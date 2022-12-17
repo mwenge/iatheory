@@ -1,0 +1,152 @@
+\chapter{Level Data} 
+
+\begin{q}{Jeff Minter's Development Diary in Zzap Magazine\cite{planner}}
+ACONT 
+
+This is the bit that I knew would take me ages to write and get glitch
+free, and the bit that is absolutely necessary to the functioning of the game.
+The module ACONT is essentially an interpreter for my own 'wave language',
+allowing me to describe, exactly, an attack wave in about 50 bytes of data. The
+waves for the first part of IRIDIS are in good rollicking shoot-'em-up style,
+and there have to be plenty of them. There are five planets and each planet is
+to have twenty levels associated with it. It's impractical to write separate
+bits of code for each wave; even with 64K you can run outta memory pretty fast
+that way, and it's not really necessary coz a lot of stuff would be duplicated.
+Hence ACONT.
+
+\end{q}
+
+The bits and bytes that define the behaviour and appearance of
+wave after wave of Iridis Alpha's enemy formations - twenty across each of the
+five planets giving on hundred in all - takes up relatively little space given
+the sheer variety of adversaries the player faces.
+
+Each 'wave' of enemies is defined by a 40 byte data structure, not 50 bytes as
+Minter initially suggested in his development diary. There's a little bit of 
+waste going on in here too, bytes 10 to 14 are unused, while \icode{Byte 15} is only
+ever set (to \icode{\$01}) by the wave data structure that describes the default explosion 
+behaviour for enemy ships.
+
+As we can see here, the sole purpose of \icode{Byte 15} is to determine whether a
+new set of wave data needs to be loaded. This makes sense, once the animation is finished
+we'll need to load a new enemy ship. Still, you can't help thinking there might have been 
+a way that didn't waste 99 bytes! 
+
+\lstinputlisting[style=6502Style,firstline=1963,lastline=1980]{../iridisalpha/src/iridisalpha.asm}
+
+And actually, it's more than that because as we shall see the \icode{ACONT} 40-byte data
+structure is defined more than once per wave. Separate instances are defined for later
+phases of the enemy ship, such as when it is first hit. Early examples of this in the game
+are the 'spinning rings' you get when you hit an enemy in the first level.
+
+In all there are 200 instances of the \icode{ACONT} data structure: 100 defining each of the
+enemy waves and another 100 defining the subsequent behaviour of the ships when hit. There isn't
+a one-to-one mapping here either - many of the effects are reused across levels and as we shall
+see there can be multiple stages in an enemy's lifecycle.
+
+So there's already 1000 bytes or 1 kilobyte of wasted space in the level data due to bytes
+that are never or rarely used. That's out of a total of 8 kilobytes actually used.
+
+Shocking stuff. Awful.
+
+
+\begin{q}{Jeff Minter's Development Diary in Zzap Magazine\cite{planner}}
+You pass the interpreter data, that describes exactly stuff like: what each
+alien looks like, how many frames of animation it uses, speed of that
+animation, colour, velocities in X— and Y— directions, accelerations in X and
+Y, whether the alien should 'home in' on a target, and if so, what to home in
+on; whether an alien is subject to gravity, and if so, how strong is the
+gravity; what the alien should do if it hits top of screen, the ground, one of
+your bullets, or you; whether the alien can fire bullets, and if so, how
+frequently, and what types; how many points you get if you shoot it, and how
+much damage it does if it hits you; and a whole bunch more stuff like that. As
+you can imagine it was a fairly heavy routine to write and get debugged, but
+that's done now; took me about three weeks in all I'd say.
+\end{q}
+
+The level data does actually define some of this stuff. It does so by making
+heavy use of a simple but clever trick that in its way is very specific to
+8-bit assembly programming: storing references to other data structures as
+a pair of bytes. We've discussed the way this works previously but we'll try
+again briefly here as it won't do any harm. 
+
+The 40-byte data structure that defines the default explosion animation (and
+behaviour, so far as it goes) is stored at position \icode{\$18C8} while the
+game is running. To use this explosion data when an enemy is killed, bytes 31
+and 32 of the data structure contain the values \icode{\$C8,\$18}. 
+
+When an enemy is hit, the game routine responsible for figuring out what to do next
+with it looks at bytes 31 and 32 and loads in the data structure at the address
+given by combining \icode{\$18} and \icode{\$C8} as the 'new' wave data that
+defines how that enemy ship will now behave. Since the data structure at
+\icode{\$18C8} basically says: animate an explosion sprite and don't move
+anywhere that is exactly what the enemy ship now does.
+
+Here's the explosion data structure, which we've labelled \icode{defaultExplosion} in
+our disassembly, in the first twenty bytes or so of it's gory detail:
+
+\lstinputlisting[style=6502Style,firstline=4276,lastline=4310]{../iridisalpha/src/level_data/level_data2.asm}
+
+We can see the first 7 bytes are concerned with the appearance and basic behaviour of the
+enemy. Bytes 2 and 3 define the sprite used for display on the upper planet, Bytes 5 and 6
+for the lower planet. The reason there's two in each case is because they are describing the
+start and end point of the sprite's animation. The game will display \icode{EXPLOSION_START} (\icode{\$ED} first,
+then cycle through the next two sprites until it reaches \icode{EXPLOSION_START} + 3 (\icode{\$F0). 
+
+
+
+\subsubsection{Enemy Movement}
+The subsequent chapters study the software and how to build it. In particular the four ROM groups that make up a game are explained. 
+\begin{figure}[H]
+{ 
+\setlength{\tabcolsep}{3.0pt}
+\setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+\begin{adjustbox}{width=\textwidth}
+\begin{tabular}{rrllllllllll}
+\hline
+   Planet &   Level & Byte 1    & Byte 4    & Byte 7    & Byte 12   & Byte 15   & Byte 16   & Byte 19   & Byte 20   & Byte 21   & Byte 22   \\
+\hline
+        1 &       1 & \$06       & \$03       & \$00       & \$00       & \$00       & \$40       & \$06       & \$01       & \$01       & \$01       \\
+        1 &       2 & \$06       & \$01       & \$00       & \$00       & \$00       & \$00       & \$00       & \$24       & \$02       & \$01       \\
+        1 &       3 & \$05       & \$04       & \$00       & \$00       & \$00       & \$30       & \$FA       & \$01       & \$01       & \$02       \\
+        1 &       4 & \$11       & \$03       & \$00       & \$00       & \$00       & \$60       & \$07       & \$00       & \$01       & \$02       \\
+        1 &       5 & \$11       & \$00       & \$00       & \$00       & \$00       & \$00       & \$FC       & \$23       & \$02       & \$02       \\
+        1 &       6 & \$0A       & \$03       & \$00       & \$00       & \$00       & \$03       & \$00       & \$00       & \$01       & \$01       \\
+        1 &       7 & \$09       & \$00       & \$00       & \$00       & \$00       & \$50       & \$07       & \$00       & \$01       & \$02       \\
+        1 &       8 & \$11       & \$03       & \$00       & \$00       & \$00       & \$00       & \$05       & \$00       & \$01       & \$02       \\
+        1 &       9 & \$06       & \$03       & \$00       & \$00       & \$00       & \$0C       & \$FC       & \$23       & \$01       & \$03       \\
+        1 &      10 & \$08       & \$00       & \$00       & \$00       & \$00       & \$80       & \$00       & \$25       & \$00       & \$02       \\
+        1 &      11 & \$0E       & \$06       & \$03       & \$00       & \$00       & \$00       & \$02       & \$00       & \$01       & \$02       \\
+        1 &      12 & \$09       & \$02       & \$00       & \$00       & \$00       & \$00       & \$FC       & \$21       & \$01       & \$01       \\
+        1 &      13 & \$0B       & \$04       & \$00       & \$00       & \$00       & \$00       & \$00       & \$24       & \$02       & \$02       \\
+        1 &      14 & \$06       & \$05       & \$03       & \$00       & \$00       & \$00       & \$FA       & \$00       & \$01       & \$01       \\
+        1 &      15 & \$08       & \$00       & \$00       & \$00       & \$00       & \$10       & \$00       & \$00       & \$01       & \$01       \\
+        1 &      16 & \$05       & \$00       & \$00       & \$00       & \$00       & \$00       & \$00       & \$00       & \$02       & \$00       \\
+        1 &      17 & \$0A       & \$02       & \$00       & \$00       & \$00       & \$40       & \$80       & \$80       & \$01       & \$01       \\
+        1 &      18 & \$05       & \$00       & \$00       & \$00       & \$00       & \$00       & \$06       & \$00       & \$01       & \$02       \\
+        1 &      19 & \$04       & \$00       & \$00       & \$00       & \$00       & \$20       & \$00       & \$00       & \$02       & \$02       \\
+        1 &      20 & \$07       & \$00       & \$00       & \$00       & \$00       & \$00       & \$04       & \$24       & \$01       & \$02       \\
+\hline
+\end{tabular}
+  
+\end{adjustbox}
+
+  }\caption*{Usage of chips in Capcom arcades from 1984 to 1988\cite{cps0chipslist}.}
+\label{fig:capcom_pcbs}
+\end{figure}
+
+
+\subsubsection{Software}
+The subsequent chapters study the software and how to build it. In particular the four ROM groups that make up a game are explained. 
+
+\begin{itemize}[topsep=0pt]
+\item Motorola m68k ROM
+\item Zilog z80 programming and YM2151 (music) ROM
+\item MSM6295 (audio samples) ROM
+\item CPS-A/CPS-B (GFX) ROM
+\end{itemize}
+
+These chapters use modern tooling but also feature a "Back in the days" section which explores how Capcom used to work back in the '90s.
+
+\subsubsection{Peopleware}
+People involved with either hardware or software are quoted in the relevant sections. However, Capcom was already a big company by the early '90s and many ended up participating in the history of the CPS-1. To help the reader keep track of all the actors, a list of people and their roles is available on page \pageref{people}.

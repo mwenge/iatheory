@@ -174,6 +174,19 @@
    % Make some parts appear in red.
    moredelim=**[is][\color{red}]{@}{@},
 }
+\lstdefinelanguage
+   [x64]{Assembler}     % add a "x64" dialect of Assembler
+   [x86masm]{Assembler} % based on the "x86masm" dialect
+   % with these extra keywords:
+   {morekeywords={CDQE,CQO,CMPSQ,CMPXCHG16B,JRCXZ,LODSQ,MOVSXD, %
+                  POPFQ,PUSHFQ,SCASQ,STOSQ,IRETQ,RDTSCP,SWAPGS, %
+                  rax,rdx,rcx,rbx,rsi,rdi,rsp,rbp, %
+                  r8,r8d,r8w,r8b,r9,r9d,r9w,r9b, %
+                  r10,r10d,r10w,r10b,r11,r11d,r11w,r11b, %
+                  r12,r12d,r12w,r12b,r13,r13d,r13w,r13b, %
+                  r14,r14d,r14w,r14b,r15,r15d,r15w,r15b}} % etc.
+
+\lstset{language=[x64]Assembler}
 
 \definecolor{mGreen}{rgb}{0,0.6,0}
 \definecolor{mGray}{rgb}{0.5,0.5,0.5}
@@ -213,6 +226,24 @@
     tabsize=1,
     language=C,
     morekeywords={cd, git, ccps}
+}
+
+\lstdefinestyle{6502Style}{
+    backgroundcolor=\color{bg_color},   
+    commentstyle=\color{mGreen},
+    keywordstyle=\color{keyword_color},
+    numberstyle=\tiny\color{mGray},
+    stringstyle=\color{mGreen},
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=1,
+    language=[x86masm]Assembler,
+    morekeywords={call, ld, or, jr,ldr, str,ldir, EI, IM, .area}
 }
 
 \lstdefinestyle{Z80Style}{
@@ -323,6 +354,8 @@ boxsep=0pt,left=2pt,right=2pt,top=2pt,bottom=.5pt}
 {\minipage{\linewidth}}
 {\endminipage}
 
+\usepackage{adjustbox}
+
 \usepackage{tikz}
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=1pt] (char) {#1};}}
 
@@ -368,18 +401,7 @@ boxsep=0pt,left=2pt,right=2pt,top=2pt,bottom=.5pt}
 
 \tableofcontents 
 
-\subfile{src/aknowledgments}
-\subfile{src/bug_reports}
-\subfile{src/cheat_sheet}
-\subfile{src/introduction}
-\subfile{src/hardware}
-\subfile{src/programing}
-\subfile{src/gfx}
-\subfile{src/prog_z80}
-\subfile{src/prog_68000}
-\subfile{src/people}
-\subfile{src/epilogue}
-\subfile{src/appendix}
+\subfile{src/level_data}
 
 \printindex
 \subfile{src/bib}

@@ -1,0 +1,3 @@
+[submodule "iridisalpha"]
+	path = iridisalpha
+	url = git@github.com:mwenge/iridisalpha.git

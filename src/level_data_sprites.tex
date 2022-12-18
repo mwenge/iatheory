@@ -1,0 +1,219 @@
+
+\begin{figure}[H]
+  {
+  \setlength{\tabcolsep}{3.0pt}
+  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+  \begin{adjustbox}{width=\textwidth}
+
+\begin{tabular}{rllll}
+\toprule
+   Level & Byte 1    & Byte 3               & Byte 4    & Byte 6                           \\
+\midrule
+       1 & \$06       & FLYING\_SAUCER1       & \$03       & FLYING\_SAUCER1                   \\
+       2 & \$06       & BOUNCY\_RING          & \$01       & BOUNCY\_RING                      \\
+       3 & \$05       & FLYING\_DOT1          & \$04       & FLYING\_DOT1                      \\
+       4 & \$11       & FLYING\_TRIANGLE1     & \$03       & FLYING\_TRIANGLE1                 \\
+       5 & \$11       & BALLOON              & \$00       & BIRD1                            \\
+       6 & \$0A       & BIRD1                & \$03       & BIRD1                            \\
+       7 & \$09       & FLAG\_BAR             & \$00       & FLAG\_BAR                         \\
+       8 & \$11       & TEARDROP\_EXPLOSION1  & \$03       & TEARDROP\_EXPLOSION1              \\
+       9 & \$06       & WINGBALL             & \$03       & MONEY\_BAG                        \\
+      10 & \$08       & CAMEL                & \$00       & INV\_MAGIC\_MUSHROOM               \\
+      11 & \$0E       & GILBY\_AIRBORNE\_LEFT  & \$06       & GILBY\_AIRBORNE\_LOWERPLANET\_RIGHT \\
+      12 & \$09       & CAMEL                & \$02       & LICKERSHIP\_INV1                  \\
+      13 & \$0B       & BUBBLE               & \$04       & BUBBLE                           \\
+      14 & \$06       & TEARDROP\_EXPLOSION1  & \$05       & TEARDROP\_EXPLOSION1              \\
+      15 & \$08       & LLAMA                & \$00       & LLAMA                            \\
+      16 & \$05       & QBERT\_SQUARES        & \$00       & QBERT\_SQUARES                    \\
+      17 & \$0A       & BOUNCY\_RING          & \$02       & BOUNCY\_RING                      \\
+      18 & \$05       & GILBY\_AIRBORNE\_RIGHT & \$00       & GILBY\_AIRBORNE\_RIGHT             \\
+      19 & \$04       & STARSHIP             & \$00       & STARSHIP                         \\
+      20 & \$07       & COPTIC\_CROSS         & \$00       & COPTIC\_CROSS                     \\
+\addlinespace
+\bottomrule
+\multicolumn{5}{@{}l@{}}{Byte 1 : Index into array for sprite color}\\
+\multicolumn{5}{@{}l@{}}{Byte 3 : Sprite value for the attack ship on the upper planet}\\
+\multicolumn{5}{@{}l@{}}{Byte 4 : The animation frame rate for the attack ship.}\\
+\multicolumn{5}{@{}l@{}}{Byte 6 : Sprite value for the attack ship on lower planet}\\
+\end{tabular}
+
+  \end{adjustbox}
+
+  }\caption*{Planet 1 - Sprite Data.}
+\end{figure}
+
+
+\begin{figure}[H]
+  {
+  \setlength{\tabcolsep}{3.0pt}
+  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+  \begin{adjustbox}{width=\textwidth}
+
+\begin{tabular}{rllll}
+\toprule
+   Level & Byte 1    & Byte 3              & Byte 4    & Byte 6                  \\
+\midrule
+       1 & \$55       & LITTLE\_DART         & \$01       & LITTLE\_DART             \\
+       2 & \$04       & FLYING\_COCK1        & \$05       & FLYING\_COCK1            \\
+       3 & \$06       & FLYING\_COCK\_RIGHT1  & \$05       & FLYING\_COCK\_RIGHT1      \\
+       4 & \$05       & TEARDROP\_EXPLOSION1 & \$01       & TEARDROP\_EXPLOSION1     \\
+       5 & \$05       & LICKER\_SHIP1        & \$00       & LICKERSHIP\_INV1         \\
+       6 & \$04       & SPINNING\_RING1      & \$00       & SPINNING\_RING1          \\
+       7 & \$0F       & SMALLBALL\_AGAIN     & \$00       & SMALLBALL\_AGAIN         \\
+       8 & \$0C       & BUBBLE              & \$04       & BUBBLE                  \\
+       9 & \$04       & LAND\_GILBY1         & \$03       & LAND\_GILBY\_LOWERPLANET1 \\
+      10 & \$11       & FLYING\_TRIANGLE1    & \$00       & FLYING\_TRIANGLE1        \\
+      11 & \$00       & FLYING\_SAUCER1      & \$01       & FLYING\_SAUCER1          \\
+      12 & \$0C       & BUBBLE              & \$01       & BUBBLE                  \\
+      13 & \$08       & LLAMA               & \$00       & LLAMA                   \\
+      14 & \$04       & FLYING\_COCK1        & \$05       & FLYING\_COCK1            \\
+      15 & \$08       & FLAG\_BAR            & \$00       & FLAG\_BAR                \\
+      16 & \$10       & WINGBALL            & \$04       & MONEY\_BAG               \\
+      17 & \$06       & FLYING\_COCK\_RIGHT1  & \$05       & FLYING\_COCK\_RIGHT1      \\
+      18 & \$10       & BOLAS1              & \$02       & BOLAS1                  \\
+      19 & \$0E       & LAND\_GILBY1         & \$04       & LAND\_GILBY\_LOWERPLANET1 \\
+      20 & \$06       & EYE\_OF\_HORUS        & \$00       & EYE\_OF\_HORUS            \\
+\addlinespace
+\bottomrule
+\multicolumn{5}{@{}l@{}}{Byte 1 : Index into array for sprite color}\\
+\multicolumn{5}{@{}l@{}}{Byte 3 : Sprite value for the attack ship on the upper planet}\\
+\multicolumn{5}{@{}l@{}}{Byte 4 : The animation frame rate for the attack ship.}\\
+\multicolumn{5}{@{}l@{}}{Byte 6 : Sprite value for the attack ship on lower planet}\\
+\end{tabular}
+
+  \end{adjustbox}
+
+  }\caption*{Planet 2 - Sprite Data.}
+\end{figure}
+
+
+\begin{figure}[H]
+  {
+  \setlength{\tabcolsep}{3.0pt}
+  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+  \begin{adjustbox}{width=\textwidth}
+
+\begin{tabular}{rllll}
+\toprule
+   Level & Byte 1    & Byte 3               & Byte 4    & Byte 6                  \\
+\midrule
+       1 & \$10       & \$FC                  & \$02       & \$FC                     \\
+       2 & \$0D       & LITTLE\_DART          & \$00       & LITTLE\_DART             \\
+       3 & \$02       & BOUNCY\_RING          & \$04       & BOUNCY\_RING             \\
+       4 & \$06       & GILBY\_AIRBORNE\_RIGHT & \$00       & GILBY\_AIRBORNE\_RIGHT    \\
+       5 & \$0B       & SMALL\_BALL1          & \$02       & SMALL\_BALL1             \\
+       6 & \$00       & LAND\_GILBY1          & \$01       & LAND\_GILBY\_LOWERPLANET1 \\
+       7 & \$07       & LICKER\_SHIP1         & \$07       & LICKERSHIP\_INV1         \\
+       8 & \$0C       & BUBBLE               & \$03       & BUBBLE                  \\
+       9 & \$06       & FLYING\_DART1         & \$05       & FLYING\_DART1            \\
+      10 & \$06       & FLYING\_SAUCER1       & \$03       & FLYING\_SAUCER1          \\
+      11 & \$04       & LICKER\_SHIP1         & \$05       & LICKERSHIP\_INV1         \\
+      12 & \$00       & SMALLBALL\_AGAIN      & \$00       & SMALLBALL\_AGAIN         \\
+      13 & \$06       & LICKER\_SHIP1         & \$05       & LICKERSHIP\_INV1         \\
+      14 & \$08       & CAMEL                & \$00       & CAMEL                   \\
+      15 & \$10       & BOUNCY\_RING          & \$01       & BOUNCY\_RING             \\
+      16 & \$10       & STRANGE\_SYMBOL       & \$00       & STRANGE\_SYMBOL          \\
+      17 & \$08       & LLAMA                & \$00       & LLAMA                   \\
+      18 & \$06       & FLYING\_SAUCER1       & \$01       & FLYING\_SAUCER1          \\
+      19 & \$0E       & FLYING\_COMMA1        & \$04       & FLYING\_COMMA1           \\
+      20 & \$11       & PSI                  & \$00       & PSI                     \\
+\addlinespace
+\bottomrule
+\multicolumn{5}{@{}l@{}}{Byte 1 : Index into array for sprite color}\\
+\multicolumn{5}{@{}l@{}}{Byte 3 : Sprite value for the attack ship on the upper planet}\\
+\multicolumn{5}{@{}l@{}}{Byte 4 : The animation frame rate for the attack ship.}\\
+\multicolumn{5}{@{}l@{}}{Byte 6 : Sprite value for the attack ship on lower planet}\\
+\end{tabular}
+
+  \end{adjustbox}
+
+  }\caption*{Planet 3 - Sprite Data.}
+\end{figure}
+
+
+\begin{figure}[H]
+  {
+  \setlength{\tabcolsep}{3.0pt}
+  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+  \begin{adjustbox}{width=\textwidth}
+
+\begin{tabular}{rllll}
+\toprule
+   Level & Byte 1    & Byte 3               & Byte 4    & Byte 6               \\
+\midrule
+       1 & \$04       & MAGIC\_MUSHROOM       & \$00       & INV\_MAGIC\_MUSHROOM   \\
+       2 & \$0E       & GILBY\_AIRBORNE\_RIGHT & \$00       & GILBY\_AIRBORNE\_RIGHT \\
+       3 & \$02       & LITTLE\_DART          & \$03       & LITTLE\_DART          \\
+       4 & \$03       & MAGIC\_MUSHROOM       & \$00       & INV\_MAGIC\_MUSHROOM   \\
+       5 & \$09       & LOZENGE              & \$00       & LOZENGE              \\
+       6 & \$06       & SMALLBALL\_AGAIN      & \$00       & SMALLBALL\_AGAIN      \\
+       7 & \$05       & TEARDROP\_EXPLOSION1  & \$06       & TEARDROP\_EXPLOSION1  \\
+       8 & \$00       & LLAMA                & \$00       & LLAMA                \\
+       9 & \$11       & BUBBLE               & \$04       & BUBBLE               \\
+      10 & \$11       & FLYING\_COCK\_RIGHT1   & \$05       & FLYING\_COCK\_RIGHT1   \\
+      11 & \$0E       & MAGIC\_MUSHROOM       & \$00       & INV\_MAGIC\_MUSHROOM   \\
+      12 & \$00       & SMALLBALL\_AGAIN      & \$00       & SMALLBALL\_AGAIN      \\
+      13 & \$0D       & FLYING\_DOT1          & \$03       & FLYING\_DOT1          \\
+      14 & \$11       & SMALLBALL\_AGAIN      & \$00       & SMALLBALL\_AGAIN      \\
+      15 & \$10       & BOLAS1               & \$02       & BOLAS1               \\
+      16 & \$07       & CAMEL                & \$00       & CAMEL                \\
+      17 & \$00       & CUMMING\_COCK1        & \$06       & BOLAS1               \\
+      18 & \$10       & CUMMING\_COCK1        & \$05       & LICKERSHIP\_INV1      \\
+      19 & \$06       & QBERT\_SQUARES        & \$00       & QBERT                \\
+      20 & \$10       & BULLHEAD             & \$00       & BULLHEAD             \\
+\addlinespace
+\bottomrule
+\multicolumn{5}{@{}l@{}}{Byte 1 : Index into array for sprite color}\\
+\multicolumn{5}{@{}l@{}}{Byte 3 : Sprite value for the attack ship on the upper planet}\\
+\multicolumn{5}{@{}l@{}}{Byte 4 : The animation frame rate for the attack ship.}\\
+\multicolumn{5}{@{}l@{}}{Byte 6 : Sprite value for the attack ship on lower planet}\\
+\end{tabular}
+
+  \end{adjustbox}
+
+  }\caption*{Planet 4 - Sprite Data.}
+\end{figure}
+
+
+\begin{figure}[H]
+  {
+  \setlength{\tabcolsep}{3.0pt}
+  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+  \begin{adjustbox}{width=\textwidth}
+
+\begin{tabular}{rllll}
+\toprule
+   Level & Byte 1    & Byte 3               & Byte 4    & Byte 6                  \\
+\midrule
+       1 & \$11       & STARSHIP             & \$00       & STARSHIP                \\
+       2 & \$11       & MAGIC\_MUSHROOM       & \$00       & INV\_MAGIC\_MUSHROOM      \\
+       3 & \$02       & LAND\_GILBY1          & \$04       & LAND\_GILBY\_LOWERPLANET1 \\
+       4 & \$0E       & TEARDROP\_EXPLOSION1  & \$04       & TEARDROP\_EXPLOSION1     \\
+       5 & \$04       & FLYING\_COMMA1        & \$05       & FLYING\_COMMA1           \\
+       6 & \$0B       & STARSHIP             & \$00       & STARSHIP                \\
+       7 & \$10       & FLYING\_FLOWCHART1    & \$01       & FLYING\_FLOWCHART1       \\
+       8 & \$10       & BALLOON              & \$01       & BOUNCY\_RING             \\
+       9 & \$00       & BOUNCY\_RING          & \$03       & BOUNCY\_RING             \\
+      10 & \$08       & CAMEL                & \$00       & CAMEL                   \\
+      11 & \$06       & BIRD1                & \$04       & BIRD1                   \\
+      12 & \$07       & BALLOON              & \$03       & LAND\_GILBY\_LOWERPLANET8 \\
+      13 & \$11       & BUBBLE               & \$01       & BUBBLE                  \\
+      14 & \$08       & CAMEL                & \$00       & CAMEL                   \\
+      15 & \$10       & BOUNCY\_RING          & \$04       & BOUNCY\_RING             \\
+      17 & \$10       & BUBBLE               & \$02       & BUBBLE                  \\
+      18 & \$10       & LITTLE\_OTHER\_EYEBALL & \$01       & SMALL\_BALL1             \\
+      20 & \$02       & ATARI\_ST             & \$00       & ATARI\_ST                \\
+\addlinespace
+\bottomrule
+\multicolumn{5}{@{}l@{}}{Byte 1 : Index into array for sprite color}\\
+\multicolumn{5}{@{}l@{}}{Byte 3 : Sprite value for the attack ship on the upper planet}\\
+\multicolumn{5}{@{}l@{}}{Byte 4 : The animation frame rate for the attack ship.}\\
+\multicolumn{5}{@{}l@{}}{Byte 6 : Sprite value for the attack ship on lower planet}\\
+\end{tabular}
+
+  \end{adjustbox}
+
+  }\caption*{Planet 5 - Sprite Data.}
+\end{figure}
+
+

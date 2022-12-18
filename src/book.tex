@@ -90,6 +90,9 @@
 % Color header row 
 \usepackage[table]{xcolor}
 %----------------------------
+\usepackage{varwidth} %for the varwidth minipage environment
+
+\newcolumntype{M}{>{\begin{varwidth}{4cm}}l<{\end{varwidth}}} %M is for Maximal column
 
 % Used to force figure to now float (with \begin{figure}[H]).
 \usepackage{float}
@@ -233,7 +236,7 @@
     commentstyle=\color{mGreen},
     keywordstyle=\color{keyword_color},
     numberstyle=\tiny\color{mGray},
-    stringstyle=\color{mGreen},
+    stringstyle=\tiny\color{mGreen},
     breakatwhitespace=false,         
     breaklines=true,                 
     captionpos=b,                    
@@ -243,7 +246,10 @@
     showtabs=false,                  
     tabsize=1,
     language=[x86masm]Assembler,
-    morekeywords={call, ld, or, jr,ldr, str,ldir, EI, IM, .area}
+    morekeywords={call, ld, or, jr,ldr, str,ldir, EI, IM, .area,
+		.BYTE,LDY,LDX,INC,LDA,BEQ,BNE,JSR,DEY,DEX,PHA,PLA,INY,
+		STA,
+		}
 }
 
 \lstdefinestyle{Z80Style}{

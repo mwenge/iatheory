@@ -21,6 +21,7 @@ wave after wave of Iridis Alpha's enemy formations - twenty across each of the
 five planets giving on hundred in all - takes up relatively little space given
 the sheer variety of adversaries the player faces.
 
+\subsection{You're a Waste of Space}
 Each 'wave' of enemies is defined by a 40 byte data structure, not 50 bytes as
 Minter initially suggested in his development diary. There's a little bit of 
 waste going on in here too, bytes 10 to 14 are unused, while \icode{Byte 15} is only
@@ -50,6 +51,7 @@ that are never or rarely used. That's out of a total of 8 kilobytes actually use
 Shocking stuff. Awful.
 
 
+\subsection{Clever Business}
 \begin{q}{Jeff Minter's Development Diary in Zzap Magazine\cite{planner}}
 You pass the interpreter data, that describes exactly stuff like: what each
 alien looks like, how many frames of animation it uses, speed of that
@@ -85,68 +87,49 @@ anywhere that is exactly what the enemy ship now does.
 Here's the explosion data structure, which we've labelled \icode{defaultExplosion} in
 our disassembly, in the first twenty bytes or so of it's gory detail:
 
-\lstinputlisting[style=6502Style,firstline=4276,lastline=4310]{../iridisalpha/src/level_data/level_data2.asm}
+\lstinputlisting[basicstyle=\tiny,style=6502Style,firstline=4276,lastline=4310]{../iridisalpha/src/level_data/level_data2.asm}
 
 We can see the first 7 bytes are concerned with the appearance and basic behaviour of the
 enemy. Bytes 2 and 3 define the sprite used for display on the upper planet, Bytes 5 and 6
 for the lower planet. The reason there's two in each case is because they are describing the
-start and end point of the sprite's animation. The game will display \icode{EXPLOSION_START} (\icode{\$ED} first,
-then cycle through the next two sprites until it reaches \icode{EXPLOSION_START} + 3 (\icode{\$F0). 
+start and end point of the sprite's animation. The game will display \icode{EXPLOSION\_START} \icode{\$ED}) first,
+then cycle through the next two sprites until it reaches \icode{EXPLOSION\_START} + 3 (\icode{\$F0}). 
 
+\subsection{And You're a Waste of Space}
 
+\icode{Bytes 33 - 34} seem to be left in an unfinished state. Wave 12 on Planet 5 has both populated, \icode{flowchartArrowAsExplosion}
+is the only other wave that has anything in either byte, in this case \icode{\$60} in \icode{Byte 33}.
 
-\subsubsection{Enemy Movement}
-The subsequent chapters study the software and how to build it. In particular the four ROM groups that make up a game are explained. 
-\begin{figure}[H]
-{ 
-\setlength{\tabcolsep}{3.0pt}
-\setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
-\begin{adjustbox}{width=\textwidth}
-\begin{tabular}{rrllllllllll}
-\hline
-   Planet &   Level & Byte 1    & Byte 4    & Byte 7    & Byte 12   & Byte 15   & Byte 16   & Byte 19   & Byte 20   & Byte 21   & Byte 22   \\
-\hline
-        1 &       1 & \$06       & \$03       & \$00       & \$00       & \$00       & \$40       & \$06       & \$01       & \$01       & \$01       \\
-        1 &       2 & \$06       & \$01       & \$00       & \$00       & \$00       & \$00       & \$00       & \$24       & \$02       & \$01       \\
-        1 &       3 & \$05       & \$04       & \$00       & \$00       & \$00       & \$30       & \$FA       & \$01       & \$01       & \$02       \\
-        1 &       4 & \$11       & \$03       & \$00       & \$00       & \$00       & \$60       & \$07       & \$00       & \$01       & \$02       \\
-        1 &       5 & \$11       & \$00       & \$00       & \$00       & \$00       & \$00       & \$FC       & \$23       & \$02       & \$02       \\
-        1 &       6 & \$0A       & \$03       & \$00       & \$00       & \$00       & \$03       & \$00       & \$00       & \$01       & \$01       \\
-        1 &       7 & \$09       & \$00       & \$00       & \$00       & \$00       & \$50       & \$07       & \$00       & \$01       & \$02       \\
-        1 &       8 & \$11       & \$03       & \$00       & \$00       & \$00       & \$00       & \$05       & \$00       & \$01       & \$02       \\
-        1 &       9 & \$06       & \$03       & \$00       & \$00       & \$00       & \$0C       & \$FC       & \$23       & \$01       & \$03       \\
-        1 &      10 & \$08       & \$00       & \$00       & \$00       & \$00       & \$80       & \$00       & \$25       & \$00       & \$02       \\
-        1 &      11 & \$0E       & \$06       & \$03       & \$00       & \$00       & \$00       & \$02       & \$00       & \$01       & \$02       \\
-        1 &      12 & \$09       & \$02       & \$00       & \$00       & \$00       & \$00       & \$FC       & \$21       & \$01       & \$01       \\
-        1 &      13 & \$0B       & \$04       & \$00       & \$00       & \$00       & \$00       & \$00       & \$24       & \$02       & \$02       \\
-        1 &      14 & \$06       & \$05       & \$03       & \$00       & \$00       & \$00       & \$FA       & \$00       & \$01       & \$01       \\
-        1 &      15 & \$08       & \$00       & \$00       & \$00       & \$00       & \$10       & \$00       & \$00       & \$01       & \$01       \\
-        1 &      16 & \$05       & \$00       & \$00       & \$00       & \$00       & \$00       & \$00       & \$00       & \$02       & \$00       \\
-        1 &      17 & \$0A       & \$02       & \$00       & \$00       & \$00       & \$40       & \$80       & \$80       & \$01       & \$01       \\
-        1 &      18 & \$05       & \$00       & \$00       & \$00       & \$00       & \$00       & \$06       & \$00       & \$01       & \$02       \\
-        1 &      19 & \$04       & \$00       & \$00       & \$00       & \$00       & \$20       & \$00       & \$00       & \$02       & \$02       \\
-        1 &      20 & \$07       & \$00       & \$00       & \$00       & \$00       & \$00       & \$04       & \$24       & \$01       & \$02       \\
-\hline
-\end{tabular}
-  
-\end{adjustbox}
+This another 200 wasted bytes it seems but it seems these bytes have some game logic attached and
+when you look at what that logic is doing it seems broken.
 
-  }\caption*{Usage of chips in Capcom arcades from 1984 to 1988\cite{cps0chipslist}.}
-\label{fig:capcom_pcbs}
-\end{figure}
+\lstinputlisting[basicstyle=\tiny,style=6502Style,firstline=1945,lastline=1958]{../iridisalpha/src/iridisalpha.asm}
 
+When Byte 34 (\icode{\$21}) is populated (and fire has not been pressed) the game will attempt to load
+a set of wave date from Bytes 33 and 34:
 
-\subsubsection{Software}
-The subsequent chapters study the software and how to build it. In particular the four ROM groups that make up a game are explained. 
+\lstinputlisting[basicstyle=\tiny,style=6502Style,firstline=1989,lastline=2006]{../iridisalpha/src/iridisalpha.asm}
 
-\begin{itemize}[topsep=0pt]
-\item Motorola m68k ROM
-\item Zilog z80 programming and YM2151 (music) ROM
-\item MSM6295 (audio samples) ROM
-\item CPS-A/CPS-B (GFX) ROM
-\end{itemize}
+In the case of the data for Planet 5 Level 12 this translates to whatever is at \icode{\$1488}. As it happens this 
+is the address of the frequency data used in the title screen's music. So effectively pretty random data:
 
-These chapters use modern tooling but also feature a "Back in the days" section which explores how Capcom used to work back in the '90s.
+\lstinputlisting[basicstyle=\tiny,style=6502Style,firstline=659,lastline=673]{../iridisalpha/src/iridisalpha.asm}
 
-\subsubsection{Peopleware}
-People involved with either hardware or software are quoted in the relevant sections. However, Capcom was already a big company by the early '90s and many ended up participating in the history of the CPS-1. To help the reader keep track of all the actors, a list of people and their roles is available on page \pageref{people}.
+Clearly, no one has ever reached level 12 in planet 5!
+
+\subsection{Sprites Behaving Badly}
+
+\subfile{level_data_sprites}
+
+\subsection{Enemy Movement}
+
+\subfile{level_data_movement}
+
+\subsection{Enemy Behaviour}
+
+\subfile{level_data_behaviour}
+
+\subsection{Pointer Data}
+
+\subfile{level_data_pointers}
+

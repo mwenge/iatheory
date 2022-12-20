@@ -1,45 +1,49 @@
+
 \begin{figure}[H]
   {
   \setlength{\tabcolsep}{3.0pt}
   \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
   \begin{adjustbox}{width=\textwidth}
 
-\begin{tabular}{rlllll}
+\begin{tabular}{rllllllll}
 \toprule
-   Level & Byte 16   & Byte 23   & Byte 24   & Byte 35   & Byte 36   \\
+   Level & Byte 16   & Byte 23   & Byte 24   & Byte 35   & Byte 36   & Byte 37   & Byte 38   & Byte 39   \\
 \midrule
-       1 & \$40       & \$00       & \$00       & \$02       & \$02       \\
-       2 & \$00       & \$01       & \$23       & \$01       & \$01       \\
-       3 & \$30       & \$00       & \$00       & \$02       & \$01       \\
-       4 & \$60       & \$00       & \$01       & \$04       & \$02       \\
-       5 & \$00       & \$00       & \$23       & \$00       & \$05       \\
-       6 & \$03       & \$01       & \$01       & \$01       & \$04       \\
-       7 & \$50       & \$00       & \$01       & \$00       & \$03       \\
-       8 & \$00       & \$00       & \$01       & \$02       & \$02       \\
-       9 & \$0C       & \$00       & \$00       & \$00       & \$08       \\
-      10 & \$80       & \$00       & \$23       & \$00       & \$06       \\
-      11 & \$00       & \$00       & \$01       & \$04       & \$05       \\
-      12 & \$00       & \$00       & \$23       & \$03       & \$02       \\
-      13 & \$00       & \$01       & \$23       & \$04       & \$02       \\
-      14 & \$00       & \$00       & \$01       & \$00       & \$08       \\
-      15 & \$10       & \$01       & \$01       & \$03       & \$03       \\
-      16 & \$00       & \$01       & \$00       & \$00       & \$06       \\
-      17 & \$40       & \$00       & \$00       & \$05       & \$0C       \\
-      18 & \$00       & \$00       & \$01       & \$00       & \$03       \\
-      19 & \$20       & \$80       & \$01       & \$00       & \$04       \\
-      20 & \$00       & \$00       & \$23       & \$01       & \$01       \\
+       1 & \$40       & \$00       & \$00       & \$02       & \$02       & \$00       & \$04       & \$18       \\
+       2 & \$00       & \$01       & \$23       & \$01       & \$01       & \$00       & \$04       & \$20       \\
+       3 & \$30       & \$00       & \$00       & \$02       & \$01       & \$00       & \$04       & \$20       \\
+       4 & \$60       & \$00       & \$01       & \$04       & \$02       & \$00       & \$04       & \$20       \\
+       5 & \$00       & \$00       & \$23       & \$00       & \$05       & \$00       & \$04       & \$20       \\
+       6 & \$03       & \$01       & \$01       & \$01       & \$04       & \$00       & \$04       & \$10       \\
+       7 & \$50       & \$00       & \$01       & \$00       & \$03       & \$00       & \$04       & \$28       \\
+       8 & \$00       & \$00       & \$01       & \$02       & \$02       & \$00       & \$04       & \$20       \\
+       9 & \$0C       & \$00       & \$00       & \$00       & \$08       & \$00       & \$04       & \$20       \\
+      10 & \$80       & \$00       & \$23       & \$00       & \$06       & \$00       & \$04       & \$18       \\
+      11 & \$00       & \$00       & \$01       & \$04       & \$05       & \$00       & \$04       & \$10       \\
+      12 & \$00       & \$00       & \$23       & \$03       & \$02       & \$00       & \$04       & \$20       \\
+      13 & \$00       & \$01       & \$23       & \$04       & \$02       & \$00       & \$04       & \$20       \\
+      14 & \$00       & \$00       & \$01       & \$00       & \$08       & \$00       & \$04       & \$10       \\
+      15 & \$10       & \$01       & \$01       & \$03       & \$03       & \$00       & \$04       & \$20       \\
+      16 & \$00       & \$01       & \$00       & \$00       & \$06       & \$00       & \$04       & \$18       \\
+      17 & \$40       & \$00       & \$00       & \$05       & \$0C       & \$00       & \$04       & \$20       \\
+      18 & \$00       & \$00       & \$01       & \$00       & \$03       & \$00       & \$04       & \$20       \\
+      19 & \$20       & \$80       & \$01       & \$00       & \$04       & \$00       & \$04       & \$20       \\
+      20 & \$00       & \$00       & \$23       & \$01       & \$01       & \$00       & \$04       & \$40       \\
 \addlinespace
 \bottomrule
-\multicolumn{5}{@{}l@{}}{Byte 16: Update rate for attack wave}\\
-\multicolumn{5}{@{}l@{}}{Byte 23: Stickiness factor, does the enemy stick to the player}\\
-\multicolumn{5}{@{}l@{}}{Byte 24: Does the enemy gravitate quickly toward the player when its}\\
-\multicolumn{5}{@{}l@{}}{Byte 35: Does destroying this enemy increase the gilby's energy?.}\\
-\multicolumn{5}{@{}l@{}}{Byte 36: Does colliding with this enemy decrease the gilby's energy?}\\
+\multicolumn{9}{@{}l@{}}{Byte 16: Update rate for attack wave}\\
+\multicolumn{9}{@{}l@{}}{Byte 23: Stickiness factor, does the enemy stick to the player}\\
+\multicolumn{9}{@{}l@{}}{Byte 24: Does the enemy gravitate quickly toward the player when its hit?}\\
+\multicolumn{9}{@{}l@{}}{Byte 35: Does destroying this enemy increase the gilby's energy?.}\\
+\multicolumn{9}{@{}l@{}}{Byte 36: Does colliding with this enemy decrease the gilby's energy?}\\
+\multicolumn{9}{@{}l@{}}{Byte 37: Is the ship a spinning ring, i.e. does it allow the gilby to warp?}\\
+\multicolumn{9}{@{}l@{}}{Byte 38: Number of waves in data.}\\
+\multicolumn{9}{@{}l@{}}{Byte 39: Number of ships in wave.}\\
 \end{tabular}
 
   \end{adjustbox}
 
-  }\caption*{Planet 1 - Sprite Data.}
+  }\caption*{Planet 1 - Enemy Behaviour Data.}
 \end{figure}
 
 
@@ -49,42 +53,45 @@
   \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
   \begin{adjustbox}{width=\textwidth}
 
-\begin{tabular}{rlllll}
+\begin{tabular}{rllllllll}
 \toprule
-   Level & Byte 16   & Byte 23   & Byte 24   & Byte 35   & Byte 36   \\
+   Level & Byte 16   & Byte 23   & Byte 24   & Byte 35   & Byte 36   & Byte 37   & Byte 38   & Byte 39   \\
 \midrule
-       1 & \$08       & \$01       & \$10       & \$01       & \$02       \\
-       2 & \$00       & \$00       & \$01       & \$02       & \$02       \\
-       3 & \$00       & \$00       & \$01       & \$02       & \$02       \\
-       4 & \$00       & \$00       & \$23       & \$06       & \$03       \\
-       5 & \$00       & \$00       & \$23       & \$02       & \$01       \\
-       6 & \$00       & \$00       & \$00       & \$01       & \$02       \\
-       7 & \$40       & \$00       & \$01       & \$03       & \$02       \\
-       8 & \$60       & \$00       & \$23       & \$00       & \$20       \\
-       9 & \$00       & \$00       & \$23       & \$00       & \$04       \\
-      10 & \$00       & \$00       & \$00       & \$00       & \$06       \\
-      11 & \$00       & \$10       & \$01       & \$00       & \$00       \\
-      12 & \$00       & \$00       & \$00       & \$00       & CAMEL     \\
-      13 & \$00       & \$01       & \$01       & \$02       & \$01       \\
-      14 & \$00       & \$00       & \$01       & \$02       & \$02       \\
-      15 & \$00       & \$00       & \$23       & \$03       & \$02       \\
-      16 & \$00       & \$00       & \$00       & \$00       & \$10       \\
-      17 & \$00       & \$00       & \$01       & \$02       & \$02       \\
-      18 & \$08       & \$01       & \$01       & \$00       & \$06       \\
-      19 & \$00       & \$00       & \$23       & \$04       & \$02       \\
-      20 & \$00       & \$00       & \$23       & \$01       & \$01       \\
+       1 & \$08       & \$01       & \$10       & \$01       & \$02       & \$00       & \$04       & \$18       \\
+       2 & \$00       & \$00       & \$01       & \$02       & \$02       & \$00       & \$04       & \$18       \\
+       3 & \$00       & \$00       & \$01       & \$02       & \$02       & \$00       & \$04       & \$18       \\
+       4 & \$00       & \$00       & \$23       & \$06       & \$03       & \$00       & \$04       & \$18       \\
+       5 & \$00       & \$00       & \$23       & \$02       & \$01       & \$00       & \$04       & \$30       \\
+       6 & \$00       & \$00       & \$00       & \$01       & \$02       & \$00       & \$04       & \$20       \\
+       7 & \$40       & \$00       & \$01       & \$03       & \$02       & \$00       & \$04       & \$10       \\
+       8 & \$60       & \$00       & \$23       & \$00       & \$20       & \$00       & \$04       & \$10       \\
+       9 & \$00       & \$00       & \$23       & \$00       & \$04       & \$00       & \$04       & \$10       \\
+      10 & \$00       & \$00       & \$00       & \$00       & \$06       & \$00       & \$04       & \$18       \\
+      11 & \$00       & \$10       & \$01       & \$00       & \$00       & \$00       & \$04       & \$10       \\
+      12 & \$00       & \$00       & \$00       & \$00       & CAMEL     & \$00       & \$04       & \$30       \\
+      13 & \$00       & \$01       & \$01       & \$02       & \$01       & \$00       & \$04       & \$40       \\
+      14 & \$00       & \$00       & \$01       & \$02       & \$02       & \$00       & \$04       & \$18       \\
+      15 & \$00       & \$00       & \$23       & \$03       & \$02       & \$00       & \$04       & \$20       \\
+      16 & \$00       & \$00       & \$00       & \$00       & \$10       & \$00       & \$04       & \$30       \\
+      17 & \$00       & \$00       & \$01       & \$02       & \$02       & \$00       & \$04       & \$18       \\
+      18 & \$08       & \$01       & \$01       & \$00       & \$06       & \$00       & \$04       & \$20       \\
+      19 & \$00       & \$00       & \$23       & \$04       & \$02       & \$00       & \$04       & \$38       \\
+      20 & \$00       & \$00       & \$23       & \$01       & \$01       & \$00       & \$04       & \$40       \\
 \addlinespace
 \bottomrule
-\multicolumn{5}{@{}l@{}}{Byte 16: Update rate for attack wave}\\
-\multicolumn{5}{@{}l@{}}{Byte 23: Stickiness factor, does the enemy stick to the player}\\
-\multicolumn{5}{@{}l@{}}{Byte 24: Does the enemy gravitate quickly toward the player when its}\\
-\multicolumn{5}{@{}l@{}}{Byte 35: Does destroying this enemy increase the gilby's energy?.}\\
-\multicolumn{5}{@{}l@{}}{Byte 36: Does colliding with this enemy decrease the gilby's energy?}\\
+\multicolumn{9}{@{}l@{}}{Byte 16: Update rate for attack wave}\\
+\multicolumn{9}{@{}l@{}}{Byte 23: Stickiness factor, does the enemy stick to the player}\\
+\multicolumn{9}{@{}l@{}}{Byte 24: Does the enemy gravitate quickly toward the player when its hit?}\\
+\multicolumn{9}{@{}l@{}}{Byte 35: Does destroying this enemy increase the gilby's energy?.}\\
+\multicolumn{9}{@{}l@{}}{Byte 36: Does colliding with this enemy decrease the gilby's energy?}\\
+\multicolumn{9}{@{}l@{}}{Byte 37: Is the ship a spinning ring, i.e. does it allow the gilby to warp?}\\
+\multicolumn{9}{@{}l@{}}{Byte 38: Number of waves in data.}\\
+\multicolumn{9}{@{}l@{}}{Byte 39: Number of ships in wave.}\\
 \end{tabular}
 
   \end{adjustbox}
 
-  }\caption*{Planet 2 - Sprite Data.}
+  }\caption*{Planet 2 - Enemy Behaviour Data.}
 \end{figure}
 
 
@@ -94,42 +101,45 @@
   \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
   \begin{adjustbox}{width=\textwidth}
 
-\begin{tabular}{rlllll}
+\begin{tabular}{rllllllll}
 \toprule
-   Level & Byte 16   & Byte 23   & Byte 24   & Byte 35   & Byte 36   \\
+   Level & Byte 16   & Byte 23   & Byte 24   & Byte 35   & Byte 36   & Byte 37   & Byte 38   & Byte 39   \\
 \midrule
-       1 & \$20       & \$01       & \$01       & \$01       & \$01       \\
-       2 & \$50       & \$00       & \$00       & \$02       & \$05       \\
-       3 & \$00       & \$00       & \$23       & \$02       & \$04       \\
-       4 & \$00       & \$00       & \$01       & \$04       & \$08       \\
-       5 & \$00       & \$00       & \$00       & \$02       & \$03       \\
-       6 & \$00       & \$00       & \$23       & \$03       & \$04       \\
-       7 & \$00       & \$00       & \$00       & \$01       & \$02       \\
-       8 & \$00       & \$00       & \$00       & \$00       & \$0C       \\
-       9 & \$0C       & \$01       & \$01       & \$03       & \$05       \\
-      10 & \$0A       & \$01       & \$01       & \$03       & \$03       \\
-      11 & \$00       & \$00       & \$23       & \$00       & \$08       \\
-      12 & \$00       & \$00       & \$23       & \$01       & \$02       \\
-      13 & \$00       & \$00       & \$00       & \$00       & \$05       \\
-      14 & \$F0       & \$00       & \$00       & \$00       & \$08       \\
-      15 & \$00       & \$00       & \$00       & \$03       & \$02       \\
-      16 & \$C0       & \$00       & \$00       & \$00       & \$10       \\
-      17 & \$00       & \$00       & \$01       & \$00       & \$0C       \\
-      18 & \$00       & \$01       & \$01       & \$04       & \$02       \\
-      19 & \$40       & \$00       & \$01       & \$00       & \$04       \\
-      20 & \$00       & \$00       & \$23       & \$01       & \$01       \\
+       1 & \$20       & \$01       & \$01       & \$01       & \$01       & \$53       & \$41       & \$56       \\
+       2 & \$50       & \$00       & \$00       & \$02       & \$05       & \$00       & \$04       & \$18       \\
+       3 & \$00       & \$00       & \$23       & \$02       & \$04       & \$00       & \$04       & \$10       \\
+       4 & \$00       & \$00       & \$01       & \$04       & \$08       & \$00       & \$04       & \$18       \\
+       5 & \$00       & \$00       & \$00       & \$02       & \$03       & \$00       & \$04       & \$20       \\
+       6 & \$00       & \$00       & \$23       & \$03       & \$04       & \$00       & \$04       & \$10       \\
+       7 & \$00       & \$00       & \$00       & \$01       & \$02       & \$00       & \$04       & \$20       \\
+       8 & \$00       & \$00       & \$00       & \$00       & \$0C       & \$00       & \$04       & \$10       \\
+       9 & \$0C       & \$01       & \$01       & \$03       & \$05       & \$00       & \$04       & \$18       \\
+      10 & \$0A       & \$01       & \$01       & \$03       & \$03       & \$00       & \$04       & \$20       \\
+      11 & \$00       & \$00       & \$23       & \$00       & \$08       & \$00       & \$04       & \$20       \\
+      12 & \$00       & \$00       & \$23       & \$01       & \$02       & \$00       & \$04       & \$28       \\
+      13 & \$00       & \$00       & \$00       & \$00       & \$05       & \$00       & \$04       & \$18       \\
+      14 & \$F0       & \$00       & \$00       & \$00       & \$08       & \$00       & \$04       & \$20       \\
+      15 & \$00       & \$00       & \$00       & \$03       & \$02       & \$00       & \$04       & \$28       \\
+      16 & \$C0       & \$00       & \$00       & \$00       & \$10       & \$00       & \$04       & \$10       \\
+      17 & \$00       & \$00       & \$01       & \$00       & \$0C       & \$00       & \$04       & \$30       \\
+      18 & \$00       & \$01       & \$01       & \$04       & \$02       & \$00       & \$04       & \$20       \\
+      19 & \$40       & \$00       & \$01       & \$00       & \$04       & \$00       & \$04       & \$20       \\
+      20 & \$00       & \$00       & \$23       & \$01       & \$01       & \$00       & \$04       & \$40       \\
 \addlinespace
 \bottomrule
-\multicolumn{5}{@{}l@{}}{Byte 16: Update rate for attack wave}\\
-\multicolumn{5}{@{}l@{}}{Byte 23: Stickiness factor, does the enemy stick to the player}\\
-\multicolumn{5}{@{}l@{}}{Byte 24: Does the enemy gravitate quickly toward the player when its}\\
-\multicolumn{5}{@{}l@{}}{Byte 35: Does destroying this enemy increase the gilby's energy?.}\\
-\multicolumn{5}{@{}l@{}}{Byte 36: Does colliding with this enemy decrease the gilby's energy?}\\
+\multicolumn{9}{@{}l@{}}{Byte 16: Update rate for attack wave}\\
+\multicolumn{9}{@{}l@{}}{Byte 23: Stickiness factor, does the enemy stick to the player}\\
+\multicolumn{9}{@{}l@{}}{Byte 24: Does the enemy gravitate quickly toward the player when its hit?}\\
+\multicolumn{9}{@{}l@{}}{Byte 35: Does destroying this enemy increase the gilby's energy?.}\\
+\multicolumn{9}{@{}l@{}}{Byte 36: Does colliding with this enemy decrease the gilby's energy?}\\
+\multicolumn{9}{@{}l@{}}{Byte 37: Is the ship a spinning ring, i.e. does it allow the gilby to warp?}\\
+\multicolumn{9}{@{}l@{}}{Byte 38: Number of waves in data.}\\
+\multicolumn{9}{@{}l@{}}{Byte 39: Number of ships in wave.}\\
 \end{tabular}
 
   \end{adjustbox}
 
-  }\caption*{Planet 3 - Sprite Data.}
+  }\caption*{Planet 3 - Enemy Behaviour Data.}
 \end{figure}
 
 
@@ -139,42 +149,45 @@
   \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
   \begin{adjustbox}{width=\textwidth}
 
-\begin{tabular}{rlllll}
+\begin{tabular}{rllllllll}
 \toprule
-   Level & Byte 16   & Byte 23   & Byte 24   & Byte 35   & Byte 36   \\
+   Level & Byte 16   & Byte 23   & Byte 24   & Byte 35   & Byte 36   & Byte 37   & Byte 38   & Byte 39   \\
 \midrule
-       1 & \$00       & \$00       & \$23       & \$02       & \$02       \\
-       2 & \$00       & \$00       & \$01       & \$04       & \$01       \\
-       3 & \$60       & \$00       & \$02       & \$00       & \$03       \\
-       4 & \$40       & \$00       & \$23       & \$02       & \$04       \\
-       5 & \$00       & \$00       & \$23       & \$02       & \$04       \\
-       6 & \$20       & \$00       & \$00       & \$01       & \$04       \\
-       7 & \$E0       & \$00       & \$00       & \$00       & \$08       \\
-       8 & \$00       & \$00       & \$00       & \$00       & \$00       \\
-       9 & \$00       & \$00       & \$23       & \$04       & \$01       \\
-      10 & \$10       & \$00       & \$01       & \$00       & \$08       \\
-      11 & \$E0       & \$00       & \$23       & \$02       & \$02       \\
-      12 & \$00       & \$00       & \$00       & \$00       & \$04       \\
-      13 & \$00       & \$00       & \$01       & \$00       & \$0C       \\
-      14 & \$00       & \$00       & \$00       & \$00       & \$10       \\
-      15 & \$00       & \$01       & \$01       & \$03       & \$03       \\
-      16 & \$00       & \$00       & \$01       & \$00       & \$0C       \\
-      17 & \$00       & \$00       & \$00       & \$00       & \$0C       \\
-      18 & \$00       & \$01       & \$23       & \$03       & \$02       \\
-      19 & \$00       & \$00       & \$23       & \$02       & \$08       \\
-      20 & \$00       & \$00       & \$23       & \$01       & \$01       \\
+       1 & \$00       & \$00       & \$23       & \$02       & \$02       & \$00       & \$04       & \$20       \\
+       2 & \$00       & \$00       & \$01       & \$04       & \$01       & \$00       & \$04       & \$10       \\
+       3 & \$60       & \$00       & \$02       & \$00       & \$03       & \$00       & \$04       & \$20       \\
+       4 & \$40       & \$00       & \$23       & \$02       & \$04       & \$00       & \$04       & \$18       \\
+       5 & \$00       & \$00       & \$23       & \$02       & \$04       & \$00       & \$04       & \$18       \\
+       6 & \$20       & \$00       & \$00       & \$01       & \$04       & \$00       & \$04       & \$20       \\
+       7 & \$E0       & \$00       & \$00       & \$00       & \$08       & \$00       & \$04       & \$08       \\
+       8 & \$00       & \$00       & \$00       & \$00       & \$00       & \$00       & \$04       & \$20       \\
+       9 & \$00       & \$00       & \$23       & \$04       & \$01       & \$00       & \$04       & \$20       \\
+      10 & \$10       & \$00       & \$01       & \$00       & \$08       & \$00       & \$04       & \$20       \\
+      11 & \$E0       & \$00       & \$23       & \$02       & \$02       & \$00       & \$04       & \$20       \\
+      12 & \$00       & \$00       & \$00       & \$00       & \$04       & \$00       & \$04       & \$30       \\
+      13 & \$00       & \$00       & \$01       & \$00       & \$0C       & \$00       & \$04       & \$40       \\
+      14 & \$00       & \$00       & \$00       & \$00       & \$10       & \$00       & \$04       & \$18       \\
+      15 & \$00       & \$01       & \$01       & \$03       & \$03       & \$00       & \$04       & \$28       \\
+      16 & \$00       & \$00       & \$01       & \$00       & \$0C       & \$00       & \$04       & \$30       \\
+      17 & \$00       & \$00       & \$00       & \$00       & \$0C       & \$00       & \$04       & \$20       \\
+      18 & \$00       & \$01       & \$23       & \$03       & \$02       & \$00       & \$04       & \$20       \\
+      19 & \$00       & \$00       & \$23       & \$02       & \$08       & \$00       & \$04       & \$0C       \\
+      20 & \$00       & \$00       & \$23       & \$01       & \$01       & \$05       & \$05       & \$05       \\
 \addlinespace
 \bottomrule
-\multicolumn{5}{@{}l@{}}{Byte 16: Update rate for attack wave}\\
-\multicolumn{5}{@{}l@{}}{Byte 23: Stickiness factor, does the enemy stick to the player}\\
-\multicolumn{5}{@{}l@{}}{Byte 24: Does the enemy gravitate quickly toward the player when its}\\
-\multicolumn{5}{@{}l@{}}{Byte 35: Does destroying this enemy increase the gilby's energy?.}\\
-\multicolumn{5}{@{}l@{}}{Byte 36: Does colliding with this enemy decrease the gilby's energy?}\\
+\multicolumn{9}{@{}l@{}}{Byte 16: Update rate for attack wave}\\
+\multicolumn{9}{@{}l@{}}{Byte 23: Stickiness factor, does the enemy stick to the player}\\
+\multicolumn{9}{@{}l@{}}{Byte 24: Does the enemy gravitate quickly toward the player when its hit?}\\
+\multicolumn{9}{@{}l@{}}{Byte 35: Does destroying this enemy increase the gilby's energy?.}\\
+\multicolumn{9}{@{}l@{}}{Byte 36: Does colliding with this enemy decrease the gilby's energy?}\\
+\multicolumn{9}{@{}l@{}}{Byte 37: Is the ship a spinning ring, i.e. does it allow the gilby to warp?}\\
+\multicolumn{9}{@{}l@{}}{Byte 38: Number of waves in data.}\\
+\multicolumn{9}{@{}l@{}}{Byte 39: Number of ships in wave.}\\
 \end{tabular}
 
   \end{adjustbox}
 
-  }\caption*{Planet 4 - Sprite Data.}
+  }\caption*{Planet 4 - Enemy Behaviour Data.}
 \end{figure}
 
 
@@ -184,40 +197,43 @@
   \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
   \begin{adjustbox}{width=\textwidth}
 
-\begin{tabular}{rlllll}
+\begin{tabular}{rllllllll}
 \toprule
-   Level & Byte 16   & Byte 23   & Byte 24   & Byte 35   & Byte 36   \\
+   Level & Byte 16   & Byte 23   & Byte 24   & Byte 35   & Byte 36   & Byte 37   & Byte 38   & Byte 39   \\
 \midrule
-       1 & \$60       & \$00       & \$01       & \$01       & \$01       \\
-       2 & \$00       & \$00       & \$23       & \$00       & \$08       \\
-       3 & \$00       & \$00       & \$23       & \$02       & \$01       \\
-       4 & \$10       & \$01       & \$00       & \$02       & \$02       \\
-       5 & \$30       & \$00       & \$00       & \$02       & \$02       \\
-       6 & \$00       & \$00       & \$01       & \$00       & \$05       \\
-       7 & \$00       & \$00       & \$01       & \$01       & \$03       \\
-       8 & \$00       & \$00       & \$23       & \$00       & \$10       \\
-       9 & \$E0       & \$00       & \$00       & \$02       & \$01       \\
-      10 & \$00       & \$00       & \$00       & \$03       & \$03       \\
-      11 & \$0C       & \$10       & \$01       & \$03       & \$02       \\
-      12 & \$00       & \$18       & \$23       & \$00       & \$04       \\
-      13 & \$00       & \$00       & \$00       & \$00       & \$20       \\
-      14 & \$00       & \$00       & \$01       & \$03       & \$01       \\
-      15 & \$00       & \$00       & \$00       & \$06       & \$10       \\
-      17 & \$00       & \$00       & \$23       & \$00       & \$0C       \\
-      18 & \$30       & \$01       & \$01       & \$00       & \$0C       \\
-      20 & \$00       & \$00       & \$23       & \$01       & \$01       \\
+       1 & \$60       & \$00       & \$01       & \$01       & \$01       & \$00       & \$04       & \$18       \\
+       2 & \$00       & \$00       & \$23       & \$00       & \$08       & \$00       & \$04       & \$18       \\
+       3 & \$00       & \$00       & \$23       & \$02       & \$01       & \$00       & \$04       & \$30       \\
+       4 & \$10       & \$01       & \$00       & \$02       & \$02       & \$00       & \$04       & \$20       \\
+       5 & \$30       & \$00       & \$00       & \$02       & \$02       & \$00       & \$04       & \$20       \\
+       6 & \$00       & \$00       & \$01       & \$00       & \$05       & \$00       & \$04       & \$20       \\
+       7 & \$00       & \$00       & \$01       & \$01       & \$03       & \$00       & \$04       & \$20       \\
+       8 & \$00       & \$00       & \$23       & \$00       & \$10       & \$00       & \$04       & \$30       \\
+       9 & \$E0       & \$00       & \$00       & \$02       & \$01       & \$00       & \$04       & \$08       \\
+      10 & \$00       & \$00       & \$00       & \$03       & \$03       & \$00       & \$04       & \$18       \\
+      11 & \$0C       & \$10       & \$01       & \$03       & \$02       & \$00       & \$04       & \$18       \\
+      12 & \$00       & \$18       & \$23       & \$00       & \$04       & \$00       & \$04       & \$08       \\
+      13 & \$00       & \$00       & \$00       & \$00       & \$20       & \$00       & \$04       & \$C0       \\
+      14 & \$00       & \$00       & \$01       & \$03       & \$01       & \$00       & \$04       & \$60       \\
+      15 & \$00       & \$00       & \$00       & \$06       & \$10       & \$00       & \$04       & \$10       \\
+      17 & \$00       & \$00       & \$23       & \$00       & \$0C       & \$00       & \$04       & \$30       \\
+      18 & \$30       & \$01       & \$01       & \$00       & \$0C       & \$00       & \$04       & \$40       \\
+      20 & \$00       & \$00       & \$23       & \$01       & \$01       & \$00       & \$04       & \$40       \\
 \addlinespace
 \bottomrule
-\multicolumn{5}{@{}l@{}}{Byte 16: Update rate for attack wave}\\
-\multicolumn{5}{@{}l@{}}{Byte 23: Stickiness factor, does the enemy stick to the player}\\
-\multicolumn{5}{@{}l@{}}{Byte 24: Does the enemy gravitate quickly toward the player when its}\\
-\multicolumn{5}{@{}l@{}}{Byte 35: Does destroying this enemy increase the gilby's energy?.}\\
-\multicolumn{5}{@{}l@{}}{Byte 36: Does colliding with this enemy decrease the gilby's energy?}\\
+\multicolumn{9}{@{}l@{}}{Byte 16: Update rate for attack wave}\\
+\multicolumn{9}{@{}l@{}}{Byte 23: Stickiness factor, does the enemy stick to the player}\\
+\multicolumn{9}{@{}l@{}}{Byte 24: Does the enemy gravitate quickly toward the player when its hit?}\\
+\multicolumn{9}{@{}l@{}}{Byte 35: Does destroying this enemy increase the gilby's energy?.}\\
+\multicolumn{9}{@{}l@{}}{Byte 36: Does colliding with this enemy decrease the gilby's energy?}\\
+\multicolumn{9}{@{}l@{}}{Byte 37: Is the ship a spinning ring, i.e. does it allow the gilby to warp?}\\
+\multicolumn{9}{@{}l@{}}{Byte 38: Number of waves in data.}\\
+\multicolumn{9}{@{}l@{}}{Byte 39: Number of ships in wave.}\\
 \end{tabular}
 
   \end{adjustbox}
 
-  }\caption*{Planet 5 - Sprite Data.}
+  }\caption*{Planet 5 - Enemy Behaviour Data.}
 \end{figure}
 
 

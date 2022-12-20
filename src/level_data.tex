@@ -1,4 +1,6 @@
-\chapter{Level Data} 
+\chapter{Enemies and their Discontents} 
+
+\lstset{style=6502Style}
 
 \begin{q}{Jeff Minter's Development Diary in Zzap Magazine\cite{planner}}
 ACONT 
@@ -33,7 +35,8 @@ new set of wave data needs to be loaded. This makes sense, once the animation is
 we'll need to load a new enemy ship. Still, you can't help thinking there might have been 
 a way that didn't waste 99 bytes! 
 
-\lstinputlisting[style=6502Style,firstline=1963,lastline=1980]{../iridisalpha/src/iridisalpha.asm}
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{1962}{1981}%
+\lstinputlisting[caption="Routine for Animating Enemy Sprites",basicstyle=\tiny]{tmp.asm}
 
 And actually, it's more than that because as we shall see the \icode{ACONT} 40-byte data
 structure is defined more than once per wave. Separate instances are defined for later
@@ -50,6 +53,30 @@ that are never or rarely used. That's out of a total of 8 kilobytes actually use
 
 Shocking stuff. Awful.
 
+\subsection{And You're a Waste of Space}
+
+\icode{Bytes 33 - 34} seem to be left in an unfinished state. Wave 12 on Planet 5 has both populated, \icode{flowchartArrowAsExplosion}
+is the only other wave that has anything in either byte, in this case \icode{\$60} in \icode{Byte 33}.
+
+This another 200 wasted bytes it seems but it seems these bytes have some game logic attached and
+when you look at what that logic is doing it seems broken.
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{1945}{1958}%
+\lstinputlisting[caption="Routine for Animating Enemy Sprites",basicstyle=\tiny]{tmp.asm}
+
+When Byte 34 (\icode{\$21}) is populated (and fire has not been pressed) the game will attempt to load
+a set of wave date from Bytes 33 and 34:
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{1974}{1992}%
+\lstinputlisting[caption="Routine for Animating Enemy Sprites",basicstyle=\tiny]{tmp.asm}
+
+In the case of the data for Planet 5 Level 12 this translates to whatever is at \icode{\$1488}. As it happens this 
+is the address of the frequency data used in the title screen's music. So effectively pretty random data:
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{659}{674}%
+\lstinputlisting[caption="Routine for Animating Enemy Sprites",basicstyle=\tiny]{tmp.asm}
+
+Clearly, no one has ever reached level 12 in planet 5!
 
 \subsection{Clever Business}
 \begin{q}{Jeff Minter's Development Diary in Zzap Magazine\cite{planner}}
@@ -87,7 +114,8 @@ anywhere that is exactly what the enemy ship now does.
 Here's the explosion data structure, which we've labelled \icode{defaultExplosion} in
 our disassembly, in the first twenty bytes or so of it's gory detail:
 
-\lstinputlisting[basicstyle=\tiny,style=6502Style,firstline=4276,lastline=4310]{../iridisalpha/src/level_data/level_data2.asm}
+\CopyPartialFile{../iridisalpha/src/level_data/level_data2.asm}{tmp.asm}{4276}{4311}%
+\lstinputlisting[caption="Routine for Animating Enemy Sprites",basicstyle=\tiny]{tmp.asm}
 
 We can see the first 7 bytes are concerned with the appearance and basic behaviour of the
 enemy. Bytes 2 and 3 define the sprite used for display on the upper planet, Bytes 5 and 6
@@ -95,30 +123,42 @@ for the lower planet. The reason there's two in each case is because they are de
 start and end point of the sprite's animation. The game will display \icode{EXPLOSION\_START} \icode{\$ED}) first,
 then cycle through the next two sprites until it reaches \icode{EXPLOSION\_START} + 3 (\icode{\$F0}). 
 
-\subsection{And You're a Waste of Space}
-
-\icode{Bytes 33 - 34} seem to be left in an unfinished state. Wave 12 on Planet 5 has both populated, \icode{flowchartArrowAsExplosion}
-is the only other wave that has anything in either byte, in this case \icode{\$60} in \icode{Byte 33}.
-
-This another 200 wasted bytes it seems but it seems these bytes have some game logic attached and
-when you look at what that logic is doing it seems broken.
-
-\lstinputlisting[basicstyle=\tiny,style=6502Style,firstline=1945,lastline=1958]{../iridisalpha/src/iridisalpha.asm}
-
-When Byte 34 (\icode{\$21}) is populated (and fire has not been pressed) the game will attempt to load
-a set of wave date from Bytes 33 and 34:
-
-\lstinputlisting[basicstyle=\tiny,style=6502Style,firstline=1989,lastline=2006]{../iridisalpha/src/iridisalpha.asm}
-
-In the case of the data for Planet 5 Level 12 this translates to whatever is at \icode{\$1488}. As it happens this 
-is the address of the frequency data used in the title screen's music. So effectively pretty random data:
-
-\lstinputlisting[basicstyle=\tiny,style=6502Style,firstline=659,lastline=673]{../iridisalpha/src/iridisalpha.asm}
-
-Clearly, no one has ever reached level 12 in planet 5!
-
 \subsection{Sprites Behaving Badly}
 
+We can see this in action in \icode{AnimateAttackShipSprites}. When this routine runs Byte 4 has been loaded
+to \icode{upperPlanetAttackShipInitialFrameRate} for the upper planet and \icode{lowerPlanetAttackShipInitialFrameRate}
+for the lower planet. This routine is cycling through the sprites given by Byte 2 as the lower limit and Byte 3 as 
+the upper limit. This is what the animation consists of: an animation effect achieved by changing the sprite from
+one to another to create a classic animation effect.
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{8223}{8258}%
+\lstinputlisting[caption="Routine for Animating Enemy Sprites",basicstyle=\tiny]{tmp.asm}
+ 
+Byte 2 (loaded to \icode{upperPlanetAttackShipAnimationFrameRate} comes into play here. It's decremented and as long as it's
+not zero yet the animation is skipped, execution jumps forward to \icode{AnimateLowerPlanetAttackShips}:
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{8235}{8237}%
+\lstinputlisting[caption="Routine for Animating Enemy Sprites",basicstyle=\tiny]{tmp.asm}
+
+If it is zero, it instead gets reset to the initial value from Byte 2 (stored in
+ \icode{upperPlanetAttackShipInitialFrameRate})
+and the current sprite for the enemy ship is incremented to point to the next 'frame' of the ship's animation:
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{8239}{8242}%
+\lstinputlisting[caption="Routine for Animating Enemy Sprites",basicstyle=\tiny]{tmp.asm}
+
+Next we check if we've reached the end of the animation by checking the value
+of Byte 3 (loaded to \icode{upperPlanetAttackShipSpriteAnimationEnd}).  If so,
+we reset \icode{upperPlanetAttackShip2SpriteValue} to the value initially
+loaded from Byte 2 - and that is what will be used to display the ship the next
+time we pass through to animate the ship:
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{8244}{8251}%
+\lstinputlisting[caption="Routine for Animating Enemy Sprites",basicstyle=\tiny]{tmp.asm}
+
+What follows are all the sprites and their frame rates defined for each level.
+
+\subsubsection{Sprite Data for Each Level}
 \subfile{level_data_sprites}
 
 \subsection{Enemy Movement}

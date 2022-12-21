@@ -7,7 +7,7 @@
    viewBox="0 0 190.5 234.95001"
    version="1.1"
    id="svg5"
-   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   inkscape:version="1.2.2 (1:1.2.2+202212051550+b0a8486541)"
    sodipodi:docname="cover_front_work.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -27,19 +27,21 @@
      units="in"
      width="7.5in"
      inkscape:zoom="0.64488976"
-     inkscape:cx="142.66004"
-     inkscape:cy="496.98417"
-     inkscape:window-width="2560"
-     inkscape:window-height="1376"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
+     inkscape:cx="-51.946863"
+     inkscape:cy="313.23183"
+     inkscape:window-width="1886"
+     inkscape:window-height="1009"
+     inkscape:window-x="34"
+     inkscape:window-y="34"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1"
      fit-margin-top="0"
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:snap-global="false">
+     inkscape:snap-global="false"
+     inkscape:showpageshadow="2"
+     inkscape:deskcolor="#d1d1d1">
     <inkscape:grid
        type="xygrid"
        id="grid1244" />
@@ -107,31 +109,28 @@
      transform="translate(-0.98828572,0.40104347)">
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.9275px;line-height:1.25;font-family:Novarese;-inkscape-font-specification:Novarese;fill:#1a4de3;fill-opacity:1;stroke:none;stroke-width:0.182534;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       x="48.663765"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.9275px;line-height:1.25;font-family:Novarese;-inkscape-font-specification:'Novarese, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#1a4de3;fill-opacity:1;stroke:none;stroke-width:0.182534;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       x="56.886532"
        y="199.36873"
        id="text2328-2-5"><tspan
          sodipodi:role="line"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.9275px;font-family:Novarese;-inkscape-font-specification:Novarese;fill:#1a4de3;fill-opacity:1;stroke:none;stroke-width:0.182534;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         x="48.663765"
-         y="199.36873"
-         id="tspan2330-5-1">FABIEN SANGLARD</tspan></text>
+         id="tspan1287"
+         x="56.886532"
+         y="199.36873">ROBERT HOGAN</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:28.0147px;line-height:1.25;font-family:Novarese;-inkscape-font-specification:Novarese;fill:#3e6aab;fill-opacity:1;stroke:#000000;stroke-width:0.623162;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       x="28.189573"
-       y="72.399979"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50.8px;line-height:1.25;font-family:Novarese;-inkscape-font-specification:'Novarese, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.623162;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       x="26.804113"
+       y="80.069611"
        id="text2328"><tspan
          sodipodi:role="line"
-         id="tspan2326"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:28.0147px;font-family:Novarese;-inkscape-font-specification:Novarese;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.623162;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         x="28.189573"
-         y="72.399979">THE BOOK</tspan><tspan
+         id="tspan558"
+         x="26.804113"
+         y="80.069611">IRIDIS</tspan><tspan
          sodipodi:role="line"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:28.0147px;font-family:Novarese;-inkscape-font-specification:Novarese;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.623162;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         x="28.189573"
-         y="107.41835"
-         id="tspan2330" /></text>
+         id="tspan560"
+         x="26.804113"
+         y="143.5696"></tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.7602px;line-height:1.25;font-family:Novarese;-inkscape-font-specification:Novarese;fill:#3e6aab;fill-opacity:1;stroke:#000000;stroke-width:0.627832;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -145,26 +144,14 @@
          id="tspan2330-53">ARCADE SERIES</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:27.4837px;line-height:1.25;font-family:Novarese;-inkscape-font-specification:Novarese;fill:#3e6aab;fill-opacity:1;stroke:#000000;stroke-width:0.611351;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       x="25.23679"
-       y="156.37572"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:27.4837px;line-height:1.25;font-family:Novarese;-inkscape-font-specification:'Novarese, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.611351;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       x="46.120316"
+       y="156.52249"
        id="text2328-2"><tspan
          sodipodi:role="line"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:27.4837px;font-family:Novarese;-inkscape-font-specification:Novarese;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.611351;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         x="25.23679"
-         y="156.37572"
-         id="tspan2330-5">CP-SYSTEM</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.1111px;line-height:1.25;font-family:Novarese;-inkscape-font-specification:Novarese;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.565;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       x="87.148132"
-       y="109.58159"
-       id="text3126"><tspan
-         sodipodi:role="line"
-         id="tspan3124"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.1111px;font-family:Novarese;-inkscape-font-specification:Novarese;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.565;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         x="87.148132"
-         y="109.58159">OF</tspan></text>
+         id="tspan1247"
+         x="46.120316"
+         y="156.52249">THEORY</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50.8px;line-height:1.25;font-family:Novarese;-inkscape-font-specification:Novarese;fill:url(#meshgradient17665);fill-opacity:1;stroke:none;stroke-width:0.264583"
@@ -178,12 +165,12 @@
          y="157.13741" /></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.69938;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 26.483839,93.303229 H 166.38261"
+       d="M 26.269911,85.231738 H 166.16868"
        id="path77767"
        sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.69938;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 26.483838,114.48254 H 166.38261"
+       d="M 25.176156,126.98022 H 165.07493"
        id="path77767-4"
        sodipodi:nodetypes="cc" />
     <path
@@ -217,6 +204,16 @@
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93889px;font-family:Novarese;-inkscape-font-specification:Novarese;stroke-width:0.264583"
          x="69.506447"
          y="214.72098">MEMSET PUBLICATIONS</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50.8px;line-height:1.25;font-family:Novarese;-inkscape-font-specification:'Novarese, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.623162;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       x="20.850967"
+       y="121.89525"
+       id="text1243"><tspan
+         sodipodi:role="line"
+         id="tspan1245"
+         x="20.850967"
+         y="121.89525">ALPHA</tspan></text>
   </g>
   <script
      id="mesh_polyfill"

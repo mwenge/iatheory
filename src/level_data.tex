@@ -156,20 +156,320 @@ time we pass through to animate the ship:
 \CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{8244}{8251}%
 \lstinputlisting[caption="Routine for Animating Enemy Sprites",basicstyle=\tiny]{tmp.asm}
 
-What follows are all the sprites and their frame rates defined for each level.
-
-\subsubsection{Sprite Data for Each Level}
-\subfile{level_data_sprites}
-
 \subsection{Enemy Movement}
 
-\subfile{level_data_movement}
+Enemy movement is controlled by two parameters in each direction: the number of pixels to move in one go and the number of
+cycles to wait between each movement. So for movement in the horizontal (or X direction) \icode{Byte 19} controls the number
+of pixels to move at once, while \icode{Byte 21} controls the number of cycles to wait between each movement. The same
+applies to \icode{Byte 20} and \icode{Byte 22} for the vertical (or Y direction).
+
+If we look at Byte 19 and Byte 21 for Level 1 we can see that the the fast lateral movement of the 'UFO's is implemented by a relatively
+high value of \$06 for the number of pixels it moves at each step while the interval between steps is relatively low (\$01).
+Meanwhile the more gradual up and down movement is implemented by a value of \$01 in Byte 20 and Byte 22.
+
+For the second level ('bouncing rings') the horizontal movement is more constrained (Byte 19 is \$00) while the vertical movement
+is more extreme (Byte 20 is \$24) - achieving the bouncing effect.
+
+
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=10cm,center}
+
+      \begin{tabular}{rlllll}
+        \toprule
+        Level & Byte 7    & Byte 19   & Byte 20   & Byte 21   & Byte 22   \\
+        \midrule
+        1 & \$00       & \$06       & \$01       & \$01       & \$01       \\
+        2 & \$00       & \$00       & \$24       & \$02       & \$01       \\
+        3 & \$00       & \$FA       & \$01       & \$01       & \$02       \\
+        \addlinespace
+        \bottomrule
+        \multicolumn{6}{@{}l@{}}{Byte 7 : Whether a specific attack behaviour is used.}\\
+        \multicolumn{6}{@{}l@{}}{Byte 19: X Pos movement for attack ship.}\\
+        \multicolumn{6}{@{}l@{}}{Byte 20: Y Pos movement pattern for attack ship.}\\
+        \multicolumn{6}{@{}l@{}}{Byte 21: X Pos Frame Rate for Attack ship.}\\
+        \multicolumn{6}{@{}l@{}}{Byte 22: Y Pos Frame Rate for Attack ship.}\\
+      \end{tabular}
+
+    \end{adjustbox}
+
+    }\caption*{Movement data for the first three levels.}
+\end{figure}
+
+The horizontal movement for level three is \$FA, which would make you think the enemies must be moving horizontally
+extremely quickly. In fact, when the high bit is set a special behaviour is invoked:
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{8192}{8193}%
+\lstinputlisting[caption="From \icode{UpdateAttackShipsXAndYPositions}. "]{tmp.asm}
+
+When the upper bit is set (e.g. \$FC,\$80) on the value loaded to the accumulator by \icode{LDA} then \icode{BMI} will 
+return true and jump to \icode{UpperBitSetOnXPosMovement}.
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{8203}{8217}%
+\lstinputlisting[caption="From \icode{UpdateAttackShipsXAndYPositions}. "]{tmp.asm}
+
+This first line \icode{EOR \#\$FF} performs an exclusive-or between Byte 19 in the \icode{Accumulator} (\$FA) and the value \$FF. An exclusive-or,
+remember, is a bit by bit comparison of two bytes which will set a bit in the result if an only if the bit in one of the
+values is set but the other is not:
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=10cm,center}
+
+      \begin{tabular}{rllllllll}
+        \toprule
+        Byte & Bit 7 & Bit 6 & Bit 5 & Bit 4 & Bit 3 & Bit 2 & Bit 1 & Bit 0        \\
+        \midrule
+        \$FF & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
+        \$FA & 1 & 1 & 1 & 1 & 1 & 0 & 1 & 0 \\
+        \midrule
+        Result & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 1 \\
+        \addlinespace
+        \bottomrule
+      \end{tabular}
+
+    \end{adjustbox}
+
+    }\caption*{X-OR'ing \$FF and \$FA gives \$05.}
+\end{figure}
+
+This result is stored in \icode{attackShipOffsetRate}:
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{8208}{8208}%
+\lstinputlisting[caption="From \icode{UpdateAttackShipsXAndYPositions}. "]{tmp.asm}
+
+Incremented:
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{8209}{8209}%
+\lstinputlisting[caption="From \icode{UpdateAttackShipsXAndYPositions}. "]{tmp.asm}
+
+And then subtracted from the enemy's X position:
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{8210}{8213}%
+\lstinputlisting[caption="From \icode{UpdateAttackShipsXAndYPositions}. "]{tmp.asm}
+
+The net result is a deceleration effect. This is observed in the way the licker ship
+wave will accelerate out to the center before dialling back again.
+
+
+\subsubsection{What is going on with Byte 7?}
+
+Byte 7 comes into play when setting the initial Y position of a new enemy. This initial vertical
+position is random, but subject to some adjustment:
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{1545}{1612}%
+\lstinputlisting[caption="The sub-routine \icode{SetInitialRandomPositionUpperPlanet} in \icode{GetWaveDateForNewShip}. "]{tmp.asm}
+
+The first order of business is to call \icode{PutRandomByteInAccumulatorRegister} which gets a random value and stores it in the accumulator.
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{1563}{1563}%
+\lstinputlisting[]{tmp.asm}
+
+Since \icode{A} can now contain anything from 0 to 255 (\$00 to \$FF) this needs to be adjusted to a meaningful Y-position
+value for the upper planet. So if we imagine \icode{PutRandomByteInAccumulatorRegister} returned \$85, we now do the
+following operations on it:
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{1564}{1566}%
+\lstinputlisting[]{tmp.asm}
+
+First we do an \icode{AND \#\$3F} with the value of \$85 in \icode{A}:
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=10cm,center}
+
+      \begin{tabular}{rllllllll}
+        \toprule
+        Byte & Bit 7 & Bit 6 & Bit 5 & Bit 4 & Bit 3 & Bit 2 & Bit 1 & Bit 0        \\
+        \midrule
+        \$85 & 1 & 0 & 0 & 0 & 0 & 1 & 0 & 1 \\
+        \$3F & 0 & 0 & 1 & 1 & 1 & 1 & 1 & 1 \\
+        \midrule
+        Result & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 1 \\
+        \addlinespace
+        \bottomrule
+      \end{tabular}
+
+    \end{adjustbox}
+
+    }\caption*{AND'ing \$3F and \$85 gives \$05.}
+\end{figure}
+
+Our result is \$05. The effect of the AND'ing here is to ensure that the random number we get back is between 0 and 63 rather
+than 0 and 255. Next we add \$40 (decimal 64) to this result:
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{1565}{1567}%
+\lstinputlisting[]{tmp.asm}
+
+This gives \$45 and this is what we store as the initial Y position for the enemy.
+
+You'll notice that the steps for \icode{SetInitialRandomPositionLowerPlanet} are identical but with only the constant of the
+add value of \$98 instead of \$40. This is simply an additional offset to ensure that the Y position is lower on the screen
+for the initial position of the enemy on the lower planet.
+
+We still haven't got into what Byte 7 is doing though. With an initial Y position determined, it looks like the intention was
+for Byte 7 to specify some adjustment to this value. But this looks like another bit of non-functioning game logic. If
+Byte 7 contains a value, the function will return early without any further adjustments. If it's zero it will then try
+Byte 9. If that's zero, it will return early. So the logic needs Byte 7 to be zero and Byte 9 to contain something for 
+anything to happen. That's never the case, so the the adjustment never happens:
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{1570}{1582}%
+\lstinputlisting[caption="An adjustment that never happens. Byte 7 and Byte 9 are never set in this way"]{tmp.asm}
+
+This is definitely some forgotten code. Byte 7 is elsewhere used in combination with Byte 8 and Byte 9 to define an alternate
+enemy mode for some levels where the ship will supplement any dead ships with alternate enemy types and attack patterns periodically.
+
+
+\subsection{Pointer Data}
+This happens in \icode{MaybeSwitchToAlternateEnemyPattern} in \icode{UpdateAttackShipDataForNewShip}. 
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{2217}{2265}%
+\lstinputlisting[caption="Byte 7 is used to periodically switch to an enemy mode defined by Bytes 8-9"]{tmp.asm}
+
+Byte 7 is used to drive the rate at which this routine switches over to the enemy data/mode defined by Byte 8 and Byte 9.
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{2223}{2227}%
+\lstinputlisting[caption="\icode{rateForSwitchingToAlternateEnemy} (Byte 7) is decremented and reloaded each time it reaches zero."]{tmp.asm}
+
+What this routine is going to do is replace the first dead ship it finds in the current wave with the wave data pointed to by  Byte 8-9
+and create a new enemy with the current ship's position with it.
+
+First, we store the current ship's position. The way to do this is get the index (\icode{Y}) for the current ship \icode{X} and store
+each of the X and Y Position information into the accumulator first \icode{A} and then push it onto the 'stack' (\icode{PHA} which means
+'push \icode{A} onto the stack').
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{2229}{2238}%
+\lstinputlisting[]{tmp.asm}
+
+When this has run the stack of accumulator values now looks like this:
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=10cm,center}
+      \begin{tikzpicture}
+      \draw[fill=yellow!80!black] (0,1,0) -- (4,1,0)--(4,1,2)--(0,1,2)--cycle;
+      \node[right] at (4,1,0) {$\icode{upperPlanetAttackShipsXPosArray}$};
+      \draw[fill=yellow!80!black] (0,2,0) -- (4,2,0)--(4,2,2)--(0,2,2)--cycle;
+      \node[right] at (4,2,0) {$\icode{upperPlanetAttackShipsMSBXPosArray}$};
+      \draw[fill=yellow!80!black] (0,3,0) -- (4,3,0)--(4,3,2)--(0,3,2)--cycle;
+      \node[right] at (4,3,0) {$\icode{upperPlanetAttackShipsYPosArray}$};
+      \end{tikzpicture}
+    \end{adjustbox}
+
+  }\caption*{The stack after the code above has run with \icode{upperPlanetAttackShipsXPosArray} at the top.}
+\end{figure}
+
+With our position data safely stashed away on the stack we now decide which planet we're on:
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{2240}{2243}%
+\lstinputlisting[]{tmp.asm}
+
+If we're on the upper planet we use \icode{SetXToIndexOfShipThatNeedsReplacing} look in the \icode{activeShipsWaveDataHiPtrArray} for any ships that
+need replacing between positions \icode{\$02} and \icode{\$06}. If we don't find one, we return early:
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{2245}{2249}%
+\lstinputlisting[]{tmp.asm}
+
+If we do find one we can now pull (or 'pop') the positional data we stored away in the stack and assign that to the once-dead
+ship. First we use the index we retrieved to \icode{X} to get the ship's index (\icode{Y}) into the positional arrays:
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{2251}{2253}%
+\lstinputlisting[]{tmp.asm}
+
+Then we pop the first positional item \icode{upperPlanetAttackShipsYPosArray} from the top of the stack and store in the new
+ship's position in the array:
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{2254}{2255}%
+\lstinputlisting[caption="\icode{PLA} remove the top item from the stack and stores it in \icode{A}]{tmp.asm}
+
+The stack now looks like this, popping from the stack has the effect of removing the first item:
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=10cm,center}
+      \begin{tikzpicture}
+      \draw[fill=yellow!80!black] (0,2,0) -- (4,2,0)--(4,2,2)--(0,2,2)--cycle;
+      \node[right] at (4,2,0) {$\icode{upperPlanetAttackShipsXPosArray}$};
+      \draw[fill=yellow!80!black] (0,3,0) -- (4,3,0)--(4,3,2)--(0,3,2)--cycle;
+      \node[right] at (4,3,0) {$\icode{upperPlanetAttackShipsMSBXPosArray}$};
+      \end{tikzpicture}
+    \end{adjustbox}
+
+  }
+\end{figure}
+
+Then we pop the rest of the items one by one and assign them to the new ship. We ignore the sprite's MXB offset if it is
+zero:
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{2256}{2264}%
+\lstinputlisting[caption="\icode{PLA} remove the top item from the stack and stores it in \icode{A}]{tmp.asm}
+
+Now that we have set up the positional data for the new enemy we load all its other features from the data pointed
+to by Byte 8-9:
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{2266}{2269}%
+\lstinputlisting[]{tmp.asm}
+
+Let's take a closer look at this routine \icode{UpdateWaveDataPointersForCurrentEnemy}. What it does in this
+instance is take the address pointed to by Bytes 8 and 9 and load the data there using the routine
+\icode{GetWaveDataForNewShip}. To be used in this way the values in Bytes 8 and 9 are combined and treated
+as an address in memory. For example if Byte 8 contains \icode{\$70} and Byte 9 contains \icode{\$13} they
+are treated as providing the address \icode{\$1370}. This is the location where the enemy data for
+\icode{planet1Level8Data} is kept so that is what is loaded.
+
+
+
+\begin{table}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=7cm,center}
+      \begin{tabular}{rrll}
+        \toprule
+        Planet &   Level & Byte 7    & Bytes 8-9                   \\
+        \midrule
+        1 &      11 & \$03       & smallDotWaveData         \\
+        1 &      14 & \$03       & planet1Level8Data        \\
+        2 &      19 & \$0C       & landGilbyAsEnemy         \\
+        3 &       4 & \$04       & gilbyLookingLeft         \\
+        3 &       6 & \$04       & planet3Level6Additional  \\
+        4 &      19 & \$01       & planet4Level19Additional \\
+        5 &       3 & \$01       & planet5Level3Additional  \\
+        5 &       5 & \$05       & planet5Level5Additional  \\
+        5 &      14 & \$06       & llamaWaveData            \\
+        \addlinespace
+        \bottomrule
+        \multicolumn{4}{@{}l@{}}{Byte 7 : Whether a specific attack behaviour is used.}\\
+        \multicolumn{4}{@{}l@{}}{Bytes 8-9 : Lo and Hi Ptr for alternate enemy mode}\\
+      \end{tabular}
+
+    \end{adjustbox}
+
+  }\caption{Actual use of Bytes 7, 8, and 9. Note that the value in Byte 7 doesn't matter, as long as it's non-zero.}
+\end{table}
+
+
 
 \subsection{Enemy Behaviour}
 
-\subfile{level_data_behaviour}
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=10cm,center}
+      \begin{tikzpicture}
+        \fill[green] (0,2) rectangle ++ (1,1); 
+        \draw (0,0) grid (46,46); 
+      \end{tikzpicture}
+    \end{adjustbox}
 
-\subsection{Pointer Data}
+  }\caption{Sprite sheet}
+\end{figure}
 
-\subfile{level_data_pointers}
-
+\subsection{Level Movement Data}

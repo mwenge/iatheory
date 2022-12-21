@@ -1,218 +1,222 @@
 \begin{figure}[H]
   {
-  \setlength{\tabcolsep}{3.0pt}
-  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
-  \begin{adjustbox}{width=\textwidth}
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=\textwidth}
 
-\begin{tabular}{rllll}
-\toprule
-   Level & Byte 19   & Byte 20   & Byte 21   & Byte 22   \\
-\midrule
-       1 & \$06       & \$01       & \$01       & \$01       \\
-       2 & \$00       & \$24       & \$02       & \$01       \\
-       3 & \$FA       & \$01       & \$01       & \$02       \\
-       4 & \$07       & \$00       & \$01       & \$02       \\
-       5 & \$FC       & \$23       & \$02       & \$02       \\
-       6 & \$00       & \$00       & \$01       & \$01       \\
-       7 & \$07       & \$00       & \$01       & \$02       \\
-       8 & \$05       & \$00       & \$01       & \$02       \\
-       9 & \$FC       & \$23       & \$01       & \$03       \\
-      10 & \$00       & \$25       & \$00       & \$02       \\
-      11 & \$02       & \$00       & \$01       & \$02       \\
-      12 & \$FC       & \$21       & \$01       & \$01       \\
-      13 & \$00       & \$24       & \$02       & \$02       \\
-      14 & \$FA       & \$00       & \$01       & \$01       \\
-      15 & \$00       & \$00       & \$01       & \$01       \\
-      16 & \$00       & \$00       & \$02       & \$00       \\
-      17 & \$80       & \$80       & \$01       & \$01       \\
-      18 & \$06       & \$00       & \$01       & \$02       \\
-      19 & \$00       & \$00       & \$02       & \$02       \\
-      20 & \$04       & \$24       & \$01       & \$02       \\
-\addlinespace
-\bottomrule
-\multicolumn{5}{@{}l@{}}{Byte 19: X Pos movement for attack ship.}\\
-\multicolumn{5}{@{}l@{}}{Byte 20: Y Pos movement pattern for attack ship.}\\
-\multicolumn{5}{@{}l@{}}{Byte 21: X Pos Frame Rate for Attack ship.}\\
-\multicolumn{5}{@{}l@{}}{Byte 22: Y Pos Frame Rate for Attack ship.}\\
-\end{tabular}
+      \begin{tabular}{rlllll}
+        \toprule
+        Level & Byte 7    & Byte 19   & Byte 20   & Byte 21   & Byte 22   \\
+        \midrule
+        1 & \$00       & \$06       & \$01       & \$01       & \$01       \\
+        2 & \$00       & \$00       & \$24       & \$02       & \$01       \\
+        3 & \$00       & \$FA       & \$01       & \$01       & \$02       \\
+        4 & \$00       & \$07       & \$00       & \$01       & \$02       \\
+        5 & \$00       & \$FC       & \$23       & \$02       & \$02       \\
+        6 & \$00       & \$00       & \$00       & \$01       & \$01       \\
+        7 & \$00       & \$07       & \$00       & \$01       & \$02       \\
+        8 & \$00       & \$05       & \$00       & \$01       & \$02       \\
+        9 & \$00       & \$FC       & \$23       & \$01       & \$03       \\
+        10 & \$00       & \$00       & \$25       & \$00       & \$02       \\
+        11 & \$03       & \$02       & \$00       & \$01       & \$02       \\
+        12 & \$00       & \$FC       & \$21       & \$01       & \$01       \\
+        13 & \$00       & \$00       & \$24       & \$02       & \$02       \\
+        14 & \$03       & \$FA       & \$00       & \$01       & \$01       \\
+        15 & \$00       & \$00       & \$00       & \$01       & \$01       \\
+        16 & \$00       & \$00       & \$00       & \$02       & \$00       \\
+        17 & \$00       & \$80       & \$80       & \$01       & \$01       \\
+        18 & \$00       & \$06       & \$00       & \$01       & \$02       \\
+        19 & \$00       & \$00       & \$00       & \$02       & \$02       \\
+        20 & \$00       & \$04       & \$24       & \$01       & \$02       \\
+        \addlinespace
+        \bottomrule
+        \multicolumn{6}{@{}l@{}}{Byte 7 : Whether a specific attack behaviour is used.}\\
+        \multicolumn{6}{@{}l@{}}{Byte 19: X Pos movement for attack ship.}\\
+        \multicolumn{6}{@{}l@{}}{Byte 20: Y Pos movement pattern for attack ship.}\\
+        \multicolumn{6}{@{}l@{}}{Byte 21: X Pos Frame Rate for Attack ship.}\\
+        \multicolumn{6}{@{}l@{}}{Byte 22: Y Pos Frame Rate for Attack ship.}\\
+      \end{tabular}
 
-  \end{adjustbox}
+    \end{adjustbox}
 
-  }\caption*{Planet 1 - Sprite Data.}
+    }\caption*{Planet 1 - Movement Data.}
 \end{figure}
 
 
 \begin{figure}[H]
   {
-  \setlength{\tabcolsep}{3.0pt}
-  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
-  \begin{adjustbox}{width=\textwidth}
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=\textwidth}
 
-\begin{tabular}{rllll}
-\toprule
-   Level & Byte 19   & Byte 20   & Byte 21   & Byte 22   \\
-\midrule
-       1 & \$00       & \$00       & \$01       & \$02       \\
-       2 & \$E9       & \$00       & \$01       & \$02       \\
-       3 & \$17       & \$00       & \$01       & \$03       \\
-       4 & \$FC       & \$00       & \$02       & \$02       \\
-       5 & \$06       & \$24       & \$01       & \$02       \\
-       6 & \$07       & \$24       & \$01       & \$01       \\
-       7 & \$04       & \$00       & \$01       & \$01       \\
-       8 & \$00       & \$00       & \$00       & \$01       \\
-       9 & \$04       & \$24       & \$01       & \$02       \\
-      10 & \$06       & \$00       & \$01       & \$00       \\
-      11 & \$00       & \$00       & \$01       & \$02       \\
-      12 & \$03       & \$00       & \$01       & \$00       \\
-      13 & \$00       & \$00       & \$02       & \$02       \\
-      14 & \$E9       & \$00       & \$01       & \$02       \\
-      15 & \$03       & \$22       & \$01       & \$01       \\
-      16 & \$FC       & \$00       & \$01       & \$00       \\
-      17 & \$17       & \$00       & \$01       & \$03       \\
-      18 & \$00       & \$00       & \$01       & \$01       \\
-      19 & \$05       & \$24       & \$01       & \$02       \\
-      20 & \$FC       & \$24       & \$01       & \$02       \\
-\addlinespace
-\bottomrule
-\multicolumn{5}{@{}l@{}}{Byte 19: X Pos movement for attack ship.}\\
-\multicolumn{5}{@{}l@{}}{Byte 20: Y Pos movement pattern for attack ship.}\\
-\multicolumn{5}{@{}l@{}}{Byte 21: X Pos Frame Rate for Attack ship.}\\
-\multicolumn{5}{@{}l@{}}{Byte 22: Y Pos Frame Rate for Attack ship.}\\
-\end{tabular}
+      \begin{tabular}{rlllll}
+        \toprule
+        Level & Byte 7    & Byte 19   & Byte 20   & Byte 21   & Byte 22   \\
+        \midrule
+        1 & \$00       & \$00       & \$00       & \$01       & \$02       \\
+        2 & \$00       & \$E9       & \$00       & \$01       & \$02       \\
+        3 & \$00       & \$17       & \$00       & \$01       & \$03       \\
+        4 & \$00       & \$FC       & \$00       & \$02       & \$02       \\
+        5 & \$00       & \$06       & \$24       & \$01       & \$02       \\
+        6 & \$00       & \$07       & \$24       & \$01       & \$01       \\
+        7 & \$00       & \$04       & \$00       & \$01       & \$01       \\
+        8 & \$00       & \$00       & \$00       & \$00       & \$01       \\
+        9 & \$00       & \$04       & \$24       & \$01       & \$02       \\
+        10 & \$00       & \$06       & \$00       & \$01       & \$00       \\
+        11 & \$00       & \$00       & \$00       & \$01       & \$02       \\
+        12 & \$00       & \$03       & \$00       & \$01       & \$00       \\
+        13 & \$00       & \$00       & \$00       & \$02       & \$02       \\
+        14 & \$00       & \$E9       & \$00       & \$01       & \$02       \\
+        15 & \$00       & \$03       & \$22       & \$01       & \$01       \\
+        16 & \$00       & \$FC       & \$00       & \$01       & \$00       \\
+        17 & \$00       & \$17       & \$00       & \$01       & \$03       \\
+        18 & \$00       & \$00       & \$00       & \$01       & \$01       \\
+        19 & \$0C       & \$05       & \$24       & \$01       & \$02       \\
+        20 & \$00       & \$FC       & \$24       & \$01       & \$02       \\
+        \addlinespace
+        \bottomrule
+        \multicolumn{6}{@{}l@{}}{Byte 7 : Whether a specific attack behaviour is used.}\\
+        \multicolumn{6}{@{}l@{}}{Byte 19: X Pos movement for attack ship.}\\
+        \multicolumn{6}{@{}l@{}}{Byte 20: Y Pos movement pattern for attack ship.}\\
+        \multicolumn{6}{@{}l@{}}{Byte 21: X Pos Frame Rate for Attack ship.}\\
+        \multicolumn{6}{@{}l@{}}{Byte 22: Y Pos Frame Rate for Attack ship.}\\
+      \end{tabular}
 
-  \end{adjustbox}
+    \end{adjustbox}
 
-  }\caption*{Planet 2 - Sprite Data.}
+    }\caption*{Planet 2 - Movement Data.}
 \end{figure}
 
 
 \begin{figure}[H]
   {
-  \setlength{\tabcolsep}{3.0pt}
-  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
-  \begin{adjustbox}{width=\textwidth}
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=\textwidth}
 
-\begin{tabular}{rllll}
-\toprule
-   Level & Byte 19   & Byte 20   & Byte 21   & Byte 22   \\
-\midrule
-       1 & \$00       & \$00       & \$02       & \$02       \\
-       2 & \$F8       & \$01       & \$01       & \$0C       \\
-       3 & \$03       & \$23       & \$01       & \$01       \\
-       4 & \$08       & \$00       & \$01       & \$03       \\
-       5 & \$00       & \$00       & \$00       & \$00       \\
-       6 & \$F9       & \$23       & \$01       & \$07       \\
-       7 & \$03       & \$23       & \$01       & \$02       \\
-       8 & \$00       & \$00       & \$00       & \$00       \\
-       9 & \$00       & \$00       & \$01       & \$02       \\
-      10 & \$00       & \$00       & \$01       & \$02       \\
-      11 & \$FD       & \$21       & \$02       & \$01       \\
-      12 & \$00       & \$23       & \$00       & \$01       \\
-      13 & \$00       & \$00       & \$00       & \$00       \\
-      14 & \$00       & \$00       & \$00       & \$00       \\
-      15 & \$00       & \$00       & \$00       & \$00       \\
-      16 & \$00       & \$00       & \$00       & \$00       \\
-      17 & \$03       & \$00       & \$01       & \$01       \\
-      18 & \$00       & \$00       & \$02       & \$02       \\
-      19 & \$05       & \$00       & \$01       & \$02       \\
-      20 & \$06       & \$24       & \$01       & \$02       \\
-\addlinespace
-\bottomrule
-\multicolumn{5}{@{}l@{}}{Byte 19: X Pos movement for attack ship.}\\
-\multicolumn{5}{@{}l@{}}{Byte 20: Y Pos movement pattern for attack ship.}\\
-\multicolumn{5}{@{}l@{}}{Byte 21: X Pos Frame Rate for Attack ship.}\\
-\multicolumn{5}{@{}l@{}}{Byte 22: Y Pos Frame Rate for Attack ship.}\\
-\end{tabular}
+      \begin{tabular}{rlllll}
+        \toprule
+        Level & Byte 7    & Byte 19   & Byte 20   & Byte 21   & Byte 22   \\
+        \midrule
+        1 & \$00       & \$00       & \$00       & \$02       & \$02       \\
+        2 & \$00       & \$F8       & \$01       & \$01       & \$0C       \\
+        3 & \$00       & \$03       & \$23       & \$01       & \$01       \\
+        4 & \$04       & \$08       & \$00       & \$01       & \$03       \\
+        5 & \$00       & \$00       & \$00       & \$00       & \$00       \\
+        6 & \$04       & \$F9       & \$23       & \$01       & \$07       \\
+        7 & \$00       & \$03       & \$23       & \$01       & \$02       \\
+        8 & \$00       & \$00       & \$00       & \$00       & \$00       \\
+        9 & \$00       & \$00       & \$00       & \$01       & \$02       \\
+        10 & \$00       & \$00       & \$00       & \$01       & \$02       \\
+        11 & \$00       & \$FD       & \$21       & \$02       & \$01       \\
+        12 & \$00       & \$00       & \$23       & \$00       & \$01       \\
+        13 & \$00       & \$00       & \$00       & \$00       & \$00       \\
+        14 & \$00       & \$00       & \$00       & \$00       & \$00       \\
+        15 & \$00       & \$00       & \$00       & \$00       & \$00       \\
+        16 & \$00       & \$00       & \$00       & \$00       & \$00       \\
+        17 & \$00       & \$03       & \$00       & \$01       & \$01       \\
+        18 & \$00       & \$00       & \$00       & \$02       & \$02       \\
+        19 & \$00       & \$05       & \$00       & \$01       & \$02       \\
+        20 & \$00       & \$06       & \$24       & \$01       & \$02       \\
+        \addlinespace
+        \bottomrule
+        \multicolumn{6}{@{}l@{}}{Byte 7 : Whether a specific attack behaviour is used.}\\
+        \multicolumn{6}{@{}l@{}}{Byte 19: X Pos movement for attack ship.}\\
+        \multicolumn{6}{@{}l@{}}{Byte 20: Y Pos movement pattern for attack ship.}\\
+        \multicolumn{6}{@{}l@{}}{Byte 21: X Pos Frame Rate for Attack ship.}\\
+        \multicolumn{6}{@{}l@{}}{Byte 22: Y Pos Frame Rate for Attack ship.}\\
+      \end{tabular}
 
-  \end{adjustbox}
+    \end{adjustbox}
 
-  }\caption*{Planet 3 - Sprite Data.}
+    }\caption*{Planet 3 - Movement Data.}
 \end{figure}
 
 
 \begin{figure}[H]
   {
-  \setlength{\tabcolsep}{3.0pt}
-  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
-  \begin{adjustbox}{width=\textwidth}
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=\textwidth}
 
-\begin{tabular}{rllll}
-\toprule
-   Level & Byte 19   & Byte 20   & Byte 21   & Byte 22   \\
-\midrule
-       1 & \$04       & \$23       & \$01       & \$02       \\
-       2 & \$0C       & \$00       & \$01       & \$02       \\
-       3 & \$03       & \$00       & \$01       & \$03       \\
-       4 & \$00       & \$00       & \$00       & \$01       \\
-       5 & \$04       & \$23       & \$01       & \$02       \\
-       6 & \$00       & \$00       & \$00       & \$00       \\
-       7 & \$00       & \$00       & \$00       & \$00       \\
-       8 & \$00       & \$00       & \$00       & \$00       \\
-       9 & \$80       & \$25       & \$80       & \$02       \\
-      10 & \$0A       & \$00       & \$01       & \$02       \\
-      11 & \$00       & \$00       & \$00       & \$01       \\
-      12 & \$00       & \$00       & \$00       & \$00       \\
-      13 & \$F9       & \$00       & \$01       & \$01       \\
-      14 & \$80       & \$80       & \$80       & \$80       \\
-      15 & \$00       & \$00       & \$02       & \$03       \\
-      16 & \$F8       & \$00       & \$01       & \$04       \\
-      17 & \$04       & \$00       & \$01       & \$00       \\
-      18 & \$00       & \$24       & \$02       & \$03       \\
-      19 & \$01       & \$00       & \$01       & \$01       \\
-      20 & \$FA       & \$24       & \$01       & \$02       \\
-\addlinespace
-\bottomrule
-\multicolumn{5}{@{}l@{}}{Byte 19: X Pos movement for attack ship.}\\
-\multicolumn{5}{@{}l@{}}{Byte 20: Y Pos movement pattern for attack ship.}\\
-\multicolumn{5}{@{}l@{}}{Byte 21: X Pos Frame Rate for Attack ship.}\\
-\multicolumn{5}{@{}l@{}}{Byte 22: Y Pos Frame Rate for Attack ship.}\\
-\end{tabular}
+      \begin{tabular}{rlllll}
+        \toprule
+        Level & Byte 7    & Byte 19   & Byte 20   & Byte 21   & Byte 22   \\
+        \midrule
+        1 & \$00       & \$04       & \$23       & \$01       & \$02       \\
+        2 & \$00       & \$0C       & \$00       & \$01       & \$02       \\
+        3 & \$00       & \$03       & \$00       & \$01       & \$03       \\
+        4 & \$00       & \$00       & \$00       & \$00       & \$01       \\
+        5 & \$00       & \$04       & \$23       & \$01       & \$02       \\
+        6 & \$00       & \$00       & \$00       & \$00       & \$00       \\
+        7 & \$00       & \$00       & \$00       & \$00       & \$00       \\
+        8 & \$00       & \$00       & \$00       & \$00       & \$00       \\
+        9 & \$00       & \$80       & \$25       & \$80       & \$02       \\
+        10 & \$00       & \$0A       & \$00       & \$01       & \$02       \\
+        11 & \$00       & \$00       & \$00       & \$00       & \$01       \\
+        12 & \$00       & \$00       & \$00       & \$00       & \$00       \\
+        13 & \$00       & \$F9       & \$00       & \$01       & \$01       \\
+        14 & \$00       & \$80       & \$80       & \$80       & \$80       \\
+        15 & \$00       & \$00       & \$00       & \$02       & \$03       \\
+        16 & \$00       & \$F8       & \$00       & \$01       & \$04       \\
+        17 & \$00       & \$04       & \$00       & \$01       & \$00       \\
+        18 & \$00       & \$00       & \$24       & \$02       & \$03       \\
+        19 & \$01       & \$01       & \$00       & \$01       & \$01       \\
+        20 & \$00       & \$FA       & \$24       & \$01       & \$02       \\
+        \addlinespace
+        \bottomrule
+        \multicolumn{6}{@{}l@{}}{Byte 7 : Whether a specific attack behaviour is used.}\\
+        \multicolumn{6}{@{}l@{}}{Byte 19: X Pos movement for attack ship.}\\
+        \multicolumn{6}{@{}l@{}}{Byte 20: Y Pos movement pattern for attack ship.}\\
+        \multicolumn{6}{@{}l@{}}{Byte 21: X Pos Frame Rate for Attack ship.}\\
+        \multicolumn{6}{@{}l@{}}{Byte 22: Y Pos Frame Rate for Attack ship.}\\
+      \end{tabular}
 
-  \end{adjustbox}
+    \end{adjustbox}
 
-  }\caption*{Planet 4 - Sprite Data.}
+    }\caption*{Planet 4 - Movement Data.}
 \end{figure}
 
 
 \begin{figure}[H]
   {
-  \setlength{\tabcolsep}{3.0pt}
-  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
-  \begin{adjustbox}{width=\textwidth}
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=\textwidth}
 
-\begin{tabular}{rllll}
-\toprule
-   Level & Byte 19   & Byte 20   & Byte 21   & Byte 22   \\
-\midrule
-       1 & \$FC       & \$00       & \$01       & \$02       \\
-       2 & \$00       & \$25       & \$00       & \$01       \\
-       3 & \$FD       & \$24       & \$01       & \$02       \\
-       4 & \$00       & \$00       & \$01       & \$00       \\
-       5 & \$07       & \$03       & \$01       & \$01       \\
-       6 & \$F4       & \$00       & \$01       & \$02       \\
-       7 & \$FE       & \$00       & \$01       & \$01       \\
-       8 & \$04       & \$24       & \$01       & \$02       \\
-       9 & \$00       & \$00       & \$00       & \$00       \\
-      10 & \$00       & \$20       & \$00       & \$01       \\
-      11 & \$00       & \$00       & \$01       & \$02       \\
-      12 & \$00       & \$23       & \$02       & \$02       \\
-      13 & \$00       & \$00       & \$00       & \$00       \\
-      14 & \$FC       & \$00       & \$01       & \$02       \\
-      15 & \$00       & \$00       & \$00       & \$00       \\
-      17 & \$02       & \$22       & \$01       & \$01       \\
-      18 & \$00       & \$00       & \$02       & \$02       \\
-      20 & \$0C       & \$24       & \$01       & \$02       \\
-\addlinespace
-\bottomrule
-\multicolumn{5}{@{}l@{}}{Byte 19: X Pos movement for attack ship.}\\
-\multicolumn{5}{@{}l@{}}{Byte 20: Y Pos movement pattern for attack ship.}\\
-\multicolumn{5}{@{}l@{}}{Byte 21: X Pos Frame Rate for Attack ship.}\\
-\multicolumn{5}{@{}l@{}}{Byte 22: Y Pos Frame Rate for Attack ship.}\\
-\end{tabular}
+      \begin{tabular}{rlllll}
+        \toprule
+        Level & Byte 7    & Byte 19   & Byte 20   & Byte 21   & Byte 22   \\
+        \midrule
+        1 & \$00       & \$FC       & \$00       & \$01       & \$02       \\
+        2 & \$00       & \$00       & \$25       & \$00       & \$01       \\
+        3 & \$01       & \$FD       & \$24       & \$01       & \$02       \\
+        4 & \$00       & \$00       & \$00       & \$01       & \$00       \\
+        5 & \$05       & \$07       & \$03       & \$01       & \$01       \\
+        6 & \$00       & \$F4       & \$00       & \$01       & \$02       \\
+        7 & \$00       & \$FE       & \$00       & \$01       & \$01       \\
+        8 & \$00       & \$04       & \$24       & \$01       & \$02       \\
+        9 & \$00       & \$00       & \$00       & \$00       & \$00       \\
+        10 & \$00       & \$00       & \$20       & \$00       & \$01       \\
+        11 & \$00       & \$00       & \$00       & \$01       & \$02       \\
+        12 & \$00       & \$00       & \$23       & \$02       & \$02       \\
+        13 & \$00       & \$00       & \$00       & \$00       & \$00       \\
+        14 & \$06       & \$FC       & \$00       & \$01       & \$02       \\
+        15 & \$00       & \$00       & \$00       & \$00       & \$00       \\
+        17 & \$00       & \$02       & \$22       & \$01       & \$01       \\
+        18 & \$00       & \$00       & \$00       & \$02       & \$02       \\
+        20 & \$00       & \$0C       & \$24       & \$01       & \$02       \\
+        \addlinespace
+        \bottomrule
+        \multicolumn{6}{@{}l@{}}{Byte 7 : Whether a specific attack behaviour is used.}\\
+        \multicolumn{6}{@{}l@{}}{Byte 19: X Pos movement for attack ship.}\\
+        \multicolumn{6}{@{}l@{}}{Byte 20: Y Pos movement pattern for attack ship.}\\
+        \multicolumn{6}{@{}l@{}}{Byte 21: X Pos Frame Rate for Attack ship.}\\
+        \multicolumn{6}{@{}l@{}}{Byte 22: Y Pos Frame Rate for Attack ship.}\\
+      \end{tabular}
 
-  \end{adjustbox}
+    \end{adjustbox}
 
-  }\caption*{Planet 5 - Sprite Data.}
+    }\caption*{Planet 5 - Movement Data.}
 \end{figure}
-
 

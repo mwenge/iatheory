@@ -156,6 +156,23 @@ time we pass through to animate the ship:
 \CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{8244}{8251}%
 \lstinputlisting[caption="Routine for Animating Enemy Sprites",basicstyle=\tiny]{tmp.asm}
 
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+	\centering
+	\begin{subfigure}{0.3\textwidth}
+		\input{FLYING_SAUCER1}
+	\end{subfigure}
+	\begin{subfigure}{0.3\textwidth}
+		\input{FLYING_SAUCER2}
+	\end{subfigure}
+	\begin{subfigure}{0.3\textwidth}
+		\input{FLYING_SAUCER3}
+	\end{subfigure}
+  }\caption[position=top]{The sprites used to animate the 'UFO' in the first level.}
+\end{figure}
+
 \subsection{Enemy Movement}
 
 Enemy movement is controlled by two parameters in each direction: the number of pixels to move in one go and the number of
@@ -458,18 +475,5 @@ are treated as providing the address \icode{\$1370}. This is the location where 
 
 \subsection{Enemy Behaviour}
 
-\begin{figure}[H]
-  {
-    \setlength{\tabcolsep}{3.0pt}
-    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
-    \begin{adjustbox}{width=10cm,center}
-      \begin{tikzpicture}
-        \fill[green] (0,2) rectangle ++ (1,1); 
-        \draw (0,0) grid (46,46); 
-      \end{tikzpicture}
-    \end{adjustbox}
-
-  }\caption{Sprite sheet}
-\end{figure}
 
 \subsection{Level Movement Data}

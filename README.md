@@ -1,8 +1,8 @@
-# The Book of CP-System
+# Iridis Alpha Theory
 
-A study of the revolutionary hardware used by Capcom from 1989 to 1995 to release breath-taking arcade games such as Street Fighter II, Final Fight, and Ghouls 'n Ghosts.
+A deeper-than-is-possibly-sane dive into the workings of Iridis Alpha.
 
-The source code is open-source but I retain ownership of all drawings. They are only provided here so the project can be compiled.
+The build system and structure is based on 'The Book of CP-System' by Fabien Sanglard, of which this repository is a fork.
 
 ## How to build (Linux)
 

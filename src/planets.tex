@@ -1,0 +1,218 @@
+\chapter{Making Planets for Nigel} 
+\renewcommand*{\thesubfigure}{(\arabic{subfigure})}
+
+\begin{q}{Jeff Minter's Development Diary in Zzap Magazine\cite{planner}}
+17 February 1986 
+Redid the graphics completely, came up with some really
+nice looking metallic planet structures that I'll probably stick with. Started
+to write the GenPlan routine that'll generate random planets at will. Good to
+have a C64 that can generate planets in its spare time. Wrote pulsation
+routines for the colours; looks well good with some of the planet structures.
+The metallic look seems to be 'in' at the moment so this first planet will go
+down well. There will be five planet surface types in all, I reckon, probably
+do one with grass and sea a bit like 'Sheep in Space', cos I did like that one.
+It'll be nice to have completely different planet surfaces in top and bottom of
+the screen. The neat thing is that all the surfaces have the same basic
+structures, all I do is fit different graphics around each one. 
+\end{q}
+
+\clearpage
+\subfile{planets/planet1Charset_mediumStructureData}
+\subfile{planets/planet2Charset_mediumStructureData}
+\subfile{planets/planet3Charset_mediumStructureData}
+\subfile{planets/planet4Charset_mediumStructureData}
+\subfile{planets/planet5Charset_mediumStructureData}
+\subfile{planets/planet1Charset_largestStructureData}
+\subfile{planets/planet2Charset_largestStructureData}
+\subfile{planets/planet3Charset_largestStructureData}
+\subfile{planets/planet4Charset_largestStructureData}
+\subfile{planets/planet5Charset_largestStructureData}
+\subfile{planets/planet1Charset_nextLargestStructure}
+\subfile{planets/planet2Charset_nextLargestStructure}
+\subfile{planets/planet3Charset_nextLargestStructure}
+\subfile{planets/planet4Charset_nextLargestStructure}
+\subfile{planets/planet5Charset_nextLargestStructure}
+\subfile{planets/planet1Charset_warpGateData}
+\subfile{planets/planet2Charset_warpGateData}
+\subfile{planets/planet3Charset_warpGateData}
+\subfile{planets/planet4Charset_warpGateData}
+\subfile{planets/planet5Charset_warpGateData}
+\subfile{planets/planet1Charset_littleStructureData}
+\subfile{planets/planet2Charset_littleStructureData}
+\subfile{planets/planet3Charset_littleStructureData}
+\subfile{planets/planet4Charset_littleStructureData}
+\subfile{planets/planet5Charset_littleStructureData}
+
+\iffalse
+\clearpage
+\subfile{planets/planet1Charset_tilesheet}
+\clearpage
+\subfile{planets/planet2Charset_tilesheet}
+\clearpage
+\subfile{planets/planet3Charset_tilesheet}
+\clearpage
+\subfile{planets/planet4Charset_tilesheet}
+\clearpage
+\subfile{planets/planet5Charset_tilesheet}
+
+\begin{figure}[H]
+{
+  \setlength{\tabcolsep}{3.0pt}
+  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=10cm,center}
+  \begin{subfigure}{0.3\textwidth}
+  \input{planets/planet1Charset_\$40}
+  \end{subfigure}
+  \begin{subfigure}{0.3\textwidth}
+  \input{planets/planet1Charset_\$42}
+  \end{subfigure}
+  \end{adjustbox}
+}\caption[]{Tilesheet: Planet 1 Sea.}
+\end{figure}
+\subfile{planets/planet1Charset_sea}
+
+\begin{figure}[H]
+{
+  \setlength{\tabcolsep}{3.0pt}
+  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=10cm,center}
+  \begin{subfigure}{0.3\textwidth}
+  \input{planets/planet1Charset_\$41}
+  \end{subfigure}
+  \begin{subfigure}{0.3\textwidth}
+  \input{planets/planet1Charset_\$43}
+  \end{subfigure}
+  \end{adjustbox}
+}\caption[]{Tilesheet: Planet 1 Land.}
+\end{figure}
+\subfile{planets/planet1Charset_land}
+
+\begin{figure}[H]
+{
+  \setlength{\tabcolsep}{3.0pt}
+  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=10cm,center}
+  \begin{subfigure}{0.3\textwidth}
+  \input{planets/planet2Charset_\$40}
+  \end{subfigure}
+  \begin{subfigure}{0.3\textwidth}
+  \input{planets/planet2Charset_\$42}
+  \end{subfigure}
+  \end{adjustbox}
+}\caption[]{Tilesheet: Planet 2 Sea.}
+\end{figure}
+\subfile{planets/planet2Charset_sea}
+
+\begin{figure}[H]
+{
+  \setlength{\tabcolsep}{3.0pt}
+  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=10cm,center}
+  \begin{subfigure}{0.3\textwidth}
+  \input{planets/planet2Charset_\$41}
+  \end{subfigure}
+  \begin{subfigure}{0.3\textwidth}
+  \input{planets/planet2Charset_\$43}
+  \end{subfigure}
+  \end{adjustbox}
+}\caption[]{Tilesheet: Planet 2 Land.}
+\end{figure}
+\subfile{planets/planet2Charset_land}
+
+\begin{figure}[H]
+{
+  \setlength{\tabcolsep}{3.0pt}
+  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=10cm,center}
+  \begin{subfigure}{0.3\textwidth}
+  \input{planets/planet3Charset_\$40}
+  \end{subfigure}
+  \begin{subfigure}{0.3\textwidth}
+  \input{planets/planet3Charset_\$42}
+  \end{subfigure}
+  \end{adjustbox}
+}\caption[]{Tilesheet: Planet 3 Sea.}
+\end{figure}
+\subfile{planets/planet3Charset_sea}
+
+\begin{figure}[H]
+{
+  \setlength{\tabcolsep}{3.0pt}
+  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=10cm,center}
+  \begin{subfigure}{0.3\textwidth}
+  \input{planets/planet3Charset_\$41}
+  \end{subfigure}
+  \begin{subfigure}{0.3\textwidth}
+  \input{planets/planet3Charset_\$43}
+  \end{subfigure}
+  \end{adjustbox}
+}\caption[]{Tilesheet: Planet 3 Land.}
+\end{figure}
+\subfile{planets/planet3Charset_land}
+
+\begin{figure}[H]
+{
+  \setlength{\tabcolsep}{3.0pt}
+  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=10cm,center}
+  \begin{subfigure}{0.3\textwidth}
+  \input{planets/planet4Charset_\$40}
+  \end{subfigure}
+  \begin{subfigure}{0.3\textwidth}
+  \input{planets/planet4Charset_\$42}
+  \end{subfigure}
+  \end{adjustbox}
+}\caption[]{Tilesheet: Planet 4 Sea.}
+\end{figure}
+\subfile{planets/planet4Charset_sea}
+
+\begin{figure}[H]
+{
+  \setlength{\tabcolsep}{3.0pt}
+  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=10cm,center}
+  \begin{subfigure}{0.3\textwidth}
+  \input{planets/planet4Charset_\$41}
+  \end{subfigure}
+  \begin{subfigure}{0.3\textwidth}
+  \input{planets/planet4Charset_\$43}
+  \end{subfigure}
+  \end{adjustbox}
+}\caption[]{Tilesheet: Planet 4 Land.}
+\end{figure}
+\subfile{planets/planet4Charset_land}
+
+\begin{figure}[H]
+{
+  \setlength{\tabcolsep}{3.0pt}
+  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=10cm,center}
+  \begin{subfigure}{0.3\textwidth}
+  \input{planets/planet5Charset_\$40}
+  \end{subfigure}
+  \begin{subfigure}{0.3\textwidth}
+  \input{planets/planet5Charset_\$42}
+  \end{subfigure}
+  \end{adjustbox}
+}\caption[]{Tilesheet: Planet 5 Sea.}
+\end{figure}
+\subfile{planets/planet5Charset_sea}
+
+\begin{figure}[H]
+{
+  \setlength{\tabcolsep}{3.0pt}
+  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=10cm,center}
+  \begin{subfigure}{0.3\textwidth}
+  \input{planets/planet5Charset_\$41}
+  \end{subfigure}
+  \begin{subfigure}{0.3\textwidth}
+  \input{planets/planet5Charset_\$43}
+  \end{subfigure}
+  \end{adjustbox}
+}\caption[]{Tilesheet: Planet 5 Land.}
+\end{figure}
+\subfile{planets/planet5Charset_land}
+
+\fi

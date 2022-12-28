@@ -3,9 +3,10 @@
 
 \begin{q}{Jeff Minter's Development Diary in Zzap Magazine\cite{planner}}
 17 February 1986 
+
 Redid the graphics completely, came up with some really
 nice looking metallic planet structures that I'll probably stick with. Started
-to write the GenPlan routine that'll generate random planets at will. Good to
+to write the \icode{GenPlan} routine that'll generate random planets at will. Good to
 have a C64 that can generate planets in its spare time. Wrote pulsation
 routines for the colours; looks well good with some of the planet structures.
 The metallic look seems to be 'in' at the moment so this first planet will go
@@ -16,44 +17,70 @@ the screen. The neat thing is that all the surfaces have the same basic
 structures, all I do is fit different graphics around each one. 
 \end{q}
 
-\clearpage
-\subfile{planets/planet1Charset_mediumStructureData}
-\subfile{planets/planet2Charset_mediumStructureData}
-\subfile{planets/planet3Charset_mediumStructureData}
-\subfile{planets/planet4Charset_mediumStructureData}
-\subfile{planets/planet5Charset_mediumStructureData}
-\subfile{planets/planet1Charset_largestStructureData}
-\subfile{planets/planet2Charset_largestStructureData}
-\subfile{planets/planet3Charset_largestStructureData}
-\subfile{planets/planet4Charset_largestStructureData}
-\subfile{planets/planet5Charset_largestStructureData}
-\subfile{planets/planet1Charset_nextLargestStructure}
-\subfile{planets/planet2Charset_nextLargestStructure}
-\subfile{planets/planet3Charset_nextLargestStructure}
-\subfile{planets/planet4Charset_nextLargestStructure}
-\subfile{planets/planet5Charset_nextLargestStructure}
-\subfile{planets/planet1Charset_warpGateData}
-\subfile{planets/planet2Charset_warpGateData}
-\subfile{planets/planet3Charset_warpGateData}
-\subfile{planets/planet4Charset_warpGateData}
-\subfile{planets/planet5Charset_warpGateData}
-\subfile{planets/planet1Charset_littleStructureData}
-\subfile{planets/planet2Charset_littleStructureData}
-\subfile{planets/planet3Charset_littleStructureData}
-\subfile{planets/planet4Charset_littleStructureData}
-\subfile{planets/planet5Charset_littleStructureData}
+Making planets is easy. 
 
-\iffalse
-\clearpage
-\subfile{planets/planet1Charset_tilesheet}
-\clearpage
-\subfile{planets/planet2Charset_tilesheet}
-\clearpage
-\subfile{planets/planet3Charset_tilesheet}
-\clearpage
-\subfile{planets/planet4Charset_tilesheet}
-\clearpage
-\subfile{planets/planet5Charset_tilesheet}
+When making a planet, ensure you perform each of the following
+simple steps in the order given below.
+
+\begin{figure}[H]
+  {
+    \begin{adjustbox}{width=10cm,center}
+      \surface{planets/planet1Charset_Random_Step1.png}
+    \end{adjustbox}
+  }\caption[]{Step One: Add the sea across the entire surface of the planet.}
+\end{figure}
+
+\begin{figure}[H]
+  {
+    \begin{adjustbox}{width=10cm,center}
+      \surface{planets/planet1Charset_Random_Step2.png}
+    \end{adjustbox}
+  }\caption[]{Step Two: Insert a land mass at least 32 bytes and at most 128 bytes long.}
+\end{figure}
+
+\begin{figure}[H]
+  {
+    \begin{adjustbox}{width=10cm,center}
+      \surface{planets/planet1Charset_Random_Step3.png}
+    \end{adjustbox}
+  }\caption[]{Step Three: Add a random structure every 13 to 29 bytes.}
+\end{figure}
+
+\begin{figure}[H]
+  {
+    \begin{adjustbox}{width=10cm,center}
+      \surface{planets/planet1Charset_Random_Step4.png}
+    \end{adjustbox}
+  }\caption[]{Step Four: Add warp gates at the beginning and end of the planet surface.}
+\end{figure}
+
+Now you have not just a layout for one planet, but a layout for all five.
+
+\begin{figure}[H]
+  {
+      \begin{subfigure}{0.4\textwidth}
+        \surface{planets/planet2Charset_Random_Step4.png}
+      \end{subfigure}
+      \begin{subfigure}{0.4\textwidth}
+        \surface{planets/planet3Charset_Random_Step4.png}
+      \end{subfigure}
+      \begin{subfigure}{0.4\textwidth}
+        \surface{planets/planet4Charset_Random_Step4.png}
+      \end{subfigure}
+      \hspace{2.75cm}
+      \begin{subfigure}{0.4\textwidth}
+        \surface{planets/planet5Charset_Random_Step4.png}
+      \end{subfigure}
+  }\caption[]{A layout that will suit all the planets in your life.}
+\end{figure}
+
+But making planets isn't all simple steps and big picture decisions. There are also
+trifling details for the little people to wrestle with.
+
+\subsection{Step One: Creating the Sea}
+
+Making a sea is very easy. You come up with a character than can be repeated 1024 times to fill the
+surface of the planet.
 
 \begin{figure}[H]
 {
@@ -67,152 +94,398 @@ structures, all I do is fit different graphics around each one.
   \input{planets/planet1Charset_\$42}
   \end{subfigure}
   \end{adjustbox}
-}\caption[]{Tilesheet: Planet 1 Sea.}
+}\caption[]{There are two characters used for creating the sea and they're both the same! This will make more sense when
+we look at the land, where they are different.}
 \end{figure}
 \subfile{planets/planet1Charset_sea}
 
+The bit that needs explaining is how you define the character. If it was a simple bitmap then we could imagine the
+character as 8 rows of 8 bits and where a bit is set to 1 you color that pixel in. That is not the case. You can
+see how the bits are actually set below:
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=4cm,center}
+      \begin{tikzpicture}
+
+        \def\BACKGROUNDONE{brown}
+        \def\BACKGROUNDTWO{lightblue}
+        \def\CHARCOLOR{lightgreen}
+        \draw[step=1.0,gray,thin] (0,0) grid (8,8);
+        \fill[\BACKGROUNDTWO] (2,5) rectangle ++ (1,1);
+        \fill[\BACKGROUNDTWO] (3,5) rectangle ++ (1,1);
+        \fill[\BACKGROUNDTWO] (6,4) rectangle ++ (1,1);
+        \fill[\BACKGROUNDTWO] (7,4) rectangle ++ (1,1);
+        \fill[\BACKGROUNDTWO] (0,3) rectangle ++ (1,1);
+        \fill[\BACKGROUNDTWO] (1,3) rectangle ++ (1,1);
+        \fill[\BACKGROUNDTWO] (4,3) rectangle ++ (1,1);
+        \fill[\BACKGROUNDTWO] (5,3) rectangle ++ (1,1);
+        \fill[\BACKGROUNDTWO] (6,3) rectangle ++ (1,1);
+        \fill[\BACKGROUNDTWO] (7,3) rectangle ++ (1,1);
+        \fill[\BACKGROUNDTWO] (0,2) rectangle ++ (1,1);
+        \fill[\BACKGROUNDTWO] (1,2) rectangle ++ (1,1);
+        \fill[\BACKGROUNDTWO] (2,2) rectangle ++ (1,1);
+        \fill[\BACKGROUNDTWO] (3,2) rectangle ++ (1,1);
+        \fill[\BACKGROUNDTWO] (4,2) rectangle ++ (1,1);
+        \fill[\BACKGROUNDTWO] (5,2) rectangle ++ (1,1);
+        \fill[\BACKGROUNDTWO] (6,2) rectangle ++ (1,1);
+        \fill[\BACKGROUNDTWO] (7,2) rectangle ++ (1,1);
+        \fill[\BACKGROUNDTWO] (0,1) rectangle ++ (1,1);
+        \fill[\BACKGROUNDTWO] (1,1) rectangle ++ (1,1);
+        \fill[\BACKGROUNDTWO] (2,1) rectangle ++ (1,1);
+        \fill[\BACKGROUNDTWO] (3,1) rectangle ++ (1,1);
+        \fill[\BACKGROUNDTWO] (4,1) rectangle ++ (1,1);
+        \fill[\BACKGROUNDTWO] (5,1) rectangle ++ (1,1);
+        \fill[\BACKGROUNDTWO] (6,1) rectangle ++ (1,1);
+        \fill[\BACKGROUNDTWO] (7,1) rectangle ++ (1,1);
+        \fill[\BACKGROUNDTWO] (0,0) rectangle ++ (1,1);
+        \fill[\BACKGROUNDTWO] (1,0) rectangle ++ (1,1);
+        \fill[\BACKGROUNDTWO] (2,0) rectangle ++ (1,1);
+        \fill[\BACKGROUNDTWO] (3,0) rectangle ++ (1,1);
+        \fill[\BACKGROUNDTWO] (4,0) rectangle ++ (1,1);
+        \fill[\BACKGROUNDTWO] (5,0) rectangle ++ (1,1);
+        \fill[\BACKGROUNDTWO] (6,0) rectangle ++ (1,1);
+        \fill[\BACKGROUNDTWO] (7,0) rectangle ++ (1,1);
+        \node[matrix of math nodes,anchor=south west,inner sep=0pt,
+              nodes={draw,minimum size=1cm,anchor=center},
+              column sep=-\pgflinewidth,row sep=-\pgflinewidth]
+              {0 & 0  & 0 & 0 & 0 & 0 & 0 & 0\\
+               0 & 0  & 0 & 0 & 0 & 0 & 0 & 0\\
+               0 & 0  & 1 & 0 & 0 & 0 & 0 & 0\\
+               0 & 0  & 0 & 0 & 0 & 0 & 1 & 0\\
+               1 & 0  & 0 & 0 & 1 & 0 & 1 & 0\\
+               1 & 0  & 1 & 0 & 1 & 0 & 1 & 0\\
+               1 & 0  & 1 & 0 & 1 & 0 & 1 & 0\\
+               1 & 0  & 1 & 0 & 1 & 0 & 1 & 0\\};
+
+      \end{tikzpicture}
+    \end{adjustbox}
+  }\caption{planet1Charset \$40 representing a tile of sea.}
+\end{figure}
+
+Look closely at the picture above and you should see how it works. What is happening is that we fill
+two adjacent cells with blue when together they form the value \icode{10}. So
+we create graphic characters not with a simple bit-map but with a map of bit pairs. Each pair of bits is treated as a
+unit giving us four units on each row. Maybe it's intuitively obvious that \icode{00}
+means 'blank' or 'background' but I've pointed that out to you now just in case.
+
+\lstset{style=6502Style}
+\CopyPartialFile{../iridisalpha/src/graphics/planet_textures.asm}{tmp.asm}{644}{654}%
+\lstinputlisting[caption=Character \icode{\$40} representing the sea as it is defined in the source code. A full eight bytes are required
+to define each character\, so not cheap.,basicstyle=\tiny]{tmp.asm}
+
+Is that all there is to it? No. Before we look at how me might color things other than blue, let's look at how we color them
+with the big blue brush we have so far. The first thing we do is clear down the entire surface of the planet:
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{6903}{6925}%
+\lstinputlisting[caption=The surface data is stored from \icode{\$8000} to \icode{\$8FFF}. This code overwrites it all with 
+the value \$60\, which is an empty bitmap.]{tmp.asm}
+
+\CopyPartialFile{../iridisalpha/src/graphics/planet_textures.asm}{tmp.asm}{965}{974}%
+\lstinputlisting[caption=The empty character bit map (all zeroes) used to overwrite the surface before populating it.,basicstyle=\tiny]{tmp.asm}
+
+With the planet surface cleared out (overwritten with all \icode{\$60}s) we can now.. overwrite it all again with sequences of
+\icode{\$40,\$42}. No, that's not right. We're only overwriting the bottom layer - the surface layer - this time. This is the
+layer that contains the land and/or sea and it lives between \icode{\$8C00} and \icode{\$8FFF} which if your hexadecimal
+arithmetic is better than mine you will realize is 1024 bytes (\icode{\$400} in hex).
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{6929}{6950}%
+\lstinputlisting[caption=Filling the entire bottom surface of the planet with \icode{\$40,\$42}\, which gives us the sea. Our next step is
+to overwrite some of this with land.]{tmp.asm}
+
+\subfile{planets/planet1Charset_SeaAgain}
+
+\subsection{Step Two: Creating the Land}
+
+Is that all there is to it? Painting things with blue? No. 
+
+There are other possible values aside from \icode{10} and \icode{00} that we
+could use to paint colors. We could also have \icode{11} and \icode{01}. This
+is useful since we want to color things in with more than one color. We have
+blue assigned to \icode{10} on Planet 1, while for the land we can use two
+other colors: \icode{11} which we will assign 'green' and \icode{01} which we
+will assign 'brown'. We can assign whatever colors we like but we can only
+choose three, not counting the background. This is the kind of limitation you
+run into when you only allow two bits for assigning possible colors.
+
 \begin{figure}[H]
 {
   \setlength{\tabcolsep}{3.0pt}
   \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
     \begin{adjustbox}{width=10cm,center}
   \begin{subfigure}{0.3\textwidth}
-  \input{planets/planet1Charset_\$41}
+  \input{planets/planet1Charset_\$41_bits}
   \end{subfigure}
   \begin{subfigure}{0.3\textwidth}
-  \input{planets/planet1Charset_\$43}
+  \input{planets/planet1Charset_\$43_bits}
   \end{subfigure}
   \end{adjustbox}
-}\caption[]{Tilesheet: Planet 1 Land.}
+}\caption[]{Planet 1 Land uses two different characters that alternate to generate the land surface.}
 \end{figure}
 \subfile{planets/planet1Charset_land}
 
+The location and length of the landmass is randomly generated with a couple of constraints:
+it must be at least 128 bytes  and not more than 256 bytes from the start of surface and it must be at least 32 bytes
+and not more than 150 bytes long. The result is that the planet surface will be mostly sea
+since the entire surface is 1024 bytes long.
+
+Picking a random number between 128 and 256 is slightly convoluted in assembly:
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{6955}{6963}%
+\lstinputlisting[caption=Convoluted]{tmp.asm}
+
+\begin{q}
+A Neat Little Trick?
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{6774}{6778}%
+\lstinputlisting[caption=Neat]{tmp.asm}
+
+This little snippet's job is to return a quasi-random byte for use in the planet generation
+routines. To achieve this, it does something quite fiendish that is more or less unhead of in modern
+programming: it mutates itself.
+
+When called for the first time it loads a value from the address at \icode{randomPlanetData} to the accumulator. On first
+run \icode{randomPlanetData} points to the address \icode{\$9ABB} which contains the value \icode{\$42}:
+
+\CopyPartialFile{../iridisalpha/src/graphics/planet_surface.asm}{tmp.asm}{619}{621}%
+\lstinputlisting[caption=Not Quite Random Bytes]{tmp.asm}
+
+Before returning this value as its result it alters itself by changing
+\icode{randomPlanetData} to reference \icode{\$9ABC} (\icode{INC
+randomIntToIncrement}). In other words, it increments the pointer. In the
+assembly listing we make \icode{randomIntToIncrement} reference the position
+that holds \icode{randomPlanetData} by positioning it one byte before and
+adding a 1 to shift is reference beyond the byte holding \icode{LDA} to
+\icode{randomPlanetData}.
+
+Every time the routine is called it increments the reference again so that the next time it will pick up whatever
+  lies in the bytes beyond \icode{9ABB}. The results it returns are never truly random, but random enough
+  to permit the procedural generation of planets that they're used for.
+
+\end{q}
+
+With a random start position selected, a similar convolution is performed to choose the length of the land mass:
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{6973}{6979}%
+\lstinputlisting[caption=A convolution]{tmp.asm}
+
+Since the random number we get can be anything between \icode{\$00 - \$FF} (i.e. 0 and 255) and we want a number
+that's between 0 and 128 we need to do a bitwise \icode{AND} to mask out Bit 7 which by itself is 128.
+
 \begin{figure}[H]
-{
-  \setlength{\tabcolsep}{3.0pt}
-  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
     \begin{adjustbox}{width=10cm,center}
-  \begin{subfigure}{0.3\textwidth}
-  \input{planets/planet2Charset_\$40}
-  \end{subfigure}
-  \begin{subfigure}{0.3\textwidth}
-  \input{planets/planet2Charset_\$42}
-  \end{subfigure}
-  \end{adjustbox}
-}\caption[]{Tilesheet: Planet 2 Sea.}
+
+      \begin{tabular}{rllllllll}
+        \toprule
+        Byte & Bit 7 & Bit 6 & Bit 5 & Bit 4 & Bit 3 & Bit 2 & Bit 1 & Bit 0        \\
+        \midrule
+        \$FC & 1 & 1 & 1 & 1 & 1 & 1 & 0 & 0 \\
+        \$7F & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
+        \midrule
+        Result; \$7C & 0 & 1 & 1 & 1 & 1 & 1 & 0 & 0 \\
+        \addlinespace
+        \bottomrule
+      \end{tabular}
+
+    \end{adjustbox}
+
+  }\caption*{AND'ing \$FC and \$7F gives \$7C (124).}
 \end{figure}
-\subfile{planets/planet2Charset_sea}
+
+With the position and length selected we can start laying turf. We don't just plop down our basic land tiles. Posh
+and proper means giving the shore of the land its own look and feel. This we have in the characters \icode{\$5C} and
+\icode{\$5E} in our character set: 
 
 \begin{figure}[H]
 {
   \setlength{\tabcolsep}{3.0pt}
   \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
-    \begin{adjustbox}{width=10cm,center}
+    \begin{adjustbox}{width=15cm,center}
   \begin{subfigure}{0.3\textwidth}
-  \input{planets/planet2Charset_\$41}
+  \input{planets/tilesheets/planet1Charset_tilesheet_\$5C}
   \end{subfigure}
   \begin{subfigure}{0.3\textwidth}
-  \input{planets/planet2Charset_\$43}
+  \input{planets/tilesheets/planet1Charset_tilesheet_\$5E}
+  \end{subfigure}
+  \begin{subfigure}{0.3\textwidth}
+  \input{planets/tilesheets/planet1Charset_tilesheet_\$5D}
+  \end{subfigure}
+  \begin{subfigure}{0.3\textwidth}
+  \input{planets/tilesheets/planet1Charset_tilesheet_\$5F}
   \end{subfigure}
   \end{adjustbox}
-}\caption[]{Tilesheet: Planet 2 Land.}
+}\caption[]{Character tiles for the left shore (\$5C,\$5E) and the right shore (\$5D,\$5F).}
 \end{figure}
-\subfile{planets/planet2Charset_land}
+
+Now we can put the rest of the land down:
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{6990}{6990}%
+\lstinputlisting[caption=Write pairs of \icode{\$41,\$43} for the main land mass.]{tmp.asm}
+
+And finally the right shore:
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{7008}{7015}%
+\lstinputlisting[caption=Drawing the right shore.]{tmp.asm}
+
+\subsection{Step Three: Structures Structures Structures}
+The routines for adding structures to the planet are the opportunity to observe some assembly language cleverness.
+For each structure we draw we have to decide two things: where to drop it on the surface and what type of structure
+to draw. Apart from the Warp Gates, there are four structure types available. 
 
 \begin{figure}[H]
-{
-  \setlength{\tabcolsep}{3.0pt}
-  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
-    \begin{adjustbox}{width=10cm,center}
-  \begin{subfigure}{0.3\textwidth}
-  \input{planets/planet3Charset_\$40}
-  \end{subfigure}
-  \begin{subfigure}{0.3\textwidth}
-  \input{planets/planet3Charset_\$42}
-  \end{subfigure}
-  \end{adjustbox}
-}\caption[]{Tilesheet: Planet 3 Sea.}
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=15cm,center}
+      \begin{subfigure}{0.3\textwidth}
+        \input{planets/planet1Charset_littleStructureData}
+      \end{subfigure}
+      \begin{subfigure}{0.3\textwidth}
+        \input{planets/planet1Charset_mediumStructureData}
+      \end{subfigure}
+      \begin{subfigure}{0.3\textwidth}
+        \input{planets/planet1Charset_nextLargestStructure}
+      \end{subfigure}
+      \begin{subfigure}{0.3\textwidth}
+        \input{planets/planet1Charset_largestStructureData}
+      \end{subfigure}
+    \end{adjustbox}
+  }\caption[]{The four possible structure types for Planet 1.}
 \end{figure}
-\subfile{planets/planet3Charset_sea}
 
 \begin{figure}[H]
-{
-  \setlength{\tabcolsep}{3.0pt}
-  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
-    \begin{adjustbox}{width=10cm,center}
-  \begin{subfigure}{0.3\textwidth}
-  \input{planets/planet3Charset_\$41}
-  \end{subfigure}
-  \begin{subfigure}{0.3\textwidth}
-  \input{planets/planet3Charset_\$43}
-  \end{subfigure}
-  \end{adjustbox}
-}\caption[]{Tilesheet: Planet 3 Land.}
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=15cm,center}
+      \begin{subfigure}{0.3\textwidth}
+        \input{planets/planet2Charset_littleStructureData}
+      \end{subfigure}
+      \begin{subfigure}{0.3\textwidth}
+        \input{planets/planet2Charset_mediumStructureData}
+      \end{subfigure}
+      \begin{subfigure}{0.3\textwidth}
+        \input{planets/planet2Charset_nextLargestStructure}
+      \end{subfigure}
+      \begin{subfigure}{0.3\textwidth}
+        \input{planets/planet2Charset_largestStructureData}
+      \end{subfigure}
+    \end{adjustbox}
+  }\caption[]{The four possible structure types for Planet 2.}
 \end{figure}
-\subfile{planets/planet3Charset_land}
+
+You may be getting the sense that there is a sort of economy at work here. The structures are effectively
+the same for each planet, but with the textures swapped out. Your intuition is correct, the structures
+are only defined once and the same definition does regardless of which planet we're painting:
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{7021}{7030}%
+\lstinputlisting[caption=The definitions of three of the structures above\, each of which serves all five planets.]{tmp.asm}
+
+The \$FF at the end of each line serves as a sentinel for the drawing routine to know that the subsequent bytes
+are for the next layer 'up'. The \$FE is a terminator, indicating there is no more data for the structure.
+
+Drawing a structure is relatively straightforward so we'll cover that briefly first. Drawing the littlest
+structure provides the most compact example of the technique:
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{7039}{7073}%
+\lstinputlisting[caption=The littlest structure has only two layers.]{tmp.asm}
+
+Given that we're only writing 4 bytes this is a lot of code. As we will see there are separate routines for each
+of the structures and unfortunately for our search for evidence of coding genius they're all identical. So this
+is a pretty open-and-shut case of code duplication. It would have been more compact to rationalize them down to a single function
+and use a pointer to the structure data instead of repeating almost verbatim the same assembly code for each
+structure. 
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{7087}{7125}%
+\lstinputlisting[caption=\icode{DrawMediumStructure} and \icode{DrawLargestStructure} are identical to each other\, and to
+\icode{DrawLittleStructure} and \icode{DrawNextLargestStructure}.]{tmp.asm}
+
+The cleverness comes a little earlier so let's console ourselves with that. When we've chosen a position to draw
+our structure we need to pick a type of structure at random. The secret to this is to store the addresses to our
+regrettably repetitive draw routines in a pair of arrays. 
+
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{7256}{7259}%
+\lstinputlisting[caption=A 'jump table' containing the addresses to our draw routines. The address for \icode{DrawLittleStructure} 
+happens to be \$7486\, so we store \$74 in the first byte of \icode{structureSubRoutineArrayHiPtr} and \$86 in the first
+byte of \icode{structureSubRoutineArrayLoPtr}.,basicstyle=\tiny]{tmp.asm}
+
+With this in place our routine consists of getting a random number between 0 and 3, then using that as in index to pick
+out a value at the same position from \icode{structureSubRoutineArrayLoPtr} and \icode {structureSubRoutineArrayHiPtr}.
+We then store those values in \icode{structureRoutineLoPtr} and \icode{structureRoutineHiPtr} respectively. We now
+have a pointer to one of our draw routines at \icode{structureRoutineLoPtr} which we can jump to with the simple
+command: \icode{JMP (structureRoutineLoPtr)}. 
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{7227}{7253}%
+\lstinputlisting[caption=\icode{DrawRandomlyChosenStructure} picks a random position and a random draw routine to use at that position.]{tmp.asm}
+
+Rinse and repeat this for the length of the map and we get a surface with sea and land that is dotted with structures
+of different types.
 
 \begin{figure}[H]
-{
-  \setlength{\tabcolsep}{3.0pt}
-  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+  {
     \begin{adjustbox}{width=10cm,center}
-  \begin{subfigure}{0.3\textwidth}
-  \input{planets/planet4Charset_\$40}
-  \end{subfigure}
-  \begin{subfigure}{0.3\textwidth}
-  \input{planets/planet4Charset_\$42}
-  \end{subfigure}
-  \end{adjustbox}
-}\caption[]{Tilesheet: Planet 4 Sea.}
+      \surface{planets/planet3Charset_Random_Step3.png}
+    \end{adjustbox}
+  }\caption[]{Planet 3 once \icode{DrawRandomlyChosenStructure} has finished its business.}
 \end{figure}
-\subfile{planets/planet4Charset_sea}
+
+\subsection{Step Four: Add the warp gate}
+
+Our final step is to add the warp gate.
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=15cm,center}
+      \begin{subfigure}{0.3\textwidth}
+        \input{planets/planet1Charset_warpGateData}
+      \end{subfigure}
+      \begin{subfigure}{0.3\textwidth}
+        \input{planets/planet2Charset_warpGateData}
+      \end{subfigure}
+      \begin{subfigure}{0.3\textwidth}
+        \input{planets/planet3Charset_warpGateData}
+      \end{subfigure}
+      \begin{subfigure}{0.3\textwidth}
+        \input{planets/planet4Charset_warpGateData}
+      \end{subfigure}
+      \begin{subfigure}{0.3\textwidth}
+        \input{planets/planet5Charset_warpGateData}
+      \end{subfigure}
+    \end{adjustbox}
+  }\caption[]{The warp gates on each planet.}
+\end{figure}
+
+There's something funny here I haven't figured out yet. The routine for drawing the warp gate
+draws it twice. Yet each level has only one warp gate. Each one gets an initial position of
+\$F1 and \$05 respectively. This is used by \icode{StoreRandomPositionInPlanetInPlanetPtr} to 
+point to a position on the surface where the warp gate is drawn.
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{7203}{7222}%
+\lstinputlisting[caption=Why does it draw 2 warp gates when there's only 1? Haven't figured this out yet..]{tmp.asm}
 
 \begin{figure}[H]
-{
-  \setlength{\tabcolsep}{3.0pt}
-  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
-    \begin{adjustbox}{width=10cm,center}
-  \begin{subfigure}{0.3\textwidth}
-  \input{planets/planet4Charset_\$41}
-  \end{subfigure}
-  \begin{subfigure}{0.3\textwidth}
-  \input{planets/planet4Charset_\$43}
-  \end{subfigure}
-  \end{adjustbox}
-}\caption[]{Tilesheet: Planet 4 Land.}
+  {
+      \begin{subfigure}{0.7\textwidth}
+        \surface{planets/planet4Charset_Random_Step4.png}
+      \end{subfigure}
+      \begin{subfigure}{0.7\textwidth}
+        \surface{planets/planet5Charset_Random_Step4.png}
+      \end{subfigure}
+  }\caption[]{The final surfaces for Planets 4 and 5.}
 \end{figure}
-\subfile{planets/planet4Charset_land}
 
-\begin{figure}[H]
-{
-  \setlength{\tabcolsep}{3.0pt}
-  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
-    \begin{adjustbox}{width=10cm,center}
-  \begin{subfigure}{0.3\textwidth}
-  \input{planets/planet5Charset_\$40}
-  \end{subfigure}
-  \begin{subfigure}{0.3\textwidth}
-  \input{planets/planet5Charset_\$42}
-  \end{subfigure}
-  \end{adjustbox}
-}\caption[]{Tilesheet: Planet 5 Sea.}
-\end{figure}
-\subfile{planets/planet5Charset_sea}
+\subsection{Inactive Lower Planet}
+When the lower planet is inactive a surface with land, sea, and a warp gate is displayed. This doesn't reuse
+any of the logic described above. Instead it is generated from some customized data in the routine
+\icode{DrawLowerPlanetWhileInactive}.
 
-\begin{figure}[H]
-{
-  \setlength{\tabcolsep}{3.0pt}
-  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
-    \begin{adjustbox}{width=10cm,center}
-  \begin{subfigure}{0.3\textwidth}
-  \input{planets/planet5Charset_\$41}
-  \end{subfigure}
-  \begin{subfigure}{0.3\textwidth}
-  \input{planets/planet5Charset_\$43}
-  \end{subfigure}
-  \end{adjustbox}
-}\caption[]{Tilesheet: Planet 5 Land.}
-\end{figure}
-\subfile{planets/planet5Charset_land}
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{4239}{4294}%
+\lstinputlisting[caption=Draw the inactive lower planet.,basicstyle=\tiny]{tmp.asm}
 
-\fi

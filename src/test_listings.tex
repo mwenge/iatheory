@@ -1,0 +1,42 @@
+%! TEX program = lualatex
+\documentclass{article}
+\usepackage{listings}
+\usepackage{l3benchmark}
+
+
+\ExplSyntaxOn
+\NewDocumentCommand \CopyPartialFile {mmmm} {
+\ior_open:Nn \g_tmpa_ior {#1}
+\iow_open:Nn \g_tmpa_iow {#2}
+\prg_replicate:nn {#3} {
+    \ior_str_get:NN \g_tmpa_ior \l_tmpa_str
+}
+\def\tolines{\numexpr #4 - #3}
+\prg_replicate:nn {\tolines} {
+    \ior_str_get:NN \g_tmpa_ior \l_tmpa_str
+    \iow_now:Nx \g_tmpa_iow {\l_tmpa_str}
+}
+\ior_close:N \g_tmpa_ior
+\iow_close:N \g_tmpa_iow
+}
+\NewDocumentCommand \Repeat {mm} { \prg_replicate:nn {#1} {#2} }
+\ExplSyntaxOff
+
+
+\begin{document}
+
+\CopyPartialFile{src/iridisalpha.asm}{tmp.asm}{5000}{5020}%
+\lstinputlisting[]{tmp.asm}
+
+
+\end{document}
+
+%\def\IALines{\ReadLines{../iridisalpha/src/iridisalpha.asm}{8000}{8200}}
+%\lstset{style=6502Style}
+%\VerbatimInput[firstline=8452,lastline=8480]{../iridisalpha/src/iridisalpha.asm}
+%\begin{lstlisting}
+%\UseVerb{Verb}
+%\end{lstlisting}
+%\lstlisting[firstline=8244,lastline=8250]{../iridisalpha/src/iridisalpha.asm}
+%\lstinputlisting[style=6502Style,firstline=2,lastline=10]{src/code/variablesDeclaration.c}
+

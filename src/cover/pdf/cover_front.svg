@@ -27,8 +27,8 @@
      units="in"
      width="7.5in"
      inkscape:zoom="0.64488976"
-     inkscape:cx="265.93693"
-     inkscape:cy="437.28404"
+     inkscape:cx="607.0805"
+     inkscape:cy="494.65819"
      inkscape:window-width="1886"
      inkscape:window-height="1009"
      inkscape:window-x="34"
@@ -48,6 +48,14 @@
   </sodipodi:namedview>
   <defs
      id="defs2">
+    <linearGradient
+       id="linearGradient875"
+       inkscape:swatch="solid">
+      <stop
+         style="stop-color:#e3431a;stop-opacity:1;"
+         offset="0"
+         id="stop873" />
+    </linearGradient>
     <linearGradient
        id="linearGradient17661"
        inkscape:swatch="solid">
@@ -109,14 +117,14 @@
      transform="translate(-0.98828572,0.40104347)">
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.9275px;line-height:1.25;font-family:Novarese;-inkscape-font-specification:'Novarese, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#1a4de3;fill-opacity:1;stroke:none;stroke-width:0.182534;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       x="56.886532"
-       y="199.36873"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.9275px;line-height:1.25;font-family:Novarese;-inkscape-font-specification:'Novarese, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#e3381a;fill-opacity:1;stroke:none;stroke-width:0.182534;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       x="65.903732"
+       y="198.80986"
        id="text2328-2-5"><tspan
          sodipodi:role="line"
-         id="tspan1287"
-         x="56.886532"
-         y="199.36873">ROBERT HOGAN</tspan></text>
+         id="tspan317"
+         x="65.903732"
+         y="198.80986">ROB HOGAN</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50.8px;line-height:1.25;font-family:Novarese;-inkscape-font-specification:'Novarese, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.623162;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -170,19 +178,9 @@
        id="path77767-8"
        sodipodi:nodetypes="cc" />
     <path
-       style="fill:#3e6aab;fill-opacity:1;stroke:#1a4de3;stroke-width:0.69938;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 26.483839,39.074894 H 166.38261"
-       id="path77767-0-6"
-       sodipodi:nodetypes="cc" />
-    <path
        style="fill:none;stroke:#000000;stroke-width:0.69938;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="M 26.483839,174.22398 H 166.38261"
        id="path77767-8-9"
-       sodipodi:nodetypes="cc" />
-    <path
-       style="fill:none;fill-opacity:1;stroke:#1a4de3;stroke-width:0.69938;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 26.483839,172.31138 H 166.38261"
-       id="path77767-0-6-9"
        sodipodi:nodetypes="cc" />
     <text
        xml:space="preserve"

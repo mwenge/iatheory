@@ -1,0 +1,53 @@
+%! TEX program = lualatex
+\documentclass{article}
+\usepackage{listings}
+\usepackage{l3benchmark}
+
+
+\ExplSyntaxOn
+\NewDocumentCommand \CopyPartialFile {mmmm} {
+\ior_open:Nn \g_tmpa_ior {#1}
+\iow_open:Nn \g_tmpa_iow {#2}
+\prg_replicate:nn {#3} {
+    \ior_str_get:NN \g_tmpa_ior \l_tmpa_str
+}
+\prg_replicate:nn {#4} {
+    \ior_str_get:NN \g_tmpa_ior \l_tmpa_str
+    \iow_now:Nx \g_tmpa_iow {\l_tmpa_str}
+}
+\ior_close:N \g_tmpa_ior
+\iow_close:N \g_tmpa_iow
+}
+\NewDocumentCommand \Repeat {mm} { \prg_replicate:nn {#1} {#2} }
+\ExplSyntaxOff
+
+
+\begin{document}
+
+\ExplSyntaxOn
+\benchmark_tic:
+\ExplSyntaxOff
+
+\Repeat{5}{%
+\lstinputlisting[firstline=5001,lastline=5020]{src/iridisalpha.asm}%
+}
+
+\ExplSyntaxOn
+\benchmark_toc:
+\ExplSyntaxOff
+
+\ExplSyntaxOn
+\benchmark_tic:
+\ExplSyntaxOff
+
+\Repeat{5}{%
+\CopyPartialFile{src/iridisalpha.asm}{tmp.c}{5000}{20}%
+\lstinputlisting{tmp.c}%
+}
+
+\ExplSyntaxOn
+\benchmark_toc:
+\ExplSyntaxOff
+
+
+\end{document}

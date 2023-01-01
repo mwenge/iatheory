@@ -1,0 +1,357 @@
+\chapter{A Hundred Thousand Billion Theme Tunes} 
+
+\lstset{style=6502Style}
+The theme music in Iridis Alpha is procedurally generated. There isn't a chunk of music
+data that the game plays every time you visit the title screen. Instead a new tune is generated
+for every visit. There's a distinction to be made here between procedural and random. The 
+music isn't random: the first time you launch Iridis Alpha, and every subsequent time you launch
+it, you will hear the same piece of music. But as you let the game's attract mode cycle through and return
+to the title screen you will hear a new, different piece of music. Iridis Alpha has an infinite
+number of these tunes and it plays them in the same order every time you launch it and as it loops
+through the title sequence waiting for you to play.
+
+Because the music is generated procedurally, and not randomly, you will hear the same sequence
+of tunes every time you launch the game so it appears to you as if the music was composed in 
+advance and stored in the game waiting its turn. This is not the case.
+
+Each piece of music is generated dynamically using the same algorithm but because the logic
+is chaotic enough, the smallest difference in the initial values fed into it will result in 
+a completely different tune being generated.
+
+The routine responsible for creating this music is remarkably short so I've reproduced it here
+in full before we start to dive in and try to understand what's going on.
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{776}{864}%
+\lstinputlisting[caption=Routine responsible for playing the title tune., basicstyle=\tiny]{tmp.asm}
+
+\subsection{Some Basics}
+The rudiments of playing music on the Commodore 64 are simple. It has a powerful-for-its-time
+sound chip that has 3 tracks or 'voices'. You can play any note across 8 octaves on each of
+these voices together or separately. There are a whole bunch of settings you can apply
+to each voice to determine the way the note sounds. We'll cover a couple of these settings
+here but when it comes to playing music these extra settings aren't so important. They're
+much more useful when generating sound effects.
+
+Playing a note on one of the voices consists of loading a two-byte value into the location
+(or 'register') associated with that voice. Here's the routine in Iridis used to play a note
+for the theme tune on Voice '1':
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{869}{877}%
+\lstinputlisting[caption=Plays a note on Voice 1. The routine is supplied with a value in Y
+that indexes into two arrays\ containing the first (Hi) and second (Lo) byte respectively\ associated with the selected note.]{tmp.asm}
+
+Once the selected bytes have been loaded into \icode{\$D400} and \icode{\$D401} the new note will start playing. 
+It's as blunt an instrument as that. (Well not quite, we'll cover some other gory details soon). 
+
+The full list of available notes is given in the C64 Progammer's Reference Manual. I've adapted and reproduced it below.
+
+\def\boxit#1{%
+  \smash{\color{red}\fboxrule=1pt\relax\fboxsep=2pt\relax%
+    \llap{\rlap{\fbox{\vphantom{0}\makebox[#1]{}}}~}}\ignorespaces
+}
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=10cm,center}
+
+      \begin{tabular}{rlll}
+        \toprule
+        Octave & Note & High Byte & Low Byte \\
+        \midrule
+        0 & C & \icode{\$01} & \icode{\$0C} \\
+        0 & C\# & \icode{\$01} & \icode{\$1C} \\
+        0 & D & \icode{\$01} & \icode{\$2D} \\
+        0 & D\# & \icode{\$01} & \icode{\$3E} \\
+        0 & E & \icode{\$01} & \icode{\$51} \\
+        0 & F & \icode{\$01} & \icode{\$66} \\
+        0 & F\# & \icode{\$01} & \icode{\$7B} \\
+        0 & G & \icode{\$01} & \icode{\$91} \\
+        0 & G\# & \icode{\$01} & \icode{\$A9} \\
+        0 & A & \icode{\$01} & \icode{\$C3} \\
+        0 & A\# & \icode{\$01} & \icode{\$DD} \\
+        0 & B & \icode{\$01} & \icode{\$FA} \\
+        1 & C & \icode{\$02} & \icode{\$18} \\
+        1 & C\# & \icode{\$02} & \icode{\$38} \\
+        1 & D & \icode{\$02} & \icode{\$5A} \\
+        1 & D\# & \icode{\$02} & \icode{\$7D} \\
+        1 & E & \icode{\$02} & \icode{\$A3} \\
+        1 & F & \icode{\$02} & \icode{\$CC} \\
+        1 & F\# & \icode{\$02} & \icode{\$F6} \\
+        1 & G & \icode{\$03} & \icode{\$23} \\
+        1 & G\# & \icode{\$03} & \icode{\$53} \\
+        1 & A & \icode{\$03} & \icode{\$86} \\
+        1 & A\# & \icode{\$03} & \icode{\$BB} \\
+        1 & B & \icode{\$03} & \icode{\$F4} \\
+        2 & C & \icode{\$04} & \icode{\$30} \\
+        2 & C\# & \icode{\$04} & \icode{\$70} \\
+        2 & D & \icode{\$04} & \icode{\$B4} \\
+        2 & D\# & \icode{\$04} & \icode{\$FB} \\
+        2 & E & \icode{\$05} & \icode{\$47} \\
+        2 & F & \icode{\$05} & \icode{\$98} \\
+        2 & F\# & \icode{\$05} & \icode{\$ED} \\
+        2 & G & \icode{\$06} & \icode{\$47} \\
+        \bottomrule
+      \end{tabular}
+      \begin{tabular}{rlll}
+        \toprule
+        Octave & Note & High Byte & Low Byte \\
+        \midrule
+        2 & G\# & \icode{\$06} & \icode{\$A7} \\
+        2 & A & \icode{\$07} & \icode{\$0C} \\
+        2 & A\# & \icode{\$07} & \icode{\$77} \\
+        2 & B & \icode{\$07} & \icode{\$E9} \\        
+        \boxit{5cm}
+        3 & C & \icode{\$08} & \icode{\$61} \\
+        3 & C\# & \icode{\$08} & \icode{\$E1} \\
+        3 & D & \icode{\$09} & \icode{\$68} \\
+        3 & D\# & \icode{\$09} & \icode{\$F7} \\
+        3 & E & \icode{\$0A} & \icode{\$8F} \\
+        3 & F & \icode{\$0B} & \icode{\$30} \\
+        3 & F\# & \icode{\$0B} & \icode{\$DA} \\
+        3 & G & \icode{\$0C} & \icode{\$8F} \\
+        3 & G\# & \icode{\$0D} & \icode{\$4E} \\
+        3 & A & \icode{\$0E} & \icode{\$18} \\
+        3 & A\# & \icode{\$0E} & \icode{\$EF} \\
+        3 & B & \icode{\$0F} & \icode{\$D2} \\
+        4 & C & \icode{\$10} & \icode{\$C3} \\
+        4 & C\# & \icode{\$11} & \icode{\$C3} \\
+        4 & D & \icode{\$12} & \icode{\$D1} \\
+        4 & D\# & \icode{\$13} & \icode{\$EF} \\
+        4 & E & \icode{\$15} & \icode{\$1F} \\
+        4 & F & \icode{\$16} & \icode{\$60} \\
+        4 & F\# & \icode{\$17} & \icode{\$B5} \\
+        4 & G & \icode{\$19} & \icode{\$1E} \\
+        4 & G\# & \icode{\$1A} & \icode{\$9C} \\
+        4 & A & \icode{\$1C} & \icode{\$31} \\
+        4 & A\# & \icode{\$1D} & \icode{\$DF} \\
+        4 & B & \icode{\$1F} & \icode{\$A5} \\
+        5 & C & \icode{\$21} & \icode{\$87} \\
+        5 & C\# & \icode{\$23} & \icode{\$86} \\
+        5 & D & \icode{\$25} & \icode{\$A2} \\
+        5 & D\# & \icode{\$27} & \icode{\$DF} \\
+        \bottomrule
+      \end{tabular}
+      \begin{tabular}{rlll}
+        \toprule
+        Octave & Note & High Byte & Low Byte \\
+        \midrule
+        5 & E & \icode{\$2A} & \icode{\$3E} \\
+        5 & F & \icode{\$2C} & \icode{\$C1} \\
+        5 & F\# & \icode{\$2F} & \icode{\$6B} \\
+        5 & G & \icode{\$32} & \icode{\$3C} \\
+        5 & G\# & \icode{\$35} & \icode{\$39} \\
+        5 & A & \icode{\$38} & \icode{\$63} \\
+        5 & A\# & \icode{\$3B} & \icode{\$BE} \\
+        5 & B & \icode{\$3F} & \icode{\$4B} \\
+        6 & C & \icode{\$43} & \icode{\$0F} \\
+        6 & C\# & \icode{\$47} & \icode{\$0C} \\
+        6 & D & \icode{\$4B} & \icode{\$45} \\
+        6 & D\# & \icode{\$4F} & \icode{\$BF} \\
+        6 & E & \icode{\$54} & \icode{\$7D} \\
+        6 & F & \icode{\$59} & \icode{\$83} \\
+        6 & F\# & \icode{\$5E} & \icode{\$D6} \\
+        6 & G & \icode{\$64} & \icode{\$79} \\
+        6 & G\# & \icode{\$6A} & \icode{\$73} \\
+        6 & A & \icode{\$70} & \icode{\$C7} \\
+        6 & A\# & \icode{\$77} & \icode{\$7C} \\
+        6 & B & \icode{\$7E} & \icode{\$97} \\
+        7 & C & \icode{\$86} & \icode{\$1E} \\
+        7 & C\# & \icode{\$8E} & \icode{\$18} \\
+        7 & D & \icode{\$96} & \icode{\$8B} \\
+        7 & D\# & \icode{\$9F} & \icode{\$7E} \\
+        7 & E & \icode{\$A8} & \icode{\$FA} \\
+        7 & F & \icode{\$B3} & \icode{\$06} \\
+        7 & F\# & \icode{\$BD} & \icode{\$AC} \\
+        7 & G & \icode{\$C8} & \icode{\$F3} \\
+        7 & G\# & \icode{\$D4} & \icode{\$E6} \\
+        7 & A & \icode{\$E1} & \icode{\$8F} \\
+        7 & A\# & \icode{\$EE} & \icode{\$F8} \\
+        7 & B & \icode{\$FD} & \icode{\$2E} \\
+        \bottomrule
+      \end{tabular}
+
+    \end{adjustbox}
+
+  }\caption{All available notes on the C64 and their corresponding hi/lo byte values. Note that Iridis Alpha only uses octaves 3 to 7. The
+  available notes in octaves 1 to 2 are never used.}
+\end{figure}
+
+With 96 notes in total available, Iridis only uses 72 of them, omitting the 2 lowest octaves. We can see this when we look at the
+note table in the game. This pair of arrays are where the title music logic plucks the note to be played once it has 
+dynamically selected one:
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{738}{750}%
+\lstinputlisting[caption=The lookup table for all of the notes used in the theme music. The two lowest available octaves are not
+used by the game. To see this for yourself\, compare the first entry in \icode{titleMusicHiBytes}/\icode{titleMusicLowBytes} (\$08 and \$61\,
+giving \$0861) with the entry highlighted in red in the previous table.,basicstyle=\tiny]{tmp.asm}
+
+So now that we know where the notes are and how to make them go beep we just have to figure out the order that \icode{PlayTitleScreenMusic}
+contrives to play them.
+
+It would certainly help if we could see what the music looks like, so lets do that. Here is the opening title tune as sheet
+music in Western notation.
+
+\begin{figure}[H]
+{
+  \begin{adjustbox}{width=11cm,center}
+  \includegraphics[width=11cm]{music/title_no_1_page_1001.png}%
+    \end{adjustbox}
+}\caption[]{The first title tune in Iridis Alpha.}
+\end{figure}
+
+\subsubsection{Structure}
+Even if you can't read sheet music notation some structure should be evident.
+
+Voice 3 carries the main melody. 
+
+\begin{figure}[H]
+{
+  \begin{adjustbox}{width=11cm,center}
+  \includegraphics[width=11cm]{music/Voice_3_Part.png}%
+    \end{adjustbox}
+}
+\end{figure}
+
+For every 4 notes Voice 3 plays, Voice 2 chimes in with a new note that it sustains until the next one.
+
+\begin{figure}[H]
+{
+  \begin{adjustbox}{width=11cm,center}
+  \includegraphics[width=11cm]{music/Voice_2_Part.png}%
+    \end{adjustbox}
+}
+\end{figure}
+
+Voice 1 does the same for every 16 notes that Voice 3 plays and every 4 notes of Voice 2..
+
+\begin{figure}[H]
+{
+  \begin{adjustbox}{width=11cm,center}
+  \includegraphics[width=11cm]{music/Voice_1_Part.png}%
+    \end{adjustbox}
+}
+\end{figure}
+
+Armed with this insight we can see it reflected in the logic in \icode{PlayTitleScreenMusic}. This routine
+is called regularly by a system interrupt, a periodic wake-up call performed by the C64 CPU. So multiple
+times every second it is run and must figure out what new notes, if any, to play on each of the three
+voices.
+
+Here it is deciding whether or not to play new note on Voice 1:
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{807}{813}%
+\lstinputlisting[caption=\icode{MaybePlayVoice1}\, part of \icode{PlayTitleScreenMusic}.,basicstyle=\tiny]{tmp.asm}
+
+\icode{voice1NoteDuration} is used to count the interval between notes on Voice 1. It's decremented on each
+visit and when it reaches zero it gets reset to 48 (\$30) and a note is played. What's being counted here isn't
+seconds, it's cycles or 'interrupts'. So this translates to only a few seconds between notes being played.
+
+The same is done for both Voice 2 and Voice 3 but the intervals are shorter: 12 (\$0C) and 3 (\$03). This matches
+the relationship we see in the sheet music, one note in Voice 1 for every sixteen in Voice 3 (48/3=16) and one note in
+Voice 2 for every four in Voice 3 (12/3=4).
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{828}{833}%
+\lstinputlisting[caption=\icode{MaybePlayVoice2}\, part of \icode{PlayTitleScreenMusic}.,basicstyle=\tiny]{tmp.asm}
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{846}{851}%
+\lstinputlisting[caption=\icode{MaybePlayVoice3}\, part of \icode{PlayTitleScreenMusic}.,basicstyle=\tiny]{tmp.asm}
+
+\subsubsection{Phrasing}
+Now that we've identified the underlying 4-bar structure of the arrangement. We can take a closer look at the 
+phrasing of the invidividual parts. Voice 3 has a simple repetitive structure for each 4-bar phrase:
+
+\begin{figure}[H]
+{
+  \begin{adjustbox}{width=11cm,center}
+  \includegraphics[width=11cm]{music/Voice_3_Phrasing1.png}%
+    \end{adjustbox}
+}\caption[]{Bars 2 and 4 are always repeated}
+\end{figure}
+
+Bars 2 and 4 are repeated. Each bar consists of the same tonic formula: three notes rising two notes at a time,
+falling back on the final note. The difference between bars 1 and 3 is a simple key change.
+
+As new tunes are generated the simple repetion seen in the first iteration disappears. Here the first 16 bars
+for Voice 3 from iterations 12 and 18:
+
+
+\begin{figure}[H]
+{
+  \begin{adjustbox}{width=11cm,center}
+  \includegraphics[width=11cm]{music/Voice_3_Phrasing_Tune12.png}%
+    \end{adjustbox}
+}
+\end{figure}
+
+
+\begin{figure}[H]
+{
+  \begin{adjustbox}{width=11cm,center}
+  \includegraphics[width=11cm]{music/Voice_3_Phrasing_Tune18.png}%
+    \end{adjustbox}
+}\caption[]{Key changes and same basic structure, but no repetitions.}
+\end{figure}
+
+\begin{tcolorbox}[%
+  breakable,
+  parbox = false,
+  frame hidden,
+  sharp corners,
+  after skip=10pt,
+  overlay broken = {
+    \draw[]
+      (frame.north west) rectangle (frame.south east);},
+]{}
+Diversion: Extracting the Title Music
+
+Since each tune is dynamically generated there's nowhere for us to pull them from. We could record
+the tunes as audio files and maybe extract something useful that way. A feature of Vice, the C64
+emulator, allows us to do something much simpler. We can log every note that's played to a 
+text file and use that trace to reconstruct the tunes.
+
+We launch Iridis Alpha with \icode{x64} using the following command:
+
+\icode{x64 -moncommands moncommands.txt orig/iridisalpha.prg}
+
+The \icode{moncommands.txt} file contains a series of debugger directives that tells \icode{x64}
+to log every value stored to the music registers at \icode{\$D400-\$D415}. This will capture
+all notes played on all three voices as well as any updates made to the other sound parameters
+and write them to \icode{IridisAlphaTitleMusicAll.txt}:
+
+\begin{lstlisting}
+log on
+logname "IridisAlphaTitleMusicAll.txt"
+tr store D400 D415
+\end{lstlisting}
+
+We end up with \icode{IridisAlphaTitleMusicAll.txt} full of lines like:
+
+\begin{lstlisting}[basicstyle=\tiny]
+TRACE: 1  C:$d400-$d415  (Trace store)
+#1 (Trace store d400)  279 052
+.C:1598  8D 00 D4    STA $D400      - A:61 X:00 Y:00 SP:e8 ..-..I..   96135469
+#1 (Trace store d401)  279 060
+.C:159e  8D 01 D4    STA $D401      - A:08 X:00 Y:00 SP:e8 ..-..I..   96135477
+#1 (Trace store d40b)  280 059
+\end{lstlisting}
+
+This examples gives us the value in \icode{A} written to each register for Voice 1. For example, \icode{\$61}
+has been written to \icode{\$D400} and \icode{\$08} has been written to \icode{\$D401}.
+
+We can now write a short Python \href{https://github.com/mwenge/iatheory/tree/main/notebooks}{notebook} that
+parses this file and for each tune constructs three arrays, each representing a voice, with the sequence
+of notes played to each. For example, in the extract above we can extract \icode{\$0861} as the note 'C'
+in octave 3 played on Voice 1 (\icode{\$D400-\$D401}). (Refer to the tables above to see why \icode{\$0861}
+translates to 'C-3'.
+
+With the sequence of notes in three arrays, each representing one of the 3 voices, it is a simple
+matter to transform this into ABC format, a music notation frequently used for traditional music.
+
+\lstinputlisting[caption=Title Tune No 1 in ABC format, basicstyle=\tiny]{music/title_no_1_page_1.abc}
+
+We can the use the tool `abcm2ps` to transform this into an SVG image file giving the music in
+standard Western notation.
+\end{tcolorbox}%
+
+

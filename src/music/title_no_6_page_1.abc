@@ -1,0 +1,23 @@
+
+%abc-2.2
+%%pagewidth 30cm
+%%header "Example		page: $P"
+%%footer "	$T"
+%%gutter .5cm
+%%barsperstaff 16
+%%titleformat R-P-Q-T C1 O1, T+T N1
+%%composerspace 0
+X: 2 % start of header
+T:Iridis Alpha Title Theme
+T:6 of 100,000,000,000,000
+C: (Sid.)
+O: Jeff Minter
+R:Procedurally Generated
+L: 1/8
+K: D % scale: C major
+V:1 name="Voice 1"
+z15    |     |     |    C,16 |     |     |     |    C,16 |     |     |     |    G,16 |     |     |     |    C,16 |     |     |     |    C,16 |     |     |     |    C,16 |     |     |     |    G,16 |     |     |     |    C,16 |     |     |     |    C,16 |     |     |     |    C,16 |     |     |     |    G,16 |     |     |     |    C,16 |     |     |     |    C,16 |     |     |     |    C,16 |     |     |     |    G,16 |     |     |     |    G, | :|
+V:2 name="Voice 2"
+z3   C,4 |    C,4 |    G,4 |    C,4 |    C,4 |    C,4 |    G,4 |    C,4 |    C,4 |    C,4 |    G,4 |    G,4 |    G,4 |    G,4 |    D4 |    C,4 |    C,4 |    C,4 |    G,4 |    C,4 |    C,4 |    C,4 |    G,4 |    C,4 |    C,4 |    C,4 |    G,4 |    G,4 |    G,4 |    G,4 |    D4 |    C,4 |    C,4 |    C,4 |    G,4 |    C,4 |    C,4 |    C,4 |    G,4 |    C,4 |    C,4 |    C,4 |    G,4 |    G,4 |    G,4 |    G,4 |    D4 |    C,4 |    C,4 |    C,4 |    G,4 |    C,4 |    C,4 |    C,4 |    G,4 |    C,4 |    C,4 |    C,4 |    G,4 |    G,4 |    G,4 |    G,4 |    D4 |    G, | :|
+V:3 name="Voice 3"
+C,1C,1G,1C,1|C,1C,1G,1C,1|C,1C,1G,1G,1|G,1G,1D1C,1|C,1C,1G,1C,1|C,1C,1G,1C,1|C,1C,1G,1G,1|G,1G,1D1C,1|C,1C,1G,1C,1|C,1C,1G,1C,1|C,1C,1G,1G,1|G,1G,1D1G,1|G,1G,1D1G,1|G,1G,1D1G,1|G,1G,1D1D1|D1D1A1C,1|C,1C,1G,1C,1|C,1C,1G,1C,1|C,1C,1G,1G,1|G,1G,1D1C,1|C,1C,1G,1C,1|C,1C,1G,1C,1|C,1C,1G,1G,1|G,1G,1D1C,1|C,1C,1G,1C,1|C,1C,1G,1C,1|C,1C,1G,1G,1|G,1G,1D1G,1|G,1G,1D1G,1|G,1G,1D1G,1|G,1G,1D1D1|D1D1A1C,1|C,1C,1G,1C,1|C,1C,1G,1C,1|C,1C,1G,1G,1|G,1G,1D1C,1|C,1C,1G,1C,1|C,1C,1G,1C,1|C,1C,1G,1G,1|G,1G,1D1C,1|C,1C,1G,1C,1|C,1C,1G,1C,1|C,1C,1G,1G,1|G,1G,1D1G,1|G,1G,1D1G,1|G,1G,1D1G,1|G,1G,1D1D1|D1D1A1C,1|C,1C,1G,1C,1|C,1C,1G,1C,1|C,1C,1G,1G,1|G,1G,1D1C,1|C,1C,1G,1C,1|C,1C,1G,1C,1|C,1C,1G,1G,1|G,1G,1D1C,1|C,1C,1G,1C,1|C,1C,1G,1C,1|C,1C,1G,1G,1|G,1G,1D1G,1|G,1G,1D1G,1|G,1G,1D1G,1|G,1G,1D1D1|D1D1A1G,|:|

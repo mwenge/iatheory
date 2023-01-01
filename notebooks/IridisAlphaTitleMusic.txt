@@ -1,0 +1,1719 @@
+TRACE: 1  C:$d400-$d415  (Trace store)
+#1 (Trace store d404)  029 039
+.C:0812  8D 04 D4    STA $D404      - A:00 X:F8 Y:00 SP:f4 ..-..IZC   96178674
+#1 (Trace store d40b)  029 043
+.C:0815  8D 0B D4    STA $D40B      - A:00 X:F8 Y:00 SP:f4 ..-..IZC   96178678
+#1 (Trace store d412)  029 047
+.C:0818  8D 12 D4    STA $D412      - A:00 X:F8 Y:00 SP:f4 ..-..IZC   96178682
+#1 (Trace store d405)  030 021
+.C:15c8  8D 05 D4    STA $D405      - A:0F X:F8 Y:00 SP:f2 ..-..I.C   96178719
+#1 (Trace store d40c)  030 025
+.C:15cb  8D 0C D4    STA $D40C      - A:0F X:F8 Y:00 SP:f2 ..-..I.C   96178723
+#1 (Trace store d413)  030 029
+.C:15ce  8D 13 D4    STA $D413      - A:0F X:F8 Y:00 SP:f2 ..-..I.C   96178727
+#1 (Trace store d406)  030 039
+.C:15d6  8D 06 D4    STA $D406      - A:F5 X:F8 Y:00 SP:f2 N.-..I.C   96178737
+#1 (Trace store d40d)  030 043
+.C:15d9  8D 0D D4    STA $D40D      - A:F5 X:F8 Y:00 SP:f2 N.-..I.C   96178741
+#1 (Trace store d414)  030 047
+.C:15dc  8D 14 D4    STA $D414      - A:F5 X:F8 Y:00 SP:f2 N.-..I.C   96178745
+#1 (Trace store d404)  279 044
+.C:1592  8D 04 D4    STA $D404      - A:21 X:00 Y:00 SP:e8 ..-..I..   96214085
+#1 (Trace store d400)  279 052
+.C:1598  8D 00 D4    STA $D400      - A:61 X:00 Y:00 SP:e8 ..-..I..   96214093
+#1 (Trace store d401)  279 060
+.C:159e  8D 01 D4    STA $D401      - A:08 X:00 Y:00 SP:e8 ..-..I..   96214101
+#1 (Trace store d40b)  280 059
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:00 Y:00 SP:e8 ..-..I..   96214163
+#1 (Trace store d407)  281 004
+.C:15aa  8D 07 D4    STA $D407      - A:61 X:00 Y:00 SP:e8 ..-..I..   96214171
+#1 (Trace store d408)  281 012
+.C:15b0  8D 08 D4    STA $D408      - A:08 X:00 Y:00 SP:e8 ..-..I..   96214179
+#1 (Trace store d412)  282 007
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:00 SP:e8 ..-..I..   96214237
+#1 (Trace store d40e)  282 015
+.C:15bc  8D 0E D4    STA $D40E      - A:61 X:00 Y:00 SP:e8 ..-..I..   96214245
+#1 (Trace store d40f)  282 023
+.C:15c2  8D 0F D4    STA $D40F      - A:08 X:00 Y:00 SP:e8 ..-..I..   96214253
+#1 (Trace store d412)  285 059
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:07 SP:e8 ..-..I..   96273446
+#1 (Trace store d40e)  286 004
+.C:15bc  8D 0E D4    STA $D40E      - A:8F X:01 Y:07 SP:e8 N.-..I..   96273454
+#1 (Trace store d40f)  286 012
+.C:15c2  8D 0F D4    STA $D40F      - A:0C X:01 Y:07 SP:e8 ..-..I..   96273462
+#1 (Trace store d412)  283 052
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:0C SP:ea ..-..I..   96332281
+#1 (Trace store d40e)  283 060
+.C:15bc  8D 0E D4    STA $D40E      - A:C3 X:02 Y:0C SP:ea N.-..I..   96332289
+#1 (Trace store d40f)  284 005
+.C:15c2  8D 0F D4    STA $D40F      - A:10 X:02 Y:0C SP:ea ..-..I..   96332297
+#1 (Trace store d412)  284 033
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:07 SP:ea ..-..I..   96391293
+#1 (Trace store d40e)  284 041
+.C:15bc  8D 0E D4    STA $D40E      - A:8F X:03 Y:07 SP:ea N.-..I..   96391301
+#1 (Trace store d40f)  284 049
+.C:15c2  8D 0F D4    STA $D40F      - A:0C X:03 Y:07 SP:ea ..-..I..   96391309
+#1 (Trace store d40b)  284 030
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:01 Y:07 SP:e8 ..-..I..   96450258
+#1 (Trace store d407)  284 038
+.C:15aa  8D 07 D4    STA $D407      - A:8F X:01 Y:07 SP:e8 N.-..I..   96450266
+#1 (Trace store d408)  284 046
+.C:15b0  8D 08 D4    STA $D408      - A:0C X:01 Y:07 SP:e8 ..-..I..   96450274
+#1 (Trace store d412)  285 041
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:07 SP:e8 ..-..I..   96450332
+#1 (Trace store d40e)  285 049
+.C:15bc  8D 0E D4    STA $D40E      - A:8F X:00 Y:07 SP:e8 N.-..I..   96450340
+#1 (Trace store d40f)  285 057
+.C:15c2  8D 0F D4    STA $D40F      - A:0C X:00 Y:07 SP:e8 ..-..I..   96450348
+#1 (Trace store d412)  285 033
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:0E SP:ea ..-..I..   96509292
+#1 (Trace store d40e)  285 041
+.C:15bc  8D 0E D4    STA $D40E      - A:D1 X:01 Y:0E SP:ea N.-..I..   96509300
+#1 (Trace store d40f)  285 049
+.C:15c2  8D 0F D4    STA $D40F      - A:12 X:01 Y:0E SP:ea ..-..I..   96509308
+#1 (Trace store d412)  285 026
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:13 SP:ea ..-..I..   96568253
+#1 (Trace store d40e)  285 034
+.C:15bc  8D 0E D4    STA $D40E      - A:1E X:02 Y:13 SP:ea ..-..I..   96568261
+#1 (Trace store d40f)  285 042
+.C:15c2  8D 0F D4    STA $D40F      - A:19 X:02 Y:13 SP:ea ..-..I..   96568269
+#1 (Trace store d412)  282 039
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:0E SP:ea ..-..I..   96627045
+#1 (Trace store d40e)  282 047
+.C:15bc  8D 0E D4    STA $D40E      - A:D1 X:03 Y:0E SP:ea N.-..I..   96627053
+#1 (Trace store d40f)  282 055
+.C:15c2  8D 0F D4    STA $D40F      - A:12 X:03 Y:0E SP:ea ..-..I..   96627061
+#1 (Trace store d40b)  283 010
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:02 Y:0C SP:e8 ..-..I..   96686047
+#1 (Trace store d407)  283 018
+.C:15aa  8D 07 D4    STA $D407      - A:C3 X:02 Y:0C SP:e8 N.-..I..   96686055
+#1 (Trace store d408)  283 026
+.C:15b0  8D 08 D4    STA $D408      - A:10 X:02 Y:0C SP:e8 ..-..I..   96686063
+#1 (Trace store d412)  284 021
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:0C SP:e8 ..-..I..   96686121
+#1 (Trace store d40e)  284 029
+.C:15bc  8D 0E D4    STA $D40E      - A:C3 X:00 Y:0C SP:e8 N.-..I..   96686129
+#1 (Trace store d40f)  284 037
+.C:15c2  8D 0F D4    STA $D40F      - A:10 X:00 Y:0C SP:e8 ..-..I..   96686137
+#1 (Trace store d412)  286 052
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:13 SP:e8 ..-..I..   96745246
+#1 (Trace store d40e)  286 060
+.C:15bc  8D 0E D4    STA $D40E      - A:1E X:01 Y:13 SP:e8 ..-..I..   96745254
+#1 (Trace store d40f)  287 005
+.C:15c2  8D 0F D4    STA $D40F      - A:19 X:01 Y:13 SP:e8 ..-..I..   96745262
+#1 (Trace store d412)  285 005
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:18 SP:ea ..-..I..   96804104
+#1 (Trace store d40e)  285 013
+.C:15bc  8D 0E D4    STA $D40E      - A:87 X:02 Y:18 SP:ea N.-..I..   96804112
+#1 (Trace store d40f)  285 021
+.C:15c2  8D 0F D4    STA $D40F      - A:21 X:02 Y:18 SP:ea ..-..I..   96804120
+#1 (Trace store d412)  283 049
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:13 SP:ea ..-..I..   96862990
+#1 (Trace store d40e)  283 057
+.C:15bc  8D 0E D4    STA $D40E      - A:1E X:03 Y:13 SP:ea ..-..I..   96862998
+#1 (Trace store d40f)  284 002
+.C:15c2  8D 0F D4    STA $D40F      - A:19 X:03 Y:13 SP:ea ..-..I..   96863006
+#1 (Trace store d40b)  283 009
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:03 Y:07 SP:e8 ..-..I..   96921918
+#1 (Trace store d407)  283 017
+.C:15aa  8D 07 D4    STA $D407      - A:8F X:03 Y:07 SP:e8 N.-..I..   96921926
+#1 (Trace store d408)  283 025
+.C:15b0  8D 08 D4    STA $D408      - A:0C X:03 Y:07 SP:e8 ..-..I..   96921934
+#1 (Trace store d412)  284 020
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:07 SP:e8 ..-..I..   96921992
+#1 (Trace store d40e)  284 028
+.C:15bc  8D 0E D4    STA $D40E      - A:8F X:00 Y:07 SP:e8 N.-..I..   96922000
+#1 (Trace store d40f)  284 036
+.C:15c2  8D 0F D4    STA $D40F      - A:0C X:00 Y:07 SP:e8 ..-..I..   96922008
+#1 (Trace store d412)  284 049
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:0E SP:e8 ..-..I..   96980989
+#1 (Trace store d40e)  284 057
+.C:15bc  8D 0E D4    STA $D40E      - A:D1 X:01 Y:0E SP:e8 N.-..I..   96980997
+#1 (Trace store d40f)  285 002
+.C:15c2  8D 0F D4    STA $D40F      - A:12 X:01 Y:0E SP:e8 ..-..I..   96981005
+#1 (Trace store d412)  286 045
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:13 SP:ea ..-..I..   97040079
+#1 (Trace store d40e)  286 053
+.C:15bc  8D 0E D4    STA $D40E      - A:1E X:02 Y:13 SP:ea ..-..I..   97040087
+#1 (Trace store d40f)  286 061
+.C:15c2  8D 0F D4    STA $D40F      - A:19 X:02 Y:13 SP:ea ..-..I..   97040095
+#1 (Trace store d412)  283 026
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:0E SP:ea ..-..I..   97098839
+#1 (Trace store d40e)  283 034
+.C:15bc  8D 0E D4    STA $D40E      - A:D1 X:03 Y:0E SP:ea N.-..I..   97098847
+#1 (Trace store d40f)  283 042
+.C:15c2  8D 0F D4    STA $D40F      - A:12 X:03 Y:0E SP:ea ..-..I..   97098855
+#1 (Trace store d404)  283 002
+.C:1592  8D 04 D4    STA $D404      - A:21 X:01 Y:07 SP:ea ..-..I..   97157783
+#1 (Trace store d400)  283 010
+.C:1598  8D 00 D4    STA $D400      - A:8F X:01 Y:07 SP:ea N.-..I..   97157791
+#1 (Trace store d401)  283 018
+.C:159e  8D 01 D4    STA $D401      - A:0C X:01 Y:07 SP:ea ..-..I..   97157799
+#1 (Trace store d40b)  284 017
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:00 Y:07 SP:ea ..-..I..   97157861
+#1 (Trace store d407)  284 025
+.C:15aa  8D 07 D4    STA $D407      - A:8F X:00 Y:07 SP:ea N.-..I..   97157869
+#1 (Trace store d408)  284 033
+.C:15b0  8D 08 D4    STA $D408      - A:0C X:00 Y:07 SP:ea ..-..I..   97157877
+#1 (Trace store d412)  285 028
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:07 SP:ea ..-..I..   97157935
+#1 (Trace store d40e)  285 036
+.C:15bc  8D 0E D4    STA $D40E      - A:8F X:00 Y:07 SP:ea N.-..I..   97157943
+#1 (Trace store d40f)  285 044
+.C:15c2  8D 0F D4    STA $D40F      - A:0C X:00 Y:07 SP:ea ..-..I..   97157951
+#1 (Trace store d412)  285 058
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:0E SP:ea ..-..I..   97216933
+#1 (Trace store d40e)  286 003
+.C:15bc  8D 0E D4    STA $D40E      - A:D1 X:01 Y:0E SP:ea N.-..I..   97216941
+#1 (Trace store d40f)  286 011
+.C:15c2  8D 0F D4    STA $D40F      - A:12 X:01 Y:0E SP:ea ..-..I..   97216949
+#1 (Trace store d412)  283 048
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:13 SP:ea ..-..I..   97275765
+#1 (Trace store d40e)  283 056
+.C:15bc  8D 0E D4    STA $D40E      - A:1E X:02 Y:13 SP:ea ..-..I..   97275773
+#1 (Trace store d40f)  284 001
+.C:15c2  8D 0F D4    STA $D40F      - A:19 X:02 Y:13 SP:ea ..-..I..   97275781
+#1 (Trace store d412)  285 039
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:0E SP:e8 ..-..I..   97334850
+#1 (Trace store d40e)  285 047
+.C:15bc  8D 0E D4    STA $D40E      - A:D1 X:03 Y:0E SP:e8 N.-..I..   97334858
+#1 (Trace store d40f)  285 055
+.C:15c2  8D 0F D4    STA $D40F      - A:12 X:03 Y:0E SP:e8 ..-..I..   97334866
+#1 (Trace store d40b)  282 051
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:01 Y:0E SP:ea ..-..I..   97393641
+#1 (Trace store d407)  282 059
+.C:15aa  8D 07 D4    STA $D407      - A:D1 X:01 Y:0E SP:ea N.-..I..   97393649
+#1 (Trace store d408)  283 004
+.C:15b0  8D 08 D4    STA $D408      - A:12 X:01 Y:0E SP:ea ..-..I..   97393657
+#1 (Trace store d412)  283 062
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:0E SP:ea ..-..I..   97393715
+#1 (Trace store d40e)  284 007
+.C:15bc  8D 0E D4    STA $D40E      - A:D1 X:00 Y:0E SP:ea N.-..I..   97393723
+#1 (Trace store d40f)  284 015
+.C:15c2  8D 0F D4    STA $D40F      - A:12 X:00 Y:0E SP:ea ..-..I..   97393731
+#1 (Trace store d412)  285 037
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:15 SP:e8 ..-..I..   97452784
+#1 (Trace store d40e)  285 045
+.C:15bc  8D 0E D4    STA $D40E      - A:31 X:01 Y:15 SP:e8 ..-..I..   97452792
+#1 (Trace store d40f)  285 053
+.C:15c2  8D 0F D4    STA $D40F      - A:1C X:01 Y:15 SP:e8 ..-..I..   97452800
+#1 (Trace store d412)  285 025
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:1A SP:e8 ..-..I..   97511740
+#1 (Trace store d40e)  285 033
+.C:15bc  8D 0E D4    STA $D40E      - A:A2 X:02 Y:1A SP:e8 N.-..I..   97511748
+#1 (Trace store d40f)  285 041
+.C:15c2  8D 0F D4    STA $D40F      - A:25 X:02 Y:1A SP:e8 ..-..I..   97511756
+#1 (Trace store d412)  282 039
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:15 SP:ea ..-..I..   97570533
+#1 (Trace store d40e)  282 047
+.C:15bc  8D 0E D4    STA $D40E      - A:31 X:03 Y:15 SP:ea ..-..I..   97570541
+#1 (Trace store d40f)  282 055
+.C:15c2  8D 0F D4    STA $D40F      - A:1C X:03 Y:15 SP:ea ..-..I..   97570549
+#1 (Trace store d40b)  285 027
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:02 Y:13 SP:e8 ..-..I..   97629678
+#1 (Trace store d407)  285 035
+.C:15aa  8D 07 D4    STA $D407      - A:1E X:02 Y:13 SP:e8 ..-..I..   97629686
+#1 (Trace store d408)  285 043
+.C:15b0  8D 08 D4    STA $D408      - A:19 X:02 Y:13 SP:e8 ..-..I..   97629694
+#1 (Trace store d412)  286 038
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:13 SP:e8 ..-..I..   97629752
+#1 (Trace store d40e)  286 046
+.C:15bc  8D 0E D4    STA $D40E      - A:1E X:00 Y:13 SP:e8 ..-..I..   97629760
+#1 (Trace store d40f)  286 054
+.C:15c2  8D 0F D4    STA $D40F      - A:19 X:00 Y:13 SP:e8 ..-..I..   97629768
+#1 (Trace store d412)  285 006
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:1A SP:e8 ..-..I..   97688625
+#1 (Trace store d40e)  285 014
+.C:15bc  8D 0E D4    STA $D40E      - A:A2 X:01 Y:1A SP:e8 N.-..I..   97688633
+#1 (Trace store d40f)  285 022
+.C:15c2  8D 0F D4    STA $D40F      - A:25 X:01 Y:1A SP:e8 ..-..I..   97688641
+#1 (Trace store d412)  285 005
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:1F SP:ea ..-..I..   97747592
+#1 (Trace store d40e)  285 013
+.C:15bc  8D 0E D4    STA $D40E      - A:3C X:02 Y:1F SP:ea ..-..I..   97747600
+#1 (Trace store d40f)  285 021
+.C:15c2  8D 0F D4    STA $D40F      - A:32 X:02 Y:1F SP:ea ..-..I..   97747608
+#1 (Trace store d412)  283 016
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:1A SP:e8 ..-..I..   97806445
+#1 (Trace store d40e)  283 024
+.C:15bc  8D 0E D4    STA $D40E      - A:A2 X:03 Y:1A SP:e8 N.-..I..   97806453
+#1 (Trace store d40f)  283 032
+.C:15c2  8D 0F D4    STA $D40F      - A:25 X:03 Y:1A SP:e8 ..-..I..   97806461
+#1 (Trace store d40b)  282 042
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:03 Y:0E SP:ea ..-..I..   97865376
+#1 (Trace store d407)  282 050
+.C:15aa  8D 07 D4    STA $D407      - A:D1 X:03 Y:0E SP:ea N.-..I..   97865384
+#1 (Trace store d408)  282 058
+.C:15b0  8D 08 D4    STA $D408      - A:12 X:03 Y:0E SP:ea ..-..I..   97865392
+#1 (Trace store d412)  283 053
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:0E SP:ea ..-..I..   97865450
+#1 (Trace store d40e)  283 061
+.C:15bc  8D 0E D4    STA $D40E      - A:D1 X:00 Y:0E SP:ea N.-..I..   97865458
+#1 (Trace store d40f)  284 006
+.C:15c2  8D 0F D4    STA $D40F      - A:12 X:00 Y:0E SP:ea ..-..I..   97865466
+#1 (Trace store d412)  287 002
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:15 SP:ea ..-..I..   97924619
+#1 (Trace store d40e)  287 010
+.C:15bc  8D 0E D4    STA $D40E      - A:31 X:01 Y:15 SP:ea ..-..I..   97924627
+#1 (Trace store d40f)  287 018
+.C:15c2  8D 0F D4    STA $D40F      - A:1C X:01 Y:15 SP:ea ..-..I..   97924635
+#1 (Trace store d412)  285 003
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:1A SP:e8 ..-..I..   97983462
+#1 (Trace store d40e)  285 011
+.C:15bc  8D 0E D4    STA $D40E      - A:A2 X:02 Y:1A SP:e8 N.-..I..   97983470
+#1 (Trace store d40f)  285 019
+.C:15c2  8D 0F D4    STA $D40F      - A:25 X:02 Y:1A SP:e8 ..-..I..   97983478
+#1 (Trace store d412)  284 033
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:15 SP:ea ..-..I..   98042397
+#1 (Trace store d40e)  284 041
+.C:15bc  8D 0E D4    STA $D40E      - A:31 X:03 Y:15 SP:ea ..-..I..   98042405
+#1 (Trace store d40f)  284 049
+.C:15c2  8D 0F D4    STA $D40F      - A:1C X:03 Y:15 SP:ea ..-..I..   98042413
+#1 (Trace store d404)  282 029
+.C:1592  8D 04 D4    STA $D404      - A:21 X:02 Y:0C SP:ea ..-..I..   98101235
+#1 (Trace store d400)  282 037
+.C:1598  8D 00 D4    STA $D400      - A:C3 X:02 Y:0C SP:ea N.-..I..   98101243
+#1 (Trace store d401)  282 045
+.C:159e  8D 01 D4    STA $D401      - A:10 X:02 Y:0C SP:ea ..-..I..   98101251
+#1 (Trace store d40b)  283 044
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:00 Y:0C SP:ea ..-..I..   98101313
+#1 (Trace store d407)  283 052
+.C:15aa  8D 07 D4    STA $D407      - A:C3 X:00 Y:0C SP:ea N.-..I..   98101321
+#1 (Trace store d408)  283 060
+.C:15b0  8D 08 D4    STA $D408      - A:10 X:00 Y:0C SP:ea ..-..I..   98101329
+#1 (Trace store d412)  284 055
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:0C SP:ea ..-..I..   98101387
+#1 (Trace store d40e)  285 000
+.C:15bc  8D 0E D4    STA $D40E      - A:C3 X:00 Y:0C SP:ea N.-..I..   98101395
+#1 (Trace store d40f)  285 008
+.C:15c2  8D 0F D4    STA $D40F      - A:10 X:00 Y:0C SP:ea ..-..I..   98101403
+#1 (Trace store d412)  285 020
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:13 SP:ea ..-..I..   98160383
+#1 (Trace store d40e)  285 028
+.C:15bc  8D 0E D4    STA $D40E      - A:1E X:01 Y:13 SP:ea ..-..I..   98160391
+#1 (Trace store d40f)  285 036
+.C:15c2  8D 0F D4    STA $D40F      - A:19 X:01 Y:13 SP:ea ..-..I..   98160399
+#1 (Trace store d412)  285 027
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:18 SP:ea ..-..I..   98219358
+#1 (Trace store d40e)  285 035
+.C:15bc  8D 0E D4    STA $D40E      - A:87 X:02 Y:18 SP:ea N.-..I..   98219366
+#1 (Trace store d40f)  285 043
+.C:15c2  8D 0F D4    STA $D40F      - A:21 X:02 Y:18 SP:ea ..-..I..   98219374
+#1 (Trace store d412)  283 026
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:13 SP:e8 ..-..I..   98278199
+#1 (Trace store d40e)  283 034
+.C:15bc  8D 0E D4    STA $D40E      - A:1E X:03 Y:13 SP:e8 ..-..I..   98278207
+#1 (Trace store d40f)  283 042
+.C:15c2  8D 0F D4    STA $D40F      - A:19 X:03 Y:13 SP:e8 ..-..I..   98278215
+#1 (Trace store d40b)  283 061
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:01 Y:13 SP:ea ..-..I..   98337202
+#1 (Trace store d407)  284 006
+.C:15aa  8D 07 D4    STA $D407      - A:1E X:01 Y:13 SP:ea ..-..I..   98337210
+#1 (Trace store d408)  284 014
+.C:15b0  8D 08 D4    STA $D408      - A:19 X:01 Y:13 SP:ea ..-..I..   98337218
+#1 (Trace store d412)  285 009
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:13 SP:ea ..-..I..   98337276
+#1 (Trace store d40e)  285 017
+.C:15bc  8D 0E D4    STA $D40E      - A:1E X:00 Y:13 SP:ea ..-..I..   98337284
+#1 (Trace store d40f)  285 025
+.C:15c2  8D 0F D4    STA $D40F      - A:19 X:00 Y:13 SP:ea ..-..I..   98337292
+#1 (Trace store d412)  285 004
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:1A SP:ea ..-..I..   98396239
+#1 (Trace store d40e)  285 012
+.C:15bc  8D 0E D4    STA $D40E      - A:A2 X:01 Y:1A SP:ea N.-..I..   98396247
+#1 (Trace store d40f)  285 020
+.C:15c2  8D 0F D4    STA $D40F      - A:25 X:01 Y:1A SP:ea ..-..I..   98396255
+#1 (Trace store d412)  285 062
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:1F SP:e8 ..-..I..   98455265
+#1 (Trace store d40e)  286 007
+.C:15bc  8D 0E D4    STA $D40E      - A:3C X:02 Y:1F SP:e8 ..-..I..   98455273
+#1 (Trace store d40f)  286 015
+.C:15c2  8D 0F D4    STA $D40F      - A:32 X:02 Y:1F SP:e8 ..-..I..   98455281
+#1 (Trace store d412)  284 020
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:1A SP:ea ..-..I..   98514128
+#1 (Trace store d40e)  284 028
+.C:15bc  8D 0E D4    STA $D40E      - A:A2 X:03 Y:1A SP:ea N.-..I..   98514136
+#1 (Trace store d40f)  284 036
+.C:15c2  8D 0F D4    STA $D40F      - A:25 X:03 Y:1A SP:ea ..-..I..   98514144
+#1 (Trace store d40b)  283 013
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:02 Y:18 SP:ea ..-..I..   98573026
+#1 (Trace store d407)  283 021
+.C:15aa  8D 07 D4    STA $D407      - A:87 X:02 Y:18 SP:ea N.-..I..   98573034
+#1 (Trace store d408)  283 029
+.C:15b0  8D 08 D4    STA $D408      - A:21 X:02 Y:18 SP:ea ..-..I..   98573042
+#1 (Trace store d412)  284 024
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:18 SP:ea ..-..I..   98573100
+#1 (Trace store d40e)  284 032
+.C:15bc  8D 0E D4    STA $D40E      - A:87 X:00 Y:18 SP:ea N.-..I..   98573108
+#1 (Trace store d40f)  284 040
+.C:15c2  8D 0F D4    STA $D40F      - A:21 X:00 Y:18 SP:ea ..-..I..   98573116
+#1 (Trace store d412)  285 037
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:1F SP:ea ..-..I..   98632144
+#1 (Trace store d40e)  285 045
+.C:15bc  8D 0E D4    STA $D40E      - A:3C X:01 Y:1F SP:ea ..-..I..   98632152
+#1 (Trace store d40f)  285 053
+.C:15c2  8D 0F D4    STA $D40F      - A:32 X:01 Y:1F SP:ea ..-..I..   98632160
+#1 (Trace store d412)  283 061
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:24 SP:ea ..-..I..   98691010
+#1 (Trace store d40e)  284 006
+.C:15bc  8D 0E D4    STA $D40E      - A:0F X:02 Y:24 SP:ea ..-..I..   98691018
+#1 (Trace store d40f)  284 014
+.C:15c2  8D 0F D4    STA $D40F      - A:43 X:02 Y:24 SP:ea ..-..I..   98691026
+#1 (Trace store d412)  283 049
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:1F SP:e8 ..-..I..   98749966
+#1 (Trace store d40e)  283 057
+.C:15bc  8D 0E D4    STA $D40E      - A:3C X:03 Y:1F SP:e8 ..-..I..   98749974
+#1 (Trace store d40f)  284 002
+.C:15c2  8D 0F D4    STA $D40F      - A:32 X:03 Y:1F SP:e8 ..-..I..   98749982
+#1 (Trace store d40b)  284 017
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:03 Y:13 SP:ea ..-..I..   98808965
+#1 (Trace store d407)  284 025
+.C:15aa  8D 07 D4    STA $D407      - A:1E X:03 Y:13 SP:ea ..-..I..   98808973
+#1 (Trace store d408)  284 033
+.C:15b0  8D 08 D4    STA $D408      - A:19 X:03 Y:13 SP:ea ..-..I..   98808981
+#1 (Trace store d412)  285 028
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:13 SP:ea ..-..I..   98809039
+#1 (Trace store d40e)  285 036
+.C:15bc  8D 0E D4    STA $D40E      - A:1E X:00 Y:13 SP:ea ..-..I..   98809047
+#1 (Trace store d40f)  285 044
+.C:15c2  8D 0F D4    STA $D40F      - A:19 X:00 Y:13 SP:ea ..-..I..   98809055
+#1 (Trace store d412)  285 059
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:1A SP:ea ..-..I..   98868038
+#1 (Trace store d40e)  286 004
+.C:15bc  8D 0E D4    STA $D40E      - A:A2 X:01 Y:1A SP:ea N.-..I..   98868046
+#1 (Trace store d40f)  286 012
+.C:15c2  8D 0F D4    STA $D40F      - A:25 X:01 Y:1A SP:ea ..-..I..   98868054
+#1 (Trace store d412)  285 041
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:1F SP:e8 ..-..I..   98926988
+#1 (Trace store d40e)  285 049
+.C:15bc  8D 0E D4    STA $D40E      - A:3C X:02 Y:1F SP:e8 ..-..I..   98926996
+#1 (Trace store d40f)  285 057
+.C:15c2  8D 0F D4    STA $D40F      - A:32 X:02 Y:1F SP:e8 ..-..I..   98927004
+#1 (Trace store d412)  283 023
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:1A SP:ea ..-..I..   98985812
+#1 (Trace store d40e)  283 031
+.C:15bc  8D 0E D4    STA $D40E      - A:A2 X:03 Y:1A SP:ea N.-..I..   98985820
+#1 (Trace store d40f)  283 039
+.C:15c2  8D 0F D4    STA $D40F      - A:25 X:03 Y:1A SP:ea ..-..I..   98985828
+#1 (Trace store d404)  282 029
+.C:1592  8D 04 D4    STA $D404      - A:21 X:03 Y:07 SP:e8 ..-..I..   99044723
+#1 (Trace store d400)  282 037
+.C:1598  8D 00 D4    STA $D400      - A:8F X:03 Y:07 SP:e8 N.-..I..   99044731
+#1 (Trace store d401)  282 045
+.C:159e  8D 01 D4    STA $D401      - A:0C X:03 Y:07 SP:e8 ..-..I..   99044739
+#1 (Trace store d40b)  283 044
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:00 Y:07 SP:e8 ..-..I..   99044801
+#1 (Trace store d407)  283 052
+.C:15aa  8D 07 D4    STA $D407      - A:8F X:00 Y:07 SP:e8 N.-..I..   99044809
+#1 (Trace store d408)  283 060
+.C:15b0  8D 08 D4    STA $D408      - A:0C X:00 Y:07 SP:e8 ..-..I..   99044817
+#1 (Trace store d412)  284 055
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:07 SP:e8 ..-..I..   99044875
+#1 (Trace store d40e)  285 000
+.C:15bc  8D 0E D4    STA $D40E      - A:8F X:00 Y:07 SP:e8 N.-..I..   99044883
+#1 (Trace store d40f)  285 008
+.C:15c2  8D 0F D4    STA $D40F      - A:0C X:00 Y:07 SP:e8 ..-..I..   99044891
+#1 (Trace store d412)  286 030
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:0E SP:ea ..-..I..   99103944
+#1 (Trace store d40e)  286 038
+.C:15bc  8D 0E D4    STA $D40E      - A:D1 X:01 Y:0E SP:ea N.-..I..   99103952
+#1 (Trace store d40f)  286 046
+.C:15c2  8D 0F D4    STA $D40F      - A:12 X:01 Y:0E SP:ea ..-..I..   99103960
+#1 (Trace store d412)  284 023
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:13 SP:e8 ..-..I..   99162779
+#1 (Trace store d40e)  284 031
+.C:15bc  8D 0E D4    STA $D40E      - A:1E X:02 Y:13 SP:e8 ..-..I..   99162787
+#1 (Trace store d40f)  284 039
+.C:15c2  8D 0F D4    STA $D40F      - A:19 X:02 Y:13 SP:e8 ..-..I..   99162795
+#1 (Trace store d412)  283 062
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:0E SP:e8 ..-..I..   99221723
+#1 (Trace store d40e)  284 007
+.C:15bc  8D 0E D4    STA $D40E      - A:D1 X:03 Y:0E SP:e8 N.-..I..   99221731
+#1 (Trace store d40f)  284 015
+.C:15c2  8D 0F D4    STA $D40F      - A:12 X:03 Y:0E SP:e8 ..-..I..   99221739
+#1 (Trace store d40b)  283 060
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:01 Y:0E SP:ea ..-..I..   99280689
+#1 (Trace store d407)  284 005
+.C:15aa  8D 07 D4    STA $D407      - A:D1 X:01 Y:0E SP:ea N.-..I..   99280697
+#1 (Trace store d408)  284 013
+.C:15b0  8D 08 D4    STA $D408      - A:12 X:01 Y:0E SP:ea ..-..I..   99280705
+#1 (Trace store d412)  285 008
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:0E SP:ea ..-..I..   99280763
+#1 (Trace store d40e)  285 016
+.C:15bc  8D 0E D4    STA $D40E      - A:D1 X:00 Y:0E SP:ea N.-..I..   99280771
+#1 (Trace store d40f)  285 024
+.C:15c2  8D 0F D4    STA $D40F      - A:12 X:00 Y:0E SP:ea ..-..I..   99280779
+#1 (Trace store d412)  285 005
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:15 SP:ea ..-..I..   99339728
+#1 (Trace store d40e)  285 013
+.C:15bc  8D 0E D4    STA $D40E      - A:31 X:01 Y:15 SP:ea ..-..I..   99339736
+#1 (Trace store d40f)  285 021
+.C:15c2  8D 0F D4    STA $D40F      - A:1C X:01 Y:15 SP:ea ..-..I..   99339744
+#1 (Trace store d412)  287 005
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:1A SP:e8 ..-..I..   99398822
+#1 (Trace store d40e)  287 013
+.C:15bc  8D 0E D4    STA $D40E      - A:A2 X:02 Y:1A SP:e8 N.-..I..   99398830
+#1 (Trace store d40f)  287 021
+.C:15c2  8D 0F D4    STA $D40F      - A:25 X:02 Y:1A SP:e8 ..-..I..   99398838
+#1 (Trace store d412)  282 039
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:15 SP:ea ..-..I..   99457509
+#1 (Trace store d40e)  282 047
+.C:15bc  8D 0E D4    STA $D40E      - A:31 X:03 Y:15 SP:ea ..-..I..   99457517
+#1 (Trace store d40f)  282 055
+.C:15c2  8D 0F D4    STA $D40F      - A:1C X:03 Y:15 SP:ea ..-..I..   99457525
+#1 (Trace store d40b)  283 013
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:02 Y:13 SP:e8 ..-..I..   99516514
+#1 (Trace store d407)  283 021
+.C:15aa  8D 07 D4    STA $D407      - A:1E X:02 Y:13 SP:e8 ..-..I..   99516522
+#1 (Trace store d408)  283 029
+.C:15b0  8D 08 D4    STA $D408      - A:19 X:02 Y:13 SP:e8 ..-..I..   99516530
+#1 (Trace store d412)  284 024
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:13 SP:e8 ..-..I..   99516588
+#1 (Trace store d40e)  284 032
+.C:15bc  8D 0E D4    STA $D40E      - A:1E X:00 Y:13 SP:e8 ..-..I..   99516596
+#1 (Trace store d40f)  284 040
+.C:15c2  8D 0F D4    STA $D40F      - A:19 X:00 Y:13 SP:e8 ..-..I..   99516604
+#1 (Trace store d412)  285 042
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:1A SP:ea ..-..I..   99575637
+#1 (Trace store d40e)  285 050
+.C:15bc  8D 0E D4    STA $D40E      - A:A2 X:01 Y:1A SP:ea N.-..I..   99575645
+#1 (Trace store d40f)  285 058
+.C:15c2  8D 0F D4    STA $D40F      - A:25 X:01 Y:1A SP:ea ..-..I..   99575653
+#1 (Trace store d412)  283 061
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:1F SP:ea ..-..I..   99634498
+#1 (Trace store d40e)  284 006
+.C:15bc  8D 0E D4    STA $D40E      - A:3C X:02 Y:1F SP:ea ..-..I..   99634506
+#1 (Trace store d40f)  284 014
+.C:15c2  8D 0F D4    STA $D40F      - A:32 X:02 Y:1F SP:ea ..-..I..   99634514
+#1 (Trace store d412)  286 000
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:1A SP:ea ..-..I..   99693594
+#1 (Trace store d40e)  286 008
+.C:15bc  8D 0E D4    STA $D40E      - A:A2 X:03 Y:1A SP:ea N.-..I..   99693602
+#1 (Trace store d40f)  286 016
+.C:15c2  8D 0F D4    STA $D40F      - A:25 X:03 Y:1A SP:ea ..-..I..   99693610
+#1 (Trace store d40b)  282 038
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:03 Y:0E SP:e8 ..-..I..   99752348
+#1 (Trace store d407)  282 046
+.C:15aa  8D 07 D4    STA $D407      - A:D1 X:03 Y:0E SP:e8 N.-..I..   99752356
+#1 (Trace store d408)  282 054
+.C:15b0  8D 08 D4    STA $D408      - A:12 X:03 Y:0E SP:e8 ..-..I..   99752364
+#1 (Trace store d412)  283 049
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:0E SP:e8 ..-..I..   99752422
+#1 (Trace store d40e)  283 057
+.C:15bc  8D 0E D4    STA $D40E      - A:D1 X:00 Y:0E SP:e8 N.-..I..   99752430
+#1 (Trace store d40f)  284 002
+.C:15c2  8D 0F D4    STA $D40F      - A:12 X:00 Y:0E SP:e8 ..-..I..   99752438
+#1 (Trace store d412)  285 062
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:15 SP:e8 ..-..I..   99811529
+#1 (Trace store d40e)  286 007
+.C:15bc  8D 0E D4    STA $D40E      - A:31 X:01 Y:15 SP:e8 ..-..I..   99811537
+#1 (Trace store d40f)  286 015
+.C:15c2  8D 0F D4    STA $D40F      - A:1C X:01 Y:15 SP:e8 ..-..I..   99811545
+#1 (Trace store d412)  285 003
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:1A SP:ea ..-..I..   99870438
+#1 (Trace store d40e)  285 011
+.C:15bc  8D 0E D4    STA $D40E      - A:A2 X:02 Y:1A SP:ea N.-..I..   99870446
+#1 (Trace store d40f)  285 019
+.C:15c2  8D 0F D4    STA $D40F      - A:25 X:02 Y:1A SP:ea ..-..I..   99870454
+#1 (Trace store d412)  282 052
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:15 SP:ea ..-..I..   99929266
+#1 (Trace store d40e)  282 060
+.C:15bc  8D 0E D4    STA $D40E      - A:31 X:03 Y:15 SP:ea ..-..I..   99929274
+#1 (Trace store d40f)  283 005
+.C:15c2  8D 0F D4    STA $D40F      - A:1C X:03 Y:15 SP:ea ..-..I..   99929282
+#1 (Trace store d404)  285 015
+.C:1592  8D 04 D4    STA $D404      - A:21 X:00 Y:07 SP:e8 ..-..I..   99988386
+#1 (Trace store d400)  285 023
+.C:1598  8D 00 D4    STA $D400      - A:8F X:00 Y:07 SP:e8 N.-..I..   99988394
+#1 (Trace store d401)  285 031
+.C:159e  8D 01 D4    STA $D401      - A:0C X:00 Y:07 SP:e8 ..-..I..   99988402
+#1 (Trace store d40b)  286 030
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:00 Y:07 SP:e8 ..-..I..   99988464
+#1 (Trace store d407)  286 038
+.C:15aa  8D 07 D4    STA $D407      - A:8F X:00 Y:07 SP:e8 N.-..I..   99988472
+#1 (Trace store d408)  286 046
+.C:15b0  8D 08 D4    STA $D408      - A:0C X:00 Y:07 SP:e8 ..-..I..   99988480
+#1 (Trace store d412)  287 041
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:07 SP:e8 ..-..I..   99988538
+#1 (Trace store d40e)  287 049
+.C:15bc  8D 0E D4    STA $D40E      - A:8F X:00 Y:07 SP:e8 N.-..I..   99988546
+#1 (Trace store d40f)  287 057
+.C:15c2  8D 0F D4    STA $D40F      - A:0C X:00 Y:07 SP:e8 ..-..I..   99988554
+#1 (Trace store d412)  284 054
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:0E SP:ea ..-..I..  100047330
+#1 (Trace store d40e)  284 062
+.C:15bc  8D 0E D4    STA $D40E      - A:D1 X:01 Y:0E SP:ea N.-..I..  100047338
+#1 (Trace store d40f)  285 007
+.C:15c2  8D 0F D4    STA $D40F      - A:12 X:01 Y:0E SP:ea ..-..I..  100047346
+#1 (Trace store d412)  285 029
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:13 SP:e8 ..-..I..  100106336
+#1 (Trace store d40e)  285 037
+.C:15bc  8D 0E D4    STA $D40E      - A:1E X:02 Y:13 SP:e8 ..-..I..  100106344
+#1 (Trace store d40f)  285 045
+.C:15c2  8D 0F D4    STA $D40F      - A:19 X:02 Y:13 SP:e8 ..-..I..  100106352
+#1 (Trace store d412)  283 031
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:0E SP:e8 ..-..I..  100165180
+#1 (Trace store d40e)  283 039
+.C:15bc  8D 0E D4    STA $D40E      - A:D1 X:03 Y:0E SP:e8 N.-..I..  100165188
+#1 (Trace store d40f)  283 047
+.C:15c2  8D 0F D4    STA $D40F      - A:12 X:03 Y:0E SP:e8 ..-..I..  100165196
+#1 (Trace store d40b)  283 027
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:01 Y:0E SP:ea ..-..I..  100224144
+#1 (Trace store d407)  283 035
+.C:15aa  8D 07 D4    STA $D407      - A:D1 X:01 Y:0E SP:ea N.-..I..  100224152
+#1 (Trace store d408)  283 043
+.C:15b0  8D 08 D4    STA $D408      - A:12 X:01 Y:0E SP:ea ..-..I..  100224160
+#1 (Trace store d412)  284 038
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:0E SP:ea ..-..I..  100224218
+#1 (Trace store d40e)  284 046
+.C:15bc  8D 0E D4    STA $D40E      - A:D1 X:00 Y:0E SP:ea N.-..I..  100224226
+#1 (Trace store d40f)  284 054
+.C:15c2  8D 0F D4    STA $D40F      - A:12 X:00 Y:0E SP:ea ..-..I..  100224234
+#1 (Trace store d412)  286 043
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:15 SP:ea ..-..I..  100283317
+#1 (Trace store d40e)  286 051
+.C:15bc  8D 0E D4    STA $D40E      - A:31 X:01 Y:15 SP:ea ..-..I..  100283325
+#1 (Trace store d40f)  286 059
+.C:15c2  8D 0F D4    STA $D40F      - A:1C X:01 Y:15 SP:ea ..-..I..  100283333
+#1 (Trace store d412)  284 058
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:1A SP:ea ..-..I..  100342174
+#1 (Trace store d40e)  285 003
+.C:15bc  8D 0E D4    STA $D40E      - A:A2 X:02 Y:1A SP:ea N.-..I..  100342182
+#1 (Trace store d40f)  285 011
+.C:15c2  8D 0F D4    STA $D40F      - A:25 X:02 Y:1A SP:ea ..-..I..  100342190
+#1 (Trace store d412)  283 049
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:15 SP:ea ..-..I..  100401070
+#1 (Trace store d40e)  283 057
+.C:15bc  8D 0E D4    STA $D40E      - A:31 X:03 Y:15 SP:ea ..-..I..  100401078
+#1 (Trace store d40f)  284 002
+.C:15c2  8D 0F D4    STA $D40F      - A:1C X:03 Y:15 SP:ea ..-..I..  100401086
+#1 (Trace store d40b)  282 038
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:02 Y:13 SP:ea ..-..I..  100459964
+#1 (Trace store d407)  282 046
+.C:15aa  8D 07 D4    STA $D407      - A:1E X:02 Y:13 SP:ea ..-..I..  100459972
+#1 (Trace store d408)  282 054
+.C:15b0  8D 08 D4    STA $D408      - A:19 X:02 Y:13 SP:ea ..-..I..  100459980
+#1 (Trace store d412)  283 049
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:13 SP:ea ..-..I..  100460038
+#1 (Trace store d40e)  283 057
+.C:15bc  8D 0E D4    STA $D40E      - A:1E X:00 Y:13 SP:ea ..-..I..  100460046
+#1 (Trace store d40f)  284 002
+.C:15c2  8D 0F D4    STA $D40F      - A:19 X:00 Y:13 SP:ea ..-..I..  100460054
+#1 (Trace store d412)  286 008
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:1A SP:e8 ..-..I..  100519154
+#1 (Trace store d40e)  286 016
+.C:15bc  8D 0E D4    STA $D40E      - A:A2 X:01 Y:1A SP:e8 N.-..I..  100519162
+#1 (Trace store d40f)  286 024
+.C:15c2  8D 0F D4    STA $D40F      - A:25 X:01 Y:1A SP:e8 ..-..I..  100519170
+#1 (Trace store d412)  285 041
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:1F SP:e8 ..-..I..  100578092
+#1 (Trace store d40e)  285 049
+.C:15bc  8D 0E D4    STA $D40E      - A:3C X:02 Y:1F SP:e8 ..-..I..  100578100
+#1 (Trace store d40f)  285 057
+.C:15c2  8D 0F D4    STA $D40F      - A:32 X:02 Y:1F SP:e8 ..-..I..  100578108
+#1 (Trace store d412)  283 052
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:1A SP:e8 ..-..I..  100636945
+#1 (Trace store d40e)  283 060
+.C:15bc  8D 0E D4    STA $D40E      - A:A2 X:03 Y:1A SP:e8 N.-..I..  100636953
+#1 (Trace store d40f)  284 005
+.C:15c2  8D 0F D4    STA $D40F      - A:25 X:03 Y:1A SP:e8 ..-..I..  100636961
+#1 (Trace store d40b)  283 011
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:03 Y:0E SP:ea ..-..I..  100695872
+#1 (Trace store d407)  283 019
+.C:15aa  8D 07 D4    STA $D407      - A:D1 X:03 Y:0E SP:ea N.-..I..  100695880
+#1 (Trace store d408)  283 027
+.C:15b0  8D 08 D4    STA $D408      - A:12 X:03 Y:0E SP:ea ..-..I..  100695888
+#1 (Trace store d412)  284 022
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:0E SP:ea ..-..I..  100695946
+#1 (Trace store d40e)  284 030
+.C:15bc  8D 0E D4    STA $D40E      - A:D1 X:00 Y:0E SP:ea N.-..I..  100695954
+#1 (Trace store d40f)  284 038
+.C:15c2  8D 0F D4    STA $D40F      - A:12 X:00 Y:0E SP:ea ..-..I..  100695962
+#1 (Trace store d412)  284 049
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:15 SP:ea ..-..I..  100754941
+#1 (Trace store d40e)  284 057
+.C:15bc  8D 0E D4    STA $D40E      - A:31 X:01 Y:15 SP:ea ..-..I..  100754949
+#1 (Trace store d40f)  285 002
+.C:15c2  8D 0F D4    STA $D40F      - A:1C X:01 Y:15 SP:ea ..-..I..  100754957
+#1 (Trace store d412)  285 038
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:1A SP:ea ..-..I..  100813961
+#1 (Trace store d40e)  285 046
+.C:15bc  8D 0E D4    STA $D40E      - A:A2 X:02 Y:1A SP:ea N.-..I..  100813969
+#1 (Trace store d40f)  285 054
+.C:15c2  8D 0F D4    STA $D40F      - A:25 X:02 Y:1A SP:ea ..-..I..  100813977
+#1 (Trace store d412)  284 033
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:15 SP:e8 ..-..I..  100872861
+#1 (Trace store d40e)  284 041
+.C:15bc  8D 0E D4    STA $D40E      - A:31 X:03 Y:15 SP:e8 ..-..I..  100872869
+#1 (Trace store d40f)  284 049
+.C:15c2  8D 0F D4    STA $D40F      - A:1C X:03 Y:15 SP:e8 ..-..I..  100872877
+#1 (Trace store d404)  283 036
+.C:1592  8D 04 D4    STA $D404      - A:21 X:01 Y:0E SP:ea ..-..I..  100931769
+#1 (Trace store d400)  283 044
+.C:1598  8D 00 D4    STA $D400      - A:D1 X:01 Y:0E SP:ea N.-..I..  100931777
+#1 (Trace store d401)  283 052
+.C:159e  8D 01 D4    STA $D401      - A:12 X:01 Y:0E SP:ea ..-..I..  100931785
+#1 (Trace store d40b)  284 051
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:00 Y:0E SP:ea ..-..I..  100931847
+#1 (Trace store d407)  284 059
+.C:15aa  8D 07 D4    STA $D407      - A:D1 X:00 Y:0E SP:ea N.-..I..  100931855
+#1 (Trace store d408)  285 004
+.C:15b0  8D 08 D4    STA $D408      - A:12 X:00 Y:0E SP:ea ..-..I..  100931863
+#1 (Trace store d412)  285 062
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:0E SP:ea ..-..I..  100931921
+#1 (Trace store d40e)  286 007
+.C:15bc  8D 0E D4    STA $D40E      - A:D1 X:00 Y:0E SP:ea N.-..I..  100931929
+#1 (Trace store d40f)  286 015
+.C:15c2  8D 0F D4    STA $D40F      - A:12 X:00 Y:0E SP:ea ..-..I..  100931937
+#1 (Trace store d412)  285 024
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:15 SP:ea ..-..I..  100990851
+#1 (Trace store d40e)  285 032
+.C:15bc  8D 0E D4    STA $D40E      - A:31 X:01 Y:15 SP:ea ..-..I..  100990859
+#1 (Trace store d40f)  285 040
+.C:15c2  8D 0F D4    STA $D40F      - A:1C X:01 Y:15 SP:ea ..-..I..  100990867
+#1 (Trace store d412)  284 019
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:1A SP:ea ..-..I..  101049751
+#1 (Trace store d40e)  284 027
+.C:15bc  8D 0E D4    STA $D40E      - A:A2 X:02 Y:1A SP:ea N.-..I..  101049759
+#1 (Trace store d40f)  284 035
+.C:15c2  8D 0F D4    STA $D40F      - A:25 X:02 Y:1A SP:ea ..-..I..  101049767
+#1 (Trace store d412)  283 031
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:15 SP:ea ..-..I..  101108668
+#1 (Trace store d40e)  283 039
+.C:15bc  8D 0E D4    STA $D40E      - A:31 X:03 Y:15 SP:ea ..-..I..  101108676
+#1 (Trace store d40f)  283 047
+.C:15c2  8D 0F D4    STA $D40F      - A:1C X:03 Y:15 SP:ea ..-..I..  101108684
+#1 (Trace store d40b)  284 030
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:01 Y:15 SP:ea ..-..I..  101167698
+#1 (Trace store d407)  284 038
+.C:15aa  8D 07 D4    STA $D407      - A:31 X:01 Y:15 SP:ea ..-..I..  101167706
+#1 (Trace store d408)  284 046
+.C:15b0  8D 08 D4    STA $D408      - A:1C X:01 Y:15 SP:ea ..-..I..  101167714
+#1 (Trace store d412)  285 041
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:15 SP:ea ..-..I..  101167772
+#1 (Trace store d40e)  285 049
+.C:15bc  8D 0E D4    STA $D40E      - A:31 X:00 Y:15 SP:ea ..-..I..  101167780
+#1 (Trace store d40f)  285 057
+.C:15c2  8D 0F D4    STA $D40F      - A:1C X:00 Y:15 SP:ea ..-..I..  101167788
+#1 (Trace store d412)  285 036
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:1C SP:e8 ..-..I..  101226735
+#1 (Trace store d40e)  285 044
+.C:15bc  8D 0E D4    STA $D40E      - A:3E X:01 Y:1C SP:e8 ..-..I..  101226743
+#1 (Trace store d40f)  285 052
+.C:15c2  8D 0F D4    STA $D40F      - A:2A X:01 Y:1C SP:e8 ..-..I..  101226751
+#1 (Trace store d412)  285 028
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:21 SP:e8 ..-..I..  101285695
+#1 (Trace store d40e)  285 036
+.C:15bc  8D 0E D4    STA $D40E      - A:63 X:02 Y:21 SP:e8 ..-..I..  101285703
+#1 (Trace store d40f)  285 044
+.C:15c2  8D 0F D4    STA $D40F      - A:38 X:02 Y:21 SP:e8 ..-..I..  101285711
+#1 (Trace store d412)  283 049
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:1C SP:e8 ..-..I..  101344558
+#1 (Trace store d40e)  283 057
+.C:15bc  8D 0E D4    STA $D40E      - A:3E X:03 Y:1C SP:e8 ..-..I..  101344566
+#1 (Trace store d40f)  284 002
+.C:15c2  8D 0F D4    STA $D40F      - A:2A X:03 Y:1C SP:e8 ..-..I..  101344574
+#1 (Trace store d40b)  282 038
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:02 Y:1A SP:ea ..-..I..  101403452
+#1 (Trace store d407)  282 046
+.C:15aa  8D 07 D4    STA $D407      - A:A2 X:02 Y:1A SP:ea N.-..I..  101403460
+#1 (Trace store d408)  282 054
+.C:15b0  8D 08 D4    STA $D408      - A:25 X:02 Y:1A SP:ea ..-..I..  101403468
+#1 (Trace store d412)  283 049
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:1A SP:ea ..-..I..  101403526
+#1 (Trace store d40e)  283 057
+.C:15bc  8D 0E D4    STA $D40E      - A:A2 X:00 Y:1A SP:ea N.-..I..  101403534
+#1 (Trace store d40f)  284 002
+.C:15c2  8D 0F D4    STA $D40F      - A:25 X:00 Y:1A SP:ea ..-..I..  101403542
+#1 (Trace store d412)  287 014
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:21 SP:e8 ..-..I..  101462711
+#1 (Trace store d40e)  287 022
+.C:15bc  8D 0E D4    STA $D40E      - A:63 X:01 Y:21 SP:e8 ..-..I..  101462719
+#1 (Trace store d40f)  287 030
+.C:15c2  8D 0F D4    STA $D40F      - A:38 X:01 Y:21 SP:e8 ..-..I..  101462727
+#1 (Trace store d412)  283 061
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:26 SP:ea ..-..I..  101521474
+#1 (Trace store d40e)  284 006
+.C:15bc  8D 0E D4    STA $D40E      - A:45 X:02 Y:26 SP:ea ..-..I..  101521482
+#1 (Trace store d40f)  284 014
+.C:15c2  8D 0F D4    STA $D40F      - A:4B X:02 Y:26 SP:ea ..-..I..  101521490
+#1 (Trace store d412)  283 049
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:21 SP:ea ..-..I..  101580430
+#1 (Trace store d40e)  283 057
+.C:15bc  8D 0E D4    STA $D40E      - A:63 X:03 Y:21 SP:ea ..-..I..  101580438
+#1 (Trace store d40f)  284 002
+.C:15c2  8D 0F D4    STA $D40F      - A:38 X:03 Y:21 SP:ea ..-..I..  101580446
+#1 (Trace store d40b)  283 014
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:03 Y:15 SP:e8 ..-..I..  101639363
+#1 (Trace store d407)  283 022
+.C:15aa  8D 07 D4    STA $D407      - A:31 X:03 Y:15 SP:e8 ..-..I..  101639371
+#1 (Trace store d408)  283 030
+.C:15b0  8D 08 D4    STA $D408      - A:1C X:03 Y:15 SP:e8 ..-..I..  101639379
+#1 (Trace store d412)  284 025
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:15 SP:e8 ..-..I..  101639437
+#1 (Trace store d40e)  284 033
+.C:15bc  8D 0E D4    STA $D40E      - A:31 X:00 Y:15 SP:e8 ..-..I..  101639445
+#1 (Trace store d40f)  284 041
+.C:15c2  8D 0F D4    STA $D40F      - A:1C X:00 Y:15 SP:e8 ..-..I..  101639453
+#1 (Trace store d412)  284 054
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:1C SP:ea ..-..I..  101698434
+#1 (Trace store d40e)  284 062
+.C:15bc  8D 0E D4    STA $D40E      - A:3E X:01 Y:1C SP:ea ..-..I..  101698442
+#1 (Trace store d40f)  285 007
+.C:15c2  8D 0F D4    STA $D40F      - A:2A X:01 Y:1C SP:ea ..-..I..  101698450
+#1 (Trace store d412)  287 051
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:21 SP:ea ..-..I..  101757588
+#1 (Trace store d40e)  287 059
+.C:15bc  8D 0E D4    STA $D40E      - A:63 X:02 Y:21 SP:ea ..-..I..  101757596
+#1 (Trace store d40f)  288 004
+.C:15c2  8D 0F D4    STA $D40F      - A:38 X:02 Y:21 SP:ea ..-..I..  101757604
+#1 (Trace store d412)  282 059
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:1C SP:ea ..-..I..  101816249
+#1 (Trace store d40e)  283 004
+.C:15bc  8D 0E D4    STA $D40E      - A:3E X:03 Y:1C SP:ea ..-..I..  101816257
+#1 (Trace store d40f)  283 012
+.C:15c2  8D 0F D4    STA $D40F      - A:2A X:03 Y:1C SP:ea ..-..I..  101816265
+#1 (Trace store d404)  283 036
+.C:1592  8D 04 D4    STA $D404      - A:21 X:02 Y:13 SP:ea ..-..I..  101875257
+#1 (Trace store d400)  283 044
+.C:1598  8D 00 D4    STA $D400      - A:1E X:02 Y:13 SP:ea ..-..I..  101875265
+#1 (Trace store d401)  283 052
+.C:159e  8D 01 D4    STA $D401      - A:19 X:02 Y:13 SP:ea ..-..I..  101875273
+#1 (Trace store d40b)  284 051
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:00 Y:13 SP:ea ..-..I..  101875335
+#1 (Trace store d407)  284 059
+.C:15aa  8D 07 D4    STA $D407      - A:1E X:00 Y:13 SP:ea ..-..I..  101875343
+#1 (Trace store d408)  285 004
+.C:15b0  8D 08 D4    STA $D408      - A:19 X:00 Y:13 SP:ea ..-..I..  101875351
+#1 (Trace store d412)  285 062
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:13 SP:ea ..-..I..  101875409
+#1 (Trace store d40e)  286 007
+.C:15bc  8D 0E D4    STA $D40E      - A:1E X:00 Y:13 SP:ea ..-..I..  101875417
+#1 (Trace store d40f)  286 015
+.C:15c2  8D 0F D4    STA $D40F      - A:19 X:00 Y:13 SP:ea ..-..I..  101875425
+#1 (Trace store d412)  284 049
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:1A SP:e8 ..-..I..  101934301
+#1 (Trace store d40e)  284 057
+.C:15bc  8D 0E D4    STA $D40E      - A:A2 X:01 Y:1A SP:e8 N.-..I..  101934309
+#1 (Trace store d40f)  285 002
+.C:15c2  8D 0F D4    STA $D40F      - A:25 X:01 Y:1A SP:e8 ..-..I..  101934317
+#1 (Trace store d412)  283 048
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:1F SP:e8 ..-..I..  101993205
+#1 (Trace store d40e)  283 056
+.C:15bc  8D 0E D4    STA $D40E      - A:3C X:02 Y:1F SP:e8 ..-..I..  101993213
+#1 (Trace store d40f)  284 001
+.C:15c2  8D 0F D4    STA $D40F      - A:32 X:02 Y:1F SP:e8 ..-..I..  101993221
+#1 (Trace store d412)  285 040
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:1A SP:e8 ..-..I..  102052291
+#1 (Trace store d40e)  285 048
+.C:15bc  8D 0E D4    STA $D40E      - A:A2 X:03 Y:1A SP:e8 N.-..I..  102052299
+#1 (Trace store d40f)  285 056
+.C:15c2  8D 0F D4    STA $D40F      - A:25 X:03 Y:1A SP:e8 ..-..I..  102052307
+#1 (Trace store d40b)  282 056
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:01 Y:1A SP:ea ..-..I..  102111086
+#1 (Trace store d407)  283 001
+.C:15aa  8D 07 D4    STA $D407      - A:A2 X:01 Y:1A SP:ea N.-..I..  102111094
+#1 (Trace store d408)  283 009
+.C:15b0  8D 08 D4    STA $D408      - A:25 X:01 Y:1A SP:ea ..-..I..  102111102
+#1 (Trace store d412)  284 004
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:1A SP:ea ..-..I..  102111160
+#1 (Trace store d40e)  284 012
+.C:15bc  8D 0E D4    STA $D40E      - A:A2 X:00 Y:1A SP:ea N.-..I..  102111168
+#1 (Trace store d40f)  284 020
+.C:15c2  8D 0F D4    STA $D40F      - A:25 X:00 Y:1A SP:ea ..-..I..  102111176
+#1 (Trace store d412)  286 043
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:21 SP:ea ..-..I..  102170293
+#1 (Trace store d40e)  286 051
+.C:15bc  8D 0E D4    STA $D40E      - A:63 X:01 Y:21 SP:ea ..-..I..  102170301
+#1 (Trace store d40f)  286 059
+.C:15c2  8D 0F D4    STA $D40F      - A:38 X:01 Y:21 SP:ea ..-..I..  102170309
+#1 (Trace store d412)  284 053
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:26 SP:e8 ..-..I..  102229145
+#1 (Trace store d40e)  284 061
+.C:15bc  8D 0E D4    STA $D40E      - A:45 X:02 Y:26 SP:e8 ..-..I..  102229153
+#1 (Trace store d40f)  285 006
+.C:15c2  8D 0F D4    STA $D40F      - A:4B X:02 Y:26 SP:e8 ..-..I..  102229161
+#1 (Trace store d412)  283 010
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:21 SP:ea ..-..I..  102288007
+#1 (Trace store d40e)  283 018
+.C:15bc  8D 0E D4    STA $D40E      - A:63 X:03 Y:21 SP:ea ..-..I..  102288015
+#1 (Trace store d40f)  283 026
+.C:15c2  8D 0F D4    STA $D40F      - A:38 X:03 Y:21 SP:ea ..-..I..  102288023
+#1 (Trace store d40b)  284 019
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:02 Y:1F SP:e8 ..-..I..  102347047
+#1 (Trace store d407)  284 027
+.C:15aa  8D 07 D4    STA $D407      - A:3C X:02 Y:1F SP:e8 ..-..I..  102347055
+#1 (Trace store d408)  284 035
+.C:15b0  8D 08 D4    STA $D408      - A:32 X:02 Y:1F SP:e8 ..-..I..  102347063
+#1 (Trace store d412)  285 030
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:1F SP:e8 ..-..I..  102347121
+#1 (Trace store d40e)  285 038
+.C:15bc  8D 0E D4    STA $D40E      - A:3C X:00 Y:1F SP:e8 ..-..I..  102347129
+#1 (Trace store d40f)  285 046
+.C:15c2  8D 0F D4    STA $D40F      - A:32 X:00 Y:1F SP:e8 ..-..I..  102347137
+#1 (Trace store d412)  284 062
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:26 SP:e8 ..-..I..  102406058
+#1 (Trace store d40e)  285 007
+.C:15bc  8D 0E D4    STA $D40E      - A:45 X:01 Y:26 SP:e8 ..-..I..  102406066
+#1 (Trace store d40f)  285 015
+.C:15c2  8D 0F D4    STA $D40F      - A:4B X:01 Y:26 SP:e8 ..-..I..  102406074
+#1 (Trace store d412)  285 008
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:2B SP:e8 ..-..I..  102465035
+#1 (Trace store d40e)  285 016
+.C:15bc  8D 0E D4    STA $D40E      - A:79 X:02 Y:2B SP:e8 ..-..I..  102465043
+#1 (Trace store d40f)  285 024
+.C:15c2  8D 0F D4    STA $D40F      - A:64 X:02 Y:2B SP:e8 ..-..I..  102465051
+#1 (Trace store d412)  283 016
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:26 SP:ea ..-..I..  102523885
+#1 (Trace store d40e)  283 024
+.C:15bc  8D 0E D4    STA $D40E      - A:45 X:03 Y:26 SP:ea ..-..I..  102523893
+#1 (Trace store d40f)  283 032
+.C:15c2  8D 0F D4    STA $D40F      - A:4B X:03 Y:26 SP:ea ..-..I..  102523901
+#1 (Trace store d40b)  283 044
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:03 Y:1A SP:e8 ..-..I..  102582881
+#1 (Trace store d407)  283 052
+.C:15aa  8D 07 D4    STA $D407      - A:A2 X:03 Y:1A SP:e8 N.-..I..  102582889
+#1 (Trace store d408)  283 060
+.C:15b0  8D 08 D4    STA $D408      - A:25 X:03 Y:1A SP:e8 ..-..I..  102582897
+#1 (Trace store d412)  284 055
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:1A SP:e8 ..-..I..  102582955
+#1 (Trace store d40e)  285 000
+.C:15bc  8D 0E D4    STA $D40E      - A:A2 X:00 Y:1A SP:e8 N.-..I..  102582963
+#1 (Trace store d40f)  285 008
+.C:15c2  8D 0F D4    STA $D40F      - A:25 X:00 Y:1A SP:e8 ..-..I..  102582971
+#1 (Trace store d412)  286 030
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:21 SP:e8 ..-..I..  102642024
+#1 (Trace store d40e)  286 038
+.C:15bc  8D 0E D4    STA $D40E      - A:63 X:01 Y:21 SP:e8 ..-..I..  102642032
+#1 (Trace store d40f)  286 046
+.C:15c2  8D 0F D4    STA $D40F      - A:38 X:01 Y:21 SP:e8 ..-..I..  102642040
+#1 (Trace store d412)  285 037
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:26 SP:e8 ..-..I..  102700936
+#1 (Trace store d40e)  285 045
+.C:15bc  8D 0E D4    STA $D40E      - A:45 X:02 Y:26 SP:e8 ..-..I..  102700944
+#1 (Trace store d40f)  285 053
+.C:15c2  8D 0F D4    STA $D40F      - A:4B X:02 Y:26 SP:e8 ..-..I..  102700952
+#1 (Trace store d412)  283 028
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:21 SP:ea ..-..I..  102759769
+#1 (Trace store d40e)  283 036
+.C:15bc  8D 0E D4    STA $D40E      - A:63 X:03 Y:21 SP:ea ..-..I..  102759777
+#1 (Trace store d40f)  283 044
+.C:15c2  8D 0F D4    STA $D40F      - A:38 X:03 Y:21 SP:ea ..-..I..  102759785
+#1 (Trace store d404)  282 033
+.C:1592  8D 04 D4    STA $D404      - A:21 X:03 Y:0E SP:ea ..-..I..  102818679
+#1 (Trace store d400)  282 041
+.C:1598  8D 00 D4    STA $D400      - A:D1 X:03 Y:0E SP:ea N.-..I..  102818687
+#1 (Trace store d401)  282 049
+.C:159e  8D 01 D4    STA $D401      - A:12 X:03 Y:0E SP:ea ..-..I..  102818695
+#1 (Trace store d40b)  283 048
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:00 Y:0E SP:ea ..-..I..  102818757
+#1 (Trace store d407)  283 056
+.C:15aa  8D 07 D4    STA $D407      - A:D1 X:00 Y:0E SP:ea N.-..I..  102818765
+#1 (Trace store d408)  284 001
+.C:15b0  8D 08 D4    STA $D408      - A:12 X:00 Y:0E SP:ea ..-..I..  102818773
+#1 (Trace store d412)  284 059
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:0E SP:ea ..-..I..  102818831
+#1 (Trace store d40e)  285 004
+.C:15bc  8D 0E D4    STA $D40E      - A:D1 X:00 Y:0E SP:ea N.-..I..  102818839
+#1 (Trace store d40f)  285 012
+.C:15c2  8D 0F D4    STA $D40F      - A:12 X:00 Y:0E SP:ea ..-..I..  102818847
+#1 (Trace store d412)  285 029
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:15 SP:ea ..-..I..  102877832
+#1 (Trace store d40e)  285 037
+.C:15bc  8D 0E D4    STA $D40E      - A:31 X:01 Y:15 SP:ea ..-..I..  102877840
+#1 (Trace store d40f)  285 045
+.C:15c2  8D 0F D4    STA $D40F      - A:1C X:01 Y:15 SP:ea ..-..I..  102877848
+#1 (Trace store d412)  285 027
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:1A SP:ea ..-..I..  102936798
+#1 (Trace store d40e)  285 035
+.C:15bc  8D 0E D4    STA $D40E      - A:A2 X:02 Y:1A SP:ea N.-..I..  102936806
+#1 (Trace store d40f)  285 043
+.C:15c2  8D 0F D4    STA $D40F      - A:25 X:02 Y:1A SP:ea ..-..I..  102936814
+#1 (Trace store d412)  284 033
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:15 SP:ea ..-..I..  102995709
+#1 (Trace store d40e)  284 041
+.C:15bc  8D 0E D4    STA $D40E      - A:31 X:03 Y:15 SP:ea ..-..I..  102995717
+#1 (Trace store d40f)  284 049
+.C:15c2  8D 0F D4    STA $D40F      - A:1C X:03 Y:15 SP:ea ..-..I..  102995725
+#1 (Trace store d40b)  283 023
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:01 Y:15 SP:e8 ..-..I..  103054604
+#1 (Trace store d407)  283 031
+.C:15aa  8D 07 D4    STA $D407      - A:31 X:01 Y:15 SP:e8 ..-..I..  103054612
+#1 (Trace store d408)  283 039
+.C:15b0  8D 08 D4    STA $D408      - A:1C X:01 Y:15 SP:e8 ..-..I..  103054620
+#1 (Trace store d412)  284 034
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:15 SP:e8 ..-..I..  103054678
+#1 (Trace store d40e)  284 042
+.C:15bc  8D 0E D4    STA $D40E      - A:31 X:00 Y:15 SP:e8 ..-..I..  103054686
+#1 (Trace store d40f)  284 050
+.C:15c2  8D 0F D4    STA $D40F      - A:1C X:00 Y:15 SP:e8 ..-..I..  103054694
+#1 (Trace store d412)  285 039
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:1C SP:ea ..-..I..  103113714
+#1 (Trace store d40e)  285 047
+.C:15bc  8D 0E D4    STA $D40E      - A:3E X:01 Y:1C SP:ea ..-..I..  103113722
+#1 (Trace store d40f)  285 055
+.C:15c2  8D 0F D4    STA $D40F      - A:2A X:01 Y:1C SP:ea ..-..I..  103113730
+#1 (Trace store d412)  284 054
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:21 SP:ea ..-..I..  103172634
+#1 (Trace store d40e)  284 062
+.C:15bc  8D 0E D4    STA $D40E      - A:63 X:02 Y:21 SP:ea ..-..I..  103172642
+#1 (Trace store d40f)  285 007
+.C:15c2  8D 0F D4    STA $D40F      - A:38 X:02 Y:21 SP:ea ..-..I..  103172650
+#1 (Trace store d412)  284 020
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:1C SP:ea ..-..I..  103231568
+#1 (Trace store d40e)  284 028
+.C:15bc  8D 0E D4    STA $D40E      - A:3E X:03 Y:1C SP:ea ..-..I..  103231576
+#1 (Trace store d40f)  284 036
+.C:15c2  8D 0F D4    STA $D40F      - A:2A X:03 Y:1C SP:ea ..-..I..  103231584
+#1 (Trace store d40b)  283 013
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:02 Y:1A SP:ea ..-..I..  103290466
+#1 (Trace store d407)  283 021
+.C:15aa  8D 07 D4    STA $D407      - A:A2 X:02 Y:1A SP:ea N.-..I..  103290474
+#1 (Trace store d408)  283 029
+.C:15b0  8D 08 D4    STA $D408      - A:25 X:02 Y:1A SP:ea ..-..I..  103290482
+#1 (Trace store d412)  284 024
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:1A SP:ea ..-..I..  103290540
+#1 (Trace store d40e)  284 032
+.C:15bc  8D 0E D4    STA $D40E      - A:A2 X:00 Y:1A SP:ea N.-..I..  103290548
+#1 (Trace store d40f)  284 040
+.C:15c2  8D 0F D4    STA $D40F      - A:25 X:00 Y:1A SP:ea ..-..I..  103290556
+#1 (Trace store d412)  285 042
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:21 SP:e8 ..-..I..  103349589
+#1 (Trace store d40e)  285 050
+.C:15bc  8D 0E D4    STA $D40E      - A:63 X:01 Y:21 SP:e8 ..-..I..  103349597
+#1 (Trace store d40f)  285 058
+.C:15c2  8D 0F D4    STA $D40F      - A:38 X:01 Y:21 SP:e8 ..-..I..  103349605
+#1 (Trace store d412)  285 007
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:26 SP:ea ..-..I..  103408522
+#1 (Trace store d40e)  285 015
+.C:15bc  8D 0E D4    STA $D40E      - A:45 X:02 Y:26 SP:ea ..-..I..  103408530
+#1 (Trace store d40f)  285 023
+.C:15c2  8D 0F D4    STA $D40F      - A:4B X:02 Y:26 SP:ea ..-..I..  103408538
+#1 (Trace store d412)  283 016
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:21 SP:ea ..-..I..  103467373
+#1 (Trace store d40e)  283 024
+.C:15bc  8D 0E D4    STA $D40E      - A:63 X:03 Y:21 SP:ea ..-..I..  103467381
+#1 (Trace store d40f)  283 032
+.C:15c2  8D 0F D4    STA $D40F      - A:38 X:03 Y:21 SP:ea ..-..I..  103467389
+#1 (Trace store d40b)  284 051
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:03 Y:15 SP:e8 ..-..I..  103526439
+#1 (Trace store d407)  284 059
+.C:15aa  8D 07 D4    STA $D407      - A:31 X:03 Y:15 SP:e8 ..-..I..  103526447
+#1 (Trace store d408)  285 004
+.C:15b0  8D 08 D4    STA $D408      - A:1C X:03 Y:15 SP:e8 ..-..I..  103526455
+#1 (Trace store d412)  285 062
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:15 SP:e8 ..-..I..  103526513
+#1 (Trace store d40e)  286 007
+.C:15bc  8D 0E D4    STA $D40E      - A:31 X:00 Y:15 SP:e8 ..-..I..  103526521
+#1 (Trace store d40f)  286 015
+.C:15c2  8D 0F D4    STA $D40F      - A:1C X:00 Y:15 SP:e8 ..-..I..  103526529
+#1 (Trace store d412)  284 049
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:1C SP:ea ..-..I..  103585405
+#1 (Trace store d40e)  284 057
+.C:15bc  8D 0E D4    STA $D40E      - A:3E X:01 Y:1C SP:ea ..-..I..  103585413
+#1 (Trace store d40f)  285 002
+.C:15c2  8D 0F D4    STA $D40F      - A:2A X:01 Y:1C SP:ea ..-..I..  103585421
+#1 (Trace store d412)  285 041
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:21 SP:ea ..-..I..  103644428
+#1 (Trace store d40e)  285 049
+.C:15bc  8D 0E D4    STA $D40E      - A:63 X:02 Y:21 SP:ea ..-..I..  103644436
+#1 (Trace store d40f)  285 057
+.C:15c2  8D 0F D4    STA $D40F      - A:38 X:02 Y:21 SP:ea ..-..I..  103644444
+#1 (Trace store d412)  283 026
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:1C SP:e8 ..-..I..  103703255
+#1 (Trace store d40e)  283 034
+.C:15bc  8D 0E D4    STA $D40E      - A:3E X:03 Y:1C SP:e8 ..-..I..  103703263
+#1 (Trace store d40f)  283 042
+.C:15c2  8D 0F D4    STA $D40F      - A:2A X:03 Y:1C SP:e8 ..-..I..  103703271
+#1 (Trace store d404)  283 003
+.C:1592  8D 04 D4    STA $D404      - A:21 X:00 Y:0C SP:ea ..-..I..  103762200
+#1 (Trace store d400)  283 011
+.C:1598  8D 00 D4    STA $D400      - A:C3 X:00 Y:0C SP:ea N.-..I..  103762208
+#1 (Trace store d401)  283 019
+.C:159e  8D 01 D4    STA $D401      - A:10 X:00 Y:0C SP:ea ..-..I..  103762216
+#1 (Trace store d40b)  284 018
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:00 Y:0C SP:ea ..-..I..  103762278
+#1 (Trace store d407)  284 026
+.C:15aa  8D 07 D4    STA $D407      - A:C3 X:00 Y:0C SP:ea N.-..I..  103762286
+#1 (Trace store d408)  284 034
+.C:15b0  8D 08 D4    STA $D408      - A:10 X:00 Y:0C SP:ea ..-..I..  103762294
+#1 (Trace store d412)  285 029
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:0C SP:ea ..-..I..  103762352
+#1 (Trace store d40e)  285 037
+.C:15bc  8D 0E D4    STA $D40E      - A:C3 X:00 Y:0C SP:ea N.-..I..  103762360
+#1 (Trace store d40f)  285 045
+.C:15c2  8D 0F D4    STA $D40F      - A:10 X:00 Y:0C SP:ea ..-..I..  103762368
+#1 (Trace store d412)  287 035
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:13 SP:e8 ..-..I..  103821452
+#1 (Trace store d40e)  287 043
+.C:15bc  8D 0E D4    STA $D40E      - A:1E X:01 Y:13 SP:e8 ..-..I..  103821460
+#1 (Trace store d40f)  287 051
+.C:15c2  8D 0F D4    STA $D40F      - A:19 X:01 Y:13 SP:e8 ..-..I..  103821468
+#1 (Trace store d412)  283 049
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:18 SP:ea ..-..I..  103880182
+#1 (Trace store d40e)  283 057
+.C:15bc  8D 0E D4    STA $D40E      - A:87 X:02 Y:18 SP:ea N.-..I..  103880190
+#1 (Trace store d40f)  284 002
+.C:15c2  8D 0F D4    STA $D40F      - A:21 X:02 Y:18 SP:ea ..-..I..  103880198
+#1 (Trace store d412)  284 033
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:13 SP:ea ..-..I..  103939197
+#1 (Trace store d40e)  284 041
+.C:15bc  8D 0E D4    STA $D40E      - A:1E X:03 Y:13 SP:ea ..-..I..  103939205
+#1 (Trace store d40f)  284 049
+.C:15c2  8D 0F D4    STA $D40F      - A:19 X:03 Y:13 SP:ea ..-..I..  103939213
+#1 (Trace store d40b)  282 051
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:01 Y:13 SP:ea ..-..I..  103998057
+#1 (Trace store d407)  282 059
+.C:15aa  8D 07 D4    STA $D407      - A:1E X:01 Y:13 SP:ea ..-..I..  103998065
+#1 (Trace store d408)  283 004
+.C:15b0  8D 08 D4    STA $D408      - A:19 X:01 Y:13 SP:ea ..-..I..  103998073
+#1 (Trace store d412)  283 062
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:13 SP:ea ..-..I..  103998131
+#1 (Trace store d40e)  284 007
+.C:15bc  8D 0E D4    STA $D40E      - A:1E X:00 Y:13 SP:ea ..-..I..  103998139
+#1 (Trace store d40f)  284 015
+.C:15c2  8D 0F D4    STA $D40F      - A:19 X:00 Y:13 SP:ea ..-..I..  103998147
+#1 (Trace store d412)  284 062
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:1A SP:ea ..-..I..  104057162
+#1 (Trace store d40e)  285 007
+.C:15bc  8D 0E D4    STA $D40E      - A:A2 X:01 Y:1A SP:ea N.-..I..  104057170
+#1 (Trace store d40f)  285 015
+.C:15c2  8D 0F D4    STA $D40F      - A:25 X:01 Y:1A SP:ea ..-..I..  104057178
+#1 (Trace store d412)  287 005
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:1F SP:ea ..-..I..  104116262
+#1 (Trace store d40e)  287 013
+.C:15bc  8D 0E D4    STA $D40E      - A:3C X:02 Y:1F SP:ea ..-..I..  104116270
+#1 (Trace store d40f)  287 021
+.C:15c2  8D 0F D4    STA $D40F      - A:32 X:02 Y:1F SP:ea ..-..I..  104116278
+#1 (Trace store d412)  282 039
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:1A SP:e8 ..-..I..  104174949
+#1 (Trace store d40e)  282 047
+.C:15bc  8D 0E D4    STA $D40E      - A:A2 X:03 Y:1A SP:e8 N.-..I..  104174957
+#1 (Trace store d40f)  282 055
+.C:15c2  8D 0F D4    STA $D40F      - A:25 X:03 Y:1A SP:e8 ..-..I..  104174965
+#1 (Trace store d40b)  284 015
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:02 Y:18 SP:e8 ..-..I..  104234019
+#1 (Trace store d407)  284 023
+.C:15aa  8D 07 D4    STA $D407      - A:87 X:02 Y:18 SP:e8 N.-..I..  104234027
+#1 (Trace store d408)  284 031
+.C:15b0  8D 08 D4    STA $D408      - A:21 X:02 Y:18 SP:e8 ..-..I..  104234035
+#1 (Trace store d412)  285 026
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:18 SP:e8 ..-..I..  104234093
+#1 (Trace store d40e)  285 034
+.C:15bc  8D 0E D4    STA $D40E      - A:87 X:00 Y:18 SP:e8 N.-..I..  104234101
+#1 (Trace store d40f)  285 042
+.C:15c2  8D 0F D4    STA $D40F      - A:21 X:00 Y:18 SP:e8 ..-..I..  104234109
+#1 (Trace store d412)  284 062
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:1F SP:e8 ..-..I..  104293034
+#1 (Trace store d40e)  285 007
+.C:15bc  8D 0E D4    STA $D40E      - A:3C X:01 Y:1F SP:e8 ..-..I..  104293042
+#1 (Trace store d40f)  285 015
+.C:15c2  8D 0F D4    STA $D40F      - A:32 X:01 Y:1F SP:e8 ..-..I..  104293050
+#1 (Trace store d412)  284 032
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:24 SP:e8 ..-..I..  104351972
+#1 (Trace store d40e)  284 040
+.C:15bc  8D 0E D4    STA $D40E      - A:0F X:02 Y:24 SP:e8 ..-..I..  104351980
+#1 (Trace store d40f)  284 048
+.C:15c2  8D 0F D4    STA $D40F      - A:43 X:02 Y:24 SP:e8 ..-..I..  104351988
+#1 (Trace store d412)  284 055
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:1F SP:ea ..-..I..  104410963
+#1 (Trace store d40e)  285 000
+.C:15bc  8D 0E D4    STA $D40E      - A:3C X:03 Y:1F SP:ea ..-..I..  104410971
+#1 (Trace store d40f)  285 008
+.C:15c2  8D 0F D4    STA $D40F      - A:32 X:03 Y:1F SP:ea ..-..I..  104410979
+#1 (Trace store d40b)  282 038
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:03 Y:13 SP:e8 ..-..I..  104469788
+#1 (Trace store d407)  282 046
+.C:15aa  8D 07 D4    STA $D407      - A:1E X:03 Y:13 SP:e8 ..-..I..  104469796
+#1 (Trace store d408)  282 054
+.C:15b0  8D 08 D4    STA $D408      - A:19 X:03 Y:13 SP:e8 ..-..I..  104469804
+#1 (Trace store d412)  283 049
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:13 SP:e8 ..-..I..  104469862
+#1 (Trace store d40e)  283 057
+.C:15bc  8D 0E D4    STA $D40E      - A:1E X:00 Y:13 SP:e8 ..-..I..  104469870
+#1 (Trace store d40f)  284 002
+.C:15c2  8D 0F D4    STA $D40F      - A:19 X:00 Y:13 SP:e8 ..-..I..  104469878
+#1 (Trace store d412)  285 059
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:1A SP:ea ..-..I..  104528966
+#1 (Trace store d40e)  286 004
+.C:15bc  8D 0E D4    STA $D40E      - A:A2 X:01 Y:1A SP:ea N.-..I..  104528974
+#1 (Trace store d40f)  286 012
+.C:15c2  8D 0F D4    STA $D40F      - A:25 X:01 Y:1A SP:ea ..-..I..  104528982
+#1 (Trace store d412)  285 003
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:1F SP:e8 ..-..I..  104587878
+#1 (Trace store d40e)  285 011
+.C:15bc  8D 0E D4    STA $D40E      - A:3C X:02 Y:1F SP:e8 ..-..I..  104587886
+#1 (Trace store d40f)  285 019
+.C:15c2  8D 0F D4    STA $D40F      - A:32 X:02 Y:1F SP:e8 ..-..I..  104587894
+#1 (Trace store d412)  283 062
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:1A SP:ea ..-..I..  104646779
+#1 (Trace store d40e)  284 007
+.C:15bc  8D 0E D4    STA $D40E      - A:A2 X:03 Y:1A SP:ea N.-..I..  104646787
+#1 (Trace store d40f)  284 015
+.C:15c2  8D 0F D4    STA $D40F      - A:25 X:03 Y:1A SP:ea ..-..I..  104646795
+#1 (Trace store d404)  284 008
+.C:1592  8D 04 D4    STA $D404      - A:21 X:01 Y:13 SP:ea ..-..I..  104705756
+#1 (Trace store d400)  284 016
+.C:1598  8D 00 D4    STA $D400      - A:1E X:01 Y:13 SP:ea ..-..I..  104705764
+#1 (Trace store d401)  284 024
+.C:159e  8D 01 D4    STA $D401      - A:19 X:01 Y:13 SP:ea ..-..I..  104705772
+#1 (Trace store d40b)  285 023
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:00 Y:13 SP:ea ..-..I..  104705834
+#1 (Trace store d407)  285 031
+.C:15aa  8D 07 D4    STA $D407      - A:1E X:00 Y:13 SP:ea ..-..I..  104705842
+#1 (Trace store d408)  285 039
+.C:15b0  8D 08 D4    STA $D408      - A:19 X:00 Y:13 SP:ea ..-..I..  104705850
+#1 (Trace store d412)  286 034
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:13 SP:ea ..-..I..  104705908
+#1 (Trace store d40e)  286 042
+.C:15bc  8D 0E D4    STA $D40E      - A:1E X:00 Y:13 SP:ea ..-..I..  104705916
+#1 (Trace store d40f)  286 050
+.C:15c2  8D 0F D4    STA $D40F      - A:19 X:00 Y:13 SP:ea ..-..I..  104705924
+#1 (Trace store d412)  285 020
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:1A SP:ea ..-..I..  104764799
+#1 (Trace store d40e)  285 028
+.C:15bc  8D 0E D4    STA $D40E      - A:A2 X:01 Y:1A SP:ea N.-..I..  104764807
+#1 (Trace store d40f)  285 036
+.C:15c2  8D 0F D4    STA $D40F      - A:25 X:01 Y:1A SP:ea ..-..I..  104764815
+#1 (Trace store d412)  284 023
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:1F SP:ea ..-..I..  104823707
+#1 (Trace store d40e)  284 031
+.C:15bc  8D 0E D4    STA $D40E      - A:3C X:02 Y:1F SP:ea ..-..I..  104823715
+#1 (Trace store d40f)  284 039
+.C:15c2  8D 0F D4    STA $D40F      - A:32 X:02 Y:1F SP:ea ..-..I..  104823723
+#1 (Trace store d412)  283 026
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:1A SP:e8 ..-..I..  104882615
+#1 (Trace store d40e)  283 034
+.C:15bc  8D 0E D4    STA $D40E      - A:A2 X:03 Y:1A SP:e8 N.-..I..  104882623
+#1 (Trace store d40f)  283 042
+.C:15c2  8D 0F D4    STA $D40F      - A:25 X:03 Y:1A SP:e8 ..-..I..  104882631
+#1 (Trace store d40b)  283 023
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:01 Y:1A SP:ea ..-..I..  104941580
+#1 (Trace store d407)  283 031
+.C:15aa  8D 07 D4    STA $D407      - A:A2 X:01 Y:1A SP:ea N.-..I..  104941588
+#1 (Trace store d408)  283 039
+.C:15b0  8D 08 D4    STA $D408      - A:25 X:01 Y:1A SP:ea ..-..I..  104941596
+#1 (Trace store d412)  284 034
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:1A SP:ea ..-..I..  104941654
+#1 (Trace store d40e)  284 042
+.C:15bc  8D 0E D4    STA $D40E      - A:A2 X:00 Y:1A SP:ea N.-..I..  104941662
+#1 (Trace store d40f)  284 050
+.C:15c2  8D 0F D4    STA $D40F      - A:25 X:00 Y:1A SP:ea ..-..I..  104941670
+#1 (Trace store d412)  286 048
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:21 SP:e8 ..-..I..  105000762
+#1 (Trace store d40e)  286 056
+.C:15bc  8D 0E D4    STA $D40E      - A:63 X:01 Y:21 SP:e8 ..-..I..  105000770
+#1 (Trace store d40f)  287 001
+.C:15c2  8D 0F D4    STA $D40F      - A:38 X:01 Y:21 SP:e8 ..-..I..  105000778
+#1 (Trace store d412)  285 060
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:26 SP:ea ..-..I..  105059679
+#1 (Trace store d40e)  286 005
+.C:15bc  8D 0E D4    STA $D40E      - A:45 X:02 Y:26 SP:ea ..-..I..  105059687
+#1 (Trace store d40f)  286 013
+.C:15c2  8D 0F D4    STA $D40F      - A:4B X:02 Y:26 SP:ea ..-..I..  105059695
+#1 (Trace store d412)  283 015
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:21 SP:ea ..-..I..  105118476
+#1 (Trace store d40e)  283 023
+.C:15bc  8D 0E D4    STA $D40E      - A:63 X:03 Y:21 SP:ea ..-..I..  105118484
+#1 (Trace store d40f)  283 031
+.C:15c2  8D 0F D4    STA $D40F      - A:38 X:03 Y:21 SP:ea ..-..I..  105118492
+#1 (Trace store d40b)  283 009
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:02 Y:1F SP:e8 ..-..I..  105177438
+#1 (Trace store d407)  283 017
+.C:15aa  8D 07 D4    STA $D407      - A:3C X:02 Y:1F SP:e8 ..-..I..  105177446
+#1 (Trace store d408)  283 025
+.C:15b0  8D 08 D4    STA $D408      - A:32 X:02 Y:1F SP:e8 ..-..I..  105177454
+#1 (Trace store d412)  284 020
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:1F SP:e8 ..-..I..  105177512
+#1 (Trace store d40e)  284 028
+.C:15bc  8D 0E D4    STA $D40E      - A:3C X:00 Y:1F SP:e8 ..-..I..  105177520
+#1 (Trace store d40f)  284 036
+.C:15c2  8D 0F D4    STA $D40F      - A:32 X:00 Y:1F SP:e8 ..-..I..  105177528
+#1 (Trace store d412)  285 006
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:26 SP:e8 ..-..I..  105236529
+#1 (Trace store d40e)  285 014
+.C:15bc  8D 0E D4    STA $D40E      - A:45 X:01 Y:26 SP:e8 ..-..I..  105236537
+#1 (Trace store d40f)  285 022
+.C:15c2  8D 0F D4    STA $D40F      - A:4B X:01 Y:26 SP:e8 ..-..I..  105236545
+#1 (Trace store d412)  285 039
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:2B SP:e8 ..-..I..  105295530
+#1 (Trace store d40e)  285 047
+.C:15bc  8D 0E D4    STA $D40E      - A:79 X:02 Y:2B SP:e8 ..-..I..  105295538
+#1 (Trace store d40f)  285 055
+.C:15c2  8D 0F D4    STA $D40F      - A:64 X:02 Y:2B SP:e8 ..-..I..  105295546
+#1 (Trace store d412)  283 049
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:26 SP:ea ..-..I..  105354382
+#1 (Trace store d40e)  283 057
+.C:15bc  8D 0E D4    STA $D40E      - A:45 X:03 Y:26 SP:ea ..-..I..  105354390
+#1 (Trace store d40f)  284 002
+.C:15c2  8D 0F D4    STA $D40F      - A:4B X:03 Y:26 SP:ea ..-..I..  105354398
+#1 (Trace store d40b)  283 011
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:03 Y:1A SP:e8 ..-..I..  105413312
+#1 (Trace store d407)  283 019
+.C:15aa  8D 07 D4    STA $D407      - A:A2 X:03 Y:1A SP:e8 N.-..I..  105413320
+#1 (Trace store d408)  283 027
+.C:15b0  8D 08 D4    STA $D408      - A:25 X:03 Y:1A SP:e8 ..-..I..  105413328
+#1 (Trace store d412)  284 022
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:1A SP:e8 ..-..I..  105413386
+#1 (Trace store d40e)  284 030
+.C:15bc  8D 0E D4    STA $D40E      - A:A2 X:00 Y:1A SP:e8 N.-..I..  105413394
+#1 (Trace store d40f)  284 038
+.C:15c2  8D 0F D4    STA $D40F      - A:25 X:00 Y:1A SP:e8 ..-..I..  105413402
+#1 (Trace store d412)  285 058
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:21 SP:e8 ..-..I..  105472453
+#1 (Trace store d40e)  286 003
+.C:15bc  8D 0E D4    STA $D40E      - A:63 X:01 Y:21 SP:e8 ..-..I..  105472461
+#1 (Trace store d40f)  286 011
+.C:15c2  8D 0F D4    STA $D40F      - A:38 X:01 Y:21 SP:e8 ..-..I..  105472469
+#1 (Trace store d412)  285 004
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:26 SP:e8 ..-..I..  105531367
+#1 (Trace store d40e)  285 012
+.C:15bc  8D 0E D4    STA $D40E      - A:45 X:02 Y:26 SP:e8 ..-..I..  105531375
+#1 (Trace store d40f)  285 020
+.C:15c2  8D 0F D4    STA $D40F      - A:4B X:02 Y:26 SP:e8 ..-..I..  105531383
+#1 (Trace store d412)  285 009
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:21 SP:ea ..-..I..  105590340
+#1 (Trace store d40e)  285 017
+.C:15bc  8D 0E D4    STA $D40E      - A:63 X:03 Y:21 SP:ea ..-..I..  105590348
+#1 (Trace store d40f)  285 025
+.C:15c2  8D 0F D4    STA $D40F      - A:38 X:03 Y:21 SP:ea ..-..I..  105590356
+#1 (Trace store d404)  282 029
+.C:1592  8D 04 D4    STA $D404      - A:21 X:02 Y:18 SP:ea ..-..I..  105649139
+#1 (Trace store d400)  282 037
+.C:1598  8D 00 D4    STA $D400      - A:87 X:02 Y:18 SP:ea N.-..I..  105649147
+#1 (Trace store d401)  282 045
+.C:159e  8D 01 D4    STA $D401      - A:21 X:02 Y:18 SP:ea ..-..I..  105649155
+#1 (Trace store d40b)  283 044
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:00 Y:18 SP:ea ..-..I..  105649217
+#1 (Trace store d407)  283 052
+.C:15aa  8D 07 D4    STA $D407      - A:87 X:00 Y:18 SP:ea N.-..I..  105649225
+#1 (Trace store d408)  283 060
+.C:15b0  8D 08 D4    STA $D408      - A:21 X:00 Y:18 SP:ea ..-..I..  105649233
+#1 (Trace store d412)  284 055
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:18 SP:ea ..-..I..  105649291
+#1 (Trace store d40e)  285 000
+.C:15bc  8D 0E D4    STA $D40E      - A:87 X:00 Y:18 SP:ea N.-..I..  105649299
+#1 (Trace store d40f)  285 008
+.C:15c2  8D 0F D4    STA $D40F      - A:21 X:00 Y:18 SP:ea ..-..I..  105649307
+#1 (Trace store d412)  285 025
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:1F SP:e8 ..-..I..  105708292
+#1 (Trace store d40e)  285 033
+.C:15bc  8D 0E D4    STA $D40E      - A:3C X:01 Y:1F SP:e8 ..-..I..  105708300
+#1 (Trace store d40f)  285 041
+.C:15c2  8D 0F D4    STA $D40F      - A:32 X:01 Y:1F SP:e8 ..-..I..  105708308
+#1 (Trace store d412)  284 020
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:24 SP:ea ..-..I..  105767192
+#1 (Trace store d40e)  284 028
+.C:15bc  8D 0E D4    STA $D40E      - A:0F X:02 Y:24 SP:ea ..-..I..  105767200
+#1 (Trace store d40f)  284 036
+.C:15c2  8D 0F D4    STA $D40F      - A:43 X:02 Y:24 SP:ea ..-..I..  105767208
+#1 (Trace store d412)  283 031
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:1F SP:ea ..-..I..  105826108
+#1 (Trace store d40e)  283 039
+.C:15bc  8D 0E D4    STA $D40E      - A:3C X:03 Y:1F SP:ea ..-..I..  105826116
+#1 (Trace store d40f)  283 047
+.C:15c2  8D 0F D4    STA $D40F      - A:32 X:03 Y:1F SP:ea ..-..I..  105826124
+#1 (Trace store d40b)  285 036
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:01 Y:1F SP:ea ..-..I..  105885207
+#1 (Trace store d407)  285 044
+.C:15aa  8D 07 D4    STA $D407      - A:3C X:01 Y:1F SP:ea ..-..I..  105885215
+#1 (Trace store d408)  285 052
+.C:15b0  8D 08 D4    STA $D408      - A:32 X:01 Y:1F SP:ea ..-..I..  105885223
+#1 (Trace store d412)  286 047
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:1F SP:ea ..-..I..  105885281
+#1 (Trace store d40e)  286 055
+.C:15bc  8D 0E D4    STA $D40E      - A:3C X:00 Y:1F SP:ea ..-..I..  105885289
+#1 (Trace store d40f)  287 000
+.C:15c2  8D 0F D4    STA $D40F      - A:32 X:00 Y:1F SP:ea ..-..I..  105885297
+#1 (Trace store d412)  284 062
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:26 SP:ea ..-..I..  105944138
+#1 (Trace store d40e)  285 007
+.C:15bc  8D 0E D4    STA $D40E      - A:45 X:01 Y:26 SP:ea ..-..I..  105944146
+#1 (Trace store d40f)  285 015
+.C:15c2  8D 0F D4    STA $D40F      - A:4B X:01 Y:26 SP:ea ..-..I..  105944154
+#1 (Trace store d412)  285 060
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:2B SP:ea ..-..I..  106003167
+#1 (Trace store d40e)  286 005
+.C:15bc  8D 0E D4    STA $D40E      - A:79 X:02 Y:2B SP:ea ..-..I..  106003175
+#1 (Trace store d40f)  286 013
+.C:15c2  8D 0F D4    STA $D40F      - A:64 X:02 Y:2B SP:ea ..-..I..  106003183
+#1 (Trace store d412)  282 046
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:26 SP:ea ..-..I..  106061932
+#1 (Trace store d40e)  282 054
+.C:15bc  8D 0E D4    STA $D40E      - A:45 X:03 Y:26 SP:ea ..-..I..  106061940
+#1 (Trace store d40f)  282 062
+.C:15c2  8D 0F D4    STA $D40F      - A:4B X:03 Y:26 SP:ea ..-..I..  106061948
+#1 (Trace store d40b)  282 039
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:02 Y:24 SP:e8 ..-..I..  106120893
+#1 (Trace store d407)  282 047
+.C:15aa  8D 07 D4    STA $D407      - A:0F X:02 Y:24 SP:e8 ..-..I..  106120901
+#1 (Trace store d408)  282 055
+.C:15b0  8D 08 D4    STA $D408      - A:43 X:02 Y:24 SP:e8 ..-..I..  106120909
+#1 (Trace store d412)  283 050
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:24 SP:e8 ..-..I..  106120967
+#1 (Trace store d40e)  283 058
+.C:15bc  8D 0E D4    STA $D40E      - A:0F X:00 Y:24 SP:e8 ..-..I..  106120975
+#1 (Trace store d40f)  284 003
+.C:15c2  8D 0F D4    STA $D40F      - A:43 X:00 Y:24 SP:e8 ..-..I..  106120983
+#1 (Trace store d412)  287 015
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:2B SP:e8 ..-..I..  106180152
+#1 (Trace store d40e)  287 023
+.C:15bc  8D 0E D4    STA $D40E      - A:79 X:01 Y:2B SP:e8 ..-..I..  106180160
+#1 (Trace store d40f)  287 031
+.C:15c2  8D 0F D4    STA $D40F      - A:64 X:01 Y:2B SP:e8 ..-..I..  106180168
+#1 (Trace store d412)  283 062
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:30 SP:e8 ..-..I..  106238915
+#1 (Trace store d40e)  284 007
+.C:15bc  8D 0E D4    STA $D40E      - A:1E X:02 Y:30 SP:e8 ..-..I..  106238923
+#1 (Trace store d40f)  284 015
+.C:15c2  8D 0F D4    STA $D40F      - A:86 X:02 Y:30 SP:e8 N.-..I..  106238931
+#1 (Trace store d412)  284 055
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:2B SP:ea ..-..I..  106297939
+#1 (Trace store d40e)  285 000
+.C:15bc  8D 0E D4    STA $D40E      - A:79 X:03 Y:2B SP:ea ..-..I..  106297947
+#1 (Trace store d40f)  285 008
+.C:15c2  8D 0F D4    STA $D40F      - A:64 X:03 Y:2B SP:ea ..-..I..  106297955
+#1 (Trace store d40b)  282 038
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:03 Y:1F SP:e8 ..-..I..  106356764
+#1 (Trace store d407)  282 046
+.C:15aa  8D 07 D4    STA $D407      - A:3C X:03 Y:1F SP:e8 ..-..I..  106356772
+#1 (Trace store d408)  282 054
+.C:15b0  8D 08 D4    STA $D408      - A:32 X:03 Y:1F SP:e8 ..-..I..  106356780
+#1 (Trace store d412)  283 049
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:1F SP:e8 ..-..I..  106356838
+#1 (Trace store d40e)  283 057
+.C:15bc  8D 0E D4    STA $D40E      - A:3C X:00 Y:1F SP:e8 ..-..I..  106356846
+#1 (Trace store d40f)  284 002
+.C:15c2  8D 0F D4    STA $D40F      - A:32 X:00 Y:1F SP:e8 ..-..I..  106356854
+#1 (Trace store d412)  285 026
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:26 SP:ea ..-..I..  106415909
+#1 (Trace store d40e)  285 034
+.C:15bc  8D 0E D4    STA $D40E      - A:45 X:01 Y:26 SP:ea ..-..I..  106415917
+#1 (Trace store d40f)  285 042
+.C:15c2  8D 0F D4    STA $D40F      - A:4B X:01 Y:26 SP:ea ..-..I..  106415925
+#1 (Trace store d412)  286 045
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:2B SP:e8 ..-..I..  106474959
+#1 (Trace store d40e)  286 053
+.C:15bc  8D 0E D4    STA $D40E      - A:79 X:02 Y:2B SP:e8 ..-..I..  106474967
+#1 (Trace store d40f)  286 061
+.C:15c2  8D 0F D4    STA $D40F      - A:64 X:02 Y:2B SP:e8 ..-..I..  106474975
+#1 (Trace store d412)  282 052
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:26 SP:e8 ..-..I..  106533682
+#1 (Trace store d40e)  282 060
+.C:15bc  8D 0E D4    STA $D40E      - A:45 X:03 Y:26 SP:e8 ..-..I..  106533690
+#1 (Trace store d40f)  283 005
+.C:15c2  8D 0F D4    STA $D40F      - A:4B X:03 Y:26 SP:e8 ..-..I..  106533698
+#1 (Trace store d404)  283 037
+.C:1592  8D 04 D4    STA $D404      - A:21 X:03 Y:13 SP:e8 ..-..I..  106592698
+#1 (Trace store d400)  283 045
+.C:1598  8D 00 D4    STA $D400      - A:1E X:03 Y:13 SP:e8 ..-..I..  106592706
+#1 (Trace store d401)  283 053
+.C:159e  8D 01 D4    STA $D401      - A:19 X:03 Y:13 SP:e8 ..-..I..  106592714
+#1 (Trace store d40b)  284 052
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:00 Y:13 SP:e8 ..-..I..  106592776
+#1 (Trace store d407)  284 060
+.C:15aa  8D 07 D4    STA $D407      - A:1E X:00 Y:13 SP:e8 ..-..I..  106592784
+#1 (Trace store d408)  285 005
+.C:15b0  8D 08 D4    STA $D408      - A:19 X:00 Y:13 SP:e8 ..-..I..  106592792
+#1 (Trace store d412)  286 000
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:13 SP:e8 ..-..I..  106592850
+#1 (Trace store d40e)  286 008
+.C:15bc  8D 0E D4    STA $D40E      - A:1E X:00 Y:13 SP:e8 ..-..I..  106592858
+#1 (Trace store d40f)  286 016
+.C:15c2  8D 0F D4    STA $D40F      - A:19 X:00 Y:13 SP:e8 ..-..I..  106592866
+#1 (Trace store d412)  284 060
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:1A SP:e8 ..-..I..  106651752
+#1 (Trace store d40e)  285 005
+.C:15bc  8D 0E D4    STA $D40E      - A:A2 X:01 Y:1A SP:e8 N.-..I..  106651760
+#1 (Trace store d40f)  285 013
+.C:15c2  8D 0F D4    STA $D40F      - A:25 X:01 Y:1A SP:e8 ..-..I..  106651768
+#1 (Trace store d412)  284 055
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:1F SP:e8 ..-..I..  106710715
+#1 (Trace store d40e)  285 000
+.C:15bc  8D 0E D4    STA $D40E      - A:3C X:02 Y:1F SP:e8 ..-..I..  106710723
+#1 (Trace store d40f)  285 008
+.C:15c2  8D 0F D4    STA $D40F      - A:32 X:02 Y:1F SP:e8 ..-..I..  106710731
+#1 (Trace store d412)  285 005
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:1A SP:e8 ..-..I..  106769696
+#1 (Trace store d40e)  285 013
+.C:15bc  8D 0E D4    STA $D40E      - A:A2 X:03 Y:1A SP:e8 N.-..I..  106769704
+#1 (Trace store d40f)  285 021
+.C:15c2  8D 0F D4    STA $D40F      - A:25 X:03 Y:1A SP:e8 ..-..I..  106769712
+#1 (Trace store d40b)  283 023
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:01 Y:1A SP:e8 ..-..I..  106828556
+#1 (Trace store d407)  283 031
+.C:15aa  8D 07 D4    STA $D407      - A:A2 X:01 Y:1A SP:e8 N.-..I..  106828564
+#1 (Trace store d408)  283 039
+.C:15b0  8D 08 D4    STA $D408      - A:25 X:01 Y:1A SP:e8 ..-..I..  106828572
+#1 (Trace store d412)  284 034
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:1A SP:e8 ..-..I..  106828630
+#1 (Trace store d40e)  284 042
+.C:15bc  8D 0E D4    STA $D40E      - A:A2 X:00 Y:1A SP:e8 N.-..I..  106828638
+#1 (Trace store d40f)  284 050
+.C:15c2  8D 0F D4    STA $D40F      - A:25 X:00 Y:1A SP:e8 ..-..I..  106828646
+#1 (Trace store d412)  285 043
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:21 SP:e8 ..-..I..  106887670
+#1 (Trace store d40e)  285 051
+.C:15bc  8D 0E D4    STA $D40E      - A:63 X:01 Y:21 SP:e8 ..-..I..  106887678
+#1 (Trace store d40f)  285 059
+.C:15c2  8D 0F D4    STA $D40F      - A:38 X:01 Y:21 SP:e8 ..-..I..  106887686
+#1 (Trace store d412)  284 058
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:26 SP:ea ..-..I..  106946590
+#1 (Trace store d40e)  285 003
+.C:15bc  8D 0E D4    STA $D40E      - A:45 X:02 Y:26 SP:ea ..-..I..  106946598
+#1 (Trace store d40f)  285 011
+.C:15c2  8D 0F D4    STA $D40F      - A:4B X:02 Y:26 SP:ea ..-..I..  106946606
+#1 (Trace store d412)  283 018
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:21 SP:ea ..-..I..  107005455
+#1 (Trace store d40e)  283 026
+.C:15bc  8D 0E D4    STA $D40E      - A:63 X:03 Y:21 SP:ea ..-..I..  107005463
+#1 (Trace store d40f)  283 034
+.C:15c2  8D 0F D4    STA $D40F      - A:38 X:03 Y:21 SP:ea ..-..I..  107005471
+#1 (Trace store d40b)  284 017
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:02 Y:1F SP:ea ..-..I..  107064485
+#1 (Trace store d407)  284 025
+.C:15aa  8D 07 D4    STA $D407      - A:3C X:02 Y:1F SP:ea ..-..I..  107064493
+#1 (Trace store d408)  284 033
+.C:15b0  8D 08 D4    STA $D408      - A:32 X:02 Y:1F SP:ea ..-..I..  107064501
+#1 (Trace store d412)  285 028
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:1F SP:ea ..-..I..  107064559
+#1 (Trace store d40e)  285 036
+.C:15bc  8D 0E D4    STA $D40E      - A:3C X:00 Y:1F SP:ea ..-..I..  107064567
+#1 (Trace store d40f)  285 044
+.C:15c2  8D 0F D4    STA $D40F      - A:32 X:00 Y:1F SP:ea ..-..I..  107064575
+#1 (Trace store d412)  286 008
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:26 SP:ea ..-..I..  107123570
+#1 (Trace store d40e)  286 016
+.C:15bc  8D 0E D4    STA $D40E      - A:45 X:01 Y:26 SP:ea ..-..I..  107123578
+#1 (Trace store d40f)  286 024
+.C:15c2  8D 0F D4    STA $D40F      - A:4B X:01 Y:26 SP:ea ..-..I..  107123586
+#1 (Trace store d412)  284 036
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:2B SP:ea ..-..I..  107182440
+#1 (Trace store d40e)  284 044
+.C:15bc  8D 0E D4    STA $D40E      - A:79 X:02 Y:2B SP:ea ..-..I..  107182448
+#1 (Trace store d40f)  284 052
+.C:15c2  8D 0F D4    STA $D40F      - A:64 X:02 Y:2B SP:ea ..-..I..  107182456
+#1 (Trace store d412)  283 048
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:26 SP:ea ..-..I..  107241357
+#1 (Trace store d40e)  283 056
+.C:15bc  8D 0E D4    STA $D40E      - A:45 X:03 Y:26 SP:ea ..-..I..  107241365
+#1 (Trace store d40f)  284 001
+.C:15c2  8D 0F D4    STA $D40F      - A:4B X:03 Y:26 SP:ea ..-..I..  107241373
+#1 (Trace store d40b)  282 038
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:03 Y:1A SP:ea ..-..I..  107300252
+#1 (Trace store d407)  282 046
+.C:15aa  8D 07 D4    STA $D407      - A:A2 X:03 Y:1A SP:ea N.-..I..  107300260
+#1 (Trace store d408)  282 054
+.C:15b0  8D 08 D4    STA $D408      - A:25 X:03 Y:1A SP:ea ..-..I..  107300268
+#1 (Trace store d412)  283 049
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:1A SP:ea ..-..I..  107300326
+#1 (Trace store d40e)  283 057
+.C:15bc  8D 0E D4    STA $D40E      - A:A2 X:00 Y:1A SP:ea N.-..I..  107300334
+#1 (Trace store d40f)  284 002
+.C:15c2  8D 0F D4    STA $D40F      - A:25 X:00 Y:1A SP:ea ..-..I..  107300342
+#1 (Trace store d412)  286 030
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:01 Y:21 SP:ea ..-..I..  107359464
+#1 (Trace store d40e)  286 038
+.C:15bc  8D 0E D4    STA $D40E      - A:63 X:01 Y:21 SP:ea ..-..I..  107359472
+#1 (Trace store d40f)  286 046
+.C:15c2  8D 0F D4    STA $D40F      - A:38 X:01 Y:21 SP:ea ..-..I..  107359480
+#1 (Trace store d412)  285 042
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:02 Y:26 SP:e8 ..-..I..  107418381
+#1 (Trace store d40e)  285 050
+.C:15bc  8D 0E D4    STA $D40E      - A:45 X:02 Y:26 SP:e8 ..-..I..  107418389
+#1 (Trace store d40f)  285 058
+.C:15c2  8D 0F D4    STA $D40F      - A:4B X:02 Y:26 SP:e8 ..-..I..  107418397
+#1 (Trace store d412)  283 031
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:03 Y:21 SP:e8 ..-..I..  107477212
+#1 (Trace store d40e)  283 039
+.C:15bc  8D 0E D4    STA $D40E      - A:63 X:03 Y:21 SP:e8 ..-..I..  107477220
+#1 (Trace store d40f)  283 047
+.C:15c2  8D 0F D4    STA $D40F      - A:38 X:03 Y:21 SP:e8 ..-..I..  107477228
+#1 (Trace store d404)  286 034
+.C:1592  8D 04 D4    STA $D404      - A:21 X:00 Y:07 SP:e8 ..-..I..  107536372
+#1 (Trace store d400)  286 042
+.C:1598  8D 00 D4    STA $D400      - A:8F X:00 Y:07 SP:e8 N.-..I..  107536380
+#1 (Trace store d401)  286 050
+.C:159e  8D 01 D4    STA $D401      - A:0C X:00 Y:07 SP:e8 ..-..I..  107536388
+#1 (Trace store d40b)  287 049
+.C:15a4  8D 0B D4    STA $D40B      - A:21 X:00 Y:07 SP:e8 ..-..I..  107536450
+#1 (Trace store d407)  287 057
+.C:15aa  8D 07 D4    STA $D407      - A:8F X:00 Y:07 SP:e8 N.-..I..  107536458
+#1 (Trace store d408)  288 002
+.C:15b0  8D 08 D4    STA $D408      - A:0C X:00 Y:07 SP:e8 ..-..I..  107536466
+#1 (Trace store d412)  288 060
+.C:15b6  8D 12 D4    STA $D412      - A:21 X:00 Y:07 SP:e8 ..-..I..  107536524
+#1 (Trace store d40e)  289 005
+.C:15bc  8D 0E D4    STA $D40E      - A:8F X:00 Y:07 SP:e8 N.-..I..  107536532
+#1 (Trace store d40f)  289 013
+.C:15c2  8D 0F D4    STA $D40F      - A:0C X:00 Y:07 SP:e8 ..-..I..  107536540
+#1 (Trace store d404)  198 029
+.C:6894  8D 04 D4    STA $D404      - A:80 X:00 Y:00 SP:f6 N.-..I.C  107825663
+#1 (Trace store d40b)  198 033
+.C:6897  8D 0B D4    STA $D40B      - A:80 X:00 Y:00 SP:f6 N.-..I.C  107825667
+#1 (Trace store d412)  198 037
+.C:689a  8D 12 D4    STA $D412      - A:80 X:00 Y:00 SP:f6 N.-..I.C  107825671
+#1 (Trace store d405)  273 014
+.C:79f3  9D 00 D4    STA $D400,X    - A:0F X:05 Y:05 SP:ec ..-..I.C  107850029
+#1 (Trace store d406)  275 049
+.C:79f3  9D 00 D4    STA $D400,X    - A:00 X:06 Y:05 SP:ec ..-..I.C  107850190
+#1 (Trace store d401)  278 021
+.C:79f3  9D 00 D4    STA $D400,X    - A:00 X:01 Y:05 SP:ec ..-..I.C  107850351
+#1 (Trace store d404)  280 056
+.C:79f3  9D 00 D4    STA $D400,X    - A:11 X:04 Y:05 SP:ec ..-..I.C  107850512
+#1 (Trace store d40c)  284 015
+.C:79f3  9D 00 D4    STA $D400,X    - A:0F X:0C Y:05 SP:ee ..-..I.C  107850723
+#1 (Trace store d413)  286 050
+.C:79f3  9D 00 D4    STA $D400,X    - A:0F X:13 Y:05 SP:ee ..-..I.C  107850884
+#1 (Trace store d40d)  291 057
+.C:79f3  9D 00 D4    STA $D400,X    - A:00 X:0D Y:05 SP:ee ..-..I.C  107851206
+#1 (Trace store d414)  294 029
+.C:79f3  9D 00 D4    STA $D400,X    - A:00 X:14 Y:05 SP:ee ..-..I.C  107851367
+#1 (Trace store d408)  297 001
+.C:79f3  9D 00 D4    STA $D400,X    - A:03 X:08 Y:05 SP:ee ..-..I.C  107851528
+#1 (Trace store d40f)  299 036
+.C:79f3  9D 00 D4    STA $D400,X    - A:03 X:0F Y:05 SP:ee ..-..I.C  107851689
+#1 (Trace store d40b)  302 008
+.C:79f3  9D 00 D4    STA $D400,X    - A:21 X:0B Y:05 SP:ee ..-..I.C  107851850
+#1 (Trace store d40e)  304 043
+.C:79f3  9D 00 D4    STA $D400,X    - A:08 X:0E Y:05 SP:ee ..-..I.C  107852011
+#1 (Trace store d407)  307 015
+.C:79f3  9D 00 D4    STA $D400,X    - A:00 X:07 Y:05 SP:ee ..-..I.C  107852172
+#1 (Trace store d412)  309 050
+.C:79f3  9D 00 D4    STA $D400,X    - A:21 X:12 Y:05 SP:ee ..-..I.C  107852333
+#1 (Trace store d401)  275 060
+.C:7a46  9D 00 D4    STA $D400,X    - A:64 X:01 Y:05 SP:ec ..-..I..  107869857
+#1 (Trace store d401)  281 038
+.C:7a46  9D 00 D4    STA $D400,X    - A:C8 X:01 Y:05 SP:ec .V-..I..  107889869
+#1 (Trace store d412)  284 042
+.C:79f3  9D 00 D4    STA $D400,X    - A:21 X:12 Y:05 SP:ee ..-..I.C  107890062
+#1 (Trace store d401)  280 049
+.C:7a46  9D 00 D4    STA $D400,X    - A:2C X:01 Y:05 SP:ee ..-..I.C  107909473
+#1 (Trace store d401)  275 059
+.C:7a46  9D 00 D4    STA $D400,X    - A:90 X:01 Y:05 SP:ec .V-..I..  107928824
+#1 (Trace store d412)  279 000
+.C:79f3  9D 00 D4    STA $D400,X    - A:21 X:12 Y:05 SP:ee ..-..I.C  107929017
+#1 (Trace store d401)  283 058
+.C:7a46  9D 00 D4    STA $D400,X    - A:F4 X:01 Y:05 SP:eb ..-..I..  107948983
+#1 (Trace store d401)  275 056
+.C:7a46  9D 00 D4    STA $D400,X    - A:58 X:01 Y:05 SP:ec ..-..I.C  107968133
+#1 (Trace store d412)  278 060
+.C:79f3  9D 00 D4    STA $D400,X    - A:21 X:12 Y:05 SP:ee ..-..I.C  107968326
+#1 (Trace store d401)  280 046
+.C:7a46  9D 00 D4    STA $D400,X    - A:BC X:01 Y:05 SP:ec .V-..I..  107988094
+#1 (Trace store d401)  281 030
+.C:7a46  9D 00 D4    STA $D400,X    - A:20 X:01 Y:05 SP:ec ..-..I.C  108007797
+#1 (Trace store d412)  284 034
+.C:79f3  9D 00 D4    STA $D400,X    - A:21 X:12 Y:05 SP:ee ..-..I.C  108007990
+#1 (Trace store d401)  273 027
+.C:7a46  9D 00 D4    STA $D400,X    - A:38 X:01 Y:05 SP:ec ..-..I..  108046602
+#1 (Trace store d412)  276 031
+.C:79f3  9D 00 D4    STA $D400,X    - A:21 X:12 Y:05 SP:ee ..-..I.C  108046795
+#1 (Trace store d404)  272 045
+.C:79f3  9D 00 D4    STA $D400,X    - A:11 X:04 Y:05 SP:ee ..-..I.C  108085869
+#1 (Trace store d412)  276 004
+.C:79f3  9D 00 D4    STA $D400,X    - A:21 X:12 Y:05 SP:f0 ..-..I.C  108086080
+#1 (Trace store d401)  275 001
+.C:7a46  9D 00 D4    STA $D400,X    - A:9C X:01 Y:05 SP:ee .V-..I..  108105670
+#1 (Trace store d401)  280 020
+.C:7a46  9D 00 D4    STA $D400,X    - A:00 X:01 Y:05 SP:ec ..-..I.C  108125660
+#1 (Trace store d412)  283 024
+.C:79f3  9D 00 D4    STA $D400,X    - A:21 X:12 Y:05 SP:ee ..-..I.C  108125853
+#1 (Trace store d401)  278 050
+.C:7a46  9D 00 D4    STA $D400,X    - A:64 X:01 Y:05 SP:ec ..-..I..  108145220
+#1 (Trace store d401)  273 051
+.C:7a46  9D 00 D4    STA $D400,X    - A:C8 X:01 Y:05 SP:ec .V-..I..  108164562
+#1 (Trace store d412)  276 055
+.C:79f3  9D 00 D4    STA $D400,X    - A:21 X:12 Y:05 SP:ee ..-..I.C  108164755
+#1 (Trace store d401)  281 005
+.C:7a46  9D 00 D4    STA $D400,X    - A:2C X:01 Y:05 SP:eb ..-..I.C  108184676
+#1 (Trace store d401)  274 011
+.C:7a46  9D 00 D4    STA $D400,X    - A:90 X:01 Y:05 SP:ec .V-..I..  108203897
+#1 (Trace store d412)  277 015
+.C:79f3  9D 00 D4    STA $D400,X    - A:21 X:12 Y:05 SP:ee ..-..I.C  108204090
+#1 (Trace store d401)  278 050
+.C:7a46  9D 00 D4    STA $D400,X    - A:F4 X:01 Y:05 SP:eb ..-..I..  108223844
+#1 (Trace store d401)  279 032
+.C:7a46  9D 00 D4    STA $D400,X    - A:58 X:01 Y:05 SP:ee ..-..I.C  108243545
+#1 (Trace store d412)  282 036
+.C:79f3  9D 00 D4    STA $D400,X    - A:21 X:12 Y:05 SP:f0 ..-..I.C  108243738
+#1 (Trace store d401)  270 061
+.C:7a46  9D 00 D4    STA $D400,X    - A:70 X:01 Y:05 SP:ec ..-..I..  108282319
+#1 (Trace store d412)  274 002
+.C:79f3  9D 00 D4    STA $D400,X    - A:21 X:12 Y:05 SP:ee ..-..I.C  108282512
+#1 (Trace store d404)  271 042
+.C:79f3  9D 00 D4    STA $D400,X    - A:11 X:04 Y:05 SP:ee ..-..I.C  108321675
+#1 (Trace store d412)  275 001
+.C:79f3  9D 00 D4    STA $D400,X    - A:21 X:12 Y:05 SP:f0 ..-..I.C  108321886
+#1 (Trace store d401)  275 002
+.C:7a46  9D 00 D4    STA $D400,X    - A:D4 X:01 Y:05 SP:ee .V-..I..  108341543
+#1 (Trace store d401)  281 014
+.C:7a46  9D 00 D4    STA $D400,X    - A:38 X:01 Y:05 SP:ec ..-..I.C  108361589
+#1 (Trace store d412)  284 018
+.C:79f3  9D 00 D4    STA $D400,X    - A:21 X:12 Y:05 SP:ee ..-..I.C  108361782
+#1 (Trace store d401)  280 020
+.C:7a46  9D 00 D4    STA $D400,X    - A:9C X:01 Y:05 SP:ec .V-..I..  108381188
+#1 (Trace store d401)  275 047
+.C:7a46  9D 00 D4    STA $D400,X    - A:00 X:01 Y:05 SP:ee ..-..I.C  108400556
+#1 (Trace store d412)  278 051
+.C:79f3  9D 00 D4    STA $D400,X    - A:21 X:12 Y:05 SP:f0 ..-..I.C  108400749
+#1 (Trace store d401)  283 048
+.C:7a46  9D 00 D4    STA $D400,X    - A:64 X:01 Y:05 SP:ec ..-..I..  108420717
+#1 (Trace store d401)  275 044
+.C:7a46  9D 00 D4    STA $D400,X    - A:C8 X:01 Y:05 SP:ec .V-..I..  108439865
+#1 (Trace store d412)  278 048
+.C:79f3  9D 00 D4    STA $D400,X    - A:21 X:12 Y:05 SP:ee ..-..I.C  108440058
+#1 (Trace store d401)  280 033
+.C:7a46  9D 00 D4    STA $D400,X    - A:2C X:01 Y:05 SP:eb ..-..I.C  108459825
+#1 (Trace store d401)  281 024
+.C:7a46  9D 00 D4    STA $D400,X    - A:90 X:01 Y:05 SP:ee .V-..I..  108479535
+#1 (Trace store d412)  284 028
+.C:79f3  9D 00 D4    STA $D400,X    - A:21 X:12 Y:05 SP:f0 ..-..I.C  108479728
+#1 (Trace store d401)  273 014
+.C:7a46  9D 00 D4    STA $D400,X    - A:A8 X:01 Y:05 SP:ee ..-..I..  108518333
+#1 (Trace store d412)  276 018
+.C:79f3  9D 00 D4    STA $D400,X    - A:21 X:12 Y:05 SP:f0 ..-..I.C  108518526
+#1 (Trace store d404)  272 056
+.C:79f3  9D 00 D4    STA $D400,X    - A:11 X:04 Y:05 SP:eb ..-..I.C  108557624
+#1 (Trace store d412)  276 015
+.C:79f3  9D 00 D4    STA $D400,X    - A:21 X:12 Y:05 SP:ed ..-..I.C  108557835
+#1 (Trace store d401)  275 042
+.C:7a46  9D 00 D4    STA $D400,X    - A:0C X:01 Y:05 SP:ec ..-..I.C  108577455
+#1 (Trace store d401)  281 042
+.C:7a46  9D 00 D4    STA $D400,X    - A:70 X:01 Y:05 SP:ec ..-..I..  108597489
+#1 (Trace store d412)  284 046
+.C:79f3  9D 00 D4    STA $D400,X    - A:21 X:12 Y:05 SP:ee ..-..I.C  108597682
+#1 (Trace store d401)  280 041
+.C:7a46  9D 00 D4    STA $D400,X    - A:D4 X:01 Y:05 SP:eb .V-..I..  108617081
+#1 (Trace store d401)  275 051
+.C:7a46  9D 00 D4    STA $D400,X    - A:38 X:01 Y:05 SP:ec ..-..I.C  108636432
+#1 (Trace store d412)  278 055
+.C:79f3  9D 00 D4    STA $D400,X    - A:21 X:12 Y:05 SP:ee ..-..I.C  108636625
+#1 (Trace store d401)  283 058
+.C:7a46  9D 00 D4    STA $D400,X    - A:9C X:01 Y:05 SP:eb .V-..I..  108656599
+#1 (Trace store d401)  275 058
+.C:7a46  9D 00 D4    STA $D400,X    - A:00 X:01 Y:05 SP:ec ..-..I.C  108675751
+#1 (Trace store d412)  278 062
+.C:79f3  9D 00 D4    STA $D400,X    - A:21 X:12 Y:05 SP:ee ..-..I.C  108675944
+#1 (Trace store d401)  280 044
+.C:7a46  9D 00 D4    STA $D400,X    - A:64 X:01 Y:05 SP:ee ..-..I..  108695708
+#1 (Trace store d401)  281 038
+.C:7a46  9D 00 D4    STA $D400,X    - A:C8 X:01 Y:05 SP:ee .V-..I..  108715421
+#1 (Trace store d412)  284 042
+.C:79f3  9D 00 D4    STA $D400,X    - A:21 X:12 Y:05 SP:f0 ..-..I.C  108715614
+#1 (Trace store d401)  274 001
+.C:7a46  9D 00 D4    STA $D400,X    - A:E0 X:01 Y:05 SP:ec ..-..I..  108754255
+#1 (Trace store d412)  277 005
+.C:79f3  9D 00 D4    STA $D400,X    - A:21 X:12 Y:05 SP:ee ..-..I.C  108754448
+#1 (Trace store d404)  273 005
+.C:79f3  9D 00 D4    STA $D400,X    - A:11 X:04 Y:05 SP:eb ..-..I.C  108793508
+#1 (Trace store d412)  276 027
+.C:79f3  9D 00 D4    STA $D400,X    - A:21 X:12 Y:05 SP:ed ..-..I.C  108793719
+#1 (Trace store d401)  275 054
+.C:7a46  9D 00 D4    STA $D400,X    - A:44 X:01 Y:05 SP:ec ..-..I.C  108813339
+#1 (Trace store d401)  281 043
+.C:7a46  9D 00 D4    STA $D400,X    - A:A8 X:01 Y:05 SP:ee .V-..I..  108833362
+#1 (Trace store d412)  284 047
+.C:79f3  9D 00 D4    STA $D400,X    - A:21 X:12 Y:05 SP:f0 ..-..I.C  108833555
+#1 (Trace store d401)  280 043
+.C:7a46  9D 00 D4    STA $D400,X    - A:0C X:01 Y:05 SP:ec ..-..I.C  108852955

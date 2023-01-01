@@ -1,0 +1,9 @@
+
+X:1
+%%titleformat R-P-Q-T C1 O1, T+T N1
+T: Iridis Alpha: 1 of 100,000,000,000,000
+T: First 4 Bars of Voice 3
+L: 1/8
+K: D % scale: C major
+V:3 name="Voice 3"
+C,1G,1C1G,1|G,1D1G1D1|C1G1c1G1|G,1D1G1D1:|

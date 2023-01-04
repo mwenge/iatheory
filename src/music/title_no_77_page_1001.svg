@@ -1,0 +1,1851 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+	"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	color="black"
+	width="1208.60px" height="1372.00px">
+<style type="text/css">
+.fill {fill: currentColor}
+.stroke {stroke: currentColor; fill: none}
+text{white-space: pre}
+</style>
+<title>../src/music/title_no_77_page_1.abc (2) tune 1</title>
+<!-- Creator: abcm2ps-8.14.6 -->
+<!-- CreationDate: Jan  3, 2023 22:31 -->
+<!-- CommandLine: -g ../src/music/title_no_77_page_1.abc -O ../src/music/title_no_77_page_1.svg -->
+<g stroke-width="0.70" style="font:italic 14.00px Times">
+<text x="10.00" y="28.00">Procedurally Generated</text>
+<!-- title: Iridis Alpha Title Theme -->
+</g>
+<g stroke-width="0.70" style="font:20.00px Times">
+<text x="604.30" y="28.00" text-anchor="middle">Iridis Alpha Title Theme</text>
+</g>
+<g stroke-width="0.70" style="font:italic 14.00px Times">
+<text x="1198.60" y="28.00" text-anchor="end">(Sid.)</text>
+<text x="1198.60" y="43.40" text-anchor="end">Jeff Minter</text>
+<!-- subtitle: 77 of 100,000,000,000,000 -->
+</g>
+<g stroke-width="0.70" style="font:16.00px Times">
+<text x="604.30" y="64.00" text-anchor="middle">77 of 100,000,000,000,000</text>
+</g>
+<g stroke-width="0.70" style="font:bold 13.00px Times">
+<text x="38.28" y="224.90" text-anchor="middle">Voice 3</text>
+<text x="38.28" y="166.90" text-anchor="middle">Voice 2</text>
+<text x="38.28" y="108.90" text-anchor="middle">Voice 1</text>
+<path class="stroke" stroke-width="1"
+	d="M66.48 233.00v-140.00"/>
+<path class="stroke" stroke-width="1"
+	d="M161.48 175.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M161.48 233.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M218.68 175.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M218.68 233.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M275.88 175.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M275.88 233.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M331.88 117.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M331.88 175.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M331.88 233.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M347.88 117.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M363.88 117.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M379.88 117.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M460.08 175.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M460.08 233.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M516.08 175.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M516.08 233.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M572.08 175.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M572.08 233.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M628.18 117.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M628.18 175.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M628.18 233.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M644.18 117.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M660.18 117.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M676.18 117.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M733.18 175.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M733.18 233.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M789.18 175.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M789.18 233.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M845.18 175.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M845.18 233.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M923.18 117.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M923.18 175.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M923.18 233.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M939.18 117.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M955.18 117.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M971.18 117.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M1028.18 175.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M1028.18 233.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M1085.38 175.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M1085.38 233.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M1142.58 175.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M1142.58 233.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M1198.58 117.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M1198.58 175.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M1198.58 233.00v-58.00"/>
+<path d="m66.48 117.00
+	h1132.10
+	M66.48 111.00
+	h1132.10
+	M66.48 105.00
+	h1132.10
+	M66.48 99.00
+	h1132.10
+	M66.48 93.00
+	h1132.10
+	" class="stroke"/>
+<path d="m66.48 175.00
+	h1132.10
+	M66.48 169.00
+	h1132.10
+	M66.48 163.00
+	h1132.10
+	M66.48 157.00
+	h1132.10
+	M66.48 151.00
+	h1132.10
+	" class="stroke"/>
+<path d="m66.48 233.00
+	h1132.10
+	M66.48 227.00
+	h1132.10
+	M66.48 221.00
+	h1132.10
+	M66.48 215.00
+	h1132.10
+	M66.48 209.00
+	h1132.10
+	" class="stroke"/>
+<defs>
+<path id="ubclef" class="fill" d="m-200 -87
+	c124 -35 222 -78 254 -236
+	43 -228 -167 -246 -192 -103
+	59 -80 157 22 92 78
+	-62 47 -115 -22 -106 -88
+	21 -141 270 -136 274 52
+	-1 175 -106 264 -322 297
+	m357 -250
+	c0 -36 51 -34 51 0
+	0 37 -51 36 -51 0
+	m-2 -129
+	c0 -36 51 -34 51 0
+	0 38 -51 37 -51 0"/>
+<use id="bclef" transform="translate(0,18) scale(0.045)"
+	xlink:href="#ubclef"/>
+</defs>
+<use x="78.48" y="99.00" xlink:href="#bclef"/>
+<defs>
+<path id="usharp" class="fill" d="
+	m136 -702
+	v890
+	h32
+	v-890
+	m128 840
+	h32
+	v-888
+	h-32
+	m-232 286
+	v116
+	l338 -96
+	v-116
+	m-338 442
+	v116
+	l338 -98
+	v-114"/>
+<use id="sh0" transform="translate(-4,5) scale(0.018)"
+	xlink:href="#usharp"/>
+</defs>
+<use x="93.48" y="99.00" xlink:href="#sh0"/>
+<use x="98.98" y="108.00" xlink:href="#sh0"/>
+<defs>
+<path id="HD" class="fill" d="m-2.7 -1.4
+	c1.5 -2.8 6.9 0 5.3 2.7
+	-1.5 2.8 -6.9 0 -5.3 -2.7
+	m8.3 1.4
+	c0 -1.5 -2.2 -3 -5.6 -3
+	-3.4 0 -5.6 1.5 -5.6 3
+	0 1.5 2.2 3 5.6 3
+	3.4 0 5.6 -1.5 5.6 -3"/>
+<g id="HDD">
+	<use xlink:href="#HD"/>
+	<path d="m-6 -4v8m12 0v-8" class="stroke"/>
+</g>
+</defs>
+<use x="119.48" y="93.00" xlink:href="#HDD"/>
+<use x="394.88" y="102.00" xlink:href="#HDD"/>
+<use x="691.18" y="102.00" xlink:href="#HDD"/>
+<use x="986.18" y="93.00" xlink:href="#HDD"/>
+<use x="78.48" y="157.00" xlink:href="#bclef"/>
+<use x="93.48" y="157.00" xlink:href="#sh0"/>
+<use x="98.98" y="166.00" xlink:href="#sh0"/>
+<defs>
+<path id="hl" class="stroke" d="m-6 0h12"/>
+</defs>
+<use x="118.48" y="145.00" xlink:href="#hl"/>
+<defs>
+<path id="Hd" class="fill" d="m3 -1.6
+	c-1 -1.8 -7 1.4 -6 3.2
+	1 1.8 7 -1.4 6 -3.2
+	m0.5 -0.3
+	c2 3.8 -5 7.6 -7 3.8
+	-2 -3.8 5 -7.6 7 -3.8"/>
+</defs>
+<use x="118.48" y="142.00" xlink:href="#Hd"/>
+<path d="M114.98 142.00v21.00" class="stroke"/>
+<use x="174.48" y="151.00" xlink:href="#Hd"/>
+<path d="M170.98 151.00v21.00" class="stroke"/>
+<use x="231.68" y="151.00" xlink:href="#Hd"/>
+<path d="M228.18 151.00v21.00" class="stroke"/>
+<use x="288.88" y="145.00" xlink:href="#hl"/>
+<use x="288.88" y="142.00" xlink:href="#Hd"/>
+<path d="M285.38 142.00v21.00" class="stroke"/>
+<use x="393.88" y="151.00" xlink:href="#Hd"/>
+<path d="M390.38 151.00v21.00" class="stroke"/>
+<use x="473.08" y="160.00" xlink:href="#Hd"/>
+<path d="M469.58 160.00v21.00" class="stroke"/>
+<use x="529.08" y="160.00" xlink:href="#Hd"/>
+<path d="M525.58 160.00v21.00" class="stroke"/>
+<use x="585.08" y="151.00" xlink:href="#Hd"/>
+<path d="M581.58 151.00v21.00" class="stroke"/>
+<use x="690.18" y="151.00" xlink:href="#Hd"/>
+<path d="M686.68 151.00v21.00" class="stroke"/>
+<use x="746.18" y="160.00" xlink:href="#Hd"/>
+<path d="M742.68 160.00v21.00" class="stroke"/>
+<use x="802.18" y="160.00" xlink:href="#Hd"/>
+<path d="M798.68 160.00v21.00" class="stroke"/>
+<use x="858.18" y="151.00" xlink:href="#Hd"/>
+<path d="M854.68 151.00v21.00" class="stroke"/>
+<use x="985.18" y="145.00" xlink:href="#hl"/>
+<use x="985.18" y="142.00" xlink:href="#Hd"/>
+<path d="M981.68 142.00v21.00" class="stroke"/>
+<use x="1041.18" y="151.00" xlink:href="#Hd"/>
+<path d="M1037.68 151.00v21.00" class="stroke"/>
+<use x="1098.38" y="151.00" xlink:href="#Hd"/>
+<path d="M1094.88 151.00v21.00" class="stroke"/>
+<use x="1155.58" y="145.00" xlink:href="#hl"/>
+<use x="1155.58" y="142.00" xlink:href="#Hd"/>
+<path d="M1152.08 142.00v21.00" class="stroke"/>
+<defs>
+<path id="utclef" class="fill" d="m-50 -90
+	c-72 -41 -72 -158 52 -188
+	150 -10 220 188 90 256
+	-114 52 -275 0 -293 -136
+	-15 -181 93 -229 220 -334
+	88 -87 79 -133 62 -210
+	-51 33 -94 105 -89 186
+	17 267 36 374 49 574
+	6 96 -19 134 -77 135
+	-80 1 -126 -93 -61 -133
+	85 -41 133 101 31 105
+	23 17 92 37 90 -92
+	-10 -223 -39 -342 -50 -617
+	0 -90 0 -162 96 -232
+	56 72 63 230 22 289
+	-74 106 -257 168 -255 316
+	9 153 148 185 252 133
+	86 -65 29 -192 -80 -176
+	-71 12 -105 67 -59 124"/>
+<use id="tclef" transform="translate(0,6) scale(0.045)"
+	xlink:href="#utclef"/>
+</defs>
+<use x="78.48" y="227.00" xlink:href="#tclef"/>
+<use x="93.48" y="209.00" xlink:href="#sh0"/>
+<use x="98.98" y="218.00" xlink:href="#sh0"/>
+<path class="fill"
+	d="M121.68 208.80l31.20 0.00v3.20l-31.20 -0.00"/>
+<defs>
+<ellipse id="hd" rx="4.1" ry="2.9"
+	transform="rotate(-20)" class="fill"/>
+</defs>
+<use x="118.48" y="227.00" xlink:href="#hd"/>
+<path d="M121.98 227.00v-17.20" class="stroke"/>
+<use x="128.68" y="236.00" xlink:href="#hd"/>
+<path d="M132.18 236.00v-26.20" class="stroke"/>
+<use x="138.78" y="236.00" xlink:href="#hd"/>
+<path d="M142.28 236.00v-26.20" class="stroke"/>
+<use x="148.98" y="227.00" xlink:href="#hd"/>
+<path d="M152.48 227.00v-17.20" class="stroke"/>
+<path class="fill"
+	d="M177.68 218.10l32.40 0.00v3.20l-32.40 -0.00"/>
+<use x="174.48" y="236.00" xlink:href="#hd"/>
+<path d="M177.98 236.00v-17.00" class="stroke"/>
+<use x="184.68" y="239.00" xlink:href="#hl"/>
+<use x="184.68" y="245.00" xlink:href="#hl"/>
+<use x="184.68" y="245.00" xlink:href="#hd"/>
+<path d="M188.18 245.00v-26.00" class="stroke"/>
+<use x="195.98" y="239.00" xlink:href="#hl"/>
+<use x="195.98" y="245.00" xlink:href="#hl"/>
+<use x="195.98" y="245.00" xlink:href="#hd"/>
+<path d="M199.48 245.00v-26.00" class="stroke"/>
+<use x="206.18" y="236.00" xlink:href="#hd"/>
+<path d="M209.68 236.00v-17.00" class="stroke"/>
+<path class="fill"
+	d="M234.88 218.10l32.40 0.00v3.20l-32.40 -0.00"/>
+<use x="231.68" y="236.00" xlink:href="#hd"/>
+<path d="M235.18 236.00v-17.00" class="stroke"/>
+<use x="241.88" y="239.00" xlink:href="#hl"/>
+<use x="241.88" y="245.00" xlink:href="#hl"/>
+<use x="241.88" y="245.00" xlink:href="#hd"/>
+<path d="M245.38 245.00v-26.00" class="stroke"/>
+<use x="253.18" y="239.00" xlink:href="#hl"/>
+<use x="253.18" y="245.00" xlink:href="#hl"/>
+<use x="253.18" y="245.00" xlink:href="#hd"/>
+<path d="M256.68 245.00v-26.00" class="stroke"/>
+<use x="263.38" y="236.00" xlink:href="#hd"/>
+<path d="M266.88 236.00v-17.00" class="stroke"/>
+<path class="fill"
+	d="M292.08 208.80l31.20 0.00v3.20l-31.20 -0.00"/>
+<use x="288.88" y="227.00" xlink:href="#hd"/>
+<path d="M292.38 227.00v-17.20" class="stroke"/>
+<use x="299.08" y="236.00" xlink:href="#hd"/>
+<path d="M302.58 236.00v-26.20" class="stroke"/>
+<use x="309.18" y="236.00" xlink:href="#hd"/>
+<path d="M312.68 236.00v-26.20" class="stroke"/>
+<use x="319.38" y="227.00" xlink:href="#hd"/>
+<path d="M322.88 227.00v-17.20" class="stroke"/>
+<path class="fill"
+	d="M397.08 218.10l32.40 0.00v3.20l-32.40 -0.00"/>
+<use x="393.88" y="236.00" xlink:href="#hd"/>
+<path d="M397.38 236.00v-17.00" class="stroke"/>
+<use x="404.08" y="239.00" xlink:href="#hl"/>
+<use x="404.08" y="245.00" xlink:href="#hl"/>
+<use x="404.08" y="245.00" xlink:href="#hd"/>
+<path d="M407.58 245.00v-26.00" class="stroke"/>
+<use x="415.38" y="239.00" xlink:href="#hl"/>
+<use x="415.38" y="245.00" xlink:href="#hl"/>
+<use x="415.38" y="245.00" xlink:href="#hd"/>
+<path d="M418.88 245.00v-26.00" class="stroke"/>
+<use x="425.58" y="236.00" xlink:href="#hd"/>
+<path d="M429.08 236.00v-17.00" class="stroke"/>
+<defs>
+<use id="sbclef" transform="translate(0,14.5) scale(0.037)"
+	xlink:href="#ubclef"/>
+</defs>
+<use x="442.08" y="215.00" xlink:href="#sbclef"/>
+<path class="fill"
+	d="M469.28 235.90l31.20 0.00v-3.20l-31.20 -0.00"/>
+<use x="473.08" y="209.00" xlink:href="#hd"/>
+<path d="M469.58 209.00v26.00" class="stroke"/>
+<use x="483.28" y="218.00" xlink:href="#hd"/>
+<path d="M479.78 218.00v17.00" class="stroke"/>
+<use x="493.48" y="218.00" xlink:href="#hd"/>
+<path d="M489.98 218.00v17.00" class="stroke"/>
+<use x="503.58" y="209.00" xlink:href="#hd"/>
+<path d="M500.08 209.00v26.00" class="stroke"/>
+<path class="fill"
+	d="M525.28 235.90l31.20 0.00v-3.20l-31.20 -0.00"/>
+<use x="529.08" y="209.00" xlink:href="#hd"/>
+<path d="M525.58 209.00v26.00" class="stroke"/>
+<use x="539.28" y="218.00" xlink:href="#hd"/>
+<path d="M535.78 218.00v17.00" class="stroke"/>
+<use x="549.48" y="218.00" xlink:href="#hd"/>
+<path d="M545.98 218.00v17.00" class="stroke"/>
+<use x="559.58" y="209.00" xlink:href="#hd"/>
+<path d="M556.08 209.00v26.00" class="stroke"/>
+<path class="fill"
+	d="M581.28 227.20l31.20 0.00v-3.20l-31.20 -0.00"/>
+<use x="585.08" y="203.00" xlink:href="#hl"/>
+<use x="585.08" y="200.00" xlink:href="#hd"/>
+<path d="M581.58 200.00v26.20" class="stroke"/>
+<use x="595.28" y="209.00" xlink:href="#hd"/>
+<path d="M591.78 209.00v17.20" class="stroke"/>
+<use x="605.48" y="209.00" xlink:href="#hd"/>
+<path d="M601.98 209.00v17.20" class="stroke"/>
+<use x="615.68" y="203.00" xlink:href="#hl"/>
+<use x="615.68" y="200.00" xlink:href="#hd"/>
+<path d="M612.18 200.00v26.20" class="stroke"/>
+<path class="fill"
+	d="M686.28 227.20l31.20 0.00v-3.20l-31.20 -0.00"/>
+<use x="690.18" y="203.00" xlink:href="#hl"/>
+<use x="690.18" y="200.00" xlink:href="#hd"/>
+<path d="M686.68 200.00v26.20" class="stroke"/>
+<use x="700.28" y="209.00" xlink:href="#hd"/>
+<path d="M696.78 209.00v17.20" class="stroke"/>
+<use x="710.48" y="209.00" xlink:href="#hd"/>
+<path d="M706.98 209.00v17.20" class="stroke"/>
+<use x="720.68" y="203.00" xlink:href="#hl"/>
+<use x="720.68" y="200.00" xlink:href="#hd"/>
+<path d="M717.18 200.00v26.20" class="stroke"/>
+<path class="fill"
+	d="M742.28 235.90l31.20 0.00v-3.20l-31.20 -0.00"/>
+<use x="746.18" y="209.00" xlink:href="#hd"/>
+<path d="M742.68 209.00v26.00" class="stroke"/>
+<use x="756.28" y="218.00" xlink:href="#hd"/>
+<path d="M752.78 218.00v17.00" class="stroke"/>
+<use x="766.48" y="218.00" xlink:href="#hd"/>
+<path d="M762.98 218.00v17.00" class="stroke"/>
+<use x="776.68" y="209.00" xlink:href="#hd"/>
+<path d="M773.18 209.00v26.00" class="stroke"/>
+<path class="fill"
+	d="M798.28 235.90l31.20 0.00v-3.20l-31.20 -0.00"/>
+<use x="802.18" y="209.00" xlink:href="#hd"/>
+<path d="M798.68 209.00v26.00" class="stroke"/>
+<use x="812.28" y="218.00" xlink:href="#hd"/>
+<path d="M808.78 218.00v17.00" class="stroke"/>
+<use x="822.48" y="218.00" xlink:href="#hd"/>
+<path d="M818.98 218.00v17.00" class="stroke"/>
+<use x="832.68" y="209.00" xlink:href="#hd"/>
+<path d="M829.18 209.00v26.00" class="stroke"/>
+<path class="fill"
+	d="M854.28 227.20l31.20 0.00v-3.20l-31.20 -0.00"/>
+<use x="858.18" y="203.00" xlink:href="#hl"/>
+<use x="858.18" y="200.00" xlink:href="#hd"/>
+<path d="M854.68 200.00v26.20" class="stroke"/>
+<use x="868.38" y="209.00" xlink:href="#hd"/>
+<path d="M864.88 209.00v17.20" class="stroke"/>
+<use x="878.48" y="209.00" xlink:href="#hd"/>
+<path d="M874.98 209.00v17.20" class="stroke"/>
+<use x="888.68" y="203.00" xlink:href="#hl"/>
+<use x="888.68" y="200.00" xlink:href="#hd"/>
+<path d="M885.18 200.00v26.20" class="stroke"/>
+<defs>
+<use id="stclef" transform="translate(0,5.4) scale(0.037)"
+	xlink:href="#utclef"/>
+</defs>
+<use x="905.18" y="227.00" xlink:href="#stclef"/>
+<path class="fill"
+	d="M988.38 208.80l31.20 0.00v3.20l-31.20 -0.00"/>
+<use x="985.18" y="227.00" xlink:href="#hd"/>
+<path d="M988.68 227.00v-17.20" class="stroke"/>
+<use x="995.38" y="236.00" xlink:href="#hd"/>
+<path d="M998.88 236.00v-26.20" class="stroke"/>
+<use x="1005.48" y="236.00" xlink:href="#hd"/>
+<path d="M1008.98 236.00v-26.20" class="stroke"/>
+<use x="1015.68" y="227.00" xlink:href="#hd"/>
+<path d="M1019.18 227.00v-17.20" class="stroke"/>
+<path class="fill"
+	d="M1044.38 218.10l32.40 0.00v3.20l-32.40 -0.00"/>
+<use x="1041.18" y="236.00" xlink:href="#hd"/>
+<path d="M1044.68 236.00v-17.00" class="stroke"/>
+<use x="1051.38" y="239.00" xlink:href="#hl"/>
+<use x="1051.38" y="245.00" xlink:href="#hl"/>
+<use x="1051.38" y="245.00" xlink:href="#hd"/>
+<path d="M1054.88 245.00v-26.00" class="stroke"/>
+<use x="1062.68" y="239.00" xlink:href="#hl"/>
+<use x="1062.68" y="245.00" xlink:href="#hl"/>
+<use x="1062.68" y="245.00" xlink:href="#hd"/>
+<path d="M1066.18 245.00v-26.00" class="stroke"/>
+<use x="1072.88" y="236.00" xlink:href="#hd"/>
+<path d="M1076.38 236.00v-17.00" class="stroke"/>
+<path class="fill"
+	d="M1101.58 218.10l32.40 0.00v3.20l-32.40 -0.00"/>
+<use x="1098.38" y="236.00" xlink:href="#hd"/>
+<path d="M1101.88 236.00v-17.00" class="stroke"/>
+<use x="1108.58" y="239.00" xlink:href="#hl"/>
+<use x="1108.58" y="245.00" xlink:href="#hl"/>
+<use x="1108.58" y="245.00" xlink:href="#hd"/>
+<path d="M1112.08 245.00v-26.00" class="stroke"/>
+<use x="1119.88" y="239.00" xlink:href="#hl"/>
+<use x="1119.88" y="245.00" xlink:href="#hl"/>
+<use x="1119.88" y="245.00" xlink:href="#hd"/>
+<path d="M1123.38 245.00v-26.00" class="stroke"/>
+<use x="1130.08" y="236.00" xlink:href="#hd"/>
+<path d="M1133.58 236.00v-17.00" class="stroke"/>
+<path class="fill"
+	d="M1158.78 208.80l31.20 0.00v3.20l-31.20 -0.00"/>
+<use x="1155.58" y="227.00" xlink:href="#hd"/>
+<path d="M1159.08 227.00v-17.20" class="stroke"/>
+<use x="1165.78" y="236.00" xlink:href="#hd"/>
+<path d="M1169.28 236.00v-26.20" class="stroke"/>
+<use x="1175.88" y="236.00" xlink:href="#hd"/>
+<path d="M1179.38 236.00v-26.20" class="stroke"/>
+<use x="1186.08" y="227.00" xlink:href="#hd"/>
+<path d="M1189.58 227.00v-17.20" class="stroke"/>
+</g>
+<g stroke-width="0.70" style="font:bold 13.00px Times">
+<path class="stroke" stroke-width="1"
+	d="M10.00 419.00v-140.00"/>
+<path class="stroke" stroke-width="1"
+	d="M60.00 303.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M76.00 303.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M92.00 303.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M269.50 361.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M269.50 419.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M442.90 361.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M442.90 419.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M616.30 361.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M616.30 419.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M789.70 303.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M789.70 361.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M789.70 419.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M805.70 303.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M821.70 303.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M837.70 303.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M1025.20 361.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M1025.20 419.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M1198.60 361.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M1198.60 419.00v-58.00"/>
+<path d="m10.00 303.00
+	h1188.60
+	M10.00 297.00
+	h1188.60
+	M10.00 291.00
+	h1188.60
+	M10.00 285.00
+	h1188.60
+	M10.00 279.00
+	h1188.60
+	" class="stroke"/>
+<path d="m10.00 361.00
+	h1188.60
+	M10.00 355.00
+	h1188.60
+	M10.00 349.00
+	h1188.60
+	M10.00 343.00
+	h1188.60
+	M10.00 337.00
+	h1188.60
+	" class="stroke"/>
+<path d="m10.00 419.00
+	h1188.60
+	M10.00 413.00
+	h1188.60
+	M10.00 407.00
+	h1188.60
+	M10.00 401.00
+	h1188.60
+	M10.00 395.00
+	h1188.60
+	" class="stroke"/>
+<use x="22.00" y="285.00" xlink:href="#bclef"/>
+<use x="37.00" y="285.00" xlink:href="#sh0"/>
+<use x="42.50" y="294.00" xlink:href="#sh0"/>
+<use x="119.40" y="279.00" xlink:href="#HDD"/>
+<use x="103.60" y="279.00" xlink:href="#sh0"/>
+<use x="853.70" y="285.00" xlink:href="#HDD"/>
+<use x="22.00" y="343.00" xlink:href="#bclef"/>
+<use x="37.00" y="343.00" xlink:href="#sh0"/>
+<use x="42.50" y="352.00" xlink:href="#sh0"/>
+<use x="118.40" y="331.00" xlink:href="#hl"/>
+<use x="118.40" y="328.00" xlink:href="#Hd"/>
+<use x="108.40" y="328.00" xlink:href="#sh0"/>
+<path d="M114.90 328.00v21.00" class="stroke"/>
+<use x="291.80" y="337.00" xlink:href="#Hd"/>
+<use x="281.80" y="337.00" xlink:href="#sh0"/>
+<path d="M288.30 337.00v21.00" class="stroke"/>
+<use x="465.10" y="337.00" xlink:href="#Hd"/>
+<use x="455.10" y="337.00" xlink:href="#sh0"/>
+<path d="M461.60 337.00v21.00" class="stroke"/>
+<use x="638.50" y="331.00" xlink:href="#hl"/>
+<use x="638.50" y="328.00" xlink:href="#Hd"/>
+<use x="628.50" y="328.00" xlink:href="#sh0"/>
+<path d="M635.00 328.00v21.00" class="stroke"/>
+<use x="852.70" y="337.00" xlink:href="#Hd"/>
+<use x="842.70" y="337.00" xlink:href="#sh0"/>
+<path d="M849.20 337.00v21.00" class="stroke"/>
+<use x="1047.50" y="343.00" xlink:href="#Hd"/>
+<path d="M1044.00 343.00v21.00" class="stroke"/>
+<use x="22.00" y="413.00" xlink:href="#tclef"/>
+<use x="37.00" y="395.00" xlink:href="#sh0"/>
+<use x="42.50" y="404.00" xlink:href="#sh0"/>
+<path class="fill"
+	d="M121.60 394.80l120.70 0.00v3.20l-120.70 -0.00"/>
+<use x="118.40" y="413.00" xlink:href="#hd"/>
+<use x="109.40" y="413.00" xlink:href="#sh0"/>
+<path d="M121.90 413.00v-17.20" class="stroke"/>
+<use x="158.40" y="422.00" xlink:href="#hd"/>
+<use x="149.40" y="422.00" xlink:href="#sh0"/>
+<path d="M161.90 422.00v-26.20" class="stroke"/>
+<use x="198.40" y="422.00" xlink:href="#hd"/>
+<use x="189.40" y="422.00" xlink:href="#sh0"/>
+<path d="M201.90 422.00v-26.20" class="stroke"/>
+<use x="238.40" y="413.00" xlink:href="#hd"/>
+<use x="229.40" y="413.00" xlink:href="#sh0"/>
+<path d="M241.90 413.00v-17.20" class="stroke"/>
+<path class="fill"
+	d="M294.90 404.10l120.70 0.00v3.20l-120.70 -0.00"/>
+<use x="291.80" y="422.00" xlink:href="#hd"/>
+<use x="282.80" y="422.00" xlink:href="#sh0"/>
+<path d="M295.30 422.00v-17.00" class="stroke"/>
+<use x="331.80" y="425.00" xlink:href="#hl"/>
+<use x="331.80" y="431.00" xlink:href="#hl"/>
+<use x="331.80" y="431.00" xlink:href="#hd"/>
+<use x="322.80" y="431.00" xlink:href="#sh0"/>
+<path d="M335.30 431.00v-26.00" class="stroke"/>
+<use x="371.80" y="425.00" xlink:href="#hl"/>
+<use x="371.80" y="431.00" xlink:href="#hl"/>
+<use x="371.80" y="431.00" xlink:href="#hd"/>
+<use x="362.80" y="431.00" xlink:href="#sh0"/>
+<path d="M375.30 431.00v-26.00" class="stroke"/>
+<use x="411.80" y="422.00" xlink:href="#hd"/>
+<use x="402.80" y="422.00" xlink:href="#sh0"/>
+<path d="M415.30 422.00v-17.00" class="stroke"/>
+<path class="fill"
+	d="M468.30 404.10l120.70 0.00v3.20l-120.70 -0.00"/>
+<use x="465.10" y="422.00" xlink:href="#hd"/>
+<use x="456.10" y="422.00" xlink:href="#sh0"/>
+<path d="M468.60 422.00v-17.00" class="stroke"/>
+<use x="505.10" y="425.00" xlink:href="#hl"/>
+<use x="505.10" y="431.00" xlink:href="#hl"/>
+<use x="505.10" y="431.00" xlink:href="#hd"/>
+<use x="496.10" y="431.00" xlink:href="#sh0"/>
+<path d="M508.60 431.00v-26.00" class="stroke"/>
+<use x="545.20" y="425.00" xlink:href="#hl"/>
+<use x="545.20" y="431.00" xlink:href="#hl"/>
+<use x="545.20" y="431.00" xlink:href="#hd"/>
+<use x="536.20" y="431.00" xlink:href="#sh0"/>
+<path d="M548.70 431.00v-26.00" class="stroke"/>
+<use x="585.20" y="422.00" xlink:href="#hd"/>
+<use x="576.20" y="422.00" xlink:href="#sh0"/>
+<path d="M588.70 422.00v-17.00" class="stroke"/>
+<path class="fill"
+	d="M641.70 394.80l120.70 0.00v3.20l-120.70 -0.00"/>
+<use x="638.50" y="413.00" xlink:href="#hd"/>
+<use x="629.50" y="413.00" xlink:href="#sh0"/>
+<path d="M642.00 413.00v-17.20" class="stroke"/>
+<use x="678.50" y="422.00" xlink:href="#hd"/>
+<use x="669.50" y="422.00" xlink:href="#sh0"/>
+<path d="M682.00 422.00v-26.20" class="stroke"/>
+<use x="718.50" y="422.00" xlink:href="#hd"/>
+<use x="709.50" y="422.00" xlink:href="#sh0"/>
+<path d="M722.00 422.00v-26.20" class="stroke"/>
+<use x="758.50" y="413.00" xlink:href="#hd"/>
+<use x="749.50" y="413.00" xlink:href="#sh0"/>
+<path d="M762.00 413.00v-17.20" class="stroke"/>
+<path class="fill"
+	d="M855.90 404.10l120.70 0.00v3.20l-120.70 -0.00"/>
+<use x="852.70" y="422.00" xlink:href="#hd"/>
+<use x="843.70" y="422.00" xlink:href="#sh0"/>
+<path d="M856.20 422.00v-17.00" class="stroke"/>
+<use x="892.80" y="425.00" xlink:href="#hl"/>
+<use x="892.80" y="431.00" xlink:href="#hl"/>
+<use x="892.80" y="431.00" xlink:href="#hd"/>
+<use x="883.80" y="431.00" xlink:href="#sh0"/>
+<path d="M896.30 431.00v-26.00" class="stroke"/>
+<use x="932.80" y="425.00" xlink:href="#hl"/>
+<use x="932.80" y="431.00" xlink:href="#hl"/>
+<use x="932.80" y="431.00" xlink:href="#hd"/>
+<use x="923.80" y="431.00" xlink:href="#sh0"/>
+<path d="M936.30 431.00v-26.00" class="stroke"/>
+<use x="972.80" y="422.00" xlink:href="#hd"/>
+<use x="963.80" y="422.00" xlink:href="#sh0"/>
+<path d="M976.30 422.00v-17.00" class="stroke"/>
+<use x="1007.20" y="401.00" xlink:href="#sbclef"/>
+<path class="fill"
+	d="M1043.60 419.20l120.70 0.00v-3.20l-120.70 -0.00"/>
+<use x="1047.50" y="395.00" xlink:href="#hd"/>
+<use x="1038.50" y="395.00" xlink:href="#sh0"/>
+<path d="M1044.00 395.00v23.20" class="stroke"/>
+<use x="1087.50" y="401.00" xlink:href="#hd"/>
+<path d="M1084.00 401.00v17.20" class="stroke"/>
+<use x="1127.50" y="401.00" xlink:href="#hd"/>
+<path d="M1124.00 401.00v17.20" class="stroke"/>
+<use x="1167.50" y="395.00" xlink:href="#hd"/>
+<use x="1158.50" y="395.00" xlink:href="#sh0"/>
+<path d="M1164.00 395.00v23.20" class="stroke"/>
+</g>
+<g stroke-width="0.70" style="font:bold 13.00px Times">
+<path class="stroke" stroke-width="1"
+	d="M10.00 605.00v-140.00"/>
+<path class="stroke" stroke-width="1"
+	d="M149.50 547.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M149.50 605.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M254.20 489.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M254.20 547.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M254.20 605.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M270.20 489.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M286.20 489.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M302.20 489.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M401.30 547.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M401.30 605.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M502.90 547.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M502.90 605.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M604.40 547.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M604.40 605.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M726.20 489.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M726.20 547.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M726.20 605.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M742.20 489.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M758.20 489.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M774.20 489.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M884.60 547.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M884.60 605.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M989.30 547.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M989.30 605.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M1093.90 547.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M1093.90 605.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M1198.60 489.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M1198.60 547.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M1198.60 605.00v-58.00"/>
+<path d="m10.00 489.00
+	h1188.60
+	M10.00 483.00
+	h1188.60
+	M10.00 477.00
+	h1188.60
+	M10.00 471.00
+	h1188.60
+	M10.00 465.00
+	h1188.60
+	" class="stroke"/>
+<path d="m10.00 547.00
+	h1188.60
+	M10.00 541.00
+	h1188.60
+	M10.00 535.00
+	h1188.60
+	M10.00 529.00
+	h1188.60
+	M10.00 523.00
+	h1188.60
+	" class="stroke"/>
+<path d="m10.00 605.00
+	h1188.60
+	M10.00 599.00
+	h1188.60
+	M10.00 593.00
+	h1188.60
+	M10.00 587.00
+	h1188.60
+	M10.00 581.00
+	h1188.60
+	" class="stroke"/>
+<use x="22.00" y="471.00" xlink:href="#bclef"/>
+<use x="37.00" y="471.00" xlink:href="#sh0"/>
+<use x="42.50" y="480.00" xlink:href="#sh0"/>
+<use x="317.20" y="471.00" xlink:href="#HDD"/>
+<use x="800.50" y="465.00" xlink:href="#HDD"/>
+<use x="784.70" y="465.00" xlink:href="#sh0"/>
+<use x="22.00" y="529.00" xlink:href="#bclef"/>
+<use x="37.00" y="529.00" xlink:href="#sh0"/>
+<use x="42.50" y="538.00" xlink:href="#sh0"/>
+<use x="66.50" y="529.00" xlink:href="#Hd"/>
+<path d="M63.00 529.00v21.00" class="stroke"/>
+<use x="169.00" y="523.00" xlink:href="#Hd"/>
+<use x="159.00" y="523.00" xlink:href="#sh0"/>
+<path d="M165.50 523.00v21.00" class="stroke"/>
+<use x="316.20" y="523.00" xlink:href="#Hd"/>
+<use x="306.20" y="523.00" xlink:href="#sh0"/>
+<path d="M312.70 523.00v21.00" class="stroke"/>
+<use x="419.80" y="529.00" xlink:href="#Hd"/>
+<path d="M416.30 529.00v21.00" class="stroke"/>
+<use x="521.40" y="529.00" xlink:href="#Hd"/>
+<path d="M517.90 529.00v21.00" class="stroke"/>
+<use x="623.90" y="523.00" xlink:href="#Hd"/>
+<use x="613.90" y="523.00" xlink:href="#sh0"/>
+<path d="M620.40 523.00v21.00" class="stroke"/>
+<use x="799.50" y="517.00" xlink:href="#hl"/>
+<use x="799.50" y="514.00" xlink:href="#Hd"/>
+<use x="789.50" y="514.00" xlink:href="#sh0"/>
+<path d="M796.00 514.00v21.00" class="stroke"/>
+<use x="904.10" y="523.00" xlink:href="#Hd"/>
+<use x="894.10" y="523.00" xlink:href="#sh0"/>
+<path d="M900.60 523.00v21.00" class="stroke"/>
+<use x="1008.80" y="523.00" xlink:href="#Hd"/>
+<use x="998.80" y="523.00" xlink:href="#sh0"/>
+<path d="M1005.30 523.00v21.00" class="stroke"/>
+<use x="1113.40" y="517.00" xlink:href="#hl"/>
+<use x="1113.40" y="514.00" xlink:href="#Hd"/>
+<use x="1103.40" y="514.00" xlink:href="#sh0"/>
+<path d="M1109.90 514.00v21.00" class="stroke"/>
+<use x="22.00" y="587.00" xlink:href="#bclef"/>
+<use x="37.00" y="587.00" xlink:href="#sh0"/>
+<use x="42.50" y="596.00" xlink:href="#sh0"/>
+<path class="fill"
+	d="M62.70 605.20l66.30 0.00v-3.20l-66.30 -0.00"/>
+<use x="66.50" y="581.00" xlink:href="#hd"/>
+<use x="57.50" y="581.00" xlink:href="#sh0"/>
+<path d="M63.00 581.00v23.20" class="stroke"/>
+<use x="88.00" y="587.00" xlink:href="#hd"/>
+<path d="M84.50 587.00v17.20" class="stroke"/>
+<use x="109.60" y="587.00" xlink:href="#hd"/>
+<path d="M106.10 587.00v17.20" class="stroke"/>
+<use x="132.10" y="581.00" xlink:href="#hd"/>
+<use x="123.10" y="581.00" xlink:href="#sh0"/>
+<path d="M128.60 581.00v23.20" class="stroke"/>
+<path class="fill"
+	d="M165.20 599.20l68.40 0.00v-3.20l-68.40 -0.00"/>
+<use x="169.00" y="575.00" xlink:href="#hl"/>
+<use x="169.00" y="572.00" xlink:href="#hd"/>
+<use x="160.00" y="572.00" xlink:href="#sh0"/>
+<path d="M165.50 572.00v26.20" class="stroke"/>
+<use x="191.60" y="581.00" xlink:href="#hd"/>
+<use x="182.60" y="581.00" xlink:href="#sh0"/>
+<path d="M188.10 581.00v17.20" class="stroke"/>
+<use x="214.20" y="581.00" xlink:href="#hd"/>
+<use x="205.20" y="581.00" xlink:href="#sh0"/>
+<path d="M210.70 581.00v17.20" class="stroke"/>
+<use x="236.80" y="575.00" xlink:href="#hl"/>
+<use x="236.80" y="572.00" xlink:href="#hd"/>
+<use x="227.80" y="572.00" xlink:href="#sh0"/>
+<path d="M233.30 572.00v26.20" class="stroke"/>
+<path class="fill"
+	d="M312.40 599.20l68.40 0.00v-3.20l-68.40 -0.00"/>
+<use x="316.20" y="575.00" xlink:href="#hl"/>
+<use x="316.20" y="572.00" xlink:href="#hd"/>
+<use x="307.20" y="572.00" xlink:href="#sh0"/>
+<path d="M312.70 572.00v26.20" class="stroke"/>
+<use x="338.80" y="581.00" xlink:href="#hd"/>
+<use x="329.80" y="581.00" xlink:href="#sh0"/>
+<path d="M335.30 581.00v17.20" class="stroke"/>
+<use x="361.40" y="581.00" xlink:href="#hd"/>
+<use x="352.40" y="581.00" xlink:href="#sh0"/>
+<path d="M357.90 581.00v17.20" class="stroke"/>
+<use x="384.00" y="575.00" xlink:href="#hl"/>
+<use x="384.00" y="572.00" xlink:href="#hd"/>
+<use x="375.00" y="572.00" xlink:href="#sh0"/>
+<path d="M380.50 572.00v26.20" class="stroke"/>
+<path class="fill"
+	d="M416.00 605.20l66.30 0.00v-3.20l-66.30 -0.00"/>
+<use x="419.80" y="581.00" xlink:href="#hd"/>
+<use x="410.80" y="581.00" xlink:href="#sh0"/>
+<path d="M416.30 581.00v23.20" class="stroke"/>
+<use x="441.40" y="587.00" xlink:href="#hd"/>
+<path d="M437.90 587.00v17.20" class="stroke"/>
+<use x="462.90" y="587.00" xlink:href="#hd"/>
+<path d="M459.40 587.00v17.20" class="stroke"/>
+<use x="485.50" y="581.00" xlink:href="#hd"/>
+<use x="476.50" y="581.00" xlink:href="#sh0"/>
+<path d="M482.00 581.00v23.20" class="stroke"/>
+<path class="fill"
+	d="M517.50 605.20l66.30 0.00v-3.20l-66.30 -0.00"/>
+<use x="521.40" y="581.00" xlink:href="#hd"/>
+<use x="512.40" y="581.00" xlink:href="#sh0"/>
+<path d="M517.90 581.00v23.20" class="stroke"/>
+<use x="542.90" y="587.00" xlink:href="#hd"/>
+<path d="M539.40 587.00v17.20" class="stroke"/>
+<use x="564.40" y="587.00" xlink:href="#hd"/>
+<path d="M560.90 587.00v17.20" class="stroke"/>
+<use x="587.00" y="581.00" xlink:href="#hd"/>
+<use x="578.00" y="581.00" xlink:href="#sh0"/>
+<path d="M583.50 581.00v23.20" class="stroke"/>
+<path class="fill"
+	d="M620.10 599.20l68.40 0.00v-3.20l-68.40 -0.00"/>
+<use x="623.90" y="575.00" xlink:href="#hl"/>
+<use x="623.90" y="572.00" xlink:href="#hd"/>
+<use x="614.90" y="572.00" xlink:href="#sh0"/>
+<path d="M620.40 572.00v26.20" class="stroke"/>
+<use x="646.50" y="581.00" xlink:href="#hd"/>
+<use x="637.50" y="581.00" xlink:href="#sh0"/>
+<path d="M643.00 581.00v17.20" class="stroke"/>
+<use x="669.10" y="581.00" xlink:href="#hd"/>
+<use x="660.10" y="581.00" xlink:href="#sh0"/>
+<path d="M665.60 581.00v17.20" class="stroke"/>
+<use x="691.70" y="575.00" xlink:href="#hl"/>
+<use x="691.70" y="572.00" xlink:href="#hd"/>
+<use x="682.70" y="572.00" xlink:href="#sh0"/>
+<path d="M688.20 572.00v26.20" class="stroke"/>
+<use x="708.20" y="599.00" xlink:href="#stclef"/>
+<path class="fill"
+	d="M802.60 580.80l68.40 0.00v3.20l-68.40 -0.00"/>
+<use x="799.50" y="599.00" xlink:href="#hd"/>
+<use x="790.50" y="599.00" xlink:href="#sh0"/>
+<path d="M803.00 599.00v-17.20" class="stroke"/>
+<use x="822.10" y="608.00" xlink:href="#hd"/>
+<use x="813.10" y="608.00" xlink:href="#sh0"/>
+<path d="M825.60 608.00v-26.20" class="stroke"/>
+<use x="844.70" y="608.00" xlink:href="#hd"/>
+<use x="835.70" y="608.00" xlink:href="#sh0"/>
+<path d="M848.20 608.00v-26.20" class="stroke"/>
+<use x="867.20" y="599.00" xlink:href="#hd"/>
+<use x="858.20" y="599.00" xlink:href="#sh0"/>
+<path d="M870.70 599.00v-17.20" class="stroke"/>
+<path class="fill"
+	d="M907.30 590.10l68.40 0.00v3.20l-68.40 -0.00"/>
+<use x="904.10" y="608.00" xlink:href="#hd"/>
+<use x="895.10" y="608.00" xlink:href="#sh0"/>
+<path d="M907.60 608.00v-17.00" class="stroke"/>
+<use x="926.70" y="611.00" xlink:href="#hl"/>
+<use x="926.70" y="617.00" xlink:href="#hl"/>
+<use x="926.70" y="617.00" xlink:href="#hd"/>
+<use x="917.70" y="617.00" xlink:href="#sh0"/>
+<path d="M930.20 617.00v-26.00" class="stroke"/>
+<use x="949.30" y="611.00" xlink:href="#hl"/>
+<use x="949.30" y="617.00" xlink:href="#hl"/>
+<use x="949.30" y="617.00" xlink:href="#hd"/>
+<use x="940.30" y="617.00" xlink:href="#sh0"/>
+<path d="M952.80 617.00v-26.00" class="stroke"/>
+<use x="971.90" y="608.00" xlink:href="#hd"/>
+<use x="962.90" y="608.00" xlink:href="#sh0"/>
+<path d="M975.40 608.00v-17.00" class="stroke"/>
+<path class="fill"
+	d="M1012.00 590.10l68.40 0.00v3.20l-68.40 -0.00"/>
+<use x="1008.80" y="608.00" xlink:href="#hd"/>
+<use x="999.80" y="608.00" xlink:href="#sh0"/>
+<path d="M1012.30 608.00v-17.00" class="stroke"/>
+<use x="1031.40" y="611.00" xlink:href="#hl"/>
+<use x="1031.40" y="617.00" xlink:href="#hl"/>
+<use x="1031.40" y="617.00" xlink:href="#hd"/>
+<use x="1022.40" y="617.00" xlink:href="#sh0"/>
+<path d="M1034.90 617.00v-26.00" class="stroke"/>
+<use x="1054.00" y="611.00" xlink:href="#hl"/>
+<use x="1054.00" y="617.00" xlink:href="#hl"/>
+<use x="1054.00" y="617.00" xlink:href="#hd"/>
+<use x="1045.00" y="617.00" xlink:href="#sh0"/>
+<path d="M1057.50 617.00v-26.00" class="stroke"/>
+<use x="1076.60" y="608.00" xlink:href="#hd"/>
+<use x="1067.60" y="608.00" xlink:href="#sh0"/>
+<path d="M1080.10 608.00v-17.00" class="stroke"/>
+<path class="fill"
+	d="M1116.60 580.80l68.40 0.00v3.20l-68.40 -0.00"/>
+<use x="1113.40" y="599.00" xlink:href="#hd"/>
+<use x="1104.40" y="599.00" xlink:href="#sh0"/>
+<path d="M1116.90 599.00v-17.20" class="stroke"/>
+<use x="1136.00" y="608.00" xlink:href="#hd"/>
+<use x="1127.00" y="608.00" xlink:href="#sh0"/>
+<path d="M1139.50 608.00v-26.20" class="stroke"/>
+<use x="1158.60" y="608.00" xlink:href="#hd"/>
+<use x="1149.60" y="608.00" xlink:href="#sh0"/>
+<path d="M1162.10 608.00v-26.20" class="stroke"/>
+<use x="1181.20" y="599.00" xlink:href="#hd"/>
+<use x="1172.20" y="599.00" xlink:href="#sh0"/>
+<path d="M1184.70 599.00v-17.20" class="stroke"/>
+</g>
+<g stroke-width="0.70" style="font:bold 13.00px Times">
+<path class="stroke" stroke-width="1"
+	d="M10.00 791.00v-140.00"/>
+<path class="stroke" stroke-width="1"
+	d="M60.00 675.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M76.00 675.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M92.00 675.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M316.30 733.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M316.30 791.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M527.70 733.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M527.70 791.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M739.10 733.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M739.10 791.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M950.60 675.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M950.60 733.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M950.60 791.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M966.60 675.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M982.60 675.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M998.60 675.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M1198.60 733.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M1198.60 791.00v-58.00"/>
+<path d="m10.00 675.00
+	h1188.60
+	M10.00 669.00
+	h1188.60
+	M10.00 663.00
+	h1188.60
+	M10.00 657.00
+	h1188.60
+	M10.00 651.00
+	h1188.60
+	" class="stroke"/>
+<path d="m10.00 733.00
+	h1188.60
+	M10.00 727.00
+	h1188.60
+	M10.00 721.00
+	h1188.60
+	M10.00 715.00
+	h1188.60
+	M10.00 709.00
+	h1188.60
+	" class="stroke"/>
+<path d="m10.00 791.00
+	h1188.60
+	M10.00 785.00
+	h1188.60
+	M10.00 779.00
+	h1188.60
+	M10.00 773.00
+	h1188.60
+	M10.00 767.00
+	h1188.60
+	" class="stroke"/>
+<use x="22.00" y="657.00" xlink:href="#bclef"/>
+<use x="37.00" y="657.00" xlink:href="#sh0"/>
+<use x="42.50" y="666.00" xlink:href="#sh0"/>
+<use x="108.70" y="657.00" xlink:href="#HDD"/>
+<use x="1015.30" y="666.00" xlink:href="#HDD"/>
+<use x="22.00" y="715.00" xlink:href="#bclef"/>
+<use x="37.00" y="715.00" xlink:href="#sh0"/>
+<use x="42.50" y="724.00" xlink:href="#sh0"/>
+<use x="107.70" y="709.00" xlink:href="#Hd"/>
+<use x="97.70" y="709.00" xlink:href="#sh0"/>
+<path d="M104.20 709.00v21.00" class="stroke"/>
+<use x="343.40" y="715.00" xlink:href="#Hd"/>
+<path d="M339.90 715.00v21.00" class="stroke"/>
+<use x="554.80" y="715.00" xlink:href="#Hd"/>
+<path d="M551.30 715.00v21.00" class="stroke"/>
+<use x="766.20" y="709.00" xlink:href="#Hd"/>
+<use x="756.20" y="709.00" xlink:href="#sh0"/>
+<path d="M762.70 709.00v21.00" class="stroke"/>
+<use x="1014.30" y="715.00" xlink:href="#Hd"/>
+<path d="M1010.80 715.00v21.00" class="stroke"/>
+<use x="22.00" y="785.00" xlink:href="#tclef"/>
+<use x="37.00" y="767.00" xlink:href="#sh0"/>
+<use x="42.50" y="776.00" xlink:href="#sh0"/>
+<path class="fill"
+	d="M110.90 776.10l147.00 0.00v3.20l-147.00 -0.00"/>
+<use x="107.70" y="794.00" xlink:href="#hd"/>
+<use x="98.70" y="794.00" xlink:href="#sh0"/>
+<path d="M111.20 794.00v-17.00" class="stroke"/>
+<use x="156.50" y="797.00" xlink:href="#hl"/>
+<use x="156.50" y="803.00" xlink:href="#hl"/>
+<use x="156.50" y="803.00" xlink:href="#hd"/>
+<use x="147.50" y="803.00" xlink:href="#sh0"/>
+<path d="M160.00 803.00v-26.00" class="stroke"/>
+<use x="205.30" y="797.00" xlink:href="#hl"/>
+<use x="205.30" y="803.00" xlink:href="#hl"/>
+<use x="205.30" y="803.00" xlink:href="#hd"/>
+<use x="196.30" y="803.00" xlink:href="#sh0"/>
+<path d="M208.80 803.00v-26.00" class="stroke"/>
+<use x="254.10" y="794.00" xlink:href="#hd"/>
+<use x="245.10" y="794.00" xlink:href="#sh0"/>
+<path d="M257.60 794.00v-17.00" class="stroke"/>
+<use x="298.30" y="773.00" xlink:href="#sbclef"/>
+<path class="fill"
+	d="M339.60 791.20l147.00 0.00v-3.20l-147.00 -0.00"/>
+<use x="343.40" y="767.00" xlink:href="#hd"/>
+<use x="334.40" y="767.00" xlink:href="#sh0"/>
+<path d="M339.90 767.00v23.20" class="stroke"/>
+<use x="392.20" y="773.00" xlink:href="#hd"/>
+<path d="M388.70 773.00v17.20" class="stroke"/>
+<use x="441.00" y="773.00" xlink:href="#hd"/>
+<path d="M437.50 773.00v17.20" class="stroke"/>
+<use x="489.80" y="767.00" xlink:href="#hd"/>
+<use x="480.80" y="767.00" xlink:href="#sh0"/>
+<path d="M486.30 767.00v23.20" class="stroke"/>
+<path class="fill"
+	d="M551.00 791.20l147.00 0.00v-3.20l-147.00 -0.00"/>
+<use x="554.80" y="767.00" xlink:href="#hd"/>
+<use x="545.80" y="767.00" xlink:href="#sh0"/>
+<path d="M551.30 767.00v23.20" class="stroke"/>
+<use x="603.60" y="773.00" xlink:href="#hd"/>
+<path d="M600.10 773.00v17.20" class="stroke"/>
+<use x="652.40" y="773.00" xlink:href="#hd"/>
+<path d="M648.90 773.00v17.20" class="stroke"/>
+<use x="701.20" y="767.00" xlink:href="#hd"/>
+<use x="692.20" y="767.00" xlink:href="#sh0"/>
+<path d="M697.70 767.00v23.20" class="stroke"/>
+<path class="fill"
+	d="M762.40 785.20l147.00 0.00v-3.20l-147.00 -0.00"/>
+<use x="766.20" y="761.00" xlink:href="#hl"/>
+<use x="766.20" y="758.00" xlink:href="#hd"/>
+<use x="757.20" y="758.00" xlink:href="#sh0"/>
+<path d="M762.70 758.00v26.20" class="stroke"/>
+<use x="815.00" y="767.00" xlink:href="#hd"/>
+<use x="806.00" y="767.00" xlink:href="#sh0"/>
+<path d="M811.50 767.00v17.20" class="stroke"/>
+<use x="863.80" y="767.00" xlink:href="#hd"/>
+<use x="854.80" y="767.00" xlink:href="#sh0"/>
+<path d="M860.30 767.00v17.20" class="stroke"/>
+<use x="912.60" y="761.00" xlink:href="#hl"/>
+<use x="912.60" y="758.00" xlink:href="#hd"/>
+<use x="903.60" y="758.00" xlink:href="#sh0"/>
+<path d="M909.10 758.00v26.20" class="stroke"/>
+<path class="fill"
+	d="M1010.40 791.20l147.00 0.00v-3.20l-147.00 -0.00"/>
+<use x="1014.30" y="767.00" xlink:href="#hd"/>
+<use x="1005.30" y="767.00" xlink:href="#sh0"/>
+<path d="M1010.80 767.00v23.20" class="stroke"/>
+<use x="1063.10" y="773.00" xlink:href="#hd"/>
+<path d="M1059.60 773.00v17.20" class="stroke"/>
+<use x="1111.90" y="773.00" xlink:href="#hd"/>
+<path d="M1108.40 773.00v17.20" class="stroke"/>
+<use x="1160.70" y="767.00" xlink:href="#hd"/>
+<use x="1151.70" y="767.00" xlink:href="#sh0"/>
+<path d="M1157.20 767.00v23.20" class="stroke"/>
+</g>
+<g stroke-width="0.70" style="font:bold 13.00px Times">
+<path class="stroke" stroke-width="1"
+	d="M10.00 977.00v-140.00"/>
+<path class="stroke" stroke-width="1"
+	d="M140.20 919.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M140.20 977.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M232.40 919.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M232.40 977.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M331.00 861.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M331.00 919.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M331.00 977.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M347.00 861.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M363.00 861.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M379.00 861.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M473.10 919.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M473.10 977.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M565.40 919.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M565.40 977.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M657.60 919.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M657.60 977.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M756.20 861.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M756.20 919.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M756.20 977.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M772.20 861.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M788.20 861.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M804.20 861.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M900.00 919.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M900.00 977.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M998.60 919.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M998.60 977.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M1097.20 919.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M1097.20 977.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M1198.60 861.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M1198.60 919.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M1198.60 977.00v-58.00"/>
+<path d="m10.00 861.00
+	h1188.60
+	M10.00 855.00
+	h1188.60
+	M10.00 849.00
+	h1188.60
+	M10.00 843.00
+	h1188.60
+	M10.00 837.00
+	h1188.60
+	" class="stroke"/>
+<path d="m10.00 919.00
+	h1188.60
+	M10.00 913.00
+	h1188.60
+	M10.00 907.00
+	h1188.60
+	M10.00 901.00
+	h1188.60
+	M10.00 895.00
+	h1188.60
+	" class="stroke"/>
+<path d="m10.00 977.00
+	h1188.60
+	M10.00 971.00
+	h1188.60
+	M10.00 965.00
+	h1188.60
+	M10.00 959.00
+	h1188.60
+	M10.00 953.00
+	h1188.60
+	" class="stroke"/>
+<use x="22.00" y="843.00" xlink:href="#bclef"/>
+<use x="37.00" y="843.00" xlink:href="#sh0"/>
+<use x="42.50" y="852.00" xlink:href="#sh0"/>
+<use x="394.00" y="852.00" xlink:href="#HDD"/>
+<use x="819.20" y="843.00" xlink:href="#HDD"/>
+<use x="22.00" y="901.00" xlink:href="#bclef"/>
+<use x="37.00" y="901.00" xlink:href="#sh0"/>
+<use x="42.50" y="910.00" xlink:href="#sh0"/>
+<use x="61.00" y="910.00" xlink:href="#Hd"/>
+<path d="M64.50 910.00v-21.00" class="stroke"/>
+<use x="153.20" y="910.00" xlink:href="#Hd"/>
+<path d="M156.70 910.00v-21.00" class="stroke"/>
+<use x="250.90" y="901.00" xlink:href="#Hd"/>
+<path d="M247.40 901.00v21.00" class="stroke"/>
+<use x="393.00" y="901.00" xlink:href="#Hd"/>
+<path d="M389.50 901.00v21.00" class="stroke"/>
+<use x="486.10" y="910.00" xlink:href="#Hd"/>
+<path d="M489.60 910.00v-21.00" class="stroke"/>
+<use x="578.40" y="910.00" xlink:href="#Hd"/>
+<path d="M581.90 910.00v-21.00" class="stroke"/>
+<use x="676.10" y="901.00" xlink:href="#Hd"/>
+<path d="M672.60 901.00v21.00" class="stroke"/>
+<use x="818.20" y="895.00" xlink:href="#Hd"/>
+<use x="808.20" y="895.00" xlink:href="#sh0"/>
+<path d="M814.70 895.00v21.00" class="stroke"/>
+<use x="918.50" y="901.00" xlink:href="#Hd"/>
+<path d="M915.00 901.00v21.00" class="stroke"/>
+<use x="1017.10" y="901.00" xlink:href="#Hd"/>
+<path d="M1013.60 901.00v21.00" class="stroke"/>
+<use x="1116.70" y="895.00" xlink:href="#Hd"/>
+<use x="1106.70" y="895.00" xlink:href="#sh0"/>
+<path d="M1113.20 895.00v21.00" class="stroke"/>
+<use x="22.00" y="959.00" xlink:href="#bclef"/>
+<use x="37.00" y="959.00" xlink:href="#sh0"/>
+<use x="42.50" y="968.00" xlink:href="#sh0"/>
+<path class="fill"
+	d="M57.20 987.20l63.20 0.00v-3.20l-63.20 -0.00"/>
+<use x="61.00" y="959.00" xlink:href="#hd"/>
+<path d="M57.50 959.00v27.20" class="stroke"/>
+<use x="81.80" y="968.00" xlink:href="#hd"/>
+<path d="M78.30 968.00v18.20" class="stroke"/>
+<use x="102.70" y="968.00" xlink:href="#hd"/>
+<path d="M99.20 968.00v18.20" class="stroke"/>
+<use x="123.50" y="959.00" xlink:href="#hd"/>
+<path d="M120.00 959.00v27.20" class="stroke"/>
+<path class="fill"
+	d="M149.40 987.20l63.20 0.00v-3.20l-63.20 -0.00"/>
+<use x="153.20" y="959.00" xlink:href="#hd"/>
+<path d="M149.70 959.00v27.20" class="stroke"/>
+<use x="174.00" y="968.00" xlink:href="#hd"/>
+<path d="M170.50 968.00v18.20" class="stroke"/>
+<use x="194.90" y="968.00" xlink:href="#hd"/>
+<path d="M191.40 968.00v18.20" class="stroke"/>
+<use x="215.70" y="959.00" xlink:href="#hd"/>
+<path d="M212.20 959.00v27.20" class="stroke"/>
+<path class="fill"
+	d="M247.10 977.20l64.00 0.00v-3.20l-64.00 -0.00"/>
+<use x="250.90" y="953.00" xlink:href="#hd"/>
+<use x="241.90" y="953.00" xlink:href="#sh0"/>
+<path d="M247.40 953.00v23.20" class="stroke"/>
+<use x="271.80" y="959.00" xlink:href="#hd"/>
+<path d="M268.30 959.00v17.20" class="stroke"/>
+<use x="292.60" y="959.00" xlink:href="#hd"/>
+<path d="M289.10 959.00v17.20" class="stroke"/>
+<use x="314.30" y="953.00" xlink:href="#hd"/>
+<use x="305.30" y="953.00" xlink:href="#sh0"/>
+<path d="M310.80 953.00v23.20" class="stroke"/>
+<path class="fill"
+	d="M389.20 977.20l64.00 0.00v-3.20l-64.00 -0.00"/>
+<use x="393.00" y="953.00" xlink:href="#hd"/>
+<use x="384.00" y="953.00" xlink:href="#sh0"/>
+<path d="M389.50 953.00v23.20" class="stroke"/>
+<use x="413.90" y="959.00" xlink:href="#hd"/>
+<path d="M410.40 959.00v17.20" class="stroke"/>
+<use x="434.70" y="959.00" xlink:href="#hd"/>
+<path d="M431.20 959.00v17.20" class="stroke"/>
+<use x="456.40" y="953.00" xlink:href="#hd"/>
+<use x="447.40" y="953.00" xlink:href="#sh0"/>
+<path d="M452.90 953.00v23.20" class="stroke"/>
+<path class="fill"
+	d="M482.30 987.20l63.20 0.00v-3.20l-63.20 -0.00"/>
+<use x="486.10" y="959.00" xlink:href="#hd"/>
+<path d="M482.60 959.00v27.20" class="stroke"/>
+<use x="507.00" y="968.00" xlink:href="#hd"/>
+<path d="M503.50 968.00v18.20" class="stroke"/>
+<use x="527.80" y="968.00" xlink:href="#hd"/>
+<path d="M524.30 968.00v18.20" class="stroke"/>
+<use x="548.60" y="959.00" xlink:href="#hd"/>
+<path d="M545.10 959.00v27.20" class="stroke"/>
+<path class="fill"
+	d="M574.50 987.20l63.20 0.00v-3.20l-63.20 -0.00"/>
+<use x="578.40" y="959.00" xlink:href="#hd"/>
+<path d="M574.90 959.00v27.20" class="stroke"/>
+<use x="599.20" y="968.00" xlink:href="#hd"/>
+<path d="M595.70 968.00v18.20" class="stroke"/>
+<use x="620.00" y="968.00" xlink:href="#hd"/>
+<path d="M616.50 968.00v18.20" class="stroke"/>
+<use x="640.80" y="959.00" xlink:href="#hd"/>
+<path d="M637.30 959.00v27.20" class="stroke"/>
+<path class="fill"
+	d="M672.20 977.20l64.00 0.00v-3.20l-64.00 -0.00"/>
+<use x="676.10" y="953.00" xlink:href="#hd"/>
+<use x="667.10" y="953.00" xlink:href="#sh0"/>
+<path d="M672.60 953.00v23.20" class="stroke"/>
+<use x="696.90" y="959.00" xlink:href="#hd"/>
+<path d="M693.40 959.00v17.20" class="stroke"/>
+<use x="717.70" y="959.00" xlink:href="#hd"/>
+<path d="M714.20 959.00v17.20" class="stroke"/>
+<use x="739.40" y="953.00" xlink:href="#hd"/>
+<use x="730.40" y="953.00" xlink:href="#sh0"/>
+<path d="M735.90 953.00v23.20" class="stroke"/>
+<path class="fill"
+	d="M814.30 971.20l65.80 0.00v-3.20l-65.80 -0.00"/>
+<use x="818.20" y="947.00" xlink:href="#hl"/>
+<use x="818.20" y="944.00" xlink:href="#hd"/>
+<use x="809.20" y="944.00" xlink:href="#sh0"/>
+<path d="M814.70 944.00v26.20" class="stroke"/>
+<use x="839.90" y="953.00" xlink:href="#hd"/>
+<use x="830.90" y="953.00" xlink:href="#sh0"/>
+<path d="M836.40 953.00v17.20" class="stroke"/>
+<use x="861.60" y="953.00" xlink:href="#hd"/>
+<use x="852.60" y="953.00" xlink:href="#sh0"/>
+<path d="M858.10 953.00v17.20" class="stroke"/>
+<use x="883.30" y="947.00" xlink:href="#hl"/>
+<use x="883.30" y="944.00" xlink:href="#hd"/>
+<use x="874.30" y="944.00" xlink:href="#sh0"/>
+<path d="M879.80 944.00v26.20" class="stroke"/>
+<path class="fill"
+	d="M914.70 977.20l64.00 0.00v-3.20l-64.00 -0.00"/>
+<use x="918.50" y="953.00" xlink:href="#hd"/>
+<use x="909.50" y="953.00" xlink:href="#sh0"/>
+<path d="M915.00 953.00v23.20" class="stroke"/>
+<use x="939.40" y="959.00" xlink:href="#hd"/>
+<path d="M935.90 959.00v17.20" class="stroke"/>
+<use x="960.20" y="959.00" xlink:href="#hd"/>
+<path d="M956.70 959.00v17.20" class="stroke"/>
+<use x="981.90" y="953.00" xlink:href="#hd"/>
+<use x="972.90" y="953.00" xlink:href="#sh0"/>
+<path d="M978.40 953.00v23.20" class="stroke"/>
+<path class="fill"
+	d="M1013.30 977.20l64.00 0.00v-3.20l-64.00 -0.00"/>
+<use x="1017.10" y="953.00" xlink:href="#hd"/>
+<use x="1008.10" y="953.00" xlink:href="#sh0"/>
+<path d="M1013.60 953.00v23.20" class="stroke"/>
+<use x="1038.00" y="959.00" xlink:href="#hd"/>
+<path d="M1034.50 959.00v17.20" class="stroke"/>
+<use x="1058.80" y="959.00" xlink:href="#hd"/>
+<path d="M1055.30 959.00v17.20" class="stroke"/>
+<use x="1080.50" y="953.00" xlink:href="#hd"/>
+<use x="1071.50" y="953.00" xlink:href="#sh0"/>
+<path d="M1077.00 953.00v23.20" class="stroke"/>
+<path class="fill"
+	d="M1112.90 971.20l65.80 0.00v-3.20l-65.80 -0.00"/>
+<use x="1116.70" y="947.00" xlink:href="#hl"/>
+<use x="1116.70" y="944.00" xlink:href="#hd"/>
+<use x="1107.70" y="944.00" xlink:href="#sh0"/>
+<path d="M1113.20 944.00v26.20" class="stroke"/>
+<use x="1138.40" y="953.00" xlink:href="#hd"/>
+<use x="1129.40" y="953.00" xlink:href="#sh0"/>
+<path d="M1134.90 953.00v17.20" class="stroke"/>
+<use x="1160.20" y="953.00" xlink:href="#hd"/>
+<use x="1151.20" y="953.00" xlink:href="#sh0"/>
+<path d="M1156.70 953.00v17.20" class="stroke"/>
+<use x="1181.90" y="947.00" xlink:href="#hl"/>
+<use x="1181.90" y="944.00" xlink:href="#hd"/>
+<use x="1172.90" y="944.00" xlink:href="#sh0"/>
+<path d="M1178.40 944.00v26.20" class="stroke"/>
+</g>
+<g stroke-width="0.70" style="font:bold 13.00px Times">
+<path class="stroke" stroke-width="1"
+	d="M10.00 1163.00v-140.00"/>
+<path class="stroke" stroke-width="1"
+	d="M60.00 1047.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M76.00 1047.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M92.00 1047.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M263.20 1105.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M263.20 1163.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M442.20 1105.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M442.20 1163.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M621.30 1105.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M621.30 1163.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M800.40 1047.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M800.40 1105.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M800.40 1163.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M816.40 1047.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M832.40 1047.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M848.40 1047.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M1019.50 1105.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M1019.50 1163.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M1198.60 1105.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M1198.60 1163.00v-58.00"/>
+<path d="m10.00 1047.00
+	h1188.60
+	M10.00 1041.00
+	h1188.60
+	M10.00 1035.00
+	h1188.60
+	M10.00 1029.00
+	h1188.60
+	M10.00 1023.00
+	h1188.60
+	" class="stroke"/>
+<path d="m10.00 1105.00
+	h1188.60
+	M10.00 1099.00
+	h1188.60
+	M10.00 1093.00
+	h1188.60
+	M10.00 1087.00
+	h1188.60
+	M10.00 1081.00
+	h1188.60
+	" class="stroke"/>
+<path d="m10.00 1163.00
+	h1188.60
+	M10.00 1157.00
+	h1188.60
+	M10.00 1151.00
+	h1188.60
+	M10.00 1145.00
+	h1188.60
+	M10.00 1139.00
+	h1188.60
+	" class="stroke"/>
+<use x="22.00" y="1029.00" xlink:href="#bclef"/>
+<use x="37.00" y="1029.00" xlink:href="#sh0"/>
+<use x="42.50" y="1038.00" xlink:href="#sh0"/>
+<use x="108.00" y="1029.00" xlink:href="#HDD"/>
+<use x="864.40" y="1038.00" xlink:href="#HDD"/>
+<use x="22.00" y="1087.00" xlink:href="#bclef"/>
+<use x="37.00" y="1087.00" xlink:href="#sh0"/>
+<use x="42.50" y="1096.00" xlink:href="#sh0"/>
+<use x="107.00" y="1081.00" xlink:href="#Hd"/>
+<use x="97.00" y="1081.00" xlink:href="#sh0"/>
+<path d="M103.50 1081.00v21.00" class="stroke"/>
+<use x="286.10" y="1087.00" xlink:href="#Hd"/>
+<path d="M282.60 1087.00v21.00" class="stroke"/>
+<use x="465.20" y="1087.00" xlink:href="#Hd"/>
+<path d="M461.70 1087.00v21.00" class="stroke"/>
+<use x="644.30" y="1081.00" xlink:href="#Hd"/>
+<use x="634.30" y="1081.00" xlink:href="#sh0"/>
+<path d="M640.80 1081.00v21.00" class="stroke"/>
+<use x="863.40" y="1087.00" xlink:href="#Hd"/>
+<path d="M859.90 1087.00v21.00" class="stroke"/>
+<use x="1042.50" y="1096.00" xlink:href="#Hd"/>
+<path d="M1046.00 1096.00v-21.00" class="stroke"/>
+<use x="22.00" y="1145.00" xlink:href="#bclef"/>
+<use x="37.00" y="1145.00" xlink:href="#sh0"/>
+<use x="42.50" y="1154.00" xlink:href="#sh0"/>
+<path class="fill"
+	d="M103.20 1157.20l124.70 0.00v-3.20l-124.70 -0.00"/>
+<use x="107.00" y="1133.00" xlink:href="#hl"/>
+<use x="107.00" y="1130.00" xlink:href="#hd"/>
+<use x="98.00" y="1130.00" xlink:href="#sh0"/>
+<path d="M103.50 1130.00v26.20" class="stroke"/>
+<use x="148.40" y="1139.00" xlink:href="#hd"/>
+<use x="139.40" y="1139.00" xlink:href="#sh0"/>
+<path d="M144.90 1139.00v17.20" class="stroke"/>
+<use x="189.70" y="1139.00" xlink:href="#hd"/>
+<use x="180.70" y="1139.00" xlink:href="#sh0"/>
+<path d="M186.20 1139.00v17.20" class="stroke"/>
+<use x="231.00" y="1133.00" xlink:href="#hl"/>
+<use x="231.00" y="1130.00" xlink:href="#hd"/>
+<use x="222.00" y="1130.00" xlink:href="#sh0"/>
+<path d="M227.50 1130.00v26.20" class="stroke"/>
+<path class="fill"
+	d="M282.30 1163.20l124.70 0.00v-3.20l-124.70 -0.00"/>
+<use x="286.10" y="1139.00" xlink:href="#hd"/>
+<use x="277.10" y="1139.00" xlink:href="#sh0"/>
+<path d="M282.60 1139.00v23.20" class="stroke"/>
+<use x="327.40" y="1145.00" xlink:href="#hd"/>
+<path d="M323.90 1145.00v17.20" class="stroke"/>
+<use x="368.80" y="1145.00" xlink:href="#hd"/>
+<path d="M365.30 1145.00v17.20" class="stroke"/>
+<use x="410.10" y="1139.00" xlink:href="#hd"/>
+<use x="401.10" y="1139.00" xlink:href="#sh0"/>
+<path d="M406.60 1139.00v23.20" class="stroke"/>
+<path class="fill"
+	d="M461.30 1163.20l124.70 0.00v-3.20l-124.70 -0.00"/>
+<use x="465.20" y="1139.00" xlink:href="#hd"/>
+<use x="456.20" y="1139.00" xlink:href="#sh0"/>
+<path d="M461.70 1139.00v23.20" class="stroke"/>
+<use x="506.50" y="1145.00" xlink:href="#hd"/>
+<path d="M503.00 1145.00v17.20" class="stroke"/>
+<use x="547.80" y="1145.00" xlink:href="#hd"/>
+<path d="M544.30 1145.00v17.20" class="stroke"/>
+<use x="589.20" y="1139.00" xlink:href="#hd"/>
+<use x="580.20" y="1139.00" xlink:href="#sh0"/>
+<path d="M585.70 1139.00v23.20" class="stroke"/>
+<path class="fill"
+	d="M640.40 1157.20l124.70 0.00v-3.20l-124.70 -0.00"/>
+<use x="644.30" y="1133.00" xlink:href="#hl"/>
+<use x="644.30" y="1130.00" xlink:href="#hd"/>
+<use x="635.30" y="1130.00" xlink:href="#sh0"/>
+<path d="M640.80 1130.00v26.20" class="stroke"/>
+<use x="685.60" y="1139.00" xlink:href="#hd"/>
+<use x="676.60" y="1139.00" xlink:href="#sh0"/>
+<path d="M682.10 1139.00v17.20" class="stroke"/>
+<use x="726.90" y="1139.00" xlink:href="#hd"/>
+<use x="717.90" y="1139.00" xlink:href="#sh0"/>
+<path d="M723.40 1139.00v17.20" class="stroke"/>
+<use x="768.20" y="1133.00" xlink:href="#hl"/>
+<use x="768.20" y="1130.00" xlink:href="#hd"/>
+<use x="759.20" y="1130.00" xlink:href="#sh0"/>
+<path d="M764.70 1130.00v26.20" class="stroke"/>
+<path class="fill"
+	d="M859.60 1163.20l124.70 0.00v-3.20l-124.70 -0.00"/>
+<use x="863.40" y="1139.00" xlink:href="#hd"/>
+<use x="854.40" y="1139.00" xlink:href="#sh0"/>
+<path d="M859.90 1139.00v23.20" class="stroke"/>
+<use x="904.70" y="1145.00" xlink:href="#hd"/>
+<path d="M901.20 1145.00v17.20" class="stroke"/>
+<use x="946.10" y="1145.00" xlink:href="#hd"/>
+<path d="M942.60 1145.00v17.20" class="stroke"/>
+<use x="987.40" y="1139.00" xlink:href="#hd"/>
+<use x="978.40" y="1139.00" xlink:href="#sh0"/>
+<path d="M983.90 1139.00v23.20" class="stroke"/>
+<path class="fill"
+	d="M1038.60 1173.20l124.70 0.00v-3.20l-124.70 -0.00"/>
+<use x="1042.50" y="1145.00" xlink:href="#hd"/>
+<path d="M1039.00 1145.00v27.20" class="stroke"/>
+<use x="1083.80" y="1154.00" xlink:href="#hd"/>
+<path d="M1080.30 1154.00v18.20" class="stroke"/>
+<use x="1125.10" y="1154.00" xlink:href="#hd"/>
+<path d="M1121.60 1154.00v18.20" class="stroke"/>
+<use x="1166.50" y="1145.00" xlink:href="#hd"/>
+<path d="M1163.00 1145.00v27.20" class="stroke"/>
+</g>
+<g stroke-width="0.70" style="font:bold 13.00px Times">
+<path class="stroke" stroke-width="1"
+	d="M10.00 1349.00v-140.00"/>
+<path class="stroke" stroke-width="1"
+	d="M150.00 1291.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M150.00 1349.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M257.70 1233.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M257.70 1291.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M257.70 1349.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M273.70 1233.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M289.70 1233.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M305.70 1233.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M409.00 1291.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M409.00 1349.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M511.30 1291.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M511.30 1349.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M613.70 1291.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M613.70 1349.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M721.40 1233.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M721.40 1291.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M721.40 1349.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M737.40 1233.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M753.40 1233.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M769.40 1233.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M873.40 1291.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M873.40 1349.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M981.20 1291.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M981.20 1349.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M1089.00 1291.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M1089.00 1349.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M1198.60 1233.00v-24.00"/>
+<path class="stroke" stroke-width="1"
+	d="M1198.60 1291.00v-58.00"/>
+<path class="stroke" stroke-width="1"
+	d="M1198.60 1349.00v-58.00"/>
+<defs>
+<g id="rdots" class="fill">
+	<circle cx="0" cy="-9" r="1.2"/>
+	<circle cx="0" cy="-15" r="1.2"/>
+</g>
+</defs>
+<use x="1194.60" y="1349.00" xlink:href="#rdots"/>
+<path class="stroke" stroke-width="1"
+	d="M1190.60 1349.00v-58.00"/>
+<path d="m10.00 1233.00
+	h1188.60
+	M10.00 1227.00
+	h1188.60
+	M10.00 1221.00
+	h1188.60
+	M10.00 1215.00
+	h1188.60
+	M10.00 1209.00
+	h1188.60
+	" class="stroke"/>
+<path d="m10.00 1291.00
+	h1188.60
+	M10.00 1285.00
+	h1188.60
+	M10.00 1279.00
+	h1188.60
+	M10.00 1273.00
+	h1188.60
+	M10.00 1267.00
+	h1188.60
+	" class="stroke"/>
+<path d="m10.00 1349.00
+	h1188.60
+	M10.00 1343.00
+	h1188.60
+	M10.00 1337.00
+	h1188.60
+	M10.00 1331.00
+	h1188.60
+	M10.00 1325.00
+	h1188.60
+	" class="stroke"/>
+<use x="22.00" y="1215.00" xlink:href="#bclef"/>
+<use x="37.00" y="1215.00" xlink:href="#sh0"/>
+<use x="42.50" y="1224.00" xlink:href="#sh0"/>
+<use x="320.70" y="1224.00" xlink:href="#HDD"/>
+<use x="784.40" y="1215.00" xlink:href="#HDD"/>
+<use x="22.00" y="1273.00" xlink:href="#bclef"/>
+<use x="37.00" y="1273.00" xlink:href="#sh0"/>
+<use x="42.50" y="1282.00" xlink:href="#sh0"/>
+<use x="61.00" y="1282.00" xlink:href="#Hd"/>
+<path d="M64.50 1282.00v-21.00" class="stroke"/>
+<use x="168.50" y="1273.00" xlink:href="#Hd"/>
+<path d="M165.00 1273.00v21.00" class="stroke"/>
+<use x="319.70" y="1273.00" xlink:href="#Hd"/>
+<path d="M316.20 1273.00v21.00" class="stroke"/>
+<use x="422.40" y="1282.00" xlink:href="#Hd"/>
+<path d="M425.90 1282.00v-21.00" class="stroke"/>
+<use x="524.70" y="1282.00" xlink:href="#Hd"/>
+<path d="M528.20 1282.00v-21.00" class="stroke"/>
+<use x="632.20" y="1273.00" xlink:href="#Hd"/>
+<path d="M628.70 1273.00v21.00" class="stroke"/>
+<use x="783.40" y="1267.00" xlink:href="#Hd"/>
+<use x="773.40" y="1267.00" xlink:href="#sh0"/>
+<path d="M779.90 1267.00v21.00" class="stroke"/>
+<use x="891.90" y="1273.00" xlink:href="#Hd"/>
+<path d="M888.40 1273.00v21.00" class="stroke"/>
+<use x="999.70" y="1273.00" xlink:href="#Hd"/>
+<path d="M996.20 1273.00v21.00" class="stroke"/>
+<use x="1108.50" y="1267.00" xlink:href="#Hd"/>
+<use x="1098.50" y="1267.00" xlink:href="#sh0"/>
+<path d="M1105.00 1267.00v21.00" class="stroke"/>
+<use x="22.00" y="1331.00" xlink:href="#bclef"/>
+<use x="37.00" y="1331.00" xlink:href="#sh0"/>
+<use x="42.50" y="1340.00" xlink:href="#sh0"/>
+<path class="fill"
+	d="M57.20 1359.20l71.20 0.00v-3.20l-71.20 -0.00"/>
+<use x="61.00" y="1331.00" xlink:href="#hd"/>
+<path d="M57.50 1331.00v27.20" class="stroke"/>
+<use x="84.50" y="1340.00" xlink:href="#hd"/>
+<path d="M81.00 1340.00v18.20" class="stroke"/>
+<use x="108.00" y="1340.00" xlink:href="#hd"/>
+<path d="M104.50 1340.00v18.20" class="stroke"/>
+<use x="131.50" y="1331.00" xlink:href="#hd"/>
+<path d="M128.00 1331.00v27.20" class="stroke"/>
+<path class="fill"
+	d="M164.60 1349.20l71.50 0.00v-3.20l-71.50 -0.00"/>
+<use x="168.50" y="1325.00" xlink:href="#hd"/>
+<use x="159.50" y="1325.00" xlink:href="#sh0"/>
+<path d="M165.00 1325.00v23.20" class="stroke"/>
+<use x="192.00" y="1331.00" xlink:href="#hd"/>
+<path d="M188.50 1331.00v17.20" class="stroke"/>
+<use x="215.50" y="1331.00" xlink:href="#hd"/>
+<path d="M212.00 1331.00v17.20" class="stroke"/>
+<use x="239.30" y="1325.00" xlink:href="#hd"/>
+<use x="230.30" y="1325.00" xlink:href="#sh0"/>
+<path d="M235.80 1325.00v23.20" class="stroke"/>
+<path class="fill"
+	d="M315.90 1349.20l71.50 0.00v-3.20l-71.50 -0.00"/>
+<use x="319.70" y="1325.00" xlink:href="#hd"/>
+<use x="310.70" y="1325.00" xlink:href="#sh0"/>
+<path d="M316.20 1325.00v23.20" class="stroke"/>
+<use x="343.20" y="1331.00" xlink:href="#hd"/>
+<path d="M339.70 1331.00v17.20" class="stroke"/>
+<use x="366.70" y="1331.00" xlink:href="#hd"/>
+<path d="M363.20 1331.00v17.20" class="stroke"/>
+<use x="390.60" y="1325.00" xlink:href="#hd"/>
+<use x="381.60" y="1325.00" xlink:href="#sh0"/>
+<path d="M387.10 1325.00v23.20" class="stroke"/>
+<path class="fill"
+	d="M418.50 1359.20l71.20 0.00v-3.20l-71.20 -0.00"/>
+<use x="422.40" y="1331.00" xlink:href="#hd"/>
+<path d="M418.90 1331.00v27.20" class="stroke"/>
+<use x="445.90" y="1340.00" xlink:href="#hd"/>
+<path d="M442.40 1340.00v18.20" class="stroke"/>
+<use x="469.40" y="1340.00" xlink:href="#hd"/>
+<path d="M465.90 1340.00v18.20" class="stroke"/>
+<use x="492.90" y="1331.00" xlink:href="#hd"/>
+<path d="M489.40 1331.00v27.20" class="stroke"/>
+<path class="fill"
+	d="M520.90 1359.20l71.20 0.00v-3.20l-71.20 -0.00"/>
+<use x="524.70" y="1331.00" xlink:href="#hd"/>
+<path d="M521.20 1331.00v27.20" class="stroke"/>
+<use x="548.20" y="1340.00" xlink:href="#hd"/>
+<path d="M544.70 1340.00v18.20" class="stroke"/>
+<use x="571.70" y="1340.00" xlink:href="#hd"/>
+<path d="M568.20 1340.00v18.20" class="stroke"/>
+<use x="595.20" y="1331.00" xlink:href="#hd"/>
+<path d="M591.70 1331.00v27.20" class="stroke"/>
+<path class="fill"
+	d="M628.30 1349.20l71.50 0.00v-3.20l-71.50 -0.00"/>
+<use x="632.20" y="1325.00" xlink:href="#hd"/>
+<use x="623.20" y="1325.00" xlink:href="#sh0"/>
+<path d="M628.70 1325.00v23.20" class="stroke"/>
+<use x="655.60" y="1331.00" xlink:href="#hd"/>
+<path d="M652.10 1331.00v17.20" class="stroke"/>
+<use x="679.10" y="1331.00" xlink:href="#hd"/>
+<path d="M675.60 1331.00v17.20" class="stroke"/>
+<use x="703.00" y="1325.00" xlink:href="#hd"/>
+<use x="694.00" y="1325.00" xlink:href="#sh0"/>
+<path d="M699.50 1325.00v23.20" class="stroke"/>
+<path class="fill"
+	d="M779.60 1343.20l72.20 0.00v-3.20l-72.20 -0.00"/>
+<use x="783.40" y="1319.00" xlink:href="#hl"/>
+<use x="783.40" y="1316.00" xlink:href="#hd"/>
+<use x="774.40" y="1316.00" xlink:href="#sh0"/>
+<path d="M779.90 1316.00v26.20" class="stroke"/>
+<use x="807.30" y="1325.00" xlink:href="#hd"/>
+<use x="798.30" y="1325.00" xlink:href="#sh0"/>
+<path d="M803.80 1325.00v17.20" class="stroke"/>
+<use x="831.10" y="1325.00" xlink:href="#hd"/>
+<use x="822.10" y="1325.00" xlink:href="#sh0"/>
+<path d="M827.60 1325.00v17.20" class="stroke"/>
+<use x="854.90" y="1319.00" xlink:href="#hl"/>
+<use x="854.90" y="1316.00" xlink:href="#hd"/>
+<use x="845.90" y="1316.00" xlink:href="#sh0"/>
+<path d="M851.40 1316.00v26.20" class="stroke"/>
+<path class="fill"
+	d="M888.00 1349.20l71.50 0.00v-3.20l-71.50 -0.00"/>
+<use x="891.90" y="1325.00" xlink:href="#hd"/>
+<use x="882.90" y="1325.00" xlink:href="#sh0"/>
+<path d="M888.40 1325.00v23.20" class="stroke"/>
+<use x="915.40" y="1331.00" xlink:href="#hd"/>
+<path d="M911.90 1331.00v17.20" class="stroke"/>
+<use x="938.90" y="1331.00" xlink:href="#hd"/>
+<path d="M935.40 1331.00v17.20" class="stroke"/>
+<use x="962.70" y="1325.00" xlink:href="#hd"/>
+<use x="953.70" y="1325.00" xlink:href="#sh0"/>
+<path d="M959.20 1325.00v23.20" class="stroke"/>
+<path class="fill"
+	d="M995.80 1349.20l71.50 0.00v-3.20l-71.50 -0.00"/>
+<use x="999.70" y="1325.00" xlink:href="#hd"/>
+<use x="990.70" y="1325.00" xlink:href="#sh0"/>
+<path d="M996.20 1325.00v23.20" class="stroke"/>
+<use x="1023.20" y="1331.00" xlink:href="#hd"/>
+<path d="M1019.70 1331.00v17.20" class="stroke"/>
+<use x="1046.70" y="1331.00" xlink:href="#hd"/>
+<path d="M1043.20 1331.00v17.20" class="stroke"/>
+<use x="1070.50" y="1325.00" xlink:href="#hd"/>
+<use x="1061.50" y="1325.00" xlink:href="#sh0"/>
+<path d="M1067.00 1325.00v23.20" class="stroke"/>
+<path class="fill"
+	d="M1104.60 1343.20l72.20 0.00v-3.20l-72.20 -0.00"/>
+<use x="1108.50" y="1319.00" xlink:href="#hl"/>
+<use x="1108.50" y="1316.00" xlink:href="#hd"/>
+<use x="1099.50" y="1316.00" xlink:href="#sh0"/>
+<path d="M1105.00 1316.00v26.20" class="stroke"/>
+<use x="1132.30" y="1325.00" xlink:href="#hd"/>
+<use x="1123.30" y="1325.00" xlink:href="#sh0"/>
+<path d="M1128.80 1325.00v17.20" class="stroke"/>
+<use x="1156.10" y="1325.00" xlink:href="#hd"/>
+<use x="1147.10" y="1325.00" xlink:href="#sh0"/>
+<path d="M1152.60 1325.00v17.20" class="stroke"/>
+<use x="1179.90" y="1319.00" xlink:href="#hl"/>
+<use x="1179.90" y="1316.00" xlink:href="#hd"/>
+<use x="1170.90" y="1316.00" xlink:href="#sh0"/>
+<path d="M1176.40 1316.00v26.20" class="stroke"/>
+</g>
+</svg>

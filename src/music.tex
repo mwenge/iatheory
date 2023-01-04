@@ -257,42 +257,6 @@ Voice 2 for every four in Voice 3 (12/3=4).
 \CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{846}{851}%
 \lstinputlisting[caption=\icode{MaybePlayVoice3}\, part of \icode{PlayTitleScreenMusic}.,basicstyle=\tiny]{tmp.asm}
 
-\subsubsection{Phrasing}
-Now that we've identified the underlying 4-bar structure of the arrangement. We can take a closer look at the 
-phrasing of the invidividual parts. Voice 3 has a simple repetitive structure for each 4-bar phrase:
-
-\begin{figure}[H]
-{
-  \begin{adjustbox}{width=11cm,center}
-  \includegraphics[width=11cm]{music/Voice_3_Phrasing1.png}%
-    \end{adjustbox}
-}\caption[]{Bars 2 and 4 are always repeated}
-\end{figure}
-
-Bars 2 and 4 are repeated. Each bar consists of the same tonic formula: three notes rising two notes at a time,
-falling back on the final note. The difference between bars 1 and 3 is a simple key change.
-
-As new tunes are generated the simple repetion seen in the first iteration disappears. Here the first 16 bars
-for Voice 3 from iterations 12 and 18:
-
-
-\begin{figure}[H]
-{
-  \begin{adjustbox}{width=11cm,center}
-  \includegraphics[width=11cm]{music/Voice_3_Phrasing_Tune12.png}%
-    \end{adjustbox}
-}
-\end{figure}
-
-
-\begin{figure}[H]
-{
-  \begin{adjustbox}{width=11cm,center}
-  \includegraphics[width=11cm]{music/Voice_3_Phrasing_Tune18.png}%
-    \end{adjustbox}
-}\caption[]{Key changes and same basic structure, but no repetitions.}
-\end{figure}
-
 \begin{tcolorbox}[%
   breakable,
   parbox = false,
@@ -303,7 +267,7 @@ for Voice 3 from iterations 12 and 18:
     \draw[]
       (frame.north west) rectangle (frame.south east);},
 ]{}
-Diversion: Extracting the Title Music
+Extracting the Title Music
 
 Since each tune is dynamically generated there's nowhere for us to pull them from. We could record
 the tunes as audio files and maybe extract something useful that way. A feature of Vice, the C64
@@ -350,8 +314,320 @@ matter to transform this into ABC format, a music notation frequently used for t
 
 \lstinputlisting[caption=Title Tune No 1 in ABC format, basicstyle=\tiny]{music/title_no_1_page_1.abc}
 
-We can the use the tool `abcm2ps` to transform this into an SVG image file giving the music in
+We can then use the tool `abcm2ps` to transform this into an SVG image file giving the music in
 standard Western notation.
+
 \end{tcolorbox}%
+
+\subsubsection{Phrasing}
+Now that we've identified the underlying 4-bar structure of the arrangement. We can take a closer look at the 
+phrasing of the invidividual parts. Voice 3 has a simple repetitive structure for each 4-bar phrase:
+
+\begin{figure}[H]
+{
+  \begin{adjustbox}{width=11cm,center}
+  \includegraphics[width=11cm]{music/Voice_3_Phrasing1.png}%
+    \end{adjustbox}
+}\caption[]{Bars 2 and 4 are always repeated}
+\end{figure}
+
+Bars 2 and 4 are repeated. Each bar consists of the same tonic formula: three notes rising two notes at a time,
+falling back on the final note. The difference between bars 1 and 3 is a simple key change.
+
+This 4 note basis is driven by the 4 bytes in \icode{titleMusicNoteArray}. Generating the music for Voice 3
+consists of calculating and loading 4 values into this array and using them as an index into  
+\icode{titleMusicLowBytes}/\icode{titleMusicHiBytes} to play the actual note.
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{752}{757}%
+\lstinputlisting[]{tmp.asm}
+
+Notice how the values populated in \icode{titleMusicNoteArray} at start-up match the structure of our basic
+tonic formula, e.g. C3-G3-C4-G3.
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=10cm,center}
+
+      \begin{tabular}{rlll}
+        \toprule
+        \icode{titleMusicNoteArray} & \icode{titleMusicHiBytes} & \icode{titleMusicLowBytes} & Note \\
+        \midrule
+        \icode{\$00} & \icode{\$08} & \icode{\$61} & C-3 \\
+        \icode{\$07} & \icode{\$8F} & \icode{\$0C} & G-3 \\
+        \icode{\$0C} & \icode{\$C3} & \icode{\$10} & G-3 \\
+        \icode{\$07} & \icode{\$8F} & \icode{\$0C} & G-3 \\
+        \bottomrule
+      \end{tabular}
+
+    \end{adjustbox}
+
+  }\caption{The value in \icode{titleMusicNoteArray} is an index into \icode{titleMusicHiBytes/titleMusicLowBytes}.}
+\end{figure}
+
+Playing the 4 note phrase we've stored in this array is done here:
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{853}{874}%
+\lstinputlisting[]{tmp.asm}
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{903}{913}%
+\lstinputlisting[]{tmp.asm}
+
+The variable that's doing a bit of extra work here is \icode{offsetForNextVoice3Note}. This is what's shifting the
+notes for subsequent bars from the base position of C3-G3-C4-G3 to G3-D4-G4-D4. This value has to get updated after
+every four notes, otherwise we just keep playing the same four notes over and over again.
+
+The obvious place to do this is when play a note on Voice 2, which is something we're already doing every 4 notes
+in Voice 3.
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{828}{848}%
+\lstinputlisting[]{tmp.asm}
+
+As we can see the mechanics of playing a note for Voice 2 are otherwise the same as Voice 3. We're playing the
+same phrase encoded in \icode{titleMusicNoteArray} that is played by Voice 3 but just over a longer period of
+time. And if you look closely again at the first four bars of the first title tune you can see that Voice 2
+is in fact playing the exact same 4 notes of the first bar of Voice 3.
+
+\begin{figure}[H]
+{
+  \begin{adjustbox}{width=11cm,center}
+  \begin{Overpic}[abs,unit=1mm]{%
+    \includegraphics[width=11cm]{music/Voice_1_Part.png}}%
+      \put(0,0){\color{blue}\linethickness{0.1mm}
+        \polygon(15,20)(90,20)(90,10)(15,10)(15,20)}
+      \put(0,0){\color{red}\linethickness{0.1mm}
+        \polygon(15,9)(35,9)(35,0)(15,0)(15,9)}
+    \end{Overpic}
+    \end{adjustbox}
+  }
+  \end{figure}
+
+The same thing happens for Voice 1: it is playing the same notes as the first bar of Voice 3 but over 16 bars (1 every 4 bars).
+
+So ultimately what we have underlying every tune generated by Iridis Alpha is a 16-bar structure where the same 4 notes
+are played by Voice 3 in its first bar, Voice 2 in its first 4 bars, and Voice 1 over the full 16 bars. This structure recurs every
+16 bars, each time using the 4 initial notes from Voice 3.
+
+\begin{figure}[H]
+{
+  \begin{adjustbox}{width=11cm,center}
+  \includegraphics[width=11cm]{music/16BarStructure_Tune14.png}%
+    \end{adjustbox}
+}\caption[]{A full 16 bar passage showing the nested structure of Voices 1 and 2}
+\end{figure}
+
+This is a nested structure with the initial musical phrase that occurs every 4 bars in Voice 3 being picked up by Voice 2 and the one
+that occurs at every 16th bar being picked up by Voice 1.
+
+The second, finer-grained structure of each tune lies in Voice 3 and consists of selecting a fundamental 4 note pattern (as we 
+discussed above) and applying that same pattern to the key change between each 4 note phrase! 
+
+\begin{figure}[H]
+{
+  \begin{adjustbox}{width=11cm,center}
+  \begin{Overpic}[abs,unit=1mm]{%
+    \includegraphics[width=11cm]{music/Tune1_Voice_3_4Bar_Pattern.png}}%
+
+      \put(0,0){\color{red}\linethickness{0.2mm}
+        \polygon(8,9)(30,9)(30,0)(8,0)(8,9)}
+      \put(0,0){\color{red}\linethickness{0.2mm}
+        \polygon(8,20)(30,20)(30,10)(8,10)(8,20)}
+      \put(0,0){\color{red}\linethickness{0.2mm}
+        \polygon(8,30)(30,30)(30,20)(8,20)(8,30)}
+      \put(0,0){\color{red}\linethickness{0.2mm}
+        \polygon(8,40)(30,40)(30,30)(8,30)(8,40)}
+
+      \put(0,0){\color{blue}\linethickness{0.2mm}
+        \polygon(32,9)(55,9)(55,0)(32,0)(32,10)}
+      \put(0,0){\color{blue}\linethickness{0.2mm}
+        \polygon(32,20)(55,20)(55,10)(32,10)(32,20)}
+      \put(0,0){\color{blue}\linethickness{0.2mm}
+        \polygon(32,30)(55,30)(55,20)(32,20)(32,30)}
+      \put(0,0){\color{blue}\linethickness{0.2mm}
+        \polygon(32,40)(55,40)(55,30)(32,30)(32,40)}
+
+      \put(0,0){\color{green}\linethickness{0.2mm}
+        \polygon(58,9)(80,9)(80,0)(58,0)(58,9)}
+      \put(0,0){\color{green}\linethickness{0.2mm}
+        \polygon(58,20)(80,20)(80,10)(58,10)(58,20)}
+      \put(0,0){\color{green}\linethickness{0.2mm}
+        \polygon(58,30)(80,30)(80,20)(58,20)(58,30)}
+      \put(0,0){\color{green}\linethickness{0.2mm}
+        \polygon(58,40)(80,40)(80,30)(58,30)(58,40)}
+
+      \put(0,0){\color{blue}\linethickness{0.2mm}
+        \polygon(82,9)(105,9)(105,0)(82,0)(82,10)}
+      \put(0,0){\color{blue}\linethickness{0.2mm}
+        \polygon(82,20)(105,20)(105,10)(82,10)(82,20)}
+      \put(0,0){\color{blue}\linethickness{0.2mm}
+        \polygon(82,30)(105,30)(105,20)(82,20)(82,30)}
+      \put(0,0){\color{blue}\linethickness{0.2mm}
+        \polygon(82,40)(105,40)(105,30)(82,30)(82,40)}
+
+    \end{Overpic}
+    \end{adjustbox}
+  }\caption[]{The G3-C4-G4-C4 pattern used to construct the 4 note pattern is also used to construct the key changes in each 4-bar sequence (red-blue-green-blue).}
+  \end{figure}
+
+This is why we observed the repeating structure of Bars 2 and 4 earlier! It's the same pattern used to construct the 4 note formula.
+
+But how do we choose the key for
+the start of each 4-bar pattern? By applying the same pattern to the start of each 4-bar section! 
+
+
+\begin{figure}[H]
+{
+  \begin{adjustbox}{width=11cm,center}
+  \begin{Overpic}[abs,unit=1mm]{%
+    \includegraphics[width=11cm]{music/Tune1_Voice_3_4Bar_Pattern.png}}%
+
+      \put(0,0){\color{blue}\linethickness{0.2mm}
+        \polygon(8,9)(30,9)(30,0)(8,0)(8,9)}
+      \put(0,0){\color{green}\linethickness{0.2mm}
+        \polygon(8,20)(30,20)(30,10)(8,10)(8,20)}
+      \put(0,0){\color{blue}\linethickness{0.2mm}
+        \polygon(8,30)(30,30)(30,20)(8,20)(8,30)}
+      \put(0,0){\color{red}\linethickness{0.2mm}
+        \polygon(8,40)(30,40)(30,30)(8,30)(8,40)}
+
+      \put(0,0){\color{blue}\linethickness{0.2mm}
+        \polygon(32,40)(55,40)(55,30)(32,30)(32,40)}
+
+      \put(0,0){\color{green}\linethickness{0.2mm}
+        \polygon(58,40)(80,40)(80,30)(58,30)(58,40)}
+
+      \put(0,0){\color{blue}\linethickness{0.2mm}
+        \polygon(82,40)(105,40)(105,30)(82,30)(82,40)}
+
+    \end{Overpic}
+    \end{adjustbox}
+  }\caption[]{The start of each 4 bar pattern in a 16 bar cycle uses each of the 4-note patterns from the first 4 bars.}
+  \end{figure}
+
+If we look at two other procedurally generated tunes we can see the same pattern:
+
+
+\begin{figure}[H]
+{
+  \begin{adjustbox}{width=11cm,center}
+  \begin{Overpic}[abs,unit=1mm]{%
+  \includegraphics[width=11cm]{music/Voice_3_Phrasing_Tune12.png}}%
+      \put(0,0){\color{blue}\linethickness{0.2mm}
+        \polygon(8,9)(30,9)(30,0)(8,0)(8,9)}
+      \put(0,0){\color{green}\linethickness{0.2mm}
+        \polygon(8,20)(30,20)(30,10)(8,10)(8,20)}
+      \put(0,0){\color{blue}\linethickness{0.2mm}
+        \polygon(8,30)(30,30)(30,20)(8,20)(8,30)}
+      \put(0,0){\color{red}\linethickness{0.2mm}
+        \polygon(8,40)(30,40)(30,30)(8,30)(8,40)}
+
+      \put(0,0){\color{blue}\linethickness{0.2mm}
+        \polygon(32,40)(55,40)(55,30)(32,30)(32,40)}
+
+      \put(0,0){\color{green}\linethickness{0.2mm}
+        \polygon(58,40)(80,40)(80,30)(58,30)(58,40)}
+
+      \put(0,0){\color{blue}\linethickness{0.2mm}
+        \polygon(82,40)(105,40)(105,30)(82,30)(82,40)}
+
+    \end{Overpic}
+    \end{adjustbox}
+}
+\end{figure}
+\begin{figure}[H]
+{
+  \begin{adjustbox}{width=11cm,center}
+  \begin{Overpic}[abs,unit=1mm]{%
+  \includegraphics[width=11cm]{music/Voice_3_Phrasing_Tune18.png}}%
+      \put(0,0){\color{blue}\linethickness{0.2mm}
+        \polygon(8,9)(30,9)(30,0)(8,0)(8,9)}
+      \put(0,0){\color{green}\linethickness{0.2mm}
+        \polygon(8,20)(30,20)(30,10)(8,10)(8,20)}
+      \put(0,0){\color{blue}\linethickness{0.2mm}
+        \polygon(8,30)(30,30)(30,20)(8,20)(8,30)}
+      \put(0,0){\color{red}\linethickness{0.2mm}
+        \polygon(8,40)(30,40)(30,30)(8,30)(8,40)}
+
+      \put(0,0){\color{blue}\linethickness{0.2mm}
+        \polygon(32,40)(55,40)(55,30)(32,30)(32,40)}
+
+      \put(0,0){\color{green}\linethickness{0.2mm}
+        \polygon(58,40)(80,40)(80,30)(58,30)(58,40)}
+
+      \put(0,0){\color{blue}\linethickness{0.2mm}
+        \polygon(82,40)(105,40)(105,30)(82,30)(82,40)}
+
+    \end{Overpic}
+    \end{adjustbox}
+}\caption[]{The same patterns in Tunes 12 and 18.}
+\end{figure}
+
+\subsubsection{Seeding the Random}
+
+We've established how each tune is built entirely off the same 4-byte sequence, all the way from selecting
+notes to play to filling out the larger structure of the tune at almost every level. What remains is
+to see how this 4-byte sequence is selected. We know it's not entirely random since if it was, none of us
+would ever hear the same tune. 
+
+The selection of our 4-byte structure for each tune happens in \icode{SelectNewNotesToPlay}. Once a seed
+value has been plucked, this is used as an index into \icode{titleMusicSeedArray} and the next four values
+are populated into our magic 4-byte sequence that determines everything \icode{titleMusicNoteArray}.
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{943}{961}%
+\lstinputlisting[caption=Put a seed byte in the accumulator and multiply this by 4 if it's not zero. This
+gives us what we need for the next step.]{tmp.asm}
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{966}{981}%
+\lstinputlisting[caption=Use our seed value to pull 4 bytes from \icode{titleMusicSeedArray} and
+store them in \icode{titleMusicNoteArray}]{tmp.asm}
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{933}{950}%
+\lstinputlisting[caption=Our seed bank for 4-byte sequences. It's 64 bytes long\, giving 16 possibles sequences in all.]{tmp.asm}
+
+The real source of variety here is this 'seed value' that we pluck at the very start of the process.
+This is done by \icode{PutProceduralByteInAccumulator} at the very start of \icode{SelectNewNotesToPlay}.
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{1053}{1066}%
+\lstinputlisting[caption=Our seed value ultimately comes from \icode{sourceOfSeedBytes}.]{tmp.asm}
+
+And \icode{sourceOfSeedBytes} turns out to be a string of 256 random-looking data at \icode{\$9A00}:
+
+\CopyPartialFile{../iridisalpha/src/graphics/planet_surface.asm}{tmp.asm}{593}{628}%
+\lstinputlisting[caption=Our seed value ultimately comes from \icode{sourceOfSeedBytes}., basicstyle=\tiny]{tmp.asm}
+
+As you might have guessed by now, given that there are only 16 possible sequences to choose from the seed bank there must
+actually be a lot less than a hundred thousand billion possible them tunes. With only 16 sequences there may even be
+only 16!
+
+Well yes, there are certainly a lot closer to just 16 than a hundred thousand billion. The variety of values we get
+from \icode{sourceOfSeedBytes} is not really of any account in the number of tunes we can generate. We're just using it to get pseudo-random but
+relatively predicatble values between 0 and 15 and using that to choose one of the 16 4-byte 'tune seeds'.
+
+There's an additional bit of variability that gives us more than just 16 tunes though. This is the value we add to
+the note's index before we play it:
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{861}{868}%
+\lstinputlisting[caption=\icode{offsetForNextVoice3Note} introduces additional tune permutations.]{tmp.asm}
+
+When we select a new tune the value \icode{offsetForNextVoice3Note} may be carrying over a value from the previous tune so
+rather than be a consistent value every time the 'tune seed' is selected, it will vary in value. The result is that the
+logic will select a different note-group even though it used the same 4-byte 'tune seed'.
+
+Since the value in \icode{offsetForNextVoice3Note} is ultimately loaded from \icode{titleMusicSeedArray}:
+
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{797}{799}%
+\lstinputlisting[caption=\icode{offsetForNextVoice1Note} is loaded from \icode{titleMusicNoteArray} and is propagated down
+to \icode{offsetForNextVoice3Note}.]{tmp.asm}
+
+In practice there are 16 possible voice note sequences and 12 unique possible byte values to load from \icode{titleMusicSeedArray}
+so there are 192 possible tunes.
+
+[ I can only get it to generate 80 so I'm missing something here.]
+
+So the Hundred Thousand Billion is a lie. Iridis will indeed play a hundred thousand billion times if you 
+leave it running long enough but ultimately even when we account for variations in key it can only ever play
+192 unique title tunes.
+
+Sorry for getting your hopes up.
 
 

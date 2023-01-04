@@ -1,0 +1,23 @@
+
+%abc-2.2
+%%pagewidth 35cm
+%%header "Example		page: $P"
+%%footer "	$T"
+%%gutter .5cm
+%%barsperstaff 16
+%%titleformat R-P-Q-T C1 O1, T+T N1
+%%composerspace 0
+X: 2 % start of header
+T:Iridis Alpha Title Theme
+T:46 of 100,000,000,000,000
+C: (Sid.)
+O: Jeff Minter
+R:Procedurally Generated
+L: 1/8
+K: D % scale: C major
+V:1 name="Voice 1"
+E16    |     |     |     | F16    |     |     |     | G16    |     |     |     | F16    |     |     |     | D16    |     |     |     | ^D16    |     |     |     | F16    |     |     |     | ^D16    |     |     |     | ^D16    |     |     |     | E16    |     |     |     | ^F16    |     |     |     | E16    |     |     |     | F16    |     |     |     | ^F16    |     |     |     | ^G16    |     |     |     | ^F16    |     |     |     | :|
+V:2 name="Voice 2"
+B4    | c4    | d4    | c4    | c4    | ^c4    | ^d4    | ^c4    | d4    | ^d4    | f4    | ^d4    | c4    | ^c4    | ^d4    | ^c4    | A4    | ^A4    | c4    | ^A4    | ^A4    | B4    | ^c4    | B4    | c4    | ^c4    | ^d4    | ^c4    | ^A4    | B4    | ^c4    | B4    | ^A4    | B4    | ^c4    | B4    | B4    | c4    | d4    | c4    | ^c4    | d4    | e4    | d4    | B4    | c4    | d4    | c4    | c4    | ^c4    | ^d4    | ^c4    | ^c4    | d4    | e4    | d4    | ^d4    | e4    | ^f4    | e4    | ^c4    | d4    | e4    | d4    | :|
+V:3 name="Voice 3"
+^f1g1a1g1|g1^g1^a1^g1|a1^a1c'1^a1|g1^g1^a1^g1|g1^g1^a1^g1|^g1a1b1a1|^a1b1^c'1b1|^g1a1b1a1|a1^a1c'1^a1|^a1b1^c'1b1|c'1^c'1^d'1^c'1|^a1b1^c'1b1|g1^g1^a1^g1|^g1a1b1a1|^a1b1^c'1b1|^g1a1b1a1|e1f1g1f1|f1^f1^g1^f1|g1^g1^a1^g1|f1^f1^g1^f1|f1^f1^g1^f1|^f1g1a1g1|^g1a1b1a1|^f1g1a1g1|g1^g1^a1^g1|^g1a1b1a1|^a1b1^c'1b1|^g1a1b1a1|f1^f1^g1^f1|^f1g1a1g1|^g1a1b1a1|^f1g1a1g1|f1^f1^g1^f1|^f1g1a1g1|^g1a1b1a1|^f1g1a1g1|^f1g1a1g1|g1^g1^a1^g1|a1^a1c'1^a1|g1^g1^a1^g1|^g1a1b1a1|a1^a1c'1^a1|b1c'1d'1c'1|a1^a1c'1^a1|^f1g1a1g1|g1^g1^a1^g1|a1^a1c'1^a1|g1^g1^a1^g1|g1^g1^a1^g1|^g1a1b1a1|^a1b1^c'1b1|^g1a1b1a1|^g1a1b1a1|a1^a1c'1^a1|b1c'1d'1c'1|a1^a1c'1^a1|^a1b1^c'1b1|b1c'1d'1c'1|^c'1d'1e'1d'1|b1c'1d'1c'1|^g1a1b1a1|a1^a1c'1^a1|b1c'1d'1c'1|a1^a1c'1^a1|:|

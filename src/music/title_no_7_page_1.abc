@@ -1,6 +1,6 @@
 
 %abc-2.2
-%%pagewidth 30cm
+%%pagewidth 35cm
 %%header "Example		page: $P"
 %%footer "	$T"
 %%gutter .5cm
@@ -16,8 +16,8 @@ R:Procedurally Generated
 L: 1/8
 K: D % scale: C major
 V:1 name="Voice 1"
-z15    |     |     |    G,16 |     |     |     |    G,16 |     |     |     |    D16 |     |     |     |    C,16 |     |     |     |    C,16 |     |     |     |    C,16 |     |     |     |    G,16 |     |     |     |    C,16 |     |     |     |    C,16 |     |     |     |    C,16 |     |     |     |    G,16 |     |     |     |    C,16 |     |     |     |    C,16 |     |     |     |    C,16 |     |     |     |    G,16 |     |     |     |    B, | :|
+G,16    |     |     |     | G,16    |     |     |     | G,16    |     |     |     | D16    |     |     |     | C,16    |     |     |     | C,16    |     |     |     | C,16    |     |     |     | G,16    |     |     |     | C,16    |     |     |     | C,16    |     |     |     | C,16    |     |     |     | G,16    |     |     |     | C,16    |     |     |     | C,16    |     |     |     | C,16    |     |     |     | G,16    |     |     |     | :|
 V:2 name="Voice 2"
-z3   G,4 |    G,4 |    D4 |    G,4 |    G,4 |    G,4 |    D4 |    G,4 |    G,4 |    G,4 |    D4 |    D4 |    D4 |    D4 |    A4 |    C,4 |    C,4 |    C,4 |    G,4 |    C,4 |    C,4 |    C,4 |    G,4 |    C,4 |    C,4 |    C,4 |    G,4 |    G,4 |    G,4 |    G,4 |    D4 |    C,4 |    C,4 |    C,4 |    G,4 |    C,4 |    C,4 |    C,4 |    G,4 |    C,4 |    C,4 |    C,4 |    G,4 |    G,4 |    G,4 |    G,4 |    D4 |    C,4 |    C,4 |    C,4 |    G,4 |    C,4 |    C,4 |    C,4 |    G,4 |    C,4 |    C,4 |    C,4 |    G,4 |    G,4 |    G,4 |    G,4 |    D4 |    ^D | :|
+G,4    | G,4    | G,4    | D4    | G,4    | G,4    | G,4    | D4    | G,4    | G,4    | G,4    | D4    | D4    | D4    | D4    | A4    | C,4    | C,4    | C,4    | G,4    | C,4    | C,4    | C,4    | G,4    | C,4    | C,4    | C,4    | G,4    | G,4    | G,4    | G,4    | D4    | C,4    | C,4    | C,4    | G,4    | C,4    | C,4    | C,4    | G,4    | C,4    | C,4    | C,4    | G,4    | G,4    | G,4    | G,4    | D4    | C,4    | C,4    | C,4    | G,4    | C,4    | C,4    | C,4    | G,4    | C,4    | C,4    | C,4    | G,4    | G,4    | G,4    | G,4    | D4    | :|
 V:3 name="Voice 3"
-G,1G,1D1G,1|G,1G,1D1G,1|G,1G,1D1D1|D1D1A1G,1|G,1G,1D1G,1|G,1G,1D1G,1|G,1G,1D1D1|D1D1A1G,1|G,1G,1D1G,1|G,1G,1D1G,1|G,1G,1D1D1|D1D1A1D1|D1D1A1D1|D1D1A1D1|D1D1A1A1|A1A1e1C,1|C,1C,1G,1C,1|C,1C,1G,1C,1|C,1C,1G,1G,1|G,1G,1D1C,1|C,1C,1G,1C,1|C,1C,1G,1C,1|C,1C,1G,1G,1|G,1G,1D1C,1|C,1C,1G,1C,1|C,1C,1G,1C,1|C,1C,1G,1G,1|G,1G,1D1G,1|G,1G,1D1G,1|G,1G,1D1G,1|G,1G,1D1D1|D1D1A1C,1|C,1C,1G,1C,1|C,1C,1G,1C,1|C,1C,1G,1G,1|G,1G,1D1C,1|C,1C,1G,1C,1|C,1C,1G,1C,1|C,1C,1G,1G,1|G,1G,1D1C,1|C,1C,1G,1C,1|C,1C,1G,1C,1|C,1C,1G,1G,1|G,1G,1D1G,1|G,1G,1D1G,1|G,1G,1D1G,1|G,1G,1D1D1|D1D1A1C,1|C,1C,1G,1C,1|C,1C,1G,1C,1|C,1C,1G,1G,1|G,1G,1D1C,1|C,1C,1G,1C,1|C,1C,1G,1C,1|C,1C,1G,1G,1|G,1G,1D1C,1|C,1C,1G,1C,1|C,1C,1G,1C,1|C,1C,1G,1G,1|G,1G,1D1G,1|G,1G,1D1G,1|G,1G,1D1G,1|G,1G,1D1D1|D1D1A1G|:|
+G,1G,1G,1D1|G,1G,1G,1D1|G,1G,1G,1D1|D1D1D1A1|G,1G,1G,1D1|G,1G,1G,1D1|G,1G,1G,1D1|D1D1D1A1|G,1G,1G,1D1|G,1G,1G,1D1|G,1G,1G,1D1|D1D1D1A1|D1D1D1A1|D1D1D1A1|D1D1D1A1|A1A1A1e1|C,1C,1C,1G,1|C,1C,1C,1G,1|C,1C,1C,1G,1|G,1G,1G,1D1|C,1C,1C,1G,1|C,1C,1C,1G,1|C,1C,1C,1G,1|G,1G,1G,1D1|C,1C,1C,1G,1|C,1C,1C,1G,1|C,1C,1C,1G,1|G,1G,1G,1D1|G,1G,1G,1D1|G,1G,1G,1D1|G,1G,1G,1D1|D1D1D1A1|C,1C,1C,1G,1|C,1C,1C,1G,1|C,1C,1C,1G,1|G,1G,1G,1D1|C,1C,1C,1G,1|C,1C,1C,1G,1|C,1C,1C,1G,1|G,1G,1G,1D1|C,1C,1C,1G,1|C,1C,1C,1G,1|C,1C,1C,1G,1|G,1G,1G,1D1|G,1G,1G,1D1|G,1G,1G,1D1|G,1G,1G,1D1|D1D1D1A1|C,1C,1C,1G,1|C,1C,1C,1G,1|C,1C,1C,1G,1|G,1G,1G,1D1|C,1C,1C,1G,1|C,1C,1C,1G,1|C,1C,1C,1G,1|G,1G,1G,1D1|C,1C,1C,1G,1|C,1C,1C,1G,1|C,1C,1C,1G,1|G,1G,1G,1D1|G,1G,1G,1D1|G,1G,1G,1D1|G,1G,1G,1D1|D1D1D1A1|:|

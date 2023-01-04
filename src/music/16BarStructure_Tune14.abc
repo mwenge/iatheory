@@ -1,0 +1,24 @@
+
+X:1
+%%titleformat R-P-Q-T C1 O1, T+T N1
+%%pagewidth 35cm
+%%barsperstaff 16
+T: Iridis Alpha: 14 of 100,000,000,000,000
+T: The 16 Bar Basic Structure.
+L: 1/8
+K: D % scale: C major
+V:1 name="Voice 1"
+C16    |     |     |     |
+A,16    |     |     |     | 
+F,16    |     |     |     | 
+F16    |     |     |     |
+V:2 name="Voice 2"
+G4    | E4    | C4    | c4    |
+E4    | ^C4    | A,4    | A4    | 
+C4    | A,4    | F,4    | F4    | 
+c4    | A4    | F4    | f4    |
+V:3 name="Voice 3"
+d1B1G1g1|B1^G1E1e1|G1E1C1c1|g1e1c1c'1|
+B1^G1E1e1|^G1F1^C1^c1|E1^C1A,1A1|e1^c1A1a1|
+G1E1C1c1|E1^C1A,1A1|C1A,1F,1F1|c1A1F1f1|
+g1e1c1c'1|e1^c1A1a1|c1A1F1f1|c'1a1f1f'1|

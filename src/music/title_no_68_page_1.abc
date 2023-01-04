@@ -1,0 +1,23 @@
+
+%abc-2.2
+%%pagewidth 35cm
+%%header "Example		page: $P"
+%%footer "	$T"
+%%gutter .5cm
+%%barsperstaff 16
+%%titleformat R-P-Q-T C1 O1, T+T N1
+%%composerspace 0
+X: 2 % start of header
+T:Iridis Alpha Title Theme
+T:68 of 100,000,000,000,000
+C: (Sid.)
+O: Jeff Minter
+R:Procedurally Generated
+L: 1/8
+K: D % scale: C major
+V:1 name="Voice 1"
+F16    |     |     |     | C16    |     |     |     | C16    |     |     |     | F16    |     |     |     | ^A,16    |     |     |     | F,16    |     |     |     | F,16    |     |     |     | ^A,16    |     |     |     | F,16    |     |     |     | C,16    |     |     |     | C,16    |     |     |     | F,16    |     |     |     | F,16    |     |     |     | C,16    |     |     |     | C,16    |     |     |     | F,16    |     |     |     | :|
+V:2 name="Voice 2"
+^A4    | F4    | F4    | ^A4    | F4    | C4    | C4    | F4    | F4    | C4    | C4    | F4    | ^A4    | F4    | F4    | ^A4    | ^D4    | ^A,4    | ^A,4    | ^D4    | ^A,4    | F,4    | F,4    | ^A,4    | ^A,4    | F,4    | F,4    | ^A,4    | ^D4    | ^A,4    | ^A,4    | ^D4    | ^A,4    | F,4    | F,4    | ^A,4    | F,4    | C,4    | C,4    | F,4    | F,4    | C,4    | C,4    | F,4    | ^A,4    | F,4    | F,4    | ^A,4    | ^A,4    | F,4    | F,4    | ^A,4    | F,4    | C,4    | C,4    | F,4    | F,4    | C,4    | C,4    | F,4    | ^A,4    | F,4    | F,4    | ^A,4    | :|
+V:3 name="Voice 3"
+^d1^A1^A1^d1|^A1F1F1^A1|^A1F1F1^A1|^d1^A1^A1^d1|^A1F1F1^A1|F1C1C1F1|F1C1C1F1|^A1F1F1^A1|^A1F1F1^A1|F1C1C1F1|F1C1C1F1|^A1F1F1^A1|^d1^A1^A1^d1|^A1F1F1^A1|^A1F1F1^A1|^d1^A1^A1^d1|^G1^D1^D1^G1|^D1^A,1^A,1^D1|^D1^A,1^A,1^D1|^G1^D1^D1^G1|^D1^A,1^A,1^D1|^A,1F,1F,1^A,1|^A,1F,1F,1^A,1|^D1^A,1^A,1^D1|^D1^A,1^A,1^D1|^A,1F,1F,1^A,1|^A,1F,1F,1^A,1|^D1^A,1^A,1^D1|^G1^D1^D1^G1|^D1^A,1^A,1^D1|^D1^A,1^A,1^D1|^G1^D1^D1^G1|^D1^A,1^A,1^D1|^A,1F,1F,1^A,1|^A,1F,1F,1^A,1|^D1^A,1^A,1^D1|^A,1F,1F,1^A,1|F,1C,1C,1F,1|F,1C,1C,1F,1|^A,1F,1F,1^A,1|^A,1F,1F,1^A,1|F,1C,1C,1F,1|F,1C,1C,1F,1|^A,1F,1F,1^A,1|^D1^A,1^A,1^D1|^A,1F,1F,1^A,1|^A,1F,1F,1^A,1|^D1^A,1^A,1^D1|^D1^A,1^A,1^D1|^A,1F,1F,1^A,1|^A,1F,1F,1^A,1|^D1^A,1^A,1^D1|^A,1F,1F,1^A,1|F,1C,1C,1F,1|F,1C,1C,1F,1|^A,1F,1F,1^A,1|^A,1F,1F,1^A,1|F,1C,1C,1F,1|F,1C,1C,1F,1|^A,1F,1F,1^A,1|^D1^A,1^A,1^D1|^A,1F,1F,1^A,1|^A,1F,1F,1^A,1|^D1^A,1^A,1^D1|:|

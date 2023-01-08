@@ -1,0 +1,303 @@
+
+
+TAPClean version: 0.38
+
+GENERAL INFO AND TEST RESULTS
+
+TAP Name    : /home/robert/Dev/iatheory/notebooks/visualize_1541/tape/iridis-alpha.tap
+TAP Size    : 526958 bytes (514 kB)
+TAP Version : 0
+Recognized  : 98%
+Data Files  : 8
+Pauses      : 8
+Gaps        : 6
+Magic CRC32 : 9D7A7034
+TAP Time    : 3:40.37
+Bootable    : YES (1 part, name: IRIDIS)
+Loader ID   : Mega-Save
+
+Overall Result    : FAIL
+
+Header test       : PASS [Sig: OK] [Ver: OK] [Siz: OK]
+Recognition test  : FAIL [517605 of 526938 bytes accounted for] [98%]
+Checksum test     : PASS [8 of 8 checksummed files OK]
+Read test         : PASS [0 Errors]
+Optimization test : FAIL [0 of 8 files OK]
+
+
+
+
+
+
+FILE FREQUENCY TABLE
+
+UNRECOGNIZED (6)
+PAUSE (8)
+C64 ROM-TAPE HEADER (2)
+C64 ROM-TAPE DATA (2)
+MEGA-SAVE T2 (4)
+
+
+
+
+
+FILE DATABASE
+
+---------------------------------
+Seq. no.: 1
+File Type: PAUSE
+Location: $0014 -> $0000 -> $0000 -> $0014
+ - Length : 20000 cycles (0.0203 secs)
+
+---------------------------------
+Seq. no.: 2
+File Type: UNRECOGNIZED
+Location: $0015 -> $0000 -> $0000 -> $0016
+ - Length = 2 pulses
+
+---------------------------------
+Seq. no.: 3
+File Type: C64 ROM-TAPE HEADER
+Location: $0017 -> $6AC9 -> $79C9 -> $79DE
+LA: $033C  EA: $03FB  SZ: 192
+File Name: IRIDIS
+Pilot/Trailer Size: 27134/0
+Checkbyte Actual/Expected: $E4/$E4, PASS
+Read Errors: 0
+Unoptimized Pulses: 18359
+CRC32: B5E6013D
+ - File ID : FIRST
+ - DATA FILE type : PRG
+ - DATA FILE Load address : $02A7
+ - DATA FILE End address : $0304
+ - DATA FILE Size (calculated) : 93 bytes
+
+---------------------------------
+Seq. no.: 4
+File Type: C64 ROM-TAPE HEADER
+Location: $79DF -> $7AE2 -> $89E2 -> $8A45
+LA: $033C  EA: $03FB  SZ: 192
+File Name: IRIDIS
+Pilot/Trailer Size: 79/78
+Checkbyte Actual/Expected: $E4/$E4, PASS
+Read Errors: 0
+Unoptimized Pulses: 2345
+CRC32: B5E6013D
+ - File ID : REPEAT
+ - DATA FILE type : PRG
+ - DATA FILE Load address : $02A7
+ - DATA FILE End address : $0304
+ - DATA FILE Size (calculated) : 93 bytes
+
+---------------------------------
+Seq. no.: 5
+File Type: PAUSE
+Location: $8A46 -> $0000 -> $0000 -> $8A57
+ - Length : 360000 cycles (0.3654 secs)
+
+---------------------------------
+Seq. no.: 6
+File Type: C64 ROM-TAPE DATA
+Location: $8A58 -> $A00B -> $A74F -> $A764
+LA: $02A7  EA: $0303  SZ: 93
+Pilot/Trailer Size: 5375/0
+Checkbyte Actual/Expected: $53/$53, PASS
+Read Errors: 0
+Unoptimized Pulses: 4065
+CRC32: 366784C8
+ - File ID : FIRST
+
+---------------------------------
+Seq. no.: 7
+File Type: C64 ROM-TAPE DATA
+Location: $A765 -> $A868 -> $AFAC -> $B00F
+LA: $02A7  EA: $0303  SZ: 93
+Pilot/Trailer Size: 79/78
+Checkbyte Actual/Expected: $53/$53, PASS
+Read Errors: 0
+Unoptimized Pulses: 1299
+CRC32: 366784C8
+ - File ID : REPEAT
+
+---------------------------------
+Seq. no.: 8
+File Type: PAUSE
+Location: $B010 -> $0000 -> $0000 -> $B0D6
+ - Length : 3980000 cycles (4.0396 secs)
+
+---------------------------------
+Seq. no.: 9
+File Type: UNRECOGNIZED
+Location: $B0D7 -> $0000 -> $0000 -> $B8DC
+ - Length = 2054 pulses
+
+---------------------------------
+Seq. no.: 10
+File Type: MEGA-SAVE T2
+Location: $B8DD -> $C2AD -> $682F5 -> $682FC
+LA: $0800  EA: $BFFE  SZ: 47103
+Pilot/Trailer Size: 157/0
+Checkbyte Actual/Expected: $CF/$CF, PASS
+Read Errors: 0
+Unoptimized Pulses: 360244
+CRC32: F85EA153
+ - Pre-pilot byte count : 0
+ - Post-sync value : $01
+ - Re-execute loader : Yes
+
+---------------------------------
+Seq. no.: 11
+File Type: PAUSE
+Location: $682FD -> $0000 -> $0000 -> $683BB
+ - Length : 3820000 cycles (3.8772 secs)
+
+---------------------------------
+Seq. no.: 12
+File Type: UNRECOGNIZED
+Location: $683BC -> $0000 -> $0000 -> $68B8A
+ - Length = 1999 pulses
+
+---------------------------------
+Seq. no.: 13
+File Type: MEGA-SAVE T2
+Location: $68B8B -> $69593 -> $69DE3 -> $69DEA
+LA: $BF00  EA: $BFFF  SZ: 256
+Pilot/Trailer Size: 158/0
+Checkbyte Actual/Expected: $60/$60, PASS
+Read Errors: 0
+Unoptimized Pulses: 4326
+CRC32: 8E3A7785
+ - Pre-pilot byte count : 6
+ - Post-sync value : $01
+ - Re-execute loader : Yes
+
+---------------------------------
+Seq. no.: 14
+File Type: PAUSE
+Location: $69DEB -> $0000 -> $0000 -> $69EB7
+ - Length : 4100000 cycles (4.1614 secs)
+
+---------------------------------
+Seq. no.: 15
+File Type: UNRECOGNIZED
+Location: $69EB8 -> $0000 -> $0000 -> $6A6A6
+ - Length = 2031 pulses
+
+---------------------------------
+Seq. no.: 16
+File Type: MEGA-SAVE T2
+Location: $6A6A7 -> $6B08F -> $730D7 -> $730DE
+LA: $C000  EA: $CFFE  SZ: 4095
+Pilot/Trailer Size: 158/0
+Checkbyte Actual/Expected: $6D/$6D, PASS
+Read Errors: 0
+Unoptimized Pulses: 33426
+CRC32: E2FB8ECD
+ - Pre-pilot byte count : 2
+ - Post-sync value : $01
+ - Re-execute loader : Yes
+
+---------------------------------
+Seq. no.: 17
+File Type: PAUSE
+Location: $730DF -> $0000 -> $0000 -> $731A6
+ - Length : 4000000 cycles (4.0599 secs)
+
+---------------------------------
+Seq. no.: 18
+File Type: UNRECOGNIZED
+Location: $731A7 -> $0000 -> $0000 -> $739AD
+ - Length = 2055 pulses
+
+---------------------------------
+Seq. no.: 19
+File Type: MEGA-SAVE T2
+Location: $739AE -> $7437E -> $803CE -> $803D5
+LA: $E000  EA: $F7FF  SZ: 6144
+Pilot/Trailer Size: 157/0
+Checkbyte Actual/Expected: $D1/$D1, PASS
+Read Errors: 0
+Unoptimized Pulses: 48206
+CRC32: 5B4ABC85
+ - Pre-pilot byte count : 0
+ - Post-sync value : $01
+ - Re-execute loader : No
+ - Execution by : JMP $0810 (SYS 2064)
+
+---------------------------------
+Seq. no.: 20
+File Type: PAUSE
+Location: $803D6 -> $0000 -> $0000 -> $804D4
+ - Length : 5100000 cycles (5.1764 secs)
+
+---------------------------------
+Seq. no.: 21
+File Type: UNRECOGNIZED
+Location: $804D5 -> $0000 -> $0000 -> $8097C
+ - Length = 1192 pulses
+
+---------------------------------
+Seq. no.: 22
+File Type: PAUSE
+Location: $8097D -> $0000 -> $0000 -> $80A6D
+ - Length : 4800000 cycles (4.8719 secs)
+
+
+
+
+
+
+PULSE FREQUENCY TABLE
+
+0x02 (1)
+0x03 (21)
+0x04 (132)
+0x05 (102)
+0x06 (126)
+0x07 (248)
+0x08 (273)
+0x09 (198)
+0x0A (87)
+0x0D (1)
+0x0E (1)
+0x10 (1)
+0x11 (1)
+0x25 (2)
+0x26 (33)
+0x27 (9285)
+0x28 (185455)
+0x29 (47459)
+0x2A (54373)
+0x2B (25033)
+0x2C (884)
+0x2D (433)
+0x2E (7)
+0x2F (962)
+0x30 (15672)
+0x31 (20292)
+0x32 (1401)
+0x33 (2025)
+0x34 (33310)
+0x35 (41067)
+0x36 (25136)
+0x37 (51833)
+0x38 (3052)
+0x39 (7)
+0x3F (19)
+0x40 (296)
+0x41 (781)
+0x42 (3078)
+0x43 (1379)
+0x44 (477)
+0x45 (65)
+0x46 (5)
+0x54 (87)
+0x55 (183)
+0x56 (213)
+0x57 (97)
+0x58 (34)
+0x5D (1)
+
+
+
+

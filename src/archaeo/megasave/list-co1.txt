@@ -1,0 +1,136 @@
+
+; 64tass Turbo Assembler Macro V1.56.2625? listing file
+; 64tass -Wall -Wno-implied-reg --cbm-prg -o loader.prg -L list-co1.txt loader2.asm
+; Thu Jan  5 19:56:18 2023
+
+;Offset	;Hex		;Monitor	;Source
+
+;******  Processing input file: loader2.asm
+
+>033c	03 a7 02 04 03 49 52 49		T033C   .byte $03,$A7,$02,$04,$03,$49,$52,$49,$44,$49,$53,$00,$00,$00,$00,$00
+>0344	44 49 53 00 00 00 00 00
+>034c	00 00 00 00 00			T034C   .byte $00,$00,$00,$00,$00
+.0351	78		sei		J0351   SEI
+.0352	a9 6e		lda #$6e	        LDA #$6E      ; Set the read bit timer/counter threshold to 0x0107
+.0354	8d 06 dd	sta $dd06	        STA $DD06
+.0357	a2 01		ldx #$01	        LDX #$01
+.0359	20 d4 02	jsr $02d4	_align  JSR rd_bit    ; Read a bit
+.035c	26 f7		rol $f7		        ROL $F7       ; Shift each of them into the byte receive register, MSbF
+.035e	a5 f7		lda $f7		        LDA $F7
+.0360	c9 63		cmp #$63	        CMP #$63      ; Until the first occurrence of 0x63 (pilot byte) is received
+.0362	d0 f5		bne $0359	        BNE _align
+.0364	a0 64		ldy #$64	        LDY #$64      ; Pre-load the first expected sync byte in Y
+.0366	20 e7 03	jsr $03e7	_pilot  JSR rd_byte   ; Keep reading bytes until the pilot train is over
+.0369	c9 63		cmp #$63	        CMP #$63
+.036b	f0 f9		beq $0366	        BEQ _pilot
+.036d	c4 f7		cpy $f7		_sync   CPY $F7       ; Is the currently expected sync byte following?
+.036f	d0 e8		bne $0359	        BNE _align    ; Start over if not
+.0371	20 e7 03	jsr $03e7	        JSR rd_byte   ; Read byte
+.0374	c8		iny		        INY           ; Bump the expected sync byte value
+.0375	d0 f6		bne $036d	        BNE _sync     ; Read the whole sync sequence (0x64-0xff inclusive)
+.0377	c9 00		cmp #$00	        CMP #$00      ; In absence of issues A is set to 0x01 here
+.0379	f0 d6		beq $0351	        BEQ J0351
+.037b	20 e7 03	jsr $03e7	_header JSR rd_byte   ; Read 10 header bytes
+.037e	99 2b 00	sta $002b,y	        STA $002B,Y   ; Overwrite BASIC program pointers
+.0381	99 f9 00	sta $00f9,y	        STA $00F9,Y   ; Also store them in RAM where they will be changed
+.0384	c8		iny		        INY
+.0385	c0 0a		cpy #$0a	        CPY #$0A
+.0387	d0 f2		bne $037b	        BNE _header
+.0389	a0 00		ldy #$00	        LDY #$00
+.038b	84 90		sty $90		        STY $90       ; Zero the status flags (not set by this code)
+.038d	84 02		sty $02		        STY $02       ; Zero the checkbyte register
+.038f	20 e7 03	jsr $03e7	_data   JSR rd_byte   ; Read a byte
+.0392	91 f9		sta ($f9),y	        STA ($F9),Y   ; Store in RAM
+.0394	45 02		eor $02		        EOR $02       ; Update the checkbyte value
+.0396	85 02		sta $02		        STA $02
+.0398	e6 f9		inc $f9		        INC $F9       ; Bump the destination pointer
+.039a	d0 02		bne $039e	        BNE _check_complete
+.039c	e6 fa		inc $fa		        INC $FA
+.039e					_check_complete
+.039e	a5 f9		lda $f9		        LDA $F9       ; And check if the file is complete
+.03a0	c5 2d		cmp $2d		        CMP $2D       ; by comparing the destination pointer
+.03a2	a5 fa		lda $fa		        LDA $FA       ; to its one-past-end value
+.03a4	e5 2e		sbc $2e		        SBC $2E
+.03a6	90 e7		bcc $038f	        BCC _data
+.03a8	20 e7 03	jsr $03e7	        JSR rd_byte   ; Read a byte
+.03ab	c8		iny		        INY
+.03ac	84 c0		sty $c0		        STY $C0       ; Control motor via software
+.03ae	58		cli		        CLI
+.03af	18		clc		        CLC
+.03b0	a9 00		lda #$00	        LDA #$00      ; Make sure the call to $FC93 does not restore the standard IRQ
+.03b2	8d a0 02	sta $02a0	        STA $02A0
+.03b5	20 93 fc	jsr $fc93	        JSR $FC93     ; Disable interrupts, un-blank the screen, and stop cassette motor
+.03b8	20 53 e4	jsr $e453	        JSR $E453     ; Copy BASIC vectors to RAM
+.03bb	a5 f7		lda $f7		        LDA $F7       ; Compare saved and computed checkbytes
+.03bd	45 02		eor $02		        EOR $02
+.03bf	05 90		ora $90		        ORA $90       ; And check that the status flags do not indicate an error
+.03c1	f0 03		beq $03c6	        BEQ *+5
+.03c3	4c e2 fc	jmp $fce2	        JMP $FCE2     ; Soft-reset if any of the above checks fails
+.03c6	a5 31		lda $31		        LDA $31       ; Check flag #1
+.03c8	f0 03		beq $03cd	        BEQ *+5       ; If not set move on
+.03ca	4c b9 02	jmp $02b9	        JMP J02B9     ; Otherwise re-execute the loader
+.03cd	a5 32		lda $32		        LDA $32       ; Check flag #2
+.03cf	f0 03		beq $03d4	        BEQ *+5       ; If not set move on in order to issue a BASIC RUN command
+.03d1	6c 2f 00	jmp ($002f)	        JMP ($002F)   ; Otherwise execute a custom routine pointed by the vector $2f/$30
+.03d4	20 33 a5	jsr $a533	        JSR $A533     ; Relink lines of tokenized program text
+.03d7	a2 03		ldx #$03	        LDX #$03      ; Set the number of characters in keyboard buffer to 3
+.03d9	86 c6		stx $c6		        STX $C6
+.03db	bd f3 02	lda $02f3,x	        LDA T02F4-1,X ; And copy R, <shift> + U, <return> into the buffer
+.03de	9d 76 02	sta $0276,x	        STA $0276,X
+.03e1	ca		dex		        DEX
+.03e2	d0 f7		bne $03db	        BNE *-7
+.03e4	4c e9 02	jmp $02e9	        JMP J02E9
+.03e7	a9 07		lda #$07	rd_byte LDA #$07      ; Prepare for 8 bits
+.03e9	85 f8		sta $f8		        STA $F8       ; Using $f8 as a counter
+.03eb	20 d4 02	jsr $02d4	B03EB   JSR rd_bit    ; Read a bit
+.03ee	26 f7		rol $f7		        ROL $F7       ; Shift each of them into the byte receive register, MSbF
+.03f0	ee 20 d0	inc $d020	        INC $D020
+.03f3	c6 f8		dec $f8		        DEC $F8       ; And loop until 8 bits are received
+.03f5	10 f4		bpl $03eb	        BPL B03EB
+.03f7	a5 f7		lda $f7		        LDA $F7       ; Return read byte in A
+.03f9	60		rts		        RTS
+>03fa	00 00				        .align $03FC, $00 ; Padding
+.02a7	a9 80		lda #$80	NMIH    LDA #$80
+.02a9	05 91		ora $91		        ORA $91
+.02ab	4c ef f6	jmp $f6ef	        JMP $F6EF
+.02ae	a9 a7		lda #$a7	J02AE   LDA #<NMIH
+.02b0	78		sei		        SEI
+.02b1	8d 28 03	sta $0328	        STA $0328     ; Disable <Run Stop> + <Restore>
+.02b4	a9 02		lda #$02	        LDA #>NMIH
+.02b6	8d 29 03	sta $0329	        STA $0329
+.02b9	58		cli		J02B9   CLI
+.02ba	a0 00		ldy #$00	        LDY #$00
+.02bc	84 c6		sty $c6		        STY $C6       ; No char in keyboard buffer
+.02be	84 c0		sty $c0		        STY $C0       ; Enable tape motor
+.02c0	84 02		sty $02		        STY $02       ; Zero the checkbyte register (also done later on)
+.02c2	ad 11 d0	lda $d011	        LDA $D011     ; Blank the screen
+.02c5	29 ef		and #$ef	        AND #$EF
+.02c7	8d 11 d0	sta $d011	        STA $D011
+.02ca	ca		dex		        DEX           ; Wait a bit
+.02cb	d0 fd		bne $02ca	        BNE *-1
+.02cd	88		dey		        DEY
+.02ce	d0 fa		bne $02ca	        BNE *-4
+.02d0	78		sei		        SEI
+.02d1	4c 51 03	jmp $0351	        JMP J0351     ; Execute the main loader code
+.02d4	ad 0d dc	lda $dc0d	rd_bit  LDA $DC0D     ; Loop until a falling edge is detected
+.02d7	29 10		and #$10	        AND #$10      ; on the read line of the tape port
+.02d9	f0 f9		beq $02d4	        BEQ rd_bit
+.02db	ad 0d dd	lda $dd0d	        LDA $DD0D
+.02de	8e 07 dd	stx $dd07	        STX $DD07
+.02e1	4a		lsr a		        LSR
+.02e2	4a		lsr a		        LSR           ; Move read bit into the Carry flag
+.02e3	a9 19		lda #$19	        LDA #$19      ; Restart the bit read threshold timer/counter
+.02e5	8d 0f dd	sta $dd0f	        STA $DD0F
+.02e8	60		rts		        RTS
+.02e9	20 8e a6	jsr $a68e	J02E9   JSR $A68E     ; Reset pointer to current text character to the beginning of program text
+.02ec	a9 00		lda #$00	        LDA #$00
+.02ee	a8		tay		        TAY
+.02ef	91 7a		sta ($7a),y	        STA ($7A),Y
+.02f1	4c 74 a4	jmp $a474	        JMP $A474     ; Print READY
+>02f4	52 d5 0d			T02F4   .byte $52,$D5,$0D ; R, <shift> + U, <return>
+>02f7	00 00 00 00 00 00 00 00		        .align $0300, $00 ; Padding
+>02ff	00
+>0300	8b e3				T0300   .word $E38B ; Leave IERROR unchanged
+>0302	ae 02				        .word J02AE ; Autostart the turbo loader, once loaded, by overwriting IMAIN
+
+;******  End of listing

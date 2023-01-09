@@ -1,4 +1,4 @@
-\chapter{Some Light Archaeology} 
+\chapter{A Little Archaeology} 
 \lstset{style=6502Style}
 
 Iridis Alpha was distributed on cassette tape by the publisher Hewson Consultants. Normally used
@@ -37,6 +37,8 @@ a value of 1 or 0. When we get eights 1s and 0s we have a byte. We get enough by
 we can run!
 
 [http://unusedino.de/ec64/technical/formats/tap.html]
+https://www.c64-wiki.com/wiki/TAP
+https://www.luigidifraia.com/doku/doku.php?id=commodore:tapes:loaders:mega-save
 
 Someone, somewhere has kindly decoded the contents of the Iridis Alpha cassette tape distribution to
 a 'tap' file for us. So we have something to dig into. This is going to be a slightly bonkers journey
@@ -44,6 +46,15 @@ into the bowels of decoding a 54kb game file from over 500kb of raw data. Every 
 are nearly done there will be yet another convolution to wrap your head around. But at the end of it
 we will finally have our binary game file and will be ready to figure out how to decipher it into something
 approximating the original assembly langage.
+
+\begin{figure}[H]
+  {
+    \begin{adjustbox}{width=10cm,center}
+      \surface{archaeo/spool.png}
+    \end{adjustbox}
+  }\caption[]{Simple, right? Here each short-pulse sound is represented by a light grey pixel, each medium-duration pulse by a blue pixel,
+and each long pulse by a pink pixel. Roughly speaking, gray is a shorthand for 0 bits and dark pixels for 1 bits.}
+\end{figure}
 
 \subsection{The Madness Begins}
 
@@ -617,6 +628,13 @@ relative sizes of the red data (the MegaSave loader which is only actually 200 o
 50,000 bytes of game data) illustrates how efficient the MegaSave loader's storage is by comparison with the default.}
 \end{figure}
 
+\begin{figure}[H]
+  {
+    \begin{adjustbox}{width=10cm,center}
+      \surface{archaeo/spool-sections.png}
+    \end{adjustbox}
+  }\caption[]{Our image of the spool from the start of this chapter but this time with each section colored in as described in the previous image.}
+\end{figure}
 
 When it has completed it has loaded the following to RAM:
 

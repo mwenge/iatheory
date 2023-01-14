@@ -1,0 +1,183 @@
+\chapter{The First 16\textsuperscript{4} Theme Tunes} 
+
+It's possible to dig into the making of the title music and how Jeff Minter
+arrived the music configuration he did thanks to a number of tiny demo programs that
+survive from the period when he was developing Iridis Alpha.
+
+Jeff distributed these on Compunet in the summer of 1986.
+
+It turns out he was inspired by an article in 'Byte' magazine from June 1986 that
+described how to make 'Fractal Music'. This article outline a version of the
+algorithm that Jeff ultimately adopted. The 'self-similarity' we encountered
+in the way the Iridis Alpha theme tunes are constructed, a four-note structure
+repeated across different time intervals on each of the three voices, finds its
+roots in this article.
+
+
+\begin{figure}[H]
+{
+  \begin{adjustbox}{width=11cm,center}
+  \includegraphics[width=11cm]{torus/fractal.jpg}%
+    \end{adjustbox}
+}\caption[]{}
+\end{figure}
+
+
+\subsection{Taurus:Torus}
+\begin{figure}[H]
+{
+  \begin{adjustbox}{width=11cm,center}
+  \includegraphics[width=11cm]{torus/torus.png}%
+    \end{adjustbox}
+}\caption[]{}
+\end{figure}
+
+This first demo, released in July 1986(?), has a version of Iridis' music-generating
+algorithm that is nearly fully formed. However, the music it produces is quite
+different. In fact, it is nearer to a tool for listening to and selecting music than
+anything else.
+
+The four seed values in \icode{titleMusicNoteArray} that are used to seed all subequently
+generated tunes (\icode{00 07 0C 07} in Iridis Alpha) can be selected and changed by the
+user. They're called 'Oscillators' and each can be any value between 0 and 16, i.e. any of
+\icode{0 1 2 3 4 5 6 7 8 9 A B C D E F}.
+
+
+\lstset{style=6502Style}
+\lstinputlisting[caption=The music routine in Torus:Taurus side-by-side with Iridis Alpha.,basicstyle=\tiny]{torus/sidebyside.asm}
+
+When it runs the demo cycles through procedural configurations of \icode{titleMusicNoteArray} of 64 notes each.
+In other words, exactly the kind of fractal structure we observed in Iridis Alpha proper. The examples below
+give a flavour of the music it generats:
+
+\begin{figure}[H]
+{
+  \begin{adjustbox}{width=14cm,center}
+    \includegraphics[width=14cm]{torus/title_no_1_page_1001.png}}%
+  \end{adjustbox}
+}\caption[]{Bars 2 and 4 are always repeated}
+\end{figure}
+
+
+\begin{figure}[H]
+{
+  \begin{adjustbox}{width=14cm,center}
+    \includegraphics[width=14cm]{torus/title_no_2_page_1001.png}}%
+  \end{adjustbox}
+}\caption[]{Bars 2 and 4 are always repeated}
+\end{figure}
+
+Not all of the tunes are 64-note based. It does generate some that are truncated. 
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+	\centering
+	\def\MULTICOLORONE{green}
+	\def\MULTICOLORTWO{red}
+	\def\SPRITECOLOR{blue}
+		\input{sprites/BULLHEAD}
+  }\caption[position=top]{The 'Torus' sprite.}
+\end{figure}
+
+
+\subsection{Taurus/Torus Two}
+\begin{figure}[H]
+{
+  \begin{adjustbox}{width=11cm,center}
+  \includegraphics[width=11cm]{torus/torus2.png}%
+    \end{adjustbox}
+}\caption[]{}
+\end{figure}
+
+\lstset{style=6502Style}
+\lstinputlisting[caption=The music routine in Taurus:Torus II side-by-side with Iridis Alpha.,basicstyle=\tiny]{torus/sidebyside2.asm}
+
+
+\begin{figure}[H]
+{
+  \begin{adjustbox}{width=14cm,center}
+    \includegraphics[width=14cm]{torus/torus2_title_no_1_page_1001.png}%
+  \end{adjustbox}
+}\caption[]{}
+\end{figure}
+
+\begin{figure}[H]
+{
+  \begin{adjustbox}{width=14cm,center}
+    \includegraphics[width=14cm]{music/title_no_1_page_1001.png}%
+  \end{adjustbox}
+}\caption[]{}
+\end{figure}
+
+\subsection{Making the Bonus Bounty Animation}
+\begin{figure}[H]
+{
+  \setlength{\tabcolsep}{3.0pt}
+  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=12cm,center}
+  \begin{subfigure}{0.3\textwidth}
+  \includegraphics[width=4cm]{torus/bonusbounty.png}%
+  \end{subfigure}
+  \begin{subfigure}{0.3\textwidth}
+  \includegraphics[width=4cm]{torus/torus.png}%
+  \end{subfigure}
+  \end{adjustbox}
+}\caption[]{The Torus oscillator animation and Iridis' bonus animation.}
+\end{figure}
+
+The Torus demo is also where the elegant animation used when awarding a bonus was developed. The code
+handling each is identical and was only very lightly modified for the final game.
+
+\begin{minipage}[b]{0.45\linewidth}
+\centering
+\CopyPartialFile{../iridisalpha/demos/torus/src/torus.asm}{tmp.asm}{361}{412}%
+\lstinputlisting[caption=Animation in Torus Demo,basicstyle=\tiny]{tmp.asm}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}[b]{0.45\linewidth}
+\centering
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{5055}{5106}%
+\lstinputlisting[caption=... and Iridis Alpha,basicstyle=\tiny]{tmp.asm}
+\end{minipage}
+
+
+\begin{tcolorbox}[%
+  breakable,
+  parbox = false,
+  frame hidden,
+  sharp corners,
+  after skip=10pt,
+  overlay broken = {
+    \draw[]
+      (frame.north west) rectangle (frame.south east);},
+]{}
+A Testing Hack
+
+In the CheckKeyboardInGame Routine, we find the following:
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{7909}{7920}%
+\lstinputlisting[basicstyle=\tiny]{tmp.asm}
+
+In the above the `canAwardBonus` byte is the first letter in the name of the player with the top score in the Hi-Score table. By default this is 'YAK':
+\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{8713}{8716}%
+\lstinputlisting[basicstyle=\tiny]{tmp.asm}
+
+But if we change 'Y' to \icode{\$1C} like so, we can activate the hack:
+
+\begin{lstlisting}[basicstyle=\tiny]
+hiScoreTablePtr           .TEXT "0068000"
+canAwardBonus             .TEXT $1C,"AK "
+\end{lstlisting}
+
+Note that \icode{\$1C} is charset code for a bull's head symbol in Iridis Alpha, so it is also possible to enter this as the initial of a high scorer name if we get a score that puts us to the top of the table:
+
+\CopyPartialFile{../iridisalpha/src/graphics/charset.asm}{tmp.asm}{287}{296}%
+\lstinputlisting[basicstyle=\tiny]{tmp.asm}
+
+
+I'm guessing this was used for testing the animation routine and left in as an Easter egg.
+
+
+
+\end{tcolorbox}%

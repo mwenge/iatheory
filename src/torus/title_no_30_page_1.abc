@@ -1,0 +1,23 @@
+
+%abc-2.2
+%%pagewidth 35cm
+%%header "Example		page: $P"
+%%footer "	$T"
+%%gutter .5cm
+%%barsperstaff 16
+%%titleformat R-P-Q-T C1 O1, T+T N1
+%%composerspace 0
+X: 2 % start of header
+T:Torus:Taurus Tune
+T:30 of 100,000,000,000,000
+C: (Sid.)
+O: Jeff Minter
+R:Procedurally Generated
+L: 1/8
+K: D % scale: C major
+V:1 name="Voice 1"
+^A,16    |     |     |     | D16    |     |     |     | E16    |     |     |     | ^A,16    |     |     |     | :|
+V:2 name="Voice 2"
+^C4    | F4    | G4    | ^C4    | F4    | A4    | B4    | F4    | G4    | B4    | ^c4    | G4    | ^C4    | F4    | G4    | ^C4    | :|
+V:3 name="Voice 3"
+E1^G1^A1E1|^G1c1d1^G1|^A1d1e1^A1|E1^G1^A1E1|^G1c1d1^G1|c1e1^f1c1|d1^f1^g1d1|^G1c1d1^G1|^A1d1e1^A1|d1^f1^g1d1|e1^g1^a1e1|^A1d1e1^A1|E1^G1^A1E1|^G1c1d1^G1|^A1d1e1^A1|E1^G1^A1E1|:|

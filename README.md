@@ -2,6 +2,8 @@
 
 A deeper-than-is-possibly-sane dive into the workings of Iridis Alpha.
 
+Work-in-progress is available as a [Scrapbook Edition](out/iatheory_scrapbook.pdf).
+
 The build system and structure is based on 'The Book of CP-System' by Fabien Sanglard, of which this repository is a fork.
 
 ## How to build (Linux)

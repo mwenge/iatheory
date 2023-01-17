@@ -1,4 +1,4 @@
-\chapter{The First 16\textsuperscript{4} Theme Tunes} 
+\chapter{Another 16\textsuperscript{4} Tunes} 
 
 It's possible to dig into the making of the title music and how Jeff Minter
 arrived the music configuration he did thanks to a number of tiny demo programs that
@@ -111,73 +111,3 @@ Not all of the tunes are 64-note based. It does generate some that are truncated
 }\caption[]{}
 \end{figure}
 
-\subsection{Making the Bonus Bounty Animation}
-\begin{figure}[H]
-{
-  \setlength{\tabcolsep}{3.0pt}
-  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
-    \begin{adjustbox}{width=12cm,center}
-  \begin{subfigure}{0.3\textwidth}
-  \includegraphics[width=4cm]{torus/bonusbounty.png}%
-  \end{subfigure}
-  \begin{subfigure}{0.3\textwidth}
-  \includegraphics[width=4cm]{torus/torus.png}%
-  \end{subfigure}
-  \end{adjustbox}
-}\caption[]{The Torus oscillator animation and Iridis' bonus animation.}
-\end{figure}
-
-The Torus demo is also where the elegant animation used when awarding a bonus was developed. The code
-handling each is identical and was only very lightly modified for the final game.
-
-\begin{minipage}[b]{0.45\linewidth}
-\centering
-\CopyPartialFile{../iridisalpha/demos/torus/src/torus.asm}{tmp.asm}{361}{412}%
-\lstinputlisting[caption=Animation in Torus Demo,basicstyle=\tiny]{tmp.asm}
-\end{minipage}
-\hspace{0.5cm}
-\begin{minipage}[b]{0.45\linewidth}
-\centering
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{5055}{5106}%
-\lstinputlisting[caption=... and Iridis Alpha,basicstyle=\tiny]{tmp.asm}
-\end{minipage}
-
-
-\begin{tcolorbox}[%
-  breakable,
-  parbox = false,
-  frame hidden,
-  sharp corners,
-  after skip=10pt,
-  overlay broken = {
-    \draw[]
-      (frame.north west) rectangle (frame.south east);},
-]{}
-A Testing Hack
-
-In the CheckKeyboardInGame Routine, we find the following:
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{7909}{7920}%
-\lstinputlisting[basicstyle=\tiny]{tmp.asm}
-
-In the above the `canAwardBonus` byte is the first letter in the name of the player with the top score in the Hi-Score table. By default this is 'YAK':
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{8713}{8716}%
-\lstinputlisting[basicstyle=\tiny]{tmp.asm}
-
-But if we change 'Y' to \icode{\$1C} like so, we can activate the hack:
-
-\begin{lstlisting}[basicstyle=\tiny]
-hiScoreTablePtr           .TEXT "0068000"
-canAwardBonus             .TEXT $1C,"AK "
-\end{lstlisting}
-
-Note that \icode{\$1C} is charset code for a bull's head symbol in Iridis Alpha, so it is also possible to enter this as the initial of a high scorer name if we get a score that puts us to the top of the table:
-
-\CopyPartialFile{../iridisalpha/src/graphics/charset.asm}{tmp.asm}{287}{296}%
-\lstinputlisting[basicstyle=\tiny]{tmp.asm}
-
-
-I'm guessing this was used for testing the animation routine and left in as an Easter egg.
-
-
-
-\end{tcolorbox}%

@@ -1,0 +1,1294 @@
+TRACE: 1  C:$0916  (Trace exec)
+TRACE: 2  C:$0919  (Trace exec)
+TRACE: 3  C:$0923  (Trace exec)
+TRACE: 4  C:$0935  (Trace exec)
+TRACE: 5  C:$0938  (Trace exec)
+TRACE: 6  C:$0944  (Trace exec)
+TRACE: 7  C:$0947  (Trace exec)
+TRACE: 8  C:$098d  (Trace exec)
+Setting checkpoint 1 command to: screenshot "title" 2
+Setting checkpoint 2 command to: screenshot "title" 2
+Setting checkpoint 3 command to: screenshot "title" 2
+Setting checkpoint 4 command to: screenshot "title" 2
+Setting checkpoint 5 command to: screenshot "title" 2
+Setting checkpoint 6 command to: screenshot "title" 2
+Setting checkpoint 7 command to: screenshot "title" 2
+Setting checkpoint 8 command to: screenshot "title" 2
+#7 (Trace  exec 0947)   17/$011,  31/$1f
+.C:0947  8D 0F D0    STA $D00F      - A:48 X:EC Y:00 SP:ec ..-..I..   79136158
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   19/$013,  32/$20
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:00 SP:ec ..-..I.C   79136285
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   78/$04e,   4/$04
+.C:0947  8D 0F D0    STA $D00F      - A:4E X:EC Y:01 SP:ec ..-..I..   79139974
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   79/$04f,  40/$28
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:06 Y:01 SP:ec ..-..I.C   79140073
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   84/$054,  52/$34
+.C:0947  8D 0F D0    STA $D00F      - A:54 X:EC Y:02 SP:ec ..-..I..   79140400
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   86/$056,  25/$19
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:07 Y:02 SP:ec ..-..I.C   79140499
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   90/$05a,   4/$04
+.C:0947  8D 0F D0    STA $D00F      - A:5A X:EC Y:03 SP:ec ..-..I..   79140730
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   92/$05c,  29/$1d
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:02 Y:03 SP:ec ..-..I.C   79140881
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   96/$060,   1/$01
+.C:0947  8D 0F D0    STA $D00F      - A:60 X:EC Y:04 SP:ec ..-..I..   79141105
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   97/$061,  36/$24
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:01 Y:04 SP:ec ..-..I.C   79141203
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  102/$066,   4/$04
+.C:0947  8D 0F D0    STA $D00F      - A:66 X:EC Y:05 SP:ec ..-..I..   79141486
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  103/$067,  40/$28
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:05 Y:05 SP:ec ..-..I.C   79141585
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  108/$06c,  52/$34
+.C:0947  8D 0F D0    STA $D00F      - A:6C X:EC Y:06 SP:ec ..-..I..   79141912
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  110/$06e,  25/$19
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:06 SP:ec ..-..I.C   79142011
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  114/$072,   4/$04
+.C:0947  8D 0F D0    STA $D00F      - A:72 X:EC Y:07 SP:ec ..-..I..   79142242
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  116/$074,  29/$1d
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:08 Y:07 SP:ec ..-..I.C   79142393
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  120/$078,   1/$01
+.C:0947  8D 0F D0    STA $D00F      - A:78 X:EC Y:08 SP:ec ..-..I..   79142617
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  121/$079,  36/$24
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:04 Y:08 SP:ec ..-..I.C   79142715
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  126/$07e,  13/$0d
+.C:0947  8D 0F D0    STA $D00F      - A:7E X:EC Y:09 SP:ec ..-..I..   79143007
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  127/$07f,  48/$30
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:09 SP:ec ..-..I.C   79143105
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  132/$084,  57/$39
+.C:0947  8D 0F D0    STA $D00F      - A:84 X:EC Y:0A SP:ec N.-..I..   79143429
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  134/$086,  33/$21
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:02 Y:0A SP:ec ..-..I.C   79143531
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  138/$08a,   4/$04
+.C:0947  8D 0F D0    STA $D00F      - A:8A X:EC Y:0B SP:ec N.-..I..   79143754
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  140/$08c,  29/$1d
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:08 Y:0B SP:ec ..-..I.C   79143905
+Executing: screenshot "title" 2
+#1 (Trace  exec 0916)  143/$08f,  57/$39
+.C:0916  20 5A 0B    JSR $0B5A      - A:01 X:EC Y:0C SP:ec ..-..IZC   79144122
+Executing: screenshot "title" 2
+#2 (Trace  exec 0919)  152/$098,  36/$24
+.C:0919  A0 10       LDY #$10       - A:06 X:07 Y:0C SP:ec ..-..IZC   79144668
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  152/$098,  49/$31
+.C:0947  8D 0F D0    STA $D00F      - A:A8 X:07 Y:10 SP:ec N.-..I.C   79144681
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  154/$09a,  16/$10
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:06 Y:10 SP:ec ..-..I.C   79144774
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  174/$0ae,   4/$04
+.C:0947  8D 0F D0    STA $D00F      - A:AE X:EC Y:11 SP:ec N.-..I.C   79146022
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  175/$0af,  40/$28
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:01 Y:11 SP:ec ..-..I.C   79146121
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  181/$0b5,   4/$04
+.C:0947  8D 0F D0    STA $D00F      - A:B4 X:EE Y:12 SP:ee N.-..I.C   79146463
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  182/$0b6,  45/$2d
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:07 Y:12 SP:ee ..-..I.C   79146567
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  186/$0ba,  22/$16
+.C:0947  8D 0F D0    STA $D00F      - A:BA X:EC Y:13 SP:ec N.-..I.C   79146796
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  189/$0bd,   4/$04
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:07 Y:13 SP:ec ..-..I.C   79146967
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  192/$0c0,  11/$0b
+.C:0947  8D 0F D0    STA $D00F      - A:C0 X:EC Y:14 SP:ec N.-..I.C   79147163
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  193/$0c1,  51/$33
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:05 Y:14 SP:ec ..-..I.C   79147266
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  198/$0c6,  28/$1c
+.C:0947  8D 0F D0    STA $D00F      - A:C6 X:EC Y:15 SP:ec N.-..I.C   79147558
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  200/$0c8,  29/$1d
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:15 SP:ec ..-..I.C   79147685
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  205/$0cd,  19/$13
+.C:0947  8D 0F D0    STA $D00F      - A:CC X:EE Y:16 SP:ee N.-..I.C   79147990
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  207/$0cf,  13/$0d
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:02 Y:16 SP:ee ..-..I.C   79148110
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  210/$0d2,  24/$18
+.C:0947  8D 0F D0    STA $D00F      - A:D2 X:EE Y:17 SP:ee N.-..I.C   79148310
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  212/$0d4,  61/$3d
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:05 Y:17 SP:ee ..-..I.C   79148473
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  216/$0d8,  14/$0e
+.C:0947  8D 0F D0    STA $D00F      - A:D8 X:EC Y:18 SP:ec N.-..I.C   79148678
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  217/$0d9,  51/$33
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:07 Y:18 SP:ec ..-..I.C   79148778
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  222/$0de,  25/$19
+.C:0947  8D 0F D0    STA $D00F      - A:DE X:EC Y:19 SP:ec N.-..I.C   79149067
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  224/$0e0,  13/$0d
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:19 SP:ec ..-..I.C   79149181
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  229/$0e5,  11/$0b
+.C:0947  8D 0F D0    STA $D00F      - A:E4 X:EE Y:1A SP:ee N.-..I.C   79149494
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  230/$0e6,  43/$2b
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:06 Y:1A SP:ee ..-..I.C   79149589
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  234/$0ea,  15/$0f
+.C:0947  8D 0F D0    STA $D00F      - A:EA X:EC Y:1B SP:ec N.-..I.C   79149813
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  236/$0ec,  36/$24
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:08 Y:1B SP:ec ..-..I.C   79149960
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  240/$0f0,   1/$01
+.C:0947  8D 0F D0    STA $D00F      - A:F0 X:EE Y:1C SP:ee N.-..I.C   79150177
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  241/$0f1,  33/$21
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:05 Y:1C SP:ee ..-..I.C   79150272
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  246/$0f6,  13/$0d
+.C:0947  8D 0F D0    STA $D00F      - A:F6 X:EE Y:1D SP:ee N.-..I.C   79150567
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  247/$0f7,  45/$2d
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:1D SP:ee ..-..I..   79150662
+Executing: screenshot "title" 2
+#3 (Trace  exec 0923)  256/$100,   3/$03
+.C:0923  20 4A 0A    JSR $0A4A      - A:00 X:EE Y:1E SP:ee ..-..IZC   79151187
+Executing: screenshot "title" 2
+#4 (Trace  exec 0935)  270/$10e,  13/$0d
+.C:0935  8D 1A D0    STA $D01A      - A:01 X:00 Y:1E SP:ee ..-..I..   79152079
+Executing: screenshot "title" 2
+#5 (Trace  exec 0938)  270/$10e,  17/$11
+.C:0938  20 C6 0A    JSR $0AC6      - A:01 X:00 Y:1E SP:ee ..-..I..   79152083
+Executing: screenshot "title" 2
+#6 (Trace  exec 0944)  286/$11e,  11/$0b
+.C:0944  4C 31 EA    JMP $EA31      - A:01 X:01 Y:15 SP:ee ..-..I..   79153085
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   17/$011,   2/$02
+.C:0947  8D 0F D0    STA $D00F      - A:48 X:EE Y:00 SP:ee ..-..I..   79155785
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   18/$012,  28/$1c
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:00 SP:ee ..-..I.C   79155874
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   78/$04e,  31/$1f
+.C:0947  8D 0F D0    STA $D00F      - A:4E X:EC Y:01 SP:ec ..-..I..   79159657
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   80/$050,  32/$20
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:06 Y:01 SP:ec ..-..I.C   79159784
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   85/$055,  28/$1c
+.C:0947  8D 0F D0    STA $D00F      - A:54 X:EE Y:02 SP:ee ..-..I..   79160095
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   87/$057,  29/$1d
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:07 Y:02 SP:ee ..-..I.C   79160222
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   90/$05a,  30/$1e
+.C:0947  8D 0F D0    STA $D00F      - A:5A X:EE Y:03 SP:ee ..-..I..   79160412
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   93/$05d,  34/$22
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:02 Y:03 SP:ee ..-..I.C   79160605
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   96/$060,  21/$15
+.C:0947  8D 0F D0    STA $D00F      - A:60 X:EC Y:04 SP:ec ..-..I..   79160781
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   98/$062,  26/$1a
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:01 Y:04 SP:ec ..-..I.C   79160912
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  102/$066,  29/$1d
+.C:0947  8D 0F D0    STA $D00F      - A:66 X:EE Y:05 SP:ee ..-..I..   79161167
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  104/$068,  30/$1e
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:05 Y:05 SP:ee ..-..I.C   79161294
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  108/$06c,  52/$34
+.C:0947  8D 0F D0    STA $D00F      - A:6C X:EC Y:06 SP:ec ..-..I..   79161568
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  110/$06e,  25/$19
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:06 SP:ec ..-..I.C   79161667
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  114/$072,  16/$10
+.C:0947  8D 0F D0    STA $D00F      - A:72 X:EE Y:07 SP:ee ..-..I..   79161910
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  116/$074,  40/$28
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:08 Y:07 SP:ee ..-..I.C   79162060
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  120/$078,  13/$0d
+.C:0947  8D 0F D0    STA $D00F      - A:78 X:EC Y:08 SP:ec ..-..I..   79162285
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  121/$079,  50/$32
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:04 Y:08 SP:ec ..-..I.C   79162385
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  126/$07e,  15/$0f
+.C:0947  8D 0F D0    STA $D00F      - A:7E X:EC Y:09 SP:ec ..-..I..   79162665
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  127/$07f,  52/$34
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:09 SP:ec ..-..I.C   79162765
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  132/$084,  55/$37
+.C:0947  8D 0F D0    STA $D00F      - A:84 X:EE Y:0A SP:ee N.-..I..   79163083
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  134/$086,  33/$21
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:02 Y:0A SP:ee ..-..I.C   79163187
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  138/$08a,  13/$0d
+.C:0947  8D 0F D0    STA $D00F      - A:8A X:EC Y:0B SP:ec N.-..I..   79163419
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  140/$08c,  33/$21
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:08 Y:0B SP:ec ..-..I.C   79163565
+Executing: screenshot "title" 2
+#1 (Trace  exec 0916)  143/$08f,  57/$39
+.C:0916  20 5A 0B    JSR $0B5A      - A:01 X:EE Y:0C SP:ee ..-..IZC   79163778
+Executing: screenshot "title" 2
+#2 (Trace  exec 0919)  152/$098,  36/$24
+.C:0919  A0 10       LDY #$10       - A:06 X:07 Y:0C SP:ee ..-..IZC   79164324
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  152/$098,  49/$31
+.C:0947  8D 0F D0    STA $D00F      - A:A8 X:07 Y:10 SP:ee N.-..I.C   79164337
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  154/$09a,  16/$10
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:06 Y:10 SP:ee ..-..I.C   79164430
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  174/$0ae,  14/$0e
+.C:0947  8D 0F D0    STA $D00F      - A:AE X:EE Y:11 SP:ee N.-..I.C   79165688
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  175/$0af,  45/$2d
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:01 Y:11 SP:ee ..-..I.C   79165782
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  180/$0b4,  57/$39
+.C:0947  8D 0F D0    STA $D00F      - A:B4 X:EE Y:12 SP:ee N.-..I.C   79166109
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  182/$0b6,  29/$1d
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:07 Y:12 SP:ee ..-..I.C   79166207
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  186/$0ba,  19/$13
+.C:0947  8D 0F D0    STA $D00F      - A:BA X:EE Y:13 SP:ee N.-..I.C   79166449
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  188/$0bc,  54/$36
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:07 Y:13 SP:ee ..-..I.C   79166610
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  192/$0c0,  20/$14
+.C:0947  8D 0F D0    STA $D00F      - A:C0 X:EC Y:14 SP:ec N.-..I.C   79166828
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  194/$0c2,  19/$13
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:05 Y:14 SP:ec ..-..I.C   79166953
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  198/$0c6,  30/$1e
+.C:0947  8D 0F D0    STA $D00F      - A:C6 X:EE Y:15 SP:ee N.-..I.C   79167216
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  200/$0c8,  34/$22
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:15 SP:ee ..-..I.C   79167346
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  205/$0cd,  26/$1a
+.C:0947  8D 0F D0    STA $D00F      - A:CC X:EC Y:16 SP:ec N.-..I.C   79167653
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  207/$0cf,  24/$18
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:02 Y:16 SP:ec ..-..I.C   79167777
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  210/$0d2,  27/$1b
+.C:0947  8D 0F D0    STA $D00F      - A:D2 X:EE Y:17 SP:ee N.-..I.C   79167969
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  213/$0d5,  20/$14
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:05 Y:17 SP:ee ..-..I.C   79168151
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  216/$0d8,  11/$0b
+.C:0947  8D 0F D0    STA $D00F      - A:D8 X:EE Y:18 SP:ee N.-..I.C   79168331
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  217/$0d9,  50/$32
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:07 Y:18 SP:ee ..-..I.C   79168433
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  222/$0de,  23/$17
+.C:0947  8D 0F D0    STA $D00F      - A:DE X:EE Y:19 SP:ee N.-..I.C   79168721
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  224/$0e0,   5/$05
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:19 SP:ee ..-..I.C   79168829
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  229/$0e5,   4/$04
+.C:0947  8D 0F D0    STA $D00F      - A:E4 X:EC Y:1A SP:ec N.-..I.C   79169143
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  230/$0e6,  41/$29
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:06 Y:1A SP:ec ..-..I.C   79169243
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  234/$0ea,  14/$0e
+.C:0947  8D 0F D0    STA $D00F      - A:EA X:EE Y:1B SP:ee N.-..I.C   79169468
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  236/$0ec,  35/$23
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:08 Y:1B SP:ee ..-..I.C   79169615
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  240/$0f0,   6/$06
+.C:0947  8D 0F D0    STA $D00F      - A:F0 X:EC Y:1C SP:ec N.-..I.C   79169838
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  241/$0f1,  38/$26
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:05 Y:1C SP:ec ..-..I.C   79169933
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  246/$0f6,   4/$04
+.C:0947  8D 0F D0    STA $D00F      - A:F6 X:EE Y:1D SP:ee N.-..I.C   79170214
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  247/$0f7,  41/$29
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:1D SP:ee ..-..I..   79170314
+Executing: screenshot "title" 2
+#3 (Trace  exec 0923)  256/$100,  12/$0c
+.C:0923  20 4A 0A    JSR $0A4A      - A:00 X:EC Y:1E SP:ec ..-..IZC   79170852
+Executing: screenshot "title" 2
+#4 (Trace  exec 0935)  270/$10e,  16/$10
+.C:0935  8D 1A D0    STA $D01A      - A:01 X:00 Y:1E SP:ec ..-..I..   79171738
+Executing: screenshot "title" 2
+#5 (Trace  exec 0938)  270/$10e,  20/$14
+.C:0938  20 C6 0A    JSR $0AC6      - A:01 X:00 Y:1E SP:ec ..-..I..   79171742
+Executing: screenshot "title" 2
+#6 (Trace  exec 0944)  284/$11c,   6/$06
+.C:0944  4C 31 EA    JMP $EA31      - A:01 X:07 Y:02 SP:ec ..-..I.C   79172610
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   17/$011,   2/$02
+.C:0947  8D 0F D0    STA $D00F      - A:48 X:EE Y:00 SP:ee ..-..I..   79175441
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   18/$012,  28/$1c
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:00 SP:ee ..-..I.C   79175530
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   78/$04e,  29/$1d
+.C:0947  8D 0F D0    STA $D00F      - A:4E X:EC Y:01 SP:ec ..-..I..   79179311
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   80/$050,  30/$1e
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:06 Y:01 SP:ec ..-..I.C   79179438
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   85/$055,  28/$1c
+.C:0947  8D 0F D0    STA $D00F      - A:54 X:EE Y:02 SP:ee ..-..I..   79179751
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   87/$057,  29/$1d
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:07 Y:02 SP:ee ..-..I.C   79179878
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   90/$05a,  31/$1f
+.C:0947  8D 0F D0    STA $D00F      - A:5A X:EE Y:03 SP:ee ..-..I..   79180069
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   93/$05d,  35/$23
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:02 Y:03 SP:ee ..-..I.C   79180262
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   96/$060,  23/$17
+.C:0947  8D 0F D0    STA $D00F      - A:60 X:EC Y:04 SP:ec ..-..I..   79180439
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   98/$062,  28/$1c
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:01 Y:04 SP:ec ..-..I.C   79180570
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  102/$066,  32/$20
+.C:0947  8D 0F D0    STA $D00F      - A:66 X:EE Y:05 SP:ee ..-..I..   79180826
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  104/$068,  33/$21
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:05 Y:05 SP:ee ..-..I.C   79180953
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  108/$06c,  52/$34
+.C:0947  8D 0F D0    STA $D00F      - A:6C X:EC Y:06 SP:ec ..-..I..   79181224
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  110/$06e,  25/$19
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:06 SP:ec ..-..I.C   79181323
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  114/$072,  17/$11
+.C:0947  8D 0F D0    STA $D00F      - A:72 X:EE Y:07 SP:ee ..-..I..   79181567
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  116/$074,  41/$29
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:08 Y:07 SP:ee ..-..I.C   79181717
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  120/$078,  12/$0c
+.C:0947  8D 0F D0    STA $D00F      - A:78 X:EC Y:08 SP:ec ..-..I..   79181940
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  121/$079,  49/$31
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:04 Y:08 SP:ec ..-..I.C   79182040
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  126/$07e,  20/$14
+.C:0947  8D 0F D0    STA $D00F      - A:7E X:EE Y:09 SP:ee ..-..I..   79182326
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  127/$07f,  57/$39
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:09 SP:ee ..-..I.C   79182426
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  132/$084,  59/$3b
+.C:0947  8D 0F D0    STA $D00F      - A:84 X:EE Y:0A SP:ee N.-..I..   79182743
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  134/$086,  38/$26
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:02 Y:0A SP:ee ..-..I.C   79182848
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  138/$08a,  15/$0f
+.C:0947  8D 0F D0    STA $D00F      - A:8A X:EC Y:0B SP:ec N.-..I..   79183077
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  140/$08c,  35/$23
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:08 Y:0B SP:ec ..-..I.C   79183223
+Executing: screenshot "title" 2
+#1 (Trace  exec 0916)  143/$08f,  57/$39
+.C:0916  20 5A 0B    JSR $0B5A      - A:01 X:EE Y:0C SP:ee ..-..IZC   79183434
+Executing: screenshot "title" 2
+#2 (Trace  exec 0919)  152/$098,  36/$24
+.C:0919  A0 10       LDY #$10       - A:06 X:07 Y:0C SP:ee ..-..IZC   79183980
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  152/$098,  49/$31
+.C:0947  8D 0F D0    STA $D00F      - A:A8 X:07 Y:10 SP:ee N.-..I.C   79183993
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  154/$09a,  16/$10
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:06 Y:10 SP:ee ..-..I.C   79184086
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  174/$0ae,   4/$04
+.C:0947  8D 0F D0    STA $D00F      - A:AE X:EE Y:11 SP:ee N.-..I.C   79185334
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  175/$0af,  40/$28
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:01 Y:11 SP:ee ..-..I.C   79185433
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  180/$0b4,  52/$34
+.C:0947  8D 0F D0    STA $D00F      - A:B4 X:EE Y:12 SP:ee N.-..I.C   79185760
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  182/$0b6,  25/$19
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:07 Y:12 SP:ee ..-..I.C   79185859
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  186/$0ba,  16/$10
+.C:0947  8D 0F D0    STA $D00F      - A:BA X:EC Y:13 SP:ec N.-..I.C   79186102
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  188/$0bc,  48/$30
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:07 Y:13 SP:ec ..-..I.C   79186260
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  192/$0c0,  21/$15
+.C:0947  8D 0F D0    STA $D00F      - A:C0 X:EE Y:14 SP:ee N.-..I.C   79186485
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  194/$0c2,  20/$14
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:05 Y:14 SP:ee ..-..I.C   79186610
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  198/$0c6,  32/$20
+.C:0947  8D 0F D0    STA $D00F      - A:C6 X:EE Y:15 SP:ee N.-..I.C   79186874
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  200/$0c8,  35/$23
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:15 SP:ee ..-..I.C   79187003
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  205/$0cd,  29/$1d
+.C:0947  8D 0F D0    STA $D00F      - A:CC X:EE Y:16 SP:ee N.-..I.C   79187312
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  207/$0cf,  31/$1f
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:02 Y:16 SP:ee ..-..I.C   79187440
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  210/$0d2,  25/$19
+.C:0947  8D 0F D0    STA $D00F      - A:D2 X:EC Y:17 SP:ec N.-..I.C   79187623
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  213/$0d5,  20/$14
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:05 Y:17 SP:ec ..-..I.C   79187807
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  216/$0d8,  15/$0f
+.C:0947  8D 0F D0    STA $D00F      - A:D8 X:EC Y:18 SP:ec N.-..I.C   79187991
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  217/$0d9,  54/$36
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:07 Y:18 SP:ec ..-..I.C   79188093
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  222/$0de,  18/$12
+.C:0947  8D 0F D0    STA $D00F      - A:DE X:EE Y:19 SP:ee N.-..I.C   79188372
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  223/$0df,  58/$3a
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:19 SP:ee ..-..I.C   79188475
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  228/$0e4,  57/$39
+.C:0947  8D 0F D0    STA $D00F      - A:E4 X:EE Y:1A SP:ee N.-..I.C   79188789
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  230/$0e6,  36/$24
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:06 Y:1A SP:ee ..-..I.C   79188894
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  234/$0ea,   4/$04
+.C:0947  8D 0F D0    STA $D00F      - A:EA X:EE Y:1B SP:ee N.-..I.C   79189114
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  236/$0ec,  30/$1e
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:08 Y:1B SP:ee ..-..I.C   79189266
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  240/$0f0,   2/$02
+.C:0947  8D 0F D0    STA $D00F      - A:F0 X:EE Y:1C SP:ee N.-..I.C   79189490
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  241/$0f1,  34/$22
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:05 Y:1C SP:ee ..-..I.C   79189585
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  246/$0f6,   4/$04
+.C:0947  8D 0F D0    STA $D00F      - A:F6 X:EC Y:1D SP:ec N.-..I.C   79189870
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  247/$0f7,  41/$29
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:1D SP:ec ..-..I..   79189970
+Executing: screenshot "title" 2
+#3 (Trace  exec 0923)  256/$100,   3/$03
+.C:0923  20 4A 0A    JSR $0A4A      - A:00 X:EE Y:1E SP:ee ..-..IZC   79190499
+Executing: screenshot "title" 2
+#4 (Trace  exec 0935)  269/$10d,  42/$2a
+.C:0935  8D 1A D0    STA $D01A      - A:01 X:00 Y:1E SP:ee ..-..I..   79191357
+Executing: screenshot "title" 2
+#5 (Trace  exec 0938)  269/$10d,  46/$2e
+.C:0938  20 C6 0A    JSR $0AC6      - A:01 X:00 Y:1E SP:ee ..-..I..   79191361
+Executing: screenshot "title" 2
+#6 (Trace  exec 0944)  283/$11b,  32/$20
+.C:0944  4C 31 EA    JMP $EA31      - A:01 X:07 Y:02 SP:ee ..-..I.C   79192229
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   17/$011,   4/$04
+.C:0947  8D 0F D0    STA $D00F      - A:48 X:EE Y:00 SP:ee ..-..I..   79195099
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   18/$012,  30/$1e
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:00 SP:ee ..-..I.C   79195188
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   78/$04e,  29/$1d
+.C:0947  8D 0F D0    STA $D00F      - A:4E X:EE Y:01 SP:ee ..-..I..   79198967
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   80/$050,  30/$1e
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:06 Y:01 SP:ee ..-..I.C   79199094
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   85/$055,  28/$1c
+.C:0947  8D 0F D0    STA $D00F      - A:54 X:EC Y:02 SP:ec ..-..I..   79199407
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   87/$057,  29/$1d
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:07 Y:02 SP:ec ..-..I.C   79199534
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   90/$05a,  32/$20
+.C:0947  8D 0F D0    STA $D00F      - A:5A X:EE Y:03 SP:ee ..-..I..   79199726
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   93/$05d,  36/$24
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:02 Y:03 SP:ee ..-..I.C   79199919
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   96/$060,  23/$17
+.C:0947  8D 0F D0    STA $D00F      - A:60 X:EE Y:04 SP:ee ..-..I..   79200095
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   98/$062,  28/$1c
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:01 Y:04 SP:ee ..-..I.C   79200226
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  102/$066,  29/$1d
+.C:0947  8D 0F D0    STA $D00F      - A:66 X:EC Y:05 SP:ec ..-..I..   79200479
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  104/$068,  30/$1e
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:05 Y:05 SP:ec ..-..I.C   79200606
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  108/$06c,  52/$34
+.C:0947  8D 0F D0    STA $D00F      - A:6C X:EE Y:06 SP:ee ..-..I..   79200880
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  110/$06e,  25/$19
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:06 SP:ee ..-..I.C   79200979
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  114/$072,  18/$12
+.C:0947  8D 0F D0    STA $D00F      - A:72 X:EE Y:07 SP:ee ..-..I..   79201224
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  116/$074,  42/$2a
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:08 Y:07 SP:ee ..-..I.C   79201374
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  120/$078,  11/$0b
+.C:0947  8D 0F D0    STA $D00F      - A:78 X:EE Y:08 SP:ee ..-..I..   79201595
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  121/$079,  48/$30
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:04 Y:08 SP:ee ..-..I.C   79201695
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  126/$07e,  20/$14
+.C:0947  8D 0F D0    STA $D00F      - A:7E X:EC Y:09 SP:ec ..-..I..   79201982
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  127/$07f,  57/$39
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:09 SP:ec ..-..I.C   79202082
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  132/$084,  55/$37
+.C:0947  8D 0F D0    STA $D00F      - A:84 X:EC Y:0A SP:ec N.-..I..   79202395
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  134/$086,  33/$21
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:02 Y:0A SP:ec ..-..I.C   79202499
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  138/$08a,  14/$0e
+.C:0947  8D 0F D0    STA $D00F      - A:8A X:EE Y:0B SP:ee N.-..I..   79202732
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  140/$08c,  34/$22
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:08 Y:0B SP:ee ..-..I.C   79202878
+Executing: screenshot "title" 2
+#1 (Trace  exec 0916)  143/$08f,  60/$3c
+.C:0916  20 5A 0B    JSR $0B5A      - A:01 X:EE Y:0C SP:ee ..-..IZC   79203093
+Executing: screenshot "title" 2
+#2 (Trace  exec 0919)  152/$098,  39/$27
+.C:0919  A0 10       LDY #$10       - A:06 X:07 Y:0C SP:ee ..-..IZC   79203639
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  152/$098,  52/$34
+.C:0947  8D 0F D0    STA $D00F      - A:A8 X:07 Y:10 SP:ee N.-..I.C   79203652
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  154/$09a,  19/$13
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:06 Y:10 SP:ee ..-..I.C   79203745
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  174/$0ae,  13/$0d
+.C:0947  8D 0F D0    STA $D00F      - A:AE X:EE Y:11 SP:ee N.-..I.C   79204999
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  175/$0af,  44/$2c
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:01 Y:11 SP:ee ..-..I.C   79205093
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  180/$0b4,  59/$3b
+.C:0947  8D 0F D0    STA $D00F      - A:B4 X:EC Y:12 SP:ec N.-..I.C   79205423
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  182/$0b6,  36/$24
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:07 Y:12 SP:ec ..-..I.C   79205526
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  186/$0ba,  23/$17
+.C:0947  8D 0F D0    STA $D00F      - A:BA X:EE Y:13 SP:ee N.-..I.C   79205765
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  188/$0bc,  54/$36
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:07 Y:13 SP:ee ..-..I.C   79205922
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  192/$0c0,  22/$16
+.C:0947  8D 0F D0    STA $D00F      - A:C0 X:EC Y:14 SP:ec N.-..I.C   79206142
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  194/$0c2,  18/$12
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:05 Y:14 SP:ec ..-..I.C   79206264
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  198/$0c6,  29/$1d
+.C:0947  8D 0F D0    STA $D00F      - A:C6 X:EE Y:15 SP:ee N.-..I.C   79206527
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  200/$0c8,  33/$21
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:15 SP:ee ..-..I.C   79206657
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  205/$0cd,  27/$1b
+.C:0947  8D 0F D0    STA $D00F      - A:CC X:EC Y:16 SP:ec N.-..I.C   79206966
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  207/$0cf,  26/$1a
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:02 Y:16 SP:ec ..-..I.C   79207091
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  210/$0d2,  24/$18
+.C:0947  8D 0F D0    STA $D00F      - A:D2 X:EE Y:17 SP:ee N.-..I.C   79207278
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  213/$0d5,  20/$14
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:05 Y:17 SP:ee ..-..I.C   79207463
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  216/$0d8,  11/$0b
+.C:0947  8D 0F D0    STA $D00F      - A:D8 X:EE Y:18 SP:ee N.-..I.C   79207643
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  217/$0d9,  50/$32
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:07 Y:18 SP:ee ..-..I.C   79207745
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  222/$0de,  18/$12
+.C:0947  8D 0F D0    STA $D00F      - A:DE X:EC Y:19 SP:ec N.-..I.C   79208028
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  224/$0e0,   1/$01
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:19 SP:ec ..-..I.C   79208137
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  228/$0e4,  62/$3e
+.C:0947  8D 0F D0    STA $D00F      - A:E4 X:EE Y:1A SP:ee N.-..I.C   79208450
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  230/$0e6,  36/$24
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:06 Y:1A SP:ee ..-..I.C   79208550
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  234/$0ea,   4/$04
+.C:0947  8D 0F D0    STA $D00F      - A:EA X:EC Y:1B SP:ec N.-..I.C   79208770
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  236/$0ec,  30/$1e
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:08 Y:1B SP:ec ..-..I.C   79208922
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  240/$0f0,   3/$03
+.C:0947  8D 0F D0    STA $D00F      - A:F0 X:EE Y:1C SP:ee N.-..I.C   79209147
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  241/$0f1,  35/$23
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:05 Y:1C SP:ee ..-..I.C   79209242
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  246/$0f6,  14/$0e
+.C:0947  8D 0F D0    STA $D00F      - A:F6 X:EE Y:1D SP:ee N.-..I.C   79209536
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  247/$0f7,  46/$2e
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:1D SP:ee ..-..I..   79209631
+Executing: screenshot "title" 2
+#3 (Trace  exec 0923)  256/$100,   3/$03
+.C:0923  20 4A 0A    JSR $0A4A      - A:00 X:EE Y:1E SP:ee ..-..IZC   79210155
+Executing: screenshot "title" 2
+#4 (Trace  exec 0935)  268/$10c,  37/$25
+.C:0935  8D 1A D0    STA $D01A      - A:01 X:00 Y:1E SP:ee ..-..I..   79210945
+Executing: screenshot "title" 2
+#5 (Trace  exec 0938)  268/$10c,  41/$29
+.C:0938  20 C6 0A    JSR $0AC6      - A:01 X:00 Y:1E SP:ee ..-..I..   79210949
+Executing: screenshot "title" 2
+#6 (Trace  exec 0944)  286/$11e,  10/$0a
+.C:0944  4C 31 EA    JMP $EA31      - A:02 X:02 Y:1C SP:ee ..-..I..   79212052
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   17/$011,   3/$03
+.C:0947  8D 0F D0    STA $D00F      - A:48 X:EC Y:00 SP:ec ..-..I..   79214754
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   18/$012,  29/$1d
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:00 SP:ec ..-..I.C   79214843
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   78/$04e,  29/$1d
+.C:0947  8D 0F D0    STA $D00F      - A:4E X:EE Y:01 SP:ee ..-..I..   79218623
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   80/$050,  30/$1e
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:06 Y:01 SP:ee ..-..I.C   79218750
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   85/$055,  29/$1d
+.C:0947  8D 0F D0    STA $D00F      - A:54 X:EE Y:02 SP:ee ..-..I..   79219064
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   87/$057,  30/$1e
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:07 Y:02 SP:ee ..-..I.C   79219191
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   90/$05a,  30/$1e
+.C:0947  8D 0F D0    STA $D00F      - A:5A X:EC Y:03 SP:ec ..-..I..   79219380
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   93/$05d,  34/$22
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:02 Y:03 SP:ec ..-..I.C   79219573
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   96/$060,  23/$17
+.C:0947  8D 0F D0    STA $D00F      - A:60 X:EE Y:04 SP:ee ..-..I..   79219751
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   98/$062,  28/$1c
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:01 Y:04 SP:ee ..-..I.C   79219882
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  102/$066,  30/$1e
+.C:0947  8D 0F D0    STA $D00F      - A:66 X:EE Y:05 SP:ee ..-..I..   79220136
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  104/$068,  31/$1f
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:05 Y:05 SP:ee ..-..I.C   79220263
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  108/$06c,  57/$39
+.C:0947  8D 0F D0    STA $D00F      - A:6C X:EE Y:06 SP:ee ..-..I..   79220541
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  110/$06e,  29/$1d
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:06 SP:ee ..-..I.C   79220639
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  114/$072,  15/$0f
+.C:0947  8D 0F D0    STA $D00F      - A:72 X:EC Y:07 SP:ec ..-..I..   79220877
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  116/$074,  38/$26
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:08 Y:07 SP:ec ..-..I.C   79221026
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  120/$078,  16/$10
+.C:0947  8D 0F D0    STA $D00F      - A:78 X:EE Y:08 SP:ee ..-..I..   79221256
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  121/$079,  53/$35
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:04 Y:08 SP:ee ..-..I.C   79221356
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  126/$07e,  16/$10
+.C:0947  8D 0F D0    STA $D00F      - A:7E X:EE Y:09 SP:ee ..-..I..   79221634
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  127/$07f,  53/$35
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:09 SP:ee ..-..I.C   79221734
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  133/$085,   1/$01
+.C:0947  8D 0F D0    STA $D00F      - A:84 X:EC Y:0A SP:ec N.-..I..   79222060
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  134/$086,  43/$2b
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:02 Y:0A SP:ec ..-..I.C   79222165
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  138/$08a,   4/$04
+.C:0947  8D 0F D0    STA $D00F      - A:8A X:EC Y:0B SP:ec N.-..I..   79222378
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  140/$08c,  29/$1d
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:08 Y:0B SP:ec ..-..I.C   79222529
+Executing: screenshot "title" 2
+#1 (Trace  exec 0916)  143/$08f,  57/$39
+.C:0916  20 5A 0B    JSR $0B5A      - A:01 X:EE Y:0C SP:ee ..-..IZC   79222746
+Executing: screenshot "title" 2
+#2 (Trace  exec 0919)  152/$098,  36/$24
+.C:0919  A0 10       LDY #$10       - A:06 X:07 Y:0C SP:ee ..-..IZC   79223292
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  152/$098,  49/$31
+.C:0947  8D 0F D0    STA $D00F      - A:A8 X:07 Y:10 SP:ee N.-..I.C   79223305
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  154/$09a,  16/$10
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:06 Y:10 SP:ee ..-..I.C   79223398
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  174/$0ae,  14/$0e
+.C:0947  8D 0F D0    STA $D00F      - A:AE X:EC Y:11 SP:ec N.-..I.C   79224656
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  175/$0af,  45/$2d
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:01 Y:11 SP:ec ..-..I.C   79224750
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  180/$0b4,  62/$3e
+.C:0947  8D 0F D0    STA $D00F      - A:B4 X:EE Y:12 SP:ee N.-..I.C   79225082
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  182/$0b6,  43/$2b
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:07 Y:12 SP:ee ..-..I.C   79225189
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  186/$0ba,  24/$18
+.C:0947  8D 0F D0    STA $D00F      - A:BA X:EE Y:13 SP:ee N.-..I.C   79225422
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  188/$0bc,  59/$3b
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:07 Y:13 SP:ee ..-..I.C   79225583
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  192/$0c0,  20/$14
+.C:0947  8D 0F D0    STA $D00F      - A:C0 X:EE Y:14 SP:ee N.-..I.C   79225796
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  194/$0c2,  15/$0f
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:05 Y:14 SP:ee ..-..I.C   79225917
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  198/$0c6,  25/$19
+.C:0947  8D 0F D0    STA $D00F      - A:C6 X:EE Y:15 SP:ee N.-..I.C   79226179
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  200/$0c8,  22/$16
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:15 SP:ee ..-..I.C   79226302
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  205/$0cd,  15/$0f
+.C:0947  8D 0F D0    STA $D00F      - A:CC X:EE Y:16 SP:ee N.-..I.C   79226610
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  206/$0ce,  56/$38
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:02 Y:16 SP:ee ..-..I.C   79226714
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  210/$0d2,  18/$12
+.C:0947  8D 0F D0    STA $D00F      - A:D2 X:EE Y:17 SP:ee N.-..I.C   79226928
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  213/$0d5,   3/$03
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:05 Y:17 SP:ee ..-..I.C   79227102
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  216/$0d8,   9/$09
+.C:0947  8D 0F D0    STA $D00F      - A:D8 X:EE Y:18 SP:ee N.-..I.C   79227297
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  217/$0d9,  48/$30
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:07 Y:18 SP:ee ..-..I.C   79227399
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  222/$0de,  19/$13
+.C:0947  8D 0F D0    STA $D00F      - A:DE X:EE Y:19 SP:ee N.-..I.C   79227685
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  224/$0e0,   2/$02
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:19 SP:ee ..-..I.C   79227794
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  228/$0e4,  62/$3e
+.C:0947  8D 0F D0    STA $D00F      - A:E4 X:EC Y:1A SP:ec N.-..I.C   79228106
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  230/$0e6,  36/$24
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:06 Y:1A SP:ec ..-..I.C   79228206
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  234/$0ea,   4/$04
+.C:0947  8D 0F D0    STA $D00F      - A:EA X:EE Y:1B SP:ee N.-..I.C   79228426
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  236/$0ec,  30/$1e
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:08 Y:1B SP:ee ..-..I.C   79228578
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  240/$0f0,   2/$02
+.C:0947  8D 0F D0    STA $D00F      - A:F0 X:EC Y:1C SP:ec N.-..I.C   79228802
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  241/$0f1,  34/$22
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:05 Y:1C SP:ec ..-..I.C   79228897
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  246/$0f6,   4/$04
+.C:0947  8D 0F D0    STA $D00F      - A:F6 X:EC Y:1D SP:ec N.-..I.C   79229182
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  247/$0f7,  41/$29
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:1D SP:ec ..-..I..   79229282
+Executing: screenshot "title" 2
+#3 (Trace  exec 0923)  256/$100,  14/$0e
+.C:0923  20 4A 0A    JSR $0A4A      - A:00 X:EE Y:1E SP:ee ..-..IZC   79229822
+Executing: screenshot "title" 2
+#4 (Trace  exec 0935)  267/$10b,  39/$27
+.C:0935  8D 1A D0    STA $D01A      - A:01 X:00 Y:1E SP:ee ..-..I..   79230540
+Executing: screenshot "title" 2
+#5 (Trace  exec 0938)  267/$10b,  43/$2b
+.C:0938  20 C6 0A    JSR $0AC6      - A:01 X:00 Y:1E SP:ee ..-..I..   79230544
+Executing: screenshot "title" 2
+#6 (Trace  exec 0944)  281/$119,  16/$10
+.C:0944  4C 31 EA    JMP $EA31      - A:01 X:07 Y:02 SP:ee ..-..I.C   79231399
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   17/$011,   2/$02
+.C:0947  8D 0F D0    STA $D00F      - A:48 X:EC Y:00 SP:ec ..-..I..   79234409
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   18/$012,  28/$1c
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:00 SP:ec ..-..I.C   79234498
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   78/$04e,  29/$1d
+.C:0947  8D 0F D0    STA $D00F      - A:4E X:EE Y:01 SP:ee ..-..I..   79238279
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   80/$050,  30/$1e
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:06 Y:01 SP:ee ..-..I.C   79238406
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   85/$055,  29/$1d
+.C:0947  8D 0F D0    STA $D00F      - A:54 X:EC Y:02 SP:ec ..-..I..   79238720
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   87/$057,  30/$1e
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:07 Y:02 SP:ec ..-..I.C   79238847
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   90/$05a,  34/$22
+.C:0947  8D 0F D0    STA $D00F      - A:5A X:EE Y:03 SP:ee ..-..I..   79239040
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   93/$05d,  36/$24
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:02 Y:03 SP:ee ..-..I.C   79239231
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   96/$060,  21/$15
+.C:0947  8D 0F D0    STA $D00F      - A:60 X:EE Y:04 SP:ee ..-..I..   79239405
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   98/$062,  26/$1a
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:01 Y:04 SP:ee ..-..I.C   79239536
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  102/$066,  33/$21
+.C:0947  8D 0F D0    STA $D00F      - A:66 X:EC Y:05 SP:ec ..-..I..   79239795
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  104/$068,  34/$22
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:05 Y:05 SP:ec ..-..I.C   79239922
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  108/$06c,  57/$39
+.C:0947  8D 0F D0    STA $D00F      - A:6C X:EE Y:06 SP:ee ..-..I..   79240197
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  110/$06e,  29/$1d
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:06 SP:ee ..-..I.C   79240295
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  114/$072,  20/$14
+.C:0947  8D 0F D0    STA $D00F      - A:72 X:EE Y:07 SP:ee ..-..I..   79240538
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  116/$074,  44/$2c
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:08 Y:07 SP:ee ..-..I.C   79240688
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  120/$078,  13/$0d
+.C:0947  8D 0F D0    STA $D00F      - A:78 X:EE Y:08 SP:ee ..-..I..   79240909
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  121/$079,  50/$32
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:04 Y:08 SP:ee ..-..I.C   79241009
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  126/$07e,  16/$10
+.C:0947  8D 0F D0    STA $D00F      - A:7E X:EE Y:09 SP:ee ..-..I..   79241290
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  127/$07f,  53/$35
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:09 SP:ee ..-..I.C   79241390
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  132/$084,  59/$3b
+.C:0947  8D 0F D0    STA $D00F      - A:84 X:EC Y:0A SP:ec N.-..I..   79241711
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  134/$086,  38/$26
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:02 Y:0A SP:ec ..-..I.C   79241816
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  138/$08a,   4/$04
+.C:0947  8D 0F D0    STA $D00F      - A:8A X:EE Y:0B SP:ee N.-..I..   79242034
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  140/$08c,  29/$1d
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:08 Y:0B SP:ee ..-..I.C   79242185
+Executing: screenshot "title" 2
+#1 (Trace  exec 0916)  143/$08f,  58/$3a
+.C:0916  20 5A 0B    JSR $0B5A      - A:01 X:EC Y:0C SP:ec ..-..IZC   79242403
+Executing: screenshot "title" 2
+#2 (Trace  exec 0919)  152/$098,  37/$25
+.C:0919  A0 10       LDY #$10       - A:06 X:07 Y:0C SP:ec ..-..IZC   79242949
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  152/$098,  50/$32
+.C:0947  8D 0F D0    STA $D00F      - A:A8 X:07 Y:10 SP:ec N.-..I.C   79242962
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  154/$09a,  17/$11
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:06 Y:10 SP:ec ..-..I.C   79243055
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  174/$0ae,  11/$0b
+.C:0947  8D 0F D0    STA $D00F      - A:AE X:EC Y:11 SP:ec N.-..I.C   79244309
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  175/$0af,  44/$2c
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:01 Y:11 SP:ec ..-..I.C   79244405
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  181/$0b5,  12/$0c
+.C:0947  8D 0F D0    STA $D00F      - A:B4 X:EE Y:12 SP:ee N.-..I.C   79244751
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  182/$0b6,  49/$31
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:07 Y:12 SP:ee ..-..I.C   79244851
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  186/$0ba,  27/$1b
+.C:0947  8D 0F D0    STA $D00F      - A:BA X:EC Y:13 SP:ec N.-..I.C   79245081
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  189/$0bd,  18/$12
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:07 Y:13 SP:ec ..-..I.C   79245261
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  192/$0c0,  27/$1b
+.C:0947  8D 0F D0    STA $D00F      - A:C0 X:EC Y:14 SP:ec N.-..I.C   79245459
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  194/$0c2,  26/$1a
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:05 Y:14 SP:ec ..-..I.C   79245584
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  198/$0c6,  25/$19
+.C:0947  8D 0F D0    STA $D00F      - A:C6 X:EE Y:15 SP:ee N.-..I.C   79245835
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  200/$0c8,  23/$17
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:15 SP:ee ..-..I.C   79245959
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  205/$0cd,  13/$0d
+.C:0947  8D 0F D0    STA $D00F      - A:CC X:EE Y:16 SP:ee N.-..I.C   79246264
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  206/$0ce,  54/$36
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:02 Y:16 SP:ee ..-..I.C   79246368
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  210/$0d2,  16/$10
+.C:0947  8D 0F D0    STA $D00F      - A:D2 X:EE Y:17 SP:ee N.-..I.C   79246582
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  212/$0d4,  51/$33
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:05 Y:17 SP:ee ..-..I.C   79246743
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  216/$0d8,   7/$07
+.C:0947  8D 0F D0    STA $D00F      - A:D8 X:EC Y:18 SP:ec N.-..I.C   79246951
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  217/$0d9,  44/$2c
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:07 Y:18 SP:ec ..-..I.C   79247051
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  222/$0de,   4/$04
+.C:0947  8D 0F D0    STA $D00F      - A:DE X:EC Y:19 SP:ec N.-..I.C   79247326
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  223/$0df,  45/$2d
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:19 SP:ec ..-..I.C   79247430
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  228/$0e4,  52/$34
+.C:0947  8D 0F D0    STA $D00F      - A:E4 X:EE Y:1A SP:ee N.-..I.C   79247752
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  230/$0e6,  26/$1a
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:06 Y:1A SP:ee ..-..I.C   79247852
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  234/$0ea,   4/$04
+.C:0947  8D 0F D0    STA $D00F      - A:EA X:EE Y:1B SP:ee N.-..I.C   79248082
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  236/$0ec,  30/$1e
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:08 Y:1B SP:ee ..-..I.C   79248234
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  240/$0f0,   2/$02
+.C:0947  8D 0F D0    STA $D00F      - A:F0 X:EC Y:1C SP:ec N.-..I.C   79248458
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  241/$0f1,  34/$22
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:05 Y:1C SP:ec ..-..I.C   79248553
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  246/$0f6,   4/$04
+.C:0947  8D 0F D0    STA $D00F      - A:F6 X:EC Y:1D SP:ec N.-..I.C   79248838
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  247/$0f7,  41/$29
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:1D SP:ec ..-..I..   79248938
+Executing: screenshot "title" 2
+#3 (Trace  exec 0923)  256/$100,  14/$0e
+.C:0923  20 4A 0A    JSR $0A4A      - A:00 X:EE Y:1E SP:ee ..-..IZC   79249478
+Executing: screenshot "title" 2
+#4 (Trace  exec 0935)  269/$10d,  49/$31
+.C:0935  8D 1A D0    STA $D01A      - A:01 X:00 Y:1E SP:ee ..-..I..   79250332
+Executing: screenshot "title" 2
+#5 (Trace  exec 0938)  269/$10d,  53/$35
+.C:0938  20 C6 0A    JSR $0AC6      - A:01 X:00 Y:1E SP:ee ..-..I..   79250336
+Executing: screenshot "title" 2
+#6 (Trace  exec 0944)  283/$11b,  26/$1a
+.C:0944  4C 31 EA    JMP $EA31      - A:01 X:07 Y:02 SP:ee ..-..I.C   79251191
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   17/$011,   4/$04
+.C:0947  8D 0F D0    STA $D00F      - A:48 X:EE Y:00 SP:ee ..-..I..   79254067
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   18/$012,  30/$1e
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:00 SP:ee ..-..I.C   79254156
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   78/$04e,  29/$1d
+.C:0947  8D 0F D0    STA $D00F      - A:4E X:EE Y:01 SP:ee ..-..I..   79257935
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   80/$050,  30/$1e
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:06 Y:01 SP:ee ..-..I.C   79258062
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   85/$055,  28/$1c
+.C:0947  8D 0F D0    STA $D00F      - A:54 X:EC Y:02 SP:ec ..-..I..   79258375
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   87/$057,  29/$1d
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:07 Y:02 SP:ec ..-..I.C   79258502
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   90/$05a,  32/$20
+.C:0947  8D 0F D0    STA $D00F      - A:5A X:EE Y:03 SP:ee ..-..I..   79258694
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   93/$05d,  36/$24
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:02 Y:03 SP:ee ..-..I.C   79258887
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   96/$060,  23/$17
+.C:0947  8D 0F D0    STA $D00F      - A:60 X:EE Y:04 SP:ee ..-..I..   79259063
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   98/$062,  28/$1c
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:01 Y:04 SP:ee ..-..I.C   79259194
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  102/$066,  29/$1d
+.C:0947  8D 0F D0    STA $D00F      - A:66 X:EC Y:05 SP:ec ..-..I..   79259447
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  104/$068,  30/$1e
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:05 Y:05 SP:ec ..-..I.C   79259574
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  108/$06c,  52/$34
+.C:0947  8D 0F D0    STA $D00F      - A:6C X:EE Y:06 SP:ee ..-..I..   79259848
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  110/$06e,  25/$19
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:06 SP:ee ..-..I.C   79259947
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  114/$072,  18/$12
+.C:0947  8D 0F D0    STA $D00F      - A:72 X:EE Y:07 SP:ee ..-..I..   79260192
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  116/$074,  42/$2a
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:08 Y:07 SP:ee ..-..I.C   79260342
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  120/$078,  11/$0b
+.C:0947  8D 0F D0    STA $D00F      - A:78 X:EE Y:08 SP:ee ..-..I..   79260563
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  121/$079,  48/$30
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:04 Y:08 SP:ee ..-..I.C   79260663
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  126/$07e,  20/$14
+.C:0947  8D 0F D0    STA $D00F      - A:7E X:EC Y:09 SP:ec ..-..I..   79260950
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  127/$07f,  57/$39
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:09 SP:ec ..-..I.C   79261050
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  132/$084,  55/$37
+.C:0947  8D 0F D0    STA $D00F      - A:84 X:EC Y:0A SP:ec N.-..I..   79261363
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  134/$086,  33/$21
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:02 Y:0A SP:ec ..-..I.C   79261467
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  138/$08a,  14/$0e
+.C:0947  8D 0F D0    STA $D00F      - A:8A X:EE Y:0B SP:ee N.-..I..   79261700
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  140/$08c,  34/$22
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:08 Y:0B SP:ee ..-..I.C   79261846
+Executing: screenshot "title" 2
+#1 (Trace  exec 0916)  143/$08f,  60/$3c
+.C:0916  20 5A 0B    JSR $0B5A      - A:01 X:EE Y:0C SP:ee ..-..IZC   79262061
+Executing: screenshot "title" 2
+#2 (Trace  exec 0919)  152/$098,  39/$27
+.C:0919  A0 10       LDY #$10       - A:06 X:07 Y:0C SP:ee ..-..IZC   79262607
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  152/$098,  52/$34
+.C:0947  8D 0F D0    STA $D00F      - A:A8 X:07 Y:10 SP:ee N.-..I.C   79262620
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  154/$09a,  19/$13
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:06 Y:10 SP:ee ..-..I.C   79262713
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  174/$0ae,  19/$13
+.C:0947  8D 0F D0    STA $D00F      - A:AE X:EE Y:11 SP:ee N.-..I.C   79263973
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  175/$0af,  54/$36
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:01 Y:11 SP:ee ..-..I.C   79264071
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  181/$0b5,  16/$10
+.C:0947  8D 0F D0    STA $D00F      - A:B4 X:EC Y:12 SP:ec N.-..I.C   79264411
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  182/$0b6,  55/$37
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:07 Y:12 SP:ec ..-..I.C   79264513
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  186/$0ba,  26/$1a
+.C:0947  8D 0F D0    STA $D00F      - A:BA X:EE Y:13 SP:ee N.-..I.C   79264736
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  189/$0bd,  23/$17
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:07 Y:13 SP:ee ..-..I.C   79264922
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  192/$0c0,  23/$17
+.C:0947  8D 0F D0    STA $D00F      - A:C0 X:EC Y:14 SP:ec N.-..I.C   79265111
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  194/$0c2,  26/$1a
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:05 Y:14 SP:ec ..-..I.C   79265240
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  198/$0c6,  25/$19
+.C:0947  8D 0F D0    STA $D00F      - A:C6 X:EE Y:15 SP:ee N.-..I.C   79265491
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  200/$0c8,  23/$17
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:15 SP:ee ..-..I.C   79265615
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  205/$0cd,   4/$04
+.C:0947  8D 0F D0    STA $D00F      - A:CC X:EE Y:16 SP:ee N.-..I.C   79265911
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  206/$0ce,  48/$30
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:02 Y:16 SP:ee ..-..I.C   79266018
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  210/$0d2,  18/$12
+.C:0947  8D 0F D0    STA $D00F      - A:D2 X:EC Y:17 SP:ec N.-..I.C   79266240
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  212/$0d4,  49/$31
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:05 Y:17 SP:ec ..-..I.C   79266397
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  216/$0d8,   5/$05
+.C:0947  8D 0F D0    STA $D00F      - A:D8 X:EC Y:18 SP:ec N.-..I.C   79266605
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  217/$0d9,  36/$24
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:07 Y:18 SP:ec ..-..I.C   79266699
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  222/$0de,   4/$04
+.C:0947  8D 0F D0    STA $D00F      - A:DE X:EE Y:19 SP:ee N.-..I.C   79266982
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  223/$0df,  45/$2d
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:19 SP:ee ..-..I.C   79267086
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  228/$0e4,  52/$34
+.C:0947  8D 0F D0    STA $D00F      - A:E4 X:EE Y:1A SP:ee N.-..I.C   79267408
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  230/$0e6,  26/$1a
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:06 Y:1A SP:ee ..-..I.C   79267508
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  234/$0ea,   4/$04
+.C:0947  8D 0F D0    STA $D00F      - A:EA X:EC Y:1B SP:ec N.-..I.C   79267738
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  236/$0ec,  30/$1e
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:08 Y:1B SP:ec ..-..I.C   79267890
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  240/$0f0,   3/$03
+.C:0947  8D 0F D0    STA $D00F      - A:F0 X:EE Y:1C SP:ee N.-..I.C   79268115
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  241/$0f1,  35/$23
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:05 Y:1C SP:ee ..-..I.C   79268210
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  246/$0f6,  14/$0e
+.C:0947  8D 0F D0    STA $D00F      - A:F6 X:EE Y:1D SP:ee N.-..I.C   79268504
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  247/$0f7,  46/$2e
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:1D SP:ee ..-..I..   79268599
+Executing: screenshot "title" 2
+#3 (Trace  exec 0923)  256/$100,   3/$03
+.C:0923  20 4A 0A    JSR $0A4A      - A:00 X:EE Y:1E SP:ee ..-..IZC   79269123
+Executing: screenshot "title" 2
+#4 (Trace  exec 0935)  271/$10f,  20/$14
+.C:0935  8D 1A D0    STA $D01A      - A:01 X:00 Y:1E SP:ee ..-..I..   79270085
+Executing: screenshot "title" 2
+#5 (Trace  exec 0938)  271/$10f,  24/$18
+.C:0938  20 C6 0A    JSR $0AC6      - A:01 X:00 Y:1E SP:ee ..-..I..   79270089
+Executing: screenshot "title" 2
+#6 (Trace  exec 0944)  285/$11d,  62/$3e
+.C:0944  4C 31 EA    JMP $EA31      - A:03 X:03 Y:21 SP:ee ..-..I..   79271009
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   17/$011,   5/$05
+.C:0947  8D 0F D0    STA $D00F      - A:48 X:EE Y:00 SP:ee ..-..I..   79273724
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   18/$012,  31/$1f
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:00 SP:ee ..-..I.C   79273813
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   78/$04e,  32/$20
+.C:0947  8D 0F D0    STA $D00F      - A:4E X:EE Y:01 SP:ee ..-..I..   79277594
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   80/$050,  33/$21
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:06 Y:01 SP:ee ..-..I.C   79277721
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   85/$055,  29/$1d
+.C:0947  8D 0F D0    STA $D00F      - A:54 X:EC Y:02 SP:ec ..-..I..   79278032
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   87/$057,  30/$1e
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:07 Y:02 SP:ec ..-..I.C   79278159
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   90/$05a,  31/$1f
+.C:0947  8D 0F D0    STA $D00F      - A:5A X:EE Y:03 SP:ee ..-..I..   79278349
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   93/$05d,  35/$23
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:02 Y:03 SP:ee ..-..I.C   79278542
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)   96/$060,  22/$16
+.C:0947  8D 0F D0    STA $D00F      - A:60 X:EE Y:04 SP:ee ..-..I..   79278718
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)   98/$062,  26/$1a
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:01 Y:04 SP:ee ..-..I.C   79278848
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  102/$066,  29/$1d
+.C:0947  8D 0F D0    STA $D00F      - A:66 X:EC Y:05 SP:ec ..-..I..   79279103
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  104/$068,  30/$1e
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:05 Y:05 SP:ec ..-..I.C   79279230
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  108/$06c,  52/$34
+.C:0947  8D 0F D0    STA $D00F      - A:6C X:EE Y:06 SP:ee ..-..I..   79279504
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  110/$06e,  25/$19
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:06 SP:ee ..-..I.C   79279603
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  114/$072,  18/$12
+.C:0947  8D 0F D0    STA $D00F      - A:72 X:EE Y:07 SP:ee ..-..I..   79279848
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  116/$074,  42/$2a
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:08 Y:07 SP:ee ..-..I.C   79279998
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  120/$078,  11/$0b
+.C:0947  8D 0F D0    STA $D00F      - A:78 X:EE Y:08 SP:ee ..-..I..   79280219
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  121/$079,  48/$30
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:04 Y:08 SP:ee ..-..I.C   79280319
+Executing: screenshot "title" 2
+#7 (Trace  exec 0947)  126/$07e,  20/$14
+.C:0947  8D 0F D0    STA $D00F      - A:7E X:EC Y:09 SP:ec ..-..I..   79280606
+Executing: screenshot "title" 2
+#8 (Trace  exec 098d)  127/$07f,  57/$39
+.C:098d  4C F5 08    JMP $08F5      - A:01 X:03 Y:09 SP:ec ..-..I.C   79280706
+Executing: screenshot "title" 2

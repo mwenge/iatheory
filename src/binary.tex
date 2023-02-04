@@ -1,0 +1,130 @@
+\chapter{We Need to Talk About Binary} 
+\lstset{style=6502Style}
+
+Here we are, ground zero in every book about assembly programming. Where the reader
+finds themselves in an awkdward sit-down discussion about the B word. It's a necessary evil
+of course. Nothing will ever make sense without a rudimentary but slowly growing
+grasp of what bytes are and why they keep being referred to in a confusing mixture
+of letters and numbers such as \icode{\$D012} and icode{\$F4}.
+
+So what am I supposed to do with you here? Succeed where every other author has
+usually failed? I assume that's the expectation. OK here goes.
+
+You already know, OK maybe you already know that computers, even those in the 
+1980s, understand everything in terms of 1s and 0s. All it knows is a world
+in which something is on or off, high or low, present or absent. The reason
+for this is simply because yes/no and on/off are so fundamental to the reality
+of very small things. Once you break anything down far enough you are always
+left with a simple question of there being somethere or nothing. The idea of a
+\icode{1} or a \icode{0} as the simplest possible building blocks for every
+single thing is not so outrageous. You put enough 1s and 0s together in a row
+you can build patterns that repeat and create larger patterns and suddenly
+you find yourself with a string of 1s and 0s that means something.
+
+The idea of on/off is so simple even a computer can understand it. If you feed
+it a signal all it has to do is determine whether it is one or the other and
+store the result. Then read the next signal. And before long the computer
+has a sequence of 1s and 0s it might be able to do something with.
+
+So when you are programming a computer or in our case trying to understand
+how it was programmed to give us Iridis Alpha you have to be able to visualize
+how the computer has stored all the ones and zeros it has been given and how
+it shuffles them around. An unruly mound of 1s and 0s is not much use when
+operating on them intensively. There has to be some benefit to splitting
+up the blob in some way that allows some order to be imposed. Some way
+of segmenting a string of 1s and 0s that is both useful to us as the
+programmers and an efficient way of directing the computer to make effective
+use of the amorphous blob fed into it.
+
+Trial and error has eventually arrived at an optimal arrangement, one which
+you have definitely heard of: this is the \icode{byte}. The idea of the byte
+is simply to divide and conquer. We take any string of 1s and 0s and split
+them up into segments of eight. We now consider ourselves to have a string
+of bytes and we call each of the individual 1s and 0s \icode{bits}. 
+
+Any scheme that reduces the number of items we have to deal with is a boon,
+but is there any rhyme or reason to choosing 8 as our magic number instead
+of say 7, or 12? Believe it or not, the number 8 was chosen almost solely
+after much experimentation with others because it proved the easiest and
+most convenient for people to deal with when understanding how they would
+make computers work.
+
+The reason a byte of 8 bits is so convenient to deal with is because of
+the number of different values it can represent and the compact notation
+this particular number allows. Having a convenient notation system that
+allows humans to compose larger values from smaller values is surprisingly
+important when it comes down to it. It is humans doing the important part
+of the computing: making the big decisions, figuring out where things go
+and how they should work. The computer is just a glorified bit shuffler
+for which everything is on or off and there is no bigger picture. Humans
+need to be able to at least intuit some of this shuffling with a mental
+model of what happens when one set of ones and zeros is clashed with another.
+Using the magic number of 8 as the denominator for batches of bits enables
+this simple mental model.
+
+The first great thing about 8 is that it can be divided into two. That is,
+into two segments of 4 bits. The great thing about a sequence of four 1s
+and 0s is that it has 16 possible permutations. That's to say it can be
+ordered in sixteen unique ways. Yet another way, is to say that a sequence
+of 4 bits can store up to sixteen different values.
+
+You have to agree this is marvellous stuff. But what is so convenient
+about a number between 1 and 16? If you're using decimal notation it's
+not convenient at all, in some cases you end up having to write two
+whole characters rather than one. We could avoid that if we invented
+a system that allowed a single character for each of the 16 values.
+
+For example \icode{0-9} for 0-9, and \icode{A-F} for 10-15. Seems a bit
+clunky. But it works.
+
+On the other hand, congratulations, we've just invented hexadecimal.
+
+The genius of this system is that it allows us to write every possible
+sequence of 8 bits with just two characters. 
+
+But that is not its only benefit. When we look at any specific number
+using this notation we can almost immediately tell how the bits in it
+are set, without needing to memorize all 256 possible permutations.
+
+This is possible because we can start by looking at either character
+in the two-character notation and quickly divine the 1s and 0s that
+make it up. We can do this because each character represents a value
+between 0 and 15 that made is up of some combination of 8, 4, 2, and
+1 - each representing a bit from left to right.
+
+The ability to do this is especially important when doing the low
+level programming that is typical of assembly. We'll see plenty of
+examples in future chapters but here is a taste of the kind of operation
+we ask a computer to perform by expressing our intentions using 
+hexadecimal notation for binary.
+
+Imagine we have a value from some random source stored in a byte. Imagine
+we happen to be in need of a random number, for example to select a random
+planet to use the next time we run attract mode in Iridis Alpha.
+
+This random number we have stored in a byte sounds like it should be useful to us, but since its
+random it can be any value between 0 and 255 and since we only have four
+planets to choose from what we need is a number between 0 and 3.
+
+A simple binary operation provides a way of solving this problem and 
+our hexadecimal notation gives us a straightforward way of expressing it.
+
+First the binary operation itself. Let's say our random value is a string of bits
+like \icode{01011010}. Since we only want a value between 0 and 3 we can
+extract out just the last two bits to give us that number. We can ask the
+computer to do this us by asking it to compare \icode{01011010} with \icode{00000011}
+and give use as a result all the bits where both are 1. Notice that in this new 
+bit string we've set the bits that we're interested in to \icode{1}.
+
+This is called an \icode{AND} operation. We have used \icode{00000011} to mask
+out the bits we're not interested in and hence turn a number between 0 and 255
+into a number between 0 and 3.
+
+
+
+
+
+
+
+
+

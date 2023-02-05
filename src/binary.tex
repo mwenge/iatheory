@@ -10,7 +10,7 @@ of letters and numbers such as \icode{\$D012} and icode{\$F4}.
 So what am I supposed to do with you here? Succeed where every other author has
 usually failed? I assume that's the expectation. OK here goes.
 
-You already know, OK maybe you already know that computers, even those in the 
+You already know, OK maybe you already know, that computers, even those in the 
 1980s, understand everything in terms of 1s and 0s. All it knows is a world
 in which something is on or off, high or low, present or absent. The reason
 for this is simply because yes/no and on/off are so fundamental to the reality
@@ -68,8 +68,33 @@ and 0s is that it has 16 possible permutations. That's to say it can be
 ordered in sixteen unique ways. Yet another way, is to say that a sequence
 of 4 bits can store up to sixteen different values.
 
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=4cm,center}
+
+      \begin{tabular}{rcccccccc}
+        \toprule
+        Value & Bits & Value & Bits  \\
+        \midrule
+        0 & \icode{0000} & 8 & \icode{1000}  \\
+        1 & \icode{0001} & 9 & \icode{1001}  \\
+        2 & \icode{0010} & 10 & \icode{1010}  \\
+        3 & \icode{0011} & 11 & \icode{1011}  \\
+        4 & \icode{0100} & 12 & \icode{1100}  \\
+        5 & \icode{0101} & 13 & \icode{1101}  \\
+        6 & \icode{0110} & 14 & \icode{1110}  \\
+        7 & \icode{0111} & 15 & \icode{1111}  \\
+        \addlinespace
+        \bottomrule
+      \end{tabular}
+    \end{adjustbox}
+  }\caption*{The 16 different permutations of four 0s and 1s.}
+\end{figure}
+
 You have to agree this is marvellous stuff. But what is so convenient
-about a number between 1 and 16? If you're using decimal notation it's
+about a number between 0 and 15? If you're using decimal notation it's
 not convenient at all, in some cases you end up having to write two
 whole characters rather than one. We could avoid that if we invented
 a system that allowed a single character for each of the 16 values.
@@ -77,10 +102,59 @@ a system that allowed a single character for each of the 16 values.
 For example \icode{0-9} for 0-9, and \icode{A-F} for 10-15. Seems a bit
 clunky. But it works.
 
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=4cm,center}
+
+      \begin{tabular}{rcccccccc}
+        \toprule
+        Value & Bits & Value & Bits  \\
+        \midrule
+        0 & \icode{0000} & 8 & \icode{1000}  \\
+        1 & \icode{0001} & 9 & \icode{1001}  \\
+        2 & \icode{0010} & A & \icode{1010}  \\
+        3 & \icode{0011} & B & \icode{1011}  \\
+        4 & \icode{0100} & C & \icode{1100}  \\
+        5 & \icode{0101} & D & \icode{1101}  \\
+        6 & \icode{0110} & E & \icode{1110}  \\
+        7 & \icode{0111} & F & \icode{1111}  \\
+        \addlinespace
+        \bottomrule
+      \end{tabular}
+    \end{adjustbox}
+  }\caption*{The 16 different permutations of four 0s and 1s but with letters too.}
+\end{figure}
+
 On the other hand, congratulations, we've just invented hexadecimal.
 
 The genius of this system is that it allows us to write every possible
 sequence of 8 bits with just two characters. 
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=6cm,center}
+
+      \begin{tabular}{rcccccccc}
+        \toprule
+        Value & Bits & Value & Bits  \\
+        \midrule
+        00 & \icode{00000000} & 80 & \icode{10000000}  \\
+        01 & \icode{00000001} & 81 & \icode{10000001}  \\
+        02 & \icode{00000010} & 82 & \icode{10000010}  \\
+        . & . & . & .  \\
+        7D & \icode{01111101} & FD & \icode{11111101}  \\
+        7E & \icode{01111110} & FE & \icode{11111110}  \\
+        7F & \icode{01111111} & FF & \icode{11111111}  \\
+        \addlinespace
+        \bottomrule
+      \end{tabular}
+    \end{adjustbox}
+  }\caption*{The 256 different permutations of eight 0s and 1s.}
+\end{figure}
 
 But that is not its only benefit. When we look at any specific number
 using this notation we can almost immediately tell how the bits in it
@@ -91,6 +165,73 @@ in the two-character notation and quickly divine the 1s and 0s that
 make it up. We can do this because each character represents a value
 between 0 and 15 that made is up of some combination of 8, 4, 2, and
 1 - each representing a bit from left to right.
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=4cm,center}
+
+      \begin{tabular}{rcccccccc}
+        \toprule
+        8 & 4 & 2 & 1 & Decimal & Hex  \\
+        \midrule
+        \icode{0} & \icode{0} & \icode{0} & \icode{0} & 0 & \icode{0}  \\
+        \icode{0} & \icode{0} & \icode{0} & \icode{1} & 1 & \icode{1}  \\
+        \icode{0} & \icode{0} & \icode{1} & \icode{0} & 2 & \icode{2}  \\
+        . & . & . & .  \\
+        \icode{1} & \icode{1} & \icode{0} & \icode{1} & 13 & \icode{E}  \\
+        \icode{0} & \icode{1} & \icode{1} & \icode{0} & 14 & \icode{D}  \\
+        \icode{1} & \icode{1} & \icode{1} & \icode{1} & 15 & \icode{F}  \\
+        \addlinespace
+        \bottomrule
+      \end{tabular}
+    \end{adjustbox}
+  }\caption*{The 16 different permutations of four 0s and 1s but with letters too.}
+\end{figure}
+
+"All" we have to do when confronted with a single hexadecimal digit like \icode{9}
+is figure out that its made up of 8 and 1 in order to know that the bits are set
+as follows:
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=4cm,center}
+
+      \begin{tabular}{rcccccccc}
+        \toprule
+        8 & 4 & 2 & 1 & Decimal & Hex  \\
+        \midrule
+        \icode{1} & \icode{0} & \icode{0} & \icode{1} & 9 & \icode{9}  \\
+        \addlinespace
+        \bottomrule
+      \end{tabular}
+    \end{adjustbox}
+  }
+\end{figure}
+
+Likewise with the slightly more inscrutable \icode{D}. Since \icode{F} is 15,
+\icode{D} must be 13. And 13 is made up of 8, 4, and 1:
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=4cm,center}
+
+      \begin{tabular}{rcccccccc}
+        \toprule
+        8 & 4 & 2 & 1 & Decimal & Hex  \\
+        \midrule
+        \icode{1} & \icode{1} & \icode{0} & \icode{1} & 13 & \icode{D}  \\
+        \addlinespace
+        \bottomrule
+      \end{tabular}
+    \end{adjustbox}
+  }
+\end{figure}
 
 The ability to do this is especially important when doing the low
 level programming that is typical of assembly. We'll see plenty of
@@ -110,15 +251,149 @@ A simple binary operation provides a way of solving this problem and
 our hexadecimal notation gives us a straightforward way of expressing it.
 
 First the binary operation itself. Let's say our random value is a string of bits
-like \icode{01011010}. Since we only want a value between 0 and 3 we can
-extract out just the last two bits to give us that number. We can ask the
-computer to do this us by asking it to compare \icode{01011010} with \icode{00000011}
-and give use as a result all the bits where both are 1. Notice that in this new 
-bit string we've set the bits that we're interested in to \icode{1}.
+like \icode{01011010} which is \icode{5A} in hexadecimal.
 
-This is called an \icode{AND} operation. We have used \icode{00000011} to mask
-out the bits we're not interested in and hence turn a number between 0 and 255
-into a number between 0 and 3.
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=6cm,center}
+
+      \begin{tabular}{rccccccccc}
+        \toprule
+        8 & 4 & 2 & 1 & 8 & 4 & 2 & 1 & Decimal & Hex  \\
+        \midrule
+        \icode{0} & \icode{1} & \icode{0} & \icode{1} & \icode{1} & \icode{0} & \icode{1} & \icode{0} & 90 & \icode{5A}\\
+        \addlinespace
+      \end{tabular}
+    \end{adjustbox}
+  }
+\end{figure}
+
+Since we only want a value between 0 and 3 we can
+extract out just the last two bits to give us that number. In other words, if we 
+set all the other bits to zero but that last two we would have a number between 0 and 3:
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=6cm,center}
+
+      \begin{tabular}{rccccccccc}
+        \toprule
+        8 & 4 & 2 & 1 & 8 & 4 & 2 & 1 & Decimal & Hex  \\
+        \midrule
+        \icode{0} & \icode{0} & \icode{0} & \icode{0} & \icode{0} & \icode{0} & \bicode{1} & \bicode{0} & 2 & \icode{02}\\
+        \addlinespace
+      \end{tabular}
+    \end{adjustbox}
+  }
+\end{figure}
+
+We can ask the
+computer to do this us by asking it to compare \icode{01011010} with \icode{00000011}
+and give use as a result all the bits where both are 1.
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=8cm,center}
+
+      \begin{tabular}{rcccccccc}
+        \toprule
+        Byte & Bit 7 & Bit 6 & Bit 5 & Bit 4 & Bit 3 & Bit 2 & Bit 1 & Bit 0        \\
+        \midrule
+        \$5A & 0 & 1 & 0 & 1 & 1 & 0 & \textbf{1} & \textbf{0} \\
+        \$03 & 0 & 0 & 0 & 0 & 0 & 0 & \textbf{1} & \textbf{1} \\
+        \midrule
+        Result: \$02 & 0 & 0 & 0 & 0 & 0 & 0 & \textbf{1} & \textbf{0}\\
+        \addlinespace
+        \bottomrule
+      \end{tabular}
+    \end{adjustbox}
+  }\caption*{AND'ing \icode{\$5A} and \icode{\$03} gives \icode{\$01} (1). For \icode{AND} to give a 1 both bits must 1 or both must be 0.}
+\end{figure}
+
+
+Notice that in this new bit string we've set the bits that we're interested in
+to \icode{1}.  This is called an \icode{AND} operation. We have used
+\icode{00000011} to mask out the bits we're not interested in and hence turn a
+random number between 0 and 255 into a random number between 0 and 3.
+
+Our choice of 8 as a magic number becomes slightly less magical when we realize
+that we never had all possible numbers to choose from in the first place. Sure
+we could have chosen 7 or 9 or 13 but how practical would this really be when
+the actual value assigned to any individual bit is always going to be a power of
+2. Even if we could never precisely intuit the reasons as to why, a magic number
+that is also the power of 2, e.g. 8,4,16,64, is always going to make things easier
+over the long haul even if we can't articulate them.
+
+So now some jargon we might have heard in the past is starting to make sense. The
+Commodore 64 was an '8-bit computer'. What this means is that its basic unit of
+currency is the 8-bit byte we've invented here. Everytime it performs an operation
+it does so using a single byte as its fundamental building block. This is true 
+whether we talking about the \icode{AND} operation or storing a value for use
+later on. When we give the C64 a value it's always a single byte. The subsequent
+ear of 16-bit computing (e.g. the Amiga) took this a step further by introducing
+a two-byte block as its basic unit of currency. 32-bit and 64-bit computing are the
+lingua franc of modern processors - no matter how small the value we're using it
+will be managed as 4-byte or 8-byte value respectively by 32-bit and 64-bit
+computer architectures.
+
+But even the C64 had use for values larger than 255. In fact it could handle staggering
+numbers as large as 65,536 using a little sleight of hand to put two bytes side by side
+and treat them as a single number.
+
+This was as far as its ken could reach however. And since it could look no further than
+65,536 that imposed an upper bound on the number of values it could reach for at any given
+time. This finite horizon is known as its address space. When we want to store a value
+in the C64's memory we only have 65,536 slots available to specify or select from. The
+address we choose must be between \icode{\$0000} (0) and \icode{\$FFFF} (65,536).
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=9cm,center}
+      \begin{tikzpicture}
+        \draw[step=1.0,gray,thin] (0,0) grid (8,2);
+        \fill[gray] (3,1) rectangle ++ (2,1);
+        \node[matrix of math nodes,anchor=south west,inner sep=0pt,
+              nodes={draw,minimum size=1cm,anchor=center},
+              column sep=-\pgflinewidth,row sep=-\pgflinewidth,font=\ttfamily]
+              {
+                43 & 36 & 34 & 00 & 40 & .. & 41 & 50 & 45 & DE & A2 \\
+        \icode{\$0000} & \icode{\$0001} & \icode{\$0002} & \icode{\$0003} & \icode{\$0004}  & .. & \icode{\$FFFC}  & \icode{\$FFFC}  & \icode{\$FFFD}  & \icode{\$FFFE}  & \icode{\$FFFF} \\
+						  };
+      \end{tikzpicture}
+    \end{adjustbox}
+  }\caption{The C64's memory visualized as a long strip of 65,536 slots, each holding a byte represented in hexadecimal.}
+\end{figure}
+
+This upper limit is what gives the Commodore 64 its name. It has 64 kilobytes of memory.
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=8cm,center}
+
+      \begin{tabular}{ccccccccc}
+        \toprule
+        Hex & Decimal & Meaning &  & Hex & Decimal & Meaning \\
+        \midrule
+        \icode{\$0400} & 1024 & 1 Kilobyte &  & \icode{\$0400} & 1024 & 1 Kilobyte & \\\\
+        \icode{\$FFFF} & 65,536 & 64 Kilobytes & &  \icode{\$0400} & 1024 & 1 Kilobyte & \\\\
+        \bottomrule
+      \end{tabular}
+    \end{adjustbox}
+  }\caption*{Some magic numbers when dealing with bytes.}
+\end{figure}
+
+This is all we need to get started. The rest we can pick up along the way. So let's start.
+
 
 
 

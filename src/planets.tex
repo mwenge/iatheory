@@ -179,9 +179,28 @@ to define each character\, so not cheap.,basicstyle=\tiny]{tmp.asm}
 Is that all there is to it? No. Before we look at how me might color things other than blue, let's look at how we color them
 with the big blue brush we have so far. The first thing we do is clear down the entire surface of the planet:
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{6903}{6925}%
-\lstinputlisting[caption=The surface data is stored from \icode{\$8000} to \icode{\$8FFF}. This code overwrites it all with 
-the value \$60\, which is an empty bitmap.]{tmp.asm}
+\begin{lstlisting}[caption=The surface data is stored from \icode{\$8000} to \icode{\$8FFF}. This code overwrites it all with 
+the value \$60\, which is an empty bitmap.]
+        ; Clear down the planet surface data from $8000 to $8FFF.
+        ; There are 4 layers:
+        ; Top Layer:    $8000 to $83FF - 256 bytes 
+        ; Second Layer: $8400 to $87FF - 256 bytes 
+        ; Third Layer:  $8800 to $8BFF - 256 bytes 
+        ; Bottom Layer: $8C00 to $8FFF - 256 bytes 
+        LDY #$00
+ClearPlanetHiPtrs   
+        ; $60 is an empty character and gets written to the entire
+        ; range from $8000 to $8FFF.
+        LDA #$60
+ClearPlanetLoPtrs   
+        STA (planetSurfaceDataPtrLo),Y
+        DEY
+        BNE ClearPlanetLoPtrs
+        INC planetSurfaceDataPtrHi
+        LDA planetSurfaceDataPtrHi
+        CMP (#>planetSurfaceData) + $10
+        BNE ClearPlanetHiPtrs
+\end{lstlisting}
 
 \CopyPartialFile{../iridisalpha/src/graphics/planet_textures.asm}{tmp.asm}{965}{974}%
 \lstinputlisting[caption=The empty character bit map (all zeroes) used to overwrite the surface before populating it.,basicstyle=\tiny]{tmp.asm}
@@ -191,9 +210,31 @@ With the planet surface cleared out (overwritten with all \icode{\$60}s) we can 
 layer that contains the land and/or sea and it lives between \icode{\$8C00} and \icode{\$8FFF} which if your hexadecimal
 arithmetic is better than mine you will realize is 1024 bytes (\icode{\$400} in hex).
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{6929}{6950}%
-\lstinputlisting[caption=Filling the entire bottom surface of the planet with \icode{\$40,\$42}\, which gives us the sea. Our next step is
-to overwrite some of this with land.]{tmp.asm}
+\begin{lstlisting}[caption=Filling the entire bottom surface of the planet with \icode{\$40,\$42}\, which gives us the sea. Our next step is
+to overwrite some of this with land.]
+        ; Fill $8C00 to $8FFF with a $40,$42 pattern. These are the
+        ; character values that represent 'sea' on the planet.
+        LDA #$8C
+        STA planetSurfaceDataPtrHi
+WriteSeaLoop   
+        LDA #$40
+        STA (planetSurfaceDataPtrLo),Y
+        LDA #$42
+        INY
+        STA (planetSurfaceDataPtrLo),Y
+        DEY
+        ; Move the pointers forward by 2 bytes
+        LDA planetSurfaceDataPtrLo
+        CLC
+        ADC #$02
+        STA planetSurfaceDataPtrLo
+        LDA planetSurfaceDataPtrHi
+        ADC #$00
+        STA planetSurfaceDataPtrHi
+        ; Loop until $8FFF
+        CMP #$90
+        BNE WriteSeaLoop
+\end{lstlisting}
 
 \subfile{planets/planet1Charset_SeaAgain}
 
@@ -233,14 +274,28 @@ since the entire surface is 1024 bytes long.
 
 Picking a random number between 128 and 256 is slightly convoluted in assembly:
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{6955}{6963}%
-\lstinputlisting[caption=Convoluted]{tmp.asm}
+\begin{lstlisting}[caption=Convoluted.]
+        ; Get a random number between 0 and 256 and store
+        ; in A.
+        JSR PutProceduralByteInAccumulatorRegister
+        ; Ensure the random number is between 128 and 256.
+        AND #$7F ; e.g. $92 becomes $12.
+        CLC      ; Clear the carry so addition doesn't overflow.
+        ADC #$7F ; e.g. Adding $7F to $12 gives $91 (145).
+        ; Store the result.
+        STA charSetDataPtrHi
+\end{lstlisting}
 
 \begin{q}
 A Neat Little Trick?
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{6774}{6778}%
-\lstinputlisting[caption=Neat]{tmp.asm}
+\begin{lstlisting}[caption=Neat.]
+PutProceduralByteInAccumulatorRegister
+randomIntToIncrement   =*+$01
+        LDA randomPlanetData
+        INC randomIntToIncrement
+        RTS
+\end{lstlisting}
 
 This little snippet's job is to return a quasi-random byte for use in the planet generation
 routines. To achieve this, it does something quite fiendish that is more or less unhead of in modern
@@ -268,8 +323,16 @@ Every time the routine is called it increments the reference again so that the n
 
 With a random start position selected, a similar convolution is performed to choose the length of the land mass:
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{6973}{6979}%
-\lstinputlisting[caption=A convolution]{tmp.asm}
+\begin{lstlisting}[caption=A convolution.]
+        ; Randomly generate the length of the land section, but
+        ; make it at least 32 bytes and not more than 150.
+        JSR PutProceduralByteInAccumulatorRegister
+        AND #$7F ; Random number between 0 and 128
+        CLC
+        ADC #$20 ; Add 32
+        STA planetSurfaceDataPtrLo
+
+\end{lstlisting}
 
 Since the random number we get can be anything between \icode{\$00 - \$FF} (i.e. 0 and 255) and we want a number
 that's between 0 and 128 we need to do a bitwise \icode{AND} to mask out Bit 7 which by itself is 128.
@@ -324,13 +387,40 @@ and proper means giving the shore of the land its own look and feel. This we hav
 
 Now we can put the rest of the land down:
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{6990}{6990}%
 \lstinputlisting[caption=Write pairs of \icode{\$41,\$43} for the main land mass.]{tmp.asm}
+\begin{lstlisting}[caption=Write pairs of \icode{\$41,\$43} for the main land mass.]
+        ; Draw the land from the randomly chosen position for up to
+        ; 150 bytes, depending on the randomly chosen length of the land
+        ; chosen above and storedin planetSurfaceDataPtrLo.
+DrawLandMassLoop   
+        INC charSetDataPtrHi
+        BNE b7420
+
+        INC charSetDataPtrLo
+b7420   JSR StoreRandomPositionInPlanetInPlanetPtr
+        LDY #$00
+        LDA #$41
+        STA (planetPtrLo),Y
+        LDA #$43
+        INY
+        STA (planetPtrLo),Y
+        DEC planetSurfaceDataPtrLo
+        BNE DrawLandMassLoop
+\end{lstlisting}
 
 And finally the right shore:
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{7008}{7015}%
-\lstinputlisting[caption=Drawing the right shore.]{tmp.asm}
+\begin{lstlisting}[caption=Drawing the right hand shore..]
+        ; Draw the right short of the land, represented by the chars in
+        ; $5D/$5F.
+        INY
+        LDA #$5D
+        STA (planetPtrLo),Y
+        LDA #$5F
+        INY
+        STA (planetPtrLo),Y
+\end{lstlisting}
+
 
 \subsection{Step Three: Structures Structures Structures}
 The routines for adding structures to the planet are the opportunity to observe some assembly language cleverness.
@@ -383,8 +473,20 @@ You may be getting the sense that there is a sort of economy at work here. The s
 the same for each planet, but with the textures swapped out. Your intuition is correct, the structures
 are only defined once and the same definition does regardless of which planet we're painting:
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{7021}{7030}%
-\lstinputlisting[caption=The definitions of three of the structures above\, each of which serves all five planets.]{tmp.asm}
+\begin{lstlisting}[caption=The definitions of three of the structures above\, each of which serves all five planets.]
+littleStructureData  .BYTE $45,$47,$FF
+                     .BYTE $44,$46,$FE
+mediumStructureData  .BYTE $65,$67,$69,$6B,$FF
+                     .BYTE $64,$66,$68,$6A,$FE
+largestStructureData .BYTE $41,$43,$51,$53,$41,$43,$FF
+                     .BYTE $60,$60,$50,$52,$60,$60,$FF
+                     .BYTE $49,$4B,$4D,$4F,$6D,$6F,$FF
+                     .BYTE $48,$4A,$4C,$4E,$6C,$6E,$FE
+nextLargestStructure .BYTE $59,$5B,$FF
+                     .BYTE $58,$5A,$FF
+                     .BYTE $55,$57,$FF
+                     .BYTE $54,$56,$FE
+\end{lstlisting}
 
 The \$FF at the end of each line serves as a sentinel for the drawing routine to know that the subsequent bytes
 are for the next layer 'up'. The \$FE is a terminator, indicating there is no more data for the structure.
@@ -392,8 +494,39 @@ are for the next layer 'up'. The \$FE is a terminator, indicating there is no mo
 Drawing a structure is relatively straightforward so we'll cover that briefly first. Drawing the littlest
 structure provides the most compact example of the technique:
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{7039}{7073}%
-\lstinputlisting[caption=The littlest structure has only two layers.]{tmp.asm}
+\begin{lstlisting}[caption=The littlest structure has only two layers.]
+DrawLittleStructure
+        ; Start iterating at 0.
+        LDX #$00
+DrawLSLoop
+        ; Get the byte in littleStructureData pointed to
+        ; by X.
+        LDA littleStructureData,X
+        ; If we reached the 'end of layer' sentinel, move
+        ; our pointer planetPtrHi to the next layer. The
+        ; BNE 'stays on the same layer' by jumping to
+        ; LS_StayonSameLayer if the current byte
+        ; is not $FF.
+        CMP #$FF
+        BNE LS_StayonSameLayer
+        ; Switch to the next layer.
+        JSR SwitchToNextLayerInPlanet
+        ; SwitchToNextLayerInPlanet incremented X for us
+        ; so continue looping.
+        JMP DrawLSLoop
+
+LS_StayonSameLayer   
+        CMP #$FE
+        ; If we read in an $FE, we're done drawing.
+        BEQ ReturnFromDrawingStructure
+        STA (planetPtrLo),Y
+        ; Increment Y to the next position to write to.
+        INY
+        ; Increment X to get the next byte to read in.
+        INX
+        ; Continue looping.
+        JMP DrawLSLoop
+\end{lstlisting}
 
 Given that we're only writing 4 bytes this is a lot of code. As we will see there are separate routines for each
 of the structures and unfortunately for our search for evidence of coding genius they're all identical. So this
@@ -401,19 +534,63 @@ is a pretty open-and-shut case of code duplication. It would have been more comp
 and use a pointer to the structure data instead of repeating almost verbatim the same assembly code for each
 structure. 
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{7087}{7125}%
-\lstinputlisting[caption=\icode{DrawMediumStructure} and \icode{DrawLargestStructure} are identical to each other\, and to
-\icode{DrawLittleStructure} and \icode{DrawNextLargestStructure}.]{tmp.asm}
+\begin{lstlisting}[caption=\icode{DrawMediumStructure} and \icode{DrawLargestStructure} are identical to each other\, and to
+\icode{DrawLittleStructure} and \icode{DrawNextLargestStructure}.]
+;-------------------------------------------------------
+; DrawMediumStructure ($74B1)
+;-------------------------------------------------------
+DrawMediumStructure
+        LDX #$00
+
+DrawMSLoop
+        LDA mediumStructureData,X
+        CMP #$FF
+        BNE b74C0
+        JSR SwitchToNextLayerInPlanet
+        JMP DrawMSLoop
+
+b74C0   CMP #$FE
+        BEQ ReturnFromDrawingStructure ; Return
+        STA (planetPtrLo),Y
+        INY
+        INX
+        JMP DrawMSLoop
+
+;-------------------------------------------------------
+; DrawLargestStructure ($74CB)
+;-------------------------------------------------------
+DrawLargestStructure
+        LDX #$00
+
+DrawLargeStructureLoop
+        LDA largestStructureData,X
+        CMP #$FF
+        BNE b74DA
+        JSR SwitchToNextLayerInPlanet
+        JMP DrawLargeStructureLoop
+
+b74DA   CMP #$FE
+        BEQ ReturnFromDrawingStructure ; Return
+        STA (planetPtrLo),Y
+        INY
+        INX
+        JMP DrawLargeStructureLoop
+\end{lstlisting}
 
 The cleverness comes a little earlier so let's console ourselves with that. When we've chosen a position to draw
 our structure we need to pick a type of structure at random. The secret to this is to store the addresses to our
 regrettably repetitive draw routines in a pair of arrays. 
 
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{7256}{7259}%
-\lstinputlisting[caption=A 'jump table' containing the addresses to our draw routines. The address for \icode{DrawLittleStructure} 
+\begin{lstlisting}[caption=A 'jump table' containing the addresses to our draw routines. The address for \icode{DrawLittleStructure} 
 happens to be \$7486\, so we store \$74 in the first byte of \icode{structureSubRoutineArrayHiPtr} and \$86 in the first
-byte of \icode{structureSubRoutineArrayLoPtr}.,basicstyle=\tiny]{tmp.asm}
+byte of \icode{structureSubRoutineArrayLoPtr}.,basicstyle=\tiny]
+;Jump table
+structureSubRoutineArrayHiPtr   .BYTE >DrawLittleStructure,>DrawMediumStructure
+                                .BYTE >DrawLargestStructure,>DrawNextLargestStructure
+structureSubRoutineArrayLoPtr   .BYTE <DrawLittleStructure,<DrawMediumStructure
+                                .BYTE <DrawLargestStructure,<DrawNextLargestStructure
+\end{lstlisting}
 
 With this in place our routine consists of getting a random number between 0 and 3, then using that as in index to pick
 out a value at the same position from \icode{structureSubRoutineArrayLoPtr} and \icode {structureSubRoutineArrayHiPtr}.
@@ -421,8 +598,39 @@ We then store those values in \icode{structureRoutineLoPtr} and \icode{structure
 have a pointer to one of our draw routines at \icode{structureRoutineLoPtr} which we can jump to with the simple
 command: \icode{JMP (structureRoutineLoPtr)}. 
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{7227}{7253}%
-\lstinputlisting[caption=\icode{DrawRandomlyChosenStructure} picks a random position and a random draw routine to use at that position.]{tmp.asm}
+
+\begin{lstlisting}[caption=\icode{DrawRandomlyChosenStructure} picks a random position and a random draw routine to use at that position.]
+;---------------------------------------------------------------
+; DrawRandomlyChosenStructure
+;---------------------------------------------------------------
+DrawRandomlyChosenStructure
+        ; Pick a random positio to draw the structure
+        JSR StoreRandomPositionInPlanetInPlanetPtr
+
+        ; Run the randomly chose subroutine, one of:
+        ; DrawLittleStructure, DrawMediumStructure,
+        ; DrawLargestStructure, DrawNextLargestStructure
+        ; to draw a structure on the planet surface
+
+        ; Pick a random number between 0 and 3
+        JSR PutProceduralByteInAccumulatorRegister
+        ; AND'ing with $03 ensures the number is between
+        ; 0 and 3.
+        AND #$03
+        ; Move the number to the X register.
+        TAX
+        ; Use the random number to pick and draw a structure.
+        LDA structureSubRoutineArrayHiPtr,X
+        STA structureRoutineHiPtr
+        LDA structureSubRoutineArrayLoPtr,X
+        STA structureRoutineLoPtr
+        ; With the address of the routine we've chosen copied
+        ; to structureRoutineLoPtr, we jump to that address and
+        ; run the routine.
+        JMP (structureRoutineLoPtr)
+        ; The routine contains an 'RTS' so does the returning
+        ; for us.
+\end{lstlisting}
 
 Rinse and repeat this for the length of the map and we get a surface with sea and land that is dotted with structures
 of different types.
@@ -467,17 +675,37 @@ draws it twice. Yet each level has only one warp gate. Each one gets an initial 
 \$F1 and \$05 respectively. This is used by \icode{StoreRandomPositionInPlanetInPlanetPtr} to 
 point to a position on the surface where the warp gate is drawn.
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{7203}{7222}%
-\lstinputlisting[caption=Why does it draw 2 warp gates when there's only 1? Haven't figured this out yet..]{tmp.asm}
+\begin{lstlisting}[caption=Why does it draw 2 warp gates when there's only 1? Haven't figured this out yet..]
+DrawWarpGates   
+        LDA charSetDataPtrLo
+        BEQ GenerateStructuresLoop
+
+        ; Draw a warp gate at the end of the map.
+        LDA #$F1
+        STA charSetDataPtrHi
+
+        JSR StoreRandomPositionInPlanetInPlanetPtr
+        JSR DrawWarpGate
+        DEC charSetDataPtrLo
+
+        ; Draw a warp gate at the start of the map.
+        LDA #$05
+        STA charSetDataPtrHi
+
+        JSR StoreRandomPositionInPlanetInPlanetPtr
+        JSR DrawWarpGate
+\end{lstlisting}
 
 \begin{figure}[H]
   {
+    \begin{adjustbox}{width=10cm,center}
       \begin{subfigure}{0.7\textwidth}
         \surface{planets/planet4Charset_Random_Step4.png}
       \end{subfigure}
       \begin{subfigure}{0.7\textwidth}
         \surface{planets/planet5Charset_Random_Step4.png}
       \end{subfigure}
+  \end{adjustbox}
   }\caption[]{The final surfaces for Planets 4 and 5.}
 \end{figure}
 
@@ -486,6 +714,792 @@ When the lower planet is inactive a surface with land, sea, and a warp gate is d
 any of the logic described above. Instead it is generated from some customized data in the routine
 \icode{DrawLowerPlanetWhileInactive}.
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{4239}{4294}%
-\lstinputlisting[caption=Draw the inactive lower planet.,basicstyle=\tiny]{tmp.asm}
+\begin{lstlisting}[caption=Draw the inactive lower planet.,basicstyle=\tiny]
+;-----------------------------------------------------------
+; DrawLowerPlanetWhileInactive
+; Draws the lower planet for the early levels when it isn't
+; active yet.
+;-----------------------------------------------------------
+DrawLowerPlanetWhileInactive
+        LDA lowerPlanetActivated
+        BEQ b6047
 
+        LDX #$28
+DrawLowerTextLoop   
+        LDA textForInactiveLowerPlanet - $01,X
+        AND #$3F
+        STA SCREEN_RAM + LINE18_COL39,X
+        LDA #WHITE
+        STA COLOR_RAM + LINE18_COL39,X
+        DEX
+        BNE DrawLowerTextLoop
+
+        LDX #$28
+DrawInactiveSurfaceLoop   
+        LDA surfaceDataInactiveLowerPlanet,X
+        CLC
+        ADC #$40
+        STA SCREEN_RAM + LINE14_COL39,X
+        DEX
+        BNE DrawInactiveSurfaceLoop
+
+        LDX #$10
+DrawWarpGateInactive   
+        LDY xPosSecondLevelSurfaceInactivePlanet,X
+        LDA secondLevelSurfaceDataInactivePlanet,X
+        CLC
+        ADC #$40
+        STA SCREEN_RAM + LINE12_COL4,Y
+        DEX
+        BNE DrawWarpGateInactive
+        RTS
+
+; The *-$01 is because the array index starts at 1 rather than 0.
+xPosSecondLevelSurfaceInactivePlanet =*-$01
+       .BYTE $00,$01,$02,$03,$28,$29,$2A,$2B
+       .BYTE $50,$51,$52,$53,$78,$79,$7A,$7B
+secondLevelSurfaceDataInactivePlanet =*-$01 
+       .BYTE $30,$32,$38,$3A,$31,$33,$39,$3B
+       .BYTE $34,$36,$3C,$3E,$35,$37,$3D,$3F
+surfaceDataInactiveLowerPlanet =*-$01       
+       .BYTE $01,$03,$01,$03,$01,$03,$01,$03
+       .BYTE $01,$03,$01,$03,$01,$03,$01,$03
+       .BYTE $01,$03,$01,$03,$01,$03,$01,$03
+       .BYTE $01,$03,$01,$03,$01,$03,$1D,$1F
+       .BYTE $00,$02,$00,$02,$00,$02,$00,$02
+
+textForInactiveLowerPlanet
+      .TEXT "  WARP GATE       GILBY   CORE  NOT-CORE"
+\end{lstlisting}
+
+
+\subsection{Drawing the Lower Planet}
+Drawing the upper planet is all very well. The data is just there and as we have seen it's just a question
+of 'writing it to the screen'. For the lower planet, which is just an upside down version of the upper one,
+we could store the data all over again, but inverted. Or we could try something a little more clever,
+so let's be clever.
+
+Our clever trick will be to take each character definition for the upper planet and shift its bits around
+so that we can turn it into an upside down version of the original. This avoids the need to store everything
+twice. Instead we store it once for the upper planet and just mutate it for the lower planet.
+
+\begin{figure}[H]
+{
+  \setlength{\tabcolsep}{3.0pt}
+  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=10cm,center}
+  \begin{subfigure}{0.3\textwidth}
+  \input{planets/planet1Charset_\$40_bits}
+  \end{subfigure}
+  \begin{subfigure}{0.3\textwidth}
+  \input{planets/planet1Charset_\$40_bits_inv}
+  \end{subfigure}
+  \end{adjustbox}
+}\caption[]{The character set definition for a piece of land and it's topsy-turvy counterpart.}
+\end{figure}
+
+Doing this all at once for the full planet would be expensive and there will never be a good time to do it.
+So what we'll do instead is make a chutney from this pickle and do the heavy lifting while distracting the
+player's attention with an impressive-looking level-entry sequence.
+
+When the player enters a pair of planets for the first time we'll slowly materialize the planet surfaces
+while quietly loading the upper planet data and converting it for the lower planet too. If we make
+this entry sequence long enough we'll have time to populate all 256 bytes of each planet's surface.
+
+\begin{figure}[H]
+    \centering
+    \foreach \l in {10, 32, ...,255}
+    {
+      \includegraphics[width=4cm]{planets/entry_images/entry\l.png}%
+    }%
+\caption{The materialization sequence as we enter a new pair of planets.}
+\end{figure}
+
+The trickery takes place in \icode{MaybeDrawLevelEntrySequence}, one of the many routines called in
+the busiest code junction in the raster interrupt used during main game play. Even though the game
+isn't properly 'playing' at this point all of the main game code is running during the entry
+level sequence though nearly all of it except for this routine exits early as there is nothing
+for most of the routines to do:
+
+\begin{lstlisting}[caption=\icode{PerformMainGameUpdate}\, the spaghetti junction handling nearly everything
+during main gameplay. We'll see more of this code section later in the book\. During the entry level sequence
+it is \icode{MaybeDrawLevelEntrySequence} and \icode{PlaySoundEffects} that do most of the work.]
+;-------------------------------------------------------
+; PerformMainGameUpdate
+;-------------------------------------------------------
+PerformMainGameUpdate
+        LDX currentPlanetBackgroundClr1
+        LDA backgroundColorsForPlanets,X
+        STA $D022    ;Background Color 1, Multi-Color Register 0
+        LDX currentPlanetBackgroundClr2
+        LDA backgroundColorsForPlanets,X
+        STA $D023    ;Background Color 2, Multi-Color Register 1
+
+        LDA $D01F    ;Sprite to Background Collision Detect
+        STA spriteCollidedWithBackground
+
+        JSR CheckKeyboardInGame
+        JSR ScrollStarfieldAndThenPlanets
+        JSR AnimateGilbySpriteMovement
+        JSR PerformMainGameProcessing
+        JSR CheckForLandscapeCollisionAndWarpThenProcessJoystickInput
+        JSR PerformGilbyLandingOrJumpingAnimation
+        JSR AlsoPerformGilbyLandingOrJumpingAnimation
+        JSR MaybeDrawLevelEntrySequence
+        JSR PlaySoundEffects
+        JSR FlashBorderAndBackground
+        JSR UpdateGilbyPositionAndColor
+        JSR UpdateAndAnimateAttackShips
+        JSR UpdateBulletPositions
+        JSR DrawUpperPlanetAttackShips
+        JSR UpdateControlPanelColors
+        ; Jump into KERNAL's standard interrupt service routine to 
+        ; handle keyboard scan, cursor display etc.
+        JMP ReEnterInterrupt 
+        ;Returns From Interrupt
+\end{lstlisting}
+
+\icode{MaybeDrawLevelEntrySequence}'s principal sleight-of-hand is to make it look like it is slowly filling
+out the surface of the planets when that is precisely what it is doing. Not just to look fancy, but because
+inverting the tiles of the lower planet takes a bit of CPU time and would result in the player starting a blank screen
+for quite a long time if we tried to do it all at once.
+
+The routine maintains a counter from 0 to 255 and every time it is visited it increments this counter and uses it
+to pick part of a tile in the charset to populate. The thing to remember here is that it is not actually painting the planet
+itself - rather it is slowly filling out the character set containing the tiles that define the textures on the planet.
+The game already knows which tiles it wants to put where - it just doesn't yet know what they look like. If we maintained
+separate copies of the upper planet and lower planet tiles we could just give them to the routine and painting would be easy.
+But because we don't have a copy of the lower planet tiles we have to generate them on the fly and resort to this
+bit of entry level sequence trickery.
+
+Since there are 8 bytes in each character set definition, each represeting a line in the tile, 
+each visit to this routine updates just one line in one tile. There are 32 tiles in total so 256 visits to the routine
+during the entry sequence will be enough to fill out the tileset completely. This allows
+us to fill out the tile set in a random-looking way and is responsible for the materialization effect.
+
+The first part of the \icode{MaybeDrawLevelEntrySequence} is the easy part. We just pick the byte we're going to fill
+at this visit from a jumbled array of every value between 0 and 255 stored in \icode{sourceOfSeedBytes}. This jumbled
+sequence is the source of the random-looking nature of the materialization.
+
+\begin{lstlisting}[caption=The start of \icode{MaybeDrawLevelEntrySequence}. As long as \icode{levelEntrySequenceActive}
+is non-zero\, \icode{DrawLevelEntrySequence} will run.]
+MaybeDrawLevelEntrySequence
+        LDA levelEntrySequenceActive
+        BNE DrawLevelEntrySequence
+ReturnFromEntrySequence   
+        RTS
+
+DrawLevelEntrySequence   
+        LDX entryLevelSequenceCounter
+        ; 'Y' becomes our 'random' index into the
+        ; character set definition picking one of its
+        ; 256 bytes to populate a line in one of the tiles.
+        LDY sourceOfSeedBytes,X
+
+        ; Pointers to the character set used for the
+        ; current planet.
+        LDA currentTopPlanetDataLoPtr
+        STA planetSurfaceDataPtrLo
+        LDA currentTopPlanetDataHiPtr
+        STA planetSurfaceDataPtrHi
+
+        ; The easy part, just copy part of the tile
+        ; for the upper planet to where it needs to go.
+        LDA (planetSurfaceDataPtrLo),Y
+        STA upperPlanetSurfaceCharset,Y
+
+        INC planetSurfaceDataPtrHi
+        ; Likewise for the character set data used to 
+        ; define the heads up display.
+        LDA (planetSurfaceDataPtrLo),Y
+        STA upperPlanetHUDCharset,Y
+
+        JSR InvertSurfaceDataForLowerPlanet
+\end{lstlisting}
+
+
+This all just copying and pasting so far. We're slowly populating the tiles for the current upper planet without doing
+anything computationally intensive. The very last statement is where start work on the lower planet, and that's where
+the sorcery starts. In \icode{InvertSurfaceDataForLowerPlanet} we repoint ourselves to the data for the lower planet
+and use a routine called \icode{InvertCharacter} to the do the actual turning of the byte upside-down:
+
+\begin{lstlisting}[caption=\icode{InvertSurfaceDataForLowerPlanet}.]
+InvertSurfaceDataForLowerPlanet
+        LDA currentBottomPlanetDataLoPtr
+        STA planetSurfaceDataPtrLo
+        LDA currentBottomPlanetDataHiPtr
+        STA planetSurfaceDataPtrHi
+
+        ; This is the routine that does the actual inversion.
+        ; Everything below and above is managing the copy/paste
+        ; of the inverted character into the appropriate position
+        ; in lowerPlanetSurfaceCharset.
+        JSR InvertCharacter
+
+        LDA invertedCharToDraw
+        ; Note that 'X' was updated by InvertCharacter
+        STA lowerPlanetSurfaceCharset,X
+        INC planetSurfaceDataPtrHi
+
+        ; Same as above, but for the charset used in the panel.
+        JSR InvertCharacter
+        LDA invertedCharToDraw
+        ; Note that 'X' was updated by InvertCharacter
+        STA lowerPlanetHUDCharset,X
+
+        RTS
+\end{lstlisting}
+
+The approach taken by \icode{InvertCharacter} is two-fold: it has to reverse the chosen byte left to right and 
+it also it has to move the byte to its appropriate position in the 8 byte sequence.
+
+\begin{figure}[H]
+{
+  \setlength{\tabcolsep}{3.0pt}
+  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=10cm,center}
+  \begin{subfigure}{0.3\textwidth}
+  \input{planets/planet1Charset_\$40_bits_1}
+  \end{subfigure}
+  \begin{subfigure}{0.3\textwidth}
+  \input{planets/planet1Charset_\$40_bits_inv_1}
+  \end{subfigure}
+  \end{adjustbox}
+}\caption[]{Inverting \icode{00100000} means transforming it to \icode{00001000} and moving it from position 3 in the
+  8 byte character set definition to position 5.}
+\end{figure}
+
+\subsubsection{1. Flipping the Byte}
+The first of these requirements is the more elaborate of the two. We need to look at each of the four bit-pairs in the
+byte and move it to its corresponding 'inverted' position in the byte. So in a way we treat one half of they byte as
+a mirror of the other and move the bit pair there as in the following examples.
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\lightrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=10cm,center}
+      \begin{tikzpicture}
+        \draw[step=1.0,gray,thin] (0,0) grid (1,1);
+        \node[matrix of math nodes,anchor=south west,inner sep=0pt,
+        nodes={draw,minimum size=1cm,anchor=center},
+        column sep=-\pgflinewidth,row sep=-\pgflinewidth,font=\huge\ttfamily]
+        {
+        1 & 0  & 0 & 0 & 0 & 0 & 0 & 0\\
+        };
+      \end{tikzpicture}
+      \begin{tikzpicture}
+        \draw[->,line width=4pt] (0,0) to (1,0);
+      \end{tikzpicture}
+      \begin{tikzpicture}
+        \draw[step=1.0,gray,thin] (0,0) grid (1,1);
+        \node[matrix of math nodes,anchor=south west,inner sep=0pt,
+        nodes={draw,minimum size=1cm,anchor=center},
+        column sep=-\pgflinewidth,row sep=-\pgflinewidth,font=\huge\ttfamily]
+        {
+        0 & 0  & 0 & 0 & 0 & 0 & 1 & 0\\
+        };
+      \end{tikzpicture}
+    \end{adjustbox}
+    \begin{adjustbox}{width=10cm,center}
+      \begin{tikzpicture}
+        \draw[step=1.0,gray,thin] (0,0) grid (1,1);
+        \node[matrix of math nodes,anchor=south west,inner sep=0pt,
+        nodes={draw,minimum size=1cm,anchor=center},
+        column sep=-\pgflinewidth,row sep=-\pgflinewidth,font=\huge\ttfamily]
+        {
+        0 & 0  & 1 & 0 & 0 & 0 & 0 & 0\\
+        };
+      \end{tikzpicture}
+      \begin{tikzpicture}
+        \draw[->,line width=4pt] (0,0) to (1,0);
+      \end{tikzpicture}
+      \begin{tikzpicture}
+        \draw[step=1.0,gray,thin] (0,0) grid (1,1);
+        \node[matrix of math nodes,anchor=south west,inner sep=0pt,
+        nodes={draw,minimum size=1cm,anchor=center},
+        column sep=-\pgflinewidth,row sep=-\pgflinewidth,font=\huge\ttfamily]
+        {
+        0 & 0  & 0 & 0 & 1 & 0 & 0 & 0\\
+        };
+      \end{tikzpicture}
+    \end{adjustbox}
+  }\caption{Examples of the inversion operation.}
+\end{figure}
+
+The way to do through a combination of bit-shifting and masking. This is what the code
+responsible looks like. We'll break it down.
+
+\begin{lstlisting}[caption=\icode{InvertSurfaceDataForLowerPlanet}.]
+bitfield1ForInvertingByte .BYTE $00,$40,$80,$C0
+bitfield2ForInvertingByte .BYTE $00,$10,$20,$30
+bitfield3ForInvertingByte .BYTE $00,$04,$08,$0C
+
+InvertCharacter
+        LDA (planetSurfaceDataPtrLo),Y
+        PHA
+        AND #$03
+        TAX
+
+        ; This part of the routine inverts the byte itself.
+        LDA bitfield1ForInvertingByte,X
+        STA invertedCharToDraw
+        PLA
+        ROR
+        ROR
+        PHA
+        AND #$03
+        TAX
+
+        LDA bitfield2ForInvertingByte,X
+        ORA invertedCharToDraw
+        STA invertedCharToDraw
+        PLA
+        ROR
+        ROR
+        AND #$03
+        TAX
+
+        LDA bitfield3ForInvertingByte,X
+        ORA invertedCharToDraw
+        STA invertedCharToDraw
+        LDA (planetSurfaceDataPtrLo),Y
+        ROL
+        ROL
+        ROL
+        AND #$03
+        ORA invertedCharToDraw
+        STA invertedCharToDraw
+\end{lstlisting}
+
+Our first step is to take the byte we're interested in from the upper planet character set
+definition. Let's assume it's the one below.
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\lightrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=4cm,center}
+      \begin{tikzpicture}
+
+        \def\BACKGROUNDONE{brown}
+        \def\BACKGROUNDTWO{lightblue}
+        \def\CHARCOLOR{lightgreen}
+        \def\OFF{lightgray}
+        \draw[step=1.0,gray,thin] (0,0) grid (1,1);
+        \fill[\BACKGROUNDTWO] (4,0) rectangle ++ (1,1);
+        \fill[\BACKGROUNDTWO] (5,0) rectangle ++ (1,1);
+        \node[matrix of math nodes,anchor=south west,inner sep=0pt,
+        nodes={draw,minimum size=1cm,anchor=center},
+        column sep=-\pgflinewidth,row sep=-\pgflinewidth,font=\huge\ttfamily]
+        {
+          0 & 0  & 0 & 0 & 1 & 0 & 0 & 0\\
+        };
+
+      \end{tikzpicture}
+    \end{adjustbox}
+  }
+\end{figure}
+
+We load this into the accumulator (\icode{A}) so that we can get work on it. What we're going to
+do is shift each of the four bit pairs in turn into the rightmost position in the byte and use
+that value (between 0 and 3) as in index into a trio of helper arrays that give the 'mirrored'
+bit-pair for that particular position. These helper arrays are \icode{bitfield[1-3]ForInvertingByte}.
+
+We don't have to do any shifting to compare the rightmost bit-pair. We can just \icode{AND} it with
+\icode{\#\$03} and store the result in \icode{X}:
+
+\begin{lstlisting}
+bitfield1ForInvertingByte .BYTE $00,$40,$80,$C0
+InvertCharacter
+        LDA (planetSurfaceDataPtrLo),Y
+        PHA
+        AND #$03
+        TAX
+\end{lstlisting}
+
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=10cm,center}
+
+      \begin{tabular}{rllllllll}
+        \toprule
+        Byte & Bit 7 & Bit 6 & Bit 5 & Bit 4 & Bit 3 & Bit 2 & Bit 1 & Bit 0        \\
+        \midrule
+        \$08 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+        \$03 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 \\
+        \midrule
+        Result; \$00 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+        \addlinespace
+        \bottomrule
+      \end{tabular}
+
+    \end{adjustbox}
+
+  }\caption*{AND'ing \$08 and \$03 gives \$00.}
+\end{figure}
+
+Since the result is zero, we will then store the value at index zero in \icode{bitfield1ForInvertingByte}
+as our result in \icode{invertedCharToDraw}:
+
+\begin{lstlisting}
+bitfield1ForInvertingByte .BYTE $00,$40,$80,$C0
+\end{lstlisting}
+\begin{lstlisting}
+        LDA bitfield1ForInvertingByte,X
+        STA invertedCharToDraw
+\end{lstlisting}
+
+Since our result is zero we've stored zero in \icode{invertedCharToDraw}.
+
+Now we can move on to the second rightmost bitpair. The ones highlighted in blue below:
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\lightrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=4cm,center}
+      \begin{tikzpicture}
+
+      \def\BACKGROUNDONE{brown}
+      \def\BACKGROUNDTWO{lightblue}
+      \def\CHARCOLOR{lightgreen}
+      \def\OFF{lightgray}
+      \draw[step=1.0,gray,thin] (0,0) grid (1,1);
+      \fill[\BACKGROUNDTWO] (4,0) rectangle ++ (1,1);
+      \fill[\BACKGROUNDTWO] (5,0) rectangle ++ (1,1);
+    \node[matrix of math nodes,anchor=south west,inner sep=0pt,
+    nodes={draw,minimum size=1cm,anchor=center},
+    column sep=-\pgflinewidth,row sep=-\pgflinewidth,font=\huge\ttfamily]
+    {
+    0 & 0  & 0 & 0 & 1 & 0 & 0 & 0\\
+    };
+
+      \end{tikzpicture}
+    \end{adjustbox}
+  }
+\end{figure}
+
+We pushed our original value onto the stack using \icode{PHA}. First we retrieve it using \icode{PLA}
+and then shift it two bits to the right:
+
+\begin{lstlisting}
+        PLA
+        ROR
+        ROR
+\end{lstlisting}
+
+When we've done this our byte looks like this, the bitpair we're interested has moved to the rightmost
+position:
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\lightrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=4cm,center}
+      \begin{tikzpicture}
+
+      \def\BACKGROUNDONE{brown}
+      \def\BACKGROUNDTWO{lightblue}
+      \def\CHARCOLOR{lightgreen}
+      \def\OFF{lightgray}
+      \draw[step=1.0,gray,thin] (0,0) grid (1,1);
+      \fill[\BACKGROUNDTWO] (6,0) rectangle ++ (1,1);
+      \fill[\BACKGROUNDTWO] (7,0) rectangle ++ (1,1);
+    \node[matrix of math nodes,anchor=south west,inner sep=0pt,
+    nodes={draw,minimum size=1cm,anchor=center},
+    column sep=-\pgflinewidth,row sep=-\pgflinewidth,font=\huge\ttfamily]
+    {
+    0 & 0  & 0 & 0 & 0 & 0 & 1 & 0\\
+    };
+
+      \end{tikzpicture}
+    \end{adjustbox}
+  }
+\end{figure}
+
+Now we can \icode{AND} this byte with \icode{\$03} again to ensure we only deal with the last two bits
+(remember that although all the other bits are zero in the example, they may not be in other cases).
+
+\begin{lstlisting}
+        AND #$03
+        TAX
+\end{lstlisting}
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=10cm,center}
+
+      \begin{tabular}{rllllllll}
+        \toprule
+        Byte & Bit 7 & Bit 6 & Bit 5 & Bit 4 & Bit 3 & Bit 2 & Bit 1 & Bit 0        \\
+        \midrule
+        \$02 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+        \$03 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+        \midrule
+        Result; \$02 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+        \addlinespace
+        \bottomrule
+      \end{tabular}
+
+    \end{adjustbox}
+
+  }\caption*{AND'ing \$02 and \$03 gives \$02.}
+\end{figure}
+
+This result of \icode{\$02} gives us an index into \icode{bitfield2ForInvertingByte} which will
+give us the 'mirrored' bit pair:
+
+\begin{lstlisting}
+bitfield2ForInvertingByte .BYTE $00,$10,$20,$30
+\end{lstlisting}
+\begin{lstlisting}
+        LDA bitfield2ForInvertingByte,X
+        ORA invertedCharToDraw
+        STA invertedCharToDraw
+\end{lstlisting}
+
+The byte we get from \icode{bitfield2ForInvertingByte}i at index 2 is \icode{\$20} (remember that indexes
+always start counting from 0 rather than 1). When we \icode{ORA} this with our current value for
+\icode{invertedCharToDraw} we end up with a value of \icode{\$20}:
+
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=10cm,center}
+
+      \begin{tabular}{rllllllll}
+        \toprule
+        Byte & Bit 7 & Bit 6 & Bit 5 & Bit 4 & Bit 3 & Bit 2 & Bit 1 & Bit 0        \\
+        \midrule
+        \$20 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+        \$00 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+        \midrule
+        Result; \$20 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+        \addlinespace
+        \bottomrule
+      \end{tabular}
+
+    \end{adjustbox}
+
+  }\caption*{ORA'ing \$20 and \$00 gives \$20.}
+\end{figure}
+
+As we can see, this has achieved an effective mirroring of our original value!
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\lightrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=10cm,center}
+      \begin{tikzpicture}
+      \def\BACKGROUNDTWO{lightblue}
+      \fill[\BACKGROUNDTWO] (4,0) rectangle ++ (1,1);
+      \fill[\BACKGROUNDTWO] (5,0) rectangle ++ (1,1);
+        \draw[step=1.0,gray,thin] (0,0) grid (1,1);
+        \node[matrix of math nodes,anchor=south west,inner sep=0pt,
+        nodes={draw,minimum size=1cm,anchor=center},
+        column sep=-\pgflinewidth,row sep=-\pgflinewidth,font=\huge\ttfamily]
+        {
+        0 & 0  & 0 & 0 & 1 & 0 & 0 & 0\\
+        };
+      \end{tikzpicture}
+      \begin{tikzpicture}
+        \draw[->,line width=4pt] (0,0) to (1,0);
+      \end{tikzpicture}
+      \begin{tikzpicture}
+      \def\BACKGROUNDTWO{lightblue}
+      \fill[\BACKGROUNDTWO] (2,0) rectangle ++ (1,1);
+      \fill[\BACKGROUNDTWO] (3,0) rectangle ++ (1,1);
+        \draw[step=1.0,gray,thin] (0,0) grid (1,1);
+        \node[matrix of math nodes,anchor=south west,inner sep=0pt,
+        nodes={draw,minimum size=1cm,anchor=center},
+        column sep=-\pgflinewidth,row sep=-\pgflinewidth,font=\huge\ttfamily]
+        {
+        0 & 0  & 1 & 0 & 0 & 0 & 0 & 0\\
+        };
+      \end{tikzpicture}
+    \end{adjustbox}
+  }\caption{The result of our bit-shifting, \icode{AND}'ing\, and \icode{OR}ing.}
+\end{figure}
+
+\subsubsection{2. Flipping the Byte's Position}
+The remaining steps for the other two bit-pairs in the byte are similar. In the case of our
+example they will have no effect as the result will be always be zero for them. We've
+effectively mirrored our bitpair already.
+
+The next and last thing we have to do with our mirrored byte is adjust it's position in the 8 byte sequence
+in the character definition. In the example below we are dealing with a byte on
+the left which occurs as the 5th position in the byte sequence and in order to be
+inverted needs to be moved to the 4th position.
+
+So whereas we were dealing with a left-right mirroring in the byte itself we are now dealing with an up-down
+mirroring in the position of the byte in its sequence. The total effect of our inversion operation is
+to flip the character set from left to righ and top to bottom:
+
+\begin{figure}[H]
+{
+  \setlength{\tabcolsep}{3.0pt}
+  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=10cm,center}
+  \begin{subfigure}{0.3\textwidth}
+  \input{planets/planet1Charset_\$40_bits_2}
+  \end{subfigure}
+  \begin{subfigure}{0.3\textwidth}
+  \input{planets/planet1Charset_\$40_bits_inv_2}
+  \end{subfigure}
+  \end{adjustbox}
+}\caption[]{}
+\end{figure}
+
+The second half of \icode{InvertCharacter} that does this looks like:
+
+\begin{lstlisting}
+      ; Now that the byte has been inverted, invert the position in
+      ; the 8 byte charset definition. For example, if the position is
+      ; 0 then the inverted position is 7.
+
+      ; Mask out everything but the last 3 bits in the current upper
+      ; planet position. 
+      TYA
+      PHA
+      AND #$07
+      TAY
+      PLA
+      PHA
+      AND #$F8
+      STA charSetDataPtrLo
+
+      ; Now add the inverted position to get the correct lower planet
+      ; position in the 8-byte charset definition. charSetDataPtrLo is
+      ; just temporary storage here. We store the final value for use
+      ; by the calling routine in 'X' below.
+      LDA positionInInvertedCharSet,Y
+      CLC
+      ADC charSetDataPtrLo
+
+      ; By storing the updated position in the charset definition to 'X'
+      ; here, we're changing the offset used in lowerPlanetSurfaceCharset
+      ; in InvertSurfaceDataForLowerPlanet.
+      TAX
+
+      PLA
+      TAY
+\end{lstlisting}
+
+The key to this operation lies in the use of the array \icode{positionInInvertedCharSet}.
+If we know that the current byte is number 5 in the 8 byte sequence (i.e. the red row
+below):
+
+\begin{figure}[H]
+{
+  \setlength{\tabcolsep}{3.0pt}
+  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=6cm,center}
+  \begin{subfigure}{0.3\textwidth}
+  \input{planets/planet1Charset_\$40_bits_2}
+  \end{subfigure}
+  \end{adjustbox}
+}\caption[]{}
+\end{figure}
+
+
+then we can use that as an index into \icode{positionInInvertedCharSet}
+to retreve the corresponding position in the inverted character set definition. As we can
+see value of the the 5th byte in \icode{positionInInvertedCharSet} is \icode{\$03}:
+
+\begin{lstlisting}
+positionInInvertedCharSet      .BYTE $07,$06,$05,$04,$03,$02,$01,$00
+\end{lstlisting}
+
+Which as we can see is the appropriate position for the byte in the inverted character set (the
+4th byte or red row starting from the top). (Remember that our index into arrays starts at zero,
+so an index value of zero will pick the first byte and of three, as in this case, will pick the fourth.)
+
+\begin{figure}[H]
+{
+  \setlength{\tabcolsep}{3.0pt}
+  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=6cm,center}
+  \begin{subfigure}{0.3\textwidth}
+  \input{planets/planet1Charset_\$40_bits_inv_2}
+  \end{subfigure}
+  \end{adjustbox}
+}\caption[]{}
+\end{figure}
+
+So where do we get the position of the current byte in the uninverted character set? This was
+passed into \icode{InvertSurfaceDataForLowerPlanet} and \icode{InvertCharacter} in the \icode{Y}
+register. It's a value between 0 and 256 which references the offset of the current byte
+in the character set data as a whole so all we have to do is clamp it to a value between 0 and 7
+to get the value we need within the 8-byte definition for this specific character.
+
+\begin{lstlisting}
+      ; Mask out everything but the last 3 bits in the current upper
+      ; planet position. 
+      TYA
+      PHA
+      AND #$07
+\end{lstlisting}
+
+The clamping is achieved by the \icode{AND} statement. If we imagine that \icode{Y} has a value of
+\icode{\$D4}, we transfer it to the \icode{A} register (\icode{TYA} and then do an \icode{AND} operation
+with \icode{\$07}:
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=10cm,center}
+
+      \begin{tabular}{rllllllll}
+        \toprule
+        Byte & Bit 7 & Bit 6 & Bit 5 & Bit 4 & Bit 3 & Bit 2 & Bit 1 & Bit 0        \\
+        \midrule
+        \$D4 & 1 & 1 & 0 & 1 & 1 & 0 & 0 & 0 \\
+        \$07 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 \\
+        \midrule
+        Result: \$04 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+        \addlinespace
+        \bottomrule
+      \end{tabular}
+
+    \end{adjustbox}
+
+  }\caption*{AND'ing \$D4 and \$07 gives \$04.}
+\end{figure}
+
+This gives us \icode{\$04} as a result, which as we saw returns \icode{\$03} when used as an index
+into \icode{positionInInvertedCharSet}.
+
+With our new position for the byte in the character set definition established we can store it to the
+\icode{X} register and use that as the position in \icode{lowerPlanetSurfaceCharset} where we will
+store the \icode{invertedCharToDraw} we calculated earlier. We do this when we return from the
+\icode{InvertCharacter} routine and are back in \icode{InvertSurfaceDataForLowerPlanet}:
+
+\begin{lstlisting}
+        JSR InvertCharacter
+        LDA invertedCharToDraw
+        ; Note that 'X' was updated by InvertCharacter
+        STA lowerPlanetSurfaceCharset,X
+\end{lstlisting}
+
+With that done, we've added another brick in the wall. Or more precisely, another byte in the 
+256 that in total make up the tileset for the upper and lower planets respectively. As the 
+materialization sequence proceeds we slowly fill out the tileset byte-by-byte. After a few
+seconds we've successfully cheated our way into generating the lower planet's tileset on the
+fly into \icode{lowerPlanetSurfaceCharset} and the game is ready to play.
+
+\begin{figure}[H]
+    \centering
+      \includegraphics[width=6cm]{planets/entry_images/entry73.png}%
+      \includegraphics[width=6cm]{planets/entry_images/entry255.png}%
+\caption{The planets when we start the materialization sequence, and when we end.}
+\end{figure}

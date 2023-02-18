@@ -1,4 +1,3 @@
-theme:minimal
 # Iridis Alpha Theory
 <img height=360 src="https://github.com/mwenge/iatheory/raw/main/src/cover/pdf/cover_front.svg">
 

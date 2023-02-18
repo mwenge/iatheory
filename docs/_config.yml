@@ -11,7 +11,8 @@ minima:
 
   # Generate social links in footer.
   #
-  # social_links:
+   social_links:
+     - { platform: twitter,        user_url: "https://twitter.com/mwenge" }
   #   - { platform: devto,          user_url: "https://dev.to/jekyll" }
   #   - { platform: dribbble,       user_url: "https://dribbble.com/jekyll" }
   #   - { platform: facebook,       user_url: "https://www.facebook.com/jekyll" }
@@ -25,5 +26,4 @@ minima:
   #   - { platform: pinterest,      user_url: "https://www.pinterest.com/jekyll" }
   #   - { platform: stackoverflow,  user_url: "https://stackoverflow.com/users/1234567/jekyll" }
   #   - { platform: telegram,       user_url: "https://t.me/jekyll" }
-     - { platform: twitter,        user_url: "https://twitter.com/mwenge" }
   #   - { platform: youtube,        user_url: "https://www.youtube.com/jekyll" }

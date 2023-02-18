@@ -26,8 +26,8 @@ PerformMainGameUpdate
         JSR AnimateGilbySpriteMovement
         JSR PerformMainGameProcessing
         JSR CheckForLandscapeCollisionAndWarpThenProcessJoystickInput
-        JSR PerformGilbyLandingOrJumpingAnimation
-        JSR AlsoPerformGilbyLandingOrJumpingAnimation
+        JSR CalculateGilbyVerticalPositionEarthBound
+        JSR CalculateGilbyVerticalPositionAirborne
         JSR MaybeDrawLevelEntrySequence
         JSR PlaySoundEffects
         JSR FlashBorderAndBackground
@@ -47,16 +47,18 @@ beam of light painting the screen travels from top to bottom up to 25 times per 
 \icode{PerformMainGameUpdate}, along with a routine called \icode{AnimateStarFieldAndScrollPlanets}
 whose purpose you can hopefully guess from its name, are the two gears that grind out the
 gameplay as long as the player is alive and blasting. 
-\clearpage
-\begin{figure}[H]
-    \centering
-    \foreach \l in {0,...,299}
-    {
-      \includegraphics[width=1cm]{main_game/one_second/main\l.png}%
-    }%
-\caption{The screens displayed in a single second of game time.}
-\end{figure}
-\clearpage
+
+\afterpage{%
+  \begin{figure}[H]
+      \centering
+      \foreach \l in {0,...,299}
+      {
+        \includegraphics[width=1cm]{main_game/one_second/main\l.png}%
+      }%
+  \caption{The screens displayed in a single second of game time.}
+  \end{figure}
+  \clearpage
+}
 
 For each pass through the screen \icode{AnimateStarFieldAndScrollPlanets} is executed 8 times
 while \icode{PerformMainGameUpdate} is executed once.
@@ -628,4 +630,117 @@ ScrollPlanetRight
 \end{lstlisting}
 
 
+\subsection{Jumping Up and Down}
+\begin{lstlisting}[caption=The routines responsible for updating the Gilby's vertical position.]
+;-------------------------------------------------------
+; PerformMainGameUpdate
+;-------------------------------------------------------
+PerformMainGameUpdate
+        ...
+        JSR CalculateGilbyVerticalPositionEarthBound
+        JSR CalculateGilbyVerticalPositionAirborne
+        ...
+
+\end{lstlisting}
+When the gilby jumps on the surface of the planet it exhibits a smooth and pleasing acceleration in ascent and descent that
+eloquently suggests the gravity of the planet. This is achieved with a remarkably simple mechanism. Rather than define
+distinct behaviours for the journey upwards and the journey back, we use a single continuous movement based on incrementing
+the gilby's vertical position with an offset that 'cycles around' and transitions naturally from ascent to descent.
+
+Achieving the complementary movements of ascent and descent with the same operation depends on a simple property of byte values when we increment them. If we keep adding
+to a value and it eventually reaches the maximum value of 255 (i.e. \icode{\$FF}) that can be stored in a single byte,
+ the next time we add 1 to it it will cycle around to \icode{\$00}. So if we add \icode{\$FB}, for example, to \icode{\$09} 
+ we get \icode{\$05}. 
+
+So let's take our starting vertical position (our Y co-ordinate) on the planet to be \icode{\$6D}. This is the Y-coordinate on the
+screen that coincides with the surface of the planet. If we're planning to move upwards we might think that the natural number
+to subtract from this position to move us up the screen is something like 3 or 4. And then when we're moving down the screen later
+on we would increment this position value by 3 or 4, or some smaller number depending on how quickly we want to move. This intuition
+is correct, up to a point, but it would mean keeping track of which direction we're going and complicate our code.
+
+Given the circular property of byte arithmetic we described above we can increment or decrement our position by simply adding a carefully
+chosen value. If we add a number that will force the result to cycle around and come out less than the current Y value then we've
+succesfully subtracted from Y while adding to it! This the essence of our trick.
+
+If we choose our offset value (\icode{gilbyLandingJumpingAnimationYPosOffset}) as \icode{\$FB} and add it to our current Y co-ordinate
+of \icode{\$67} we get a result of \icode{\$62}: we move the gilby up the screen by five pixels:
+
+\begin{figure}[H]
+    \centering
+      \includegraphics[width=7cm]{main_game/gilby_jumping/gilby_jumping41.png}%
+      \includegraphics[width=7cm]{main_game/gilby_jumping/gilby_jumping42.png}%
+\end{figure}
+
+This is what the code achieving this effect looks like:
+
+\begin{lstlisting}
+UpdateGilbyPosition
+        CLC
+        ADC gilbyLandingJumpingAnimationYPosOffset
+        STA gilbyVerticalPositionUpperPlanet
+
+        ; Check if we've hit the surface.
+        AND #$F0
+        CMP #YPOS_PLANET_SURFACE + $03
+        BNE StorePositionAndReturn
+
+        LDA #YPOS_PLANET_SURFACE
+        STA gilbyVerticalPositionUpperPlanet
+
+StorePositionAndReturn   
+        ; Update the position on screen.
+        LDA gilbyVerticalPositionUpperPlanet
+        STA $D001    ;Sprite 0 Y Pos
+        RTS
+\end{lstlisting}
+
+Our choice of \icode{\$FB} as an initial value for the offset is very deliberate. As we increment this offset it will eventually
+reach \icode{\$FF}. Each time we do so the resulting degree in movement it creates gets smaller. So the gilby will appear to 
+move quickly at first but slow down the further it gets from the planet:
+
+\begin{figure}[H]
+    \centering
+    \foreach \l in {3,...,11}
+    {
+      \includegraphics[width=4cm]{main_game/gilby_jumping/gilby_jumping\l.png}%
+    }%
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \foreach \l in {12,...,17}
+    {
+      \includegraphics[width=4cm]{main_game/gilby_jumping/gilby_jumping\l.png}%
+    }%
+\caption{Each increment in the offset, performed every three movements, results in a deceleration effect.}
+\end{figure}
+
+When our offset value \icode{gilbyLandingJumpingAnimationYPosOffset} reaches \icode{\$FF} it is time for modular arithmetic
+to kick in the next time we increment it: the movement-increment it gives us is \icode{\$00} and for the next three 'movements' the gilby appears to
+hang in the sky at Y co-ordinate \icode{\$33}:
+
+\begin{figure}[H]
+    \centering
+    \foreach \l in {18,...,20}
+    {
+      \includegraphics[width=4cm]{main_game/gilby_jumping/gilby_jumping\l.png}%
+    }%
+\end{figure}
+
+Now that \icode{gilbyLandingJumpingAnimationYPosOffset} is \icode{\$00} adding it to our current Y position will no longer have the 
+effect of cycling around and arriving a smaller value than the current Y position. Instead it will increment the Y position and move
+the gilby down the screen again. Just as when we were moving upwards the resulting movement increases in degree as we get closer to the
+land, creating an acceleration effect due to gravity. 
+
+\begin{figure}[H]
+    \centering
+    \foreach \l in {21,...,35}
+    {
+      \includegraphics[width=4cm]{main_game/gilby_jumping/gilby_jumping\l.png}%
+    }%
+\caption{Each increment in the offset, performed every three movements, results in an acceleration effect.}
+\end{figure}
+
+With a simple, consistent addition operation each time it comes to positino the gilby we've managed to achieve a jumping and
+landing effect with a neat gravity effect built in!
 

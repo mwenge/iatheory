@@ -1,3 +1,4 @@
+theme:minimal
 # Iridis Alpha Theory
 
 A deeper-than-is-possibly-sane dive into the workings of Iridis Alpha.

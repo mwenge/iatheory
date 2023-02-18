@@ -3,13 +3,13 @@ title: Iridis Alpha Theory
 description: >
   It's not really a theory.
 
-skin: solarized-dark
-
 minima:
-   social_links:
-     - { platform: twitter,        user_url: "https://twitter.com/mwenge" }
-     - { platform: github,         user_url: "https://github.com/mwenge/iatheory" }
-
+  date_format: "%b %-d, %Y"
+  social_links:
+    - { platform: devto,          user_url: "https://dev.to/jekyll" }
+    - { platform: twitter,        user_url: "https://twitter.com/mwenge" }
+    - { platform: github,         user_url: "https://github.com/mwenge/iatheory" }
+    
 plugins:
   - jekyll-feed
   - jekyll-seo-tag

@@ -3,6 +3,8 @@ title: Iridis Alpha Theory
 description: >
   It's not really a theory.
 
+skin: solarized-dark
+
 minima:
   # Minima date format.
   # Refer to https://shopify.github.io/liquid/filters/date/ if you want to customize this.

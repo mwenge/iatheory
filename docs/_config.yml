@@ -27,3 +27,6 @@ minima:
   #   - { platform: stackoverflow,  user_url: "https://stackoverflow.com/users/1234567/jekyll" }
   #   - { platform: telegram,       user_url: "https://t.me/jekyll" }
   #   - { platform: youtube,        user_url: "https://www.youtube.com/jekyll" }
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag

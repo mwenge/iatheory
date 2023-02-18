@@ -7,7 +7,7 @@ Work-in-progress is available for free as a [Scrapbook Edition](https://github.c
 
 
 ## Sample Pages
-<img height=560 src="https://github.com/mwenge/iatheory/raw/main/docs/page1.png">
-<img height=560 src="https://github.com/mwenge/iatheory/raw/main/docs/page2.png">
-<img height=560 src="https://github.com/mwenge/iatheory/raw/main/docs/page3.png">
-<img height=560 src="https://github.com/mwenge/iatheory/raw/main/docs/page4.png">
+<img height=360 src="https://github.com/mwenge/iatheory/raw/main/docs/page1.png">
+<img height=360 src="https://github.com/mwenge/iatheory/raw/main/docs/page2.png">
+<img height=360 src="https://github.com/mwenge/iatheory/raw/main/docs/page3.png">
+<img height=360 src="https://github.com/mwenge/iatheory/raw/main/docs/page4.png">

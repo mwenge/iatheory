@@ -1,0 +1,631 @@
+\chapter{Blasting, Fast and Slow} 
+\lstset{style=6502Style}
+
+Every game has a 'main loop'. A tight section of code which is executed multiple times
+per second and which controls nearly all aspect of the gameplay. In Iridis Alpha this
+boiler-room is \icode{PerformMainGameUpdate}:
+
+\begin{lstlisting}[caption=\icode{PerformMainGameUpdate}\, the spaghetti junction handling nearly everything
+during main gameplay.]
+;-------------------------------------------------------
+; PerformMainGameUpdate
+;-------------------------------------------------------
+PerformMainGameUpdate
+        LDX currentPlanetBackgroundClr1
+        LDA backgroundColorsForPlanets,X
+        STA $D022    ;Background Color 1, Multi-Color Register 0
+        LDX currentPlanetBackgroundClr2
+        LDA backgroundColorsForPlanets,X
+        STA $D023    ;Background Color 2, Multi-Color Register 1
+
+        LDA $D01F    ;Sprite to Background Collision Detect
+        STA spriteCollidedWithBackground
+
+        JSR CheckKeyboardInGame
+        JSR ScrollStarfieldAndThenPlanets
+        JSR AnimateGilbySpriteMovement
+        JSR PerformMainGameProcessing
+        JSR CheckForLandscapeCollisionAndWarpThenProcessJoystickInput
+        JSR PerformGilbyLandingOrJumpingAnimation
+        JSR AlsoPerformGilbyLandingOrJumpingAnimation
+        JSR MaybeDrawLevelEntrySequence
+        JSR PlaySoundEffects
+        JSR FlashBorderAndBackground
+        JSR UpdateGilbyPositionAndColor
+        JSR UpdateAndAnimateAttackShips
+        JSR UpdateBulletPositions
+        JSR DrawUpperPlanetAttackShips
+        JSR UpdateControlPanelColors
+        ; Jump into KERNAL's standard interrupt service routine to 
+        ; handle keyboard scan, cursor display etc.
+        JMP ReEnterInterrupt 
+        ;Returns From Interrupt
+\end{lstlisting}
+
+Just like in the title sequence this routine is called dozens of times as the 
+beam of light painting the screen travels from top to bottom up to 25 times per second.
+\icode{PerformMainGameUpdate}, along with a routine called \icode{AnimateStarFieldAndScrollPlanets}
+whose purpose you can hopefully guess from its name, are the two gears that grind out the
+gameplay as long as the player is alive and blasting. 
+\clearpage
+\begin{figure}[H]
+    \centering
+    \foreach \l in {0,...,299}
+    {
+      \includegraphics[width=1cm]{main_game/one_second/main\l.png}%
+    }%
+\caption{The screens displayed in a single second of game time.}
+\end{figure}
+\clearpage
+
+For each pass through the screen \icode{AnimateStarFieldAndScrollPlanets} is executed 8 times
+while \icode{PerformMainGameUpdate} is executed once.
+
+\begin{figure}[H]
+    \centering
+    \foreach \l in {5368,...,5378}
+    {
+      \includegraphics[width=3cm]{main_game/main_loop/main\l.png}%
+    }%
+\caption{The rasterline positiion when \icode{AnimateStarFieldAndScrollPlanets} and \icode{PerformMainGameUpdate} are called.}
+\end{figure}
+
+If you look closely you'll notice that our so-called boiler-room routine is called last, when the
+raster is nearing the end of the screen. This makes sense as it has the most to do and therefore
+we need to execute it at a point when most of the screen has been painted and what to paint on the
+rest of it has already been prepared. \icode{PerformMainGameUpdate} primarily concerns itself with
+preparing the screen for the next time it will be painted: updating the position of the enemies
+on the upper planet, the position of the player's ship, playing sound effects, moving the bullets
+and so on. 
+
+\icode{AnimateStarFieldAndScrollPlanets} on the other hand only has to worry about painting the 
+parallax starfield in the background, scrolling the planets using the C64's specialized hardware,
+and preparing the position of the enemy sprites on the lower planet. The only reason it is called
+more than once is because, like in the title screen routine, the starfield is being painted using
+a single sprite (Sprite 7). Each time it runs it can change the position of this sprite so that
+it appears at a new position as well as the old one on which the raster has already painted it. We
+covered the mechanics of this in detail when we dissected the title screen in 'The First 16 Milliseconds'.
+
+\subsection{Updating Enemy Sprite Positions}
+We can get a better sense of how the labour is divided between the two routines if we isolate the
+position of the raster when the position of the enemy sprites on each planet is updated.
+
+\begin{figure}[H]
+    \centering
+    \foreach \l in {987,...,988}
+    {
+      \includegraphics[width=6cm]{main_game/attack_ships/attack_ships\l.png}%
+    }%
+\caption{The rasterline position when the enemies on the upper and lower planets are updated.}
+\end{figure}
+
+The routines for updating the sprites on the upper and lower planets are identical. If we were writing
+this game in any other language than assembly we would just have one function and pass the different
+arrays for each planet in as parameters. 
+
+\begin{minipage}[b]{0.55\linewidth}
+\centering
+\begin{lstlisting}[basicstyle=\tiny]
+DrawUpperPlanetAttackShips
+        LDX #$0C
+        LDY #$06
+UpperPlanetShipsLoop   
+        LDA upperPlanetAttackShipsXPosArray,Y
+        STA $D000,X  ;Sprite 0 X Pos
+
+        LDA attackShipsXPosArray - $01,Y
+        AND $D010    ;Sprites 0-7 MSB of X coordinate
+        STA currentMSBXPosOffset
+
+        LDA upperPlanetAttackShipsMSBXPosArray,Y
+        AND attackShipsMSBXPosOffsetArray,Y
+        ORA currentMSBXPosOffset
+        STA $D010    ;Sprites 0-7 MSB of X coordinate
+
+        ; The X-Pos of sprites is fiddly. The MSB manages
+        ; which side of the 512 possible x positions they
+        ; are on.
+        LDA upperPlanetAttackShipsYPosArray,Y
+        STA $D001,X  ;Sprite 0 Y Pos
+        STX tempVarStorage
+
+        LDX upperPlanetAttackShipsColorArray,Y
+        LDA colorsForAttackShips,X
+        STA $D027,Y  ;Sprite 0 Color
+
+        LDA upperPlanetAttackShipsSpriteValueArray,Y
+        STA Sprite0Ptr,Y
+        LDX tempVarStorage
+
+        DEX
+        DEX
+        DEY
+        BNE UpperPlanetShipsLoop
+        RTS
+\end{lstlisting}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}[b]{0.55\linewidth}
+\centering
+\begin{lstlisting}[basicstyle=\tiny]
+DrawLowerPlanetAttackShips
+        LDX #$0C
+        LDY #$06
+LowerPlanetShipsLoop   
+        LDA lowerPlanetAttackShipsXPosArray + $01,Y
+        STA $D000,X  ;Sprite 0 X Pos
+
+        LDA attackShipsXPosArray - $01,Y
+        AND $D010    ;Sprites 0-7 MSB of X coordinate
+        STA currentMSBXPosOffset
+
+        ; The X-Pos of sprites is fiddly. The MSB manages
+        ; which side of the 512 possible x positions they
+        ; are on.
+        LDA lowerPlanetGilbyBulletMSBXPosValue,Y
+        AND attackShipsMSBXPosOffsetArray,Y
+        ORA currentMSBXPosOffset
+        STA $D010    ;Sprites 0-7 MSB of X coordinate
+
+        LDA lowerPlanetAttackShipsYPosArray,Y
+        STA $D001,X  ;Sprite 0 Y Pos
+        STX tempVarStorage
+
+        LDX lowerPlanetAttackShipsColorArray,Y
+        LDA colorsForAttackShips,X
+        STA $D027,Y  ;Sprite 0 Color
+
+        LDA lowerPlanetAttackShipsSpriteValueArray,Y
+        STA Sprite0Ptr,Y
+        LDX tempVarStorage
+
+        DEX
+        DEX
+        DEY
+        BNE LowerPlanetShipsLoop
+        RTS
+\end{lstlisting}
+\end{minipage}
+
+\subsection{Scrolling the Planets}
+We want scrolling to be smooth and fast. Moving swiftly or slowly across the planet surface
+depending on how much acceleration we apply is the fundamental dynamic of the game so will
+be important to get right.
+
+Exerting some fine-grained control on the scrolling requires us to balance
+two fundamental operations: a pixel-by-pixel scrolling mechanism that preserves the smoothness
+of movement we want at slower speeds, and a bigger, blunter implement that will accelerate
+us across larger sections of the planet while preserving an illusion of relative fluidity.
+
+The first is available as a hardware implementation on the C64. The value stored in the last
+three bits of \icode{\$D016} allows us to specify a pixel offset for the planet graphics between
+0 and 7, effectively shifting the planet left or right by one or more pixels.
+
+The second is up to us. We need to keep an eye on the speed of our gilby and decide if we should
+shift the landscape by one or more full characters.
+
+Here are both of these tactics in operation during two paints of the screen while we're
+warping into the Sheep planet at the start of a new game. Each row represents
+a single pass of the raster. As you can see we adjust the pixel position using \icode{\$D016}
+twice on each pass and adjust the character position once. 
+
+\begin{figure}[H]
+    \centering
+    \foreach \l in {482,...,487}
+    {
+      \includegraphics[width=4cm]{main_game/scroll/scroll\l.png}%
+    }%
+\end{figure}
+
+Since we're moving fairly fast, we're updating the character position by 3 characters on each
+occasion (notice how much the bush moves). At the same time we're applying a pixel movement
+to preserve the impression of smoothness.
+
+\subsubsection{Pixel Movement}
+If we look at the code that looks after the pixel-grained movement in \icode{AnimateStarFieldAndScrollPlanets}
+we can see it is using a variable called \icode{planetScrollSpeed} to control the amount of offset to apply:
+
+\begin{lstlisting}[]
+        ; Scroll the planet
+        LDA $D016    ;VIC Control Register 2
+        AND #$F0
+        ORA planetScrollSpeed
+        ORA #$10
+        STA $D016    ;VIC Control Register 2
+\end{lstlisting}
+
+This parameter is always kept to a value between 0 and 7, for example here in \icode{DrawPlanetScroll} where it
+gets clamped to the last 3 bits (Bits 0 to 2) by an \icode{AND} operation:
+
+\begin{lstlisting}
+        LDA planetScrollSpeed
+        AND #$07
+        STA planetScrollSpeed
+\end{lstlisting}
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=6cm,center}
+
+      \begin{tabular}{rllllllll}
+        \toprule
+        Byte & Bit 7 & Bit 6 & Bit 5 & Bit 4 & Bit 3 & Bit 2 & Bit 1 & Bit 0        \\
+        \midrule
+        \$FC & 1 & 1 & 1 & 1 & 1 & 1 & 0 & 0 \\
+        \$07 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 1 \\
+        \midrule
+        Result: \$04 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+        \addlinespace
+        \bottomrule
+      \end{tabular}
+
+    \end{adjustbox}
+
+  }\caption*{AND'ing a notional value of \$FC with \$07 gives \$04.}
+\end{figure}
+
+As you might guess, \icode{planetScrollSpeed} is controlled by the speed of the gilby itself:
+
+\begin{lstlisting}
+        LDA planetScrollSpeed
+        CLC
+        ADC currentGilbySpeed
+        STA planetScrollSpeed
+\end{lstlisting}
+
+The more we push on the joystick left or right the greater \icode{currentGilbySpeed} becomes. The
+greater \icode{currentGilbySpeed} becomes, the more we add to \icode{planetScrollSpeed}. The only
+thing we have to be careful about when using this simple mechanic is to ensure that when we update
+\icode{\$D016} with \icode{planetScrollSpeed} we are only updating the lower 3 bits - writing to the
+rest of them will break things as they are not concerned with scrolling at all. This is why, when
+we first retrieve \icode{\$D016} to the \icode{A} register we mask out the first four bits:
+
+\begin{lstlisting}[]
+        ; Scroll the planet
+        LDA $D016    ;VIC Control Register 2
+        AND #$F0
+\end{lstlisting}
+
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=6cm,center}
+
+      \begin{tabular}{rllllllll}
+        \toprule
+        Byte & Bit 7 & Bit 6 & Bit 5 & Bit 4 & Bit 3 & Bit 2 & Bit 1 & Bit 0        \\
+        \midrule
+        \$DE & 1 & 1 & 0 & 1 & 1 & 1 & 1 & 0 \\
+        \$F0 & 1 & 1 & 1 & 1 & 0 & 0 & 0 & 0 \\
+        \midrule
+        Result: \$D0 & 1 & 1 & 0 & 1 & 0 & 0 & 0 & 0 \\
+        \addlinespace
+        \bottomrule
+      \end{tabular}
+
+    \end{adjustbox}
+
+  }\caption*{AND'ing a notional value of \$DE with \$F0 gives \$D0\, preserving the first 4 bits (\icode{D}).}
+\end{figure}
+
+\icode{ORA}'ing a notional value for \icode{planetScrollSpeed} of \icode{\$06} with \icode{\$D0} gives \icode{\$D6}, 
+adding our \icode{planetScrollSpeed} into \icode{\$D0} without disturbing what was aleady there:
+
+\begin{lstlisting}[]
+        ORA planetScrollSpeed
+\end{lstlisting}
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=6cm,center}
+
+      \begin{tabular}{rllllllll}
+        \toprule
+        Byte & Bit 7 & Bit 6 & Bit 5 & Bit 4 & Bit 3 & Bit 2 & Bit 1 & Bit 0        \\
+        \midrule
+        \$D0 & 1 & 1 & 0 & 1 & 0 & 0 & 0 & 0 \\
+        \$06 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 0 \\
+        \midrule
+        Result: \$D6 & 1 & 1 & 0 & 1 & 0 & 1 & 1 & 0 \\
+        \addlinespace
+        \bottomrule
+      \end{tabular}
+    \end{adjustbox}
+  }
+\end{figure}
+
+Finally, \icode{ORA \#\$10} ensures that the multi-color mode bit in \icode{\$D016} is set:
+
+\begin{lstlisting}[]
+        ORA #$10
+        STA $D016    ;VIC Control Register 2
+\end{lstlisting}
+
+So in a nutshell we're not being too fussy about what value we select for the pixel-perfect offset. We
+just take the overall scroll speed and clamp it to a value between 0 and 7. This is 'good enough' in 
+practice - it ensures we're avoiding the appearance of scrolling purely character-wise by guaranteeing
+we're nearly always displaying the surface offset by some small number of pixels.
+
+\subsubsection{Character Movement}
+
+As a quick reminder from our chapter on generating the surfaces of the planets ('Making Planets for Nigel'),
+the data we came up with for the ever-so-randomly-generated planet was stored between \icode{\$8000} and \icode{\$8FFF}.
+
+\begin{lstlisting}[caption=The surface data is stored from \icode{\$8000} to \icode{\$8FFF}. This code overwrites it all with 
+the value \$60\, which is an empty bitmap.]
+        ; Clear down the planet surface data from $8000 to $8FFF.
+        ; There are 4 layers:
+        ; Top Layer:    $8000 to $83FF - 256 bytes 
+        ; Second Layer: $8400 to $87FF - 256 bytes 
+        ; Third Layer:  $8800 to $8BFF - 256 bytes 
+        ; Bottom Layer: $8C00 to $8FFF - 256 bytes 
+        LDY #$00
+ClearPlanetHiPtrs   
+        ; $60 is an empty character and gets written to the entire
+        ; range from $8000 to $8FFF.
+        LDA #$60
+ClearPlanetLoPtrs   
+        STA (planetSurfaceDataPtrLo),Y
+        DEY
+        BNE ClearPlanetLoPtrs
+        INC planetSurfaceDataPtrHi
+        LDA planetSurfaceDataPtrHi
+        CMP (#>planetSurfaceData) + $10
+        BNE ClearPlanetHiPtrs
+\end{lstlisting}
+
+As you can see in the code comment above the planet surface itself is 256 bytes long and we store 4 layers of 256
+bytes each. The bottom layer is the surface, the other three are used for filling in the structures that dot the
+planet's surface.
+
+When we initialize the game we use a bunch of pointers to store the position of each of these layers:
+
+\begin{lstlisting}
+        ; The planet data starts at $8000. Each planet
+        ; has 4 lines or layers.
+        LDA #>planetOneTopLayer
+        STA planetTextureTopLayerPtrHi
+        LDA #>planetOneSecondFromTopLayer
+        STA planetTextureSecondFromTopLayerPtrHi
+        LDA #>planetOneSecondFromBottomLayer
+        STA planetTextureSecondFromBottomLayerPtrHi
+        LDA #>planetOneBottomLayer
+        STA planetTextureBottomLayerPtrHi
+\end{lstlisting}
+
+Every time we scroll by one ore more characters along the planet surface updating what we see on the screen will
+just be a simple question of calling a routine called \icode{DrawPlanetSurfaces} to write wherever in each layer
+the current pointer is pointing to:
+
+\begin{lstlisting}
+DrawPlanetSurfaces
+        ....
+
+        ;Draw the upper and lower planets. The lower
+        ; planet is a mirror image of the top.
+b71E6   LDX #$27
+b71E8   LDA (planetTextureTopLayerPtr),Y
+        STA SCREEN_RAM + LINE7_COL0,Y
+        ORA #$C0
+        STA SCREEN_RAM + LINE15_COL0,X
+        LDA (planetTextureSecondFromTopLayerPtr),Y
+        STA SCREEN_RAM + LINE8_COL0,Y
+        ORA #$C0
+        STA SCREEN_RAM + LINE14_COL0,X
+        LDA (planetTextureSecondFromBottomLayerPtr),Y
+        STA SCREEN_RAM + LINE9_COL0,Y
+        ORA #$C0
+        STA SCREEN_RAM + LINE13_COL0,X
+        LDA (planetTextureBottomLayerPtr),Y
+        STA SCREEN_RAM + LINE10_COL0,Y
+        ORA #$C0
+        STA SCREEN_RAM + LINE12_COL0,X
+        INY
+        DEX
+        CPY #$28
+        BNE b71E8
+        RTS
+\end{lstlisting}
+
+So all we have to do as we scroll along the planet is adjust the position in RAM between \icode{\$8000-\$83FF}
+that  \icode{planetTextureTopLayerPtr} is pointing to (and the same for the other layers) and we will effect
+the illusion of movement across the surface of the planet.
+
+This means that our job is a simple one: how many characters should we move along the planet?
+
+THis decision happens in the \icode{ScrollPlanets} routine, inside the \icode{PerformMainGameUpdate} loop. As
+we have seen earlier, this routine is called around the time the raster reaches just past the halfway point
+down the screen:
+
+\begin{figure}[H]
+    \centering
+      \includegraphics[width=7cm]{main_game/scroll/scroll1770.png}%
+\caption{The rasterline positiion at 196 when \icode{ScrollPlanets} is called.}
+\end{figure}
+
+Just like with calculating the more fine-grained pixel offset we used \icode{planetScrollSpeed} to determine
+how much to move by. But whereas the pixel movement used the lower 3 bits of \icode{planetScrollSpeed} to come
+up with a value between 0 and 7 to adjust the pixel scroll by, we will here instead use the 3 bits before that.
+
+The reason for doing that is straightforward: if those upper 3 bits are set the number in \icode{planetScrollSpeed}
+must be fairly large and therefore enough to warrant scrolling an entire character or even more.
+
+In a situation where we're moving to the right, this is the logic that figures out how many characters to move and
+updates \icode{planetTextureTopLayerPtr} with the updated position:
+
+\begin{lstlisting}
+ScrollPlanetRight   
+        LDA planetScrollSpeed
+        EOR #$FF
+        CLC
+        AND #$F8
+        ROR
+        ROR
+        ROR
+        STA tempHiPtr1
+        INC tempHiPtr1
+        LDA planetTextureTopLayerPtr
+        CLC
+        ADC tempHiPtr1
+        STA planetTextureTopLayerPtr
+\end{lstlisting}
+
+This is more complicated than we actually had reason to expect. Surely if the value in \icode{planetScrollSpeed} is
+greater than 7 we could just shift the bits over there and use that instead? For example with a notional value of
+\icode{\$1F} in \icode{planetScrollSpeed} if we just did the following:
+
+\begin{lstlisting}
+ScrollPlanetRight   
+        LDA planetScrollSpeed
+        AND #$F8
+        ROR
+        ROR
+        ROR
+\end{lstlisting}
+
+We would get a value of \icode{\$03} for our number of characters to move by. THis is because \icode{AND}'ing
+\icode{\$1F} and \icode{\$F8} gives us \icode{\$18}:
+
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=6cm,center}
+
+      \begin{tabular}{rllllllll}
+        \toprule
+        Byte & Bit 7 & Bit 6 & Bit 5 & Bit 4 & Bit 3 & Bit 2 & Bit 1 & Bit 0        \\
+        \midrule
+        \$1F & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 1 \\
+        \$F8 & 1 & 1 & 1 & 1 & 1 & 0 & 0 & 0 \\
+        \midrule
+        Result: \$18 & 0 & 0 & 0 & 1 & 1 & 0 & 0 & 0 \\
+        \addlinespace
+        \bottomrule
+      \end{tabular}
+    \end{adjustbox}
+  }
+\end{figure}
+
+And then using \icode{ROR} to shift the bits to the right three times results in \icode{\$03}:
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=6cm,center}
+
+      \begin{tabular}{rllllllll}
+        \toprule
+        Byte & Bit 7 & Bit 6 & Bit 5 & Bit 4 & Bit 3 & Bit 2 & Bit 1 & Bit 0        \\
+        \midrule
+        \$18 & 0 & 0 & 0 & 1 & 1 & 0 & 0 & 0 \\
+        \midrule
+        Result: \$03 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 \\
+        \addlinespace
+        \bottomrule
+      \end{tabular}
+    \end{adjustbox}
+  }\caption{\icode{ROR} performed three times shifts everything to the right by three bits.}
+\end{figure}
+
+But instead of this we're doing an exclusive-or with the value in \icode{planetScrollSpeed} first:
+
+\begin{lstlisting}
+ScrollPlanetRight   
+        LDA planetScrollSpeed
+        EOR #$FF
+\end{lstlisting}
+
+The reason we have to do this is because the value in \icode{planetScrollSpeed} isn't what we might have
+assumed: a linear value between 0 and 40 for example that goes up and down a sliding scale depending on
+how fast we're going. Instead, it's something slightly different. It's fed by the value in \icode{currentGilbySpeed}
+that reflects the current velocity of the gilby and this always starts out at a value of \icode{\$EA}:
+
+\begin{lstlisting}
+SetUpGilbySprite
+        LDA #GILBY_AIRBORNE_RIGHT
+        STA currentGilbySprite
+        ..
+        LDA #$EA
+        STA currentGilbySpeed
+        ..
+        RTS
+\end{lstlisting}
+
+There's a trick at work here. The gilby can move left or right and \icode{currentGilbySpeed} is being used to
+store both the speed *and* direction of the gilby. When the value is between \icode{00} and \icode{80} the gilby is moving
+to the left and the value reflects its relative velociy. When the value is between \icode{80} and \icode{FF} the gilby is
+moving to the right and the value reflects its relative velocity.
+
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=6cm,center}
+
+      \begin{tabular}{rllllllll}
+        \toprule
+        When Moving Left &  & & & Stationary &  & & & When Moving Right    \\
+        \midrule
+        \$04 & 03 & 02 & 01 & 00 & FF & FE & FD & FC \\
+        \addlinespace
+        \bottomrule
+      \end{tabular}
+    \end{adjustbox}
+  }\caption{Value of \icode{currentGilbySpeed} when moving left and right.}
+\end{figure}
+
+Sure enough, when we look at the calculation using for the character scroll offset when moving left, it's what we
+originally envisaged:
+
+\begin{lstlisting}
+ScrollPlanetLeft
+        LDA planetScrollSpeed
+        CLC
+        ADC currentGilbySpeed
+        STA planetScrollSpeed
+        ..
+b72CF   CLC
+        ROR
+        ROR
+        ROR
+        STA tempHiPtr1
+
+        LDA planetTextureTopLayerPtr
+        SEC
+        SBC tempHiPtr1
+\end{lstlisting}
+
+So the extra steps we see in \icode{ScrollPlanetRight} are to handle the fact that the speed is going to be some value
+between \icode{\$80} and \icode{\$FF}. The exclusive-or (\icode{EOR}) has the effect of reversing the value in \icode{planetScrollSpeed}
+and transforming it into a number between 0 and 16 that we can then clamp to a number between 0 and 7.
+
+
+\begin{lstlisting}
+ScrollPlanetRight   
+        LDA planetScrollSpeed
+        EOR #$FF
+        CLC
+        AND #$F8
+        ROR
+        ROR
+        ROR
+        STA tempHiPtr1
+        INC tempHiPtr1
+        LDA planetTextureTopLayerPtr
+        CLC
+        ADC tempHiPtr1
+        STA planetTextureTopLayerPtr
+\end{lstlisting}
+
+
+

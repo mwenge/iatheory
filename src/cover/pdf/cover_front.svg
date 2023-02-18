@@ -27,7 +27,7 @@
      units="in"
      width="7.5in"
      inkscape:zoom="0.64488976"
-     inkscape:cx="607.0805"
+     inkscape:cx="470.62307"
      inkscape:cy="494.65819"
      inkscape:window-width="1886"
      inkscape:window-height="1009"
@@ -111,46 +111,72 @@
     </meshgradient>
   </defs>
   <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Layer 2"
+     style="fill:#ffcc00">
+    <rect
+       style="fill:#fff6d5;stroke:#e34a1a;stroke-width:0.264583"
+       id="rect1570"
+       width="193.73898"
+       height="240.75313"
+       x="-1.1767788"
+       y="-2.5199947" />
+  </g>
+  <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(-0.98828572,0.40104347)">
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.9275px;line-height:1.25;font-family:Novarese;-inkscape-font-specification:'Novarese, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#e3381a;fill-opacity:1;stroke:none;stroke-width:0.182534;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       x="65.903732"
-       y="198.80986"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.9275px;line-height:1.25;font-family:Novarese;-inkscape-font-specification:'Novarese, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#2b0000;fill-opacity:1;stroke:none;stroke-width:0.182534;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       x="63.475952"
+       y="220.6429"
        id="text2328-2-5"><tspan
          sodipodi:role="line"
          id="tspan317"
-         x="65.903732"
-         y="198.80986">ROB HOGAN</tspan></text>
+         x="63.475952"
+         y="220.6429">ROB HOGAN</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50.8px;line-height:1.25;font-family:Novarese;-inkscape-font-specification:'Novarese, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.623162;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       x="26.804113"
-       y="80.069611"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.5327px;line-height:1.25;font-family:Novarese;-inkscape-font-specification:'Novarese, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#e3381a;fill-opacity:1;stroke:none;stroke-width:0.242756;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       x="25.10977"
+       y="182.13084"
+       id="text2328-2-5-3"><tspan
+         sodipodi:role="line"
+         id="tspan1797"
+         x="25.10977"
+         y="182.13084"
+         style="stroke-width:0.242756">SCRAPBOOK EDITION</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:67.1106px;line-height:1.25;font-family:Novarese;-inkscape-font-specification:'Novarese, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.823244;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       x="5.6511784"
+       y="67.505272"
        id="text2328"><tspan
          sodipodi:role="line"
          id="tspan558"
-         x="26.804113"
-         y="80.069611">IRIDIS</tspan><tspan
+         x="5.6511784"
+         y="67.505272"
+         style="stroke-width:0.823244">IRIDIS</tspan><tspan
          sodipodi:role="line"
          id="tspan560"
-         x="26.804113"
-         y="143.5696" /></text>
+         x="5.6511784"
+         y="151.39352"
+         style="stroke-width:0.823244" /></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40.4756px;line-height:1.25;font-family:Novarese;-inkscape-font-specification:'Novarese, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.900344;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       x="16.488907"
-       y="169.71938"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:44.5556px;line-height:1.25;font-family:Novarese;-inkscape-font-specification:'Novarese, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.991104;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       x="8.2310791"
+       y="168.64886"
        id="text2328-2"
-       transform="scale(1.0537516,0.94899024)"><tspan
+       transform="scale(1.0544229,0.94838607)"><tspan
          sodipodi:role="line"
          id="tspan1247"
-         x="16.488907"
-         y="169.71938"
-         style="stroke-width:0.900344">THEORY</tspan></text>
+         x="8.2310791"
+         y="168.64886"
+         style="stroke-width:0.991104">THEORY</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50.8px;line-height:1.25;font-family:Novarese;-inkscape-font-specification:Novarese;fill:url(#meshgradient17665);fill-opacity:1;stroke:none;stroke-width:0.264583"
@@ -164,7 +190,7 @@
          y="157.13741" /></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.69938;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 26.269911,85.231738 H 166.16868"
+       d="M 25.864743,75.783338 H 165.76351"
        id="path77767"
        sodipodi:nodetypes="cc" />
     <path
@@ -174,25 +200,25 @@
        sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.69938;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 26.491033,37.283072 c 9.257989,0.410303 139.898767,0 139.898767,0"
+       d="m 26.112058,17.035144 c 9.257989,0.410303 139.898762,0 139.898762,0"
        id="path77767-8"
        sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.69938;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 26.483839,174.22398 H 166.38261"
+       d="M 26.283408,167.2034 H 166.18218"
        id="path77767-8-9"
        sodipodi:nodetypes="cc" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:45.8379px;line-height:1.25;font-family:Novarese;-inkscape-font-specification:'Novarese, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.562292;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       x="23.330095"
-       y="121.33004"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:57.811px;line-height:1.25;font-family:Novarese;-inkscape-font-specification:'Novarese, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.709166;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       x="8.8557606"
+       y="118.84904"
        id="text1243"><tspan
          sodipodi:role="line"
          id="tspan1245"
-         x="23.330095"
-         y="121.33004"
-         style="stroke-width:0.562292">ALPHA</tspan></text>
+         x="8.8557606"
+         y="118.84904"
+         style="stroke-width:0.709166">ALPHA</tspan></text>
   </g>
   <script
      id="mesh_polyfill"

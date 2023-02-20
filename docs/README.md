@@ -1,4 +1,4 @@
-[<img height=360 src="https://github.com/mwenge/iatheory/raw/main/src/cover/pdf/cover_front.svg">](https://github.com/mwenge/iatheory/raw/main/out/iatheory_scrapbook.pdf)
+[<img height=360 src="https://github.com/mwenge/iatheory/raw/main/docs/cover_front.png">](https://github.com/mwenge/iatheory/raw/main/out/iatheory_scrapbook.pdf)
 
 A deeper-than-is-possibly-sane dive into the workings of [Iridis Alpha](https://github.com/mwenge/iridisalpha/).
 

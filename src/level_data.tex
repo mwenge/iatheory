@@ -35,8 +35,45 @@ new set of wave data needs to be loaded. This makes sense, once the animation is
 we'll need to load a new enemy ship. Still, you can't help thinking there might have been 
 a way that didn't waste 99 bytes! 
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{1962}{1981}%
-\lstinputlisting[caption="Routine for Animating Enemy Sprites",basicstyle=\tiny]{tmp.asm}
+\begin{lstlisting}
+CheckForCollisionsBeforeUpdatingCurrentShipsWaveData
+        ; X is the current value in indexForActiveShipsWaveData
+        ; We're checking if this is the first time the ship has been hit by the gilby.
+        ; If so, there may be a new state for the enemy to turn into, e.g. a licker ship
+        ; seed turning into a licker ship.
+        LDA shipHasAlreadyBeenHitByGilby,X
+        BEQ JumpToGetNewShipDataFromDataStore
+
+        LDA #$00
+        STA shipHasAlreadyBeenHitByGilby,X
+
+        ; Check if there is another set of wave data to get for this wave when it is first hit.
+        LDY #$1F
+        LDA (currentShipWaveDataLoPtr),Y
+        BEQ JumpToGetNewShipDataFromDataStore
+
+        ; Byte 15 (Index $0E): Controls the rate at which new enemies are added?
+        ; Is there a rate at which new enemies are added?
+        LDY #$0E
+        LDA (currentShipWaveDataLoPtr),Y
+        BEQ CheckCollisionType
+
+        TXA
+        AND #$08 ; Is X pointing to lower planet ships?
+        BNE DecrementStepsThenCheckCollisionsForBottomPlanet
+
+        ; X is pointing to a top planet ship.
+        DEC currentStepsBetweenTopPlanetAttackWaves
+        JMP CheckCollisionType
+        ; Returns
+
+;-------------------------------------------------------
+; JumpToGetNewShipDataFromDataStore
+;-------------------------------------------------------
+JumpToGetNewShipDataFromDataStore
+        JMP GetNewShipDataFromDataStore
+        ; Returns
+\end{lstlisting}
 
 And actually, it's more than that because as we shall see the \icode{ACONT} 40-byte data
 structure is defined more than once per wave. Separate instances are defined for later
@@ -61,20 +98,47 @@ is the only other wave that has anything in either byte, in this case \icode{\$6
 This another 200 wasted bytes it seems but it seems these bytes have some game logic attached and
 when you look at what that logic is doing it seems broken.
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{1945}{1958}%
-\lstinputlisting[caption="Routine for Animating Enemy Sprites",basicstyle=\tiny]{tmp.asm}
 
 When Byte 34 (\icode{\$21}) is populated (and fire has not been pressed) the game will attempt to load
 a set of wave date from Bytes 33 and 34:
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{1974}{1992}%
-\lstinputlisting[caption="Routine for Animating Enemy Sprites",basicstyle=\tiny]{tmp.asm}
+\begin{lstlisting}
+UpdateWaveDataPointersForCurrentEnemy
+        LDA (currentShipWaveDataLoPtr),Y
+        PHA
+        INY
+        LDA (currentShipWaveDataLoPtr),Y
+
+        ; If we have a nullPtr then there's no wave data to get
+        ; so the enemy ship can be cleared out and we can return.
+        BEQ ClearDeadShipFromLevelData
+
+        STA activeShipsWaveDataHiPtrArray,X
+        STA currentShipWaveDataHiPtr
+        PLA
+        STA currentShipWaveDataLoPtr
+        STA activeShipsWaveDataLoPtrArray,X
+        ; Falls through
+\end{lstlisting}
 
 In the case of the data for Planet 5 Level 12 this translates to whatever is at \icode{\$1488}. As it happens this 
 is the address of the frequency data used in the title screen's music. So effectively pretty random data:
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{659}{674}%
-\lstinputlisting[caption="Routine for Animating Enemy Sprites",basicstyle=\tiny]{tmp.asm}
+\begin{lstlisting}
+                    ;      C   C#  D   D#  E   F   F#  G   G#  A   A#  B
+titleMusicHiBytes   .BYTE $08,$08,$09,$09,$0A,$0B,$0B,$0C,$0D,$0E,$0E,$0F  ; 4
+                    .BYTE $10,$11,$12,$13,$15,$16,$17,$19,$1A,$1C,$1D,$1F  ; 5
+                    .BYTE $21,$23,$25,$27,$2A,$2C,$2F,$32,$35,$38,$3B,$3F  ; 6
+                    .BYTE $43,$47,$4B,$4F,$54,$59,$5E,$64,$6A,$70,$77,$7E  ; 7
+                    .BYTE $86,$8E,$96,$9F,$A8,$B3,$BD,$C8,$D4,$E1,$EE,$FD  ; 8
+
+                    ;      C   C#  D   D#  E   F   F#  G   G#  A   A#  B
+titleMusicLowBytes  .BYTE $61,$E1,$68,$F7,$8F,$30,$DA,$8F,$4E,$18,$EF,$D2  ; 4
+                    .BYTE $C3,$C3,$D1,$EF,$1F,$60,$B5,$1E,$9C,$31,$DF,$A5  ; 5
+                    .BYTE $87,$86,$A2,$DF,$3E,$C1,$6B,$3C,$39,$63,$BE,$4B  ; 6
+                    .BYTE $0F,$0C,$45,$BF,$7D,$83,$D6,$79,$73,$C7,$7C,$97  ; 7
+                    .BYTE $1E,$18,$8B,$7E,$FA,$06,$AC,$F3,$E6,$8F,$F8,$2E  ; 8
+\end{lstlisting}
 
 Clearly, no one has ever reached level 12 in planet 5!
 
@@ -114,8 +178,46 @@ anywhere that is exactly what the enemy ship now does.
 Here's the explosion data structure, which we've labelled \icode{defaultExplosion} in
 our disassembly, in the first twenty bytes or so of it's gory detail:
 
-\CopyPartialFile{../iridisalpha/src/level_data/level_data2.asm}{tmp.asm}{4276}{4311}%
-\lstinputlisting[caption="Routine for Animating Enemy Sprites",basicstyle=\tiny]{tmp.asm}
+\begin{lstlisting}
+defaultExplosion = $18C8
+        ; Byte 1 (Index $00): An index into colorsForAttackShips that applies a
+        ; color value for the ship sprite.
+        .BYTE $07
+        ; Byte 2 (Index $01): Sprite value for the attack ship for the upper planet.
+        ; Byte 3 (Index $02): The 'end' sprite value for the attack ship's animation
+        ; for the upper planet.
+        .BYTE EXPLOSION_START,EXPLOSION_START + $03
+        ; Byte 4 (Index $03): The animation frame rate for the attack ship.
+        .BYTE $03
+        ; Byte 5 (Index $04): Sprite value for the attack ship for the lower planet.
+        ; Byte 6 (Index $05): The 'end' sprite value for the ship's lower planet animation.
+        .BYTE EXPLOSION_START,EXPLOSION_START + $03
+        ; Byte 7 (Index $06): Whether a specific attack behaviour is used.
+        .BYTE $00
+        ; Byte 8 (Index $07): Lo Ptr for an unused attack behaviour
+        ; Byte 9 (Index $08): Hi Ptr for an unused attack behaviour
+        .BYTE <nullPtr,>nullPtr
+        ; Byte 10 (Index $09): Lo Ptr for an animation effect? (Doesn't seem to be used?)
+        ; Byte 11 (Index $0A): Hi Ptr for an animation effect (Doesn't seem to be used?)?
+        .BYTE <nullPtr,>nullPtr
+        ; Byte 12 (Index $0B): some kind of rate limiting for attack wave
+        .BYTE $00
+        ; Byte 13 (Index $0C): Lo Ptr for a stage in wave data (never used).
+        ; Byte 14 (Index $0D): Hi Ptr for a stage in wave data (never used).
+        .BYTE <nullPtr,>nullPtr
+        ; Byte 15 (Index $0E): Controls the rate at which new enemies are added?
+        .BYTE $01
+        ; Byte 16 (Index $0F): Update rate for attack wave
+        .BYTE $0D
+        ; Byte 17 (Index $10): Lo Ptr to the wave data we switch to when first hit.
+        ; Byte 18 (Index $11): Hi Ptr to the wave data we switch to when first hit.
+        .BYTE <nullPtr,>nullPtr
+        ; Byte 19 (Index $12): X Pos movement for attack ship.
+        .BYTE $80
+        ; Byte 20 (Index $13): Y Pos movement pattern for attack ship.
+        ; An index into yPosMovementPatternForShips1
+        .BYTE $80
+\end{lstlisting}
 
 We can see the first 7 bytes are concerned with the appearance and basic behaviour of the
 enemy. Bytes 2 and 3 define the sprite used for display on the upper planet, Bytes 5 and 6
@@ -131,21 +233,93 @@ for the lower planet. This routine is cycling through the sprites given by Byte 
 the upper limit. This is what the animation consists of: an animation effect achieved by changing the sprite from
 one to another to create a classic animation effect.
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{8223}{8258}%
-\lstinputlisting[caption="Routine for Animating Enemy Sprites",basicstyle=\tiny]{tmp.asm}
+\begin{lstlisting}[caption=Routine for Animating Enemy Sprites. ]
+AnimateAttackShipSprites
+        LDA pauseModeSelected
+        BEQ AnimateUpperPlanetAttackShips
+        RTS
+
+AnimateUpperPlanetAttackShips   
+        DEC upperPlanetAttackShipAnimationFrameRate - $01,X
+        BNE AnimateLowerPlanetAttackShips
+
+        LDA upperPlanetAttackShipInitialFrameRate - $01,X
+        STA upperPlanetAttackShipAnimationFrameRate - $01,X
+        INC upperPlanetAttackShip2SpriteValue,X
+        LDA upperPlanetAttackShip2SpriteValue,X
+
+        ; Reached the end of the animation?
+        CMP upperPlanetAttackShipSpriteAnimationEnd - $01,X
+        BNE AnimateLowerPlanetAttackShips
+
+        ; Reset the animation sprite back to the start.
+        LDA upperPlanetAttackShipSpritesLoadedFromBackingData - $01,X
+        STA upperPlanetAttackShip2SpriteValue,X
+
+AnimateLowerPlanetAttackShips   
+        DEC lowerPlanetAttackShipAnimationFrameRate - $01,X
+        BNE DontAnimateLowerPlanetAttackShip
+
+        LDA lowerPlanetAttackShipInitialFrameRate - $01,X
+        STA lowerPlanetAttackShipAnimationFrameRate - $01,X
+        INC lowerPlanetAttackShip2SpriteValue,X
+        LDA lowerPlanetAttackShip2SpriteValue,X
+
+        ; Reached the end of the animation?
+        CMP lowerPlanetAttackShipSpriteAnimationEnd - $01,X
+        BNE DontAnimateLowerPlanetAttackShip
+
+        ; Reset the animation sprite back to the start.
+        LDA lowerPlanetAttackShipSpritesLoadedFromBackingData - $01,X
+        STA lowerPlanetAttackShip2SpriteValue,X
+DontAnimateLowerPlanetAttackShip   
+        RTS
+\end{lstlisting}
  
 Byte 2 (loaded to \icode{upperPlanetAttackShipAnimationFrameRate} comes into play here. It's decremented and as long as it's
 not zero yet the animation is skipped, execution jumps forward to \icode{AnimateLowerPlanetAttackShips}:
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{8235}{8237}%
-\lstinputlisting[caption="Routine for Animating Enemy Sprites",basicstyle=\tiny]{tmp.asm}
+\begin{lstlisting}
+AnimateLowerPlanetAttackShips   
+        DEC lowerPlanetAttackShipAnimationFrameRate - $01,X
+        BNE DontAnimateLowerPlanetAttackShip
+
+        LDA lowerPlanetAttackShipInitialFrameRate - $01,X
+        STA lowerPlanetAttackShipAnimationFrameRate - $01,X
+        INC lowerPlanetAttackShip2SpriteValue,X
+        LDA lowerPlanetAttackShip2SpriteValue,X
+
+        ; Reached the end of the animation?
+        CMP lowerPlanetAttackShipSpriteAnimationEnd - $01,X
+        BNE DontAnimateLowerPlanetAttackShip
+
+        ; Reset the animation sprite back to the start.
+        LDA lowerPlanetAttackShipSpritesLoadedFromBackingData - $01,X
+        STA lowerPlanetAttackShip2SpriteValue,X
+\end{lstlisting}
 
 If it is zero, it instead gets reset to the initial value from Byte 2 (stored in
  \icode{upperPlanetAttackShipInitialFrameRate})
 and the current sprite for the enemy ship is incremented to point to the next 'frame' of the ship's animation:
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{8239}{8242}%
-\lstinputlisting[caption="Routine for Animating Enemy Sprites",basicstyle=\tiny]{tmp.asm}
+\begin{lstlisting}
+AnimateUpperPlanetAttackShips   
+        DEC upperPlanetAttackShipAnimationFrameRate - $01,X
+        BNE AnimateLowerPlanetAttackShips
+
+        LDA upperPlanetAttackShipInitialFrameRate - $01,X
+        STA upperPlanetAttackShipAnimationFrameRate - $01,X
+        INC upperPlanetAttackShip2SpriteValue,X
+        LDA upperPlanetAttackShip2SpriteValue,X
+
+        ; Reached the end of the animation?
+        CMP upperPlanetAttackShipSpriteAnimationEnd - $01,X
+        BNE AnimateLowerPlanetAttackShips
+
+        ; Reset the animation sprite back to the start.
+        LDA upperPlanetAttackShipSpritesLoadedFromBackingData - $01,X
+        STA upperPlanetAttackShip2SpriteValue,X
+\end{lstlisting}
 
 Next we check if we've reached the end of the animation by checking the value
 of Byte 3 (loaded to \icode{upperPlanetAttackShipSpriteAnimationEnd}).  If so,
@@ -153,8 +327,41 @@ we reset \icode{upperPlanetAttackShip2SpriteValue} to the value initially
 loaded from Byte 2 - and that is what will be used to display the ship the next
 time we pass through to animate the ship:
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{8244}{8251}%
-\lstinputlisting[caption="Routine for Animating Enemy Sprites",basicstyle=\tiny]{tmp.asm}
+\begin{lstlisting}
+DrawUpperPlanetAttackShips
+        LDX #$0C
+        LDY #$06
+UpperPlanetShipsLoop   
+        LDA upperPlanetAttackShipsXPosArray,Y
+        STA $D000,X  ;Sprite 0 X Pos
+
+        LDA attackShipsXPosArray - $01,Y
+        AND $D010    ;Sprites 0-7 MSB of X coordinate
+        STA currentMSBXPosOffset
+
+        LDA upperPlanetAttackShipsMSBXPosArray,Y
+        AND attackShipsMSBXPosOffsetArray,Y
+        ORA currentMSBXPosOffset
+        STA $D010    ;Sprites 0-7 MSB of X coordinate
+
+        LDA upperPlanetAttackShipsYPosArray,Y
+        STA $D001,X  ;Sprite 0 Y Pos
+        STX tempVarStorage
+
+        LDX upperPlanetAttackShipsColorArray,Y
+        LDA colorsForAttackShips,X
+        STA $D027,Y  ;Sprite 0 Color
+
+        LDA upperPlanetAttackShipsSpriteValueArray,Y
+        STA Sprite0Ptr,Y
+        LDX tempVarStorage
+
+        DEX
+        DEX
+        DEY
+        BNE UpperPlanetShipsLoop
+        RTS
+\end{lstlisting}
 
 \begin{figure}[H]
   {
@@ -222,14 +429,31 @@ is more extreme (Byte 20 is \$24) - achieving the bouncing effect.
 The horizontal movement for level three is \$FA, which would make you think the enemies must be moving horizontally
 extremely quickly. In fact, when the high bit is set a special behaviour is invoked:
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{8192}{8193}%
-\lstinputlisting[caption="From \icode{UpdateAttackShipsXAndYPositions}. "]{tmp.asm}
+\begin{lstlisting}[caption=From \icode{UpdateAttackShipsXAndYPositions}.  ]
+        LDA xPosMovementForUpperPlanetAttackShip - $01,X
+        BMI UpperBitSetOnXPosMovement
+\end{lstlisting}
 
 When the upper bit is set (e.g. \$FC,\$80) on the value loaded to the accumulator by \icode{LDA} then \icode{BMI} will 
 return true and jump to \icode{UpperBitSetOnXPosMovement}.
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{8203}{8217}%
-\lstinputlisting[caption="From \icode{UpdateAttackShipsXAndYPositions}. "]{tmp.asm}
+\begin{lstlisting}
+UpperBitSetOnXPosMovement   
+        ; This creates a decelerating effect on the attack ship's movement.
+        ; Used by the licker ship wave in planet 1 for example.
+        EOR #$FF
+        STA attackShipOffsetRate
+        INC attackShipOffsetRate
+        LDA upperPlanetAttackShip2XPos,X
+        SEC
+        SBC attackShipOffsetRate
+        STA upperPlanetAttackShip2XPos,X
+        BCS DecrementXPosFrameRateLowerPlanet
+
+        LDA upperPlanetAttackShip2MSBXPosValue,X
+        EOR attackShip2MSBXPosOffsetArray,X
+        STA upperPlanetAttackShip2MSBXPosValue,X
+\end{lstlisting}
 
 This first line \icode{EOR \#\$FF} performs an exclusive-or between Byte 19 in the \icode{Accumulator} (\$FA) and the value \$FF. An exclusive-or,
 remember, is a bit by bit comparison of two bytes which will set a bit in the result if an only if the bit in one of the
@@ -259,16 +483,25 @@ values is set but the other is not:
 \end{figure}
 
 This result is stored in \icode{attackShipOffsetRate}:
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{8208}{8208}%
-\lstinputlisting[caption="From \icode{UpdateAttackShipsXAndYPositions}. "]{tmp.asm}
+\begin{lstlisting}
+UpperBitSetOnXPosMovement   
+        ; This creates a decelerating effect on the attack ship's movement.
+        ; Used by the licker ship wave in planet 1 for example.
+        EOR #$FF
+        STA attackShipOffsetRate
+\end{lstlisting}
 
 Incremented:
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{8209}{8209}%
-\lstinputlisting[caption="From \icode{UpdateAttackShipsXAndYPositions}. "]{tmp.asm}
+\begin{lstlisting}
+        INC attackShipOffsetRate
+\end{lstlisting}
 
 And then subtracted from the enemy's X position:
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{8210}{8213}%
-\lstinputlisting[caption="From \icode{UpdateAttackShipsXAndYPositions}. "]{tmp.asm}
+\begin{lstlisting}
+        SEC
+        SBC attackShipOffsetRate
+        STA upperPlanetAttackShip2XPos,X
+\end{lstlisting}
 
 The net result is a deceleration effect. This is observed in the way the licker ship
 wave will accelerate out to the center before dialling back again.
@@ -279,20 +512,53 @@ wave will accelerate out to the center before dialling back again.
 Byte 7 comes into play when setting the initial Y position of a new enemy. This initial vertical
 position is random, but subject to some adjustment:
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{1545}{1612}%
-\lstinputlisting[caption="The sub-routine \icode{SetInitialRandomPositionUpperPlanet} in \icode{GetWaveDateForNewShip}. "]{tmp.asm}
+\begin{lstlisting}[caption=The sub-routine \icode{SetInitialRandomPositionUpperPlanet} in \icode{GetWaveDateForNewShip}.  ]
+SetInitialRandomPositionUpperPlanet   
+        JSR PutProceduralByteInAccumulatorRegister
+        AND #$3F
+        CLC
+        ADC #$40
+        STA upperPlanetAttackShipsYPosArray + $01,Y
 
-The first order of business is to call \icode{PutRandomByteInAccumulatorRegister} which gets a random value and stores it in the accumulator.
+        STY previousAttackShipIndexTmp
+        ; Byte 7 ($06): Usually an update rate for the attack ships.
+        LDY #$06
+        LDA (currentShipWaveDataLoPtr),Y
+        BNE ReturnFromLoadingWaveDataEarly
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{1563}{1563}%
-\lstinputlisting[]{tmp.asm}
+        ; Byte 9 ($08): Default initiation Y position for the enemy. 
+        LDY #$08
+        LDA (currentShipWaveDataLoPtr),Y
+        BEQ ReturnFromLoadingWaveDataEarly
+
+        LDA #$6C
+        LDY previousAttackShipIndexTmp
+        STA upperPlanetAttackShipsYPosArray + $01,Y
+
+ReturnFromLoadingWaveDataEarly   
+        RTS
+\end{lstlisting}
+
+The first order of business is to call \icode{PutProceduralByteInAccumulatorRegister} which gets a random value and stores it in the accumulator.
+
+\begin{lstlisting}
+PutProceduralByteInAccumulatorRegister
+randomIntToIncrement   =*+$01
+        LDA randomPlanetData
+        INC randomIntToIncrement
+        RTS
+\end{lstlisting}
 
 Since \icode{A} can now contain anything from 0 to 255 (\$00 to \$FF) this needs to be adjusted to a meaningful Y-position
-value for the upper planet. So if we imagine \icode{PutRandomByteInAccumulatorRegister} returned \$85, we now do the
+value for the upper planet. So if we imagine \icode{PutProceduralByteInAccumulatorRegister} returned \$85, we now do the
 following operations on it:
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{1564}{1566}%
-\lstinputlisting[]{tmp.asm}
+\begin{lstlisting}
+        AND #$3F
+        CLC
+        ADC #$40
+        STA upperPlanetAttackShipsYPosArray + $01,Y
+\end{lstlisting}
 
 First we do an \icode{AND \#\$3F} with the value of \$85 in \icode{A}:
 \begin{figure}[H]
@@ -321,8 +587,10 @@ First we do an \icode{AND \#\$3F} with the value of \$85 in \icode{A}:
 Our result is \$05. The effect of the AND'ing here is to ensure that the random number we get back is between 0 and 63 rather
 than 0 and 255. Next we add \$40 (decimal 64) to this result:
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{1565}{1567}%
-\lstinputlisting[]{tmp.asm}
+\begin{lstlisting}
+        CLC
+        ADC #$40
+\end{lstlisting}
 
 This gives \$45 and this is what we store as the initial Y position for the enemy.
 
@@ -336,8 +604,18 @@ Byte 7 contains a value, the function will return early without any further adju
 Byte 9. If that's zero, it will return early. So the logic needs Byte 7 to be zero and Byte 9 to contain something for 
 anything to happen. That's never the case, so the the adjustment never happens:
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{1570}{1582}%
-\lstinputlisting[caption="An adjustment that never happens. Byte 7 and Byte 9 are never set in this way"]{tmp.asm}
+\begin{lstlisting}[caption= An adjustment that never happens. Byte 7 and Byte 9 are never set in this way.]
+        STY previousAttackShipIndexTmp
+        ; Byte 7 ($06): Usually an update rate for the attack ships.
+        LDY #$06
+        LDA (currentShipWaveDataLoPtr),Y
+        BNE ReturnFromLoadingWaveDataEarly
+
+        ; Byte 9 ($08): Default initiation Y position for the enemy. 
+        LDY #$08
+        LDA (currentShipWaveDataLoPtr),Y
+        BEQ ReturnFromLoadingWaveDataEarly
+\end{lstlisting}
 
 This is definitely some forgotten code. Byte 7 is elsewhere used in combination with Byte 8 and Byte 9 to define an alternate
 enemy mode for some levels where the ship will supplement any dead ships with alternate enemy types and attack patterns periodically.
@@ -346,13 +624,46 @@ enemy mode for some levels where the ship will supplement any dead ships with al
 \subsection{Pointer Data}
 This happens in \icode{MaybeSwitchToAlternateEnemyPattern} in \icode{UpdateAttackShipDataForNewShip}. 
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{2217}{2265}%
-\lstinputlisting[caption="Byte 7 is used to periodically switch to an enemy mode defined by Bytes 8-9"]{tmp.asm}
+\begin{lstlisting}[caption=Byte 7 is used to periodically switch to an enemy mode defined by Bytes 8-9 ]
+MaybeSwitchToAlternateEnemyPattern   
+        ; Byte 7 ($06): Usually an update rate for the attack ships.
+        LDY #$06
+        LDA (currentShipWaveDataLoPtr),Y
+        BEQ EarlyReturnFromAttackShipBehaviour
+
+        DEC rateForSwitchingToAlternateEnemy,X
+        BNE EarlyReturnFromAttackShipBehaviour
+
+        LDA (currentShipWaveDataLoPtr),Y
+        STA rateForSwitchingToAlternateEnemy,X
+
+        ; Push the current ship's position data onto the stack.
+        TXA
+        PHA
+        LDY indexIntoUpperPlanetAttackShipXPosAndYPosArray,X
+        LDA upperPlanetAttackShipsXPosArray + $01,Y
+        PHA
+        LDA upperPlanetAttackShipsMSBXPosArray + $01,Y
+        PHA
+        LDA upperPlanetAttackShipsYPosArray + $01,Y
+        PHA
+
+        ; Are we on the top or bottom planet?
+        TXA
+        AND #$08
+        BNE LowerPlanetAttackShipBehaviour
+
+\end{lstlisting}
 
 Byte 7 is used to drive the rate at which this routine switches over to the enemy data/mode defined by Byte 8 and Byte 9.
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{2223}{2227}%
-\lstinputlisting[caption="\icode{rateForSwitchingToAlternateEnemy} (Byte 7) is decremented and reloaded each time it reaches zero."]{tmp.asm}
+\begin{lstlisting}[caption=\icode{rateForSwitchingToAlternateEnemy} (Byte 7) is decremented and reloaded each time it reaches zero. ]
+        DEC rateForSwitchingToAlternateEnemy,X
+        BNE EarlyReturnFromAttackShipBehaviour
+
+        LDA (currentShipWaveDataLoPtr),Y
+        STA rateForSwitchingToAlternateEnemy,X
+\end{lstlisting}
 
 What this routine is going to do is replace the first dead ship it finds in the current wave with the wave data pointed to by  Byte 8-9
 and create a new enemy with the current ship's position with it.
@@ -361,8 +672,18 @@ First, we store the current ship's position. The way to do this is get the index
 each of the X and Y Position information into the accumulator first \icode{A} and then push it onto the 'stack' (\icode{PHA} which means
 'push \icode{A} onto the stack').
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{2229}{2238}%
-\lstinputlisting[]{tmp.asm}
+\begin{lstlisting}
+        ; Push the current ship's position data onto the stack.
+        TXA
+        PHA
+        LDY indexIntoUpperPlanetAttackShipXPosAndYPosArray,X
+        LDA upperPlanetAttackShipsXPosArray + $01,Y
+        PHA
+        LDA upperPlanetAttackShipsMSBXPosArray + $01,Y
+        PHA
+        LDA upperPlanetAttackShipsYPosArray + $01,Y
+        PHA
+\end{lstlisting}
 
 When this has run the stack of accumulator values now looks like this:
 
@@ -386,26 +707,38 @@ When this has run the stack of accumulator values now looks like this:
 
 With our position data safely stashed away on the stack we now decide which planet we're on:
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{2240}{2243}%
-\lstinputlisting[]{tmp.asm}
+\begin{lstlisting}[caption= ]
+        ; Are we on the top or bottom planet?
+        TXA
+        AND #$08
+        BNE LowerPlanetAttackShipBehaviour
+\end{lstlisting}
 
 If we're on the upper planet we use \icode{SetXToIndexOfShipThatNeedsReplacing} look in the \icode{activeShipsWaveDataHiPtrArray} for any ships that
 need replacing between positions \icode{\$02} and \icode{\$06}. If we don't find one, we return early:
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{2245}{2249}%
-\lstinputlisting[]{tmp.asm}
+\begin{lstlisting}
+        ; We're on the upper planet.
+        LDX #$02
+ProcessAttackShipBehaviour   
+        JSR SetXToIndexOfShipThatNeedsReplacing
+        BEQ ResetAndReturnFromAttackShipBehaviour
+\end{lstlisting}
 
 If we do find one we can now pull (or 'pop') the positional data we stored away in the stack and assign that to the once-dead
 ship. First we use the index we retrieved to \icode{X} to get the ship's index (\icode{Y}) into the positional arrays:
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{2251}{2253}%
-\lstinputlisting[]{tmp.asm}
+\begin{lstlisting}
+        LDY indexIntoUpperPlanetAttackShipXPosAndYPosArray,X
+\end{lstlisting}
 
 Then we pop the first positional item \icode{upperPlanetAttackShipsYPosArray} from the top of the stack and store in the new
 ship's position in the array:
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{2254}{2255}%
-\lstinputlisting[caption="\icode{PLA} remove the top item from the stack and stores it in \icode{A}]{tmp.asm}
+\begin{lstlisting}[caption="\icode{PLA} remove the top item from the stack and stores it in \icode{A}]
+        PLA
+        STA upperPlanetAttackShipsYPosArray + $01,Y
+\end{lstlisting}
 
 The stack now looks like this, popping from the stack has the effect of removing the first item:
 
@@ -427,14 +760,32 @@ The stack now looks like this, popping from the stack has the effect of removing
 
 Then we pop the rest of the items one by one and assign them to the new ship. We ignore the sprite's MXB offset if it is
 zero:
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{2256}{2264}%
-\lstinputlisting[caption="\icode{PLA} remove the top item from the stack and stores it in \icode{A}]{tmp.asm}
+\begin{lstlisting}[caption=\icode{PLA} remove the top item from the stack and stores it in \icode{A}.]
+        PLA
+        BEQ MSBXPosOffsetIzZero
+
+        LDA attackShipsMSBXPosOffsetArray + $01,X
+MSBXPosOffsetIzZero   
+        STA upperPlanetAttackShipsMSBXPosArray + $01,Y
+        PLA
+        STA upperPlanetAttackShipsXPosArray + $01,Y
+        PLA
+
+        ; Byte 8 of Wave Data gets loaded now. Bytes 8 and 9
+        ; contain the hi/lo ptrs to the alternate enemy data.
+        LDY #$07
+        JMP UpdateWaveDataPointersForCurrentEnemy
+\end{lstlisting}
 
 Now that we have set up the positional data for the new enemy we load all its other features from the data pointed
 to by Byte 8-9:
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{2266}{2269}%
-\lstinputlisting[]{tmp.asm}
+\begin{lstlisting}[caption= ]
+        ; Byte 8 of Wave Data gets loaded now. Bytes 8 and 9
+        ; contain the hi/lo ptrs to the alternate enemy data.
+        LDY #$07
+        JMP UpdateWaveDataPointersForCurrentEnemy
+\end{lstlisting}
 
 Let's take a closer look at this routine \icode{UpdateWaveDataPointersForCurrentEnemy}. What it does in this
 instance is take the address pointed to by Bytes 8 and 9 and load the data there using the routine

@@ -1,0 +1,693 @@
+TRACE: 1  C:$760c  (Trace store)
+Setting checkpoint 1 command to: screenshot "gilby_jumping" 2
+(C:$6af1) ret
+.C:6c68  20 84 52    JSR $5284      - A:F0 X:00 Y:00 SP:f0 ..-..IZC   97373166
+(C:$6c68) ret
+.C:5e1c  18          CLC            - A:00 X:00 Y:00 SP:f6 ..-...Z.   97373378
+(C:$5e1c) ret
+.C:6a0b  AD B9 59    LDA $59B9      - A:06 X:00 Y:00 SP:f8 ..-.....   97373404
+(C:$6a0b) ret
+#1 (Trace store 760c)  205/$0cd,   9/$09
+.C:7037  CE 0C 76    DEC $760C      - A:00 X:06 Y:02 SP:f0 ..-..I.C   98843292
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  206/$0ce,  11/$0b
+.C:7635  8D 0C 76    STA $760C      - A:66 X:06 Y:02 SP:f0 ..-..I.C   98843357
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  210/$0d2,  46/$2e
+.C:7635  8D 0C 76    STA $760C      - A:60 X:06 Y:01 SP:ee ..-..I.C   98882956
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  205/$0cd,  31/$1f
+.C:7635  8D 0C 76    STA $760C      - A:5B X:06 Y:01 SP:f0 ..-..I.C   98921938
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  205/$0cd,   8/$08
+.C:7635  8D 0C 76    STA $760C      - A:56 X:06 Y:01 SP:ee ..-..I.C   98961227
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  210/$0d2,  51/$33
+.C:7635  8D 0C 76    STA $760C      - A:51 X:06 Y:01 SP:f0 ..-..I.C   99000897
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  205/$0cd,  31/$1f
+.C:7635  8D 0C 76    STA $760C      - A:4D X:06 Y:01 SP:ee ..-..I.C   99039874
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  193/$0c1,  37/$25
+.C:7635  8D 0C 76    STA $760C      - A:49 X:0D Y:0E SP:f0 ..-..I.C   99078436
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  211/$0d3,   2/$02
+.C:7635  8D 0C 76    STA $760C      - A:45 X:06 Y:02 SP:ed ..-..I.C   99118847
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  205/$0cd,  27/$1b
+.C:7635  8D 0C 76    STA $760C      - A:42 X:06 Y:02 SP:ee ..-..I.C   99157806
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  204/$0cc,  61/$3d
+.C:7635  8D 0C 76    STA $760C      - A:3F X:06 Y:02 SP:f0 ..-..I.C   99197089
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  210/$0d2,  42/$2a
+.C:7635  8D 0C 76    STA $760C      - A:3C X:06 Y:02 SP:ee ..-..I.C   99236760
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  205/$0cd,  57/$39
+.C:7635  8D 0C 76    STA $760C      - A:3A X:06 Y:02 SP:f0 ..-..I.C   99275772
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  204/$0cc,  57/$39
+.C:7635  8D 0C 76    STA $760C      - A:38 X:06 Y:03 SP:f0 ..-..I.C   99315021
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  210/$0d2,  47/$2f
+.C:7635  8D 0C 76    STA $760C      - A:36 X:06 Y:03 SP:ee ..-..I.C   99354701
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  205/$0cd,  26/$1a
+.C:7635  8D 0C 76    STA $760C      - A:35 X:06 Y:03 SP:ee ..-..I.C   99393677
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  204/$0cc,  61/$3d
+.C:7635  8D 0C 76    STA $760C      - A:34 X:06 Y:03 SP:f0 ..-..I.C   99432961
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  210/$0d2,  46/$2e
+.C:7635  8D 0C 76    STA $760C      - A:33 X:06 Y:03 SP:f0 ..-..I.C   99472636
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  193/$0c1,  43/$2b
+.C:7635  8D 0C 76    STA $760C      - A:33 X:03 Y:0E SP:ee ..-..I..   99510874
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  205/$0cd,  16/$10
+.C:7635  8D 0C 76    STA $760C      - A:33 X:06 Y:04 SP:ee ..-..I..   99550915
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  210/$0d2,  50/$32
+.C:7635  8D 0C 76    STA $760C      - A:33 X:06 Y:04 SP:ee ..-..I..   99590576
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  205/$0cd,  35/$23
+.C:7635  8D 0C 76    STA $760C      - A:34 X:06 Y:04 SP:f0 ..-..I..   99629558
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  205/$0cd,  17/$11
+.C:7635  8D 0C 76    STA $760C      - A:35 X:06 Y:04 SP:ee ..-..I..   99668852
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  212/$0d4,   2/$02
+.C:7635  8D 0C 76    STA $760C      - A:36 X:06 Y:02 SP:f0 ..-..I..   99708590
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  205/$0cd,  44/$2c
+.C:7635  8D 0C 76    STA $760C      - A:38 X:06 Y:05 SP:ee ..-..I..   99747503
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  205/$0cd,   7/$07
+.C:7635  8D 0C 76    STA $760C      - A:3A X:06 Y:05 SP:f0 ..-..I..   99786778
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  210/$0d2,  55/$37
+.C:7635  8D 0C 76    STA $760C      - A:3C X:06 Y:05 SP:ee ..-..I..   99826453
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  205/$0cd,  40/$28
+.C:7635  8D 0C 76    STA $760C      - A:3F X:06 Y:05 SP:f0 ..-..I..   99865435
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  205/$0cd,   7/$07
+.C:7635  8D 0C 76    STA $760C      - A:42 X:06 Y:05 SP:ee ..-..I..   99904714
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  199/$0c7,  31/$1f
+.C:7635  8D 0C 76    STA $760C      - A:45 X:09 Y:0E SP:ee ..-..I..   99943672
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  205/$0cd,  35/$23
+.C:7635  8D 0C 76    STA $760C      - A:49 X:06 Y:06 SP:ee ..-..I..   99983366
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  204/$0cc,  61/$3d
+.C:7635  8D 0C 76    STA $760C      - A:4D X:06 Y:06 SP:ee ..-..I..  100022641
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  210/$0d2,  47/$2f
+.C:7635  8D 0C 76    STA $760C      - A:51 X:06 Y:06 SP:f0 ..-..I..  100062317
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  205/$0cd,  22/$16
+.C:7635  8D 0C 76    STA $760C      - A:56 X:06 Y:06 SP:ed ..-..I..  100101289
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  205/$0cd,  24/$18
+.C:7635  8D 0C 76    STA $760C      - A:5B X:06 Y:02 SP:ee ..-..I..  100140603
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  210/$0d2,  37/$25
+.C:7635  8D 0C 76    STA $760C      - A:60 X:06 Y:07 SP:f0 ..-..I..  100180243
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  205/$0cd,  22/$16
+.C:7635  8D 0C 76    STA $760C      - A:66 X:06 Y:07 SP:ed ..-..I..  100219225
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  205/$0cd,   3/$03
+.C:7635  8D 0C 76    STA $760C      - A:6C X:06 Y:07 SP:ee ..-..I..  100258518
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  210/$0d2,  37/$25
+.C:7635  8D 0C 76    STA $760C      - A:72 X:06 Y:07 SP:ee ..-..I..  100298179
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  210/$0d2,  49/$31
+.C:7640  8D 0C 76    STA $760C      - A:6D X:06 Y:07 SP:ee ..-..I.C  100298191
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  221/$0dd,  41/$29
+.C:7037  CE 0C 76    DEC $760C      - A:00 X:FF Y:00 SP:ee ..-..I.C  113586332
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  223/$0df,   8/$08
+.C:7635  8D 0C 76    STA $760C      - A:67 X:FF Y:00 SP:ee ..-..I.C  113586425
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  221/$0dd,   0/$00
+.C:7635  8D 0C 76    STA $760C      - A:62 X:FF Y:00 SP:ee ..-..I.C  113625603
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  225/$0e1,  37/$25
+.C:7635  8D 0C 76    STA $760C      - A:5D X:FF Y:00 SP:f0 ..-..I.C  113665204
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  220/$0dc,  46/$2e
+.C:7635  8D 0C 76    STA $760C      - A:59 X:FF Y:00 SP:ee ..-..I.C  113704210
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  221/$0dd,  20/$14
+.C:7635  8D 0C 76    STA $760C      - A:55 X:FF Y:00 SP:f0 ..-..I.C  113743559
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  226/$0e2,  12/$0c
+.C:7635  8D 0C 76    STA $760C      - A:51 X:FF Y:00 SP:ee ..-..I.C  113783178
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  220/$0dc,  39/$27
+.C:7635  8D 0C 76    STA $760C      - A:4E X:FF Y:00 SP:ee ..-..I.C  113822139
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  220/$0dc,  58/$3a
+.C:7635  8D 0C 76    STA $760C      - A:4B X:FF Y:00 SP:ee ..-..I.C  113861470
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  225/$0e1,  36/$24
+.C:7635  8D 0C 76    STA $760C      - A:48 X:FF Y:00 SP:ee ..-..I.C  113901075
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  220/$0dc,  45/$2d
+.C:7635  8D 0C 76    STA $760C      - A:46 X:FF Y:00 SP:ee ..-..I.C  113940081
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  220/$0dc,  39/$27
+.C:7635  8D 0C 76    STA $760C      - A:44 X:FF Y:00 SP:ed ..-..I.C  113979387
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  225/$0e1,  55/$37
+.C:7635  8D 0C 76    STA $760C      - A:42 X:FF Y:00 SP:ed ..-..I.C  114019030
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  220/$0dc,  22/$16
+.C:7635  8D 0C 76    STA $760C      - A:41 X:FF Y:00 SP:f0 ..-..I.C  114057994
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  221/$0dd,   3/$03
+.C:7635  8D 0C 76    STA $760C      - A:40 X:FF Y:00 SP:f0 ..-..I.C  114097350
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  225/$0e1,  44/$2c
+.C:7635  8D 0C 76    STA $760C      - A:3F X:FF Y:00 SP:f0 ..-..I.C  114136955
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  222/$0de,  49/$31
+.C:7635  8D 0C 76    STA $760C      - A:3F X:FF Y:00 SP:ee ..-..I..  114176083
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  251/$0fb,  15/$0f
+.C:7635  8D 0C 76    STA $760C      - A:3F X:FF Y:00 SP:f0 ..-..I..  114217188
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  228/$0e4,  28/$1c
+.C:7635  8D 0C 76    STA $760C      - A:3F X:FF Y:00 SP:f0 ..-..I..  114255064
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  222/$0de,   9/$09
+.C:7635  8D 0C 76    STA $760C      - A:40 X:FF Y:00 SP:f0 ..-..I..  114293979
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  222/$0de,  49/$31
+.C:7635  8D 0C 76    STA $760C      - A:41 X:FF Y:00 SP:f0 ..-..I..  114333331
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  228/$0e4,   3/$03
+.C:7635  8D 0C 76    STA $760C      - A:42 X:FF Y:00 SP:ee ..-..I..  114372975
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  222/$0de,  31/$1f
+.C:7635  8D 0C 76    STA $760C      - A:44 X:FF Y:00 SP:ee ..-..I..  114411937
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  222/$0de,  30/$1e
+.C:7635  8D 0C 76    STA $760C      - A:46 X:FF Y:00 SP:ee ..-..I..  114451248
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  228/$0e4,  27/$1b
+.C:7635  8D 0C 76    STA $760C      - A:48 X:FF Y:00 SP:f0 ..-..I..  114490935
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  222/$0de,  13/$0d
+.C:7635  8D 0C 76    STA $760C      - A:4B X:FF Y:00 SP:f0 ..-..I..  114529855
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  222/$0de,  51/$33
+.C:7635  8D 0C 76    STA $760C      - A:4E X:FF Y:00 SP:ee ..-..I..  114569205
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  228/$0e4,   9/$09
+.C:7635  8D 0C 76    STA $760C      - A:51 X:FF Y:00 SP:ee ..-..I..  114608853
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  222/$0de,  29/$1d
+.C:7635  8D 0C 76    STA $760C      - A:55 X:FF Y:00 SP:ee ..-..I..  114647807
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  222/$0de,  51/$33
+.C:7635  8D 0C 76    STA $760C      - A:59 X:FF Y:00 SP:ee ..-..I..  114687141
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  228/$0e4,  29/$1d
+.C:7635  8D 0C 76    STA $760C      - A:5D X:FF Y:00 SP:ee ..-..I..  114726809
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  222/$0de,  15/$0f
+.C:7635  8D 0C 76    STA $760C      - A:62 X:FF Y:00 SP:f0 ..-..I..  114765729
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  222/$0de,  46/$2e
+.C:7635  8D 0C 76    STA $760C      - A:67 X:FF Y:00 SP:ee ..-..I..  114805072
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  228/$0e4,  45/$2d
+.C:7635  8D 0C 76    STA $760C      - A:6C X:FF Y:00 SP:ee ..-..I..  114844761
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  223/$0df,   2/$02
+.C:7635  8D 0C 76    STA $760C      - A:72 X:FF Y:00 SP:ed ..-..I..  114883715
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  223/$0df,  14/$0e
+.C:7640  8D 0C 76    STA $760C      - A:6D X:FF Y:00 SP:ed ..-..I.C  114883727
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  222/$0de,  46/$2e
+.C:7037  CE 0C 76    DEC $760C      - A:00 X:FF Y:00 SP:f0 ..-..I.C  115276816
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  223/$0df,  48/$30
+.C:7635  8D 0C 76    STA $760C      - A:66 X:FF Y:00 SP:f0 ..-..I.C  115276881
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  228/$0e4,  26/$1a
+.C:7635  8D 0C 76    STA $760C      - A:60 X:FF Y:00 SP:f0 ..-..I.C  115316486
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  223/$0df,   5/$05
+.C:7635  8D 0C 76    STA $760C      - A:5B X:FF Y:00 SP:ee ..-..I.C  115355462
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  223/$0df,   7/$07
+.C:7635  8D 0C 76    STA $760C      - A:56 X:FF Y:00 SP:f0 ..-..I.C  115394776
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  229/$0e5,   4/$04
+.C:7635  8D 0C 76    STA $760C      - A:51 X:FF Y:00 SP:f0 ..-..I.C  115434463
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  251/$0fb,  51/$33
+.C:7635  8D 0C 76    STA $760C      - A:4D X:FF Y:00 SP:ee ..-..I.C  115475208
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  221/$0dd,  55/$37
+.C:7635  8D 0C 76    STA $760C      - A:49 X:06 Y:00 SP:f0 ..-..I.C  115512634
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  228/$0e4,  32/$20
+.C:7635  8D 0C 76    STA $760C      - A:45 X:06 Y:00 SP:f0 ..-..I.C  115552364
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  222/$0de,  23/$17
+.C:7635  8D 0C 76    STA $760C      - A:42 X:06 Y:00 SP:f0 ..-..I.C  115591289
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  257/$101,  17/$11
+.C:7635  8D 0C 76    STA $760C      - A:3F X:06 Y:00 SP:ed ..-..I.C  115632800
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  263/$107,  13/$0d
+.C:7635  8D 0C 76    STA $760C      - A:3C X:06 Y:00 SP:ee ..-..I.C  115672486
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  258/$102,  14/$0e
+.C:7635  8D 0C 76    STA $760C      - A:3A X:06 Y:00 SP:f0 ..-..I.C  115711484
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  257/$101,  21/$15
+.C:7635  8D 0C 76    STA $760C      - A:38 X:06 Y:00 SP:ee ..-..I.C  115750740
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  262/$106,  46/$2e
+.C:7635  8D 0C 76    STA $760C      - A:36 X:06 Y:00 SP:ee ..-..I.C  115790392
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  257/$101,  53/$35
+.C:7635  8D 0C 76    STA $760C      - A:35 X:06 Y:00 SP:f0 ..-..I.C  115829396
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  257/$101,   3/$03
+.C:7635  8D 0C 76    STA $760C      - A:34 X:06 Y:00 SP:f0 ..-..I.C  115868658
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  263/$107,   3/$03
+.C:7635  8D 0C 76    STA $760C      - A:33 X:06 Y:00 SP:ee ..-..I.C  115908348
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  257/$101,  32/$20
+.C:7635  8D 0C 76    STA $760C      - A:33 X:06 Y:00 SP:ee ..-..I..  115947311
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  257/$101,  15/$0f
+.C:7635  8D 0C 76    STA $760C      - A:33 X:06 Y:00 SP:ee ..-..I..  115986606
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  262/$106,   5/$05
+.C:7635  8D 0C 76    STA $760C      - A:33 X:06 Y:00 SP:f0 ..-..I..  116026223
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  257/$101,  13/$0d
+.C:7635  8D 0C 76    STA $760C      - A:34 X:06 Y:00 SP:ed ..-..I..  116065228
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  256/$100,  23/$17
+.C:7635  8D 0C 76    STA $760C      - A:35 X:06 Y:00 SP:f0 ..-..I..  116104487
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  262/$106,  23/$17
+.C:7635  8D 0C 76    STA $760C      - A:36 X:06 Y:00 SP:f0 ..-..I..  116144177
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  256/$100,  56/$38
+.C:7635  8D 0C 76    STA $760C      - A:38 X:06 Y:00 SP:f0 ..-..I..  116183144
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  256/$100,  50/$32
+.C:7635  8D 0C 76    STA $760C      - A:3A X:06 Y:00 SP:ee ..-..I..  116222450
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  262/$106,  40/$28
+.C:7635  8D 0C 76    STA $760C      - A:3C X:06 Y:00 SP:f0 ..-..I..  116262130
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  257/$101,  15/$0f
+.C:7635  8D 0C 76    STA $760C      - A:3F X:06 Y:00 SP:ed ..-..I..  116301102
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  256/$100,  28/$1c
+.C:7635  8D 0C 76    STA $760C      - A:42 X:06 Y:00 SP:ee ..-..I..  116340364
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  262/$106,  30/$1e
+.C:7635  8D 0C 76    STA $760C      - A:45 X:06 Y:00 SP:f0 ..-..I..  116380056
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  256/$100,  55/$37
+.C:7635  8D 0C 76    STA $760C      - A:49 X:06 Y:00 SP:ed ..-..I..  116419015
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  256/$100,  46/$2e
+.C:7635  8D 0C 76    STA $760C      - A:4D X:06 Y:00 SP:f0 ..-..I..  116458318
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  262/$106,   1/$01
+.C:7635  8D 0C 76    STA $760C      - A:51 X:06 Y:00 SP:f0 ..-..I..  116497963
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  257/$101,  46/$2e
+.C:7635  8D 0C 76    STA $760C      - A:56 X:06 Y:00 SP:f0 ..-..I..  116537005
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  256/$100,  27/$1b
+.C:7635  8D 0C 76    STA $760C      - A:5B X:06 Y:00 SP:ee ..-..I..  116576235
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  262/$106,  30/$1e
+.C:7635  8D 0C 76    STA $760C      - A:60 X:06 Y:00 SP:ee ..-..I..  116615928
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  256/$100,  55/$37
+.C:7635  8D 0C 76    STA $760C      - A:66 X:06 Y:00 SP:ed ..-..I..  116654887
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  256/$100,  53/$35
+.C:7635  8D 0C 76    STA $760C      - A:6C X:06 Y:00 SP:ee ..-..I..  116694197
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  289/$121,  17/$11
+.C:7635  8D 0C 76    STA $760C      - A:72 X:06 Y:00 SP:ee ..-..I..  116735552
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  289/$121,  29/$1d
+.C:7640  8D 0C 76    STA $760C      - A:6D X:06 Y:00 SP:ee ..-..I.C  116735564
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  257/$101,   0/$00
+.C:7037  CE 0C 76    DEC $760C      - A:00 X:06 Y:00 SP:ed .V-..I.C  117362511
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  258/$102,  30/$1e
+.C:7635  8D 0C 76    STA $760C      - A:67 X:06 Y:00 SP:ed ..-..I.C  117362604
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  257/$101,   5/$05
+.C:7635  8D 0C 76    STA $760C      - A:62 X:06 Y:00 SP:f0 ..-..I.C  117401828
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  262/$106,  20/$14
+.C:7635  8D 0C 76    STA $760C      - A:5D X:06 Y:00 SP:ee ..-..I.C  117441470
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  257/$101,  34/$22
+.C:7635  8D 0C 76    STA $760C      - A:59 X:06 Y:00 SP:f0 ..-..I.C  117480481
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  256/$100,  43/$2b
+.C:7635  8D 0C 76    STA $760C      - A:55 X:06 Y:00 SP:f0 ..-..I.C  117519739
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  262/$106,  46/$2e
+.C:7635  8D 0C 76    STA $760C      - A:51 X:06 Y:00 SP:ee ..-..I.C  117559432
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  257/$101,  17/$11
+.C:7635  8D 0C 76    STA $760C      - A:4E X:06 Y:00 SP:f0 ..-..I.C  117598400
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  257/$101,  20/$14
+.C:7635  8D 0C 76    STA $760C      - A:4B X:06 Y:00 SP:ee ..-..I.C  117637715
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  262/$106,   5/$05
+.C:7635  8D 0C 76    STA $760C      - A:48 X:06 Y:00 SP:f0 ..-..I.C  117677327
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  257/$101,   1/$01
+.C:7635  8D 0C 76    STA $760C      - A:46 X:06 Y:00 SP:f0 ..-..I.C  117716320
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  256/$100,  13/$0d
+.C:7635  8D 0C 76    STA $760C      - A:44 X:06 Y:00 SP:f0 ..-..I.C  117755581
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  262/$106,   9/$09
+.C:7635  8D 0C 76    STA $760C      - A:42 X:06 Y:00 SP:ee ..-..I.C  117795267
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  256/$100,  48/$30
+.C:7635  8D 0C 76    STA $760C      - A:41 X:06 Y:00 SP:ed ..-..I.C  117834240
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  256/$100,  50/$32
+.C:7635  8D 0C 76    STA $760C      - A:40 X:06 Y:00 SP:ee ..-..I.C  117873554
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  262/$106,  41/$29
+.C:7635  8D 0C 76    STA $760C      - A:3F X:06 Y:00 SP:ee ..-..I.C  117913235
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  257/$101,  11/$0b
+.C:7635  8D 0C 76    STA $760C      - A:3F X:06 Y:00 SP:ee ..-..I..  117952202
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  282/$11a,  52/$34
+.C:7635  8D 0C 76    STA $760C      - A:3F X:06 Y:00 SP:ee ..-..I..  117993130
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  262/$106,  34/$22
+.C:7635  8D 0C 76    STA $760C      - A:3F X:06 Y:00 SP:ed ..-..I..  118031164
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  256/$100,  59/$3b
+.C:7635  8D 0C 76    STA $760C      - A:40 X:06 Y:00 SP:ee ..-..I..  118070123
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  256/$100,  49/$31
+.C:7635  8D 0C 76    STA $760C      - A:41 X:06 Y:00 SP:ee ..-..I..  118109425
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  262/$106,   9/$09
+.C:7635  8D 0C 76    STA $760C      - A:42 X:06 Y:00 SP:ee ..-..I..  118149075
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  257/$101,  49/$31
+.C:7635  8D 0C 76    STA $760C      - A:44 X:06 Y:00 SP:ed ..-..I..  118188112
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  256/$100,  28/$1c
+.C:7635  8D 0C 76    STA $760C      - A:46 X:06 Y:00 SP:f0 ..-..I..  118227340
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  262/$106,  31/$1f
+.C:7635  8D 0C 76    STA $760C      - A:48 X:06 Y:00 SP:ed ..-..I..  118267033
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  256/$100,  56/$38
+.C:7635  8D 0C 76    STA $760C      - A:4B X:06 Y:00 SP:ee ..-..I..  118305992
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  256/$100,  53/$35
+.C:7635  8D 0C 76    STA $760C      - A:4E X:06 Y:00 SP:ed ..-..I..  118345301
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  262/$106,  11/$0b
+.C:7635  8D 0C 76    STA $760C      - A:51 X:06 Y:00 SP:ed ..-..I..  118384949
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  257/$101,  37/$25
+.C:7635  8D 0C 76    STA $760C      - A:55 X:06 Y:00 SP:f0 ..-..I..  118423972
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  257/$101,  18/$12
+.C:7635  8D 0C 76    STA $760C      - A:59 X:06 Y:00 SP:f0 ..-..I..  118463265
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  269/$10d,  55/$37
+.C:7635  8D 0C 76    STA $760C      - A:5D X:03 Y:00 SP:ee ..-..I..  118503370
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  222/$0de,  33/$21
+.C:7635  8D 0C 76    STA $760C      - A:62 X:06 Y:00 SP:f0 ..-..I..  118539699
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  223/$0df,   4/$04
+.C:7635  8D 0C 76    STA $760C      - A:67 X:03 Y:00 SP:ee ..-..I..  118579045
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  227/$0e3,   8/$08
+.C:7635  8D 0C 76    STA $760C      - A:6C X:06 Y:00 SP:f0 ..-..I..  118618613
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  222/$0de,  20/$14
+.C:7635  8D 0C 76    STA $760C      - A:72 X:06 Y:00 SP:ee ..-..I..  118657622
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  222/$0de,  32/$20
+.C:7640  8D 0C 76    STA $760C      - A:6D X:06 Y:00 SP:ee ..-..I.C  118657634
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  228/$0e4,  10/$0a
+.C:7037  CE 0C 76    DEC $760C      - A:00 X:06 Y:00 SP:ee ..-..I.C  119680102
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  229/$0e5,  12/$0c
+.C:7635  8D 0C 76    STA $760C      - A:66 X:06 Y:00 SP:ee ..-..I.C  119680167
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  222/$0de,  26/$1a
+.C:7635  8D 0C 76    STA $760C      - A:60 X:06 Y:00 SP:ed ..-..I.C  119719052
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  259/$103,   8/$08
+.C:7635  8D 0C 76    STA $760C      - A:5B X:03 Y:00 SP:ee ..-..I.C  119760677
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  262/$106,  20/$14
+.C:7635  8D 0C 76    STA $760C      - A:56 X:06 Y:00 SP:f0 ..-..I.C  119800190
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  258/$102,  38/$26
+.C:7635  8D 0C 76    STA $760C      - A:51 X:03 Y:00 SP:ee ..-..I.C  119839268
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  256/$100,  55/$37
+.C:7635  8D 0C 76    STA $760C      - A:4D X:06 Y:00 SP:ee ..-..I.C  119878471
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  262/$106,  17/$11
+.C:7635  8D 0C 76    STA $760C      - A:49 X:06 Y:00 SP:ee ..-..I.C  119918123
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  256/$100,  24/$18
+.C:7635  8D 0C 76    STA $760C      - A:45 X:06 Y:00 SP:f0 ..-..I.C  119957064
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  257/$101,  51/$33
+.C:7635  8D 0C 76    STA $760C      - A:42 X:06 Y:00 SP:ed ..-..I.C  119996466
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  260/$104,  11/$0b
+.C:7635  8D 0C 76    STA $760C      - A:3F X:06 Y:00 SP:ee ..-..I.C  120035927
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  254/$0fe,  53/$35
+.C:7635  8D 0C 76    STA $760C      - A:3C X:06 Y:00 SP:ee ..-..I.C  120074903
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  255/$0ff,  33/$21
+.C:7635  8D 0C 76    STA $760C      - A:3A X:06 Y:00 SP:f0 ..-..I.C  120114258
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  260/$104,  25/$19
+.C:7635  8D 0C 76    STA $760C      - A:38 X:06 Y:00 SP:ee ..-..I.C  120153877
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  254/$0fe,  26/$1a
+.C:7635  8D 0C 76    STA $760C      - A:36 X:06 Y:00 SP:ed ..-..I.C  120192812
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  255/$0ff,   3/$03
+.C:7635  8D 0C 76    STA $760C      - A:35 X:06 Y:00 SP:f0 ..-..I.C  120232164
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  260/$104,  20/$14
+.C:7635  8D 0C 76    STA $760C      - A:34 X:06 Y:00 SP:ee ..-..I.C  120271808
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  255/$0ff,   0/$00
+.C:7635  8D 0C 76    STA $760C      - A:33 X:06 Y:00 SP:f0 ..-..I.C  120310785
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  255/$0ff,   1/$01
+.C:7635  8D 0C 76    STA $760C      - A:33 X:06 Y:00 SP:ee ..-..I..  120350098
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  261/$105,   6/$06
+.C:7635  8D 0C 76    STA $760C      - A:33 X:06 Y:00 SP:f0 ..-..I..  120389793
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  254/$0fe,  36/$24
+.C:7635  8D 0C 76    STA $760C      - A:33 X:06 Y:00 SP:f0 ..-..I..  120428694
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  257/$101,  23/$17
+.C:7635  8D 0C 76    STA $760C      - A:34 X:06 Y:00 SP:ee ..-..I..  120468182
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  284/$11c,  51/$33
+.C:7635  8D 0C 76    STA $760C      - A:35 X:06 Y:00 SP:ee ..-..I..  120509223
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  256/$100,  62/$3e
+.C:7635  8D 0C 76    STA $760C      - A:36 X:06 Y:00 SP:f0 ..-..I..  120546782
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  256/$100,  59/$3b
+.C:7635  8D 0C 76    STA $760C      - A:38 X:06 Y:00 SP:f0 ..-..I..  120586091
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  262/$106,  16/$10
+.C:7635  8D 0C 76    STA $760C      - A:3A X:06 Y:00 SP:ee ..-..I..  120625738
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  256/$100,  58/$3a
+.C:7635  8D 0C 76    STA $760C      - A:3C X:06 Y:00 SP:ee ..-..I..  120664714
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  257/$101,   8/$08
+.C:7635  8D 0C 76    STA $760C      - A:3F X:06 Y:00 SP:ee ..-..I..  120704039
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  262/$106,  11/$0b
+.C:7635  8D 0C 76    STA $760C      - A:42 X:06 Y:00 SP:f0 ..-..I..  120743669
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  256/$100,  47/$2f
+.C:7635  8D 0C 76    STA $760C      - A:45 X:06 Y:00 SP:f0 ..-..I..  120782639
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  256/$100,  59/$3b
+.C:7635  8D 0C 76    STA $760C      - A:49 X:06 Y:00 SP:ee ..-..I..  120821963
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  262/$106,  24/$18
+.C:7635  8D 0C 76    STA $760C      - A:4D X:06 Y:00 SP:ee ..-..I..  120861618
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  256/$100,  27/$1b
+.C:7635  8D 0C 76    STA $760C      - A:51 X:06 Y:00 SP:ee ..-..I..  120900555
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  257/$101,  43/$2b
+.C:7635  8D 0C 76    STA $760C      - A:56 X:06 Y:00 SP:f0 ..-..I..  120939946
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  262/$106,   5/$05
+.C:7635  8D 0C 76    STA $760C      - A:5B X:06 Y:00 SP:f0 ..-..I..  120979535
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  256/$100,  44/$2c
+.C:7635  8D 0C 76    STA $760C      - A:60 X:06 Y:00 SP:f0 ..-..I..  121018508
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  256/$100,  59/$3b
+.C:7635  8D 0C 76    STA $760C      - A:66 X:06 Y:00 SP:ed ..-..I..  121057835
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  262/$106,  28/$1c
+.C:7635  8D 0C 76    STA $760C      - A:6C X:06 Y:00 SP:f0 ..-..I..  121097494
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  256/$100,  32/$20
+.C:7635  8D 0C 76    STA $760C      - A:72 X:06 Y:00 SP:f0 ..-..I..  121136432
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  256/$100,  44/$2c
+.C:7640  8D 0C 76    STA $760C      - A:6D X:06 Y:00 SP:f0 ..-..I.C  121136444
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  227/$0e3,   7/$07
+.C:7037  CE 0C 76    DEC $760C      - A:00 X:06 Y:00 SP:ee ..-..I.C  130412212
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  229/$0e5,  17/$11
+.C:7635  8D 0C 76    STA $760C      - A:67 X:06 Y:00 SP:ee ..-..I.C  130412348
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  221/$0dd,  25/$19
+.C:7635  8D 0C 76    STA $760C      - A:62 X:06 Y:00 SP:ee ..-..I.C  130451164
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  221/$0dd,  52/$34
+.C:7635  8D 0C 76    STA $760C      - A:5D X:06 Y:00 SP:ed ..-..I.C  130490503
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  261/$105,  61/$3d
+.C:7635  8D 0C 76    STA $760C      - A:59 X:06 Y:00 SP:f0 ..-..I.C  130532344
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  246/$0f6,  51/$33
+.C:7635  8D 0C 76    STA $760C      - A:55 X:06 Y:00 SP:ee ..-..I.C  130570701
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  228/$0e4,  57/$39
+.C:7635  8D 0C 76    STA $760C      - A:51 X:02 Y:00 SP:ee ..-..I.C  130608885
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  228/$0e4,  45/$2d
+.C:7635  8D 0C 76    STA $760C      - A:4E X:06 Y:00 SP:ee ..-..I.C  130648185
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  222/$0de,  25/$19
+.C:7635  8D 0C 76    STA $760C      - A:4B X:02 Y:00 SP:f0 ..-..I.C  130687099
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  221/$0dd,  37/$25
+.C:7635  8D 0C 76    STA $760C      - A:48 X:06 Y:00 SP:ee ..-..I.C  130726360
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  227/$0e3,  62/$3e
+.C:7635  8D 0C 76    STA $760C      - A:46 X:06 Y:00 SP:ed ..-..I.C  130766075
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  221/$0dd,  37/$25
+.C:7635  8D 0C 76    STA $760C      - A:44 X:06 Y:00 SP:ed ..-..I.C  130804984
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  221/$0dd,   8/$08
+.C:7635  8D 0C 76    STA $760C      - A:42 X:06 Y:00 SP:ed ..-..I.C  130844267
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  225/$0e1,  31/$1f
+.C:7635  8D 0C 76    STA $760C      - A:41 X:06 Y:00 SP:ee ..-..I.C  130883854
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  218/$0da,  18/$12
+.C:7635  8D 0C 76    STA $760C      - A:40 X:06 Y:00 SP:f0 ..-..I.C  130922712
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  218/$0da,  53/$35
+.C:7635  8D 0C 76    STA $760C      - A:3F X:06 Y:00 SP:f0 ..-..I.C  130962059
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  225/$0e1,  11/$0b
+.C:7635  8D 0C 76    STA $760C      - A:3F X:06 Y:00 SP:ee ..-..I..  131001770
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  218/$0da,  46/$2e
+.C:7635  8D 0C 76    STA $760C      - A:3F X:06 Y:00 SP:ed ..-..I..  131040676
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  218/$0da,  22/$16
+.C:7635  8D 0C 76    STA $760C      - A:3F X:06 Y:00 SP:ed ..-..I..  131079964
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  226/$0e2,   0/$00
+.C:7635  8D 0C 76    STA $760C      - A:40 X:06 Y:00 SP:f0 ..-..I..  131119758
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  221/$0dd,  13/$0d
+.C:7635  8D 0C 76    STA $760C      - A:41 X:06 Y:00 SP:ee ..-..I..  131158768
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  221/$0dd,  38/$26
+.C:7635  8D 0C 76    STA $760C      - A:42 X:06 Y:00 SP:f0 ..-..I..  131198105
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  228/$0e4,   4/$04
+.C:7635  8D 0C 76    STA $760C      - A:44 X:06 Y:00 SP:ee ..-..I..  131237824
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  221/$0dd,  37/$25
+.C:7635  8D 0C 76    STA $760C      - A:46 X:06 Y:00 SP:f0 ..-..I..  131276728
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  221/$0dd,  10/$0a
+.C:7635  8D 0C 76    STA $760C      - A:48 X:06 Y:00 SP:ee ..-..I..  131316013
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  228/$0e4,  24/$18
+.C:7635  8D 0C 76    STA $760C      - A:4B X:06 Y:00 SP:f0 ..-..I..  131355780
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  221/$0dd,  10/$0a
+.C:7635  8D 0C 76    STA $760C      - A:4E X:06 Y:00 SP:f0 ..-..I..  131394637
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  221/$0dd,  34/$22
+.C:7635  8D 0C 76    STA $760C      - A:51 X:06 Y:00 SP:f0 ..-..I..  131433973
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  228/$0e4,  13/$0d
+.C:7635  8D 0C 76    STA $760C      - A:55 X:06 Y:00 SP:ee ..-..I..  131473705
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  227/$0e3,   9/$09
+.C:7635  8D 0C 76    STA $760C      - A:59 X:06 Y:00 SP:ee ..-..I..  131512950
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  257/$101,  53/$35
+.C:7635  8D 0C 76    STA $760C      - A:5D X:02 Y:00 SP:ee ..-..I..  131554196
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  228/$0e4,  16/$10
+.C:7635  8D 0C 76    STA $760C      - A:62 X:06 Y:00 SP:f0 ..-..I..  131591644
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  222/$0de,  31/$1f
+.C:7635  8D 0C 76    STA $760C      - A:67 X:01 Y:00 SP:ee ..-..I..  131630593
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  222/$0de,   3/$03
+.C:7635  8D 0C 76    STA $760C      - A:6C X:06 Y:00 SP:ee ..-..I..  131669877
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  261/$105,  60/$3c
+.C:7635  8D 0C 76    STA $760C      - A:72 X:06 Y:00 SP:f0 ..-..I..  131711703
+Executing: screenshot "gilby_jumping" 2
+#1 (Trace store 760c)  262/$106,   9/$09
+.C:7640  8D 0C 76    STA $760C      - A:6D X:06 Y:00 SP:f0 ..-..I.C  131711715
+Executing: screenshot "gilby_jumping

@@ -1,0 +1,1957 @@
+TRACE: 1  C:$0e08  (Trace exec)
+Setting checkpoint 1 command to: screenshot "dna" 2
+TRACE: 1  C:$0e08  (Trace exec)
+Setting checkpoint 1 command to: screenshot "dna" 2
+#1 (Trace  exec 0e08)   48/$030,  51/$33
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EA Y:00 SP:ea ..-..I.C  199786659
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   54/$036,  51/$33
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EA Y:00 SP:ea ..-..I.C  199787037
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   63/$03f,  15/$0f
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EA Y:00 SP:ea ..-..I.C  199787568
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   71/$047,  15/$0f
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EA Y:00 SP:ea ..-..I.C  199788072
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   79/$04f,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EA Y:00 SP:ea ..-..I.C  199788569
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   87/$057,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EA Y:00 SP:ea ..-..I.C  199789082
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   95/$05f,  15/$0f
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EA Y:00 SP:ea ..-..I.C  199789584
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  103/$067,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EA Y:00 SP:ea ..-..I.C  199790081
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  111/$06f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EA Y:00 SP:ea ..-..I.C  199790593
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  119/$077,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EA Y:00 SP:ea ..-..I.C  199791098
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  127/$07f,  11/$0b
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EA Y:00 SP:ea ..-..I.C  199791596
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  135/$087,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199792106
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  143/$08f,  14/$0e
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EA Y:00 SP:ea ..-..I.C  199792607
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  151/$097,   9/$09
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EA Y:00 SP:ea ..-..I.C  199793106
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  159/$09f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EA Y:00 SP:ea ..-..I.C  199793617
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  167/$0a7,  14/$0e
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EA Y:00 SP:ea ..-..I.C  199794119
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  175/$0af,   9/$09
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EA Y:00 SP:ea ..-..I.C  199794618
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  183/$0b7,  19/$13
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EA Y:00 SP:ea ..-..I.C  199795132
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  191/$0bf,  15/$0f
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EA Y:00 SP:ea ..-..I.C  199795632
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  199/$0c7,  11/$0b
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EA Y:00 SP:ea ..-..I.C  199796132
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  207/$0cf,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EA Y:00 SP:ea ..-..I.C  199796643
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  215/$0d7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EA Y:00 SP:ea ..-..I.C  199797146
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  223/$0df,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EA Y:00 SP:ea ..-..I.C  199797641
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  231/$0e7,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EA Y:00 SP:ea ..-..I.C  199798153
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   46/$02e,  53/$35
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199806191
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   55/$037,  14/$0e
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199806719
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   63/$03f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199807226
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   71/$047,   9/$09
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199807722
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   79/$04f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199808234
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   87/$057,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199808737
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   95/$05f,   9/$09
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199809234
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  103/$067,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199809746
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  111/$06f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199810249
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  119/$077,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199810744
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  127/$07f,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199811261
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  135/$087,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199811762
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  143/$08f,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199812256
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  151/$097,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199812773
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  159/$09f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199813274
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  167/$0a7,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199813769
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  175/$0af,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199814283
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  183/$0b7,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199814785
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  191/$0bf,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199815281
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  199/$0c7,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199815795
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  207/$0cf,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199816297
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  215/$0d7,  10/$0a
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199816795
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  223/$0df,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199817305
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  231/$0e7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199817810
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   46/$02e,  51/$33
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199825845
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   55/$037,  15/$0f
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199826376
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   63/$03f,  19/$13
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199826884
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   71/$047,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199827377
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   79/$04f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199827889
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   87/$057,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199828393
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   95/$05f,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199828888
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  103/$067,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199829402
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  111/$06f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199829906
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  119/$077,  10/$0a
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199830403
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  127/$07f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199830914
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  135/$087,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199831418
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  143/$08f,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199831913
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  151/$097,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199832425
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  159/$09f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199832929
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  167/$0a7,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199833425
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  175/$0af,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199833941
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  183/$0b7,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199834445
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  191/$0bf,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199834936
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  199/$0c7,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199835451
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  207/$0cf,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199835954
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  214/$0d6,  56/$38
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199836434
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  223/$0df,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199836962
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  231/$0e7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199837466
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   46/$02e,  53/$35
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199845503
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   55/$037,  15/$0f
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199846032
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   63/$03f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199846538
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   71/$047,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199847033
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   79/$04f,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199847547
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   87/$057,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199848049
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   95/$05f,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199848545
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  103/$067,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199849059
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  111/$06f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199849561
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  119/$077,  10/$0a
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199850059
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  127/$07f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199850569
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  135/$087,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199851074
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  143/$08f,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199851568
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  151/$097,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199852082
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  159/$09f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199852585
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  167/$0a7,  10/$0a
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199853083
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  175/$0af,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199853593
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  183/$0b7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199854098
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  191/$0bf,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199854592
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  199/$0c7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199855106
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  207/$0cf,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199855609
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  215/$0d7,  10/$0a
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199856107
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  223/$0df,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199856617
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  231/$0e7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199857122
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   46/$02e,  51/$33
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199865157
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   55/$037,  15/$0f
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199865688
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   63/$03f,  19/$13
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199866196
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   71/$047,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199866689
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   79/$04f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199867201
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   87/$057,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199867705
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   95/$05f,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199868200
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  103/$067,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199868714
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  111/$06f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199869218
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  119/$077,  10/$0a
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199869715
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  127/$07f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199870226
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  135/$087,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199870730
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  143/$08f,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199871225
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  151/$097,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199871737
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  159/$09f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199872241
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  167/$0a7,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199872737
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  175/$0af,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199873253
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  183/$0b7,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199873757
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  191/$0bf,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199874248
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  199/$0c7,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199874763
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  207/$0cf,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199875266
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  214/$0d6,  56/$38
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199875746
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  223/$0df,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199876274
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  231/$0e7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199876778
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   46/$02e,  53/$35
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199884815
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   55/$037,  15/$0f
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199885344
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   63/$03f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199885850
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   71/$047,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199886345
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   79/$04f,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199886859
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   87/$057,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199887361
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   95/$05f,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199887857
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  103/$067,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199888371
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  111/$06f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199888873
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  119/$077,  10/$0a
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199889371
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  127/$07f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199889881
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  135/$087,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199890386
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  143/$08f,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199890880
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  151/$097,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199891394
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  159/$09f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199891897
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  167/$0a7,  10/$0a
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199892395
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  175/$0af,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199892905
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  183/$0b7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199893410
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  191/$0bf,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199893904
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  199/$0c7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199894418
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  207/$0cf,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199894921
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  215/$0d7,  10/$0a
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199895419
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  223/$0df,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199895929
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  231/$0e7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199896434
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   46/$02e,  54/$36
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199904472
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   55/$037,  13/$0d
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199904998
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   63/$03f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199905505
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   71/$047,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199906001
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   79/$04f,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199906517
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   87/$057,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199907021
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   95/$05f,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199907512
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  103/$067,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199908027
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  111/$06f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199908530
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  118/$076,  56/$38
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199909010
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  127/$07f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199909538
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  135/$087,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199910042
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  143/$08f,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199910537
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  151/$097,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199911053
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  159/$09f,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199911557
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  167/$0a7,   9/$09
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199912050
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  175/$0af,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199912562
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  183/$0b7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199913066
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  191/$0bf,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199913561
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  199/$0c7,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199914073
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  207/$0cf,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199914577
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  215/$0d7,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199915073
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  223/$0df,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199915589
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  231/$0e7,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199916093
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   46/$02e,  52/$34
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199924126
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   55/$037,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199924658
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   63/$03f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199925162
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   71/$047,   9/$09
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199925658
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   79/$04f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199926170
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   87/$057,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199926673
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   95/$05f,   9/$09
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199927170
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  103/$067,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199927682
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  111/$06f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199928185
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  119/$077,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199928680
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  127/$07f,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199929197
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  135/$087,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199929698
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  143/$08f,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199930192
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  151/$097,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199930709
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  159/$09f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199931210
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  167/$0a7,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199931705
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  175/$0af,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199932219
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  183/$0b7,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199932721
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  191/$0bf,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199933217
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  199/$0c7,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199933731
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  207/$0cf,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199934233
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  215/$0d7,  10/$0a
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199934731
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  223/$0df,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199935241
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  231/$0e7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199935746
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   46/$02e,  51/$33
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199943781
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   55/$037,  15/$0f
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199944312
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   63/$03f,  19/$13
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199944820
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   71/$047,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199945313
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   79/$04f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199945825
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   87/$057,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199946329
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   95/$05f,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199946824
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  103/$067,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199947338
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  111/$06f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199947842
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  119/$077,  10/$0a
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199948339
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  127/$07f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199948850
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  135/$087,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199949354
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  143/$08f,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199949849
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  151/$097,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199950361
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  159/$09f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199950865
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  167/$0a7,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199951361
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  175/$0af,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199951877
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  183/$0b7,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199952381
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  191/$0bf,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199952872
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  199/$0c7,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199953387
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  207/$0cf,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199953890
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  214/$0d6,  56/$38
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199954370
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  223/$0df,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199954898
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  231/$0e7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199955402
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   46/$02e,  53/$35
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199963439
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   55/$037,  15/$0f
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199963968
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   63/$03f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199964474
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   71/$047,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199964969
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   79/$04f,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199965483
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   87/$057,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199965985
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   95/$05f,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199966481
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  103/$067,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199966995
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  111/$06f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199967497
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  119/$077,  10/$0a
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199967995
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  127/$07f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199968505
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  135/$087,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199969010
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  143/$08f,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199969504
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  151/$097,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199970018
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  159/$09f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199970521
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  167/$0a7,  10/$0a
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199971019
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  175/$0af,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199971529
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  183/$0b7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199972034
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  191/$0bf,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199972528
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  199/$0c7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199973042
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  207/$0cf,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199973545
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  215/$0d7,  10/$0a
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199974043
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  223/$0df,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199974553
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  231/$0e7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199975058
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   46/$02e,  51/$33
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199983093
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   55/$037,  15/$0f
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199983624
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   63/$03f,  19/$13
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199984132
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   71/$047,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199984625
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   79/$04f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199985137
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   87/$057,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199985641
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   95/$05f,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199986136
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  103/$067,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199986650
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  111/$06f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199987154
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  119/$077,  10/$0a
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199987651
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  127/$07f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199988162
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  135/$087,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199988666
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  143/$08f,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199989161
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  151/$097,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199989673
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  159/$09f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199990177
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  167/$0a7,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199990673
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  175/$0af,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199991189
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  183/$0b7,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199991693
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  191/$0bf,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199992184
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  199/$0c7,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199992699
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  207/$0cf,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199993202
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  214/$0d6,  56/$38
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199993682
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  223/$0df,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199994210
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  231/$0e7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  199994714
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   46/$02e,  53/$35
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200002751
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   55/$037,  14/$0e
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200003279
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   63/$03f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200003786
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   71/$047,   9/$09
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200004282
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   79/$04f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200004794
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   87/$057,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200005297
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   95/$05f,   9/$09
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200005794
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  103/$067,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200006306
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  111/$06f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200006809
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  119/$077,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200007304
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  127/$07f,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200007821
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  135/$087,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200008322
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  143/$08f,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200008816
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  151/$097,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200009333
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  159/$09f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200009834
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  167/$0a7,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200010329
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  175/$0af,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200010843
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  183/$0b7,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200011345
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  191/$0bf,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200011841
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  199/$0c7,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200012355
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  207/$0cf,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200012857
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  215/$0d7,  10/$0a
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200013355
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  223/$0df,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200013865
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  231/$0e7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200014370
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   46/$02e,  51/$33
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200022405
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   55/$037,  15/$0f
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200022936
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   63/$03f,  19/$13
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200023444
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   71/$047,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200023937
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   79/$04f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200024449
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   87/$057,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200024953
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   95/$05f,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200025448
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  103/$067,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200025962
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  111/$06f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200026466
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  119/$077,  10/$0a
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200026963
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  127/$07f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200027474
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  135/$087,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200027978
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  143/$08f,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200028473
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  151/$097,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200028985
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  159/$09f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200029489
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  167/$0a7,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200029985
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  175/$0af,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200030501
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  183/$0b7,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200031005
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  191/$0bf,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200031496
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  199/$0c7,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200032011
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  207/$0cf,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200032514
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  214/$0d6,  56/$38
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200032994
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  223/$0df,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200033522
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  231/$0e7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200034026
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   46/$02e,  53/$35
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200042063
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   55/$037,  15/$0f
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200042592
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   63/$03f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200043098
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   71/$047,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200043593
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   79/$04f,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200044107
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   87/$057,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200044609
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   95/$05f,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200045105
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  103/$067,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200045619
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  111/$06f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200046121
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  119/$077,  10/$0a
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200046619
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  127/$07f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200047129
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  135/$087,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200047634
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  143/$08f,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200048128
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  151/$097,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200048642
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  159/$09f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200049145
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  167/$0a7,  10/$0a
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200049643
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  175/$0af,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200050153
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  183/$0b7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200050658
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  191/$0bf,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200051152
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  199/$0c7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200051666
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  207/$0cf,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200052169
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  215/$0d7,  10/$0a
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200052667
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  223/$0df,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200053177
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  231/$0e7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200053682
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   46/$02e,  51/$33
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200061717
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   55/$037,  15/$0f
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200062248
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   63/$03f,  19/$13
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200062756
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   71/$047,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200063249
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   79/$04f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200063761
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   87/$057,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200064265
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   95/$05f,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200064760
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  103/$067,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200065274
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  111/$06f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200065778
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  119/$077,  10/$0a
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200066275
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  127/$07f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200066786
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  135/$087,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200067290
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  143/$08f,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200067785
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  151/$097,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200068297
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  159/$09f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200068801
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  167/$0a7,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200069297
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  175/$0af,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200069813
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  183/$0b7,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200070317
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  191/$0bf,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200070808
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  199/$0c7,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200071323
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  207/$0cf,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200071826
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  214/$0d6,  56/$38
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200072306
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  223/$0df,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200072834
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  231/$0e7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200073338
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   46/$02e,  53/$35
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200081375
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   55/$037,  15/$0f
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200081904
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   63/$03f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200082410
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   71/$047,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200082905
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   79/$04f,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200083419
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   87/$057,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200083921
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   95/$05f,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200084417
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  103/$067,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200084931
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  111/$06f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200085433
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  119/$077,  10/$0a
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200085931
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  127/$07f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200086441
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  135/$087,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200086946
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  143/$08f,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200087440
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  151/$097,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200087954
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  159/$09f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200088457
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  167/$0a7,  10/$0a
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200088955
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  175/$0af,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200089465
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  183/$0b7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200089970
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  191/$0bf,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200090464
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  199/$0c7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200090978
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  207/$0cf,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200091481
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  215/$0d7,  10/$0a
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200091979
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  223/$0df,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200092489
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  231/$0e7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200092994
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   46/$02e,  52/$34
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200101030
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   55/$037,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200101561
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   63/$03f,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200102069
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   71/$047,   9/$09
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200102562
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   79/$04f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200103074
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   87/$057,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200103578
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   95/$05f,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200104073
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  103/$067,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200104585
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  111/$06f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200105089
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  119/$077,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200105585
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  127/$07f,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200106101
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  135/$087,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200106605
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  143/$08f,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200107096
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  151/$097,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200107611
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  159/$09f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200108114
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  166/$0a6,  56/$38
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200108594
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  175/$0af,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200109122
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  183/$0b7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200109626
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  191/$0bf,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200110121
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  199/$0c7,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200110637
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  207/$0cf,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200111141
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  215/$0d7,   9/$09
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200111634
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  223/$0df,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200112146
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  231/$0e7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200112650
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   46/$02e,  53/$35
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200120687
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   55/$037,  14/$0e
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200121215
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   63/$03f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200121722
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   71/$047,   9/$09
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200122218
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   79/$04f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200122730
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   87/$057,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200123233
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   95/$05f,   9/$09
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200123730
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  103/$067,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200124242
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  111/$06f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200124745
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  119/$077,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200125240
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  127/$07f,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200125757
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  135/$087,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200126258
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  143/$08f,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200126752
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  151/$097,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200127269
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  159/$09f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200127770
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  167/$0a7,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200128265
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  175/$0af,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200128779
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  183/$0b7,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200129281
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  191/$0bf,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200129777
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  199/$0c7,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200130291
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  207/$0cf,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200130793
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  215/$0d7,  10/$0a
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200131291
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  223/$0df,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200131801
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  231/$0e7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200132306
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   46/$02e,  51/$33
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200140341
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   55/$037,  15/$0f
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200140872
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   63/$03f,  19/$13
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200141380
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   71/$047,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200141873
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   79/$04f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200142385
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   87/$057,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200142889
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   95/$05f,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200143384
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  103/$067,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200143898
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  111/$06f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200144402
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  119/$077,  10/$0a
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200144899
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  127/$07f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200145410
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  135/$087,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200145914
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  143/$08f,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200146409
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  151/$097,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200146921
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  159/$09f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200147425
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  167/$0a7,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200147921
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  175/$0af,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200148437
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  183/$0b7,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200148941
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  191/$0bf,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200149432
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  199/$0c7,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200149947
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  207/$0cf,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200150450
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  214/$0d6,  56/$38
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200150930
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  223/$0df,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200151458
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  231/$0e7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200151962
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   46/$02e,  53/$35
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200159999
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   55/$037,  15/$0f
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200160528
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   63/$03f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200161034
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   71/$047,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200161529
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   79/$04f,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200162043
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   87/$057,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200162545
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   95/$05f,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200163041
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  103/$067,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200163555
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  111/$06f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200164057
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  119/$077,  10/$0a
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200164555
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  127/$07f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200165065
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  135/$087,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200165570
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  143/$08f,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200166064
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  151/$097,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200166578
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  159/$09f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200167081
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  167/$0a7,  10/$0a
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200167579
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  175/$0af,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200168089
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  183/$0b7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200168594
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  191/$0bf,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200169088
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  199/$0c7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200169602
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  207/$0cf,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200170105
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  215/$0d7,  10/$0a
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200170603
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  223/$0df,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200171113
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  231/$0e7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200171618
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   46/$02e,  51/$33
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200179653
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   55/$037,  15/$0f
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200180184
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   63/$03f,  19/$13
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200180692
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   71/$047,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200181185
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   79/$04f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200181697
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   87/$057,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200182201
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   95/$05f,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200182696
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  103/$067,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200183210
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  111/$06f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200183714
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  119/$077,  10/$0a
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200184211
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  127/$07f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200184722
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  135/$087,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200185226
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  143/$08f,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200185721
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  151/$097,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200186233
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  159/$09f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200186737
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  167/$0a7,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200187233
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  175/$0af,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200187749
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  183/$0b7,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200188253
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  191/$0bf,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200188744
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  199/$0c7,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200189259
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  207/$0cf,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200189762
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  214/$0d6,  56/$38
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200190242
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  223/$0df,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200190770
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  231/$0e7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200191274
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   46/$02e,  51/$33
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200199309
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   55/$037,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200199841
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   63/$03f,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200200349
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   70/$046,  56/$38
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200200826
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   79/$04f,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200201357
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   87/$057,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200201858
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   95/$05f,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200202352
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  103/$067,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200202869
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  111/$06f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200203370
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  119/$077,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200203865
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  127/$07f,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200204379
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  135/$087,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200204881
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  143/$08f,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200205377
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  151/$097,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200205891
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  159/$09f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200206393
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  167/$0a7,  10/$0a
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200206891
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  175/$0af,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200207401
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  183/$0b7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200207906
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  191/$0bf,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200208400
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  199/$0c7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200208914
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  207/$0cf,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200209417
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  215/$0d7,  10/$0a
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200209915
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  223/$0df,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200210425
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  231/$0e7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200210930
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   46/$02e,  54/$36
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200218968
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   55/$037,  13/$0d
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200219494
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   63/$03f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200220001
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   71/$047,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200220497
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   79/$04f,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200221013
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   87/$057,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200221517
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   95/$05f,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200222008
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  103/$067,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200222523
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  111/$06f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200223026
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  118/$076,  56/$38
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200223506
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  127/$07f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200224034
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  135/$087,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200224538
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  143/$08f,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200225033
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  151/$097,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200225549
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  159/$09f,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200226053
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  167/$0a7,   9/$09
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200226546
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  175/$0af,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200227058
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  183/$0b7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200227562
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  191/$0bf,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200228057
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  199/$0c7,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200228569
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  207/$0cf,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200229073
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  215/$0d7,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200229569
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  223/$0df,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200230085
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  231/$0e7,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200230589
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   46/$02e,  52/$34
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200238622
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   55/$037,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200239154
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   63/$03f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200239658
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   71/$047,   9/$09
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200240154
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   79/$04f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200240666
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   87/$057,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200241169
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   95/$05f,   9/$09
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200241666
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  103/$067,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200242178
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  111/$06f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200242681
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  119/$077,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200243176
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  127/$07f,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200243693
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  135/$087,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200244194
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  143/$08f,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200244688
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  151/$097,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200245205
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  159/$09f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200245706
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  167/$0a7,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200246201
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  175/$0af,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200246715
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  183/$0b7,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200247217
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  191/$0bf,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200247713
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  199/$0c7,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200248227
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  207/$0cf,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200248729
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  215/$0d7,  10/$0a
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200249227
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  223/$0df,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200249737
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  231/$0e7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200250242
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   46/$02e,  51/$33
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200258277
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   55/$037,  15/$0f
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200258808
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   63/$03f,  19/$13
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200259316
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   71/$047,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200259809
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   79/$04f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200260321
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   87/$057,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200260825
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   95/$05f,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200261320
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  103/$067,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200261834
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  111/$06f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200262338
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  119/$077,  10/$0a
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200262835
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  127/$07f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200263346
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  135/$087,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200263850
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  143/$08f,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200264345
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  151/$097,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200264857
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  159/$09f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200265361
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  167/$0a7,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200265857
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  175/$0af,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200266373
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  183/$0b7,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200266877
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  191/$0bf,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200267368
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  199/$0c7,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200267883
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  207/$0cf,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200268386
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  214/$0d6,  56/$38
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200268866
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  223/$0df,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200269394
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  231/$0e7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200269898
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   46/$02e,  53/$35
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200277935
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   55/$037,  15/$0f
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200278464
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   63/$03f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200278970
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   71/$047,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200279465
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   79/$04f,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200279979
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   87/$057,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200280481
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   95/$05f,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200280977
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  103/$067,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200281491
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  111/$06f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200281993
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  119/$077,  10/$0a
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200282491
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  127/$07f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200283001
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  135/$087,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200283506
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  143/$08f,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200284000
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  151/$097,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200284514
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  159/$09f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200285017
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  167/$0a7,  10/$0a
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200285515
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  175/$0af,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200286025
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  183/$0b7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200286530
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  191/$0bf,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200287024
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  199/$0c7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200287538
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  207/$0cf,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200288041
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  215/$0d7,  10/$0a
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200288539
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  223/$0df,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200289049
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  231/$0e7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200289554
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   46/$02e,  54/$36
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200297592
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   55/$037,  13/$0d
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200298118
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   63/$03f,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200298625
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   71/$047,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200299121
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   79/$04f,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200299637
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   87/$057,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200300141
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   95/$05f,   7/$07
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200300632
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  103/$067,  18/$12
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200301147
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  111/$06f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200301650
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  118/$076,  56/$38
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200302130
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  127/$07f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200302658
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  135/$087,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200303162
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  143/$08f,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200303657
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  151/$097,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200304173
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  159/$09f,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200304677
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  167/$0a7,   9/$09
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200305170
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  175/$0af,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200305682
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  183/$0b7,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200306186
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  191/$0bf,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200306681
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  199/$0c7,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200307193
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  207/$0cf,  16/$10
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200307697
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  215/$0d7,   8/$08
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200308193
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  223/$0df,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200308709
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)  231/$0e7,  20/$14
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200309213
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   46/$02e,  52/$34
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200317246
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   55/$037,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200317778
+Executing: screenshot "dna" 2
+#1 (Trace  exec 0e08)   63/$03f,  17/$11
+.C:0e08  AE 07 0E    LDX $0E07      - A:01 X:EC Y:00 SP:ec ..-..I.C  200318282
+Executing: screenshot "dna" 2

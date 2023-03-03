@@ -744,3 +744,750 @@ land, creating an acceleration effect due to gravity.
 With a simple, consistent addition operation each time it comes to position the gilby we've managed to achieve a jumping and
 landing effect with a neat gravity effect built in!
 
+\subsection{Sound Effects}
+\begin{lstlisting}
+;-------------------------------------------------------
+; PerformMainGameUpdate
+;-------------------------------------------------------
+PerformMainGameUpdate
+        ...
+        JSR PlaySoundEffects
+        ...
+\end{lstlisting}
+
+Iridis Alpha has a rich weave of sound effects during play. The game is as much an assault on the ears as it is on
+the eyes. In order to create the impression that there are multiple sounds going on at once so it is necessary to... have
+multiple sounds going at once. The fancy word for this is 'multiplexing'. If we want the player to experience the world
+of Iridis Alpha as one in which things are not happening sequentially but simultaneously we will need the sounds they
+experience to interleave with each other, rather than just playing whatever the 'current' sound is then waiting for it
+to finish before we play the next. Playing two sounds at once is more than enough multiplexing to be going on with,
+so that is what we do. 
+
+The way to achieve this is to come up with a data structure for sound effects that segments the full sound effect
+into multiple frames and to process a few frames of each data structure every time \icode{PlaySoundEffects} is called
+by the raster interrupt. We also need \icode{PlaySoundEffects} to behave like a 'state machine'. This means that
+when it is called a little later it can pick up from where it left off on each data structure, recognize
+when it has finished playing the frames for that interrupt and also when it has finished playing the full effect. This
+will allow us to manage two different sound effects concurrently. Before we look at how this multiplexing is achieved
+lets look at how a single sound effect is managed in general.
+
+\subsubsection{The Sound Effect Data Structure}
+As ever, the key to managing complexity isn't the cleverness of our code but the simplicity of the data structure
+we choose. Iridis Alpha solves this with a remarkably compact solution where each frame in the sound effect is represented
+by a meagre 5 bytes and the whole sound effect is encoded by a sequence of these 5-byte records. In order to unpack
+what this looks like in practice, let's look at the iconic effect played when we enter a new planet. The data structure
+here is just one part of the level entry sound effect, the duller part. It plays a dull bass note that fades away. (We'll
+examine the more interesting leg of the overall sound effect, the one that it's multiplexed with, right after this. But
+this is a relatively nice and simple one for us to get an idea of how the data structure works.) 
+
+\begin{lstlisting}
+PLAY_SOUND = $00
+PLAY_LOOP = $05
+LINK = $80
+VOICE2_HI = $08
+VOICE2_CTRL = $0B
+VOICE3_HI = $0F
+VOICE2_ATK_DEC = $0C
+VOICE2_SUS_REL = $0D
+VOICE3_CTRL = $12
+VOICE3_ATK_DEC = $13
+VOICE3_SUS_REL = $14
+planetWarpSoundEffect  .BYTE $00,PLAY_SOUND,$0F,VOICE2_ATK_DEC,$00
+                       .BYTE $00,PLAY_SOUND,$0F,VOICE3_ATK_DEC,$00
+                       .BYTE $00,PLAY_SOUND,$0F,VOLUME,$00
+                       .BYTE $00,PLAY_SOUND,$00,VOICE2_SUS_REL,$00
+                       .BYTE $00,PLAY_SOUND,$00,VOICE3_SUS_REL,$00
+                       .BYTE $00,PLAY_SOUND,$03,VOICE2_HI,$00
+                       .BYTE $00,PLAY_SOUND,$03,VOICE3_HI,$00
+                       .BYTE $00,PLAY_SOUND,$21,VOICE2_CTRL,$00
+                       .BYTE $00,PLAY_SOUND,$08,VOICE3_LO,$00
+                       .BYTE $00,PLAY_SOUND,$00,VOICE2_LO,$00
+pwLoop                 .BYTE $00,PLAY_SOUND,$21,VOICE3_CTRL,$01
+                       .BYTE $18,PLAY_LOOP,$00,<pwLoop,>pwLoop
+                       .BYTE $00,PLAY_SOUND,$20,VOICE2_CTRL,$00
+                       .BYTE $00,PLAY_SOUND,$20,VOICE3_CTRL,$00
+                       .BYTE $00,LINK,<setVolToMax,>setVolToMax,$00
+\end{lstlisting}
+
+This data is like a piano roll fed into \icode{PlaySoundEffects}. In simplified terms each line is a 'frame' containing
+a single note for it to play. For the lines with \icode{PLAY\_SOUND} it really is that simple. Byte 3 in each of those lines
+is the 'note' to play, and Byte 4 (e.g. \icode{VOICE2\_ATK\_DEC} is the 'key on the piano' to play it on. \icode{PlaySoundEffects}
+will keep playing each line in the roll until it hits one with a value in Byte 5 that is not \icode{\$00}. In this case that
+happens when it hits the line that starts with \icode{pwLoop}, notice the \icode{\$01} at the very end.
+
+Let's be more concrete about what's happening when each \icode{PLAY\_SOUND} record is processed as it's quite simple. The value in Byte 3 
+is written to the position in the SID register given by Byte 4. The SID register is an array of bytes in the C64's ROM that controls
+the production of sound and they live between addresses \icode{\$D400} and \icode{\$D418}. So in the first record in \icode{planetWarpSoundEffect}
+we are going to write \icode{\$0F} to the address \icode{\$D40C} in the SID register. 
+
+What does that do you might ask? Does it play a note? Well, no, as it happens this address in the SID register is responsible for
+controlling how much a sound rises or falls. As you can see in the visualization of the effect below it decays away. This byte
+we're setting is reponsible for setting that on 'Voice 2' in the sound chip.  
+
+\begin{figure}[H]
+{
+\setlength{\tabcolsep}{1.0pt}
+\setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+\begin{adjustbox}{width=14cm,center}
+\begin{tabular}{ccc}
+\toprule
+Spectrogram & Amplitude & Sound \\
+\midrule
+  \makecell[l]{
+    \includegraphics[width=6cm]{sound_effects/planetWarpSoundEffect.wav-spec.png}%
+  } &
+  \makecell[l]{
+    \includegraphics[width=6cm]{sound_effects/planetWarpSoundEffect.wav-amp.png}%
+  } &
+  \makecell[l]{
+    \textattachfile{src/sound_effects/sounds/planetWarpSoundEffect.wav}{\includegraphics[width=1cm]{sound_effects/sounds/play.png}}
+  } \\
+  \addlinespace
+    \bottomrule
+    \end{tabular}
+  \end{adjustbox}
+}\caption{}
+\end{figure}
+
+The next record does the same for 'Voice 3'. The one after that sets the volume (\icode{\$D418}) to its maximum value of 15 (\icode{\$0F}.
+\begin{lstlisting}
+               .BYTE $00,PLAY_SOUND,$0F,VOICE3_ATK_DEC,$00
+               .BYTE $00,PLAY_SOUND,$0F,VOLUME,$00
+\end{lstlisting}
+
+The next two records ensure Voices 2 and 3 do not sustain their sound by writing \icode{\$00} to both. We just want them to die
+away quickly after all.
+\begin{lstlisting}
+               .BYTE $00,PLAY_SOUND,$00,VOICE2_SUS_REL,$00
+               .BYTE $00,PLAY_SOUND,$00,VOICE3_SUS_REL,$00
+\end{lstlisting}
+
+Finally we can start playing some notes.
+\begin{lstlisting}
+               .BYTE $00,PLAY_SOUND,$03,VOICE2_HI,$00
+               .BYTE $00,PLAY_SOUND,$03,VOICE3_HI,$00
+\end{lstlisting}
+
+What we are doing here is writing a frequency value to SID registers for Voice 2 and Voice 3 that will actually make some noise.
+We then tell the sound device to start playing the note by setting its 'gate' to 1. The 'gate' is the 'least significant bit', i.e.
+the \icode{1} in the \icode{\$21} given in Byte 3:
+
+\begin{lstlisting}
+               .BYTE $00,PLAY_SOUND,$21,VOICE2_CTRL,$00
+\end{lstlisting}
+
+After adjusting the sound again:
+
+
+\begin{lstlisting}
+               .BYTE $00,PLAY_SOUND,$08,VOICE3_LO,$00
+               .BYTE $00,PLAY_SOUND,$00,VOICE2_LO,$00
+\end{lstlisting}
+
+We now encounter the use of a new record type called \icode{PLAY\_LOOP}. 
+
+\begin{lstlisting}
+VOLUME = $18
+pwLoop        .BYTE $00,PLAY_SOUND,$21,VOICE3_CTRL,$01
+              .BYTE VOLUME,PLAY_LOOP,$01,<pwLoop,>pwLoop
+\end{lstlisting}
+
+What this this particular instance of a \icode{PLAY\_LOOP} record does is gradually lower the volume until it reaches zero.
+
+More generally the way \icode{PLAY\_LOOP} records are processed is as follows. First of all we write to the offset in the SID register 
+given by Byte 1 (in this case the register responsible for volume). The value we write is also derived from Byte 1, but by using it
+as in index into an array called \icode{soundEffectBuffer}:
+
+\begin{lstlisting}
+soundEffectBuffer   .BYTE $00,$94,$00,$00,$11,$0F,$00,$00
+                    .BYTE $03,$00,$00,$21,$0F,$00,$08,$03
+                    .BYTE $00,$00,$21,$0F,$00,$00,$00,$00
+                    .BYTE $02,$00,$00,$00,$00,$00,$00,$00
+\end{lstlisting}
+
+
+If we look at our record again..
+
+\begin{lstlisting}
+              .BYTE VOLUME,PLAY_LOOP,$01,<pwLoop,>pwLoop
+\end{lstlisting}
+
+we can see Byte 1 is \icode{VOLUME}, which is an alias for the value \icode{\$18}. Using \icode{\$18} as an index into
+\icode{soundEffectBuffer} retrieves the fourth value on the third line above, \icode{\$0F}. We then subtract the value
+in Byte 3 (\icode{\$01}) and store the result back in the \icode{soundEffectBuffer}. If it's not zero yet,
+we then treat the record pointed to by Bytes 4 and 5 as the next one to play. In this case thats given as \icode{pwLoop}. So in
+fact we go round in a loop between the two records until \icode{\$0F} eventually becomes zero. Here's the code that handles this:
+
+
+\begin{lstlisting}
+        LDX soundEffectDataStructure_Byte1
+        LDA soundEffectBuffer,X
+        SEC
+        SBC soundEffectDataStructure_Byte3
+
+StorePointersAndReturnIfZero
+        STA soundEffectBuffer,X
+        STA $D400,X  ;Voice 1: Frequency Control - Low-Byte
+        BEQ JumpToGetNextRecordInSoundEffect
+        LDA soundEffectDataStructure_Byte4
+        LDX indexToPrimaryOrSecondarySoundEffectPtr
+        STA primarySoundEffectLoPtr,X
+        LDA soundEffectDataStructure_Byte5
+        STA primarySoundEffectHiPtr,X
+        RTS
+
+JumpToGetNextRecordInSoundEffect   
+        JMP GetNextRecordInSoundEffect
+\end{lstlisting}
+
+You can see that once we reach zero \icode{BEQ JumpToGetNextRecordInSoundEffect} becomes true and we end up calling 
+\icode{GetNextRecordInSoundEffect} which actually lets us move on to the next record in our data structure (the two
+we've just looped through are given at the start to make it easier to see where picked up from):
+
+\begin{lstlisting}
+               .BYTE $00,PLAY_SOUND,$20,VOICE2_CTRL,$00
+               .BYTE $00,PLAY_SOUND,$20,VOICE3_CTRL,$00
+\end{lstlisting}
+
+You can see we write \icode{\$20} to \icode{VOICE2\_CTRL} and \icode{VOICE3\_CTRL}. This stops the noise we were making
+until now. It switches off the sound by setting the 'gate' we set to \icode{1} earlier on back to \icode{0}.
+
+The final record we play is a simple 'jump' record. Its processed by simply jumping to the address given in Bytes 4 and
+5 and playing whatever is there:
+
+\begin{lstlisting}
+              .BYTE $00,LINK,<setVolToMax,>setVolToMax,$00
+\end{lstlisting}
+
+In this case it is pointing us to the data structure at \icode{setVolToMax}. This simply runs in a loop setting the volume
+back to \icode{\$0F}, i.e. it's maximum value of 15. Notice the way the firs record below writes \icode{\$0F} (Byte 3) to the
+\icode{VOLUME} register. The second one, just tells it loop back and do the same thing again. This will keep running until
+a new sound effect is selected.
+
+\begin{lstlisting}
+setVolToMax            .BYTE $00,PLAY_SOUND,$0F,VOLUME,$01
+                       .BYTE $00,LINK,<setVolToMax,>setVolToMax,$00
+\end{lstlisting}
+
+We can get a picture of how each record affects the relevant registers in the SID interface by looking at the table below.
+This is full history of each record that's processed in the \icode{planetWarpSoundEffect} data structure by \icode{PlaySoundEffects}
+in temporal order. Notice the way the colume steadily decreases as we go through the \icode{PLAY\_LOOP} loop towards the end.
+
+\begin{figure}[H]
+{
+  \setlength{\tabcolsep}{3.0pt}
+  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=\textwidth}
+
+  \begin{tabular}{lrrrrrrrrr}
+  \hline
+    Data Frame &   Voice 2 &   &   &   &   Voice 3 &   &   &   & Volume \\
+    &   Sound &   Gate &   Saw &   Decay &   Sound &   Gate &   Saw &   Decay &    \\
+    \hline
+    \icode{\$00,PLAY\_SOUND,\$0F,VOICE3\_ATK\_DEC,\$00} &       0 &       0 &      0 &     15 &       0 &       0 &      0 &      0 &    15 \\
+    \icode{\$00,PLAY\_SOUND,\$0F,VOLUME,\$00}         &       0 &       0 &      0 &     15 &       0 &       0 &      0 &     15 &    15 \\
+    \icode{\$00,PLAY\_SOUND,\$00,VOICE2\_SUS\_REL,\$00} &       0 &       0 &      0 &     15 &       0 &       0 &      0 &     15 &    15 \\
+    \icode{\$00,PLAY\_SOUND,\$00,VOICE3\_SUS\_REL,\$00} &       0 &       0 &      0 &     15 &       0 &       0 &      0 &     15 &    15 \\
+    \icode{\$00,PLAY\_SOUND,\$03,VOICE2\_HI,\$00}      &     768 &       0 &      0 &     15 &       0 &       0 &      0 &     15 &    15 \\
+    \icode{\$00,PLAY\_SOUND,\$03,VOICE3\_HI,\$00}      &     768 &       0 &      0 &     15 &     768 &       0 &      0 &     15 &    15 \\
+    \icode{\$00,PLAY\_SOUND,\$21,VOICE2\_CTRL,\$00}    &     768 &       1 &      1 &     15 &     768 &       0 &      0 &     15 &    15 \\
+    \icode{\$00,PLAY\_SOUND,\$08,VOICE3\_LO,\$00}      &     768 &       1 &      1 &     15 &     776 &       0 &      0 &     15 &    15 \\
+    \icode{\$00,PLAY\_SOUND,\$00,VOICE2\_LO,\$00}      &     768 &       1 &      1 &     15 &     776 &       0 &      0 &     15 &    15 \\
+    \icode{\$00,PLAY\_SOUND,\$21,VOICE3\_CTRL,\$01}    &     768 &       1 &      1 &     15 &     776 &       1 &      1 &     15 &    15 \\
+    \icode{\$18,PLAY\_LOOP,\$00,\ensuremath{<}pwLoop,\ensuremath{>}pwLoop}       &     768 &       1 &      1 &     15 &     776 &       1 &      1 &     15 &    14 \\
+    \icode{\$00,PLAY\_SOUND,\$21,VOICE3\_CTRL,\$01}    &     768 &       1 &      1 &     15 &     776 &       1 &      1 &     15 &    13 \\
+    \icode{\$18,PLAY\_LOOP,\$00,\ensuremath{<}pwLoop,\ensuremath{>}pwLoop}       &     768 &       1 &      1 &     15 &     776 &       1 &      1 &     15 &    12 \\
+    \icode{\$00,PLAY\_SOUND,\$21,VOICE3\_CTRL,\$01}    &     768 &       1 &      1 &     15 &     776 &       1 &      1 &     15 &    11 \\
+    \icode{\$18,PLAY\_LOOP,\$00,\ensuremath{<}pwLoop,\ensuremath{>}pwLoop}       &     768 &       1 &      1 &     15 &     776 &       1 &      1 &     15 &    10 \\
+    \icode{\$00,PLAY\_SOUND,\$21,VOICE3\_CTRL,\$01}    &     768 &       1 &      1 &     15 &     776 &       1 &      1 &     15 &     9 \\
+    \icode{\$18,PLAY\_LOOP,\$00,\ensuremath{<}pwLoop,\ensuremath{>}pwLoop}       &     768 &       1 &      1 &     15 &     776 &       1 &      1 &     15 &     8 \\
+    \icode{\$00,PLAY\_SOUND,\$21,VOICE3\_CTRL,\$01}    &     768 &       1 &      1 &     15 &     776 &       1 &      1 &     15 &     7 \\
+    \icode{\$18,PLAY\_LOOP,\$00,\ensuremath{<}pwLoop,\ensuremath{>}pwLoop}       &     768 &       1 &      1 &     15 &     776 &       1 &      1 &     15 &     6 \\
+    \icode{\$00,PLAY\_SOUND,\$21,VOICE3\_CTRL,\$01}    &     768 &       1 &      1 &     15 &     776 &       1 &      1 &     15 &     5 \\
+    \icode{\$18,PLAY\_LOOP,\$00,\ensuremath{<}pwLoop,\ensuremath{>}pwLoop}       &     768 &       1 &      1 &     15 &     776 &       1 &      1 &     15 &     4 \\
+    \icode{\$00,PLAY\_SOUND,\$21,VOICE3\_CTRL,\$01}    &     768 &       1 &      1 &     15 &     776 &       1 &      1 &     15 &     3 \\
+    \icode{\$18,PLAY\_LOOP,\$00,\ensuremath{<}pwLoop,\ensuremath{>}pwLoop}       &     768 &       1 &      1 &     15 &     776 &       1 &      1 &     15 &     2 \\
+    \icode{\$00,PLAY\_SOUND,\$21,VOICE3\_CTRL,\$01}    &     768 &       1 &      1 &     15 &     776 &       1 &      1 &     15 &     1 \\
+    \icode{\$18,PLAY\_LOOP,\$00,\ensuremath{<}pwLoop,\ensuremath{>}pwLoop}       &     768 &       1 &      1 &     15 &     776 &       1 &      1 &     15 &     0 \\
+    \icode{\$00,PLAY\_SOUND,\$21,VOICE3\_CTRL,\$01}    &     768 &       0 &      1 &     15 &     776 &       1 &      1 &     15 &     0 \\
+    \icode{\$18,PLAY\_LOOP,\$00,\ensuremath{<}pwLoop,\ensuremath{>}pwLoop}       &     768 &       0 &      1 &     15 &     776 &       0 &      1 &     15 &     0 \\
+  \hline
+    \end{tabular}
+
+  \end{adjustbox}
+
+}\caption*{}
+\end{figure}
+
+\subsubsection{Multiplexing}
+While playing the fairly dull component we cover above, Iridis Alpha plays a second sequence simultaneously that constitutes
+the one a player will know and recognize.
+
+\begin{figure}[H]
+{
+\setlength{\tabcolsep}{1.0pt}
+\setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+\begin{adjustbox}{width=14cm,center}
+\begin{tabular}{ccc}
+\toprule
+Spectrogram & Amplitude & Sound \\
+\midrule
+    \makecell[l]{
+      \includegraphics[width=6cm]{sound_effects/planetWarpSoundEffect2.wav-spec.png}%
+    } &
+  \makecell[l]{
+    \includegraphics[width=6cm]{sound_effects/planetWarpSoundEffect2.wav-amp.png}%
+  } &
+  \makecell[l]{
+    \textattachfile{src/sound_effects/sounds/planetWarpSoundEffect2.wav}{\includegraphics[width=1cm]{sound_effects/sounds/play.png}}
+  } \\
+  \addlinespace
+    \bottomrule
+    \end{tabular}
+  \end{adjustbox}
+}\caption{}
+\end{figure}
+
+The way this concurrency is managed is by storing the addresses for each effect separately. In the case of the sequence
+where the player is entering a new planet this is done in \icode{PerformPlanetWarp}, the routine responsible for rendering
+the warp sequence as a whole:
+
+\begin{lstlisting}
+PerformPlanetWarp
+        ...
+        LDA #<planetWarpSoundEffect
+        STA secondarySoundEffectLoPtr
+        LDA #>planetWarpSoundEffect
+        STA secondarySoundEffectHiPtr
+        LDA #<planetWarpSoundEffect2
+        STA primarySoundEffectLoPtr
+        LDA #>planetWarpSoundEffect2
+        STA primarySoundEffectHiPtr
+\end{lstlisting}
+
+With the primary and secondary sound effects stored in \icode{primarySoundEffectLo/HIPtr} and \icode{secondarySoundEffectLo/HiPtr}
+respectively, all the \icode{PlaySoundEffects} routine has to do it ensures that it processes each of the effects every time it
+is visited by the raster interrupt.  Here we see it take in the 'primary' sound effect and process it in \icode{PlayCurrentSoundEffect}:
+
+\begin{lstlisting}
+PlaySoundEffects
+        LDA #$00
+        STA indexToPrimaryOrSecondarySoundEffectPtr
+        LDA soundEffectInProgress
+        BEQ DontDecrementSoundEffectProgressCounter
+        DEC soundEffectInProgress
+DontDecrementSoundEffectProgressCounter   
+        LDA primarySoundEffectLoPtr
+        STA currentSoundEffectLoPtr
+        LDA primarySoundEffectHiPtr
+        STA currentSoundEffectHiPtr
+        JSR PlayCurrentSoundEffect
+\end{lstlisting}
+
+And here we see it then move on to processing the \icode{secondarySoundEffect}. Notice that it falls through to \icode{PlayCurrentSoundEffect}
+rather than having to call it directly with \icode{JSR}:
+
+\begin{lstlisting}
+        LDA #$02
+        STA indexToPrimaryOrSecondarySoundEffectPtr
+        LDA secondarySoundEffectLoPtr
+        STA currentSoundEffectLoPtr
+        LDA secondarySoundEffectHiPtr
+        STA currentSoundEffectHiPtr
+        ;Falls through and plays secondary sound effect.
+
+;-------------------------------------------------------
+; PlayCurrentSoundEffect
+;-------------------------------------------------------
+PlayCurrentSoundEffect
+        LDY #$00
+        ; Read the 5-byte record into working storage.
+FillSoundEffectDataStructureLoop   
+        LDA (currentSoundEffectLoPtr),Y
+        STA soundEffectDataStructure,Y
+        INY
+        CPY #$05
+        BNE FillSoundEffectDataStructureLoop
+
+\end{lstlisting}
+
+The secondary sound effect for the planet warp sequence, which is the one with all the recognizable noises, looks like this:
+
+\begin{lstlisting}
+          .BYTE $00,PLAY_SOUND,$0F,VOICE1_ATK_DEC,$00
+          .BYTE $00,PLAY_SOUND,$00,VOICE1_SUS_REL,$00
+          .BYTE $00,PLAY_SOUND,$00,VOICE1_HI,$00
+pwLoop    .BYTE $00,PLAY_SOUND,$11,VOICE1_CTRL,$02
+          .BYTE $01,INC_AND_PLAY_FROM_BUFFER,$64,VOICE1_HI,$01
+          .BYTE $00,REPEAT_PREVIOUS,$08,$00,$00
+          .BYTE $01,INC_AND_PLAY_FROM_BUFFER,$18,VOICE1_HI,$01
+          .BYTE VOLUME,PLAY_LOOP,$01,<pwLoop,>pwLoop
+          .BYTE $00,PLAY_SOUND,$10,VOICE1_CTRL,$00
+          .BYTE $00,LINK,<setVolumeToMax,>setVolumeToMax,$00
+\end{lstlisting}
+
+Just like the primary sound effect we discussed this one contains a loop, achieving the same effect as before. 
+There are a couple of new record types in there though, namely \icode{INC\_AND\_PLAY\_FROM\_BUFFER} and \icode{REPEAT\_PREVIOUS}.
+The latter is probably self-explanatory, it repeats processing of the previous record for as many times as given by the 
+value in Byte 3 which in this is case is \icode{\$08} times.
+
+\icode{INC\_AND\_PLAY\_FROM\_BUFFER} does something more interesting, in the first case above it's being used to update the sound we play
+(i.e. write to register \icode{VOICE1\_HI}) by a regularly incrementing amounts of \icode{\$64} given in Byte 3. This value is picked
+from and updated in position 1 of the \icode{soundEffectBuffer}, this position being given by Byte 1. The result is the 'iconic'
+bleeping sound that increases in frequency as we warp into the planet. Here we see the section in \icode{PlaySoundEffects} that
+processes records of type \icode{INC\_AND\_PLAY\_FROM\_BUFFER}, and the way it uses each byte in the record to effect the update
+and the write to the sound register:
+
+\begin{lstlisting}
+        ; Increment the value in the buffer and play it.
+        LDX soundEffectDataStructure_Byte1
+        LDA soundEffectBuffer,X
+        CLC
+        ADC soundEffectDataStructure_Byte3
+        LDX soundEffectDataStructure_Byte4
+        STA soundEffectBuffer,X
+        STA $D400,X  ;Voice 1: Frequency Control - Low-Byte
+        JMP GetNextRecordAndMaybePlayIt
+\end{lstlisting}
+
+
+\begin{sidewaysfigure}
+{
+  \setlength{\tabcolsep}{1.0pt}
+  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=18cm,center}
+  \begin{tabular}{llllll}
+  \toprule
+    Record Type & Byte 1 & Byte 2 & Byte 3 & Byte 4 & Byte 5 \\
+    \midrule
+    \makecell[l]{
+      Play Sound
+    } &
+    \makecell[l]{
+      Unused
+    } &
+    \makecell[l]{
+      PLAY\_SOUND \\
+      (\icode{\$00})
+    } &
+    \makecell[l]{
+      Value to write to \\
+      offset to \icode{\$D400} \\
+      given by Byte 4.
+    } &
+    \makecell[l]{
+      Offset to \icode{\$D400} \\
+      to write to.
+    } &
+    \makecell[l]{
+ '00' indicates the next record should be \\
+ played immediately. \\
+ '01' indicates should play no more records. \\
+ Anything else indicates the next record \\
+  should be stored and \\
+  no more should be played for now. \\
+    } \\
+    \addlinespace
+    \makecell[l]{
+Increment and \\
+Play from Buffer      
+    } &
+    \makecell[l]{
+      Address of byte \\
+      to pick from \\
+      \icode{soundEffectBuffer}
+    } &
+    \makecell[l]{
+      INC\_AND\_PLAY\_ \\
+      FROM\_BUFFER \\
+      (\icode{\$01})
+    } &
+    \makecell[l]{
+      Amount to \\
+      increment \\
+      picked byte by.
+    } &
+    \makecell[l]{
+      Offset to \icode{\$D400} \\
+      to write to.
+    } &
+    \makecell[l]{
+'00' indicates the next record should be \\
+played immediately. \\
+'01' indicates should play no more records. \\
+Anything else indicates the next record \\
+should be stored and \\
+ no more should be played for now.
+    } \\
+    \addlinespace
+    \makecell[l]{
+Decrement and \\
+Play from Buffer      
+    } &
+    \makecell[l]{
+      Address of byte \\
+      to pick from \\
+      \icode{soundEffectBuffer}
+    } &
+    \makecell[l]{
+      DEC\_AND\_PLAY\_ \\
+      FROM\_BUFFER \\
+      (\icode{\$02})
+    } &
+    \makecell[l]{
+      Amount to \\
+      decrement \\
+      picked byte by.
+    } &
+    \makecell[l]{
+      Offset to \icode{\$D400} \\
+      to write to.
+    } &
+    \makecell[l]{
+'00' indicates the next record should be \\
+played immediately. \\
+'01' indicates should play no more records. \\
+Anything else indicates the next record \\
+should be stored and \\
+ no more should be played for now.
+    } \\
+    \addlinespace
+    \makecell[l]{
+Play Loop\\
+    } &
+    \makecell[l]{
+      Address of byte \\
+      to pick from \\
+      \icode{soundEffectBuffer} \\
+      and offset to \icode{\$D400}
+    } &
+    \makecell[l]{
+      PLAY\_LOOP \\
+      (\icode{\$05})
+    } &
+    \makecell[l]{
+      Amount to \\
+      decrement \\
+      picked byte by.
+    } &
+    \makecell[l]{
+      Lo Ptr of \\
+      next record.
+    } &
+    \makecell[l]{
+      Hi Ptr of \\
+      next record.
+    } \\
+    \addlinespace
+    \makecell[l]{
+Link to\\
+Record
+    } &
+    \makecell[l]{
+      Unused.\\
+    } &
+    \makecell[l]{
+      LINK \\
+      (\icode{\$80})
+    } &
+    \makecell[l]{
+      Lo Ptr of \\
+      next record.
+    } &
+    \makecell[l]{
+      Hi Ptr of \\
+      next record.
+    } &
+    \makecell[l]{
+'00' indicates the next record should be \\
+played immediately. \\
+'01' indicates should play no more records. \\
+Anything else indicates the next record \\
+should be stored and \\
+ no more should be played for now.
+    } \\
+    \addlinespace
+    \makecell[l]{
+Repeat \\
+Previous \\
+Record
+    } &
+    \makecell[l]{
+      Unused.\\
+    } &
+    \makecell[l]{
+      REPEAT\_ \\
+      PREVIOUS\\
+      (\icode{\$81})
+    } &
+    \makecell[l]{
+      Number of \\
+      times to play 
+      previous record\.\
+    } &
+    \makecell[l]{
+      Unused.
+    } &
+    \makecell[l]{
+'00' indicates the next record should be \\
+played immediately. \\
+'01' indicates should play no more records. \\
+Anything else indicates the next record \\
+should be stored and \\
+ no more should be played for now.
+    } \\
+    \addlinespace
+      \bottomrule
+      \end{tabular}
+  \end{adjustbox}
+}\caption{The data structures for sound effects used by Iridis Alpha.}
+\end{sidewaysfigure}
+
+The amount of looping the data structure demands is much greater than the effect we reviewed previously. We can get a sense
+of this from the truncated trace which shows a total of over 250 writes to the sound register and of which the table below
+is just a snapshot:
+
+\begin{figure}[H]
+{
+  \setlength{\tabcolsep}{3.0pt}
+  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=\textwidth}
+
+  \begin{tabular}{lrrrrrr}
+  \hline
+    &   freq1 &   gate1 &   saw1 &   dec1 &   sus1 &   vol \\
+    \hline
+    \icode{\$00,PLAY\_SOUND,\$0F,VOICE1\_ATK\_DEC,\$00}          &       0 &       0 &      0 &     15 &      0 &    15 \\
+    \icode{\$00,PLAY\_SOUND,\$00,VOICE1\_SUS\_REL,\$00}          &       0 &       0 &      0 &     15 &      0 &    15 \\
+    \icode{\$00,PLAY\_SOUND,\$00,VOICE1\_HI,\$00}               &       0 &       0 &      0 &     15 &      0 &    15 \\
+    \icode{\$00,PLAY\_SOUND,\$11,VOICE1\_CTRL,\$02}             &       0 &       1 &      0 &     15 &      0 &    15 \\
+    \icode{\$01,INC\_AND\_PLAY\_FROM\_BUFFER,\$64,VOICE1\_HI,\$01} &   25600 &       1 &      0 &     15 &      0 &    15 \\
+    \icode{\$01,INC\_AND\_PLAY\_FROM\_BUFFER,\$64,VOICE1\_HI,\$01} &   51200 &       1 &      0 &     15 &      0 &    15 \\
+    \icode{\$01,INC\_AND\_PLAY\_FROM\_BUFFER,\$64,VOICE1\_HI,\$01} &   11264 &       1 &      0 &     15 &      0 &    15 \\
+    \icode{\$01,INC\_AND\_PLAY\_FROM\_BUFFER,\$64,VOICE1\_HI,\$01} &   36864 &       1 &      0 &     15 &      0 &    15 \\
+    \icode{\$01,INC\_AND\_PLAY\_FROM\_BUFFER,\$64,VOICE1\_HI,\$01} &   62464 &       1 &      0 &     15 &      0 &    15 \\
+    \icode{\$01,INC\_AND\_PLAY\_FROM\_BUFFER,\$64,VOICE1\_HI,\$01} &   22528 &       1 &      0 &     15 &      0 &    15 \\
+    \icode{\$01,INC\_AND\_PLAY\_FROM\_BUFFER,\$64,VOICE1\_HI,\$01} &   48128 &       1 &      0 &     15 &      0 &    15 \\
+    \icode{\$01,INC\_AND\_PLAY\_FROM\_BUFFER,\$64,VOICE1\_HI,\$01} &    8192 &       1 &      0 &     15 &      0 &    15 \\
+    \icode{\$01,INC\_AND\_PLAY\_FROM\_BUFFER,\$18,VOICE1\_HI,\$01} &   14336 &       1 &      0 &     15 &      0 &    15 \\
+    \icode{VOLUME,PLAY\_LOOP,\$01,\ensuremath{<}f5D8D,\ensuremath{>}f5D8D}             &   14336 &       1 &      0 &     15 &      0 &    14 \\
+    \icode{\$00,PLAY\_SOUND,\$11,VOICE1\_CTRL,\$02}             &   39936 &       1 &      0 &     15 &      0 &    14 \\
+    \icode{\$01,INC\_AND\_PLAY\_FROM\_BUFFER,\$64,VOICE1\_HI,\$01} &       0 &       1 &      0 &     15 &      0 &    14 \\
+    \icode{\$01,INC\_AND\_PLAY\_FROM\_BUFFER,\$64,VOICE1\_HI,\$01} &   25600 &       1 &      0 &     15 &      0 &    14 \\
+    \icode{\$01,INC\_AND\_PLAY\_FROM\_BUFFER,\$64,VOICE1\_HI,\$01} &   51200 &       1 &      0 &     15 &      0 &    14 \\
+    \icode{\$01,INC\_AND\_PLAY\_FROM\_BUFFER,\$64,VOICE1\_HI,\$01} &   11264 &       1 &      0 &     15 &      0 &    14 \\
+    \icode{\$01,INC\_AND\_PLAY\_FROM\_BUFFER,\$64,VOICE1\_HI,\$01} &   36864 &       1 &      0 &     15 &      0 &    14 \\
+    \icode{\$01,INC\_AND\_PLAY\_FROM\_BUFFER,\$64,VOICE1\_HI,\$01} &   62464 &       1 &      0 &     15 &      0 &    14 \\
+    \icode{\$01,INC\_AND\_PLAY\_FROM\_BUFFER,\$64,VOICE1\_HI,\$01} &   22528 &       1 &      0 &     15 &      0 &    14 \\
+    \icode{\$01,INC\_AND\_PLAY\_FROM\_BUFFER,\$64,VOICE1\_HI,\$01} &   28672 &       1 &      0 &     15 &      0 &    14 \\
+    \icode{\$01,INC\_AND\_PLAY\_FROM\_BUFFER,\$18,VOICE1\_HI,\$01} &   28672 &       1 &      0 &     15 &      0 &    13 \\
+    \icode{VOLUME,PLAY\_LOOP,\$01,\ensuremath{<}f5D8D,\ensuremath{>}f5D8D}             &   54272 &       1 &      0 &     15 &      0 &    13 \\
+    Repeats many times! &  .. & .. & .. & .. & .. &\\
+    \icode{\$00,PLAY\_SOUND,\$10,VOICE1\_CTRL,\$00}             &       0 &       1 &      0 &     15 &      0 &    14 \\
+    \hline
+    \end{tabular}
+
+  \end{adjustbox}
+
+}\caption*{A sample of the processing of records in the \icode{planetWarpSoundEffect2} data structure.}
+\end{figure}
+
+
+\subsubsection{Unused Sound Effects}
+The \icode{PlaySoundEffects} code has some leftover routines for record types that appear to have gone unused in the final
+game. These make slightly more complicated use of the \icode{soundEffectBuffer}. All they do is mutate the data in the buffer
+using the 5-byte record. They don't actually play any sounds or make any writes to the SID register.
+
+For example here is the logic applied to records with a 'type byte' in Byte 2 of (\icode{\$03}):
+
+\begin{lstlisting}
+TrySequenceByteValueOf3   
+        CMP #$03
+        BNE TrySequenceByteValueOf4
+        LDX soundEffectDataStructure_Byte1
+        LDY soundEffectDataStructure_Byte3
+        LDA soundEffectBuffer,X
+        CLC
+        ADC soundEffectBuffer,Y
+        JMP GetNextRecordInSoundEffectLoop
+\end{lstlisting}
+
+This takes the value in Byte 1 as an offset into \icode{soundEffectBuffer}, adds the value found at the offset in \icode{soundEffectBuffer}
+given by Byte 3 and stores the result in the \icode{A} accumulator. It then proceeds directly to reading the next record in the sound
+effect's data structure.
+
+Logic for records with a type of \icode{\$04} does the same thing but subtracts rather than adds:
+
+\begin{lstlisting}
+TrySequenceByteValueOf4   
+        CMP #$04
+        BNE MaybeIsFadeOutLoop
+        LDX soundEffectDataStructure_Byte1
+        LDY soundEffectDataStructure_Byte3
+        LDA soundEffectBuffer,X
+        SEC
+        SBC soundEffectBuffer,Y
+        JMP GetNextRecordInSoundEffectLoop
+\end{lstlisting}
+
+So the general idea for these two unused record types seems to have been that the \icode{soundEffectBuffer} could be used to generate
+a sequence of sounds in some sort of procedural or even fractal manner, similar to the way in which the title music was generated. The
+experiment obviously didn't work as they ended up on the cutting room floor, with just this leftover code to indicate the attempt.
+
+
+\begin{figure}[H]
+{
+  \setlength{\tabcolsep}{1.0pt}
+  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=14cm,center}
+  \begin{tabular}{ccc}
+  \toprule
+    Spectrogram & Amplitude & Sound \\
+    \midrule
+    %  \foreach \l in {newPlanetSound, planetWarpSoundEffect2, planetWarpSoundEffect, shipCollidedWithGilbySound, soundGilbyJumpOnLand, bulletSoundEffect, gilbyDiedSoundEffect, levelRestartSoundEffect1, levelRestartSoundEffect2, levelEntrySoundEffect, airborneBulletSoundEffect, gilbyWalkingSound, pushedUpWhileOverSea}
+  %  {
+    \makecell[l]{
+      \includegraphics[width=6cm]{sound_effects/planetWarpSoundEffect.wav-spec.png}%
+    } &
+    \makecell[l]{
+      \includegraphics[width=6cm]{sound_effects/planetWarpSoundEffect.wav-amp.png}%
+    } &
+    \makecell[l]{
+      \textattachfile{src/sound_effects/sounds/planetWarpSoundEffect.wav}{\includegraphics[width=1cm]{sound_effects/sounds/play.png}}
+    } \\
+    \addlinespace
+      \makecell[l]{
+        \includegraphics[width=6cm]{sound_effects/airborneBulletSoundEffect.wav-spec.png}%
+      } &
+    \makecell[l]{
+      \includegraphics[width=6cm]{sound_effects/airborneBulletSoundEffect.wav-amp.png}%
+    } &
+    \makecell[l]{
+      \textattachfile{src/sound_effects/sounds/airborneBulletSoundEffect.wav}{\includegraphics[width=1cm]{sound_effects/sounds/play.png}}
+    } \\
+    \addlinespace
+      \makecell[l]{
+        \includegraphics[width=6cm]{sound_effects/levelEntrySoundEffect.wav-spec.png}%
+      } &
+    \makecell[l]{
+      \includegraphics[width=6cm]{sound_effects/levelEntrySoundEffect.wav-amp.png}%
+    } &
+    \makecell[l]{
+      \textattachfile{src/sound_effects/sounds/levelEntrySoundEffect.wav}{\includegraphics[width=1cm]{sound_effects/sounds/play.png}}
+    } \\
+    \addlinespace
+      \makecell[l]{
+        \includegraphics[width=6cm]{sound_effects/gilbyWalkingSound.wav-spec.png}%
+      } &
+    \makecell[l]{
+      \includegraphics[width=6cm]{sound_effects/gilbyWalkingSound.wav-amp.png}%
+    } &
+    \makecell[l]{
+      \textattachfile{src/sound_effects/sounds/gilbyWalkingSound.wav}{\includegraphics[width=1cm]{sound_effects/sounds/play.png}}
+    } \\
+    \addlinespace
+      \bottomrule
+      \end{tabular}
+    \end{adjustbox}
+  }\caption{Some of the sound effects played during the game. On PDF viewers that support it, you can click the play icon to hear the effect.}
+  \end{figure}

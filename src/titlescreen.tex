@@ -256,8 +256,19 @@ in detail we need to understand how this thing \icode{SCREEN\_RAM} works and how
 Our starting point for displaying text on screen is to define what our characters look like. We define the appearance
 of a character using 8 bytes. This is what the definition of the stripe character looks like: 
 
-\CopyPartialFile{../iridisalpha/src/graphics/charset.asm}{tmp.asm}{3}{12}%
-\lstinputlisting[basicstyle=\tiny,caption=The 'stripe' character.]{tmp.asm}
+\begin{lstlisting}[caption= The 'stripe' character.,basicstyle=\tiny]
+characterSetData
+        .BYTE $FF,$00,$FF,$00,$00,$FF,$00,$FF   ;.BYTE $FF,$00,$FF,$00,$00,$FF,$00,$FF
+                                                ; CHARACTER $00
+                                                ; 11111111   ********
+                                                ; 00000000           
+                                                ; 11111111   ********
+                                                ; 00000000           
+                                                ; 00000000           
+                                                ; 11111111   ********
+                                                ; 00000000           
+                                                ; 11111111   ********
+\end{lstlisting}
 
 As you can see each byte translates to a row of 0s and 1s. Each 1 defines a dot and each 0 a blank space. We end up
 with a character that is 8 pixels wide and 8 pixels high:
@@ -278,8 +289,38 @@ in this \icode{SCREEN\_RAM} memory it will know to write it the corresponding po
 \subsubsection{Drawing the Stripes}
 So let's write some stripes to RAM!
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{413}{441}%
-\lstinputlisting[caption=The 'stripe' character.]{tmp.asm}
+\begin{lstlisting}[caption=The 'stripe' character.]
+DrawStripesBehindTitle
+        LDX #$28
+        LDA #$00
+        STA shouldUpdateTitleScreenColors
+DrawStripesLoop   
+        LDA #RED
+        STA COLOR_RAM + LINE2_COL39,X
+        LDA #ORANGE
+        STA COLOR_RAM + LINE3_COL39,X
+        LDA #YELLOW
+        STA COLOR_RAM + LINE4_COL39,X
+        LDA #GREEN
+        STA COLOR_RAM + LINE5_COL39,X
+        LDA #LTBLUE
+        STA COLOR_RAM + LINE6_COL39,X
+        LDA #PURPLE
+        STA COLOR_RAM + LINE7_COL39,X
+        LDA #BLUE
+        STA COLOR_RAM + LINE8_COL39,X
+        LDA #$00 ; Stripe character
+        STA SCREEN_RAM + LINE2_COL39,X
+        STA SCREEN_RAM + LINE3_COL39,X
+        STA SCREEN_RAM + LINE4_COL39,X
+        STA SCREEN_RAM + LINE5_COL39,X
+        STA SCREEN_RAM + LINE6_COL39,X
+        STA SCREEN_RAM + LINE7_COL39,X
+        STA SCREEN_RAM + LINE8_COL39,X
+        DEX
+        BNE DrawStripesLoop
+
+\end{lstlisting}
 
 As you can hopefully see, what we're dealing with here is a loop. We load \icode{X} with the value \icode{\$28} (40 in decimal)
 and perform everything inside \icode{DrawStripesLoop} until \icode{DEX} has reduced the value of \icode{X} to zero.
@@ -476,8 +517,47 @@ The three sub-routines the work at each raster interrupt can get divvied out to 
 that's called the most often is \icode{DoStarfieldAnimation} as it is responsible for sprinkling the screen with 
 animated stars traversing it left to right.
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{272}{310}%
-\lstinputlisting[caption=\icode{TitleScreenAnimation} responsible for choosing what to do at each interrupt.]{tmp.asm}
+\begin{lstlisting}[caption=\icode{TitleScreenAnimation} responsible for choosing what to do at each interrupt. ]
+;-------------------------------------------------------
+; TitleScreenAnimation
+; This handles all the activity in the title screen and is called
+; roughly 60 times a second by the Raster Interrupt.
+;-------------------------------------------------------
+TitleScreenAnimation
+        LDY titleScreenStarFieldAnimationCounter
+        CPY #$0C
+        BNE MaybeDoStarFieldOrTitleText
+
+        JSR UpdateJumpingGilbyPositionsAndColors
+        LDY #$10
+        STY titleScreenStarFieldAnimationCounter
+
+MaybeDoStarFieldOrTitleText   
+        LDA titleScreenStarFieldYPosArray,Y
+        BNE DoStarfieldAnimation
+
+PaintTitleTextSprites
+        JSR TitleScreenMutateStarfieldAnimationData
+
+        LDA #$00
+        STA titleScreenStarFieldAnimationCounter
+
+        LDA #$10
+        STA $D012    ;Raster Position
+
+        ; Acknowledge the interrupt, so the CPU knows that
+        ; we have handled it.
+        LDA #$01
+        STA $D019    ;VIC Interrupt Request Register (IRR)
+        STA $D01A    ;VIC Interrupt Mask Register (IMR)
+
+        JSR UpdateTitleTextSprites
+        JSR MaybeUpdateSpriteColors
+        JSR RecalculateJumpingGilbyPositions
+        JSR PlayTitleScreenMusic
+        JMP ReEnterInterrupt
+        ; We're done, returns from function.
+\end{lstlisting}
 
 The internal accounting responsible for choosing the routine to run is tricky to decipher by just looking at the code. So
 instead let's follow what actually happens in practice. If we roll ahead to the next interrupt we can already see something
@@ -520,8 +600,17 @@ titleScreenStarFieldXPosArray .BYTE $00,$3A,$1A,$C4,$1B,$94,$7B,$96
 So when \icode{DoStarfieldAnimation} is called the first thing it does is set the y position of the star to paint
 to \icode{\$48} (72 in decimal): 
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{316}{323}%
-\lstinputlisting[caption= The start of \icode{DoStarfieldAnimation} responsible for painting stars.]{tmp.asm}
+\begin{lstlisting}[caption=The start of \icode{DoStarfieldAnimation} responsible for painting stars.]
+DoStarfieldAnimation   
+        ; A was loaded from titleScreenStarFieldYPosArray
+        ; by the caller.
+        STA $D00F    ;Sprite 7 Y Pos
+
+        ; Set the X position of the star.
+        LDA titleScreenStarFieldXPosArray + $01,Y
+        STA $D00E    ;Sprite 7 X Pos
+
+\end{lstlisting}
 
 You can also see it then sets the X position of the star using values plucked from \icode{titleScreenStarFieldXPosArray}.
 So we're leaning heavily on these two arrays to decide where to place stars. But so far, so simple. We've placed the star
@@ -533,8 +622,24 @@ The next few lines of the routine do quite a bit of convoluted work to handle so
 star. This is our complication. 
 
 \subsubsection{A Complication}
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{325}{339}%
-\lstinputlisting[caption=MSBXPos.. some'it.]{tmp.asm}
+\begin{lstlisting}[caption= MSBXPos.. some'it.]
+        ; Set the rest of the X position of the star
+        ; if it's greater than 255.
+        LDA titleScreenStarfieldMSBXPosArray + $01,Y
+        AND #$01
+        STA spriteMSBXPosOffset
+
+        BEQ StarFieldSkipMSB
+
+        LDA #$80
+        STA spriteMSBXPosOffset
+StarFieldSkipMSB   
+        LDA $D010    ;Sprites 0-7 MSB of X coordinate
+        AND #$7F
+        ORA spriteMSBXPosOffset
+        STA $D010    ;Sprites 0-7 MSB of X coordinate
+
+\end{lstlisting}
 
 If you look at the diagram again you may recall we said the screen we're painting is 504 pixels wide. Fortunately the only 
 part we can paint is the section in the center that is 320 pixels wide and 200 pixels high. 
@@ -782,9 +887,44 @@ because we don't need to worry about the raster painting anything on the screen 
 
 Since there are 7 of them, setting the x and y co-ordinates of the seven gilby sprites is handled by a loop:
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{580}{614}%
-\lstinputlisting[caption=The loop in \icode{UpdateJumpingGilbyPositionsAndColors} updating the x and y position on screen and color of each of the gilby sprites.]{tmp.asm}
+\begin{lstlisting}[caption= The loop in \icode{UpdateJumpingGilbyPositionsAndColors} updating the x and y position on screen and color of each of the gilby sprites.]
+        ; Loop through the gilby sprites in the title screen and
+        ; update their position and color
+        LDX #$00
+UpdateJumpingGilbiesLoop   
+        TXA
+        ASL
+        TAY
+        LDA titleScreenGilbiesXPosArray,X
+        ASL
+        STA $D000,Y  ;Sprite 0 X Pos
+        BCC SkipGilbyMSBXPos
+        LDA $D010    ;Sprites 0-7 MSB of X coordinate
+        ORA titleScreenGilbiesMSBXPosArray,X
+        STA $D010    ;Sprites 0-7 MSB of X coordinate
+        JMP UpdateYPosJumpingGilbies
 
+SkipGilbyMSBXPos   
+        LDA $D010    ;Sprites 0-7 MSB of X coordinate
+        AND titleScreenGilbiesMSBXPosOffset,X
+        STA $D010    ;Sprites 0-7 MSB of X coordinate
+
+UpdateYPosJumpingGilbies
+        LDA titleScreenGilbiesYPosARray,X
+        STA $D001,Y  ;Sprite 0 Y Pos
+
+        LDA currentTitleScreenGilbySpriteValue
+        STA Sprite0Ptr,X
+
+        ; Update Gilby color.
+        LDA titleScreenColorsArray,X
+        STA $D027,X  ;Sprite 0 Color
+
+        INX
+        CPX #$07
+        BNE UpdateJumpingGilbiesLoop
+        RTS
+\end{lstlisting}
 We can see in here the verbosity required to handle the most significant bit of the sprite's x co-ordinate. Just
 as with the starfield we need a separate array (\icode{titleScreenGilbiesMSBXPosArray} to handle this in addition
 to arrays to manage the basic x/y positions themselves.

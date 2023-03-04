@@ -261,8 +261,15 @@ We can see this in action if we look at what happens when the code at \icode{\$4
 a 'label' name of \icode{MainControlLoop} in our disassembled code so \icode{MainControlLoop} always refers to whatever lives at
 \icode{\$4000}. 
 
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{1164}{1170}%
-\lstinputlisting[caption=The code at \icode{\$4000}.]{tmp.asm}
+\begin{lstlisting}[caption=The code at \icode{\$4000}. ]
+MainControlLoop
+        LDA #$00
+        SEI
+p4003   LDA #<MainControlLoopInterruptHandler
+        STA $318    ;NMI
+        LDA #>MainControlLoopInterruptHandler
+        STA $319    ;NMI
+\end{lstlisting}
 
 As you can see the first thing it does is change the address of the code that should be executed at every 'interrupt'. It's now an
 address referred to by the label \icode{MainControlLoopInterruptHandler}. This happens to be address \icode{\$6B3E} but the beauty

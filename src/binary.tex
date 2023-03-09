@@ -343,14 +343,14 @@ will be managed as 4-byte or 8-byte value respectively by 32-bit and 64-bit
 computer architectures.
 
 But even the C64 had use for values larger than 255. In fact it could handle staggering
-numbers as large as 65,536 using a little sleight of hand to put two bytes side by side
+numbers as large as 65,535 using a little sleight of hand to put two bytes side by side
 and treat them as a single number.
 
 This was as far as its ken could reach however. And since it could look no further than
-65,536 that imposed an upper bound on the number of values it could reach for at any given
+65,535 that imposed an upper bound on the number of values it could reach for at any given
 time. This finite horizon is known as its address space. When we want to store a value
 in the C64's memory we only have 65,536 slots available to specify or select from. The
-address we choose must be between \icode{\$0000} (0) and \icode{\$FFFF} (65,536).
+address we choose must be between \icode{\$0000} (0) and \icode{\$FFFF} (65,535).
 
 \begin{figure}[H]
   {
@@ -385,7 +385,7 @@ This upper limit is what gives the Commodore 64 its name. It has 64 kilobytes of
         Hex & Decimal & Meaning &  & Hex & Decimal & Meaning \\
         \midrule
         \icode{\$0400} & 1024 & 1 Kilobyte &  & \icode{\$0400} & 1024 & 1 Kilobyte & \\\\
-        \icode{\$FFFF} & 65,536 & 64 Kilobytes & &  \icode{\$0400} & 1024 & 1 Kilobyte & \\\\
+        \icode{\$FFFF} & 65,535 & 64 Kilobytes & &  \icode{\$0400} & 1024 & 1 Kilobyte & \\\\
         \bottomrule
       \end{tabular}
     \end{adjustbox}

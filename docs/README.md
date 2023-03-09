@@ -1,6 +1,4 @@
----
-image: https://github.com/mwenge/iatheory/raw/main/docs/cover_front.png
----
+
 A deeper-than-is-possibly-sane dive into the workings of [Iridis Alpha](https://github.com/mwenge/iridisalpha/).
 
 [<img height=360 src="https://github.com/mwenge/iatheory/raw/main/docs/cover_front.png">](https://github.com/mwenge/iatheory/raw/main/out/iatheory_scrapbook.pdf)

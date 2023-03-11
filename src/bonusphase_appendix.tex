@@ -1,0 +1,313 @@
+\chapter{Bonus Phase - Map Segments}
+
+% \newdate{..label..}{..date..}{..info..}
+\newcommand\newrow[2]%
+{
+  \expandafter\def\csname row:#1\endcsname{#2}%
+}
+
+% \showrow{..label..}
+\newcommand\showrow[1]%
+{\expandafter\csname row:#1\endcsname}
+
+
+% \cp{..label..}
+\newcommand\cp[1]%
+{\noindent
+  \textbf{\showrow{#1}}
+  \par
+}
+
+\newrow{0}{\icode{\$00,\$00,\$00,\$00,\$00,\$00,\$00,\$00,\$00,\$00}}
+\newrow{1}{\icode{\$00,\$15,\$16,\$17,\$00,\$00,\$15,\$16,\$17,\$00}}
+\newrow{2}{\icode{\$00,\$14,\$14,\$14,\$14,\$14,\$14,\$14,\$14,\$00}}
+\newrow{3}{\icode{\$11,\$11,\$11,\$11,\$11,\$11,\$11,\$11,\$11,\$11}}
+\newrow{4}{\icode{\$13,\$13,\$13,\$13,\$13,\$13,\$13,\$13,\$13,\$13}}
+\newrow{5}{\icode{\$12,\$12,\$12,\$12,\$12,\$12,\$12,\$12,\$12,\$00}}
+\newrow{6}{\icode{\$14,\$14,\$00,\$15,\$16,\$17,\$00,\$00,\$14,\$14}}
+\newrow{7}{\icode{\$15,\$16,\$16,\$16,\$16,\$16,\$16,\$16,\$16,\$17}}
+\newrow{8}{\icode{\$00,\$00,\$00,\$00,\$00,\$00,\$00,\$00,\$00,\$00}}
+\newrow{9}{\icode{\$00,\$00,\$0F,\$0F,\$0F,\$0F,\$0F,\$0F,\$00,\$00}}
+\newrow{10}{\icode{\$01,\$01,\$01,\$01,\$00,\$00,\$01,\$01,\$01,\$01}}
+\newrow{12}{\icode{\$00,\$00,\$0B,\$0B,\$0B,\$0C,\$0C,\$0C,\$00,\$00}}
+\newrow{13}{\icode{\$00,\$02,\$03,\$04,\$05,\$06,\$07,\$08,\$09,\$0A}}
+\newrow{14}{\icode{\$02,\$03,\$04,\$05,\$05,\$05,\$05,\$0B,\$0B,\$0B}}
+\newrow{15}{\icode{\$00,\$00,\$01,\$01,\$00,\$00,\$01,\$01,\$00,\$00}}
+\newrow{16}{\icode{\$00,\$00,\$0E,\$0D,\$00,\$00,\$0E,\$0D,\$00,\$00}}
+\newrow{17}{\icode{\$00,\$02,\$03,\$04,\$05,\$08,\$09,\$0A,\$0B,\$00}}
+\newrow{18}{\icode{\$00,\$00,\$00,\$1A,\$1A,\$1A,\$18,\$18,\$18,\$18}}
+\newrow{19}{\icode{\$00,\$00,\$00,\$1A,\$1A,\$1A,\$19,\$19,\$19,\$19}}
+\newrow{20}{\icode{\$00,\$00,\$18,\$18,\$00,\$00,\$00,\$00,\$19,\$19}}
+\newrow{21}{\icode{\$00,\$00,\$1B,\$1B,\$00,\$00,\$15,\$16,\$17,\$00}}
+\newrow{22}{\icode{\$15,\$16,\$17,\$1D,\$1D,\$15,\$16,\$17,\$1D,\$1D}}
+\newrow{23}{\icode{\$14,\$14,\$1E,\$1E,\$00,\$00,\$15,\$16,\$17,\$00}}
+\newrow{24}{\icode{\$00,\$0B,\$0B,\$0B,\$15,\$16,\$17,\$15,\$16,\$17}}
+\newrow{25}{\icode{\$00,\$00,\$1D,\$1D,\$1D,\$1D,\$1E,\$1E,\$1E,\$1E}}
+\newrow{26}{\icode{\$00,\$00,\$20,\$1F,\$20,\$1F,\$00,\$00,\$11,\$11}}
+\newrow{27}{\icode{\$00,\$00,\$20,\$1F,\$20,\$1F,\$20,\$1F,\$20,\$1F}}
+\newrow{28}{\icode{\$00,\$1E,\$1E,\$1E,\$20,\$1F,\$1D,\$1D,\$1D,\$00}}
+\newrow{29}{\icode{\$00,\$0C,\$0C,\$0C,\$15,\$16,\$17,\$00,\$00,\$00}}
+\newrow{30}{\icode{\$00,\$02,\$03,\$04,\$05,\$08,\$09,\$0A,\$0B,\$00}}
+\newrow{31}{\icode{\$00,\$00,\$06,\$06,\$06,\$11,\$11,\$11,\$00,\$00}}
+\newrow{32}{\icode{\$00,\$00,\$0F,\$0F,\$15,\$16,\$17,\$15,\$16,\$17}}
+
+\clearpage
+\begin{figure}[H]
+    \centering
+    \foreach \l [evaluate=\l as \k using {int(\l+1)}] in {0,2,...,7}
+    {
+        \begin{minipage}{0.49\linewidth}
+        \includegraphics[width=6cm]{src/bonusphase/section\l.png}%
+        \caption*{\cp{\l}}
+        \end{minipage}%
+        \begin{minipage}{0.49\linewidth}
+        \includegraphics[width=6cm]{src/bonusphase/section\k.png}%
+        \caption*{\cp{\k}}
+        \end{minipage}%
+        \vspace{0.5cm}
+
+    }%
+\caption{Bonus Phase Map Segments.}
+\end{figure}
+
+\clearpage
+\begin{figure}[H]
+    \centering
+    \foreach \l [evaluate=\l as \k using {int(\l+1)}] in {8,10,...,15}
+    {
+        \begin{minipage}{0.49\linewidth}
+        \includegraphics[width=6cm]{src/bonusphase/section\l.png}%
+        \caption*{\cp{\l}}
+        \end{minipage}%
+        \begin{minipage}{0.49\linewidth}
+        \includegraphics[width=6cm]{src/bonusphase/section\k.png}%
+        \caption*{\cp{\k}}
+        \end{minipage}%
+        \vspace{0.5cm}
+
+    }%
+\caption{Bonus Phase Map Segments.}
+\end{figure}
+
+
+\clearpage
+\begin{figure}[H]
+    \centering
+    \foreach \l [evaluate=\l as \k using {int(\l+1)}] in {16,18,...,23}
+    {
+        \begin{minipage}{0.49\linewidth}
+        \includegraphics[width=6cm]{src/bonusphase/section\l.png}%
+        \caption*{\cp{\l}}
+        \end{minipage}%
+        \begin{minipage}{0.49\linewidth}
+        \includegraphics[width=6cm]{src/bonusphase/section\k.png}%
+        \caption*{\cp{\k}}
+        \end{minipage}%
+        \vspace{0.5cm}
+
+    }%
+\caption{Bonus Phase Map Segments.}
+\end{figure}
+
+
+\clearpage
+\begin{figure}[H]
+    \centering
+    \foreach \l [evaluate=\l as \k using {int(\l+1)}] in {24,26,...,31}
+    {
+        \begin{minipage}{0.49\linewidth}
+        \includegraphics[width=6cm]{src/bonusphase/section\l.png}%
+        \caption*{\cp{\l}}
+        \end{minipage}%
+        \begin{minipage}{0.49\linewidth}
+        \includegraphics[width=6cm]{src/bonusphase/section\k.png}%
+        \caption*{\cp{\k}}
+        \end{minipage}%
+        \vspace{0.5cm}
+
+    }%
+\caption{Bonus Phase Map Segments.}
+\end{figure}
+
+
+\chapter{Bonus Phase - Map Rows}
+\afterpage{%
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=14cm,center}
+
+      \begin{tabular}{cc}
+        \toprule
+        Index & Image\\
+        \midrule
+0 & \makecell[l]{
+        \includegraphics[width=10cm]{src/bonusphase/row0.png}%
+} \\
+        \addlinespace
+1 & \makecell[l]{
+        \includegraphics[width=10cm]{src/bonusphase/row1.png}%
+} \\
+        \addlinespace
+2 & \makecell[l]{
+        \includegraphics[width=10cm]{src/bonusphase/row2.png}%
+} \\
+        \addlinespace
+        \bottomrule
+3 & \makecell[l]{
+        \includegraphics[width=10cm]{src/bonusphase/row3.png}%
+} \\
+        \addlinespace
+        \bottomrule
+4 & \makecell[l]{
+        \includegraphics[width=10cm]{src/bonusphase/row4.png}%
+} \\
+        \addlinespace
+        \bottomrule
+5 & \makecell[l]{
+        \includegraphics[width=10cm]{src/bonusphase/row5.png}%
+} \\
+        \addlinespace
+        \bottomrule
+6 & \makecell[l]{
+        \includegraphics[width=10cm]{src/bonusphase/row6.png}%
+} \\
+        \addlinespace
+        \bottomrule
+7 & \makecell[l]{
+        \includegraphics[width=10cm]{src/bonusphase/row7.png}%
+} \\
+        \addlinespace
+        \bottomrule
+8 & \makecell[l]{
+        \includegraphics[width=10cm]{src/bonusphase/row8.png}%
+} \\
+        \addlinespace
+        \bottomrule
+9 & \makecell[l]{
+        \includegraphics[width=10cm]{src/bonusphase/row9.png}%
+} \\
+        \addlinespace
+        \bottomrule
+10 & \makecell[l]{
+        \includegraphics[width=10cm]{src/bonusphase/row10.png}%
+} \\
+        \addlinespace
+        \bottomrule
+11 & \makecell[l]{
+        \includegraphics[width=10cm]{src/bonusphase/row11.png}%
+} \\
+        \addlinespace
+        \bottomrule
+12 & \makecell[l]{
+        \includegraphics[width=10cm]{src/bonusphase/row12.png}%
+} \\
+        \addlinespace
+        \bottomrule
+13 & \makecell[l]{
+        \includegraphics[width=10cm]{src/bonusphase/row13.png}%
+} \\
+        \addlinespace
+        \bottomrule
+14 & \makecell[l]{
+        \includegraphics[width=10cm]{src/bonusphase/row14.png}%
+} \\
+        \addlinespace
+15 & \makecell[l]{
+        \includegraphics[width=10cm]{src/bonusphase/row15.png}%
+} \\
+        \bottomrule
+      \end{tabular}
+    \end{adjustbox}
+  }\caption{The first 16 of the 32 row definitions.}
+\end{figure}
+  \clearpage
+}
+
+
+\afterpage{%
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=14cm,center}
+
+      \begin{tabular}{cc}
+        \toprule
+        Index & Image\\
+        \midrule
+16 & \makecell[l]{
+        \includegraphics[width=10cm]{src/bonusphase/row16.png}%
+} \\
+        \addlinespace
+17 & \makecell[l]{
+        \includegraphics[width=10cm]{src/bonusphase/row17.png}%
+} \\
+        \addlinespace
+18 & \makecell[l]{
+        \includegraphics[width=10cm]{src/bonusphase/row18.png}%
+} \\
+        \addlinespace
+19 & \makecell[l]{
+        \includegraphics[width=10cm]{src/bonusphase/row19.png}%
+} \\
+        \addlinespace
+20 & \makecell[l]{
+        \includegraphics[width=10cm]{src/bonusphase/row20.png}%
+} \\
+        \addlinespace
+21 & \makecell[l]{
+        \includegraphics[width=10cm]{src/bonusphase/row21.png}%
+} \\
+        \addlinespace
+22 & \makecell[l]{
+        \includegraphics[width=10cm]{src/bonusphase/row22.png}%
+} \\
+        \addlinespace
+23 & \makecell[l]{
+        \includegraphics[width=10cm]{src/bonusphase/row23.png}%
+} \\
+        \addlinespace
+24 & \makecell[l]{
+        \includegraphics[width=10cm]{src/bonusphase/row24.png}%
+} \\
+        \addlinespace
+25 & \makecell[l]{
+        \includegraphics[width=10cm]{src/bonusphase/row25.png}%
+} \\
+        \addlinespace
+26 & \makecell[l]{
+        \includegraphics[width=10cm]{src/bonusphase/row26.png}%
+} \\
+        \addlinespace
+27 & \makecell[l]{
+        \includegraphics[width=10cm]{src/bonusphase/row27.png}%
+} \\
+        \addlinespace
+28 & \makecell[l]{
+        \includegraphics[width=10cm]{src/bonusphase/row28.png}%
+} \\
+        \addlinespace
+29 & \makecell[l]{
+        \includegraphics[width=10cm]{src/bonusphase/row29.png}%
+} \\
+        \addlinespace
+30 & \makecell[l]{
+        \includegraphics[width=10cm]{src/bonusphase/row30.png}%
+} \\
+        \addlinespace
+31 & \makecell[l]{
+        \includegraphics[width=10cm]{src/bonusphase/row31.png}%
+} \\
+        \addlinespace
+        \bottomrule
+      \end{tabular}
+    \end{adjustbox}
+  }\caption{The second 16 of the 32 row definitions.}
+\end{figure}
+  \clearpage
+}
+
+\chapter{Bonus Phase - Tilesheet}
+\subfile{bonusphase/Bonus_Phase_tilesheet}

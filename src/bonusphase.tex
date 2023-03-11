@@ -1,0 +1,895 @@
+\chapter{Congoatulations Hotshot} 
+\lstset{style=6502Style}
+
+This decidedly ropey mini-game has a few interesting features.
+
+\subsection{Entry Sequence}
+\begin{figure}[H]
+    \centering
+      \includegraphics[width=10cm]{src/bonusphase/entry/bonus_entry_example.png}%
+\caption{The entry sequence.}
+\end{figure}
+
+The entry sequence is an animated cascade of colored bars that appears to roll
+down from the top of the screen. You might assume we achieve this effect by simply
+drawing a series of colored text-based lines in a tight loop. Not the case:
+
+\begin{figure}[H]
+    \centering
+    \foreach \l in {0,25,...,890}
+    {
+      \includegraphics[width=2cm]{src/bonusphase/entry_fill/bonus_entry\l.png}%
+    }%
+\caption{The entry effect filling the screen.}
+\end{figure}
+
+\begin{lstlisting}
+EnterBonusPhaseInterruptHandler   
+        ...
+        LDY backgroundColorIndex
+        LDA enterBPRainbowColors,Y
+        STA $D021    ;Background Color 0
+\end{lstlisting}
+
+What we actually do is update the screen's background color as the raster travels
+down the screen. The above three lines do this about 30 times every single paint
+of the screen, updating the background color that gets painted as we go. The result
+is that each colored bar reflects the background color of the screen at the time
+the raster is passing it. The trick is to keep updating the background color at
+gradually increasing intervals.
+
+After we update the background color we set the raster interrupt to the next position
+we're interested in:
+
+\begin{lstlisting}
+EnterBonusPhaseInterruptHandler   
+        ...
+        LDY backgroundColorIndex
+        LDA enterBPRainbowColors,Y
+        STA $D021    ;Background Color 0
+
+        ; Check if we've reached the end of the rainbow effect.
+        LDA bpRasterPositionArray,Y
+        ...
+        ; Update the position of the next interrupt.
+        CLC 
+        ADC $D012    ;Raster Position
+        STA $D012    ;Raster Position
+\end{lstlisting}
+
+The value we get from \icode{bpRasterPositionArray} reflects our intention of painting
+increasingly tall bars:
+
+\begin{lstlisting}
+bpRasterPositionArray     .BYTE $01,$01,$01,$01,$02,$02,$02,$02
+                          .BYTE $03,$03,$03,$03,$04,$04,$04,$04
+                          .BYTE $05,$05,$05,$05,$06,$06,$06,$06
+                          .BYTE $07,$07,$07,$07,$07,$07,$00
+\end{lstlisting}
+
+Each value in here gets added to the current raster interrupt position (\icode{ADC \$D012}).
+The further we go down the screen the taller the bars become.
+
+\begin{figure}[H]
+    \centering
+    \foreach \l in {554,...,555}
+    {
+      \includegraphics[width=6.5cm]{bonusphase/entry/bonus_entry\l.png}%
+    }%
+  \caption{Updating the background color at a 5 line interval as given by \icode{bpRasterPositionArray}.}
+\end{figure}
+
+In addition to drawing incrementally larger bars we're also shifting down by one row the color each one is painted
+at each pass. This is responsible for creating the visual effect of each bar moving independently
+down the screen.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=6.5cm]{bonusphase/entry/bonus_entry_from.png}%
+    \includegraphics[width=6.5cm]{bonusphase/entry/bonus_entry_to.png}%
+  \caption{The color sequences shifts down one position after each full screen paint.}
+\end{figure}
+
+This is managed by an array..
+
+\begin{lstlisting}
+entryScreenRainbowColors
+      .BYTE RED,ORANGE,YELLOW,GREEN,LTBLUE,PURPLE,BLUE,YELLOW
+      .BYTE BLACK,CYAN,BLACK,GREEN,BLACK,PURPLE,BLACK,RED
+      .BYTE BLACK,BLUE,BLACK,BLUE,BLACK,BLUE,PURPLE,LTBLUE
+      .BYTE GREEN,YELLOW,ORANGE,RED
+\end{lstlisting}
+
+.. referenced in \icode{UpdateEntryScreenRainbow}. After every full screen paint we update the an
+array \icode{previousRoundRainbowColors} to store the position of the previous bar that used it.
+This allows us to use \icode{previousRoundRainbowColors} as a source for \icode{X} the next time
+we finish a screen and shift the colors along by one position:
+
+\begin{lstlisting}
+UpdateEntryScreenRainbow   
+        ...
+        LDA entryScreenRainbowColors,X
+        STA enterBPRainbowColors,Y
+        TYA 
+        STA previousRoundRainbowColors,X
+\end{lstlisting}
+
+All in all, this is a neat effect and would only have been possible at the speeds achieved by using
+the raster interrupt in this way. Simply painting the screen with colored text would have been much
+slower.
+
+\subsection{Generating Maps}
+\begin{figure}[H]
+    \centering
+      \includegraphics[width=10cm]{src/bonusphase/bonus_phase.png}%
+\caption{The beginning of the first bonus phase.}
+\end{figure}
+Every time the player enters the bonus phase we'll procedurally generate a 
+new map. The way we'll manage this is by treating the map a stack of 
+256 rows and defining our map simply as an array of the rows that 
+make up the map.
+
+  \begin{figure}[H]
+      \centering
+      \foreach \l in {0,...,6}
+      {
+        \includegraphics[height=17cm]{src/bonusphase/map\l.png}%
+        \hspace{1em}
+      }%
+  \caption{The first seven maps used by the bonus phase round.}
+  \end{figure}
+
+This means that in order to generate a new map all we have to do is come
+up with an array of bytes where each byte defines a row in the map. By
+way of example, this is what the array that defines the map for the 
+first bonus phase round looks like:
+
+
+\begin{lstlisting}
+bonusPhaseMapDefinition 
+    .BYTE $00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+    .BYTE $11,$11,$11,$11,$11,$11,$11,$11,$11,$11
+    .BYTE $11,$11,$11,$11,$11,$11,$11,$11,$11,$11
+    .BYTE $15,$16,$16,$16,$16,$16,$16,$16,$16,$17
+    .BYTE $15,$16,$16,$16,$16,$16,$16,$16,$16,$17
+    .BYTE $13,$13,$13,$13,$13,$13,$13,$13,$13,$13
+    .BYTE $15,$16,$16,$16,$16,$16,$16,$16,$16,$17
+    .BYTE $14,$14,$00,$15,$16,$17,$00,$00,$14,$14
+    .BYTE $00,$14,$14,$14,$14,$14,$14,$14,$14,$00
+    .BYTE $00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+    .BYTE $00,$14,$14,$14,$14,$14,$14,$14,$14,$00
+    .BYTE $14,$14,$00,$15,$16,$17,$00,$00,$14,$14
+    .BYTE $15,$16,$16,$16,$16,$16,$16,$16,$16,$17
+    .BYTE $00,$14,$14,$14,$14,$14,$14,$14,$14,$00
+    .BYTE $00,$15,$16,$17,$00,$00,$15,$16,$17,$00
+    .BYTE $13,$13,$13,$13,$13,$13,$13,$13,$13,$13
+    .BYTE $15,$16,$16,$16,$16,$16,$16,$16,$16,$17
+    .BYTE $11,$11,$11,$11,$11,$11,$11,$11,$11,$11
+    .BYTE $00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+    .BYTE $12,$12,$12,$12,$12,$12,$12,$12,$12,$00
+    .BYTE $00,$15,$16,$17,$00,$00,$15,$16,$17,$00
+    .BYTE $00,$15,$16,$17,$00,$00,$15,$16,$17,$00
+    .BYTE $13,$13,$13,$13,$13,$13,$13,$13,$13,$13
+    .BYTE $12,$12,$12,$12,$12,$12,$12,$12,$12,$00
+    .BYTE $11,$11,$11,$11,$11,$11,$11,$11,$11,$11
+    .BYTE $10,$10,$10,$10,$10,$10
+\end{lstlisting}
+
+This map definition starts from the bottom up, it does this because we
+are scrolling upward so it makes sense to begin with what the player
+will see first. The start of the map is a simple sequence of zeroes:
+
+\begin{lstlisting}
+bonusPhaseMapDefinition 
+    .BYTE $00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+\end{lstlisting}
+
+This is the row image each line translates to, a regular square pattern
+initially followed by rows with some other features.
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=14cm,center}
+      \begin{tabular}{cc}
+        \toprule
+        Index & Image\\
+        \midrule
+        \icode{\$00} & \makecell[l]{
+          \includegraphics[width=10cm]{src/bonusphase/row_hex00.png}%
+        } \\
+        \icode{\$00} & \makecell[l]{
+          \includegraphics[width=10cm]{src/bonusphase/row_hex00.png}%
+        } \\
+        \icode{\$00} & \makecell[l]{
+          \includegraphics[width=10cm]{src/bonusphase/row_hex00.png}%
+        } \\
+        \icode{\$00} & \makecell[l]{
+          \includegraphics[width=10cm]{src/bonusphase/row_hex00.png}%
+        } \\
+        \icode{\$00} & \makecell[l]{
+          \includegraphics[width=10cm]{src/bonusphase/row_hex00.png}%
+        } \\
+        \icode{\$00} & \makecell[l]{
+          \includegraphics[width=10cm]{src/bonusphase/row_hex00.png}%
+        } \\
+        \icode{\$00} & \makecell[l]{
+          \includegraphics[width=10cm]{src/bonusphase/row_hex00.png}%
+        } \\
+        \icode{\$00} & \makecell[l]{
+          \includegraphics[width=10cm]{src/bonusphase/row_hex00.png}%
+        } \\
+        \bottomrule
+      \end{tabular}
+    \end{adjustbox}
+  }\caption{Snapshot of the map created by the first line definition.}
+\end{figure}
+
+Further along in the definition we reach a segment where some new features
+are introduced.
+
+\begin{lstlisting}
+bonusPhaseMapDefinition 
+    .BYTE $11,$11,$11,$11,$11,$11,$11,$11,$11,$11
+    .BYTE $15,$16,$16,$16,$16,$16,$16,$16,$16,$17
+\end{lstlisting}
+
+We can see what each of \icode{\$11,\$15,\$16} translate to when we
+map them to their corresponding images:
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=14cm,center}
+      \begin{tabular}{cc}
+        \toprule
+        Index & Image\\
+        \midrule
+        \icode{\$16} & \makecell[l]{
+          \includegraphics[width=10cm]{src/bonusphase/row_hex16.png}%
+        } \\
+        \icode{\$16} & \makecell[l]{
+          \includegraphics[width=10cm]{src/bonusphase/row_hex16.png}%
+        } \\
+        \icode{\$16} & \makecell[l]{
+          \includegraphics[width=10cm]{src/bonusphase/row_hex16.png}%
+        } \\
+        \icode{\$15} & \makecell[l]{
+          \includegraphics[width=10cm]{src/bonusphase/row_hex15.png}%
+        } \\
+        \icode{\$11} & \makecell[l]{
+          \includegraphics[width=10cm]{src/bonusphase/row_hex11.png}%
+        } \\
+        \icode{\$11} & \makecell[l]{
+          \includegraphics[width=10cm]{src/bonusphase/row_hex11.png}%
+        } \\
+        \icode{\$11} & \makecell[l]{
+          \includegraphics[width=10cm]{src/bonusphase/row_hex11.png}%
+        } \\
+        \bottomrule
+      \end{tabular}
+    \end{adjustbox}
+  }\caption{Snapshot of the map created by the first line definition.}
+\end{figure}
+
+So how do we get from a value like \icode{\$15} to an image that represents
+a row on the screen? 
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=14cm,center}
+      \begin{tabular}{cc}
+        \toprule
+        Index & Image\\
+        \midrule
+        \icode{\$15} & \makecell[l]{
+          \includegraphics[width=10cm]{src/bonusphase/row_hex15.png}%
+        }\\
+        \bottomrule
+      \end{tabular}
+    \end{adjustbox}
+  }
+\end{figure}
+
+We do this by defining each row with yet another array
+of bytes. In all we define 32 rows of different types so when we come up
+with a map for the level we are simply referencing each of these rows by their
+index in the array. Here is the data structure defining each of the 32 rows:
+
+\begin{lstlisting}[basicstyle=\tiny]
+bonusPhaseMapRowDefinitions   
+        .BYTE $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; 00
+        .BYTE $0D,$0D,$0E,$0E,$0E,$0E,$0E,$00,$00,$0B,$0B,$00,$00,$0D,$0D,$0D,$0D,$0D,$0E,$0E 
+        .BYTE $10,$0B,$0B,$0B,$0B,$0B,$0B,$0B,$0B,$11,$10,$0B,$0B,$0B,$0B,$0B,$0B,$0B,$0B,$11
+        .BYTE $0E,$10,$0B,$0B,$0B,$0B,$0B,$0B,$11,$0D,$0E,$10,$0B,$0B,$0B,$0B,$0B,$0B,$11,$0D
+        .BYTE $0E,$0E,$10,$0B,$0B,$0B,$0B,$11,$0D,$0D,$0E,$0E,$10,$0B,$0B,$0B,$0B,$11,$0D,$0D
+        .BYTE $0E,$0E,$0E,$00,$00,$00,$00,$0D,$0D,$0D,$0E,$0E,$0E,$00,$00,$00,$00,$0D,$0D,$0D
+        .BYTE $0E,$0E,$0E,$00,$0A,$0A,$00,$0D,$0D,$0D,$0E,$0E,$0E,$00,$0A,$0A,$00,$0D,$0D,$0D
+        .BYTE $0E,$0E,$0E,$00,$09,$09,$00,$0D,$0D,$0D,$0E,$0E,$0E,$00,$09,$09,$00,$0D,$0D,$0D
+        .BYTE $0E,$0E,$12,$0C,$0C,$0C,$0C,$13,$0D,$0D,$0E,$0E,$12,$0C,$0C,$0C,$0C,$13,$0D,$0D
+        .BYTE $0E,$07,$00,$00,$15,$15,$00,$00,$05,$0D,$0E,$07,$00,$00,$15,$15,$00,$00,$05,$0D
+        .BYTE $07,$0F,$00,$00,$15,$15,$00,$00,$0F,$05,$07,$0F,$00,$00,$15,$15,$00,$00,$0F,$05
+        .BYTE $17,$17,$00,$00,$18,$17,$00,$00,$18,$18,$17,$17,$00,$00,$18,$17,$00,$00,$18,$18
+        .BYTE $0F,$0F,$0F,$00,$00,$00,$00,$0F,$0F,$0F,$0F,$0F,$0F,$00,$00,$00,$00,$0F,$0F,$0F
+        .BYTE $00,$00,$09,$09,$00,$00,$09,$09,$00,$00,$00,$00,$09,$09,$00,$00,$09,$09,$00,$00
+        .BYTE $00,$00,$0A,$0A,$00,$00,$0A,$0A,$00,$00,$00,$00,$0A,$0A,$00,$00,$0A,$0A,$00,$00
+        .BYTE $0F,$0F,$0F,$0F,$0F,$0F,$0F,$0F,$0F,$00,$00,$0F,$0F,$0F,$0F,$0F,$0F,$0F,$0F,$0F ; 0F
+        .BYTE $14,$14,$14,$14,$14,$14,$14,$14,$14,$14,$14,$14,$14,$14,$14,$14,$14,$14,$14,$14
+        .BYTE $0F,$0E,$0E,$0E,$0E,$0E,$0E,$0E,$0E,$0E,$0D,$0D,$0D,$0D,$0D,$0D,$0D,$0D,$0D,$0F
+        .BYTE $0B,$0B,$0B,$00,$0B,$0B,$0B,$0B,$0B,$0F,$0F,$0B,$0B,$0B,$0B,$0B,$00,$0B,$0B,$0B
+        .BYTE $15,$15,$15,$15,$15,$15,$15,$15,$15,$15,$15,$15,$15,$15,$15,$15,$15,$15,$15,$15
+        .BYTE $00,$00,$00,$0F,$0F,$0F,$00,$00,$00,$0F,$0F,$00,$00,$00,$0F,$0F,$0F,$00,$00,$00
+        .BYTE $00,$10,$0B,$11,$00,$00,$10,$0B,$11,$00,$00,$10,$0B,$11,$00,$00,$10,$0B,$11,$00 ; 15 
+        .BYTE $00,$0E,$00,$0D,$00,$00,$0E,$00,$0D,$00,$00,$0E,$00,$0D,$00,$00,$0E,$00,$0D,$00
+        .BYTE $00,$12,$0C,$13,$00,$00,$12,$0C,$13,$00,$00,$12,$0C,$13,$00,$00,$12,$0C,$13,$00
+        .BYTE $0F,$0E,$00,$00,$00,$00,$0D,$0F,$0F,$0F,$0F,$0F,$0F,$0E,$0B,$0B,$0B,$0B,$0D,$0F
+        .BYTE $0F,$0E,$0B,$0B,$0B,$0B,$0D,$0F,$0F,$0F,$0F,$0F,$0F,$0E,$00,$00,$00,$00,$0D,$0F
+        .BYTE $0F,$0E,$00,$00,$00,$00,$0D,$0F,$0F,$0F,$0F,$0F,$0F,$0E,$00,$00,$00,$00,$0D,$0F
+        .BYTE $15,$15,$00,$00,$16,$16,$00,$00,$15,$15,$00,$00,$16,$16,$00,$00,$15,$15,$00,$00
+        .BYTE $00,$00,$16,$16,$00,$00,$15,$15,$00,$00,$16,$16,$00,$00,$15,$15,$00,$00,$16,$16
+        .BYTE $0B,$0B,$0B,$0B,$0B,$0B,$0B,$0B,$0B,$0B,$0B,$0B,$0B,$0B,$0B,$0B,$0B,$0B,$0B,$0B
+        .BYTE $0C,$0C,$0C,$0C,$0C,$0C,$0C,$0C,$0C,$0C,$0C,$0C,$0C,$0C,$0C,$0C,$0C,$0C,$0C,$0C
+        .BYTE $09,$09,$09,$09,$09,$09,$09,$09,$09,$15,$15,$09,$09,$09,$09,$09,$09,$09,$09,$09
+        .BYTE $0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$15,$15,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A
+\end{lstlisting}
+
+The one at index \icode{\$15} (21 in decimal) is this guy:
+
+\begin{lstlisting}[basicstyle=\tiny]
+bonusPhaseMapRowDefinitions   
+        .BYTE $00,$10,$0B,$11,$00,$00,$10,$0B,$11,$00,$00,$10,$0B,$11,$00,$00,$10,$0B,$11,$00
+\end{lstlisting}
+
+Each byte in this definition represents a square cell of four bytes. So for example, \icode{\$00}
+translates to:
+
+\begin{figure}[H]
+  {
+    \begin{adjustbox}{width=2cm,center}
+        \includegraphics[width=2cm]{src/bonusphase/row21_cell0.png}%
+    \end{adjustbox}
+  }
+\end{figure}
+
+\captionsetup[subfigure]{font=large,labelfont=large,labelformat=empty}
+And the first five bytes (which are repeated four times to complete the full row) translate as follows:
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=15cm,center}
+      \begin{subfigure}{0.3\textwidth}
+        \includegraphics[width=3cm]{src/bonusphase/row21_cell0.png}%
+        \caption{\icode{\$00}}
+      \end{subfigure}
+      \begin{subfigure}{0.3\textwidth}
+        \includegraphics[width=3cm]{src/bonusphase/row21_cell1.png}%
+        \caption{\icode{\$10}}
+      \end{subfigure}
+      \begin{subfigure}{0.3\textwidth}
+        \includegraphics[width=3cm]{src/bonusphase/row21_cell2.png}%
+        \caption{\icode{\$0B}}
+      \end{subfigure}
+      \begin{subfigure}{0.3\textwidth}
+        \includegraphics[width=3cm]{src/bonusphase/row21_cell3.png}%
+        \caption{\icode{\$11}}
+      \end{subfigure}
+      \begin{subfigure}{0.3\textwidth}
+        \includegraphics[width=3cm]{src/bonusphase/row21_cell4.png}%
+        \caption{\icode{\$00}}
+      \end{subfigure}
+    \end{adjustbox}
+  }
+\end{figure}
+\captionsetup[subfigure]{font=footnotesize,labelfont=footnotesize,labelformat=empty}
+
+So how do we go from a single byte like \icode{\$00} to a four-byte square? Would you be surprised
+if I told you it involved another array of bytes? In fact it involves two arrays of bytes.
+
+\begin{lstlisting}
+cellFirstColumnArray
+        .BYTE $40,$41,$44,$47,$48,$49,$4F,$4D
+        .BYTE $50,$51,$54,$56,$5B,$59,$5C,$5D
+        .BYTE $60,$61,$64,$65,$68,$69,$47,$47
+        .BYTE $4E,$4E,$57,$57,$5D,$5D,$20,$20
+        .BYTE $5D,$45,$4B,$47,$4C,$5D,$4E,$52
+        .BYTE $7C,$7D,$6C,$6D,$70,$71,$74,$75
+        .BYTE $78,$79
+cellSecondColumnArray   
+        .BYTE $42,$43,$46,$47,$4A,$48,$4E,$4F
+        .BYTE $51,$53,$56,$57,$5A,$5B,$5E,$5C
+        .BYTE $61,$63,$66,$67,$6A,$6B,$47,$47
+        .BYTE $4E,$4E,$57,$57,$5D,$5D,$20,$20
+        .BYTE $45,$47,$57,$4B,$4E,$4C,$52,$57
+        .BYTE $7E,$7F,$6E,$6F,$72,$73,$76,$77
+        .BYTE $7A,$7B
+\end{lstlisting}
+
+
+So let's look at how we from \icode{\$00} to ...
+
+\begin{figure}[H]
+  {
+    \begin{adjustbox}{width=2cm,center}
+        \includegraphics[width=2cm]{src/bonusphase/row21_cell0.png}%
+    \end{adjustbox}
+  }
+\end{figure}
+
+.. using the two arrays above. The value \icode{\$00} is treated as in index into each array, so it
+points us to the first byte in each. However we're not interested in just the first value in each array
+but the first two. So the bytes that we will use to construct the 4-byte square are:
+
+
+\begin{lstlisting}
+cellFirstColumnArray
+        .BYTE $40,$41
+cellSecondColumnArray   
+        .BYTE $42,$43
+\end{lstlisting}
+
+Each of these bytes is a reference to a byte in the bonus phase character set. When we set out the
+characters in a table as they are eventually laid out we begin to get a sense of what we must do
+to turn them into our 4-byte cell:
+
+\begin{figure}[H]                          
+{                                          
+  \setlength{\tabcolsep}{3.0pt}            
+  \setlength\cmidrulewidth{\lightrulewidth}
+    \begin{adjustbox}{width=5cm,center}
+\begin{subfigure}{0.12\textwidth}
+\input{bonusphase/tilesheets/Bonus_Phase_tilesheet_$40}
+\end{subfigure}
+\begin{subfigure}{0.12\textwidth}
+\input{bonusphase/tilesheets/Bonus_Phase_tilesheet_$42}
+\end{subfigure}
+    \end{adjustbox}
+    \begin{adjustbox}{width=5cm,center}
+\begin{subfigure}{0.12\textwidth}
+\input{bonusphase/tilesheets/Bonus_Phase_tilesheet_$41}
+\end{subfigure}
+\begin{subfigure}{0.12\textwidth}
+\input{bonusphase/tilesheets/Bonus_Phase_tilesheet_$43}
+\end{subfigure}
+    \end{adjustbox}
+  }\caption[]{Characters making up the four-byte cell referenced by \icode{\$00}.}
+\end{figure}
+
+What we have done is take the two values at index \icode{\$00} in \icode{cellFirstColumnArray}
+and used each as the first column across two rows. Then we've taken the two values from
+\icode{cellSecondColumnArray} and used them as the second column across two rows. 
+
+Let's repeat this process for the values given by index \icode{\$10} highlighted in red. 
+
+\begin{lstlisting}
+cellFirstColumnArray
+        .BYTE $40,$41,$44,$47,$48,$49,$4F,$4D
+        .BYTE $50,$51,$54,$56,$5B,$59,$5C,$5D
+        .BYTE $60,$61,$64,$65,$68,$69,$47,$47
+        ...
+cellSecondColumnArray   
+        .BYTE $42,$43,$46,$47,$4A,$48,$4E,$4F
+        .BYTE $51,$53,$56,$57,$5A,$5B,$5E,$5C
+        .BYTE $61,$63,$66,$67,$6A,$6B,$47,$47
+        ...
+\end{lstlisting}
+
+The values at index \icode{\$10} in \icode{cellFirstColumnArray} are \icode{\$60,\$61} and
+in \icode{cellSecondColumnArray} are \icode{\$61,\$63}. Translated to row and column position
+this gives:
+
+\begin{figure}[H]                          
+{                                          
+  \setlength{\tabcolsep}{3.0pt}            
+  \setlength\cmidrulewidth{\lightrulewidth}
+    \begin{adjustbox}{width=5cm,center}
+\begin{subfigure}{0.12\textwidth}
+\input{bonusphase/tilesheets/Bonus_Phase_tilesheet_$60}
+\end{subfigure}
+\begin{subfigure}{0.12\textwidth}
+\input{bonusphase/tilesheets/Bonus_Phase_tilesheet_$61}
+\end{subfigure}
+    \end{adjustbox}
+    \begin{adjustbox}{width=5cm,center}
+\begin{subfigure}{0.12\textwidth}
+\input{bonusphase/tilesheets/Bonus_Phase_tilesheet_$61}
+\end{subfigure}
+\begin{subfigure}{0.12\textwidth}
+\input{bonusphase/tilesheets/Bonus_Phase_tilesheet_$63}
+\end{subfigure}
+    \end{adjustbox}
+  }\caption[]{Characters making up the four-byte cell referenced by \icode{\$10}.}
+\end{figure}
+
+Which gives us our second cell..
+\begin{figure}[H]
+  {
+    \begin{adjustbox}{width=2cm,center}
+        \includegraphics[width=2cm]{src/bonusphase/row21_cell1.png}%
+    \end{adjustbox}
+  }
+\end{figure}
+
+in the row:
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=14cm,center}
+          \includegraphics[width=10cm]{src/bonusphase/row_hex15.png}%
+    \end{adjustbox}
+  }
+\end{figure}
+
+The code that looks after all this is a routine we call \icode{BonusPhaseFillTopLineAfterScrollUp}
+which is called every time the player scrolls up. There's an equivalent \\
+\icode{BonusPhaseFillBottomLineAfterScrollDown}
+for when the player scrolls down. They're nearly identical.
+
+\begin{minipage}[b]{0.45\linewidth}
+\centering
+\begin{lstlisting}[basicstyle=\tiny]
+BonusPhaseFillTopLineAfterScrollUp   
+        LDX offsetForScrollUp
+        LDY bonusPhaseMapDefinition,X
+        LDA bonusPhaseMapLoPtrArray,Y
+        STA bonusPhaseMapLoPtr
+        LDA bonusPhaseMapHiPtrArray,Y
+        STA bonusPhaseMapHiPtr
+
+        LDY #$00
+        LDX #$00
+FillRowLoop
+        LDA (bonusPhaseMapLoPtr),Y
+        STY mapOffsetTemp
+        ASL 
+        CLC 
+        ADC scrollLineOffset
+        TAY 
+        LDA cellFirstColumnArray,Y
+        STA SCREEN_RAM,X
+        LDA cellSecondColumnArray,Y
+        STA SCREEN_RAM + LINE0_COL1,X
+        LDY mapOffsetTemp
+        INX 
+        INX 
+        INY 
+        CPY #$14
+        BNE FillRowLoop
+
+        LDA scrollLineOffset
+        BNE ReturnEarly
+
+        INC offsetForScrollUp
+        INC offsetForScrollDown
+ReturnEarly
+        RTS 
+\end{lstlisting}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}[b]{0.45\linewidth}
+\centering
+\begin{lstlisting}[basicstyle=\tiny]
+BonusPhaseFillBottomLineAfterScrollDown   
+        LDX offsetForScrollDown
+        LDY bonusPhaseMapDefinition,X
+        LDA bonusPhaseMapLoPtrArray,Y
+        STA bonusPhaseMapLoPtr
+        LDA bonusPhaseMapHiPtrArray,Y
+        STA bonusPhaseMapHiPtr
+
+        LDY #$00
+        LDX #$00
+FillRowLoop
+        LDA (bonusPhaseMapLoPtr),Y
+        STY mapOffsetTemp
+        ASL 
+        CLC 
+        ADC scrollLineOffset
+        TAY 
+        LDA cellFirstColumnArray,Y
+        STA SCREEN_RAM + LINE18_COL0,X
+        LDA cellSecondColumnArray,Y
+        STA SCREEN_RAM + LINE18_COL1,X
+        LDY mapOffsetTemp
+        INX 
+        INX 
+        INY 
+        CPY #$14
+        BNE FillRowLoop
+
+        LDA scrollLineOffset
+        BEQ FillRowLoop
+
+        DEC offsetForScrollDown
+        DEC offsetForScrollUp
+        LDA offsetForScrollDown
+        CMP #$FF
+        BNE ReturnEarly
+
+        LDA #$00
+        STA offsetForScrollDown
+        LDA #$0A
+        STA offsetForScrollUp
+ReturnEarly
+        RTS 
+\end{lstlisting}
+\end{minipage}
+
+The thing to note about this routine is that it only fills one actual line of characters
+at a time, whereas as the 'rows' we've defined are two lines deep. It decides which of the
+two lines its writing by using the \icode{scrollLineOffset} variable to determine which
+one its writing.
+
+\subsubsection{Choosing a Map}
+So now that we understand how the individual rows of the map are generated, the question
+arises: how do we procedurally generate entire maps? Do we just pick random rows and 
+join them together? This wouldn't work well, since some rows aren't going to go well
+together. The solution is to define entire map segments using the building blocks above
+and let those be the building blocks we use when constructing an entire map.
+
+If we look at our definition for the first bonus phase  again we can see it consists of arrays of 10 bytes with
+each 10-byte array corresponding to a segment in the map and each byte in the array corresponding to a row in the map. 
+So each 10-byte array below gives us a full 20 byte high screen of map data.
+
+\begin{lstlisting}
+bonusPhaseMapDefinition 
+    .BYTE $00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+    .BYTE $11,$11,$11,$11,$11,$11,$11,$11,$11,$11
+    .BYTE $11,$11,$11,$11,$11,$11,$11,$11,$11,$11
+    .BYTE $15,$16,$16,$16,$16,$16,$16,$16,$16,$17
+    .BYTE $15,$16,$16,$16,$16,$16,$16,$16,$16,$17
+    .BYTE $13,$13,$13,$13,$13,$13,$13,$13,$13,$13
+    .BYTE $15,$16,$16,$16,$16,$16,$16,$16,$16,$17
+    .BYTE $14,$14,$00,$15,$16,$17,$00,$00,$14,$14
+    .BYTE $00,$14,$14,$14,$14,$14,$14,$14,$14,$00
+    .BYTE $00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+    .BYTE $00,$14,$14,$14,$14,$14,$14,$14,$14,$00
+    .BYTE $14,$14,$00,$15,$16,$17,$00,$00,$14,$14
+    .BYTE $15,$16,$16,$16,$16,$16,$16,$16,$16,$17
+    .BYTE $00,$14,$14,$14,$14,$14,$14,$14,$14,$00
+    .BYTE $00,$15,$16,$17,$00,$00,$15,$16,$17,$00
+    .BYTE $13,$13,$13,$13,$13,$13,$13,$13,$13,$13
+    .BYTE $15,$16,$16,$16,$16,$16,$16,$16,$16,$17
+    .BYTE $11,$11,$11,$11,$11,$11,$11,$11,$11,$11
+    .BYTE $00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+    .BYTE $12,$12,$12,$12,$12,$12,$12,$12,$12,$00
+    .BYTE $00,$15,$16,$17,$00,$00,$15,$16,$17,$00
+    .BYTE $00,$15,$16,$17,$00,$00,$15,$16,$17,$00
+    .BYTE $13,$13,$13,$13,$13,$13,$13,$13,$13,$13
+    .BYTE $12,$12,$12,$12,$12,$12,$12,$12,$12,$00
+    .BYTE $11,$11,$11,$11,$11,$11,$11,$11,$11,$11
+    .BYTE $10,$10,$10,$10,$10,$10
+\end{lstlisting}
+
+The trick is that these segments aren't themselves
+generated procedurally, we defined them in advance.  We did this in \icode{bonusMapSegmentArray}
+given below. We've highlighted the segments used in our map in red:
+
+\begin{lstlisting}
+bonusMapSegmentArray
+        .BYTE $00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+        .BYTE $00,$15,$16,$17,$00,$00,$15,$16,$17,$00
+        .BYTE $00,$14,$14,$14,$14,$14,$14,$14,$14,$00
+        .BYTE $11,$11,$11,$11,$11,$11,$11,$11,$11,$11
+        .BYTE $13,$13,$13,$13,$13,$13,$13,$13,$13,$13
+        .BYTE $12,$12,$12,$12,$12,$12,$12,$12,$12,$00
+        .BYTE $14,$14,$00,$15,$16,$17,$00,$00,$14,$14
+        .BYTE $15,$16,$16,$16,$16,$16,$16,$16,$16,$17
+        .BYTE $00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+        .BYTE $00,$00,$0F,$0F,$0F,$0F,$0F,$0F,$00,$00
+        .BYTE $01,$01,$01,$01,$00,$00,$01,$01,$01,$01
+        .BYTE $00,$00,$0B,$0B,$0B,$0C,$0C,$0C,$00,$00
+        .BYTE $00,$02,$03,$04,$05,$06,$07,$08,$09,$0A
+        .BYTE $02,$03,$04,$05,$05,$05,$05,$0B,$0B,$0B
+        .BYTE $00,$00,$01,$01,$00,$00,$01,$01,$00,$00
+        .BYTE $00,$00,$0E,$0D,$00,$00,$0E,$0D,$00,$00
+        .BYTE $00,$02,$03,$04,$05,$08,$09,$0A,$0B,$00
+        .BYTE $00,$00,$00,$1A,$1A,$1A,$18,$18,$18,$18
+        .BYTE $00,$00,$00,$1A,$1A,$1A,$19,$19,$19,$19
+        .BYTE $00,$00,$18,$18,$00,$00,$00,$00,$19,$19
+        .BYTE $00,$00,$1B,$1B,$00,$00,$15,$16,$17,$00
+        .BYTE $15,$16,$17,$1D,$1D,$15,$16,$17,$1D,$1D
+        .BYTE $14,$14,$1E,$1E,$00,$00,$15,$16,$17,$00
+        .BYTE $00,$0B,$0B,$0B,$15,$16,$17,$15,$16,$17
+        .BYTE $00,$00,$1D,$1D,$1D,$1D,$1E,$1E,$1E,$1E
+        .BYTE $00,$00,$20,$1F,$20,$1F,$00,$00,$11,$11
+        .BYTE $00,$00,$20,$1F,$20,$1F,$20,$1F,$20,$1F
+        .BYTE $00,$1E,$1E,$1E,$20,$1F,$1D,$1D,$1D,$00
+        .BYTE $00,$0C,$0C,$0C,$15,$16,$17,$00,$00,$00
+        .BYTE $00,$02,$03,$04,$05,$08,$09,$0A,$0B,$00
+        .BYTE $00,$00,$06,$06,$06,$11,$11,$11,$00,$00
+        .BYTE $00,$00,$0F,$0F,$15,$16,$17,$15,$16,$17
+\end{lstlisting}
+
+By way of example this is what the last segment in the list above looks like when 
+rendered as a section of our map:
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=14cm,center}
+      \begin{tabular}{cc}
+        \toprule
+        Index & Image\\
+        \icode{\$17} & \makecell[l]{
+          \includegraphics[width=10cm]{src/bonusphase/row_hex17.png}%
+        } \\
+        \icode{\$16} & \makecell[l]{
+          \includegraphics[width=10cm]{src/bonusphase/row_hex16.png}%
+        } \\
+        \icode{\$15} & \makecell[l]{
+          \includegraphics[width=10cm]{src/bonusphase/row_hex15.png}%
+        } \\
+        \icode{\$17} & \makecell[l]{
+          \includegraphics[width=10cm]{src/bonusphase/row_hex17.png}%
+        } \\
+        \icode{\$16} & \makecell[l]{
+          \includegraphics[width=10cm]{src/bonusphase/row_hex16.png}%
+        } \\
+        \icode{\$15} & \makecell[l]{
+          \includegraphics[width=10cm]{src/bonusphase/row_hex15.png}%
+        } \\
+        \icode{\$0F} & \makecell[l]{
+          \includegraphics[width=10cm]{src/bonusphase/row_hex0F.png}%
+        } \\
+        \icode{\$0F} & \makecell[l]{
+          \includegraphics[width=10cm]{src/bonusphase/row_hex0F.png}%
+        } \\
+        \icode{\$00} & \makecell[l]{
+          \includegraphics[width=10cm]{src/bonusphase/row_hex00.png}%
+        } \\
+        \icode{\$00} & \makecell[l]{
+          \includegraphics[width=10cm]{src/bonusphase/row_hex00.png}%
+        } \\
+      \end{tabular}
+    \end{adjustbox}
+  }
+\end{figure}
+
+So our procedure for generating a map is simply choosing 30 of these segments in a
+pseudo-random order and stacking them on top of one another!
+
+
+
+\subsection{Some Very Ugly Sprites}
+For some reason the gilby sprite in the bonus phase is made impossibly ugly.
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{1.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=14cm,center}
+      \begin{tabular}{cccc}
+        \toprule
+        Please & Make & It & Stop \\
+        \midrule
+        \midrule
+\makecell[l]{
+	\begin{subfigure}{0.3\textwidth}
+    \def\MULTICOLORONE{gray}
+    \def\MULTICOLORTWO{white}
+    \def\SPRITECOLOR{red}
+		\input{sprites/UGLY_GILBY1}
+	\end{subfigure}
+} & 
+\makecell[l]{
+	\begin{subfigure}{0.3\textwidth}
+    \def\MULTICOLORONE{gray}
+    \def\MULTICOLORTWO{white}
+    \def\SPRITECOLOR{red}
+		\input{sprites/UGLY_GILBY2}
+	\end{subfigure}
+} & 
+\makecell[l]{
+	\begin{subfigure}{0.3\textwidth}
+    \def\MULTICOLORONE{gray}
+    \def\MULTICOLORTWO{white}
+    \def\SPRITECOLOR{red}
+		\input{sprites/UGLY_GILBY3}
+	\end{subfigure}
+} & 
+\makecell[l]{
+	\begin{subfigure}{0.3\textwidth}
+    \def\MULTICOLORONE{gray}
+    \def\MULTICOLORTWO{white}
+    \def\SPRITECOLOR{red}
+		\input{sprites/UGLY_GILBY4}
+	\end{subfigure}
+} \\
+\makecell[l]{
+	\begin{subfigure}{0.3\textwidth}
+    \def\MULTICOLORONE{gray}
+    \def\MULTICOLORTWO{white}
+    \def\SPRITECOLOR{red}
+		\input{sprites/UGLY_GILBY5}
+	\end{subfigure}
+} & 
+\makecell[l]{
+	\begin{subfigure}{0.3\textwidth}
+    \def\MULTICOLORONE{gray}
+    \def\MULTICOLORTWO{white}
+    \def\SPRITECOLOR{red}
+		\input{sprites/UGLY_GILBY6}
+	\end{subfigure}
+} & 
+\makecell[l]{
+	\begin{subfigure}{0.3\textwidth}
+    \def\MULTICOLORONE{gray}
+    \def\MULTICOLORTWO{white}
+    \def\SPRITECOLOR{red}
+		\input{sprites/UGLY_GILBY7}
+	\end{subfigure}
+} & 
+\makecell[l]{
+	\begin{subfigure}{0.3\textwidth}
+    \def\MULTICOLORONE{gray}
+    \def\MULTICOLORTWO{white}
+    \def\SPRITECOLOR{red}
+		\input{sprites/UGLY_GILBY8}
+	\end{subfigure}
+} \\ 
+        \addlinespace
+        \bottomrule
+      \end{tabular}
+    \end{adjustbox}
+  }\caption{There is no excuse for this.}
+\end{figure}
+
+\subsection{IBalls}
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{1.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=14cm,center}
+      \begin{tabular}{ccccccc}
+        \toprule
+        IBall & Another One & A Third & One More & \\
+        \midrule
+        \midrule
+\makecell[l]{
+	\begin{subfigure}{0.3\textwidth}
+    \def\MULTICOLORONE{gray}
+    \def\MULTICOLORTWO{white}
+    \def\SPRITECOLOR{black}
+		\input{sprites/BONUS_IBALL1}
+	\end{subfigure}
+} & 
+\makecell[l]{
+	\begin{subfigure}{0.3\textwidth}
+    \def\MULTICOLORONE{gray}
+    \def\MULTICOLORTWO{white}
+    \def\SPRITECOLOR{black}
+		\input{sprites/BONUS_IBALL2}
+	\end{subfigure}
+} & 
+\makecell[l]{
+	\begin{subfigure}{0.3\textwidth}
+    \def\MULTICOLORONE{gray}
+    \def\MULTICOLORTWO{white}
+    \def\SPRITECOLOR{black}
+		\input{sprites/BONUS_IBALL3}
+	\end{subfigure}
+} & 
+\makecell[l]{
+	\begin{subfigure}{0.3\textwidth}
+    \def\MULTICOLORONE{gray}
+    \def\MULTICOLORTWO{white}
+    \def\SPRITECOLOR{black}
+		\input{sprites/BONUS_IBALL4}
+	\end{subfigure}
+} \\ 
+        \addlinespace
+        \bottomrule
+      \end{tabular}
+    \end{adjustbox}
+  }\caption{OK this is better.}
+\end{figure}
+
+

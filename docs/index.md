@@ -5,6 +5,7 @@ A deeper-than-is-possibly-sane dive into the workings of [Iridis Alpha](https://
 
 Work-in-progress is available for free as a [Scrapbook Edition](https://github.com/mwenge/iatheory/raw/main/out/iatheory_scrapbook.pdf).
 
+You can [gift what you want](https://www.paypal.com/paypalme/hoganrobert).
 
 ## A Peek Inside
 <img height=360 src="https://github.com/mwenge/iatheory/raw/main/docs/page1.png">

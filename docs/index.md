@@ -7,6 +7,8 @@ Work-in-progress is available for free as a [Scrapbook Edition](https://github.c
 
 You can [gift what you want](https://www.paypal.com/paypalme/hoganrobert).
 
+You can even [sponsor future work](https://github.com/sponsors/mwenge/).
+
 ## A Peek Inside
 <img height=360 src="https://github.com/mwenge/iatheory/raw/main/docs/page1.png">
 <img height=360 src="https://github.com/mwenge/iatheory/raw/main/docs/page2.png">

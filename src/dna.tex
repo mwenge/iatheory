@@ -1,7 +1,54 @@
 \chapter{A Pause Mode for your Pause Mode} 
 \lstset{style=6502Style}
 
-Any pause mode must surely be in need of a pause mode.
+Any pause mode must surely be in need of a pause mode. Titled 'DNA' this little entertainment is
+a cousin of Minter's previous work on Psychedelia for the C64 and Colorspace for the Atari 800
+in 1984 and 1985. It isn't accessed directly from the game but instead is invoked by pressing the
+asterisk key while playing 'Made in France'.
+
+Minter first shared it as a tiny 11K demo in a UK Compunet forum in the summer of 
+1986. It followed shortly after 'Torus', an oscillator-based demo, shared at the same time and which we
+cover elsewhere : both are sprite-based
+light synthesisers where, like Psychedelia and Colorspace, the player gets to experiment with different
+configurations that control the behaviour of a frantic assembly of brightly colored, pulsating sprites.
+
+DNA has an unapologetically daft premise: two chains of flashing eyeballs cascade down the
+screen in an unsettling, blinking helix configuration. Your object as player is to twiddle the available
+knobs to see if you can get them to do anything interesting while listening to your favorite music.
+
+For its time DNA's most noteworthy feature was the number of sprites being written to the screen. There are
+48 eyeballs displayed at any one time, in addition to a pair of parallax starfields drifting past in the
+background. As you may have gathered by now, the C64 can only support 8 sprites in total so this would
+have seemed like wizardry to the uninitiated. If you're not dipping into this chapter at random, but have
+read any of the previous chapters in this book you may already be able to guess the secret to this 
+unsettling feat: raster interrupts.
+
+As elsewhere in Iridis Alpha the trick to filling the screen with sprites is to write a tight piece of code
+that can run periodically during a single paint of the screen, adding a layer of sprites to each horizontal
+section. We tell the C64 where we want the raster to interrupt its progress and call our code. This code
+will then paint as many sprites as possible on the horizontal layer. DNA takes the approach of painting a
+pair of eyeballs at 8 pixel vertical intervals, so each horizontal layer is 8 pixels tall. 
+These intervals are defined in \icode{dnaSpritesYPositionsArray}:
+
+\begin{lstlisting}
+dnaSpritesYPositionsArray       .BYTE $30,$38,$40,$48,$50,$58,$60,$68
+                                .BYTE $70,$78,$80,$88,$90,$98,$A0,$A8
+                                .BYTE $B0,$B8,$C0,$C8,$D0,$D8,$E0,$E8
+                                .BYTE END_SENTINEL
+\end{lstlisting}
+
+While the Y co-ordinates of the sprites are set in stone, their X co-ordinates must be calculated on the fly
+and indeed the purpose of the twiddling knobs is to control the way these co-ordinates are generated. Initially
+the X positions are all set to 192 (\$C0):
+
+\begin{lstlisting}
+dnaSpritesXPositionsArray       .BYTE $C0,$C0,$C0,$C0,$C0,$C0,$C0,$C0
+                                .BYTE $C0,$C0,$C0,$C0,$C0,$C0,$C0,$C0
+                                .BYTE $C0,$C0,$C0,$C0,$C0,$C0,$C0,$C0
+                                .BYTE $00,$00,$00,$00,$00,$00,$00,$00
+                                .BYTE $00,$00,$00,$00,$00,$00,$00,$00
+\end{lstlisting}
+
 
 \begin{figure}[H]
     \centering

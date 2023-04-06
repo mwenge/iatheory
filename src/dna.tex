@@ -1,5 +1,34 @@
 \chapter{A Pause Mode for your Pause Mode} 
 \lstset{style=6502Style}
+\begin{figure}[H]
+    \centering
+      \includegraphics[width=10cm]{src/dna/dnascreenshot.png}%
+\caption{DNA: A pause mode within a pause mode.}
+\end{figure}
+\begin{lstlisting}[caption=Defining the text for the DNA screen]
+titleTextLine1   .TEXT "    % % %  DNA  % % %   "
+titleTextLine2   .TEXT " CONCEIVED AND EXECUTED B"
+titleTextLine3   .TEXT "Y            Y A K       "
+titleTextLine4   .TEXT " SPACE: CANCEL SCREEN TEX"
+titleTextLine5   .TEXT "TF5 AND F7 CHANGE COLOURS"
+titleTextLine6   .TEXT " LISTEN TO TALKING HEADS."
+titleTextLine7   .TEXT ".BE NICE TO HAIRY ANIMALS "
+\end{lstlisting}
+
+\begin{figure}[H]
+
+    \centering
+    \foreach \l in {1, ...,16}
+    {
+      \includegraphics[width=3cm]{dna/dna\l.png}%
+    }%
+    \foreach \l in {17, ...,24}
+    {
+      \includegraphics[width=4cm]{dna/dna\l.png}%
+    }%
+\caption{The first screen paint in DNA. There are 24 raster interrupts allowing us to paint a long chain of sprites.}
+\end{figure}
+\clearpage
 
 Any pause mode must surely be in need of a pause mode. Titled 'DNA' this little entertainment is
 a cousin of Minter's previous work on Psychedelia for the C64 and Colorspace for the Atari 800
@@ -49,141 +78,404 @@ dnaSpritesXPositionsArray       .BYTE $C0,$C0,$C0,$C0,$C0,$C0,$C0,$C0
                                 .BYTE $00,$00,$00,$00,$00,$00,$00,$00
 \end{lstlisting}
 
+With every full paint of the screen calculates a new X co-ordinate and puts it at the head of the array. Depending
+on the value given as the 'Speed' setting, it then shifts all the others in the array to the right by one position. 
+
+\begin{lstlisting}
+DNA_PropagatePreviousXPosToTheRight
+        LDX #$27
+PropagateToRightLoop   
+        LDA dnaSpritesXPositionsArray - $01,X
+        STA dnaSpritesXPositionsArray,X
+        DEX
+        BNE PropagateToRightLoop
+        RTS
+\end{lstlisting}
+
+This very quickly fills the array.  We can see this in operation from the below
+snippet in \icode{DNA\_MainAnimationRoutine}. In order to calculate the x position
+for the right hand chain, it shows the value in
+\icode{dnaCurrentPhase} being added to the value
+\icode{dnaCurrentSpritesPosArrayIndex} to pick out a value in
+\icode{dnaSpritesXPositionsArray} offset by the amount of the 'Phase' setting:
+
+\begin{minipage}[b]{0.75\linewidth}
+\centering
+\begin{lstlisting}[caption=\icode{dnaCurrentPhase} is set by the 'Q' key.]
+  LDX dnaCurrentSpritesPosArrayIndex
+  ..
+  ; Add in the phase to our index to the X position
+  ; of the sprite on the right hand chain. If the 
+  ; result is greater than the number of values
+  ; in the array ($27) subtract it out again.
+  ; This means the 'Phase' setting  acts as an 
+  ; offset into the X Position array  picking up 
+  ; previous values of X Pos from the left hand chain.
+  TXA
+  ..
+  ADC dnaCurrentPhase
+  CMP #$27
+  BMI UpdateXPosWithPhase
+
+  ; Back out the addition if result greater than $27.
+  SEC
+  SBC #$27
+UpdateXPosWithPhase   
+  ; Finally, use the offset given by the update value 
+  ; in 'A', load it to 'X' and use it pick the X 
+  ; position from dnaSpritesXPositionsArray.
+  TAX
+  LDA dnaSpritesXPositionsArray,X
+  STA $D004,Y  ;Sprite 2 X Pos
+\end{lstlisting}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}[b]{0.25\linewidth}
+\centering
+      \includegraphics[width=3cm]{dna/dnaphase.png}%
+      \vspace{5cm}
+\end{minipage}
+
+In the table below we've selected a few frames from the first second or two showing how the array fills up and how values from
+the array are selected for the X position of the left and right chains. Notice how the 'Phase' setting of 5 effectively means
+the right-hand chain lags 5 'eyeballs' behind the left chain in terms of the positions.
 
 \begin{figure}[H]
-    \centering
-    \foreach \l in {1, ...,24}
-    {
-      \includegraphics[width=3cm]{dna/dna\l.png}%
-    }%
-\caption{The first screen paint in DNA. There are 24 raster interrupts allowing us to paint a long chain of sprites.}
-\end{figure}
+{
+  \setlength{\tabcolsep}{9.0pt}
+  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{center}
+  \begin{tabular}{lcc}
+  \toprule
+    State & Left Chain & Right Chain \\
+    \midrule
+    \makecell[l]{
+      \includegraphics[height=2.5cm]{dna/initial/frame46.png}%
+    } &
+    \makecell[l]{
+      \lstinputlisting[linewidth=4.5cm,framexleftmargin=-0.1cm,framexrightmargin=-0.22cm,
+          basicstyle=\tiny,escapechar=!,backgroundcolor=\color{white},frame=single,framerule=0pt]{dna/initial/frame46.tex}
+    } &
+    \makecell[l]{
+      \lstinputlisting[linewidth=4.5cm,framexleftmargin=-0.1cm,framexrightmargin=-0.22cm,
+          basicstyle=\tiny,escapechar=!,backgroundcolor=\color{white},frame=single,framerule=0pt]{dna/initial/frame46r.tex}
+    } \\
+    \addlinespace
+    \makecell[l]{
+      \includegraphics[height=2.5cm]{dna/initial/frame58.png}%
+    } &
+    \makecell[l]{
+      \lstinputlisting[linewidth=4.5cm,framexleftmargin=-0.1cm,framexrightmargin=-0.22cm,
+          basicstyle=\tiny,escapechar=!,backgroundcolor=\color{white},frame=single,framerule=0pt]{dna/initial/frame58.tex}
+    } &
+    \makecell[l]{
+      \lstinputlisting[linewidth=4.5cm,framexleftmargin=-0.1cm,framexrightmargin=-0.22cm,
+          basicstyle=\tiny,escapechar=!,backgroundcolor=\color{white},frame=single,framerule=0pt]{dna/initial/frame58r.tex}
+    } \\
+    \addlinespace
+    \makecell[l]{
+      \includegraphics[height=2.5cm]{dna/initial/frame67.png}%
+    } &
+    \makecell[l]{
+      \lstinputlisting[linewidth=4.5cm,framexleftmargin=-0.1cm,framexrightmargin=-0.22cm,
+          basicstyle=\tiny,escapechar=!,backgroundcolor=\color{white},frame=single,framerule=0pt]{dna/initial/frame67.tex}
+    } &
+    \makecell[l]{
+      \lstinputlisting[linewidth=4.5cm,framexleftmargin=-0.1cm,framexrightmargin=-0.22cm,
+          basicstyle=\tiny,escapechar=!,backgroundcolor=\color{white},frame=single,framerule=0pt]{dna/initial/frame67r.tex}
+    } \\
+    \addlinespace
+      \bottomrule
+      \end{tabular}
+    \end{adjustbox}
+  }\caption{Examples of the x co-ordinates (highlighted) in \icode{dnaSpritesXPositionsArray} used by the left and right chain when 'phase' is set to 5.}
+  \end{figure}
+
+We said a new value for the top eye-ball in each chain is calculated every paint, but whether the existing
+values get propagated to the right in \icode{dnaSpritesXPositionsArray} depends on the 'Speed' setting:
+
+\begin{minipage}[b]{0.75\linewidth}
+\centering
+\begin{lstlisting}[caption=\icode{dnaCurrentSpeed} is set by the 'A' and 'S' keys.]
+UpdateXPosArrays
+    DEC actualSpeed
+    BNE CalculateNewXPosForHead
+
+    ; The speed setting determines how quickly
+    ; the X pos values are propagated down the chains.
+    LDA dnaCurrentSpeed
+    STA actualSpeed
+    JSR DNA_PropagatePreviousXPosToTheRight
+\end{lstlisting}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}[b]{0.25\linewidth}
+\centering
+      \includegraphics[width=3cm]{dna/dnaspeed.png}%
+      \vspace{2cm}
+\end{minipage}
+
+The 'Speed' setting is effectively a counter that is decremented at every paint, once it reaches zero it gets reset back to 
+its initial value (in this case '1') and the X Positions are all shifted to the right in \icode{dnaSpritesXPositionsArray}.
+
+How is the new value for the eyeball at the head of each chain calculated? We get that it's updated at every screen paint
+but what determines it? The calculation is a two-phase process but both phases depend on the same array of values stored
+in \icode{newXPosOffsetsArray}. This is a rattle-bag of X positions describing a more or less continuous curve:
+
+\begin{lstlisting}[caption=Notice that the values start at \icode{\$40}\, rise gradually to \icode{\$80}\, back to \icode{\$00} and then
+back up to \icode{\$40} again.]
+newXPosOffsetsArray  .BYTE $40,$46,$4C,$53,$58,$5E,$63,$68
+                     .BYTE $6D,$71,$75,$78,$7B,$7D,$7E,$7F
+                     .BYTE $80,$7F,$7E,$7D,$7B,$78,$75,$71
+                     .BYTE $6D,$68,$63,$5E,$58,$52,$4C,$46
+                     .BYTE $40,$39,$33,$2D,$27,$21,$1C,$17
+                     .BYTE $12,$0E,$0A,$07,$04,$02,$01,$00
+                     .BYTE $00,$00,$01,$02,$04,$07,$0A,$0E
+                     .BYTE $12,$17,$1C,$21,$27,$2D,$33,$39
+                     .BYTE END_SENTINEL
+\end{lstlisting}
+
+The other factors in this calculation are the 'Frequency' selected for each chain, the left-hand chain (Wave 1) and the right-hand
+chain (Wave 2). The values that do the most work are \icode{xPosOffsetForWave1} and \icode{xPosOffsetForWave2}. 
+
+\begin{minipage}[b]{0.75\linewidth}
+\centering
+\begin{lstlisting}[caption=The value selected for 'Frequency' for Wave 1 and 2 translates to settings used in calculating the next X position for each chain.]
+DNA_UpdateSettingsBasedOnFrequency
+  LDA dnaWave1Frequency
+  AND #$1F
+  TAX
+  LDA timesToNextUpdateForFrequency,X
+  STA initialTimeToNextUpdateForWave1
+  STA timeToNextUpdateCounterForWave1
+  LDA xPosOffsetsForFrequency,X
+  STA xPosOffsetForWave1
+
+  LDA dnaWave2Frequency
+  AND #$1F
+  TAX
+  LDA timesToNextUpdateForFrequency,X
+  STA initialTimeToNextUpdateForWave2
+  STA timeToNextUpdateCounterForWave2
+  LDA xPosOffsetsForFrequency,X
+  STA xPosOffsetForWave2
+  JMP DNA_UpdateDisplayedSettings
+  ; Returns
+\end{lstlisting}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}[b]{0.25\linewidth}
+\centering
+      \includegraphics[width=3cm]{dna/dnafreq1.png}\\
+      \vspace{1cm}
+      \includegraphics[width=3cm]{dna/dnafreq2.png}%
+      \vspace{1cm}
+\end{minipage}
+As we can see above these are populated from \icode{xPosOffsetsForFrequency} using the 'Frequency' as an index.
+
+\begin{lstlisting}
+  ..
+  LDA xPosOffsetsForFrequency,X
+  STA xPosOffsetForWave1
+
+  ..
+  LDA xPosOffsetsForFrequency,X
+  STA xPosOffsetForWave2
+\end{lstlisting}
+
+In each case the value populated here is added to a value selected from \icode{newXPosOffsetsArray} to give the 
+new X position for the eyeball at the head of the chain. Well, in a way that's only half true. Separate positions
+are indeed calculated for the left and right chain, but at the end of the day the position calculate for the right-hand
+chain (Wave 2) is purely notional. It's just used as an initial value that the value calculated for the left-hand chain
+is layered on to. This allows the two chains to 'interfere' with each other, as though the position of one affects the
+other - and reduces the chance of the two overlapping too much:
+
+\begin{lstlisting}[caption=From \icode{CalculateValueOfNewXPosForWave1}]
+UpdateHeadOfWave   
+  ; Take the new X Pos value we calculated for Wave 2, add the position
+  ; we calculated for Wave 1 and make that the new position for the lead
+  ; sprite at the head of dnaSpritesXPositionsArray.
+  LDA notionalNewXPosForWave2
+  CLC
+  ADC newXPosForWave1
+  STA dnaSpritesXPositionsArray
+\end{lstlisting}
+
+When we compare the routines responsible for calculating the X Pos for Wave 2 and Wave 1 side by side on the next
+page we can see many similarities between the two. They are both maintaining and updating an index into 
+\icode{newXPosOffsetsArray} and using that to come up with a new X position. They both have to deal towards the end
+of the routine with the need to ensure the index does not exceed \icode{\$40} and subtract \icode{\$40} from it if
+it does. The output of \icode{CalculateValueOfNewXPosForWave2} is essentially the value stored in \icode{notionalNewXPosForWave2}
+and this is what is used as the input above, in conjunction with \icode{newXPosForWave1}, to come up with the final
+value for the X position for Wave 1. It is this value that gets added to the head of the working array \icode{dnaXPosDataHeadArray}
+by \icode{DNA_PropagatePreviousXPosToTheRight}.
+
+\begin{minipage}[b]{0.55\linewidth}
+\centering
+\begin{lstlisting}[basicstyle=\tiny, caption=Calculate a notional X Pos value for Wave 2. This routine is called by the one on the
+right\, its return value is \icode{notionalNewXPosForWave2}. ]
+CalculateValueOfNewXPosForWave2
+  LDA dnaWave2Enabled
+  BNE NewXPosWhenWave2Enabled
+
+  ; If wave 2 is not enabled set $40
+  ; as the initial X Pos (it will be
+  ; incremented later).
+  LDA #XPOS_OFFSETS_ARRAY_SIZE
+  STA notionalNewXPosForWave2
+ReturnFromNewXPos   
+  RTS
+
+NewXPosWhenWave2Enabled   
+  DEC timeToNextUpdateCounterForWave2
+  BNE ReturnFromNewXPos
+
+  LDA initialTimeToNextUpdateForWave2
+  STA timeToNextUpdateCounterForWave2
+
+  ; If right hand chain is enabled
+  ; get value from newXPosOffsetsArray,
+  ; which has $40 (64) potential values. 
+  ; This logic uses 
+  ; indexToXPosDataArrayForWave2 
+  ; to get a value from it, halves it
+  ; with ROR, and adds $40.
+  LDX indexToXPosDataArrayForWave2
+  LDA newXPosOffsetsArray,X
+  CLC
+  ROR         ; Halve it.
+  CLC
+  ADC #XPOS_OFFSETS_ARRAY_SIZE
+  STA notionalNewXPosForWave2
+
+  ; Add xPosOffsetForWave2 to
+  ; indexToXPosDataArrayForWave2.
+  ; Ensure it loops to start of array if
+  ; greater than $40. 
+  TXA
+  CLC
+  ADC xPosOffsetForWave2
+  CMP #XPOS_OFFSETS_ARRAY_SIZE
+  BMI NoLoopingRequired
+
+  SEC
+  SBC #XPOS_OFFSETS_ARRAY_SIZE
+NoLoopingRequired   
+  STA indexToXPosDataArrayForWave2
+  RTS
+\end{lstlisting}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}[b]{0.55\linewidth}
+\centering
+  \begin{lstlisting}[basicstyle=\tiny, caption=Calculate the new X Pos value for the head sprites, as well as propagate the
+  values in \icode{dnaXPosDataHeadArray} to the right when required.]
+CalculateValueOfNewXPosForWave1
+  DEC actualSpeed
+  BNE CalculateNewXPosForHead
+
+  ; The speed setting determines how quickly 
+  ; the X pos values are propagated down the chains.
+  LDA dnaCurrentSpeed
+  STA actualSpeed
+  JSR DNA_PropagatePreviousXPosToTheRight
+CalculateNewXPosForHead   
+  ; Get a new value for Wave 2.
+  JSR CalculateValueOfNewXPosForWave2
+  DEC timeToNextUpdateCounterForWave1
+  BNE ReturnFromUpdatingHead
+
+  LDA initialTimeToNextUpdateForWave1
+  STA timeToNextUpdateCounterForWave1
+
+  ; Get newXPosForWave1, this will be added to
+  ; notionalNewXPosForWave2. Both are sourced
+  ; from the same array newXPosOffsetsArray.
+  LDX indexToNextXPosForHead
+  LDA newXPosOffsetsArray,X
+  STA newXPosForWave1
+
+  LDY dnaWave2Enabled
+  BEQ UpdateHeadOfWave
+
+  ; Halve the offset we will use if
+  ; the right hand chain is enabled.
+  CLC
+  ROR 
+  STA newXPosForWave1
+UpdateHeadOfWave   
+  ; Take the new X Pos value we calculated for Wave 2,
+  ; add the position we calculated for Wave 1 and 
+  ; make that the new position for the lead
+  ; sprite at the head of dnaSpritesXPositionsArray.
+  LDA notionalNewXPosForWave2
+  CLC
+  ADC newXPosForWave1
+  STA dnaSpritesXPositionsArray
+
+  ; Get value for indexToNextXPosForHead for the next
+  ; time around. Ensure it loops to start of array if 
+  ; greater than $40.
+  TXA
+  CLC
+  ADC xPosOffsetForWave1
+  TAX
+  CPX #XPOS_OFFSETS_ARRAY_SIZE
+  BMI UpdateNextXPos
+
+  SEC
+  SBC #XPOS_OFFSETS_ARRAY_SIZE
+  TAX
+UpdateNextXPos   
+  STX indexToNextXPosForHead
+ReturnFromUpdatingHead   
+  RTS
+\end{lstlisting}
+\end{minipage}
+
+
+
+
+
+
+
 
 \begin{figure}[H]
   {
     \setlength{\tabcolsep}{1.0pt}
     \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
     \begin{adjustbox}{width=14cm,center}
-      \begin{tabular}{ccccccc}
+      \begin{tabular}{ccc}
         \toprule
-        Sprite0 & Sprite1 & Sprite2 & Sprite3 & Sprite4 & Sprite5 & Sprite6 \\
+        Sprite0 & Sprite1 & Sprite2 \\
         \midrule
 \makecell[l]{
 	\begin{subfigure}{0.3\textwidth}
-    \def\MULTICOLORONE{gray}
-    \def\MULTICOLORTWO{black}
-    \def\SPRITECOLOR{yellow}
-		\input{sprites/BIG_I}
-	\end{subfigure}
-} &
-\makecell[l]{
-	\begin{subfigure}{0.3\textwidth}
-    \def\MULTICOLORONE{gray}
-    \def\MULTICOLORTWO{black}
-    \def\SPRITECOLOR{green}
-		\input{sprites/BIG_R}
-	\end{subfigure}
-} &
-\makecell[l]{
-	\begin{subfigure}{0.3\textwidth}
-    \def\MULTICOLORONE{gray}
-    \def\MULTICOLORTWO{black}
-    \def\SPRITECOLOR{lightblue}
-		\input{sprites/BIG_I}
-	\end{subfigure}
-} &
-\makecell[l]{
-	\begin{subfigure}{0.3\textwidth}
-    \def\MULTICOLORONE{gray}
-    \def\MULTICOLORTWO{black}
-    \def\SPRITECOLOR{purple}
-		\input{sprites/BIG_D}
-	\end{subfigure}
-} &
-\makecell[l]{
-	\begin{subfigure}{0.3\textwidth}
-    \def\MULTICOLORONE{gray}
-    \def\MULTICOLORTWO{black}
-    \def\SPRITECOLOR{blue}
-		\input{sprites/BIG_I}
-	\end{subfigure}
-} &
-\makecell[l]{
-	\begin{subfigure}{0.3\textwidth}
-    \def\MULTICOLORONE{gray}
-    \def\MULTICOLORTWO{black}
-    \def\SPRITECOLOR{gray}
-		\input{sprites/IG_S}
-	\end{subfigure}
-} &
-\makecell[l]{
-	\begin{subfigure}{0.3\textwidth}
-    \def\MULTICOLORONE{gray}
-    \def\MULTICOLORTWO{gray}
-    \def\SPRITECOLOR{gray}
-		\input{sprites/ALPHA}
-	\end{subfigure}
-} \\ 
-        \midrule
-\makecell[l]{
-	\begin{subfigure}{0.3\textwidth}
-    \def\MULTICOLORONE{gray}
-    \def\MULTICOLORTWO{white}
-    \def\SPRITECOLOR{red}
-		\input{sprites/LAND_GILBY1}
-	\end{subfigure}
-} & 
-\makecell[l]{
-	\begin{subfigure}{0.3\textwidth}
-    \def\MULTICOLORONE{gray}
-    \def\MULTICOLORTWO{white}
-    \def\SPRITECOLOR{red}
-		\input{sprites/LAND_GILBY2}
-	\end{subfigure}
-} & 
-\makecell[l]{
-	\begin{subfigure}{0.3\textwidth}
-    \def\MULTICOLORONE{gray}
-    \def\MULTICOLORTWO{white}
-    \def\SPRITECOLOR{orange}
-		\input{sprites/LAND_GILBY3}
-	\end{subfigure}
-} & 
-\makecell[l]{
-	\begin{subfigure}{0.3\textwidth}
-    \def\MULTICOLORONE{gray}
+    \def\MULTICOLORONE{red}
     \def\MULTICOLORTWO{white}
     \def\SPRITECOLOR{yellow}
-		\input{sprites/LAND_GILBY4}
+		\input{sprites/BONUS_IBALL1}
 	\end{subfigure}
-} & 
+} &
 \makecell[l]{
 	\begin{subfigure}{0.3\textwidth}
-    \def\MULTICOLORONE{gray}
+    \def\MULTICOLORONE{red}
     \def\MULTICOLORTWO{white}
     \def\SPRITECOLOR{green}
-		\input{sprites/LAND_GILBY5}
+		\input{sprites/BONUS_IBALL2}
 	\end{subfigure}
-} & 
+} &
 \makecell[l]{
 	\begin{subfigure}{0.3\textwidth}
-    \def\MULTICOLORONE{gray}
+    \def\MULTICOLORONE{red}
     \def\MULTICOLORTWO{white}
     \def\SPRITECOLOR{lightblue}
-		\input{sprites/LAND_GILBY6}
-	\end{subfigure}
-} & 
-\makecell[l]{
-	\begin{subfigure}{0.3\textwidth}
-    \def\MULTICOLORONE{gray}
-    \def\MULTICOLORTWO{white}
-    \def\SPRITECOLOR{purple}
-		\input{sprites/LAND_GILBY7}
+		\input{sprites/BONUS_IBALL3}
 	\end{subfigure}
 } \\ 
         \addlinespace
         \bottomrule
       \end{tabular}
     \end{adjustbox}
-  }\caption{The sprites used by the top half of the screen and the bottom half of the screen.}
+  }\caption{The eyeball sprites used by DNA.}
 \end{figure}

@@ -308,7 +308,7 @@ of the routine with the need to ensure the index does not exceed \icode{\$40} an
 it does. The output of \icode{CalculateValueOfNewXPosForWave2} is essentially the value stored in \icode{notionalNewXPosForWave2}
 and this is what is used as the input above, in conjunction with \icode{newXPosForWave1}, to come up with the final
 value for the X position for Wave 1. It is this value that gets added to the head of the working array \icode{dnaXPosDataHeadArray}
-by \icode{DNA_PropagatePreviousXPosToTheRight}.
+by \icode{DNA\_PropagatePreviousXPosToTheRight}.
 
 \begin{minipage}[b]{0.55\linewidth}
 \centering
@@ -368,7 +368,7 @@ NoLoopingRequired
 \hspace{0.5cm}
 \begin{minipage}[b]{0.55\linewidth}
 \centering
-  \begin{lstlisting}[basicstyle=\tiny, caption=Calculate the new X Pos value for the head sprites, as well as propagate the
+  \begin{lstlisting}[basicstyle=\tiny, caption=Calculate the new X Pos value for the head sprites\, as well as propagate the
   values in \icode{dnaXPosDataHeadArray} to the right when required.]
 CalculateValueOfNewXPosForWave1
   DEC actualSpeed

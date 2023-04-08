@@ -1,0 +1,284 @@
+\chapter{Sprite Atlas}
+
+% \newdate{..label..}{..date..}{..info..}
+\newcommand\newrow[2]%
+{
+  \expandafter\def\csname row:#1\endcsname{#2}%
+}
+
+% \showrow{..label..}
+\newcommand\showrow[1]%
+{\expandafter\csname row:#1\endcsname}
+
+
+% \cp{..label..}
+\newcommand\cp[1]%
+{\noindent\raggedright
+  \textbf{\showrow{#1}}
+}
+
+\newrow{247}{\icode{LICKERSHIP}}
+\newrow{250}{\icode{LICKERSHIP\_INV}}
+\newrow{33}{\icode{BALLOON}}
+\newrow{34}{\icode{BALLOON}}
+\newrow{35}{\icode{BIRD}}
+\newrow{36}{\icode{BIRD}}
+\newrow{37}{\icode{BIRD}}
+\newrow{38}{\icode{BIRD}}
+\newrow{39}{\icode{SMALL\_BALL}}
+\newrow{40}{\icode{SMALL\_BALL}}
+\newrow{41}{\icode{SMALL\_BALL}}
+\newrow{42}{\icode{QBERT\_SQUARES}}
+\newrow{43}{\icode{QBERT}}
+\newrow{44}{\icode{LOZENGE}}
+\newrow{45}{\icode{MAGIC\_MUSHROOM}}
+\newrow{46}{\icode{INV\_MAGIC\_MUSHROOM}}
+\newrow{47}{\icode{SMALLBALL\_AGAIN}}
+\newrow{48}{\icode{CAMEL}}
+\newrow{49}{\icode{FLYING\_DART}}
+\newrow{50}{\icode{FLYING\_DART}}
+\newrow{51}{\icode{FLYING\_DART}}
+\newrow{52}{\icode{FLYING\_DART}}
+\newrow{53}{\icode{WINGED\_BALL}}
+\newrow{54}{\icode{WINGED\_BALL}}
+\newrow{55}{\icode{WINGED\_BALL}}
+\newrow{56}{\icode{MONEY\_BAG}}
+\newrow{57}{\icode{MONEY\_BAG}}
+\newrow{58}{\icode{TITAN\_ROCKET}}
+\newrow{63}{\icode{BUBBLE}}
+\newrow{59}{\icode{BOUNCY\_RING}}
+\newrow{60}{\icode{BOUNCY\_RING}}
+\newrow{61}{\icode{BOUNCY\_RING}}
+\newrow{62}{\icode{BUBBLE}}
+\newrow{160}{\icode{FLYING\_SAUCER}}
+\newrow{161}{\icode{FLYING\_SAUCER}}
+\newrow{162}{\icode{FLYING\_SAUCER}}
+\newrow{163}{\icode{FLYING\_COMMA}}
+\newrow{164}{\icode{FLYING\_COMMA}}
+\newrow{165}{\icode{FLYING\_DOT}}
+\newrow{166}{\icode{FLYING\_DOT}}
+\newrow{167}{\icode{BOLAS}}
+\newrow{168}{\icode{BOLAS}}
+\newrow{169}{\icode{BOLAS}}
+\newrow{170}{\icode{BOLAS}}
+\newrow{171}{\icode{STARSHIP}}
+\newrow{172}{\icode{FLYING\_TRIANGLE}}
+\newrow{173}{\icode{FLYING\_TRIANGLE}}
+\newrow{174}{\icode{FLYING\_FLOWCHART}}
+\newrow{175}{\icode{FLYING\_FLOWCHART}}
+\newrow{176}{\icode{FLYING\_COCK}}
+\newrow{177}{\icode{FLYING\_COCK}}
+\newrow{178}{\icode{FLYING\_COCK\_RIGHT}}
+\newrow{179}{\icode{FLYING\_COCK\_RIGHT}}
+\newrow{180}{\icode{CUMMING\_COCK}}
+\newrow{181}{\icode{CUMMING\_COCK}}
+\newrow{182}{\icode{CUMMING\_COCK}}
+\newrow{183}{\icode{CUMMING\_COCK}}
+\newrow{184}{\icode{STRANGE\_SYMBOL}}
+\newrow{185}{\icode{COPTIC\_CROSS}}
+\newrow{186}{\icode{EYE\_OF\_HORUS}}
+\newrow{187}{\icode{PSI}}
+\newrow{188}{\icode{BULLHEAD}}
+\newrow{189}{\icode{ATARI\_ST}}
+\newrow{190}{\icode{FLYING\_BAR}}
+\newrow{191}{\icode{FLYING\_BAR}}
+\newrow{192}{\icode{STARFIELD\_SPRITE}}
+\newrow{193}{\icode{LAND\_GILBY}}
+\newrow{194}{\icode{LAND\_GILBY}}
+\newrow{195}{\icode{LAND\_GILBY}}
+\newrow{196}{\icode{LAND\_GILBY}}
+\newrow{197}{\icode{LAND\_GILBY}}
+\newrow{198}{\icode{LAND\_GILBY}}
+\newrow{199}{\icode{LAND\_GILBY}}
+\newrow{200}{\icode{LAND\_GILBY}}
+\newrow{201}{\icode{LAND\_GILBY}}
+\newrow{202}{\icode{LAND\_GILBY}}
+\newrow{203}{\icode{LAND\_GILBY}}
+\newrow{204}{\icode{GILBY\_TAKING\_OFF}}
+\newrow{205}{\icode{GILBY\_TAKING\_OFF}}
+\newrow{206}{\icode{GILBY\_TAKING\_OFF}}
+\newrow{207}{\icode{GILBY\_TAKING\_OFF}}
+\newrow{208}{\icode{GILBY\_TAKING\_OFF}}
+\newrow{209}{\icode{GILBY\_AIRBORNE\_LEFT}}
+\newrow{210}{\icode{GILBY\_AIRBORNE\_TURNING}}
+\newrow{211}{\icode{GILBY\_AIRBORNE\_RIGHT}}
+\newrow{212}{\icode{LAND\_GILBY\_LOWERPLANET}}
+\newrow{213}{\icode{LAND\_GILBY\_LOWERPLANET}}
+\newrow{214}{\icode{LAND\_GILBY\_LOWERPLANET}}
+\newrow{215}{\icode{LAND\_GILBY\_LOWERPLANET}}
+\newrow{216}{\icode{LAND\_GILBY\_LOWERPLANET}}
+\newrow{217}{\icode{LAND\_GILBY\_LOWERPLANET}}
+\newrow{218}{\icode{LAND\_GILBY\_LOWERPLANET}}
+\newrow{219}{\icode{LAND\_GILBY\_LOWERPLANET}}
+\newrow{220}{\icode{LAND\_GILBY\_LOWERPLANET}}
+\newrow{221}{\icode{LAND\_GILBY\_LOWERPLANET}}
+\newrow{222}{\icode{LAND\_GILBY\_LOWERPLANET}}
+\newrow{223}{\icode{GILBY\_TAKING\_OFF\_LOWERPLANET}}
+\newrow{224}{\icode{GILBY\_TAKING\_OFF\_LOWERPLANET}}
+\newrow{225}{\icode{GILBY\_TAKING\_OFF\_LOWERPLANET}}
+\newrow{226}{\icode{GILBY\_TAKING\_OFF\_LOWERPLANET}}
+\newrow{227}{\icode{GILBY\_TAKING\_OFF\_LOWERPLANET}}
+\newrow{228}{\icode{GILBY\_AIRBORNE\_LOWERPLANET\_RIGHT}}
+\newrow{229}{\icode{GILBY\_AIRBORNED\_TURNING\_LOWER\_PLANET}}
+\newrow{230}{\icode{GILBY\_AIRBORNED\_LOWERPLANET\_LEFT}}
+\newrow{231}{\icode{SMALLDOT}}
+\newrow{232}{\icode{SPINNING\_RING}}
+\newrow{233}{\icode{SPINNING\_RING}}
+\newrow{234}{\icode{SPINNING\_RING}}
+\newrow{235}{\icode{SPINNING\_RING}}
+\newrow{236}{\icode{LASER\_BULLET}}
+\newrow{237}{\icode{EXPLOSION\_START}}
+\newrow{238}{\icode{EXPLOSION\_MIDDLE}}
+\newrow{239}{\icode{EXPLOSION\_END}}
+\newrow{240}{\icode{BLANK\_SPRITE}}
+\newrow{241}{\icode{BIG\_I}}
+\newrow{242}{\icode{BIG\_R}}
+\newrow{243}{\icode{BIG\_D}}
+\newrow{244}{\icode{BIG\_S}}
+\newrow{245}{\icode{ALPHA}}
+\newrow{246}{\icode{LICKER\_SHIP}}
+\newrow{248}{\icode{LICKERSHIP}}
+\newrow{249}{\icode{LICKERSHIP\_INV}}
+\newrow{251}{\icode{LICKERSHIP\_INV}}
+\newrow{252}{\icode{TEARDROP\_EXPLOSION}}
+\newrow{253}{\icode{TEARDROP\_EXPLOSION}}
+\newrow{254}{\icode{TEARDROP\_EXPLOSION}}
+\newrow{255}{\icode{LLAMA}}
+\clearpage
+\begin{figure}[H]
+    \centering
+    \foreach \l [evaluate=\l as \k using {int(\l+1)},evaluate=\l as \m using {int(\l+2)},evaluate=\l as \n using {int(\l+3)}] in {33,37,...,52}
+    {
+        \begin{minipage}{0.20\linewidth}
+        \includegraphics[width=2cm]{src/sprites/gallery/sprite_\l.png}%
+        \caption*{\cp{\l}}
+        \end{minipage}%
+        \hspace{0.5cm}
+        \begin{minipage}{0.20\linewidth}
+        \includegraphics[width=2cm]{src/sprites/gallery/sprite_\k.png}%
+        \caption*{\cp{\k}}
+        \end{minipage}%
+        \hspace{0.5cm}
+        \begin{minipage}{0.20\linewidth}
+        \includegraphics[width=2cm]{src/sprites/gallery/sprite_\m.png}%
+        \caption*{\cp{\m}}
+        \end{minipage}%
+        \hspace{0.5cm}
+        \begin{minipage}{0.20\linewidth}
+        \includegraphics[width=2cm]{src/sprites/gallery/sprite_\n.png}%
+        \caption*{\cp{\n}}
+        \end{minipage}%
+        \vspace{0.5cm}
+    }%
+\caption{Sprites}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \foreach \l [evaluate=\l as \k using {int(\l+1)},evaluate=\l as \m using {int(\l+2)},evaluate=\l as \n using {int(\l+3)}] in {53,57,...,60}
+    {
+        \begin{minipage}{0.20\linewidth}
+        \includegraphics[width=2cm]{src/sprites/gallery/sprite_\l.png}%
+        \caption*{\cp{\l}}
+        \end{minipage}%
+        \hspace{0.5cm}
+        \begin{minipage}{0.20\linewidth}
+        \includegraphics[width=2cm]{src/sprites/gallery/sprite_\k.png}%
+        \caption*{\cp{\k}}
+        \end{minipage}%
+        \hspace{0.5cm}
+        \begin{minipage}{0.20\linewidth}
+        \includegraphics[width=2cm]{src/sprites/gallery/sprite_\m.png}%
+        \caption*{\cp{\m}}
+        \end{minipage}%
+        \hspace{0.5cm}
+        \begin{minipage}{0.20\linewidth}
+        \includegraphics[width=2cm]{src/sprites/gallery/sprite_\n.png}%
+        \caption*{\cp{\n}}
+        \end{minipage}%
+        \vspace{0.5cm}
+    }%
+    \foreach \l [evaluate=\l as \k using {int(\l+1)},evaluate=\l as \m using {int(\l+2)},evaluate=\l as \n using {int(\l+3)}] in {0,3,...,8}
+    {
+        \begin{minipage}{0.20\linewidth}
+        \includegraphics[width=2cm]{src/sprites/gallery/sprite_\l.png}%
+        \caption*{\cp{\l}}
+        \end{minipage}%
+        \hspace{0.5cm}
+        \begin{minipage}{0.20\linewidth}
+        \includegraphics[width=2cm]{src/sprites/gallery/sprite_\k.png}%
+        \caption*{\cp{\k}}
+        \end{minipage}%
+        \hspace{0.5cm}
+        \begin{minipage}{0.20\linewidth}
+        \includegraphics[width=2cm]{src/sprites/gallery/sprite_\m.png}%
+        \caption*{\cp{\m}}
+        \end{minipage}%
+        \hspace{0.5cm}
+        \begin{minipage}{0.20\linewidth}
+        \includegraphics[width=2cm]{src/sprites/gallery/sprite_\n.png}%
+        \caption*{\cp{\n}}
+        \end{minipage}%
+        \vspace{0.5cm}
+    }%
+\caption{Sprites}
+\end{figure}
+
+\foreach \i [evaluate=\i as \h using {int(\i+4)},evaluate=\i as \g using {int(\i+19)}] in {160,180,...,220}
+{
+  \begin{figure}[H]
+      \centering
+      \foreach \l [evaluate=\l as \k using {int(\l+1)},evaluate=\l as \m using {int(\l+2)},evaluate=\l as \n using {int(\l+3)}] in {\i,\h,...,\g}
+      {
+          \begin{minipage}{0.20\linewidth}
+          \includegraphics[width=2cm]{src/sprites/gallery/sprite_\l.png}%
+          \caption*{\cp{\l}}
+          \end{minipage}%
+          \hspace{0.5cm}
+          \begin{minipage}{0.20\linewidth}
+          \includegraphics[width=2cm]{src/sprites/gallery/sprite_\k.png}%
+          \caption*{\cp{\k}}
+          \end{minipage}%
+          \hspace{0.5cm}
+          \begin{minipage}{0.20\linewidth}
+          \includegraphics[width=2cm]{src/sprites/gallery/sprite_\m.png}%
+          \caption*{\cp{\m}}
+          \end{minipage}%
+          \hspace{0.5cm}
+          \begin{minipage}{0.20\linewidth}
+          \includegraphics[width=2cm]{src/sprites/gallery/sprite_\n.png}%
+          \caption*{\cp{\n}}
+          \end{minipage}%
+          \vspace{0.5cm}
+      }%
+  \caption{Sprites}
+  \end{figure}
+}
+
+\begin{figure}[H]
+    \centering
+    \foreach \l [evaluate=\l as \k using {int(\l+1)},evaluate=\l as \m using {int(\l+2)},evaluate=\l as \n using {int(\l+3)}] in {240,244,...,255}
+    {
+        \begin{minipage}{0.20\linewidth}
+        \includegraphics[width=2cm]{src/sprites/gallery/sprite_\l.png}%
+        \caption*{\cp{\l}}
+        \end{minipage}%
+        \hspace{0.5cm}
+        \begin{minipage}{0.20\linewidth}
+        \includegraphics[width=2cm]{src/sprites/gallery/sprite_\k.png}%
+        \caption*{\cp{\k}}
+        \end{minipage}%
+        \hspace{0.5cm}
+        \begin{minipage}{0.20\linewidth}
+        \includegraphics[width=2cm]{src/sprites/gallery/sprite_\m.png}%
+        \caption*{\cp{\m}}
+        \end{minipage}%
+        \hspace{0.5cm}
+        \begin{minipage}{0.20\linewidth}
+        \includegraphics[width=2cm]{src/sprites/gallery/sprite_\n.png}%
+        \caption*{\cp{\n}}
+        \end{minipage}%
+        \vspace{0.5cm}
+    }%
+\caption{Sprites}
+\end{figure}

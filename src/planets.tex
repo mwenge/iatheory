@@ -592,7 +592,7 @@ structureSubRoutineArrayLoPtr   .BYTE <DrawLittleStructure,<DrawMediumStructure
 \end{lstlisting}
 
 With this in place our routine consists of getting a random number between 0 and 3, then using that as in index to pick
-out a value at the same position from \icode{structureSubRoutineArrayLoPtr} and \icode {structureSubRoutineArrayHiPtr}.
+out a value at the same position from \icode{structureSub\-RoutineArrayLoPtr} and \icode {structureSubRoutineArrayHiPtr}.
 We then store those values in \icode{structureRoutineLoPtr} and \icode{structureRoutineHiPtr} respectively. We now
 have a pointer to one of our draw routines at \icode{structureRoutineLoPtr} which we can jump to with the simple
 command: \icode{JMP (structureRoutineLoPtr)}. 

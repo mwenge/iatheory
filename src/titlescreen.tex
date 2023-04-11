@@ -512,7 +512,7 @@ moved on to the next line - which is why the diagram shows 17 rather than 16. Ev
 raster doesn't wait for us. We have to work quickly, especially if we're preparing graphics on lines that its likely
 to reach soon. This is why each of these subroutines does as little as it can get away with to get the job done.
 
-The three sub-routines the work at each raster interrupt can get divvied out to are \icode{UpdateJumpingGilbyPositionsAndColors},
+The three sub-routines the work at each raster interrupt can get divvied out to are \icode{UpdateJumping\-GilbyPositionsAndColors},
 \icode{DoStarfieldAnimation}, and a cluster of routines starting with \icode{UpdateTitleScreenSpriteColors}. The one
 that's called the most often is \icode{DoStarfieldAnimation} as it is responsible for sprinkling the screen with 
 animated stars traversing it left to right.
@@ -868,9 +868,9 @@ of jumping rainbow gilbies somewhere in the lower half of the screen before our 
 call it at this point in the raster's journey - because the raster hasn't reached that position in the screen yet
 (but will reach it shortly) so now is our opportunity to position the gilbies where we want them. 
 
-Since this is an animation sequence we're managing the approach of \icode{UpdateJumpingGilbyPositionsAndColors} is
+Since this is an animation sequence we're managing the approach of \icode{UpdateJumping\-GilbyPositionsAndColors} is
 simply to update their position on the screen. Calculating this new position is something that happens a little later
-in the routine \icode{RecalculateJumpingGilbyPositions} when we are nearer the bottom of the screen. This means the
+in the routine \icode{Recalculate\-JumpingGilbyPositions} when we are nearer the bottom of the screen. This means the
 position values we're picking up here are the initial ones set in the game's code:
 
 \begin{lstlisting}
@@ -878,7 +878,7 @@ titleScreenGilbiesYPosArray       .BYTE $B2,$B6,$BB,$C1,$D0,$C8,$C1
 titleScreenGilbiesXPosArray       .BYTE $54,$58,$5C,$60,$64,$68,$6C
 \end{lstlisting}
 
-The next time around we will pick up the positions as re-calculated by \icode{RecalculateJumpingGilbyPositions}.
+The next time around we will pick up the positions as re-calculated by \icode{Recalculate\-JumpingGilbyPositions}.
 So the positioning of the gilbies and the calculation of the updated positions happen separately. The reason
 for that approach is simple: there isn't enough time right now to do anything but simply update the positions the gilbies
 are displayed at.
@@ -926,7 +926,7 @@ UpdateYPosJumpingGilbies
         RTS
 \end{lstlisting}
 We can see in here the verbosity required to handle the most significant bit of the sprite's x co-ordinate. Just
-as with the starfield we need a separate array (\icode{titleScreenGilbiesMSBXPosArray} to handle this in addition
+as with the starfield we need a separate array (\icode{titleScreen\-GilbiesMSBXPosArray} to handle this in addition
 to arrays to manage the basic x/y positions themselves.
 
 With the gilbies prepared we fall through and update the starfield again. Once that's done we're finished handling the

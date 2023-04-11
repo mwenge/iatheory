@@ -272,7 +272,7 @@ p4003   LDA #<MainControlLoopInterruptHandler
 \end{lstlisting}
 
 As you can see the first thing it does is change the address of the code that should be executed at every 'interrupt'. It's now an
-address referred to by the label \icode{MainControlLoopInterruptHandler}. This happens to be address \icode{\$6B3E} but the beauty
+address referred to by the label \icode{MainControlLoop\-InterruptHandler}. This happens to be address \icode{\$6B3E} but the beauty
 of using labels in our code is that we no longer need to worry about the number of the addresses anymore. The label will do the job
 for us. It does mean we have to know what the syntax \icode{\#<MainControlLoopInterruptHandler} means though. What it means is:
 if \icode{MainControlLoopInterruptHandler} lives at \icode{\$6B3E} the \icode{\#<} decorators refer to the \icode{\$3E} part of the

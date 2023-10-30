@@ -51,7 +51,7 @@ Producing assets for the OBJ layer, on the other hand, was much more elaborate. 
 
 
 
-\subsection{Pen and Papers}
+\section{Pen and Papers}
 The artistic direction was established by the planner of the game. Their goal was to produce concept art and pose outlines in order to capture the essence of a character, as well as establishing proportions and movements. After that, senior artists took over for fine tuning.
 
 \begin{q}{Eri Nakamura\cite{sf2devinterview}}
@@ -82,7 +82,7 @@ However, "Chun-Li" stories seem to have been rare occurrences.   In the case of 
 
 
 
-\subsection{Non-square Grid Paper}\label{artists_par}
+\section{Non-square Grid Paper}\label{artists_par}
 To draw both outlines and detailed versions of the sprites, artists used a special paper with a double grid system.
 
 There was a "light" grid which used non-square proportions to match the CP-system video aspect ratio of 10:7. Artists were able to draw normally without having to worry about distortion since rectangle elements would match the CPS-1's stretched pixels. 
@@ -93,7 +93,7 @@ The paper featured a second "darker" grid which grouped elements 16 by 16 to mat
 
 
 
-\subsection{OBJ Allocation}
+\section{OBJ Allocation}
 
 If breaking free of the rectangular sprites was a blessing for the artists, it was a problem for Capcom project managers. In an era where ROM chips were very expensive, a game was allocated a ROM budget at its beginning which it could not be exceeded.
 
@@ -152,7 +152,7 @@ Ryu's sheet \icode{0x4500} allows us to guess even more about the production pro
 
 As the project progressed, the team scraped the bottom of the barrel and started to allocate space on a per-tile basis. They sometimes spread a character pose across multiple sheets, like in Dhalsim's sheet where portions of Blanka can be found.
 
-\subsection{The Sheet System}
+\section{The Sheet System}
 Besides sparsely describing it, Capcom employees never elaborated on the sheet system. For which title and for how long it was used in total are questions that were never answered.
 
 Thanks to an understanding of the GFXROM format, it is possible to peek back in time. The digital structure is an imprint of what the paper sheet looked like. These reconstructed sheets can provide answers.
@@ -176,7 +176,7 @@ Inspection of subsequent games' GFXROM indicate that all games released on CPS-2
 \img{smc-70_ad.jpg}
 
 
-\subsection{Digitizing Art}\index{Computers!SONY SMC-70}
+\section{Digitizing Art}\index{Computers!SONY SMC-70}
 
 To digitize their drawings, Capcom employees used SMC-70 computers. Manufactured by Sony, the SMC-70 hit both the US and Japan market in the end of 1982. What is particularly noteworthy about this machine is that it is built around extensibility. 
 
@@ -192,7 +192,7 @@ This architecture allowed Sony's machine capabilities to range from simple offic
 \caption*{A SMC-70 extended with a SMI-7012. Power supply at the very back}
 \end{figure}
 
-\subsubsection{Sony, the big iron}
+\subsection{Sony, the big iron}
 On one hand, the substantial list of extensions and peripherals, totaling nearly 40 pieces all made by Sony, is a testament to the company's commitment. On the other hand, it also embodies a desire to remain in control of the platform by keeping other manufacturers from contributing to the eco-system.
 
 \begin{figure}[H]
@@ -223,7 +223,7 @@ On one hand, the substantial list of extensions and peripherals, totaling nearly
 \end{figure}
 
 
-\subsubsection{Noteworthy capabilities}
+\subsection{Noteworthy capabilities}
 The SMC-70 is notable for being the first computer to allow a 3.5" floppy reader (also invented by Sony in 1981) and its ability to display kanji characters via a ROM extension. 
 
 However, it is really when it comes to graphic capabilities that the machine stood out. Four resolutions were available, ranging from low-resolution 320x200 using sixteen colors up to high-resolution 640x200 in two colors. 
@@ -231,7 +231,7 @@ However, it is really when it comes to graphic capabilities that the machine sto
 The 16 colors mode was particularly interesting to Capcom artists since it was a perfect match to the CPS-1 pen system.
 
 
-\subsection{Tiny Character Editor}
+\section{Tiny Character Editor}
 
 The SMC-70 had no ability to use a scanner. The digitization process was entirely achieved by hand. To help them in their task, artists used a tool called TCE (Tiny Character Editor). Although no screenshot ever emerged, Capcom employees gave a rough description of its minimalist approach.
 
@@ -240,7 +240,7 @@ You had a 16 pixel grid, a 16-color palette, and that was it.
 \end{q}
 
 
-\subsection{Dotting}
+\section{Dotting}
 For both SCROLL and OBJ elements, dotting was done on a tile basis. The artist's task was to look at their detailed graph paper drawing and decide, for each rectangular element in the tile, which color of the palette to use for it.
 
 Pixel-art was a tedious and repetitive process which required a sense of aesthetic creativity to deal with the cases where a line crossed a pixel. Drop the pixel, include it plain, or attempt to anti-alias with a color in the palette were difficult choices to make.
@@ -269,7 +269,7 @@ I used a keyboard to draw all the graphics for Vampire and Street Fighter 2.
 \end{q}
 
 
-\subsection{Saving Tiles}
+\section{Saving Tiles}
 Artists attempted to reuse tiles as much as possible to reduce usage of the scarce ROM space available. In Street Fighter 2, there was only enough GFXROM for eleven challengers. Ken is a patchwork and a palette swap on top of Ryu tiles base. It "weighs" only 98,304 bytes. A remarkable achievement compared to characters such as Zangief (622,592 bytes), Honda (491,520 bytes), or Ryu (442,368 bytes).
 
 \begin{minipage}[t]{0.19\linewidth}
@@ -336,7 +336,7 @@ The capacity of the ASICs to flip tiles horizontally was used extensively in Str
 
 \pagebreak
 
-\subsection{Team Structure and Culture}
+\section{Team Structure and Culture}
 
 The art team had a strong hierarchy based on skills and seniority.
 
@@ -352,7 +352,7 @@ The structure was flat with no involvement of intermediate managers. Out of the 
 
 As layered as they were, operations were not set in stone and employees could climb the ladder quickly. Akiman was hired on "Dyn Side Arms" in 1986 as a SCROLL artist, the bottom of the artist ladder. Two years later, he was a Planner on Forgotten Worlds and went on to work on Final Fight and Street Fighter 2 in the same capacity.
 
-\subsubsection{Work Ethic}
+\subsection{Work Ethic}
 
 A strong working culture was established from the very top.
 
@@ -366,7 +366,7 @@ A strong working culture was established from the very top.
   By the way, even now that I'm freelance, I still sleep under my computer desk at home.
   \end{q}
 
-\subsubsection{Poaching}
+\subsection{Poaching}
 
 
 Retaining talent was a top priority. The credit screen of Street Fighter II illustrates Capcom's cautiousness. Artists were only credited by their nicknames.
@@ -393,7 +393,7 @@ Despite its precautions, Capcom lost numerous employees over the years. Among th
 
 
 
-\subsection{Inspiration}
+\section{Inspiration}
 For Street Fighter II, artists' inspiration came from various outlets. 
 
 Mangas such as "Yasunori Katō" helped to give birth to Dictator while Tao from "Harmagedon: Genma Wars" was part of the genesis of Chun-Li. 
@@ -446,7 +446,7 @@ On this layer, tiles can be used either directly or in groups which mandate dist
 \end{figure}
 
 
-\subsection{Sprite}
+\section{Sprite}
 A sprite is a collection of tiles with rectangular boundaries. As we will see in the m68k programming section it can be rendered by issuing a single draw call mentioning the offset in the sheet, the width in tiles and the height in tiles.
 
  \begin{figure}[H]
@@ -458,7 +458,7 @@ While it is convenient to be able to use a single command and the best way to re
 
 Another limitation (or advantage depending on how you look at it) is that a single palette is specified when placing the sprite draw command so all tiles must use it.
 
-\subsection{Shape}
+\section{Shape}
 
 A much more efficient and flexible method is to use a Shape where tile layout can be arbitrary. It takes several draw calls to draw (tiles have to be specified one by one) but they can be located anywhere in a GFXROM.
 

@@ -89,7 +89,7 @@ a single sprite (Sprite 7). Each time it runs it can change the position of this
 it appears at a new position as well as the old one on which the raster has already painted it. We
 covered the mechanics of this in detail when we dissected the title screen in 'The First 16 Milliseconds'.
 
-\subsection{Updating Enemy Sprite Positions}
+\section{Updating Enemy Sprite Positions}
 We can get a better sense of how the labour is divided between the two routines if we isolate the
 position of the raster when the position of the enemy sprites on each planet is updated.
 
@@ -190,7 +190,7 @@ LowerPlanetShipsLoop
 \end{lstlisting}
 \end{minipage}
 
-\subsection{Scrolling the Planets}
+\section{Scrolling the Planets}
 We want scrolling to be smooth and fast. Moving swiftly or slowly across the planet surface
 depending on how much acceleration we apply is the fundamental dynamic of the game so will
 be important to get right.
@@ -224,7 +224,7 @@ Since we're moving fairly fast, we're updating the character position by 3 chara
 occasion (notice how much the bush moves). At the same time we're applying a pixel movement
 to preserve the impression of smoothness.
 
-\subsubsection{Pixel Movement}
+\subsection{Pixel Movement}
 If we look at the code that looks after the pixel-grained movement in \icode{AnimateStar\-FieldAndScrollPlanets}
 we can see it is using a variable called \icode{planetScrollSpeed} to control the amount of offset to apply:
 
@@ -355,7 +355,7 @@ just take the overall scroll speed and clamp it to a value between 0 and 7. This
 practice - it ensures we're avoiding the appearance of scrolling purely character-wise by guaranteeing
 we're nearly always displaying the surface offset by some small number of pixels.
 
-\subsubsection{Character Movement}
+\subsection{Character Movement}
 
 As a quick reminder from our chapter on generating the surfaces of the planets ('Making Planets for Nigel'),
 the data we came up with for the ever-so-randomly-generated planet was stored between \icode{\$8000} and \icode{\$8FFF}.
@@ -631,7 +631,7 @@ ScrollPlanetRight
 \end{lstlisting}
 
 
-\subsection{Jumping Up and Down}
+\section{Jumping Up and Down}
 \begin{lstlisting}[caption=The routines responsible for updating the Gilby's vertical position.]
 ;-------------------------------------------------------
 ; PerformMainGameUpdate
@@ -745,7 +745,7 @@ land, creating an acceleration effect due to gravity.
 With a simple, consistent addition operation each time it comes to position the gilby we've managed to achieve a jumping and
 landing effect with a neat gravity effect built in!
 
-\subsection{Sound Effects}
+\section{Sound Effects}
 \begin{lstlisting}
 ;-------------------------------------------------------
 ; PerformMainGameUpdate
@@ -772,7 +772,7 @@ when it has finished playing the frames for that interrupt and also when it has 
 will allow us to manage two different sound effects concurrently. Before we look at how this multiplexing is achieved
 lets look at how a single sound effect is managed in general.
 
-\subsubsection{The Sound Effect Data Structure}
+\subsection{The Sound Effect Data Structure}
 As ever, the key to managing complexity isn't the cleverness of our code but the simplicity of the data structure
 we choose. Iridis Alpha solves this with a remarkably compact solution where each frame in the sound effect is represented
 by a meagre 5 bytes and the whole sound effect is encoded by a sequence of these 5-byte records. In order to unpack
@@ -1020,7 +1020,7 @@ in temporal order. Notice the way the colume steadily decreases as we go through
 }\caption*{}
 \end{figure}
 
-\subsubsection{Multiplexing}
+\subsection{Multiplexing}
 While playing the fairly dull component we cover above, Iridis Alpha plays a second sequence simultaneously that constitutes
 the one a player will know and recognize.
 
@@ -1394,7 +1394,7 @@ is just a snapshot:
 \end{figure}
 
 
-\subsubsection{Unused Sound Effects}
+\subsection{Unused Sound Effects}
 The \icode{PlaySoundEffects} code has some leftover routines for record types that appear to have gone unused in the final
 game. These make slightly more complicated use of the \icode{soundEffectBuffer}. All they do is mutate the data in the buffer
 using the 5-byte record. They don't actually play any sounds or make any writes to the SID register.

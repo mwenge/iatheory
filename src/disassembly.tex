@@ -179,7 +179,7 @@ LDA #$00
 STA $0318    ;Non-Maskable Interrupt
 \end{lstlisting}
 
-\subsubsection{Important Concept Number One: High Bytes and Low Bytes}
+\subsection{Important Concept Number One: High Bytes and Low Bytes}
 On the face of it these four instructions are doing something very simple. They are storing the value \$40
 at address \$0319 and the value \$00 at \$0318. What they are actually doing is storing the address \$4000
 in a place where the C64's 6502 CPU will be expected to look in a moment's time and take that as a command
@@ -227,7 +227,7 @@ seem strange and maybe even wasteful. Seeing the many uses it is put to in the I
 you otherwise, but hopefully when we look at the use it is put to here you may begin to get a flavor of its
 utility. Let's do that by looking at our second important concept.
 
-\subsubsection{Important Concept Number Two: Interrupts}
+\subsection{Important Concept Number Two: Interrupts}
 \begin{lstlisting}[caption=It's an interrupt. And it's non-maskable.]
 LDA #$40
 STA $0319    ;Non-Maskable Interrupt

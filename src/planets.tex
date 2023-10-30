@@ -77,7 +77,7 @@ Now you have not just a layout for one planet, but a layout for all five.
 But making planets isn't all simple steps and big picture decisions. There are also
 trifling details for the little people to wrestle with.
 
-\subsection{Step One: Creating the Sea}
+\section{Step One: Creating the Sea}
 
 Making a sea is very easy. You come up with a character than can be repeated 1024 times to fill the
 surface of the planet.
@@ -238,7 +238,7 @@ WriteSeaLoop
 
 \subfile{planets/planet1Charset_SeaAgain}
 
-\subsection{Step Two: Creating the Land}
+\section{Step Two: Creating the Land}
 
 Is that all there is to it? Painting things with blue? No. 
 
@@ -422,7 +422,7 @@ And finally the right shore:
 \end{lstlisting}
 
 
-\subsection{Step Three: Structures Structures Structures}
+\section{Step Three: Structures Structures Structures}
 The routines for adding structures to the planet are the opportunity to observe some assembly language cleverness.
 For each structure we draw we have to decide two things: where to drop it on the surface and what type of structure
 to draw. Apart from the Warp Gates, there are four structure types available. 
@@ -643,7 +643,7 @@ of different types.
   }\caption[]{Planet 3 once \icode{DrawRandomlyChosenStructure} has finished its business.}
 \end{figure}
 
-\subsection{Step Four: Add the warp gate}
+\section{Step Four: Add the warp gate}
 
 Our final step is to add the warp gate.
 \begin{figure}[H]
@@ -709,7 +709,7 @@ DrawWarpGates
   }\caption[]{The final surfaces for Planets 4 and 5.}
 \end{figure}
 
-\subsection{Inactive Lower Planet}
+\section{Inactive Lower Planet}
 When the lower planet is inactive a surface with land, sea, and a warp gate is displayed. This doesn't reuse
 any of the logic described above. Instead it is generated from some customized data in the routine
 \icode{DrawLowerPlanetWhileInactive}.
@@ -773,7 +773,7 @@ textForInactiveLowerPlanet
 \end{lstlisting}
 
 
-\subsection{Drawing the Lower Planet}
+\section{Drawing the Lower Planet}
 Drawing the upper planet is all very well. The data is just there and as we have seen it's just a question
 of 'writing it to the screen'. For the lower planet, which is just an upside down version of the upper one,
 we could store the data all over again, but inverted. Or we could try something a little more clever,
@@ -969,7 +969,7 @@ it also it has to move the byte to its appropriate position in the 8 byte sequen
   8 byte character set definition to position 5.}
 \end{figure}
 
-\subsubsection{1. Flipping the Byte}
+\subsection{1. Flipping the Byte}
 The first of these requirements is the more elaborate of the two. We need to look at each of the four bit-pairs in the
 byte and move it to its corresponding 'inverted' position in the byte. So in a way we treat one half of they byte as
 a mirror of the other and move the bit pair there as in the following examples.
@@ -1330,7 +1330,7 @@ As we can see, this has achieved an effective mirroring of our original value!
   }\caption{The result of our bit-shifting, \icode{AND}'ing\, and \icode{OR}ing.}
 \end{figure}
 
-\subsubsection{2. Flipping the Byte's Position}
+\subsection{2. Flipping the Byte's Position}
 The remaining steps for the other two bit-pairs in the byte are similar. In the case of our
 example they will have no effect as the result will be always be zero for them. We've
 effectively mirrored our bitpair already.

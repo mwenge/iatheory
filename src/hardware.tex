@@ -116,7 +116,7 @@ The connection points are prominent white connectors. Boards A and B are connect
 
 The system was revised over the years. Approximately 229 variations are known to exist, including bootlegs\cite{mame_cps1_video}. The board which will be studied in this book is the one used to run "Street Fighter 2": board A "88617A-7B", board B "90629B", and board C "90628-C".
 
-\subsection{Board A}\index{Board!Board A}
+\section{Board A}\index{Board!Board A}
 Board "A" is the platform that never changes between games. It features all but one of the chips in charge of processing data, whether it is game logic, audio, or video.
 
 A summary look at page \pageref{fig:boarda} reveals the powerhouse of the whole system. Even an untrained eye will notice the size of the \textbf{A}pplication-\textbf{S}pecific \textbf{I}ntegrated \textbf{C}ircuit (ASIC) and the sheer number of bus lines leading to it. In the center left stands the "CPS-A", in charge of 50\% of the graphic system and its 16MHz oscillator. Just above is 384 KiB of VRAM to store a special kind of framebuffer studied in later pages.
@@ -141,7 +141,7 @@ To design an effective multi-CPUs system able to avoid both instruction and data
 \sdraw{0.94}{88617A}
 \label{fig:drawboarda}
 
-\subsection{Board B}\index{Board!Board B}
+\section{Board B}\index{Board!Board B}
    Board B is where the ROM chips containing all the assets and instructions specific to a game are attached via DIP sockets. The chips are not soldered but push-in mounted (and easily removable).
 
    Even though all ROM chips are located on the same board, they are not all part of an unified data system on an unified bus. 
@@ -178,7 +178,7 @@ To design an effective multi-CPUs system able to avoid both instruction and data
 
 Observant readers will have noticed unexplained black chips. For now we'll say they are in charge of bus traffic management. In the drawing above, \icode{STF29} handles the GFX ROM and \icode{IOB1} handles the m68k ROM. As an exercise, go back to page \pageref{fig:drawboarda} and guess which chip handles which ROM/RAM group. Or don't, I am just a book.
 
-\subsection{Board C}\index{Board!Board C}
+\section{Board C}\index{Board!Board C}
 Board "C" hosts the "CPS-B" ASIC video chip. It is in charge of the remaining 50\% of the graphic pipeline, namely mixing data from the VRAM and the GFX ROMs towards the pixel generator. Capcom also concentrated its anti-piracy measures in this chip and as a result revised board "C" many more times than board A and board B. 
 
 This will be discussed extensively in the copy-protection section of this chapter.
@@ -193,7 +193,7 @@ This will be discussed extensively in the copy-protection section of this chapte
 
 
 
-\subsection{PALs}
+\section{PALs}
 The black chips on the drawing are called \textbf{P}rogrammable \textbf{A}rray \textbf{L}ogic (PAL). They play a crucial role in the creation of the memory maps. 
 
 They pack boolean logic (\&, \textbar, !) between their input and output lines which simplifies the board, allows tuning the logic without changing the PCB hardware lines, and reduces the number of components.
@@ -236,7 +236,7 @@ The video system produces a stream of palette addresses. Combined with the palet
 The control system oversees the platform. As a ruler it needs not to excel at a specific task but to be able to direct and keep tabs on many components. This is a task tailor-made for the Motorola 68000.
 
 
-\subsection{Motorola 68000 CPU}\index{Processors!Motorola 68000}
+\section{Motorola 68000 CPU}\index{Processors!Motorola 68000}
 
  Released in 1979 and clocked at 10 MHz (later upgraded to 12 MHz), the 68000 with its two stage pipeline\cite{M68000fv} (prefetch, exec) and no internal cache was not a particularly powerful chip by late 80s standards. Its 1.7 MIPS placed it on par with an Intel 286 10MHz (1.5 MIPS). By 1989 it was already two generations old behind the 1984 M68020 (3 MIPS) and the 1987 M68030 (5 MIPS)\cite{mips}.
 
@@ -291,7 +291,7 @@ This limitation is rooted all the way down to the CPU pins where there is no \ic
 Perhaps the best testament to the quality of the 68000 design is that as of 2022, 43 years after its release, Motorola's immortal CPU is still in production.
 
 
-\subsection{Motorola 68000 "work" RAM}
+\section{Motorola 68000 "work" RAM}
 With 16-bit data bus processors it would be fair to expect a memory system built with 16-bit RAM chips. However these were expensive and a closer look reveals a bunch of \icode{65256BLSP-10} offering fast access time (100ns SRAM) and 32 KiB capacity but only 8 data lines.
 
 \sdraw{0.5}{65256BLSP-10}
@@ -328,7 +328,7 @@ This is an over-simplification to introduce complexity progressively. We will se
 
 
 
-\subsection{Motorola 68000 Program ROM}
+\section{Motorola 68000 Program ROM}
 
 
 The 68000 instructions are provided by eight \icode{27C010} which are 128 Ki $\times$ 8-bit chips. They work like the \icode{65256BLSP-10} except that they have sixteen address lines instead of fifteen (and therefore higher capacity).
@@ -354,7 +354,7 @@ The first pair of chips is mapped to addresses \icode{0x000000} while the second
 
 By now, it should be abundantly clear that the \icode{CE} / \icode{CS} lines are absolutely crucial to build a memory map. Even though they won't be mentioned again, keep in mind they impact every chip on the boards (except the CPUs).
 
-\subsection{68000 Memory Map}
+\section{68000 Memory Map}
 
 Thanks to the PAL chips enabling/disabling components, the 68000's memory space is partitioned. The result is summarized in a "memory map".
 
@@ -384,7 +384,7 @@ Thanks to the PAL chips enabling/disabling components, the 68000's memory space 
 }\caption*{Control system memory map}
 \end{figure} \label{m68k_mm}
 
-\subsection{Putting it All Together}
+\section{Putting it All Together}
 
 The details of the 68000's operations will be studied in-depth in the next chapters but we can already guess how the CPU operates based on what it can access. As the m68k boots, it starts to retrieve instructions from its ROM. For regular operations such as store/load, and also to keep track of its call stack, it uses its work RAM. 
 
@@ -413,7 +413,7 @@ The audio system runs in isolation from everything else. It has its own bus, its
 
 The component in charge is a surprisingly lightweight z80 running at 3.58 MHz.
 
-\subsection{z80 CPU}
+\section{z80 CPU}
 Released in July 1976 by Zilog, the z80 was intended as an Intel 8080 killer thanks to a compatible instruction set. It ended up becoming an icon of the 70s, sharing the scene with the equally legendary MOS 6502 well into the mid-80s. 
 
 The z80 was widely used in home computers, notably featured in the Sinclair ZX Spectrum and the Amstrad CPC. It also found its way into military applications, musical equipment (Roland Jupiter-8), embedded systems, and multiple coin-op arcades. 
@@ -450,10 +450,10 @@ The \icode{RFSH} pin (ReFreSH signal) ticks at regular intervals to trigger DRAM
 
 \pagebreak
 
-\subsection{z80 Work RAM}
+\section{z80 Work RAM}
 The amount of RAM provided to the z80 may appear scandalously small by today's standards. However because all it has to do is forward requests from the latches to the MSM6295 and feed the YM2151 music notes, the z80 needs few resources. Its bus is connected to a single 2Ki $\times$ 8-bit \icode{CXK5816SP} chip.
 
-\subsection{z80 ROM}
+\section{z80 ROM}
 The ROM is made of a simple 64Ki $\times$ 8-bit \icode{27C512} chip. It is much larger than the RAM in order to store YM2151 instructions alongside the z80 instructions.
 
 
@@ -464,7 +464,7 @@ The solution is to map only the portion of the ROM that contains instructions (3
 
 Hopefully the thought of this awful bank switch control register will leave no doubt with regards to the awesomeness of the m68k and its 24-bit flat addressing system. 
 
-\subsection{z80 Memory Map}
+\section{z80 Memory Map}
 
 \begin{figure}[H]
 {
@@ -491,7 +491,7 @@ Hopefully the thought of this awful bank switch control register will leave no d
 
 
 
-\subsection{YM2151}\index{Processors!Yamaha 2151}
+\section{YM2151}\index{Processors!Yamaha 2151}
 
 Selecting the music chip was not a matter of shopping between vendors but rather picking one from Yamaha. Thanks to the licensing of Frequency Modulation (FM) patents from Stanford in 1975, the Japanese founder ruled the world of electronic music.
 
@@ -554,14 +554,14 @@ One pin is of particular interest to us. \icode{IRQ} allows the YM2151 to genera
 
 The only drawback of this chip is that it does not feature a DAC (Digital to Analog Converter). It generates a signal on the Serial Output (\icode{SO}). 
 
-\subsection{YM3012}\index{Processors!Yamaha 3012}
+\section{YM3012}\index{Processors!Yamaha 3012}
 
 The YM3012 is a DAC connected to the YM2151 digital output \icode{SO}. The analog signal it outputs on \icode{CH1} and \icode{CH2} is mixed with the signal from the OKI6295 towards JAMMA.
 
 \sdraw{0.95}{YM3012}
 
 
-\subsection{MSM6295}\index{Processors!OKI MSM6295}
+\section{MSM6295}\index{Processors!OKI MSM6295}
 
 For audio sample playback, Capcom spared no expense and selected a chip capable of 4-bit ADPCM audio decompression over four channels, the MSM6295 (a.k.a OKI). 
 % capable chips by the past with the MSM5205 by OKI Semiconductor. For the CPS-1  they went with a steroids version,
@@ -579,7 +579,7 @@ Up to four channels can be active simultaneously. Since games don't need that ma
 ADPCM lossy compression is able to divide space consumption by three by converting 12-bit PCM samples into 4-bit nibbles. 
 
 
-\subsubsection{Making choices}
+\subsection{Making choices}
 While the choice of the Yamaha music chip left little ambiguity to the hardware designer, the MSM6295 was a different story.
 
 First, the sampling rate expected in ROM is directly correlated to the clock rate of the MSM6295. Second, the OKI can operate in two modes via its \icode{SS} pin. In high quality (H), the divisor is 132 and in low quality (L) the divisor is 165.
@@ -611,7 +611,7 @@ In the end, Capcom connected the OKI to the GFX crystal (16MHz) and divided freq
 
 
 
-\subsection{PCM 101}
+\section{PCM 101}
 \index{ADPCM!Decompression}
 The MSM6295 input and output are respectively ADPCM and PCM streams. To deepen our understanding of the chip requires studying how \textbf{P}ulse-\textbf{C}ode \textbf{M}odulation works.
 
@@ -647,7 +647,7 @@ Sound quality increases linearly with data rate.
 
 
 
-\subsection{ADPCM Compression}
+\section{ADPCM Compression}
 ADPCM is able to take 12-bit PCM samples and compress then as 4-bit nibbles by encoding only the difference between PCM samples. Decompressing an ADPCM stream consists of adding a delta value to the last decompressed  sample, over and over again.
 
 The delta is encoded with a system of weighted offsets called "step", which is accurate for small variations but coarser when deltas increase. 
@@ -697,7 +697,7 @@ These five signals are everything a CRT needs to work.
 \end{trivia}
 
 
-\subsection{CRT 101}
+\section{CRT 101}
 
 Because the timing of operations is propagated deep in the GFX system, it is important to understand how a CRT works.
 
@@ -731,7 +731,7 @@ Smaller slots can render the horizontal analog signals with better fidelity.
  With this duality of lines and signals, a CRT is both a digital and an analog system. The number of scanlines is finite (i.e: there is a set number of these elements) but there is no horizontal number of "dots", "points", or "pixels" since the three color intensity signals are analog.
 
 
-\subsection{Syncing}
+\section{Syncing}
 The RGB signals describe lines to be drawn but the CRT needs to know where to draw them. The control signal allows synchronization of the cannon orientation with the lines' color signal so they are rasterized where they should. Without syncing, the image appears distorted. 
 
 \begin{figure}[H]
@@ -748,7 +748,7 @@ VSYNC signal tells the CRT it should reset the gun's vertical position to 0 at t
 HSYNC signal tells the CRT that a line has been drawn and the gun's horizontal position should be reset to the left of the screen. This motion is called horizontal retrace. Like the VBLANK, there is a HBLANK timespan. 
 
 \pagebreak
-\subsection{Fields}
+\section{Fields}
 
 The process of drawing scanlines over the screen, also called "raster scan", is incomplete as described. If the gun draws a line and upon HSYNC goes back to the left, it would be drawing the same upper left line over and over again. 
 
@@ -784,7 +784,7 @@ Besides avoiding interlacing, many other decisions had to be made.
 
 
 
-\subsection{Making Choices}
+\section{Making Choices}
 
 To craft a video system means building a signal generator and a color generator. We'll study the signal generator first. This circuit is built to take an oscillator ticks as input and to output three signals. One signal tells for how long the color generator should hold a color on the color lines, one signal triggers HSYNC, and one signal triggers VSYNC. 
 
@@ -836,7 +836,7 @@ Before looking at Capcom's choices, let's look at the decisions made by video de
 Keep in mind that these resolutions are not what programmers can count on. Because of overhead discussed in the next section, some lines and dots are unavailable. The resolutions presented here are called "overscan resolutions".
 
 
-\subsubsection{Capcom video signal choices}
+\subsection{Capcom video signal choices}
 
 The CPS-1 uses an overscan resolution of \icode{512x262}. The dot-clock is 8 Mhz which is obtained by halving the CPS-A/CPS-B 16 MHz clock (it spares an oscillator chip).
 
@@ -859,7 +859,7 @@ The CPS-1 uses an overscan resolution of \icode{512x262}. The dot-clock is 8 Mhz
 
 Besides these vertical and horizontal frequency "rules", Capcom engineers had additional constraints. Because the graphic system works with tiles (which we will study in the next section) using sizes of 8, 16, or 32 pens, both axis dimensions had to be multiples of eight.
 
-\subsubsection{Blanking}
+\subsection{Blanking}
 
 The CP-System overscan resolution of \icode{512x262} seems to indicate a very high resolution for the time. But not all lines and dots on a line can be used, some have to be sacrificed to solve three problems. 
 
@@ -872,7 +872,7 @@ Lastly, the video system needs breaks to read or write data without generating v
 The solution to these three problems is named blanking. By setting the color signals to zero, the cannon shoots no electrons. Blanking hides artifacts and create a window of time where the video system is inactive. There is a vertical blanking called VBLANK and an horizontal blanking called HBLANK.
 
 
-\subsubsection{Capcom's second set of video signal choices}
+\subsection{Capcom's second set of video signal choices}
 
 Out of the 262 total lines available, Capcom decided to use 224 and let VBLANK last for $\mathtt{262 - 224 = 38}$ lines. They used 384 dots per line out of 512 total leaving $\mathtt{512 - 384 = 128}$ dots to HBLANK. Developers can count on a resolution of \icode{384x224}.
 
@@ -894,7 +894,7 @@ Out of the 262 total lines available, Capcom decided to use 224 and let VBLANK l
 \pagebreak
 
 
-\subsubsection{Pixel Aspect Ratio}
+\subsection{Pixel Aspect Ratio}
 
 The scanlines of a CRT have a fixed height but the width of the dots vary from machine to machine because of their dot-clock. The width/height dot ratio is called the Pixel Aspect Ratio (PAR).
 
@@ -998,7 +998,7 @@ The trade-off was a vertical refresh rate of 55.017605 Hz which was visually les
 
 
 
-\subsection{Color Space} \index{Colors!Space}
+\section{Color Space} \index{Colors!Space}
 Before moving to the color generator, a characteristic to decide on was the color depth. 
 
 The CPS-1 uses 16 bits to encode colors with 4 bits per RGB component for a total of 12 bits allowing 4,096 colors. 
@@ -1022,7 +1022,7 @@ The four remaining bits express brightness to allow 16 shades of a base color. I
 \caption*{All darker shades of red using a \icode{\{0xF,0x0, 0x0\}} base.}
 \end{figure}
 
-\subsection{Putting it All Together}
+\section{Putting it All Together}
 
 Knowing how a CRT works and what decisions Capcom engineers made, we can now understand the video signal timings.
 
@@ -1049,7 +1049,7 @@ The sheer amount of black in the drawings shows the extent of the overhead assoc
 \end{figure}
 
 
-\subsection{Color Generator}
+\section{Color Generator}
 
 To generate color signals, the CPS-1 uses a palette system storing colors via 4 $\times$ 2Ki $\times$ 1B \icode{CXK5814P-35L} SRAM chips.
 
@@ -1148,14 +1148,14 @@ Solving these problems of timing and latency well is what made the CPS-1 stand o
 \end{figure}
 
 
-\subsection{CPS-A and CPS-B: The ASICs powerhouse}\index{Processors!CPS-A}\index{Processors!CPS-B}
+\section{CPS-A and CPS-B: The ASICs powerhouse}\index{Processors!CPS-A}\index{Processors!CPS-B}
 To build their rendering pipeline, Capcom did not rely on another company's product. They crafted their own \textbf{A}pplication-\textbf{S}pecific \textbf{I}ntegrated \textbf{C}ircuit (ASIC), tailored to their needs, the CPS-A (the brain) and CPS-B (the legs).
 
 
 
 
 
-\subsection{Pens and Inks}
+\section{Pens and Inks}
 The elementary unit of work is a 4-bit value which is an index into a 16 colors palette. Everything, from backgrounds to sprites, uses these 4-bit nibble indexes. A good analogy, and the terminology used in this book, is to picture the GFX manipulating "pens" (palette indexes). The color to appear on the screen is decided not by the pen but by the value at this index, which is called "ink".
 
 This division makes the GFX system unaware of the color that will appear to players on the CRT since it only manipulates pens.
@@ -1173,11 +1173,11 @@ Groups of four bytes encoding 8 pens are "tile lines". When combined vertically,
 
 
 
-\subsection{Elements of drawing}
+\section{Elements of drawing}
 
 Games are made of backgrounds on top of which are drawn sprites. The easiest to implement are the background circuits. They are studied first, followed by the sprite circuits.
 
-\subsection{Drawing background}
+\section{Drawing background}
 
 A background is described in terms of "tiles", whose arrangement is described in a map. The goal of the circuit is to "rasterize" the map of tiles (called "tilemap").
 
@@ -1191,14 +1191,14 @@ A naive design would work at the same speed as the video system (8MHz). For each
  Even though the machine uses the fastest type of memory (SRAM), its response time does not permit enough roundtrips. This problem is solved via caching, streaming, channeling, and a humongous (for the time) 32-bit GFXROM/CPS-B local data bus. 
 
 
-\subsubsection{Caching}
+\subsection{Caching}
 The CPS-A only accesses the GFXRAM during the HBLANK interval. To eliminate memory read operations while a scanline is rasterized, a line's worth of tilemap is retrieved and stored in an internal cache of 256 entries. Each entry stores 16-bit  tileID + 10-bit attributes. Notice the two parts on the die storing respectively 10 bits and 16 bits.
 
 
 
 
 
-\subsubsection{Streaming}
+\subsection{Streaming}
 Pen values are streamed from GFXROM to the CRT without intermediate storage. The GFXROM data is retrieved eight pens at a time thanks to a 32-bit data bus.
 
 The system works with the GFXROM address lines connected to the CPS-A (with intermediate PAL decoding). The data lines are connected to the CPS-B where pen values are selected/discarded before being sent to the video system.
@@ -1208,7 +1208,7 @@ The system works with the GFXROM address lines connected to the CPS-A (with inte
  \end{figure}%
 
 
-\subsubsection{Channels}
+\subsection{Channels}
 To further improve response time, the GFXROM data uses a layout where 8 consecutive bytes are interleaved 16 bits at a time across four chips. 
 
 Upon reading, an address is issued to two chips at the same time, but their data lines are enabled consecutively. Channeling avoids one "fetch time" every two reads.
@@ -1216,7 +1216,7 @@ Upon reading, an address is issued to two chips at the same time, but their data
 \nbdraw{channels}
 
 
-\subsection{CPS1 Tilemaps}
+\section{CPS1 Tilemaps}
 The CPS-1 features three tilemap layers named SCROLL1, SCROLL2, and SCROLL3. They all rely on tilemaps made of 64x64 tiles.
 
 
@@ -1247,7 +1247,7 @@ Color codes used in this section are \fcolorbox{black}{red}{\vphantom{W}\hphanto
 \pagebreak
 
 
-\subsubsection{Starfields}
+\subsection{Starfields}
 Besides SCROLLs, the CPS-1 has two "STARfield" layers which are always behind the SCROLLs and always in order STAR1 then STAR2. Like the other layers, one full page of 32 palettes is available to each of them.
 
 To render the stars, the GFXROM contains no tiles but instead bytecode dictating the position of points as well as palette cycling timing.
@@ -1267,7 +1267,7 @@ That did not prevent the feature from being used, though. Long after STARfields 
  \end{figure}%
 \pagebreak
 
-\subsubsection{Noir Black}
+\subsection{Noir Black}
 
 
 
@@ -1298,7 +1298,7 @@ Layers color codes, \fcolorbox{black}{red}{\vphantom{W}\hphantom{H}} SCROLL1, \f
 
 
 
-\subsubsection{Draw order and Priority mask}\label{finalfight_trick}
+\subsection{Draw order and Priority mask}\label{finalfight_trick}
 
 
 The drawing order (also called "priority") of SCROLLs and the sprite layer are entirely configurable (excluding the STARs which must remain behind). Any order can be requested but there is an extra feature available to the SCROLL drawn just behind the sprite layer.
@@ -1350,7 +1350,7 @@ Refer to the CPS-B API on page \pageref{cpsbreg_programming} for more details ab
  \end{figure}%
 \pagebreak
 
-\subsubsection{Rowscrolling}
+\subsection{Rowscrolling}
 SCROLL 2 has the ability to horizontally offset rows based on their vertical position. 
 
 This capability, commonly known as "rowscroll", is implemented via a table of 1024 10-bit integers (one for each line) in GFXRAM.
@@ -1368,7 +1368,7 @@ I knew we had raster scrolling so I talked with the programmers and we gave it a
  \end{figure}%
 \pagebreak
 
-\subsubsection{Choosing features}
+\subsection{Choosing features}
 
 The starfield and rowscroll features are good examples of how difficult it is to design hardware. Doing it well consists of accurately predicting what will be useful and what won't. 
 
@@ -1393,7 +1393,7 @@ Ultimately, the balance of these two features was reversed when rowscroll was us
 
 
 
-\subsubsection{Pushing the Limits}
+\subsection{Pushing the Limits}
 
 Besides priority mask, tiles can be flipped horizontally and/or vertically but there is no scaling or rotation. Moreover, the CPU has no access to the VRAM which forbids pixel "plotting". That did not prevent seemingly impossible effects from being achieved.
 
@@ -1418,7 +1418,7 @@ In Ghouls 'n Ghosts' first level, on top of hordes of zombies, a Red Arremer, an
 
 To add rainfall, developers leveraged temporal blending on the same layer as the GUI.\label{gg_rain} Every five frames the GUI is not drawn. Instead a full screen of rain tiles is rendered, resulting in a convincing effect. Temporal blending is often used to fake translucency. 
 
-\subsubsection{Plotting Pixels}
+\subsection{Plotting Pixels}
 
 The introduction sequence of the shoot'em up Carrier Air Wing (page \pageref{caw_color} and \pageref{caw_rgb}) is even more impressive. As a F-14 Tomcat takes off from its carrier, the jet leaves in its trail an exhaust that expands vertically one pixel line at a time. The gaze then disperses with a fizzlefade effect. 
 
@@ -1459,12 +1459,12 @@ It seems like pixels are plotted into a framebuffer but both effects are rendere
 
 \pagebreak
 
-\subsection{Drawing Sprites}
+\section{Drawing Sprites}
 Drawing sprites is more difficult than drawing tilemaps. It involves solving the same problems of bandwidth and latency, only sprites can appear anywhere on the screen and are not aligned on a grid.
 
 In order to fully appreciate how Capcom solved this problem, it is worth understanding how other platforms tackled it.
 
-\subsubsection{Hardware sprites}
+\subsection{Hardware sprites}
 A sprite circuit can be implemented using the same logic as a tilemap. It is a special case where the map features a single tile and no  horizontal or vertical scrolling is allowed.
 
 Every HSYNC, the GFXRAM is read to know if a sprite appears on the next scanline. If it does, the circuit makes sure to intercept tilemap pens to issue sprite pens instead. 
@@ -1479,7 +1479,7 @@ As the CRT cannon progresses down the screen, a sprite unit used above can be re
 
 Likewise, by using built-in multiplexing, the Commodore Amiga placed an horizontal limit of 8 pixels for its sprites' width but allowed unlimited height.\index{Sprites Multiplexing!Amiga}
 
-\subsubsection{Line buffer}
+\subsection{Line buffer}
 To scale better and increase the number of sprites supported, hardware designers introduced the concept of line buffers. 
 
 A line buffer system requires a buffer as wide as a visible line on the CRT. The buffer is populated with pen codes by a Pixel Processing Unit. The number of sprites, scale and rotation capabilities depends on how much work the PPU is able to do. 
@@ -1495,7 +1495,7 @@ Systems like the Super Nintendo use a line buffer with an impressive PPU resulti
 
 
 
-\subsubsection{Double Line buffer}
+\subsection{Double Line buffer}
 A straight forward way to make a GFX more powerful is to simply give it more time to do its jobs. The merciless pixel clock cannot be cheated but the pipeline can be made deeper.
 
 By using two line buffers alternately, the GFX pipeline is made deeper which increases its latency but also frees itself from rendering only during HBLANK. While a line buffer is fed to the video, another one is rendered. This allows drawing during one full scanline (64$\mu$s) and a GFX four times more capable than one using a single line buffer. 
@@ -1505,20 +1505,20 @@ This choice, made by SNK for its Neo-Geo, allowed gorgeous titles such as "Metal
 This technique is so powerful that the entire Neo-Geo rendering pipeline revolves around its double line buffer system. It needs no tilemap system.
 
 
-\subsubsection{CPS1 Sprite FrameBuffer}
+\subsection{CPS1 Sprite FrameBuffer}
 Capcom engineers wanted something even more powerful than a double line buffer. To allow more time than the 64$\mu$s granted by a double line buffer, the CPS-1 was built around a double sprite framebuffer (the same technology as  Sega Super Scaler). To host these framebuffers, the machine uses a dedicated memory called VRAM.
 
 With a double sprite framebuffer, the PPU does not just draw a line in advance but a whole screen. This technique averages 16\% more time per line for the graphic chip to do its work, and more importantly it allows any number of tiles per line (even the powerful Neo-Geo has a limit of 96 tiles per line).
 
 The gain is massive but it comes with three drawbacks. 
 
-\subsubsection{Price tag}
+\subsection{Price tag}
 First, the price of the machine goes up since it requires much more buffering capacity. At the resolution of 384$\times$224, 9 bits per pixel are stored (5-bit palette index + 4-bit color index) requiring 200 KiB of storage for two framebuffers.
 
-\subsubsection{Bandwidth requirements}
+\subsection{Bandwidth requirements}
 The second impact is on the bus. A massive amount of data is now written and read to/from the VRAM. It requires so much bandwidth that an especially large data bus connecting the GFX pipeline and the VRAM must be designed.
 
-\subsubsection{De-synchronization}
+\subsection{De-synchronization}
 Lastly, there is the problem of tilemap and sprite synchronization. When the m68k writes a layout in the GFXRAM, the graphic system picks it up but routes background tiles and sprite tiles to different locations. The tilemap is rasterized directly towards the video system while the sprite layer is rendered to the VRAM framebuffer where it will be picked up on the next frame.
  
 
@@ -1552,7 +1552,7 @@ Finally, the scrolls of frame 3 are displayed along with the spritebuffer from f
 
 
 
-\subsubsection{CPS1 Sprites Tile}
+\subsection{CPS1 Sprites Tile}
 With its architecture based on a double sprite framebuffer, Capcom built a powerful system able to move an immense volume of sprites. But performance was only one part of the equation. They also had to come up with a flexible way for artists to use it.
 
 Up to that point, frustration arose from sprite dimensions (all sprites had to have the same sizes), shapes (mandatory rectangular), and colors (one palette per sprite). 
@@ -1607,7 +1607,7 @@ Tiles in the OBJ layer have attributes allowing them to be rendered horizontally
 
 \pagebreak
 
-\subsection{OBJ Limitations}
+\section{OBJ Limitations}
 The sprite system has a hard limit of 256 tiles per frame. This is not an arbitrary number since the constraint is dictated by how many tiles the system is able to read from the GFXROM and write to the VRAM during a full CRT raster scan (16.7ms).
 
 Because OBJ tiles are the most versatile (they can be placed independently and anywhere on the screen), it was tempting to use them often.
@@ -1640,7 +1640,7 @@ Decorations in Street Fighter 2 were the object of much consideration. The stone
 
 
 
-\subsubsection{Going Too Far} \label{going_too_far}
+\subsection{Going Too Far} \label{going_too_far}
 Games were tested to ensure the OBJ budget was not exceed but Final Fight's last level (Bay Area) managed to ship with that very problem. When the heroes encounter an unprecedented level of opposition, the list of sprites is as follows\cite{ffoverload}.
 
 \begin{itemize}[topsep=0pt]
@@ -1828,7 +1828,7 @@ Once again, Capcom banked on fast movement, brain interpolation, and maybe forgi
 
 
 
-\subsubsection{The World Warrier}
+\subsection{The World Warrier}
 The OBJ system was used in a creative way by Akiman to solve a show-stopper bug when he was working as a planner for Street Fighter 2.
 
 \begin{q}{Akiman}
@@ -1916,7 +1916,7 @@ Using Guile's calf as a pencil, but with the title's palette, three tiles are dr
 % Sometimes, in order to ship, you need to be pragmatic.
 
 
-\subsection{Putting it All Together}
+\section{Putting it All Together}
 
 We now have enough knowledge to fully understand how the CPS-A and CPS-B cooperate to render graphics.
 
@@ -1950,7 +1950,7 @@ To keep up with bandwidth requirements, the VRAM and GFX ROM systems are specifi
 
 
 
-\subsubsection{VRAM}
+\subsection{VRAM}
 The VRAM system is physically split via two independent blocks, A and B, to facilitate sprite buffer double buffering. This component also benefits from an exceptionally powerful chip compared to the rest of the machine.
 
 A quick glance at the \icode{HM53461P} shows the usual \icode{+5V}, \icode{GND}, \icode{CLK}, and address/data pins. However \icode{SD0}, \icode{SD1}, \icode{SD2}, and \icode{SD3} indicate this chip does more than the ones we have seen so far.
@@ -1980,7 +1980,7 @@ This design would allow RAM and SAM to be accessed simultaneously but this never
 % \end{trivia}
 
 
-\subsubsection{GFX ROM}
+\subsection{GFX ROM}
 To keep up with the much higher storage requirements, the GFX ROM system is not designed like the others. 
 
 While other chips on the board-B are \icode{27C010} and \icode{27C512}, the GFXROM is made of \icode{MB834200B} (256 Ki $\times$ 16-bit). This type of ROM has a much higher capacity but also a slower access time (150ns).
@@ -2027,7 +2027,7 @@ Capcom's response was a two-way verification. The hardware could be actively use
 \caption*{Capcom's disclaimer when a CPS-1 game boots}
 \end{figure}
 
-\subsection{The Ever Changing CPS-B}
+\section{The Ever Changing CPS-B}
 The heart of the protection system is the CPS-B. The core idea is to make it behave differently depending on the game it is supposed to run.
 
 To this effect, twenty-five versions the CPS-B exist\cite{mame_cps1_video}, sometimes differing between revision of the same game\cite{cpsBNumbers}.
@@ -2103,22 +2103,22 @@ Mega Man the Power Battle & \texttt{CPS-B-21}  & 1995 \\
 \end{figure}
 
 
-\subsection{ID Check}
+\section{ID Check}
 The simplest copy protection available is the chip ID check. By polling a register, the m68k prompts the CPS-B to return its version number. A version match lets the code know if it is running on the right PCB and resets the CPU if it isn't. 
 
 To make instructions patching of the 68000 ROMs more difficult, calls to verify the chip ID are placed in several locations in the code. Motivated programmers tried anyway\cite{strider_conversion}!
 
-\subsection{Multiplication Check}
+\section{Multiplication Check}
 Starting with CPS-B v21, a slightly more robust feature gave the CPS-B the ability to perform multiplications. Two registers are written and a third can be read. The 68000 code checks that the returned multiplication result is the expected value.
 
-\subsection{Moving Registers}
+\section{Moving Registers}
 The CPS-B registers move between revisions. The offset and range do not change, but the offset of each register inside that mapping is different. Accessing the scroll control, scroll priority, and palette upload registers is done slightly differently for each game.
 
 Additionally, the meaning of each bit field inside each register is altered between versions.
 
 
 
-\subsection{Unexpected Behavior Detection}
+\section{Unexpected Behavior Detection}
 Protections described so far involved active software and passive hardware. The hardware can also actively monitor the software by leveraging the moving register policy. If the CPS-B detects incoherent values written to the wrong registers, it sets and locks all palettes of all layers to black. 
 
 The game still runs in the background and the audio is played but the screen doesn't display anything. The only way to recover is to reboot the machine\cite{petitSecurity}... only for the screen to turn black again.
@@ -2128,7 +2128,7 @@ The game still runs in the background and the audio is played but the screen doe
 
 
 
-\subsection{Invalid Offset Detection}
+\section{Invalid Offset Detection}
 
 Each game uses a different amount of assets for each of its SCROLL and OBJ layers. On the "B" board, PAL chips such as the \icode{STF29} discussed earlier are hard-coded with knowledge of the amount of GFX ROM attributed to each layer.
 
@@ -2153,7 +2153,7 @@ If no data is detected, \icode{0xF} is automatically "inserted", resulting in a 
 
 
 
-\subsection{Configuration Key}
+\section{Configuration Key}
 Up to 1991, the behavior of a CPS-B was hard-coded in its silicon at the factory level. There was no way to alter or re-purpose them after they shipped. 
 
 It was not only expensive to have to revise the hardware circuits for each game, it was also a logistic difficulty to provision enough chips for a success and not be stuck with inventory on an unappreciated game. To solve this issue, Capcom revised the CPS-B chip one last time and made it configurable via software.
@@ -2166,12 +2166,12 @@ The configuration RAM was designed to survive when the cabinet was turned off th
 These batteries worked remarkably well since, thirty years later, one can find boards in working condition still using their original battery.
 \end{trivia}
 
-\subsubsection{Suicide batteries}
+\subsection{Suicide batteries}
 The infamous "suicide" nickname came from the effect of losing power. A CPS-B v21 without power lose its configuration and resets all its registers to "default" values that none of the games use. Capcom offered a battery replacement service to resurrect boards "C" which had committed seppuku but eventually discontinued it. 
 
 As the reader will have guessed, passionate fans found a way to bring these games back to life.
 
-\subsubsection{Phoenixing}
+\subsection{Phoenixing}
 The first method is called "phoenix"-ing. It is a tedious process which consists of dumping a game ROM and patching the m68k instructions to replace CPS-B registers accesses to use the "default values"\cite{csp1_phoenix}. 
 
 People phoenixing CPS-1 boards have such intimate knowledge of the CP-System that they even changed the game to display a "Phoenix Edition" splash upon startup.
@@ -2182,7 +2182,7 @@ People phoenixing CPS-1 boards have such intimate knowledge of the CP-System tha
 \end{figure}
 
 
-\subsubsection{De-suiciding}
+\subsection{De-suiciding}
 Eventually, passionate people figured out the process of accessing and writing the CPS-B RAM. Boards can be brought back to life by re-uploading the proper configuration bytes which essentially de-suicides them\cite{arcadeHackerCPS1Desuicide}.
 
 
@@ -2209,7 +2209,7 @@ Of all the security measures, it would have been fair to assume the custom ASICs
 
 As cracks appeared in its shield, Capcom did not give up on protecting its titles. As it had proved itself able to evolve and compete in the business of producing games, it embraced the challenge of embarking on an encryption crusade against bootleggers.
 
-\subsection{CPS-1.5 Kabuki}
+\section{CPS-1.5 Kabuki}
 \index{CP-System!CPS-1.5 Kabuki}
 In 1992, Capcom released the CP System Dash (a.k.a CPS-1.5). Fully encased in a gray plastic box, it introduced a fourth satellite "Qboard" PCB to handle playback of positional three-dimensional Qsound audio. Five games were produced until late 1993.
 
@@ -2244,7 +2244,7 @@ The key is not burned in the z80's silicon but, like the CPS-B v21 configuration
 The protection provided by Kabuki held remarkably well over the years. It was only broken in the early 2000s\cite{mame_kabuki}.
 \end{trivia}
 
-\subsection{CPS-2}
+\section{CPS-2}
 \index{CP-System!CPS-2}
 With significantly improved capabilities thanks to its increased ROM capacity and higher processor clocks, the CPS-2 instantly became a smash-hit, in particular thanks to the Street Fighter Alpha series. 
 
@@ -2256,7 +2256,7 @@ Thanks to a custom CPU, ABI compatible with the 68000, instructions are stored e
 
 The graphic asset stored in the GFXROM were slightly obfuscated. However no encryption occurred, data was only shuffled.
 
-\subsubsection{A strong protection}
+\subsection{A strong protection}
 
 No bootlegs of CPS-2 titles are known to have ever been produced. Efforts to shed light on the CPS-2 internals started in 2000\cite{cps2rebirth} via the "CPS-2 Shock Group".
 

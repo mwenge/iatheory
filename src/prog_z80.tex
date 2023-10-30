@@ -31,10 +31,10 @@ The last stage relies on the Small Device C Compiler (SDCC) toolchain. All artif
 \section{Processing Sound Samples}
 A wav file is a simple container with a header describing the content followed by a payload. Once the sampling frequency, bits per sample, and number of channels is retrieved, the PCM can be accessed.
 
-\subsection{Constraint}
+\section{Constraint}
 Artists should not produce stereo wavs since the CPS-1 is mono. Moreover, game developers should decide if they wish to use the OKI in high quality (7575Hz) or low quality (6060Hz) and all assets should use that sampling rate. Finally, since ADPCM compressed 12-bit sample to 4-bit samples, artists should provide 16-bit wavs.
 
-\subsection{ADPCM Compression}
+\section{ADPCM Compression}
 \index{ADPCM!Compression}
 Decompression is done in hardware by the OKI at runtime but the build system still has to compress assets appropriately. 
 
@@ -48,22 +48,22 @@ Let's take an example converting a stream of 16-bit PCM to 4-bit ADPCM nibbles.
 
 \lstinputlisting[style=CStyle]{src/code/pcm-dpcm.c}
 
-\subsubsection{Compressing sample 1}
+\subsection{Compressing sample 1}
 The first 16-bit sample has a value of \icode{960} which becomes \icode{60} in 12-bit. With the current step size at 16, ADPCM can only command a delta of + ( 16 + 16/2 + 16/4) = +28 which it encodes in a nibble \icode{0b0111}. The step size index is updated via the transitionTable[\icode{b111}] = 8. The current step size is \icode{34}. 
 
-\subsubsection{Compressing sample 2}
+\subsection{Compressing sample 2}
 The second 16-bit sample also has a value of \icode{960} which becomes \icode{60} in 12-bit. Since the latest sample output was 28, ADPCM must somehow encode a difference of 60-28 = 32. ADPCM commands a delta of + ( 0 + 34/2 + 34/4) = +25 which it encodes in a nibble \icode{0b0011}. 
 
 The decompressor will output 28 (its last value) + 25 = 53. We can see how the step size has adapted to the delta requested with only two steps. 
 
 The step size index is updated via 8 (previous value) -1 (transitionTable[\icode{b011}]) = 7. Now the step size is \icode{31}.
 
-\subsubsection{Compressing sample 3}
+\subsection{Compressing sample 3}
 The third 16-bit sample has a value of \icode{950} which becomes \icode{59} in 12-bit. Since the latest sample output was 53, ADPCM encodes a difference of 59-53 = 6. ADPCM commands a delta of + (0 + 0 + 0) = 0 which it encodes in a nibble \icode{0b0000}. 
 
 The decompressor will output 53 (its last value) + 0 = 53. The step size index is updated via 7 (previous value) - 1  (transitionTable[\icode{b000}]) = 6. Now the step size is \icode{28}.
 
-\subsubsection{Compressing sample 4}
+\subsection{Compressing sample 4}
 The last 16-bit sample has a value of \icode{160} which becomes \icode{10} in 12-bit. Since the latest sample output was 53, ADPCM encodes a difference of 10-53 = -43. ADPCM commands a delta of - (28 + 28/2 + 0) = -42 which it encodes in a nibble \icode{0b1110}. 
 
 The decompressor will output 53 (its last value) - 42 = 11. The step size index is updated via 6 (previous value) + 6 (transitionTable[\icode{0b110}]) = 12. Now the step size is \icode{50}.
@@ -157,7 +157,7 @@ As expected, the \icode{\_DATA} is placed at \icode{0xd000}. The \icode{\_CODE} 
 Debugging a CPS-1 program can be a tedious task. A good starting point when encountering an issue is to read the linker \icode{.map} file which indicates where each symbol was placed.
 \end{trivia}
 
-\subsection{Bootstrapping}
+\section{Bootstrapping}
 A z80 starts fetching and executing instructions from address \icode{0x0000}. The bootstrap code \icode{crt0.s} (on page \pageref{z80_crt0}) is placed accordingly via directive \icode{.org 0}. The code immediately jumps to \icode{0x100} in order to skip the interrupt handler instructions. 
 
 The z80 can work in interrupt modes 0, 1, or 2. Modes 0 and 2 are the most powerful and complex but they imply retrieving the ID of the interrupting peripheral by reading a byte on the data bus. This mechanism allows support of multi-device interruption. However in this case, it is overkill. The z80 uses Mode 1 which always makes the CPU jump to \icode{0x38} when interrupted.
@@ -178,7 +178,7 @@ The calling functions from ASM to C require using \icode{\_} prefixed symbols.
 
 
 
-\subsection{z80 interrupt}
+\section{z80 interrupt}
 \index{Interrupts!Programming z80}
 In order to interact with the latches properly but also be able to keep track of wall-time, the z80 needs to be interrupted regularly. Zilog's CPU does features a timer RFSH but it is intended for DRAM refresh (which the sound system does not feature anyway).
 
@@ -189,7 +189,7 @@ Setting the Timer A to \icode{800} will result in an interrupt 64 * (1024 - 800)
 \lstinputlisting[style=CStyle]{src/code/z80/interrupts.c}
 
 
-\subsection{Initializing variables}
+\section{Initializing variables}
 To finish bootstrapping, \icode{crt0} makes sure initialized C variable values are set. The linker placed all values requiring initialization in a \icode{\_GSINIT} segment. By wrapping it with markers \icode{\_INITIALIZER} (src) and \icode{\_INITIALIZED} (dst), they can be copied easily.
 
 \lstinputlisting[style=Z80Style]{src/code/z80/initVar.s}
@@ -202,7 +202,7 @@ Copying is done with \icode{ldir} instruction using the linker macros. Prefix \i
 % No initialization of BSS
 
 
-\subsection{z80 Sound Driver}
+\section{z80 Sound Driver}
 The sound driver is a simple loop which reads bytecode from our mini-vgm format to feed music notes, no-op on pauses, and forwards sample playback. 
 
 
@@ -225,7 +225,7 @@ By 1989, they had assembled a pool of talent who called themselves the "Capcom S
 
 The Capcom Sound team. L-R: Yoko Shimomura, Yoshihiro Sakaguchi, Manami Matsumae, Masaki Izumiya, Yasuaki Fujita, Mari Yamaguchi, Minae Fujii, Toshio Kajino, and Isao Abe. Identity of table-man is unknown.
 
-\subsection{Recruiting}
+\section{Recruiting}
 Capcom actively recruited by taking advantage of 'careers days' to get graduates to come work for them. Many musicians emerged from music schools located in the Kansai region encompassing Kyoto, Osaka, and Kobe near Capcom headquarters. 
 
 Several alumni of Osaka College of Music ended up working for Capcom, where they were able to compose music for a living while having the security of working for a large Japanese company. 
@@ -260,7 +260,7 @@ I was asked to talk about what I knew about FM generation at the entrance exam. 
 
 
 
-\subsection{Creative Process}
+\section{Creative Process}
 Even though musicians were part of a "Sound Team", they usually worked alone on a game. 
 
 They could pick projects based on availability\cite{sf2musics} but they were assigned to the next one immediately after they were done with the previous one.
@@ -284,14 +284,14 @@ Once I tied a carrier bag and put the ROM inside and gave it to them. 15 mn late
 
 
 
-\subsection{Tools}
+\section{Tools}
 Yoshihiro Sakaguchi, author of Mega Man music, explained what computer the musicians connected to their Yamaha keyboards.
 
 \begin{q}{Yoshihiro Sakaguchi\cite{yoko_shimomura_interview}  }
 We worked on both the music and sound effects for Capcom’s games. We’ve got a centralized recording system setup on a PC-98, so that even if we’re writing music for different hardware, we can compose without needing to be able to program.
 \end{q}
 
-\subsubsection{NEC PC-9800 series}\index{Computers!NEC PC-98}
+\subsection{NEC PC-9800 series}\index{Computers!NEC PC-98}
 
 NEC entered the personal computer market in 1979 with its 8800 series. These machines, built around 8-bit z80 CPUs would later be known as "PC-88". 
 
@@ -311,7 +311,7 @@ The success was such that the series accounted for 60\% of the Japanese Personal
 
 
 
-\subsubsection{What Capcom used}
+\subsection{What Capcom used}
 Because so many models were released, it is hard to tell for sure which PC-98 was used for a particular game. What can be done is to list the models released each year in order to get a rough idea.
 
 \begin{figure}[H]
@@ -322,13 +322,13 @@ Because so many models were released, it is hard to tell for sure which PC-98 wa
 It is likely musicians working on CPS-1 titles were provided with computers from the Main series. Around that time, it would have been a computer based on a Intel 386 CPU with 50 MiB HDD.
 
 
-\subsubsection{Proprietary technology}
+\subsection{Proprietary technology}
 
 Despite their name, NEC's machine had nothing to do with the IBM PC. Due to its operating system, MS-DOS, lacking support for Japanese glyphs, Big Blue’s machines never managed to break into the
 Japanese market. NEC's PCs were named after what they were, \textbf{P}ersonal \textbf{C}omputers.
 
 
-\subsubsection{C-Bus}
+\subsection{C-Bus}
 The PC-98 uses a proprietary 16-bit C-bus instead of the IBM's ISA bus. BIOS, I/O port addressing, memory management and graphics output are also different. This architecture was both a moat that protected NEC from clone manufacturers (which plagued IBM in the USA) and a dungeon that prevented its machine from benefiting from the many peripherals built for IBM PCs.
 
 
@@ -342,14 +342,14 @@ It was an extra effort for manufactures to create C-bus version of their card bu
 
 
 
-\subsubsection{Video chip}
+\subsection{Video chip}
 Besides their proprietary bus, PC-98s were noteworthy for their, at the time, powerful graphic system.
 
 The heart of it was the High-Performance Graphics Display Controller 7220, more commonly known as $\upmu$PD7220. The PC-98 used two of them, both running 2.5MHz. One handled the 8 KiB VRAM for text while the other acted as a co-processor managing a 96 KiB VRAM framebuffer.
 
 The tandem was one of the first GPUs, presenting primitives to draw lines, circles, arcs, and character graphics. In its highest resolution mode the PC-98 reached an impressive 640×400 with 8 colors. It allowed Latin alphabetic, numeric and most importantly katakana characters. An optional ROM board added 3,000 kanji glyphs to the repertory.   
 
-\subsubsection{The end of PC-98}
+\subsection{The end of PC-98}
 
 Although having specs far inferior to the Fujitsu FM Towns and Sharp X68000, NEC enjoyed tremendous success, selling 18 million units from 1982 to 1999.
 

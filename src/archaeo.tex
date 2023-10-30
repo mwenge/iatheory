@@ -52,7 +52,7 @@ approximating the original assembly langage.
 and each long pulse by a pink pixel. Roughly speaking, gray is a shorthand for 0 bits and dark pixels for 1 bits.}
 \end{figure}
 
-\subsection{The Madness Begins}
+\section{The Madness Begins}
 
 This is what the start of the our \icode{iridis-alpha.tap} file looks like:
 
@@ -256,7 +256,7 @@ first'. In hexadecimal the reversed bit-string of \icode{10001001} is \icode{\$8
 
 We have our first byte! It's \icode{89}! 
 
-\subsection{After Our First Real Byte}
+\section{After Our First Real Byte}
 With this precious commodity in hand we now continue reading off bytes in the same manner from the tape. Eventually we encounter
 a signal that tells us we've reached the end of the data block, a 'Long-Short' sequence. When this happens we find we've
 read 202 bytes in total:
@@ -436,7 +436,7 @@ What is this program? It seems a bit short to be Iridis Alpha right? What it is 
 rest of the data from the tape. That's right: we've read all this data from the tape to get a program for reading data
 from the tape. This type of program is called a 'loader', or perhaps in an effort to justify it's existence, a 'turbo loader'.
 
-\subsection{A Loader for your Loader}
+\section{A Loader for your Loader}
 \begin{figure}[H]
   {
     \begin{adjustbox}{width=10cm,center}
@@ -665,7 +665,7 @@ When it has completed it has loaded the following to RAM:
   }\caption[]{Where the different parts of the game end up in memory.}
 \end{figure}
 
-\subsection{Putting an End to the Madness}
+\section{Putting an End to the Madness}
 
 With all the data read in you might wonder how the loader knows what to do next (i.e. to run the game) and how it
 will know where to start running it from. The answer is given in the \icode{Header Data} for the final chunk of data:

@@ -5,7 +5,7 @@
 
 This decidedly ropey mini-game has a few interesting features.
 
-\subsection{Entry Sequence}
+\section{Entry Sequence}
 \begin{figure}[H]
     \centering
       \includegraphics[width=10cm]{src/bonusphase/entry/bonus_entry_example.png}%
@@ -120,7 +120,7 @@ All in all, this is a neat effect and would only have been possible at the speed
 the raster interrupt in this way. Simply painting the screen with colored text would have been much
 slower.
 
-\subsection{Generating Maps}
+\section{Generating Maps}
 \begin{figure}[H]
     \centering
       \includegraphics[width=10cm]{src/bonusphase/bonus_phase.png}%
@@ -627,7 +627,7 @@ at a time, whereas as the 'rows' we've defined are two lines deep. It decides wh
 two lines its writing by using the \icode{scrollLineOffset} variable to determine which
 one its writing.
 
-\subsubsection{Choosing a Map}
+\subsection{Choosing a Map}
 So now that we understand how the individual rows of the map are generated, the question
 arises: how do we procedurally generate entire maps? Do we just pick random rows and 
 join them together? This wouldn't work well, since some rows aren't going to go well
@@ -759,7 +759,7 @@ pseudo-random order and stacking them on top of one another!
 
 
 
-\subsection{Some Very Ugly Sprites}
+\section{Some Very Ugly Sprites}
 For some reason the gilby sprite in the bonus phase is made impossibly ugly.
 
 \begin{figure}[H]
@@ -843,7 +843,7 @@ For some reason the gilby sprite in the bonus phase is made impossibly ugly.
   }\caption{There is no excuse for this.}
 \end{figure}
 
-\subsection{IBalls}
+\section{IBalls}
 
 \begin{figure}[H]
   {

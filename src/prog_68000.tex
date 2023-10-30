@@ -64,7 +64,7 @@ We can compensate for the lack of \icode{\_\_at} thanks to the power of \icode{l
 
 \pagebreak
 
-\subsection{Goal}
+\section{Goal}
 To avoid flipping pages, here is the memory map studied on page \pageref{m68k_mm}.
 
 \begin{tabularx}{\textwidth}{rrrX}
@@ -89,7 +89,7 @@ To avoid flipping pages, here is the memory map studied on page \pageref{m68k_mm
   \toprule    
 \end{tabularx}%
 
-\subsection{Memory Regions}
+\section{Memory Regions}
 
 \lstinputlisting[]{src/code/68000/cps1.lk}
 
@@ -107,7 +107,7 @@ Notice the care taken to make sure the 68000 will only attempt to access aligned
 \end{trivia}
 
 
-\subsection{Code to segment}
+\section{Code to segment}
 
 C variables are placed into these sections using the names defined in the linker script.
 
@@ -183,7 +183,7 @@ The \icode{frameCounter} variable paces the main thread so a new frame is only h
 \end{trivia}
 
 
-\subsection{Commanding sound}
+\section{Commanding sound}
 Requesting a sound or music playback is only about writing to a latch and forgetting about it. However special care is necessary if the engine requests multiple sounds during the same frame. If this were to happen the value in the latch could be overwritten before the z80 picked it up.
 The solution is to implement a queue system where commands are stored and fed one by one every frame. 
 
@@ -191,7 +191,7 @@ Functions \icode{VSync} and \icode{main} run in lock-step via two counters. Main
 
 \lstinputlisting[style=CStyle]{src/code/68000/vsync.c} 
 
-\subsection{Main}
+\section{Main}
 \lstinputlisting[style=CStyle]{src/code/68000/main.c} 
 
 
@@ -199,7 +199,7 @@ How \icode{hostframe} is implemented is completely at the programmer's discretio
 
 To learn about the kernel and how it is used to run multi-task A.I bytecode and moving fireballs, check out the Street Fighter II Platinum source code\cite{sf2platinium}.
 
-\subsection{Retrieving inputs}
+\section{Retrieving inputs}
 Besides joystick and buttons, the engine must recover inputs such as the dip settings, P1Start, P2Start, and most importantly detect coins being inserted.
 
 \begin{trivia}
@@ -255,22 +255,22 @@ In Street Fighter 2, DIP B is used to configure the difficulty level of the game
 % \caption*{Input bit layouts}
 % \end{figure}  
 
-\subsection{Drawing on screen}
+\section{Drawing on screen}
 Requesting tiles to be drawn consists of first describing the layout in GFXRAM, then setting the palettes, and finally writing to the CPS-A and CPS-B registers to point them to "where is the data".
 
-\subsubsection{Double buffering}
+\subsection{Double buffering}
 When a frame is being drawn, neither the data in the GFXRAM nor the CPS-A/CPS-B register values can be changed. Raster effects are not possible since HSYNC is not forwarded to the m68k. Changes should only occur during the VBLANKing which is signaled via the \icode{VSync} function.
 
 The proper way to avoid visual artifacts is to double buffer the SCROLL/OBJ descriptors in the GFXRAM. While one buffer is used for rasterization until the next VSYNC, the next frame is prepared in the other buffer. On \icode{VSync} the CPS-A and CPS-B registers are written to swap the buffer roles.
 
-\subsubsection{CPS-A and CPS-B registers}
+\subsection{CPS-A and CPS-B registers}
 The CPS-A registers are always at the same offset in the m68k memory map and they always use the same layout. 
 
 Depending on the board being targeted, registers of the CPS-B will move and their internal layout will change. A convenient way to deal with this is to use MACROs and have the build system enable the appropriate ones.
 
 Note that all registers are 16-bit to accommodate the 68000 operating on them. As shown in the summary table, a register offset is always located on an even address.
 
-\subsubsection{CPS-A Usage}
+\subsection{CPS-A Usage}
 
 The CPS-A is controlled via 18 registers.
 
@@ -307,7 +307,7 @@ The CPS-A is controlled via 18 registers.
 
 The base registers tell the CPS-A where it should expect data in GFXRAM. Registers are 16-bit but addresses must be 24-bit so values are expanded \icode{<< 8} upon reception. The linker script should be configured to make sure data structures are aligned properly.
 
-\subsubsection{Row Scrolling}
+\subsection{Row Scrolling}
 Row scrolling allows for offsetting each visible row on SCROLL2 via a discrete X amount. In Street Fighter II, Honda's dohyō ( the space in which a sumo wrestling bout occurs) perspective is achieved via linear offset differences. The more perspective needed, the more accentuated the offset slope. 
 
 \begin{figure}[H]
@@ -343,7 +343,7 @@ A convenient trick is to allocate a rowscroll array of size 1024 with one entry 
 
 \lstinputlisting[style=CStyle]{src/code/68000/rowscroll.c} 
 
-\subsubsection{Real-life example}
+\subsection{Real-life example}
 
 When a contestant in Street Fighter II jumps, SCROLL2 moves vertically but no rowscroll offsets are re-calculated, only \icode{ROWSCROLL\_OFFSET}  is moved. This allows to amortize the generation of perspective correct rowscroll offset.
 
@@ -354,7 +354,7 @@ Note that rowscroll offsets are unsigned and always indicate an amount to move t
 \lstinputlisting[style=CStyle]{src/code/68000/videocontrol.c} 
 
 \label{cpsbreg_programming}
-\subsubsection{CPS-B Usage}
+\subsection{CPS-B Usage}
 The CPS-B features only seven registers but their location changes based on the version of the chip.
 
  \begin{figure}[H]
@@ -417,7 +417,7 @@ These four registers control the precedence of pens belonging to the layer behin
 
 
 
-\subsubsection{Drawing OBJs}
+\subsection{Drawing OBJs}
 To draw sprites and shapes, descriptors must be written to the GFX RAM. Each entry takes four 16-bit WORDS (8 bytes).
 
 \lstinputlisting[style=CStyle]{src/code/68000/sprites.c} 
@@ -434,7 +434,7 @@ The CPS-A will stop reading entries from the OBJ descriptors if it reaches an em
 
 Developers do not have to worry about the \icode{STF29} or GFX partitioning. The tileID is relative to the group it belongs to.
 
-\subsubsection{Drawing SCROLLs}
+\subsection{Drawing SCROLLs}
 
 Rendering tilemaps is much like rendering OBJs. Descriptors must be written to the GFX RAM but the layout is much simpler. Each entry is two 16-bit WORDs wide (four bytes).
 
@@ -493,7 +493,7 @@ The system used by Capcom to program the CP-System remained unknown for many yea
 
 In 2018,  Akiman confirmed\cite{x68000usage1}\cite{x68000usage2} that Capcom's SDK, named CAT-1, was launched during the making of Street Fighter II and ran on a Sharp X68000.
 
-\subsection{SHARP X68000}\index{Computers!SHARP X68000}
+\section{SHARP X68000}\index{Computers!SHARP X68000}
 
 Unheard of in the rest of the world, the X68000 is a celebrity in Japan where it was nicknamed "god computer". 
 Released in 1987, the first machine in the series was as beautiful and powerful as it was expensive (¥369,000, roughly \$3000 in 1987, equivalent to \$7,600 in 2022).
@@ -571,7 +571,7 @@ For everything else, the X68000 features two \icode{extension slots} to welcome 
 
 
 
-\subsection{X68000 Tech Specs}  
+\section{X68000 Tech Specs}  
 Inside its gorgeous "Manhattan" case, the machine packed an unparalleled amount of horse power. Even a machine such as the Amiga 500, released the same year and praised in Europe and USA for its prowess, pales in comparison to the X68000. 
 
 
@@ -604,7 +604,7 @@ If both music and sound capabilities were outstanding, it is in the graphics dep
 
 The 1056 KiB of VRAM are divided into three segments feeding four planes. 512 KiB are dedicated to the Text plane, 512 KiB are for the Bitmap plane and the rest, 32 KiB, are for the joined use of the Background plane and Sprite plane. Each plane can be configured to use distinct resolution and layers.
 
-\subsection{Video Prowess}
+\section{Video Prowess}
 
 The \textbf{Bitmap Plane} is particularly well suited to plot pixels and render images. Its direct 16bpp color mode was ideal for raytracing application (a M68881 math coprocessor could be added to reduce rendering time). Four modes are available.
 
@@ -651,7 +651,7 @@ Video games were obviously a strength of the machine thanks to its Background an
 
 
 
-\subsection{OS}
+\section{OS}
 Developed by Hudson Soft, the operating system named Human68k is strongly inspired by Microsoft's MS-DOS . 
 
 All English name commands such as \icode{DIR}, \icode{COPY} and such are available. In fact, Human68k manual is nearly identical to IBM DOS 4.0J manual\cite{human68k_manual}. The system even uses a \icode{CONFIG.SYS} file to boot.
@@ -671,12 +671,12 @@ Several windows-based GUIs running on top of Human68k were released over the yea
 
 
 
-\subsection{A Development Machine?}
+\section{A Development Machine?}
 The similarities between the X68000 and the CPS-1 are many. A quick glance over the specs on page \pageref{x68000-specs} could easily lead one to conclude that a small layer of emulation is all a X68000 needed to run CPS-1 games, making it a perfect development machine. 
 
 Since developers never detailed to what extent SHARP's machine was involved, we can only make an educated guess. A beginning of an answer comes from the hardware components, while Capcom-produced game ports leave no ambiguity.
 
-\subsubsection{Hardware response}
+\subsection{Hardware response}
 If the Motorola 680000 CPU and the YM2151 present in both machines are identical, the rest diverge from slightly to significantly.
 
 The sound chip is an OKI but it is "only" a MSM6258. Although it works alike the MSM6296 with ADPCM, it features only one channel which severely impacts how rich the sound effects and music systems can be.
@@ -687,11 +687,11 @@ Lastly, the X68000 floppy storage resulted in slow loading time compared to the 
 
 
 
-\subsubsection{The 32 KiB VRAM wall}
+\subsection{The 32 KiB VRAM wall}
 
 The real issue, and perhaps the only real weakness of the "god computer" is the minuscule amount of VRAM dedicated to feed the Sprite and Tilemap layers. Out of 1MiB, only 32KiB is available which results in asset starvation (it can store only  256 16x16 tiles). This limitation knee-capped any potential of using both layers at the same time. A VRAM shared among layers would have been a totally different story.
 
-\subsubsection{Software response}
+\subsection{Software response}
 
 A definitive answer about the viability of the X68000 as a development station comes from Capcom arcade ports.
 \begin{figure}[H]
@@ -721,7 +721,7 @@ All these clues strongly suggest the SHARP X68000 was limited to writing/testing
 \nbimg{gg_manual.jpg}
 
 
-\subsection{Ports Analysis: Ghouls 'n Ghosts (1994)}
+\section{Ports Analysis: Ghouls 'n Ghosts (1994)}
 Ghouls 'n Ghosts was released in 1994, six years after the arcade version. It is noteworthy for its low RAM requirements of 2MiB RAM and its resolution of 512x512.
 
 It is considered a "perfect port" because of its GFX faithfulness to the CPS-1 version. All the enemies, levels, and weapons are there, rendered with the correct rich colors. 
@@ -772,7 +772,7 @@ The rain effect is replicated as seen on page \pageref{gg_rain} via the Text lay
 
 \pagebreak
 
-\subsection{Ports Analysis: Final Fight (1992)}
+\section{Ports Analysis: Final Fight (1992)}
 
 Final Fight was released in 1992, three years after the arcade version. Like the Ghouls'n Ghosts port, the game managed to ship on two 5.25-inch 1.2 MiB floppies.
 
@@ -826,7 +826,7 @@ The YM2151 let music be close to the arcade version but without samples. The OKI
 
 \pagebreak
 
-\subsection{Per Scene Renderer}
+\section{Per Scene Renderer}
 
 The color-depth reduction trick is only one among many others. There are many testaments to the hair pulling process an X68000 port appears to be. One of them is the introduction sequence where Damned takes away the mayor's daughter.
 
@@ -884,7 +884,7 @@ The whole trick is not perfect. As the barrels break down, the machine reaches i
 
 \pagebreak
 
-\subsection{Ports Analysis: Street Fighter II Champion Edition (1993)}
+\section{Ports Analysis: Street Fighter II Champion Edition (1993)}
 Street Fighter II Champion Edition was released only a year after the arcade version.
 
 The volume of assets forced the game to ship on four 5.25-inch 1.2 MiB floppies. The game manages to run with 2 MiB of RAM but suffers numerous loading delays when traveling between countries. However, on a machine with 4 MiB the game engine loads all floppies to RAM to provide a loading-free experience.
@@ -944,7 +944,7 @@ Investigating further into Street Fighter 2: Champion Edition confirms the colos
 \item Remain within the m68k software rendering budget
 \end{enumerate}
 
-\subsection{Per Level Renderer}
+\section{Per Level Renderer}
 Like in Final Fight, where scenes were optimized on a case-per-case basis, Street Fighter II Champion Edition uses a distinct rendering strategy depending on the arena.
 
 When fighting occurs in China, the Text layer is not used for Sprite decoration like it is in Thailand. Instead it is dedicated to the sky and its animation. Two rows of clouds, accounting for two "frames" of animation are drawn once. The hardware offsets are leveraged to parallax the clouds and alternate their shapes. This was likely done because of the fillrate required to update this layer.
@@ -957,7 +957,7 @@ When fighting occurs in China, the Text layer is not used for Sprite decoration 
 \end{figure}
 
 
-\subsection{Saving Further 68000 Cycles}
+\section{Saving Further 68000 Cycles}
 If we look closely at Page 1 and 2, we see that the background is split. The alley is on Page 2 while the rest is on Page 1, which is surprising since no parallax effect exists (they are on the same plane). 
 
 This reduces overdraw when the Page 1 cyclist crosses the screen and goes over the other cyclist in the back alley, saving a few CPU cycles.
@@ -994,7 +994,7 @@ This reduces overdraw when the Page 1 cyclist crosses the screen and goes over t
 
 
 
-\subsection{The Rise ...}
+\section{The Rise ...}
  SHARP kept on improving the series with better CPU (68030), more RAM (up to 12MiB) and even bigger HDD (up to 80 MiB). Peripheral manufacturers embraced the computer with extension cards covering anything users and programmers could desire. 
 
 
@@ -1032,7 +1032,7 @@ The success was such that a magazine dedicated to the X68000, Oh!X, was publishe
 Often featuring a raytraced cover to boast the graphic capabilities of the SHARP marvels, each publication came loaded with software, originally on one, then two, and later three 5.25" floppy disks \cite{ohXarticle}!
 \end{trivia}
 
-\subsection{... and Fall}
+\section{... and Fall}
 Ultimately, SHARP updates were too timid to keep up. Even its most recent model sporting a Motorola 68030 CPU failed to remain competitive both in terms of price and performance.
 
 After six years without updating the video or audio pipeline, the 2D oriented design of the machine started to look dated. Other machines found themselves better fitted to embrace an era of 3D started by companies such as Silicon Graphics, 3DfX, and Verity.

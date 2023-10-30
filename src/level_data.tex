@@ -1,4 +1,5 @@
 \chapter{Enemies and their Discontents} 
+\label{sec:level}
 
 \lstset{style=6502Style}
 
@@ -38,7 +39,8 @@ the sheer variety of adversaries the player faces.
 	\begin{subfigure}{0.3\textwidth}
     \includegraphics[width=2cm]{src/sprites/gallery/sprite_162.png}%
 	\end{subfigure}
-  }\caption*{The enemy in level 1, controlled by the Level Data below.}
+  }
+
   {
   \setlength{\tabcolsep}{3.0pt}
   \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
@@ -48,7 +50,7 @@ the sheer variety of adversaries the player faces.
 \toprule
  Byte    & Value                     & Description                                                        \\
 \midrule
- Byte 0  & \$06                       & Index into array for sprite color                                  \\
+  Byte 0  & \icode{\$06}                       & Index into array for sprite color                                  \\
  Byte 1  & FLYING\_SAUCER1            & First sprite value for the attack ship on the upper planet               \\
  Byte 2  & FLYING\_SAUCER3            & Last sprite value for the attack ship on the upper planet               \\
  Byte 3  & \$03                       & The animation frame rate for the attack ship.                      \\
@@ -1010,7 +1012,7 @@ NoMultiplierAppliedToCollision
 
 \end{lstlisting}
 
-\subsection{Byte 34: Score for Hitting the Enemey}
+\subsection{Byte 34: Score for Hitting the Enemy}
 This is used to augment the score received for hitting the enemy.
 \begin{lstlisting}
     ; Get the points for hitting enemies in this level

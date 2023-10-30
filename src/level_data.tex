@@ -20,355 +20,93 @@ Hence ACONT.
 
 The bits and bytes that define the behaviour and appearance of
 wave after wave of Iridis Alpha's enemy formations - twenty across each of the
-five planets giving on hundred in all - takes up relatively little space given
+five planets giving one hundred in all - takes up relatively little space given
 the sheer variety of adversaries the player faces.
 
-\subsection{You're a Waste of Space}
-Each 'wave' of enemies is defined by a 40 byte data structure, not 50 bytes as
-Minter initially suggested in his development diary. There's a little bit of 
-waste going on in here too, bytes 10 to 14 are unused, while \icode{Byte 15} is only
-ever set (to \icode{\$01}) by the wave data structure that describes the default explosion 
-behaviour for enemy ships.
-
-As we can see here, the sole purpose of \icode{Byte 15} is to determine whether a
-new set of wave data needs to be loaded. This makes sense, once the animation is finished
-we'll need to load a new enemy ship. Still, you can't help thinking there might have been 
-a way that didn't waste 99 bytes! 
-
-\begin{lstlisting}
-CheckForCollisionsBeforeUpdatingCurrentShipsWaveData
-        ; X is the current value in indexForActiveShipsWaveData
-        ; We're checking if this is the first time the ship has been hit by the gilby.
-        ; If so, there may be a new state for the enemy to turn into, e.g. a licker ship
-        ; seed turning into a licker ship.
-        LDA shipHasAlreadyBeenHitByGilby,X
-        BEQ JumpToGetNewShipDataFromDataStore
-
-        LDA #$00
-        STA shipHasAlreadyBeenHitByGilby,X
-
-        ; Check if there is another set of wave data to get for this wave when it is first hit.
-        LDY #$1F
-        LDA (currentShipWaveDataLoPtr),Y
-        BEQ JumpToGetNewShipDataFromDataStore
-
-        ; Byte 15 (Index $0E): Controls the rate at which new enemies are added?
-        ; Is there a rate at which new enemies are added?
-        LDY #$0E
-        LDA (currentShipWaveDataLoPtr),Y
-        BEQ CheckCollisionType
-
-        TXA
-        AND #$08 ; Is X pointing to lower planet ships?
-        BNE DecrementStepsThenCheckCollisionsForBottomPlanet
-
-        ; X is pointing to a top planet ship.
-        DEC currentStepsBetweenTopPlanetAttackWaves
-        JMP CheckCollisionType
-        ; Returns
-
-;-------------------------------------------------------
-; JumpToGetNewShipDataFromDataStore
-;-------------------------------------------------------
-JumpToGetNewShipDataFromDataStore
-        JMP GetNewShipDataFromDataStore
-        ; Returns
-\end{lstlisting}
-
-And actually, it's more than that because as we shall see the \icode{ACONT} 40-byte data
-structure is defined more than once per wave. Separate instances are defined for later
-phases of the enemy ship, such as when it is first hit. Early examples of this in the game
-are the 'spinning rings' you get when you hit an enemy in the first level.
-
-In all there are 200 instances of the \icode{ACONT} data structure: 100 defining each of the
-enemy waves and another 100 defining the subsequent behaviour of the ships when hit. There isn't
-a one-to-one mapping here either - many of the effects are reused across levels and as we shall
-see there can be multiple stages in an enemy's lifecycle.
-
-So there's already 1000 bytes or 1 kilobyte of wasted space in the level data due to bytes
-that are never or rarely used. That's out of a total of 8 kilobytes actually used.
-
-Shocking stuff. Awful.
-
-\subsection{And You're a Waste of Space}
-
-\icode{Bytes 33 - 34} seem to be left in an unfinished state. Wave 12 on Planet 5 has both populated, \icode{flowchartArrowAsExplosion}
-is the only other wave that has anything in either byte, in this case \icode{\$60} in \icode{Byte 33}.
-
-This another 200 wasted bytes it seems but it seems these bytes have some game logic attached and
-when you look at what that logic is doing it seems broken.
-
-
-When Byte 34 (\icode{\$21}) is populated (and fire has not been pressed) the game will attempt to load
-a set of wave date from Bytes 33 and 34:
-
-\begin{lstlisting}
-UpdateWaveDataPointersForCurrentEnemy
-        LDA (currentShipWaveDataLoPtr),Y
-        PHA
-        INY
-        LDA (currentShipWaveDataLoPtr),Y
-
-        ; If we have a nullPtr then there's no wave data to get
-        ; so the enemy ship can be cleared out and we can return.
-        BEQ ClearDeadShipFromLevelData
-
-        STA activeShipsWaveDataHiPtrArray,X
-        STA currentShipWaveDataHiPtr
-        PLA
-        STA currentShipWaveDataLoPtr
-        STA activeShipsWaveDataLoPtrArray,X
-        ; Falls through
-\end{lstlisting}
-
-In the case of the data for Planet 5 Level 12 this translates to whatever is at \icode{\$1488}. As it happens this 
-is the address of the frequency data used in the title screen's music. So effectively pretty random data:
-
-\begin{lstlisting}
-                    ;      C   C#  D   D#  E   F   F#  G   G#  A   A#  B
-titleMusicHiBytes   .BYTE $08,$08,$09,$09,$0A,$0B,$0B,$0C,$0D,$0E,$0E,$0F  ; 4
-                    .BYTE $10,$11,$12,$13,$15,$16,$17,$19,$1A,$1C,$1D,$1F  ; 5
-                    .BYTE $21,$23,$25,$27,$2A,$2C,$2F,$32,$35,$38,$3B,$3F  ; 6
-                    .BYTE $43,$47,$4B,$4F,$54,$59,$5E,$64,$6A,$70,$77,$7E  ; 7
-                    .BYTE $86,$8E,$96,$9F,$A8,$B3,$BD,$C8,$D4,$E1,$EE,$FD  ; 8
-
-                    ;      C   C#  D   D#  E   F   F#  G   G#  A   A#  B
-titleMusicLowBytes  .BYTE $61,$E1,$68,$F7,$8F,$30,$DA,$8F,$4E,$18,$EF,$D2  ; 4
-                    .BYTE $C3,$C3,$D1,$EF,$1F,$60,$B5,$1E,$9C,$31,$DF,$A5  ; 5
-                    .BYTE $87,$86,$A2,$DF,$3E,$C1,$6B,$3C,$39,$63,$BE,$4B  ; 6
-                    .BYTE $0F,$0C,$45,$BF,$7D,$83,$D6,$79,$73,$C7,$7C,$97  ; 7
-                    .BYTE $1E,$18,$8B,$7E,$FA,$06,$AC,$F3,$E6,$8F,$F8,$2E  ; 8
-\end{lstlisting}
-
-Clearly, no one has ever reached level 12 in planet 5!
-
-\subsection{Clever Business}
-\begin{q}{Jeff Minter's Development Diary in Zzap Magazine\cite{planner}}
-You pass the interpreter data, that describes exactly stuff like: what each
-alien looks like, how many frames of animation it uses, speed of that
-animation, colour, velocities in X— and Y— directions, accelerations in X and
-Y, whether the alien should 'home in' on a target, and if so, what to home in
-on; whether an alien is subject to gravity, and if so, how strong is the
-gravity; what the alien should do if it hits top of screen, the ground, one of
-your bullets, or you; whether the alien can fire bullets, and if so, how
-frequently, and what types; how many points you get if you shoot it, and how
-much damage it does if it hits you; and a whole bunch more stuff like that. As
-you can imagine it was a fairly heavy routine to write and get debugged, but
-that's done now; took me about three weeks in all I'd say.
-\end{q}
-
-The level data does actually define some of this stuff. It does so by making
-heavy use of a simple but clever trick that in its way is very specific to
-8-bit assembly programming: storing references to other data structures as
-a pair of bytes. We've discussed the way this works previously but we'll try
-again briefly here as it won't do any harm. 
-
-The 40-byte data structure that defines the default explosion animation (and
-behaviour, so far as it goes) is stored at position \icode{\$18C8} while the
-game is running. To use this explosion data when an enemy is killed, bytes 31
-and 32 of the data structure contain the values \icode{\$C8,\$18}. 
-
-When an enemy is hit, the game routine responsible for figuring out what to do next
-with it looks at bytes 31 and 32 and loads in the data structure at the address
-given by combining \icode{\$18} and \icode{\$C8} as the 'new' wave data that
-defines how that enemy ship will now behave. Since the data structure at
-\icode{\$18C8} basically says: animate an explosion sprite and don't move
-anywhere that is exactly what the enemy ship now does.
-
-Here's the explosion data structure, which we've labelled \icode{defaultExplosion} in
-our disassembly, in the first twenty bytes or so of it's gory detail:
-
-\begin{lstlisting}
-defaultExplosion = $18C8
-        ; Byte 1 (Index $00): An index into colorsForAttackShips that applies a
-        ; color value for the ship sprite.
-        .BYTE $07
-        ; Byte 2 (Index $01): Sprite value for the attack ship for the upper planet.
-        ; Byte 3 (Index $02): The 'end' sprite value for the attack ship's animation
-        ; for the upper planet.
-        .BYTE EXPLOSION_START,EXPLOSION_START + $03
-        ; Byte 4 (Index $03): The animation frame rate for the attack ship.
-        .BYTE $03
-        ; Byte 5 (Index $04): Sprite value for the attack ship for the lower planet.
-        ; Byte 6 (Index $05): The 'end' sprite value for the ship's lower planet animation.
-        .BYTE EXPLOSION_START,EXPLOSION_START + $03
-        ; Byte 7 (Index $06): Whether a specific attack behaviour is used.
-        .BYTE $00
-        ; Byte 8 (Index $07): Lo Ptr for an unused attack behaviour
-        ; Byte 9 (Index $08): Hi Ptr for an unused attack behaviour
-        .BYTE <nullPtr,>nullPtr
-        ; Byte 10 (Index $09): Lo Ptr for an animation effect? (Doesn't seem to be used?)
-        ; Byte 11 (Index $0A): Hi Ptr for an animation effect (Doesn't seem to be used?)?
-        .BYTE <nullPtr,>nullPtr
-        ; Byte 12 (Index $0B): some kind of rate limiting for attack wave
-        .BYTE $00
-        ; Byte 13 (Index $0C): Lo Ptr for a stage in wave data (never used).
-        ; Byte 14 (Index $0D): Hi Ptr for a stage in wave data (never used).
-        .BYTE <nullPtr,>nullPtr
-        ; Byte 15 (Index $0E): Controls the rate at which new enemies are added?
-        .BYTE $01
-        ; Byte 16 (Index $0F): Update rate for attack wave
-        .BYTE $0D
-        ; Byte 17 (Index $10): Lo Ptr to the wave data we switch to when first hit.
-        ; Byte 18 (Index $11): Hi Ptr to the wave data we switch to when first hit.
-        .BYTE <nullPtr,>nullPtr
-        ; Byte 19 (Index $12): X Pos movement for attack ship.
-        .BYTE $80
-        ; Byte 20 (Index $13): Y Pos movement pattern for attack ship.
-        ; An index into yPosMovementPatternForShips1
-        .BYTE $80
-\end{lstlisting}
-
-We can see the first 7 bytes are concerned with the appearance and basic behaviour of the
-enemy. Bytes 2 and 3 define the sprite used for display on the upper planet, Bytes 5 and 6
-for the lower planet. The reason there's two in each case is because they are describing the
-start and end point of the sprite's animation. The game will display \icode{EXPLOSION\_START} \icode{\$ED}) first,
-then cycle through the next two sprites until it reaches \icode{EXPLOSION\_START} + 3 (\icode{\$F0}). 
-
-\subsection{Sprites Behaving Badly}
-
-We can see this in action in \icode{AnimateAttackShipSprites}. When this routine runs Byte 4 has been loaded
-to \icode{upperPlanetAttackShipInitialFrameRate} for the upper planet and \icode{lowerPlanetAttackShipInitialFrameRate}
-for the lower planet. This routine is cycling through the sprites given by Byte 2 as the lower limit and Byte 3 as 
-the upper limit. This is what the animation consists of: an animation effect achieved by changing the sprite from
-one to another to create a classic animation effect.
-
-\begin{lstlisting}[caption=Routine for Animating Enemy Sprites. ]
-AnimateAttackShipSprites
-        LDA pauseModeSelected
-        BEQ AnimateUpperPlanetAttackShips
-        RTS
-
-AnimateUpperPlanetAttackShips   
-        DEC upperPlanetAttackShipAnimationFrameRate - $01,X
-        BNE AnimateLowerPlanetAttackShips
-
-        LDA upperPlanetAttackShipInitialFrameRate - $01,X
-        STA upperPlanetAttackShipAnimationFrameRate - $01,X
-        INC upperPlanetAttackShip2SpriteValue,X
-        LDA upperPlanetAttackShip2SpriteValue,X
-
-        ; Reached the end of the animation?
-        CMP upperPlanetAttackShipSpriteAnimationEnd - $01,X
-        BNE AnimateLowerPlanetAttackShips
-
-        ; Reset the animation sprite back to the start.
-        LDA upperPlanetAttackShipSpritesLoadedFromBackingData - $01,X
-        STA upperPlanetAttackShip2SpriteValue,X
-
-AnimateLowerPlanetAttackShips   
-        DEC lowerPlanetAttackShipAnimationFrameRate - $01,X
-        BNE DontAnimateLowerPlanetAttackShip
-
-        LDA lowerPlanetAttackShipInitialFrameRate - $01,X
-        STA lowerPlanetAttackShipAnimationFrameRate - $01,X
-        INC lowerPlanetAttackShip2SpriteValue,X
-        LDA lowerPlanetAttackShip2SpriteValue,X
-
-        ; Reached the end of the animation?
-        CMP lowerPlanetAttackShipSpriteAnimationEnd - $01,X
-        BNE DontAnimateLowerPlanetAttackShip
-
-        ; Reset the animation sprite back to the start.
-        LDA lowerPlanetAttackShipSpritesLoadedFromBackingData - $01,X
-        STA lowerPlanetAttackShip2SpriteValue,X
-DontAnimateLowerPlanetAttackShip   
-        RTS
-\end{lstlisting}
- 
-Byte 2 (loaded to \icode{upperPlanetAttackShipAnimationFrameRate} comes into play here. It's decremented and as long as it's
-not zero yet the animation is skipped, execution jumps forward to \icode{AnimateLowerPlanetAttackShips}:
-
-\begin{lstlisting}
-AnimateLowerPlanetAttackShips   
-        DEC lowerPlanetAttackShipAnimationFrameRate - $01,X
-        BNE DontAnimateLowerPlanetAttackShip
-
-        LDA lowerPlanetAttackShipInitialFrameRate - $01,X
-        STA lowerPlanetAttackShipAnimationFrameRate - $01,X
-        INC lowerPlanetAttackShip2SpriteValue,X
-        LDA lowerPlanetAttackShip2SpriteValue,X
-
-        ; Reached the end of the animation?
-        CMP lowerPlanetAttackShipSpriteAnimationEnd - $01,X
-        BNE DontAnimateLowerPlanetAttackShip
-
-        ; Reset the animation sprite back to the start.
-        LDA lowerPlanetAttackShipSpritesLoadedFromBackingData - $01,X
-        STA lowerPlanetAttackShip2SpriteValue,X
-\end{lstlisting}
-
-If it is zero, it instead gets reset to the initial value from Byte 2 (stored in
- \icode{upperPlanet\-AttackShipInitialFrameRate})
-and the current sprite for the enemy ship is incremented to point to the next 'frame' of the ship's animation:
-
-\begin{lstlisting}
-AnimateUpperPlanetAttackShips   
-        DEC upperPlanetAttackShipAnimationFrameRate - $01,X
-        BNE AnimateLowerPlanetAttackShips
-
-        LDA upperPlanetAttackShipInitialFrameRate - $01,X
-        STA upperPlanetAttackShipAnimationFrameRate - $01,X
-        INC upperPlanetAttackShip2SpriteValue,X
-        LDA upperPlanetAttackShip2SpriteValue,X
-
-        ; Reached the end of the animation?
-        CMP upperPlanetAttackShipSpriteAnimationEnd - $01,X
-        BNE AnimateLowerPlanetAttackShips
-
-        ; Reset the animation sprite back to the start.
-        LDA upperPlanetAttackShipSpritesLoadedFromBackingData - $01,X
-        STA upperPlanetAttackShip2SpriteValue,X
-\end{lstlisting}
-
-Next we check if we've reached the end of the animation by checking the value
-of Byte 3 (loaded to \icode{upperPlanetAttackShipSpriteAnimationEnd}).  If so,
-we reset \icode{upperPlanetAttackShip2SpriteValue} to the value initially
-loaded from Byte 2 - and that is what will be used to display the ship the next
-time we pass through to animate the ship:
-
-\begin{lstlisting}
-DrawUpperPlanetAttackShips
-        LDX #$0C
-        LDY #$06
-UpperPlanetShipsLoop   
-        LDA upperPlanetAttackShipsXPosArray,Y
-        STA $D000,X  ;Sprite 0 X Pos
-
-        LDA attackShipsXPosArray - $01,Y
-        AND $D010    ;Sprites 0-7 MSB of X coordinate
-        STA currentMSBXPosOffset
-
-        LDA upperPlanetAttackShipsMSBXPosArray,Y
-        AND attackShipsMSBXPosOffsetArray,Y
-        ORA currentMSBXPosOffset
-        STA $D010    ;Sprites 0-7 MSB of X coordinate
-
-        LDA upperPlanetAttackShipsYPosArray,Y
-        STA $D001,X  ;Sprite 0 Y Pos
-        STX tempVarStorage
-
-        LDX upperPlanetAttackShipsColorArray,Y
-        LDA colorsForAttackShips,X
-        STA $D027,Y  ;Sprite 0 Color
-
-        LDA upperPlanetAttackShipsSpriteValueArray,Y
-        STA Sprite0Ptr,Y
-        LDX tempVarStorage
-
-        DEX
-        DEX
-        DEY
-        BNE UpperPlanetShipsLoop
-        RTS
-\end{lstlisting}
 
 \begin{figure}[H]
   {
     \setlength{\tabcolsep}{3.0pt}
     \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
 	\centering
-	\def\MULTICOLORONE{green}
+	\begin{subfigure}{0.3\textwidth}
+    \includegraphics[width=2cm]{src/sprites/gallery/sprite_160.png}%
+	\end{subfigure}
+	\begin{subfigure}{0.3\textwidth}
+    \includegraphics[width=2cm]{src/sprites/gallery/sprite_161.png}%
+	\end{subfigure}
+	\begin{subfigure}{0.3\textwidth}
+    \includegraphics[width=2cm]{src/sprites/gallery/sprite_162.png}%
+	\end{subfigure}
+  }\caption*{The enemy in level 1, controlled by the Level Data below.}
+  {
+  \setlength{\tabcolsep}{3.0pt}
+  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+  \begin{adjustbox}{width=13cm}
+
+\begin{tabular}{lll}
+\toprule
+ Byte    & Value                     & Description                                                        \\
+\midrule
+ Byte 0  & \$06                       & Index into array for sprite color                                  \\
+ Byte 1  & FLYING\_SAUCER1            & First sprite value for the attack ship on the upper planet               \\
+ Byte 2  & FLYING\_SAUCER3            & Last sprite value for the attack ship on the upper planet               \\
+ Byte 3  & \$03                       & The animation frame rate for the attack ship.                      \\
+ Byte 4  & FLYING\_SAUCER1            & First sprite value for the attack ship on the lower planet               \\
+ Byte 5  & FLYING\_SAUCER3            & Last sprite value for the attack ship on the lower planet               \\
+ Byte 6  & \$00                       & Rate at which to switch to alternate enemy mode.                       \\
+ Byte 7  & nullPtr                   & Lo Ptr for alternate enemy mode                             \\
+ Byte 8  & nullPtr                   & Hi Ptr for alternate enemy mode                             \\
+ Byte 9  & nullPtr                   & \textbf{Unused} Lo Ptr to an arbitrary run of Bytes 18-21.\\
+ Byte 10 & nullPtr                   & \textbf{Unused} Hi Ptr to an arbitrary run of Bytes 18-21.\\
+ Byte 11 & \$00                       & \textbf{Unused} Rate limite for use of Bytes 9 and 10. \\
+ Byte 12 & nullPtr                   & \textbf{Unused} \\
+ Byte 13 & nullPtr                   & \textbf{Unused} \\
+ Byte 14 & \$00                       & Controls the rate at which new enemies are added.\\
+ Byte 15 & \$40                       & Update rate for attack wave                                        \\
+ Byte 16 & planet1Level1Data2ndStage & Lo Ptr to the wave data we switch to when first hit.               \\
+ Byte 17 & planet1Level1Data2ndStage & Hi Ptr to the wave data we switch to when first hit.               \\
+ Byte 18 & \$06                       & X Pos movement for attack ship.                                    \\
+ Byte 19 & \$01                       & Y Pos movement pattern for attack ship.                            \\
+ Byte 20 & \$01                       & X Pos Frame Rate for Attack ship.                                  \\
+ Byte 21 & \$01                       & Y Pos Frame Rate for Attack ship.                                  \\
+ Byte 22 & \$00                       & Stickiness factor, does the enemy stick to the player              \\
+ Byte 23 & \$00                       & Does the enemy gravitate quickly toward the player when its hit?   \\
+ Byte 24 & nullPtr                   & Lo Ptr for second wave of attack ships.                               \\
+ Byte 25 & nullPtr                   & Hi Ptr for second wave of attack ships.                               \\
+ Byte 26 & nullPtr                   & Lo Ptr for third wave of attack ships.                               \\
+ Byte 27 & nullPtr                   & Hi Ptr for third wave of attack ships.                               \\
+ Byte 28 & spinningRings             & Lo Ptr for Explosion animation.                                    \\
+ Byte 29 & spinningRings             & Hi Ptr for Explosion animation.                                    \\
+ Byte 30 & defaultExplosion          & Lo Ptr for another set of wave data for this level.                \\
+ Byte 31 & defaultExplosion          & Hi Ptr for another set of wave data for this level.                \\
+ Byte 32 & \$00                       & Lo Ptr for fourth wave of attack ships.                                                            \\
+ Byte 33 & \$00                       & Hi Ptr for fourth wave of attack ships.                           \\
+ Byte 34 & \$02                       & Points for hitting the enemy. \\
+ Byte 35 & \$02                       & Energy increase multiplier for hitting an enemy.\\
+ Byte 36 & \$00                       & Is the ship a spinning ring, i.e. does it allow the gilby to warp? \\
+ Byte 37 & \$04                       & Number of waves in data.                                           \\
+ Byte 38 & \$18                       & Number of ships in wave.                                           \\
+ Byte 39 & \$00                       & \textbf{Unused} byte.                                                      \\
+\bottomrule
+\end{tabular}
+
+  \end{adjustbox}
+
+  }\caption*{Sheep Planet - Level 1 - Enemy Data for the First Wave.}
+\end{figure}
+\clearpage
+
+\subsection{Something Simple - Byte 0: The Enemy's Color}
+To get an understanding of how the level data is used we can start with the very first byte of the data
+used for the first wave in the very first level. This is the wave of flying saucers you will already be
+familiar with if you have played the game (:)):
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+	\centering
+	\def\MULTICOLORONE{white}
 	\def\MULTICOLORTWO{red}
 	\def\SPRITECOLOR{blue}
 	\begin{subfigure}{0.3\textwidth}
@@ -383,19 +121,251 @@ UpperPlanetShipsLoop
   }\caption[position=top]{The sprites used to animate the 'UFO' in the first level.}
 \end{figure}
 
-\subsection{Enemy Movement}
+The main colour for this sprite is blue. This may not be obvious from looking at the sprites themselves, but
+the way the sprite color schemes work is that you can select two colors that are available for all sprites and
+one color that is unique to the sprite itself. In this case, the unique color selected for the flying saucers is
+determined by Byte 1 in the Level Data. You can see in the table in the page opposite
+that this is defined with a value of \icode{\$06}. This is how it looks in the code itself:
+
+\begin{lstlisting}
+planet1Level1Data
+    ; Byte 0 (Index $00): An index into colorsForAttackShips that applies a
+    ; color value for the ship sprite.
+    .BYTE $06
+\end{lstlisting}
+
+This value is an index into the array \icode{colorsForAttackShips}. Starting at zero we count up to 6
+and arrive at the 7th item in the list below, giving us the result \icode{BLUE}:
+\begin{lstlisting}
+colorsForAttackShips
+    .BYTE BLACK,WHITE,RED,CYAN,PURPLE,GREEN,BLUE,YELLOW
+    .BYTE ORANGE,BROWN,LTRED,GRAY1,GRAY2,LTGREEN,LTBLUE,GRAY3
+\end{lstlisting}
+
+In the routine that draws the attack wave we find the following code segment writing this value
+to the register \icode{\$D027} that determines the color of the sprite:
+
+\begin{lstlisting}
+;-------------------------------------------------------
+; DrawUpperPlanetAttackShips Routine
+;-------------------------------------------------------
+DrawUpperPlanetAttackShips
+    LDX #$0C
+    LDY #$06
+UpperPlanetShipsLoop   
+    ...
+    LDX upperPlanetAttackShipsColorArray,Y
+    LDA colorsForAttackShips,X
+    STA $D027,Y  ;Sprite Y Color
+    ...
+    DEX
+    DEX
+    DEY
+    BNE UpperPlanetShipsLoop
+    RTS
+\end{lstlisting}
+
+Notice that the \icode{\$06} was originally stored in a position in the array \icode{upperPlanetAttackShipsColorArray}.
+This happened in an earlier routine that loads the majority of the data for a level:
+
+
+\begin{lstlisting}
+GetWaveDataForNewShip
+    ; X is the index of the ship in activeShipsWaveDataLoPtrArray
+    LDY #$00
+    LDA (currentShipWaveDataLoPtr),Y
+    STA upperPlanetAttackShipsColorArray + $01,X
+\end{lstlisting}
+
+\subsection{Bytes 1-4: Sprite Animation}
+\begin{q}{Jeff Minter's Development Diary in Zzap Magazine\cite{planner}}
+You pass the interpreter data, that describes exactly stuff like: what each
+alien looks like, how many frames of animation it uses, speed of that
+animation, colour, velocities in X— and Y— directions, accelerations in X and
+Y, whether the alien should 'home in' on a target, and if so, what to home in
+on; whether an alien is subject to gravity, and if so, how strong is the
+gravity; what the alien should do if it hits top of screen, the ground, one of
+your bullets, or you; whether the alien can fire bullets, and if so, how
+frequently, and what types; how many points you get if you shoot it, and how
+much damage it does if it hits you; and a whole bunch more stuff like that. As
+you can imagine it was a fairly heavy routine to write and get debugged, but
+that's done now; took me about three weeks in all I'd say.
+\end{q}
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+	\centering
+	\def\MULTICOLORONE{red}
+	\def\MULTICOLORTWO{white}
+	\def\SPRITECOLOR{orange}
+	\begin{subfigure}{0.3\textwidth}
+		\input{sprites/CUMMING_COCK1}
+	\end{subfigure}
+	\begin{subfigure}{0.3\textwidth}
+		\input{sprites/CUMMING_COCK2}
+	\end{subfigure}
+	\begin{subfigure}{0.3\textwidth}
+		\input{sprites/CUMMING_COCK3}
+	\end{subfigure}
+  }\caption[position=top]{Confirmation that the game developer was a young male. The sprites used to animate attack wave 17 in the Mushroom Planet.}
+\end{figure}
+
+Looking again at the table in the previous page we can see the first 7 bytes are concerned with the appearance and basic behaviour of the
+enemy. Bytes 1 and 2 define the sprite used for display on the upper planet, Bytes 4 and 5
+for the lower planet. The reason there's two in each case is because they are describing the
+start and end point of the sprite's animation. 
+
+We can see this in action in \icode{AnimateAttackShipSprites}. When this routine runs Byte 3 has been loaded
+to \icode{upperPlanetAttackShipInitialFrameRate} for the upper planet and \icode{lowerPlanetAttackShipInitialFrameRate}
+for the lower planet. This routine is cycling through the sprites given by Byte 1 as the lower limit and Byte 2 as 
+the upper limit. This is what the animation consists of: an animation effect achieved by changing the sprite from
+one to another to create a classic animation effect.
+
+\begin{lstlisting}[caption=Routine for Animating Enemy Sprites. ]
+AnimateAttackShipSprites
+    LDA pauseModeSelected
+    BEQ AnimateUpperPlanetAttackShips
+    RTS
+
+AnimateUpperPlanetAttackShips   
+    DEC upperPlanetAttackShipAnimationFrameRate - $01,X
+    BNE AnimateLowerPlanetAttackShips
+
+    LDA upperPlanetAttackShipInitialFrameRate - $01,X
+    STA upperPlanetAttackShipAnimationFrameRate - $01,X
+    INC upperPlanetAttackShip2SpriteValue,X
+    LDA upperPlanetAttackShip2SpriteValue,X
+
+    ; Reached the end of the animation?
+    CMP upperPlanetAttackShipSpriteAnimationEnd - $01,X
+    BNE AnimateLowerPlanetAttackShips
+
+    ; Reset the animation sprite back to the start.
+    LDA upperPlanetAttackShipSpritesLoadedFromBackingData - $01,X
+    STA upperPlanetAttackShip2SpriteValue,X
+
+AnimateLowerPlanetAttackShips   
+    DEC lowerPlanetAttackShipAnimationFrameRate - $01,X
+    BNE DontAnimateLowerPlanetAttackShip
+
+    LDA lowerPlanetAttackShipInitialFrameRate - $01,X
+    STA lowerPlanetAttackShipAnimationFrameRate - $01,X
+    INC lowerPlanetAttackShip2SpriteValue,X
+    LDA lowerPlanetAttackShip2SpriteValue,X
+
+    ; Reached the end of the animation?
+    CMP lowerPlanetAttackShipSpriteAnimationEnd - $01,X
+    BNE DontAnimateLowerPlanetAttackShip
+
+    ; Reset the animation sprite back to the start.
+    LDA lowerPlanetAttackShipSpritesLoadedFromBackingData - $01,X
+    STA lowerPlanetAttackShip2SpriteValue,X
+DontAnimateLowerPlanetAttackShip   
+    RTS
+\end{lstlisting}
+ 
+Byte 1 (loaded to \icode{upperPlanetAttackShipAnimationFrameRate} comes into play here. It's decremented and as long as it's
+not zero yet the animation is skipped, execution jumps forward to \icode{AnimateLowerPlanetAttackShips}:
+
+\begin{lstlisting}
+AnimateLowerPlanetAttackShips   
+    DEC lowerPlanetAttackShipAnimationFrameRate - $01,X
+    BNE DontAnimateLowerPlanetAttackShip
+
+    LDA lowerPlanetAttackShipInitialFrameRate - $01,X
+    STA lowerPlanetAttackShipAnimationFrameRate - $01,X
+    INC lowerPlanetAttackShip2SpriteValue,X
+    LDA lowerPlanetAttackShip2SpriteValue,X
+
+    ; Reached the end of the animation?
+    CMP lowerPlanetAttackShipSpriteAnimationEnd - $01,X
+    BNE DontAnimateLowerPlanetAttackShip
+
+    ; Reset the animation sprite back to the start.
+    LDA lowerPlanetAttackShipSpritesLoadedFromBackingData - $01,X
+    STA lowerPlanetAttackShip2SpriteValue,X
+\end{lstlisting}
+
+If it is zero, it instead gets reset to the initial value from Byte 1 (stored in
+ \icode{upperPlanet\-AttackShipInitialFrameRate})
+and the current sprite for the enemy ship is incremented to point to the next 'frame' of the ship's animation:
+
+\begin{lstlisting}
+AnimateUpperPlanetAttackShips   
+    DEC upperPlanetAttackShipAnimationFrameRate - $01,X
+    BNE AnimateLowerPlanetAttackShips
+
+    LDA upperPlanetAttackShipInitialFrameRate - $01,X
+    STA upperPlanetAttackShipAnimationFrameRate - $01,X
+    INC upperPlanetAttackShip2SpriteValue,X
+    LDA upperPlanetAttackShip2SpriteValue,X
+
+    ; Reached the end of the animation?
+    CMP upperPlanetAttackShipSpriteAnimationEnd - $01,X
+    BNE AnimateLowerPlanetAttackShips
+
+    ; Reset the animation sprite back to the start.
+    LDA upperPlanetAttackShipSpritesLoadedFromBackingData - $01,X
+    STA upperPlanetAttackShip2SpriteValue,X
+\end{lstlisting}
+
+Next we check if we've reached the end of the animation by checking the value
+of Byte 2 (loaded to \icode{upperPlanetAttackShipSpriteAnimationEnd}).  If so,
+we reset \icode{upperPlanetAttackShip2SpriteValue} to the value initially
+loaded from Byte 1 - and that is what will be used to display the ship the next
+time we pass through to animate the ship:
+
+\begin{lstlisting}
+DrawUpperPlanetAttackShips
+    LDX #$0C
+    LDY #$06
+UpperPlanetShipsLoop   
+    LDA upperPlanetAttackShipsXPosArray,Y
+    STA $D000,X  ;Sprite 0 X Pos
+
+    LDA attackShipsXPosArray - $01,Y
+    AND $D010    ;Sprites 0-7 MSB of X coordinate
+    STA currentMSBXPosOffset
+
+    LDA upperPlanetAttackShipsMSBXPosArray,Y
+    AND attackShipsMSBXPosOffsetArray,Y
+    ORA currentMSBXPosOffset
+    STA $D010    ;Sprites 0-7 MSB of X coordinate
+
+    LDA upperPlanetAttackShipsYPosArray,Y
+    STA $D001,X  ;Sprite 0 Y Pos
+    STX tempVarStorage
+
+    LDX upperPlanetAttackShipsColorArray,Y
+    LDA colorsForAttackShips,X
+    STA $D027,Y  ;Sprite 0 Color
+
+    LDA upperPlanetAttackShipsSpriteValueArray,Y
+    STA Sprite0Ptr,Y
+    LDX tempVarStorage
+
+    DEX
+    DEX
+    DEY
+    BNE UpperPlanetShipsLoop
+    RTS
+\end{lstlisting}
+
+\subsection{Bytes 18-21: Enemy Movement}
 
 Enemy movement is controlled by two parameters in each direction: the number of pixels to move in one go and the number of
-cycles to wait between each movement. So for movement in the horizontal (or X direction) \icode{Byte 19} controls the number
-of pixels to move at once, while \icode{Byte 21} controls the number of cycles to wait between each movement. The same
-applies to \icode{Byte 20} and \icode{Byte 22} for the vertical (or Y direction).
+cycles to wait between each movement. So for movement in the horizontal (or X direction) \icode{Byte 18} controls the number
+of pixels to move at once, while \icode{Byte 20} controls the number of cycles to wait between each movement. The same
+applies to \icode{Byte 19} and \icode{Byte 21} for the vertical (or Y direction).
 
-If we look at Byte 19 and Byte 21 for Level 1 we can see that the the fast lateral movement of the 'UFO's is implemented by a relatively
+If we look at Byte 18 and Byte 20 for Level 1 we can see that the the fast lateral movement of the 'UFO's is implemented by a relatively
 high value of \$06 for the number of pixels it moves at each step while the interval between steps is relatively low (\$01).
-Meanwhile the more gradual up and down movement is implemented by a value of \$01 in Byte 20 and Byte 22.
+Meanwhile the more gradual up and down movement is implemented by a value of \$01 in Byte 19 and Byte 21.
 
-For the second level ('bouncing rings') the horizontal movement is more constrained (Byte 19 is \$00) while the vertical movement
-is more extreme (Byte 20 is \$24) - achieving the bouncing effect.
+For the second level ('bouncing rings') the horizontal movement is more constrained (Byte 18 is \$00) while the vertical movement
+is more extreme (Byte 19 is \$24) - achieving the bouncing effect.
 
 
 
@@ -403,22 +373,22 @@ is more extreme (Byte 20 is \$24) - achieving the bouncing effect.
   {
     \setlength{\tabcolsep}{3.0pt}
     \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
-    \begin{adjustbox}{width=10cm,center}
+    \begin{adjustbox}{width=8cm,center}
 
       \begin{tabular}{rlllll}
         \toprule
-        Level & Byte 7    & Byte 19   & Byte 20   & Byte 21   & Byte 22   \\
+        Level & Byte 6    & Byte 18   & Byte 19   & Byte 20   & Byte 21   \\
         \midrule
         1 & \$00       & \$06       & \$01       & \$01       & \$01       \\
         2 & \$00       & \$00       & \$24       & \$02       & \$01       \\
         3 & \$00       & \$FA       & \$01       & \$01       & \$02       \\
         \addlinespace
         \bottomrule
-        \multicolumn{6}{@{}l@{}}{Byte 7 : Whether a specific attack behaviour is used.}\\
-        \multicolumn{6}{@{}l@{}}{Byte 19: X Pos movement for attack ship.}\\
-        \multicolumn{6}{@{}l@{}}{Byte 20: Y Pos movement pattern for attack ship.}\\
-        \multicolumn{6}{@{}l@{}}{Byte 21: X Pos Frame Rate for Attack ship.}\\
-        \multicolumn{6}{@{}l@{}}{Byte 22: Y Pos Frame Rate for Attack ship.}\\
+        \multicolumn{6}{@{}l@{}}{Byte 6 : Whether a specific attack behaviour is used.}\\
+        \multicolumn{6}{@{}l@{}}{Byte 18: X Pos movement for attack ship.}\\
+        \multicolumn{6}{@{}l@{}}{Byte 19: Y Pos movement pattern for attack ship.}\\
+        \multicolumn{6}{@{}l@{}}{Byte 20: X Pos Frame Rate for Attack ship.}\\
+        \multicolumn{6}{@{}l@{}}{Byte 21: Y Pos Frame Rate for Attack ship.}\\
       \end{tabular}
 
     \end{adjustbox}
@@ -426,13 +396,24 @@ is more extreme (Byte 20 is \$24) - achieving the bouncing effect.
     }\caption*{Movement data for the first three levels.}
 \end{figure}
 
-The horizontal movement for level three is \$FA, which would make you think the enemies must be moving horizontally
+The horizontal movement for Level Three, home to the infamous 'Licker Ships' is \$FA, which would make you think the enemies must be moving horizontally
 extremely quickly. In fact, when the high bit is set a special behaviour is invoked:
 
 \begin{lstlisting}[caption=From \icode{UpdateAttackShipsXAndYPositions}.  ]
         LDA xPosMovementForUpperPlanetAttackShip - $01,X
         BMI UpperBitSetOnXPosMovement
 \end{lstlisting}
+
+This is the special behaviour that makes the Licker Ships on this level such an enormous pain in the arse to play against.
+
+\begin{figure}[H]
+    \centering
+    \foreach \l in {0,...,1}
+    {
+      \includegraphics[width=6cm]{level_data/images/movement_1_3_\l.png}%
+    }%
+\caption*{Enemy movement for Sheep planet, level 3 - the infamous licker ships.}
+\end{figure}
 
 When the upper bit is set (e.g. \$FC,\$80) on the value loaded to the accumulator by \icode{LDA} then \icode{BMI} will 
 return true and jump to \icode{UpperBitSetOnXPosMovement}.
@@ -463,7 +444,7 @@ values is set but the other is not:
   {
     \setlength{\tabcolsep}{3.0pt}
     \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
-    \begin{adjustbox}{width=10cm,center}
+    \begin{adjustbox}{width=7cm,center}
 
       \begin{tabular}{rllllllll}
         \toprule
@@ -485,10 +466,10 @@ values is set but the other is not:
 This result is stored in \icode{attackShipOffsetRate}:
 \begin{lstlisting}
 UpperBitSetOnXPosMovement   
-        ; This creates a decelerating effect on the attack ship's movement.
-        ; Used by the licker ship wave in planet 1 for example.
-        EOR #$FF
-        STA attackShipOffsetRate
+  ; This creates a decelerating effect on the attack ship's movement.
+  ; Used by the licker ship wave in planet 1 for example.
+  EOR #$FF
+  STA attackShipOffsetRate
 \end{lstlisting}
 
 Incremented:
@@ -498,45 +479,45 @@ Incremented:
 
 And then subtracted from the enemy's X position:
 \begin{lstlisting}
-        SEC
-        SBC attackShipOffsetRate
-        STA upperPlanetAttackShip2XPos,X
+  SEC
+  SBC attackShipOffsetRate
+  STA upperPlanetAttackShip2XPos,X
 \end{lstlisting}
 
 The net result is a deceleration effect. This is observed in the way the licker ship
 wave will accelerate out to the center before dialling back again.
 
 
-\subsubsection{What is going on with Byte 7?}
+\subsubsection{What is going on with Byte 6?}
 
-Byte 7 comes into play when setting the initial Y position of a new enemy. This initial vertical
+Byte 6 comes into play when setting the initial Y position of a new enemy. This initial vertical
 position is random, but subject to some adjustment:
 
 \begin{lstlisting}[caption=The sub-routine \icode{SetInitialRandomPositionUpperPlanet} in \icode{GetWaveDateForNewShip}.  ]
 SetInitialRandomPositionUpperPlanet   
-        JSR PutProceduralByteInAccumulatorRegister
-        AND #$3F
-        CLC
-        ADC #$40
-        STA upperPlanetAttackShipsYPosArray + $01,Y
+  JSR PutProceduralByteInAccumulatorRegister
+  AND #$3F
+  CLC
+  ADC #$40
+  STA upperPlanetAttackShipsYPosArray + $01,Y
 
-        STY previousAttackShipIndexTmp
-        ; Byte 7 ($06): Usually an update rate for the attack ships.
-        LDY #$06
-        LDA (currentShipWaveDataLoPtr),Y
-        BNE ReturnFromLoadingWaveDataEarly
+  STY previousAttackShipIndexTmp
+  ; Byte 6 ($06): Usually an update rate for the attack ships.
+  LDY #$06
+  LDA (currentShipWaveDataLoPtr),Y
+  BNE ReturnFromLoadingWaveDataEarly
 
-        ; Byte 9 ($08): Default initiation Y position for the enemy. 
-        LDY #$08
-        LDA (currentShipWaveDataLoPtr),Y
-        BEQ ReturnFromLoadingWaveDataEarly
+  ; Byte 8 ($08): Default initiation Y position for the enemy. 
+  LDY #$08
+  LDA (currentShipWaveDataLoPtr),Y
+  BEQ ReturnFromLoadingWaveDataEarly
 
-        LDA #$6C
-        LDY previousAttackShipIndexTmp
-        STA upperPlanetAttackShipsYPosArray + $01,Y
+  LDA #$6C
+  LDY previousAttackShipIndexTmp
+  STA upperPlanetAttackShipsYPosArray + $01,Y
 
 ReturnFromLoadingWaveDataEarly   
-        RTS
+  RTS
 \end{lstlisting}
 
 The first order of business is to call \icode{PutProceduralByteInAccumulatorRegister} which gets a random value and stores it in the accumulator.
@@ -544,9 +525,9 @@ The first order of business is to call \icode{PutProceduralByteInAccumulatorRegi
 \begin{lstlisting}
 PutProceduralByteInAccumulatorRegister
 randomIntToIncrement   =*+$01
-        LDA randomPlanetData
-        INC randomIntToIncrement
-        RTS
+    LDA randomPlanetData
+    INC randomIntToIncrement
+    RTS
 \end{lstlisting}
 
 Since \icode{A} can now contain anything from 0 to 255 (\$00 to \$FF) this needs to be adjusted to a meaningful Y-position
@@ -599,34 +580,34 @@ add value of \$98 instead of \$40. This is simply an additional offset to ensure
 for the initial position of the enemy on the lower planet.
 
 We still haven't got into what Byte 7 is doing though. With an initial Y position determined, it looks like the intention was
-for Byte 7 to specify some adjustment to this value. But this looks like another bit of non-functioning game logic. If
-Byte 7 contains a value, the function will return early without any further adjustments. If it's zero it will then try
-Byte 9. If that's zero, it will return early. So the logic needs Byte 7 to be zero and Byte 9 to contain something for 
+for Byte 6 to specify some adjustment to this value. But this looks like another bit of non-functioning game logic. If
+Byte 6 contains a value, the function will return early without any further adjustments. If it's zero it will then try
+Byte 8. If that's zero, it will return early. So the logic needs Byte 6 to be zero and Byte 8 to contain something for 
 anything to happen. That's never the case, so the the adjustment never happens:
 
-\begin{lstlisting}[caption= An adjustment that never happens. Byte 7 and Byte 9 are never set in this way.]
+\begin{lstlisting}[caption= An adjustment that never happens. Byte 6 and Byte 8 are never set in this way.]
         STY previousAttackShipIndexTmp
-        ; Byte 7 ($06): Usually an update rate for the attack ships.
+        ; Byte 6 ($06): Usually an update rate for the attack ships.
         LDY #$06
         LDA (currentShipWaveDataLoPtr),Y
         BNE ReturnFromLoadingWaveDataEarly
 
-        ; Byte 9 ($08): Default initiation Y position for the enemy. 
+        ; Byte 8 ($08): Default initiation Y position for the enemy. 
         LDY #$08
         LDA (currentShipWaveDataLoPtr),Y
         BEQ ReturnFromLoadingWaveDataEarly
 \end{lstlisting}
 
-This is definitely some forgotten code. Byte 7 is elsewhere used in combination with Byte 8 and Byte 9 to define an alternate
+This is definitely some forgotten code. Byte 6 is elsewhere used in combination with Byte 7 and Byte 8 to define an alternate
 enemy mode for some levels where the ship will supplement any dead ships with alternate enemy types and attack patterns periodically.
 
 
-\subsection{Pointer Data}
+\subsection{Bytes 6-8: Alternate Enemy Waves}
 This happens in \icode{MaybeSwitchToAlternateEnemyPattern} in \icode{UpdateAttackShipDataForNewShip}. 
 
-\begin{lstlisting}[caption=Byte 7 is used to periodically switch to an enemy mode defined by Bytes 8-9 ]
+\begin{lstlisting}[caption=Byte 6 is used to periodically switch to an enemy mode defined by Bytes 7-8 ]
 MaybeSwitchToAlternateEnemyPattern   
-        ; Byte 7 ($06): Usually an update rate for the attack ships.
+        ; Byte 6 ($06): Usually an update rate for the attack ships.
         LDY #$06
         LDA (currentShipWaveDataLoPtr),Y
         BEQ EarlyReturnFromAttackShipBehaviour
@@ -655,9 +636,9 @@ MaybeSwitchToAlternateEnemyPattern
 
 \end{lstlisting}
 
-Byte 7 is used to drive the rate at which this routine switches over to the enemy data/mode defined by Byte 8 and Byte 9.
+Byte 6 is used to drive the rate at which this routine switches over to the enemy data/mode defined by Byte 7 and Byte 8.
 
-\begin{lstlisting}[caption=\icode{rateForSwitchingToAlternateEnemy} (Byte 7) is decremented and reloaded each time it reaches zero. ]
+\begin{lstlisting}[caption=\icode{rateForSwitchingToAlternateEnemy} (Byte 6) is decremented and reloaded each time it reaches zero. ]
         DEC rateForSwitchingToAlternateEnemy,X
         BNE EarlyReturnFromAttackShipBehaviour
 
@@ -665,7 +646,7 @@ Byte 7 is used to drive the rate at which this routine switches over to the enem
         STA rateForSwitchingToAlternateEnemy,X
 \end{lstlisting}
 
-What this routine is going to do is replace the first dead ship it finds in the current wave with the wave data pointed to by  Byte 8-9
+What this routine is going to do is replace the first dead ship it finds in the current wave with the wave data pointed to by  Byte 7-8
 and create a new enemy with the current ship's position with it.
 
 First, we store the current ship's position. The way to do this is get the index (\icode{Y}) for the current ship \icode{X} and store
@@ -803,7 +784,7 @@ are treated as providing the address \icode{\$1370}. This is the location where 
     \begin{adjustbox}{width=7cm,center}
       \begin{tabular}{rrll}
         \toprule
-        Planet &   Level & Byte 7    & Bytes 8-9                   \\
+        Planet &   Level & Byte 6    & Bytes 7-8                   \\
         \midrule
         1 &      11 & \$03       & smallDotWaveData         \\
         1 &      14 & \$03       & planet1Level8Data        \\
@@ -816,17 +797,231 @@ are treated as providing the address \icode{\$1370}. This is the location where 
         5 &      14 & \$06       & llamaWaveData            \\
         \addlinespace
         \bottomrule
-        \multicolumn{4}{@{}l@{}}{Byte 7 : Whether a specific attack behaviour is used.}\\
-        \multicolumn{4}{@{}l@{}}{Bytes 8-9 : Lo and Hi Ptr for alternate enemy mode}\\
+        \multicolumn{4}{@{}l@{}}{Byte 6 : Whether a specific attack behaviour is used.}\\
+        \multicolumn{4}{@{}l@{}}{Bytes 7-8 : Lo and Hi Ptr for alternate enemy mode}\\
       \end{tabular}
 
     \end{adjustbox}
 
-  }\caption{Actual use of Bytes 7, 8, and 9. Note that the value in Byte 7 doesn't matter, as long as it's non-zero.}
+  }\caption{Actual use of Bytes 6, 7, and 8. Note that the value in Byte 6 doesn't matter, as long as it's non-zero.}
 \end{table}
 
 
-\subsection{Enemy Behaviour}
+\subsection{Bytes 22-23: The Bytes of Death}
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+	\centering
+	\def\MULTICOLORONE{white}
+	\def\MULTICOLORTWO{red}
+	\def\SPRITECOLOR{gray}
+	\begin{subfigure}{0.3\textwidth}
+		\input{sprites/LICKER_SHIP1}
+	\end{subfigure}
+	\begin{subfigure}{0.3\textwidth}
+		\input{sprites/LICKERSHIP2}
+	\end{subfigure}
+	\begin{subfigure}{0.3\textwidth}
+		\input{sprites/LICKERSHIP3}
+	\end{subfigure}
+  }\caption[position=top]{These arseholes.}
+\end{figure}
+
+An irritating early hurdle in Iridis Alpha's gameplay is the behaviour of the lickerships in the game's third level.
+When shot the enemies turn into lickerships that seek out the player and then stick to them, sapping the player's energy
+until they lose a life. This behavious is defined by Bytes 22 and 23. 
+
+\begin{lstlisting}
+lickerShipWaveData = $1118
+  ..
+  ; Byte 22 (Index $16): Stickiness factor, does the enemy stick to the player
+  ; sapping their energy if they're near them?
+  .BYTE $01
+  ; Byte 23 (Index $17): Does the enemy gravitate quickly toward the player when its
+  ; been shot? (Typical lickership behaviour)
+  .BYTE $01
+  ..
+\end{lstlisting}
+
+Implementing each of these is relatively straighforward. Since the gilby is always in the centre of the screen (on the
+X axis at least), all an enemy has to do is figure out whether the gilby is above or below it and move in that direction.
+If we leave out the slightly complicated logic to figure out where the gilby is relative to us, we are left with this:
+
+\begin{lstlisting}
+MaybeQuicklyGravitatesToGilby
+  ; Byte 23:  Does the enemy gravitate quickly towards the gilby when it is shot?
+  LDY #$17
+  LDA (currentShipWaveDataLoPtr),Y
+  BEQ MaybeStickyAttackShipBehaviour
+  ...
+  ; Figure out the relative position of the gilby and
+  ; store it in positionRelativeToGilby
+  ...
+  ; Now decide whether to move up or down.
+  CMP positionRelativeToGilby
+  BEQ NoVerticalMovementRequired
+  BMI MoveDownToGilby
+MoveUpToGilby
+  DEC yPosMovementForUpperPlanetAttackShips,X
+  DEC yPosMovementForUpperPlanetAttackShips,X
+MoveDownToGilby
+  INC yPosMovementForUpperPlanetAttackShips,X
+NoVerticalMovementRequired
+  LDA indexForActiveShipsWaveData,X
+  TAX
+\end{lstlisting}
+
+Sticking to the gilby involves the same logic but along the horizontal axis. After all if we're sticking to the gilby
+we want to stay in the centre of the screen.
+
+\begin{lstlisting}
+MaybeStickyAttackShipBehaviour   
+  ; Byte 22: Does the enemy have the stickiness behaviour?
+  LDY #$16
+  LDA (currentShipWaveDataLoPtr),Y
+  BEQ MaybeSwitchToAlternateEnemyPattern
+  ...
+  ; Figure out the relative position of the gilby and
+  ; store it in positionRelativeToGilby
+  ...
+  CMP positionRelativeToGilby
+  BMI MoveRightToGilby
+MoveLeftToGilby   
+  DEC xPosMovementForUpperPlanetAttackShip,X
+  DEC xPosMovementForUpperPlanetAttackShip,X
+MoveRightToGilby   
+  INC xPosMovementForUpperPlanetAttackShip,X
+NoHorizontalMovementRequired   
+  LDA indexForActiveShipsWaveData,X
+  TAX
+\end{lstlisting}
+
+\subsection{Byte 35: Energy Multiplier}
+When an enemy is struck this byte contains the multiplier applied to the player's energy boost:
+
+\begin{lstlisting}
+IncreaseEnergyTopOnly
+    LDY #$23
+    LDA (currentShipWaveDataLoPtr),Y
+    BEQ NormalTopEnergyIncrease
+    STA energyChangeCounter
+EnergyTopIncreaseLoop
+    JSR IncreaseEnergyTop
+    DEC energyChangeCounter
+    BNE EnergyTopIncreaseLoop
+    RTS
+
+NormalTopEnergyIncrease
+    JMP IncreaseEnergyTop
+    ;Returns
+\end{lstlisting}
+
+The above is for the top planet energy counter, the logic for the bottom planet is identical:
+
+\begin{lstlisting}
+IncreaseEnergyBottomOnly
+    LDY #$23
+    LDA (currentShipWaveDataLoPtr),Y
+    BEQ NormalBottomEnergyIncrease
+    STA energyChangeCounter
+EnergyBottomIncreaseLoop
+    JSR IncreaseEnergyBottom
+    DEC energyChangeCounter
+    BNE EnergyBottomIncreaseLoop
+    RTS
+
+NormalBottomEnergyIncrease
+    JMP IncreaseEnergyBottom
+    ;Returns
+\end{lstlisting}
+
+\subfile{titlescreen/energy_tilesheet}
+
+Actually writing the updated energy level to the screen uses the tileset above in the routine
+\icode{IncreaseEnergyTop}:
+\begin{lstlisting}
+IncreaseEnergyTop
+    STX temporaryStorageForXRegister
+    LDX currEnergyTop
+    DEC SCREEN_RAM + LINE22_COL3,X
+    LDA SCREEN_RAM + LINE22_COL3,X
+    CMP #$7F
+    BNE b547B
+    ; Note the reference to the index $80 of the first tile in the set above.
+    LDA #$80 
+    STA SCREEN_RAM + LINE22_COL3,X
+    INX
+    STX currEnergyTop
+    CPX #$08
+    BEQ GilbyDiesFromExcessEnergy
+    LDA #$87
+    STA SCREEN_RAM + LINE22_COL3,X
+    BNE b547B
+\end{lstlisting}
+
+Byte 35 also determines the multiplier applied to the energy sapped from the player in the 
+event of a collision with the enemy:
+
+\begin{lstlisting}
+UpdateEnergyLevelsAfterCollision
+    ; Check if the enemy saps energy from the gilby?
+    LDY #$23
+    LDA (currentShipWaveDataLoPtr),Y
+    BEQ NoMultiplierAppliedToCollision
+
+    LDA #<shipCollidedWithGilbySound
+    STA primarySoundEffectLoPtr
+    LDA #>shipCollidedWithGilbySound
+    STA primarySoundEffectHiPtr
+    JSR ResetRepetitionForPrimarySoundEffect
+    LDA #$0E
+    STA gilbyExploding
+    LDA #$02
+    STA starFieldInitialStateArray - $01
+    LDA currentGilbySpeed
+    EOR #$FF
+    CLC
+    ADC #$01
+    STA currentGilbySpeed
+
+    LDA setToZeroIfOnUpperPlanet
+    BEQ EnergyUpdateTopPlanet
+
+    LDA extraAmountToDecreaseEnergyByBottomPlanet
+    BNE NoMultiplierAppliedToCollision
+    ; Y is still $23.
+    LDA (currentShipWaveDataLoPtr),Y
+    JSR AugmentAmountToDecreaseEnergyByBountiesEarned
+    STA extraAmountToDecreaseEnergyByBottomPlanet
+    BNE NoMultiplierAppliedToCollision
+
+EnergyUpdateTopPlanet   
+    LDA extraAmountToDecreaseEnergyByTopPlanet
+    BNE NoMultiplierAppliedToCollision
+    ; Y is still $23.
+    LDA (currentShipWaveDataLoPtr),Y
+    JSR AugmentAmountToDecreaseEnergyByBountiesEarned
+    STA extraAmountToDecreaseEnergyByTopPlanet
+NoMultiplierAppliedToCollision
+    LDY #$1E
+    JMP UpdateWaveDataPointersForCurrentEnemy
+    ; Returns
+
+\end{lstlisting}
+
+\subsection{Byte 34: Score for Hitting the Enemey}
+This is used to augment the score received for hitting the enemy.
+\begin{lstlisting}
+    ; Get the points for hitting enemies in this level
+    ; from the wave data.
+AddPointsForHittingEnemy   
+    ; Byte 34
+    LDY #$22
+    LDA (currentShipWaveDataLoPtr),Y
+    ..
+    ADC pointsEarnedTopPlanetByte1
+    STA pointsEarnedTopPlanetByte1
+\end{lstlisting}
 
 
-\subsection{Level Movement Data}

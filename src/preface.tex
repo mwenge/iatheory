@@ -1,28 +1,27 @@
-\chapter{Preface} 
+\chapter*{About This Book} 
 This book describes the inner workings of a relatively obscure video game created
-by an eccentric Englishman in 1986 for the Commodore 64.
+by an eccentric Englishman by the name of Jeff Minter in 1986 for the Commodore 64.
 
-If you are curious about old computers such as the C64 or the detailed mechanics
+If you are curious about old computers such as the Commodore 64 or the detailed mechanics
 of making a glorified digital breadboard produce something on a screen that flashes, bleeps,
 and fascinates then this book is hopefully for you. Iridis Alpha was not an enormous success on its release
 but it is widely regarded as one of the great achievements on the Commodore 64 hardware. It embodies an 8-bit arcade aesthetic that was
 unique to its time, it was slightly mad in its concept and execution, and its emphasis on speed and unforgiving gameplay influenced
 generations of game developers in the years that followed.
 
-Since the source code of Iridis Alpha is no longer available, I have had to unpack and reinterpret it
-from the game binary Jeff Minter released into the public domain in 2019. I describe this
+Since the source code of Iridis Alpha is no longer available, I have had to \href{https://github.com/mwenge/iridisalpha}{\textcolor{blue}{unpack and reinterpret}} it
+from the game binary Jeff Minter \href{https://www.llamasoftarchive.org/oldsite/llamasoft/cbm64/IridisAlpha.zip}{\textcolor{blue}{released into the public domain in 2019}}. I describe this
 reverse-engineering process in the opening chapters because I think it is an interesting exercise in and of it self to go from
-a binary blob to a set of fully commented source code that provides insight to the inner workings of the game. Hopefully
-you will enjoy it too.
+a binary blob to a set of fully commented source code that provides insight to the inner workings of the game. 
+\hyperref[sec:archaeo]{\textcolor{blue}{A Little Archaeology}} describes how we extract the game binary from the cassette
+tape it was originally distributed. \hyperref[sec:dis]{\textcolor{blue}{Some Disassembly Required}} shows you how to go from 
+a very long list of bytes to a full source code listing. Hopefully you are here because you enjoy this kind of gory detail too.
 
-The full source code is available in \href{https://github.com/mwenge/iridisalpha}{\textcolor{blue}{its own Github repository}}. 
-You should find that it matches exactly the snippets of code provided in the book, though in some cases the extracts in the book have been edited
-and reformatted for brevity.
-
-If you are just interested in learning about the mechanics of the game you can flick straight to \hyperref[sec:first16]{\textcolor{blue}{The First 16 Milliseconds}}, 
-which begins by covering the first few milliseconds of loading the title screen and all that goes on in there. \hyperref[sec:planets]{\textcolor{blue}{Making Planets for Nigel}},
+If you are just interested in learning about the mechanics of the game itself you can flick straight to \hyperref[sec:first16]{\textcolor{blue}{The First 16 Milliseconds}}, 
+which begins by covering the loading the title screen and all that goes on in there. \hyperref[sec:planets]{\textcolor{blue}{Making Planets for Nigel}},
 \hyperref[sec:blast]{\textcolor{blue}{Blasting Fast and Slow}}, and \hyperref[sec:level]{\textcolor{blue}{Enemies and Their Discontents}} cover the main gameplay
-and dive into how the game levels are created and how the speed of the game is achieved. 
+and dive into how the game levels are created and how the speed of the game is achieved. These chapters go deep into the game's reassembled code and look closely at how
+Jeff Minter designed its core engine.
 
 I dedicate a full chapter \hyperref[sec:first16]{\textcolor{blue}{A Hundred Thousand Billion Theme Tunes}} to the ingenious procedural programming behind Iridis Alpha's theme
 tunes and trace its inspiration back to an article 'Musical Fractals' in a 1986 issue of Byte magazine. \hyperref[sec:torusmusic]{\textcolor{blue}{Another 16\textsuperscript{4} Tunes}} looks
@@ -37,17 +36,22 @@ bundled with the main game.
 As a final coda, \hyperref[sec:bugs]{\textcolor{blue}{Iridis Oops!}} takes a look at some of the bugs that slipped through to the final release. 
 
 If you are reading the PDF version of this book the \hyperref[sec:appendices]{\textcolor{blue}{Appendices}} contain a data dump of sprite sheets, character sets, maps and tables that 
-should provide hours of rewarding bedtime reading.
+should provide hours of rewarding bedtime reading, or more likely, deep undisturbed sleep.
 
-\section{Note on the Text}
+\section*{Note on the Text}
 The version you are reading is little more than a scrapbook still many revisions away from a
 finished product. If you find the writing hard going or the attempts to explain things difficult
 to follow, by all means \href{https://github.com/mwenge/iatheory/issues}{\textcolor{blue}{leave me a note}} and
 I will gratefully accept your complaint. In the meantime, please skip over any blemishes
 to the next pretty picture or promising-looking block of text.
 
+The full source code is available in \href{https://github.com/mwenge/iridisalpha}{\textcolor{blue}{its own Github repository}}. 
+You should find that it matches exactly the snippets of code provided in the book, though in some cases the extracts in the book have been edited
+and reformatted for brevity.
 
-- Rob Hogan 2023 \href{https://mastodon.social/@mwenge}{\textcolor{blue}{@mwenge}}
+
+Rob Hogan, Dublin 2022-2023 \\
+\href{https://mastodon.social/@mwenge}{\textcolor{blue}{@mwenge}}
 \clearpage
 \vspace*{\fill}
 \begin{figure}[H]

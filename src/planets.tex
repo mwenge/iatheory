@@ -969,7 +969,7 @@ it also it has to move the byte to its appropriate position in the 8 byte sequen
   8 byte character set definition to position 5.}
 \end{figure}
 
-\subsection{1. Flipping the Byte}
+\subsection{Flipping the Byte}
 The first of these requirements is the more elaborate of the two. We need to look at each of the four bit-pairs in the
 byte and move it to its corresponding 'inverted' position in the byte. So in a way we treat one half of they byte as
 a mirror of the other and move the bit pair there as in the following examples.
@@ -1330,7 +1330,7 @@ As we can see, this has achieved an effective mirroring of our original value!
   }\caption{The result of our bit-shifting, \icode{AND}'ing\, and \icode{OR}ing.}
 \end{figure}
 
-\subsection{2. Flipping the Byte's Position}
+\subsection{Flipping the Byte's Position}
 The remaining steps for the other two bit-pairs in the byte are similar. In the case of our
 example they will have no effect as the result will be always be zero for them. We've
 effectively mirrored our bitpair already.

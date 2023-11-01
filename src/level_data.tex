@@ -1130,7 +1130,11 @@ the same sprite? This uses up more space overall but it is certainly easier to m
 of the level data is given over to chaining level data in this way. Let's look at that now.
 
 
-\section{Bytes 16-17, 24-33: Chaining Level Data}
+\section{Bytes 15-17: Sprite Switching}
+Byte 15 defines a value that is periodically decremented and when it reaches zero the level data pointed
+to by Bytes 16 and 17 is loaded. This is used in the very first level to switch the main sprite color
+of the flying UFOs. 
+
 \begin{figure}[H]
 
   {
@@ -1142,22 +1146,133 @@ of the level data is given over to chaining level data in this way. Let's look a
         \toprule
         Byte    & Value                     & Description                                                        \\
         \midrule
+        Byte 15 & \$40                       & Update rate for attack wave                                        \\
         Byte 16 & planet1Level1Data2ndStage & Lo Ptr to the wave data we switch to when first hit.               \\
         Byte 17 & planet1Level1Data2ndStage & Hi Ptr to the wave data we switch to when first hit.               \\
-        .. & ..                       & ..\\
-        Byte 24 & nullPtr                   & Lo Ptr for second wave of attack ships.                               \\
-        Byte 25 & nullPtr                   & Hi Ptr for second wave of attack ships.                               \\
-        Byte 26 & nullPtr                   & Lo Ptr for third wave of attack ships.                               \\
-        Byte 27 & nullPtr                   & Hi Ptr for third wave of attack ships.                               \\
-        Byte 28 & spinningRings             & Lo Ptr for Explosion animation.                                    \\
-        Byte 29 & spinningRings             & Hi Ptr for Explosion animation.                                    \\
-        Byte 30 & defaultExplosion          & Lo Ptr for another set of wave data for this level.                \\
-        Byte 31 & defaultExplosion          & Hi Ptr for another set of wave data for this level.                \\
-        Byte 32 & \$00                       & Lo Ptr for fourth wave of attack ships.                                                            \\
-        Byte 33 & \$00                       & Hi Ptr for fourth wave of attack ships.                           \\
         \bottomrule
       \end{tabular}
     \end{adjustbox}
-  }\caption*{Bytes 16 to 17, and 24 to 33.}
+  }\caption*{\icode{planet1Level1Data}: Bytes 15 to 17 for Level 1 on the Sheep Planet.}
+\end{figure}
+
+The way it works is Byte 15 is loaded to the appropriate position in \icode{updateRateForAttackShips}:
+
+\begin{lstlisting}
+GetWaveDataForNewShip
+  ..
+  ; Byte 15; Update Rate for Attack Waves
+  LDY #15
+  LDA (currentShipWaveDataLoPtr),Y
+  STA updateRateForAttackShips,X
+\end{lstlisting}
+
+This is then periodically decremented in \icode{GetNewShipDataFromDataStore}. When it reaches zero we 
+end up jumping to \icode{SwitchToAlternatingWaveData}:
+\begin{lstlisting}
+  DEC updateRateForAttackShips,X
+  BNE UpdateAttackShipDataForNewShip
+  ; Byte 14: Controls the rate at which new enemies are added.
+  ; This is only set when the current ship data is defaultExplosion
+  ; so in most cases we will go straight to SwitchToAlternatingWaveData.
+  LDY #14
+  LDA (currentShipWaveDataLoPtr),Y
+  BEQ SwitchToAlternatingWaveData
+\end{lstlisting}
+
+This now pulls in Bytes 16 and 17 from the level data and uses them as the address of the level data to 
+switch to:
+\begin{lstlisting}
+SwitchToAlternatingWaveData   
+        LDY #16
+
+;-------------------------------------------------------
+; UpdateWaveDataPointersForCurrentEnemy
+;-------------------------------------------------------
+UpdateWaveDataPointersForCurrentEnemy
+        ; Byte 16  Y has been set to 16 above, so we're pulling in the pointer
+        ; to the second tranche of wave data for this level. 
+        ; Or Y has been set by the caller.
+        LDA (currentShipWaveDataLoPtr),Y
+        PHA
+        INY
+        ; Byte 17
+        LDA (currentShipWaveDataLoPtr),Y
+
+        ; If we have a nullPtr then there's no wave data to get
+        ; so the enemy ship can be cleared out and we can return.
+        BEQ ClearDeadShipFromLevelData
+
+        STA activeShipsWaveDataHiPtrArray,X
+        STA currentShipWaveDataHiPtr
+        PLA
+        STA currentShipWaveDataLoPtr
+        STA activeShipsWaveDataLoPtrArray,X
+\end{lstlisting}
+
+In the case of Level 1 this second set of wave data is at \icode{planet1Level1Data2ndStage}. This data is more
+or less the same as \icode{planet1Level1Data} with the exception of the bytes in the table below.
+
+\begin{figure}[H]
+
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=13cm}
+
+      \begin{tabular}{lll}
+        \toprule
+        Byte    & Value                     & Description                                                        \\
+        \midrule
+  Byte 0  & \icode{\$11}                       & Index into array for sprite color                                  \\
+ Byte 16 & planet1Level1Data & Lo Ptr to the wave data we switch to when first hit.               \\
+ Byte 17 & planet1Level1Data & Hi Ptr to the wave data we switch to when first hit.               \\
+        \bottomrule
+      \end{tabular}
+    \end{adjustbox}
+  }\caption*{\icode{planet1Level1Data}: Bytes 15 to 17 for Level 1 on the Sheep Planet.}
+\end{figure}
+
+The effect therefore is that the main sprite color changes (although the sprite stays the same) and when the 
+periodic decrementing of Byte 15 reaches zero again it will switch back to \icode{planet1Level1Data}. This 
+switching back and forth will continue for as long as the enemy does not collide with anything or is not hit.
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+	\centering
+	\def\MULTICOLORONE{white}
+	\def\MULTICOLORTWO{red}
+	\def\SPRITECOLOR{blue}
+	\begin{subfigure}{0.3\textwidth}
+		\input{sprites/FLYING_SAUCER1}
+	\end{subfigure}
+	\begin{subfigure}{0.3\textwidth}
+		\input{sprites/FLYING_SAUCER2}
+	\end{subfigure}
+	\begin{subfigure}{0.3\textwidth}
+		\input{sprites/FLYING_SAUCER3}
+	\end{subfigure}
+}\caption[position=top]{Level 1 Sprite as given by \icode{level1Planet1Data}.}
+\end{figure}
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+	\centering
+	\def\MULTICOLORONE{white}
+	\def\MULTICOLORTWO{red}
+	\def\SPRITECOLOR{c64_purple}
+	\begin{subfigure}{0.3\textwidth}
+		\input{sprites/FLYING_SAUCER1}
+	\end{subfigure}
+	\begin{subfigure}{0.3\textwidth}
+		\input{sprites/FLYING_SAUCER2}
+	\end{subfigure}
+	\begin{subfigure}{0.3\textwidth}
+		\input{sprites/FLYING_SAUCER3}
+	\end{subfigure}
+}\caption[position=top]{Level 1 Sprite as given by \icode{level1Planet1Data2ndStage}.}
 \end{figure}
 

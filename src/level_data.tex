@@ -31,13 +31,15 @@ the sheer variety of adversaries the player faces.
     \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
 	\centering
 	\begin{subfigure}{0.3\textwidth}
-    \includegraphics[width=2cm]{src/sprites/gallery/sprite_160.png}%
+    \includegraphics[width=3cm]{src/sprites/gallery/sprite_160.png}%
+	\centering
 	\end{subfigure}
 	\begin{subfigure}{0.3\textwidth}
-    \includegraphics[width=2cm]{src/sprites/gallery/sprite_161.png}%
+    \includegraphics[width=3cm]{src/sprites/gallery/sprite_161.png}%
 	\end{subfigure}
+	\centering
 	\begin{subfigure}{0.3\textwidth}
-    \includegraphics[width=2cm]{src/sprites/gallery/sprite_162.png}%
+    \includegraphics[width=3cm]{src/sprites/gallery/sprite_162.png}%
 	\end{subfigure}
   }
 
@@ -1026,4 +1028,136 @@ AddPointsForHittingEnemy
     STA pointsEarnedTopPlanetByte1
 \end{lstlisting}
 
+\section{Bytes 9-11: A Clever Plan}
+\begin{figure}[H]
+
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=13cm}
+
+      \begin{tabular}{lll}
+        \toprule
+        Byte    & Value                     & Description                                                        \\
+        \midrule
+        Byte 9  & nullPtr                   & \textbf{Unused} Lo Ptr to an arbitrary run of Bytes 18-21.\\
+        Byte 10 & nullPtr                   & \textbf{Unused} Hi Ptr to an arbitrary run of Bytes 18-21.\\
+        Byte 11 & \$00                       & \textbf{Unused} Rate limiter for use of Bytes 9 and 10. \\
+        .. & ..                       & ..\\
+        Byte 18 & \$06                       & X Pos movement for attack ship.                                    \\
+        Byte 19 & \$01                       & Y Pos movement pattern for attack ship.                            \\
+        Byte 20 & \$01                       & X Pos Frame Rate for Attack ship.                                  \\
+        Byte 21 & \$01                       & Y Pos Frame Rate for Attack ship.                                  \\
+        \bottomrule
+      \end{tabular}
+    \end{adjustbox}
+  }\caption*{Bytes 9 to 11, and 18 to 21.}
+\end{figure}
+Bytes 9 to 11 were intended to carry out a clever plan that was probably too clever for its own
+good and as a result ended up being dropped. The idea was that Bytes 9 and 10 would point to 
+Bytes 18 to 21 in another set of level data, enabling the enemy to have a second phase of movement
+behaviour in addition to its native movement.
+
+The routine for processing these bytes appears in \icode{UpdateAttackShipDataForNewShip}. 
+
+\begin{lstlisting}
+UpdateAttackShipDataForNewShip
+
+  ; Byte 10:
+  LDY #10
+  LDA (currentShipWaveDataLoPtr),Y
+  BEQ MaybeQuicklyGravitatesToGilby
+
+UnusedRoutine
+  ; As above, this section is never reached because Byte 10 is never set.
+  DEC someKindOfRateLimitingForAttackWaves,X
+  BNE MaybeQuicklyGravitatesToGilby
+
+  ; Store Bytes 10 and 11 in newMovementLoPtr and newMovementHiPtr respectively.
+  STA newMovementHiPtr
+  DEY
+  ; Byte 9: Y is now $09.
+  LDA (currentShipWaveDataLoPtr),Y
+  STA newMovementLoPtr
+
+  ; Byte 11 in the wave data defines some kind of rate limiting.
+  LDY #11
+  LDA (currentShipWaveDataLoPtr),Y
+  STA someKindOfRateLimitingForAttackWaves,X
+
+  ; newMovementLoPtr would have pointed to some section of Bytes 18-21
+  ; in another set of leval data. So it would get loaded here to
+  ; populate the behaviour for the attack wave.
+  LDY indexForYPosMovementForUpperPlanetAttackShips,X
+  LDA orderForUpdatingPositionOfAttackShips,X
+  TAX
+  LDA (newMovementLoPtr),Y
+  CMP #$80
+  BEQ SkipLoadingWaveData
+
+  ; Load Byte 18, the X Pos movememnt.
+  LDA (newMovementLoPtr),Y
+  STA xPosMovementForUpperPlanetAttackShip,X
+  
+  ; Load Byte 19, the Y Pos movement.
+  INY
+  LDA (newMovementLoPtr),Y
+  STA yPosMovementForUpperPlanetAttackShips,X
+
+  ; Load Byte 20, the X Pos framerate.
+  INY
+  LDA (newMovementLoPtr),Y
+  STA upperPlanetInitialXPosFrameRateForAttackShip,X
+  STA upperPlanetXPosFrameRateForAttackShip,X
+
+  ; Load Byte 21, the Y Pos framerate.
+  INY
+  LDA (newMovementLoPtr),Y
+  STA upperPlanetInitialYPosFrameRateForAttackShips,X
+  STA upperPlanetYPosFrameRateForAttackShips,X
+
+  INY
+  LDA indexForActiveShipsWaveData,X
+  TAX
+  TYA
+  STA indexForYPosMovementForUpperPlanetAttackShips,X
+  JMP MaybeQuicklyGravitatesToGilby
+\end{lstlisting}
+
+Since Bytes 9 to 11 are zero in all level data, the routine is never run. On balance the idea does seem
+unnecessarily complex: why not just load a completely new set of level data with modified behaviour and
+the same sprite? This uses up more space overall but it is certainly easier to manage. Indeed, much
+of the level data is given over to chaining level data in this way. Let's look at that now.
+
+
+\section{Bytes 16-17, 24-33: Chaining Level Data}
+\begin{figure}[H]
+
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=13cm}
+
+      \begin{tabular}{lll}
+        \toprule
+        Byte    & Value                     & Description                                                        \\
+        \midrule
+        Byte 16 & planet1Level1Data2ndStage & Lo Ptr to the wave data we switch to when first hit.               \\
+        Byte 17 & planet1Level1Data2ndStage & Hi Ptr to the wave data we switch to when first hit.               \\
+        .. & ..                       & ..\\
+        Byte 24 & nullPtr                   & Lo Ptr for second wave of attack ships.                               \\
+        Byte 25 & nullPtr                   & Hi Ptr for second wave of attack ships.                               \\
+        Byte 26 & nullPtr                   & Lo Ptr for third wave of attack ships.                               \\
+        Byte 27 & nullPtr                   & Hi Ptr for third wave of attack ships.                               \\
+        Byte 28 & spinningRings             & Lo Ptr for Explosion animation.                                    \\
+        Byte 29 & spinningRings             & Hi Ptr for Explosion animation.                                    \\
+        Byte 30 & defaultExplosion          & Lo Ptr for another set of wave data for this level.                \\
+        Byte 31 & defaultExplosion          & Hi Ptr for another set of wave data for this level.                \\
+        Byte 32 & \$00                       & Lo Ptr for fourth wave of attack ships.                                                            \\
+        Byte 33 & \$00                       & Hi Ptr for fourth wave of attack ships.                           \\
+        \bottomrule
+      \end{tabular}
+    \end{adjustbox}
+  }\caption*{Bytes 16 to 17, and 24 to 33.}
+\end{figure}
 

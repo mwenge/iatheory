@@ -3,7 +3,7 @@ A deeper-than-is-possibly-sane dive into the workings of [Iridis Alpha](https://
 
 [<img height=360 src="https://github.com/mwenge/iatheory/raw/main/docs/cover_front.png">](https://github.com/mwenge/iatheory/raw/main/out/iatheory_scrapbook.pdf)
 
-Work-in-progress is available for free as a [Scrapbook Edition](https://github.com/mwenge/iatheory/raw/main/out/iatheory_scrapbook.pdf).
+Work-in-progress is available for free as a [You've-Been-Warned Edition](https://github.com/mwenge/iatheory/raw/main/out/iatheory_scrapbook.pdf).
 
 If you'd like to read a hard copy instead you can get the current version from [Amazon](https://www.amazon.de/dp/B0C1J2WRCM) at a very reasonable price.
 

@@ -52,52 +52,41 @@ the sheer variety of adversaries the player faces.
 \toprule
  Byte    & Value                     & Description                                                        \\
 \midrule
-  Byte 0  & \icode{\$06}                       & Index into array for sprite color                                  \\
- Byte 1  & FLYING\_SAUCER1            & First sprite value for the attack ship on the upper planet               \\
- Byte 2  & FLYING\_SAUCER3            & Last sprite value for the attack ship on the upper planet               \\
- Byte 3  & \$03                       & The animation frame rate for the attack ship.                      \\
- Byte 4  & FLYING\_SAUCER1            & First sprite value for the attack ship on the lower planet               \\
- Byte 5  & FLYING\_SAUCER3            & Last sprite value for the attack ship on the lower planet               \\
- Byte 6  & \$00                       & Rate at which to switch to alternate enemy mode.                       \\
- Byte 7  & nullPtr                   & Lo Ptr for alternate enemy mode                             \\
- Byte 8  & nullPtr                   & Hi Ptr for alternate enemy mode                             \\
- Byte 9  & nullPtr                   & \textbf{Unused} Lo Ptr to an arbitrary run of Bytes 18-21.\\
- Byte 10 & nullPtr                   & \textbf{Unused} Hi Ptr to an arbitrary run of Bytes 18-21.\\
- Byte 11 & \$00                       & \textbf{Unused} Rate limiter for use of Bytes 9 and 10. \\
- Byte 12 & nullPtr                   & \textbf{Unused} \\
- Byte 13 & nullPtr                   & \textbf{Unused} \\
- Byte 14 & \$00                       & Controls the rate at which new enemies are added.\\
-Byte 15 & \$40                       & Update rate for periodically switching to wave defined in Bytes 16-17. \\
- Byte 16 & planet1Level1Data2ndStage & Lo Ptr to the wave data we switch to periodically.               \\
- Byte 17 & planet1Level1Data2ndStage & Hi Ptr to the wave data we switch to periodically.               \\
- Byte 18 & \$06                       & X Pos movement for attack ship.                                    \\
- Byte 19 & \$01                       & Y Pos movement pattern for attack ship.                            \\
- Byte 20 & \$01                       & X Pos Frame Rate for Attack ship.                                  \\
- Byte 21 & \$01                       & Y Pos Frame Rate for Attack ship.                                  \\
- Byte 22 & \$00                       & Stickiness factor, does the enemy stick to the player              \\
- Byte 23 & \$00                       & Does the enemy gravitate quickly toward the player when its hit?   \\
- Byte 24 & nullPtr                   & Lo Ptr for second wave of attack ships.                               \\
- Byte 25 & nullPtr                   & Hi Ptr for second wave of attack ships.                               \\
- Byte 26 & nullPtr                   & Lo Ptr for third wave of attack ships.                               \\
- Byte 27 & nullPtr                   & Hi Ptr for third wave of attack ships.                               \\
- Byte 28 & spinningRings             & Lo Ptr for data to switch to when hit by bullet.                                    \\
- Byte 29 & spinningRings             & Hi Ptr for data to switch to when hit by bullet.                                    \\
- Byte 30 & defaultExplosion          & Lo Ptr for data to switch to after colliding with gilby.                \\
- Byte 31 & defaultExplosion          & Hi Ptr for data to switch to after colliding with gilby.                \\
- Byte 32 & \$00                       & Lo Ptr for fourth wave of attack ships.                                                            \\
- Byte 33 & \$00                       & Hi Ptr for fourth wave of attack ships.                           \\
- Byte 34 & \$02                       & Points for hitting the enemy. \\
- Byte 35 & \$02                       & Energy increase multiplier for hitting an enemy.\\
- Byte 36 & \$00                       & Is the ship a spinning ring, i.e. does it allow the gilby to warp? \\
- Byte 37 & \$04                       & Number of waves in data.                                           \\
- Byte 38 & \$18                       & Number of ships in wave.                                           \\
- Byte 39 & \$00                       & \textbf{Unused} byte.                                                      \\
+ Byte 0     & \icode{\$06}                       & Index into array for sprite color                                   \\
+ Byte 1-2   & FLYING\_SAUCER1            & First and last sprite value for the attack ship on the upper planet \\
+ Byte 3     & \icode{\$03}                       & The animation frame rate for the attack ship.                       \\
+ Byte 4-5   & FLYING\_SAUCER1            & First and last sprite value for the attack ship on the lower planet \\
+ Byte 6     & \icode{\$00}                       & Rate at which to switch to alternate enemy mode.                    \\
+ Byte 7-8   & nullPtr                   & Pointer for alternate enemy mode                                    \\
+ Byte 9-10  & nullPtr                   & Unused Pointer to an arbitrary run of Bytes 18-21.                  \\
+ Byte 11    & \icode{\$00}                       & Unused Rate limit for use of Bytes 9 and 10.                        \\
+ Byte 12-13 & nullPtr                   & Unused Bytes                                                        \\
+ Byte 14    & \icode{\$00}                       & Controls the rate at which new enemies are added.                   \\
+ Byte 15    & \icode{\$40}                       & Update rate for switching to the level data in Bytes 16/17          \\
+ Byte 16-17 & planet1Level1Data2ndStage & Pointer to wave data we switch to periodically.                     \\
+ Byte 18    & \icode{\$06}                       & X Pos movement for attack ship.                                     \\
+ Byte 19    & \icode{\$01}                       & Y Pos movement pattern for attack ship.                             \\
+ Byte 20    & \icode{\$01}                       & X Pos Frame Rate for Attack ship.                                   \\
+ Byte 21    & \icode{\$01}                       & Y Pos Frame Rate for Attack ship.                                   \\
+ Byte 22    & \icode{\$00}                       & Stickiness factor, does the enemy stick to the player               \\
+ Byte 23    & \icode{\$00}                       & Does the enemy gravitate quickly toward the player when its hit?    \\
+ Byte 24-25 & nullPtr                   & Pointer for second wave of attack ships.                            \\
+ Byte 26-27 & nullPtr                   & Pointer for third wave of attack ships.                             \\
+ Byte 28-29 & spinningRings             & Pointer for wave to switch to when hit by bullet.                   \\
+ Byte 30-31 & defaultExplosion          & Pointer for  wave to switch to after colliding with gilby.          \\
+ Byte 32-33 & \icode{\$00}                       & Pointer for fourth wave of attack ships.                            \\
+ Byte 34    & \icode{\$02}                       & Points for hitting the enemy.                                       \\
+ Byte 35    & \icode{\$02}                       & Energy increase multiplier for hitting an enemy.                    \\
+ Byte 36    & \icode{\$00}                       & Is the ship a spinning ring, i.e. does it allow the gilby to warp?  \\
+ Byte 37    & \icode{\$04}                       & Number of waves in data.                                            \\
+ Byte 38    & \icode{\$18}                       & Number of ships in wave.                                            \\
+ Byte 39    & \icode{\$00}                       & Unused byte.                                                        \\
 \bottomrule
 \end{tabular}
 
   \end{adjustbox}
 
-  }\caption*{Sheep Planet - Level 1 - Enemy Data for the First Wave.}
+  }\caption{Sheep Planet - Level 1 - Enemy Data for the First Wave.}
 \end{figure}
 \clearpage
 
@@ -397,7 +386,7 @@ is more extreme (Byte 19 is \$24) - achieving the bouncing effect.
 
     \end{adjustbox}
 
-    }\caption*{Movement data for the first three levels.}
+    }\caption{Movement data for the first three levels.}
 \end{figure}
 
 The horizontal movement for Level Three, home to the infamous 'Licker Ships' is \$FA, which would make you think the enemies must be moving horizontally
@@ -416,7 +405,7 @@ This is the special behaviour that makes the Licker Ships on this level such an 
     {
       \includegraphics[width=6cm]{level_data/images/movement_1_3_\l.png}%
     }%
-\caption*{Enemy movement for Sheep planet, level 3 - the infamous licker ships.}
+\caption{Enemy movement for Sheep planet, level 3 - the infamous licker ships.}
 \end{figure}
 
 When the upper bit is set (e.g. \$FC,\$80) on the value loaded to the accumulator by \icode{LDA} then \icode{BMI} will 
@@ -687,7 +676,7 @@ When this has run the stack of accumulator values now looks like this:
       \end{tikzpicture}
     \end{adjustbox}
 
-  }\caption*{The stack after the code above has run with \icode{upperPlanetAttackShipsXPosArray} at the top.}
+  }\caption{The stack after the code above has run with \icode{upperPlanetAttackShipsXPosArray} at the top.}
 \end{figure}
 
 With our position data safely stashed away on the stack we now decide which planet we're on:
@@ -1034,7 +1023,7 @@ AddPointsForHittingEnemy
   {
     \setlength{\tabcolsep}{3.0pt}
     \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
-    \begin{adjustbox}{width=13cm}
+    \begin{adjustbox}{width=10cm}
 
       \begin{tabular}{lll}
         \toprule
@@ -1051,7 +1040,7 @@ AddPointsForHittingEnemy
         \bottomrule
       \end{tabular}
     \end{adjustbox}
-  }\caption*{Bytes 9 to 11, and 18 to 21.}
+  }\caption{Bytes 9 to 11, and 18 to 21.}
 \end{figure}
 Bytes 9 to 11 were intended to carry out a clever plan that was probably too clever for its own
 good and as a result ended up being dropped. The idea was that Bytes 9 and 10 would point to 
@@ -1152,7 +1141,7 @@ Byte 15 & \$40                       & Update rate for periodically switching to
         \bottomrule
       \end{tabular}
     \end{adjustbox}
-  }\caption*{\icode{planet1Level1Data}: Bytes 15 to 17 for Level 1 on the Sheep Planet.}
+  }\caption{\icode{planet1Level1Data}: Bytes 15 to 17 for Level 1 on the Sheep Planet.}
 \end{figure}
 
 The way it works is Byte 15 is loaded to the appropriate position in \icode{updateRateForAttackShips}:
@@ -1229,7 +1218,7 @@ or less the same as \icode{planet1Level1Data} with the exception of the bytes in
         \bottomrule
       \end{tabular}
     \end{adjustbox}
-  }\caption*{\icode{planet1Level1Data}: Bytes 15 to 17 for Level 1 on the Sheep Planet.}
+  }\caption{\icode{planet1Level1Data}: Bytes 15 to 17 for Level 1 on the Sheep Planet.}
 \end{figure}
 
 The effect therefore is that the main sprite color changes (although the sprite stays the same) and when the 
@@ -1293,7 +1282,7 @@ switching back and forth will continue for as long as the enemy does not collide
         \bottomrule
       \end{tabular}
     \end{adjustbox}
-  }\caption*{\icode{planet1Level1Data}: Bytes 28 to 29 for Level 1 on the Sheep Planet.}
+  }\caption{\icode{planet1Level1Data}: Bytes 28 to 29 for Level 1 on the Sheep Planet.}
 \end{figure}
 
 Bytes 28 and 29 define the level data to load when struck by a bullet. In the case of our
@@ -1361,7 +1350,7 @@ been struck by a bullet.
 
   \end{adjustbox}
 
-  }\caption*{Sheep Planet - Level 3
+  }\caption{Sheep Planet - Level 3
 .}
 \end{figure}
 
@@ -1382,7 +1371,7 @@ been struck by a bullet.
         \bottomrule
       \end{tabular}
     \end{adjustbox}
-  }\caption*{\icode{planet1Level1Data}: Bytes 30 to 31 for Level 1 on the Sheep Planet.}
+  }\caption{\icode{planet1Level1Data}: Bytes 30 to 31 for Level 1 on the Sheep Planet.}
 \end{figure}
 
 Bytes 30 and 31 define the level data to load when the enemy has collided with the player. In the case of our
@@ -1484,7 +1473,7 @@ The level data accomodates up to four incarnations in total for an enemy wave.
         \bottomrule
       \end{tabular}
     \end{adjustbox}
-  }\caption*{\icode{planet1Level1Data}: Bytes 30 to 31 for Level 1 on the Sheep Planet.}
+  }\caption{\icode{planet1Level1Data}: Bytes 30 to 31 for Level 1 on the Sheep Planet.}
 \end{figure}
 
 \begin{lstlisting}
@@ -1532,3 +1521,93 @@ No3rdWaveData
     JMP UpdateWaveDataPointersForCurrentEnemy
     ; Returns
 \end{lstlisting}
+
+In the table on the following page we can see the relatively spare use made of this functionality. Most of the
+planets only use one of the waves in 6 or 7 levels. What's notable is that that only one level makes use of \textbf{both}
+Bytes 24-25 and Bytes 26-27 together: Level 12 on the Om Planet. This is also the only level that attempts to make
+use of Bytes 32-23. But there appears to be a flaw here: the pointer is to \icode{\$1488}, a position in memory
+that does not contain any level data! What sits there instead? The high-byte data for the title music:
+
+\begin{lstlisting}
+  ;      C   C#  D   D#  E   F   F#  G   G#  A   A#  B
+titleMusicHiBytes   
+	.BYTE $08,$08,$09,$09,$0A,$0B,$0B,$0C,$0D,$0E,$0E,$0F  ; 4
+	.BYTE $10,$11,$12,$13,$15,$16,$17,$19,$1A,$1C,$1D,$1F  ; 5
+	.BYTE $21,$23,$25,$27,$2A,$2C,$2F,$32,$35,$38,$3B,$3F  ; 6
+	.BYTE $43,$47,$4B,$4F,$54,$59,$5E,$64,$6A,$70,$77,$7E  ; 7
+	.BYTE $86,$8E,$96,$9F,$A8,$B3,$BD,$C8,$D4,$E1,$EE,$FD  ; 8
+
+\end{lstlisting}
+
+\begin{figure}[H]
+  {
+  \setlength{\tabcolsep}{3.0pt}
+  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+  \begin{adjustbox}{width=\textwidth}
+
+\begin{tabular}{rlll}
+\toprule
+   Sheep Planet & Bytes 24-25                      & Bytes 26-27                   & Bytes 32-33   \\
+\midrule
+       \textbf{2} & nullPtr                      & planet1Level2Data         & nullPtr       \\
+       \textbf{5} & nullPtr                      & planet1Level5Data2ndStage & nullPtr       \\
+       \textbf{9} & planet1Level9DataSecondStage & nullPtr                   & nullPtr       \\
+      \textbf{10} & nullPtr                      & planet1Level10Data        & nullPtr       \\
+      \textbf{12} & nullPtr                      & planet1Level12Data        & nullPtr       \\
+      \textbf{13} & nullPtr                      & planet1Level13Data        & nullPtr       \\
+      \textbf{20} & copticExplosion              & nullPtr                   & nullPtr       \\
+\toprule
+   Tech Planet \\
+\midrule
+       \textbf{5} & nullPtr                   & planet2Level5Data2ndStage & nullPtr       \\
+       \textbf{6} & planet2Level6Data2ndStage & nullPtr                   & nullPtr       \\
+       \textbf{9} & nullPtr                   & planet2Level9Data         & nullPtr       \\
+      \textbf{15} & nullPtr                   & planet2Level15Data        & nullPtr       \\
+      \textbf{19} & nullPtr                   & planet2Level19Data        & nullPtr       \\
+      \textbf{20} & copticExplosion           & nullPtr                   & nullPtr       \\
+\toprule
+  Brick Planet\\
+\midrule
+       \textbf{3} & nullPtr                   & planet3Level3Data2ndStage & nullPtr       \\
+       \textbf{6} & nullPtr                   & planet3Level6Data         & nullPtr       \\
+       \textbf{7} & planet3Level7Data2ndStage & nullPtr                   & nullPtr       \\
+      \textbf{11} & nullPtr                   & planet3Level11Data        & nullPtr       \\
+      \textbf{12} & nullPtr                   & planet3Level12Data        & nullPtr       \\
+      \textbf{20} & copticExplosion           & nullPtr                   & nullPtr       \\
+\addlinespace
+\toprule
+   Mushroom Planet \\
+\midrule
+       \textbf{1} & nullPtr         & planet4Level1Data2ndStage & nullPtr       \\
+       \textbf{5} & nullPtr         & planet4Level5Data2ndStage & nullPtr       \\
+       \textbf{9} & nullPtr         & planet4Level9Data2ndStage & nullPtr       \\
+      \textbf{18} & nullPtr         & planet4Level18Data        & nullPtr       \\
+      \textbf{19} & nullPtr         & planet4Level19Data        & nullPtr       \\
+      \textbf{20} & copticExplosion & nullPtr                   & nullPtr       \\
+\addlinespace
+\toprule
+   Om Planet\\
+\midrule
+       \textbf{2} & nullPtr           & planet5Level2Data  & nullPtr       \\
+       \textbf{3} & nullPtr           & planet5Level3Data  & nullPtr       \\
+       \textbf{8} & nullPtr           & planet5Level8Data  & nullPtr       \\
+      \textbf{10} & defaultExplosion  & nullPtr            & nullPtr       \\
+      \textbf{12} & planet1Level5Data & planet5Level12Data & \icode{\$1488}       \\
+      \textbf{17} & nullPtr           & planet5Level17Data & nullPtr       \\
+      \textbf{20} & copticExplosion   & nullPtr            & nullPtr       \\
+\addlinespace
+\bottomrule
+\multicolumn{3}{@{}l@{}}{Bytes 24-25: Pointer for second wave of attack ships.}\\
+\multicolumn{3}{@{}l@{}}{Bytes 26-27: Pointer for third wave of attack ships.}\\
+\multicolumn{3}{@{}l@{}}{Bytes 32-33: Pointer for fourth wave of attack ships.}\\
+\end{tabular}
+
+  \end{adjustbox}
+
+  }\caption{Use of the Enemy Phases Bytes by Each Planet. Levels that make no use of them are excluded.}
+\end{figure}
+\clearpage
+
+
+
+

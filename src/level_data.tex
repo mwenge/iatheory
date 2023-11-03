@@ -67,9 +67,9 @@ the sheer variety of adversaries the player faces.
  Byte 12 & nullPtr                   & \textbf{Unused} \\
  Byte 13 & nullPtr                   & \textbf{Unused} \\
  Byte 14 & \$00                       & Controls the rate at which new enemies are added.\\
- Byte 15 & \$40                       & Update rate for attack wave                                        \\
- Byte 16 & planet1Level1Data2ndStage & Lo Ptr to the wave data we switch to when first hit.               \\
- Byte 17 & planet1Level1Data2ndStage & Hi Ptr to the wave data we switch to when first hit.               \\
+Byte 15 & \$40                       & Update rate for periodically switching to wave defined in Bytes 16-17. \\
+ Byte 16 & planet1Level1Data2ndStage & Lo Ptr to the wave data we switch to periodically.               \\
+ Byte 17 & planet1Level1Data2ndStage & Hi Ptr to the wave data we switch to periodically.               \\
  Byte 18 & \$06                       & X Pos movement for attack ship.                                    \\
  Byte 19 & \$01                       & Y Pos movement pattern for attack ship.                            \\
  Byte 20 & \$01                       & X Pos Frame Rate for Attack ship.                                  \\
@@ -80,10 +80,10 @@ the sheer variety of adversaries the player faces.
  Byte 25 & nullPtr                   & Hi Ptr for second wave of attack ships.                               \\
  Byte 26 & nullPtr                   & Lo Ptr for third wave of attack ships.                               \\
  Byte 27 & nullPtr                   & Hi Ptr for third wave of attack ships.                               \\
- Byte 28 & spinningRings             & Lo Ptr for Explosion animation.                                    \\
- Byte 29 & spinningRings             & Hi Ptr for Explosion animation.                                    \\
- Byte 30 & defaultExplosion          & Lo Ptr for another set of wave data for this level.                \\
- Byte 31 & defaultExplosion          & Hi Ptr for another set of wave data for this level.                \\
+ Byte 28 & spinningRings             & Lo Ptr for data to switch to when hit by bullet.                                    \\
+ Byte 29 & spinningRings             & Hi Ptr for data to switch to when hit by bullet.                                    \\
+ Byte 30 & defaultExplosion          & Lo Ptr for data to switch to after colliding with gilby.                \\
+ Byte 31 & defaultExplosion          & Hi Ptr for data to switch to after colliding with gilby.                \\
  Byte 32 & \$00                       & Lo Ptr for fourth wave of attack ships.                                                            \\
  Byte 33 & \$00                       & Hi Ptr for fourth wave of attack ships.                           \\
  Byte 34 & \$02                       & Points for hitting the enemy. \\
@@ -972,7 +972,7 @@ UpdateEnergyLevelsAfterCollision
     ; Check if the enemy saps energy from the gilby?
     LDY #$23
     LDA (currentShipWaveDataLoPtr),Y
-    BEQ NoMultiplierAppliedToCollision
+    BEQ LoadExplosionData
 
     LDA #<shipCollidedWithGilbySound
     STA primarySoundEffectLoPtr
@@ -993,21 +993,21 @@ UpdateEnergyLevelsAfterCollision
     BEQ EnergyUpdateTopPlanet
 
     LDA extraAmountToDecreaseEnergyByBottomPlanet
-    BNE NoMultiplierAppliedToCollision
+    BNE LoadExplosionData
     ; Y is still $23.
     LDA (currentShipWaveDataLoPtr),Y
     JSR AugmentAmountToDecreaseEnergyByBountiesEarned
     STA extraAmountToDecreaseEnergyByBottomPlanet
-    BNE NoMultiplierAppliedToCollision
+    BNE LoadExplosionData
 
 EnergyUpdateTopPlanet   
     LDA extraAmountToDecreaseEnergyByTopPlanet
-    BNE NoMultiplierAppliedToCollision
+    BNE LoadExplosionData
     ; Y is still $23.
     LDA (currentShipWaveDataLoPtr),Y
     JSR AugmentAmountToDecreaseEnergyByBountiesEarned
     STA extraAmountToDecreaseEnergyByTopPlanet
-NoMultiplierAppliedToCollision
+LoadExplosionData
     LDY #$1E
     JMP UpdateWaveDataPointersForCurrentEnemy
     ; Returns
@@ -1146,9 +1146,9 @@ of the flying UFOs.
         \toprule
         Byte    & Value                     & Description                                                        \\
         \midrule
-        Byte 15 & \$40                       & Update rate for attack wave                                        \\
-        Byte 16 & planet1Level1Data2ndStage & Lo Ptr to the wave data we switch to when first hit.               \\
-        Byte 17 & planet1Level1Data2ndStage & Hi Ptr to the wave data we switch to when first hit.               \\
+Byte 15 & \$40                       & Update rate for periodically switching to wave defined in Bytes 16-17. \\
+ Byte 16 & planet1Level1Data2ndStage & Lo Ptr to the wave data we switch to periodically.               \\
+ Byte 17 & planet1Level1Data2ndStage & Hi Ptr to the wave data we switch to periodically.               \\
         \bottomrule
       \end{tabular}
     \end{adjustbox}
@@ -1224,8 +1224,8 @@ or less the same as \icode{planet1Level1Data} with the exception of the bytes in
         Byte    & Value                     & Description                                                        \\
         \midrule
   Byte 0  & \icode{\$11}                       & Index into array for sprite color                                  \\
- Byte 16 & planet1Level1Data & Lo Ptr to the wave data we switch to when first hit.               \\
- Byte 17 & planet1Level1Data & Hi Ptr to the wave data we switch to when first hit.               \\
+ Byte 16 & planet1Level1Data & Lo Ptr to the wave data we switch to periodically.               \\
+ Byte 17 & planet1Level1Data & Hi Ptr to the wave data we switch to periodically.               \\
         \bottomrule
       \end{tabular}
     \end{adjustbox}
@@ -1276,3 +1276,257 @@ switching back and forth will continue for as long as the enemy does not collide
 }\caption[position=top]{Level 1 Sprite as given by \icode{level1Planet1Data2ndStage}.}
 \end{figure}
 
+\section{Bytes 28-29: Data to Load When Hit by a Bullet}
+\begin{figure}[H]
+
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=13cm}
+
+      \begin{tabular}{lll}
+        \toprule
+        Byte    & Value                     & Description                                                        \\
+        \midrule
+ Byte 28 & spinningRings             & Lo Ptr for data to switch to when hit by bullet.                                    \\
+ Byte 29 & spinningRings             & Hi Ptr for data to switch to when hit by bullet.                                    \\
+        \bottomrule
+      \end{tabular}
+    \end{adjustbox}
+  }\caption*{\icode{planet1Level1Data}: Bytes 28 to 29 for Level 1 on the Sheep Planet.}
+\end{figure}
+
+Bytes 28 and 29 define the level data to load when struck by a bullet. In the case of our
+flying UFOs this is the spinning rings.
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{1.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+	\centering
+	\def\MULTICOLORONE{white}
+	\def\MULTICOLORTWO{yellow}
+	\def\SPRITECOLOR{yellow}
+	\begin{subfigure}{0.23\textwidth}
+		\input{sprites/SPINNING_RING1}
+	\end{subfigure}
+	\begin{subfigure}{0.23\textwidth}
+		\input{sprites/SPINNING_RING2}
+	\end{subfigure}
+	\begin{subfigure}{0.23\textwidth}
+		\input{sprites/SPINNING_RING3}
+	\end{subfigure}
+	\begin{subfigure}{0.23\textwidth}
+		\input{sprites/SPINNING_RING4}
+	\end{subfigure}
+  }\caption[position=top]{The sprites used to animate the spinning rings.}
+\end{figure}
+
+\begin{lstlisting}
+UpdateScoresAfterHittingShipWithBullet
+    ..
+    ; Byte 29: Load the explosion animation, if there is one. For most
+    ; enemies this is the spinning rings defined by spinningRings.
+LoadExplosionAnimation   
+    LDY #29
+    LDA (currentShipWaveDataLoPtr),Y
+    BEQ CheckForCollisionsBeforeUpdatingCurrentShipsWaveData
+    ; There's a Hi Ptr for the explosion animation, so decrement
+    ; Y to point it at the Lo Ptr and load the ptrs as the new
+    ; wave data for the enemy.
+    DEY
+    JMP UpdateWaveDataPointersForCurrentEnemy
+    ;Returns
+\end{lstlisting}
+
+This is also the path used to load the licker ships after the relatively inoffensive flying blue dots have
+been struck by a bullet.
+
+\begin{figure}[H]
+  {
+  \setlength{\tabcolsep}{3.0pt}
+  \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+  \begin{adjustbox}{width=12cm}
+
+\begin{tabular}{lll}
+\toprule
+ Byte    & Value                     & Description                                                        \\
+\midrule
+ Byte 0  & \$05                       & Index into array for sprite color                                  \\
+ Byte 1  & FLYING\_DOT1               & Sprite value for the attack ship on the upper planet               \\
+ Byte 28 & lickerShipWaveData         & Lo Ptr for data to switch to when hit by bullet.                                    \\
+ Byte 29 & lickerShipWaveData         & Hi Ptr for data to switch to when hit by bullet.                                    \\
+\bottomrule
+\end{tabular}
+
+  \end{adjustbox}
+
+  }\caption*{Sheep Planet - Level 3
+.}
+\end{figure}
+
+\section{Bytes 30-31: Data to Load After Colliding with the Player}
+\begin{figure}[H]
+
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=13cm}
+
+      \begin{tabular}{lll}
+        \toprule
+        Byte    & Value                     & Description                                                        \\
+        \midrule
+ Byte 30 & defaultExplosion          & Lo Ptr for data to switch to after colliding with gilby.                \\
+ Byte 31 & defaultExplosion          & Hi Ptr for data to switch to after colliding with gilby.                \\
+        \bottomrule
+      \end{tabular}
+    \end{adjustbox}
+  }\caption*{\icode{planet1Level1Data}: Bytes 30 to 31 for Level 1 on the Sheep Planet.}
+\end{figure}
+
+Bytes 30 and 31 define the level data to load when the enemy has collided with the player. In the case of our
+flying UFOs this is the default explosion animation.
+
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+	\centering
+	\def\MULTICOLORONE{white}
+	\def\MULTICOLORTWO{red}
+	\def\SPRITECOLOR{c64_darkgray}
+	\begin{subfigure}{0.3\textwidth}
+		\input{sprites/EXPLOSION_START}
+	\end{subfigure}
+	\begin{subfigure}{0.3\textwidth}
+		\input{sprites/EXPLOSION_MIDDLE}
+	\end{subfigure}
+	\begin{subfigure}{0.3\textwidth}
+		\input{sprites/EXPLOSION_END}
+	\end{subfigure}
+  }\caption[position=top]{The sprites used to animate the collision explosion.}
+\end{figure}
+
+These bytes are only inspected when responding to a collision. The routine \icode{UpdateEnergyLevelsAfterCollision}
+first establishes if the enemy saps energy from the gilby by inspecting Byte 35. Once the updated player energy
+is calculated the collision explosion data is loaded.
+
+\begin{lstlisting}
+UpdateEnergyLevelsAfterCollision
+    ; Byte 35: Check if the enemy saps energy from the gilby?
+    LDY #35
+    LDA (currentShipWaveDataLoPtr),Y
+    BEQ LoadExplosionData
+
+    LDA #<shipCollidedWithGilbySound
+    STA primarySoundEffectLoPtr
+    LDA #>shipCollidedWithGilbySound
+    STA primarySoundEffectHiPtr
+    JSR ResetRepetitionForPrimarySoundEffect
+    LDA #$0E
+    STA gilbyExploding
+    LDA #$02
+    STA starFieldInitialStateArray - $01
+    LDA currentGilbySpeed
+    EOR #$FF
+    CLC
+    ADC #$01
+    STA currentGilbySpeed
+
+    LDA setToZeroIfOnUpperPlanet
+    BEQ EnergyUpdateTopPlanet
+
+    LDA extraAmountToDecreaseEnergyByBottomPlanet
+    BNE LoadExplosionData
+    ; Y is still 35.
+    LDA (currentShipWaveDataLoPtr),Y
+    JSR AugmentAmountToDecreaseEnergyByBountiesEarned
+    STA extraAmountToDecreaseEnergyByBottomPlanet
+    BNE LoadExplosionData
+
+EnergyUpdateTopPlanet   
+    LDA extraAmountToDecreaseEnergyByTopPlanet
+    BNE LoadExplosionData
+    ; Y is still 35.
+    LDA (currentShipWaveDataLoPtr),Y
+    JSR AugmentAmountToDecreaseEnergyByBountiesEarned
+    STA extraAmountToDecreaseEnergyByTopPlanet
+
+LoadExplosionData
+    ; Byte 30: Hi/Lo Ptr for the collision explosion level data.
+    LDY #30
+    JMP UpdateWaveDataPointersForCurrentEnemy
+    ; Returns
+\end{lstlisting}
+
+\section{Bytes 24-27 and 32-33: Enemy Phases}
+Rather than exploding when first hit, some enemy waves are configured to metamorphose into something else, so they 
+end up requiring multiple hits before they oblige the player by finally exploding.
+
+The level data accomodates up to four incarnations in total for an enemy wave.
+
+\begin{figure}[H]
+
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=13cm}
+
+      \begin{tabular}{lll}
+        \toprule
+        Byte    & Value                     & Description                                                        \\
+        \midrule
+ Byte 30 & defaultExplosion          & Lo Ptr for data to switch to after colliding with gilby.                \\
+ Byte 31 & defaultExplosion          & Hi Ptr for data to switch to after colliding with gilby.                \\
+        \bottomrule
+      \end{tabular}
+    \end{adjustbox}
+  }\caption*{\icode{planet1Level1Data}: Bytes 30 to 31 for Level 1 on the Sheep Planet.}
+\end{figure}
+
+\begin{lstlisting}
+GetNewShipDataFromDataStore
+    LDA hasReachedSecondWaveAttackShips,X
+    BEQ No2ndWaveData
+
+    LDA #$00
+    STA hasReachedSecondWaveAttackShips,X
+
+    ; Byte 25: The 2nd stage of wave data for this enemy.
+    LDY #25
+    LDA (currentShipWaveDataLoPtr),Y
+    BEQ No2ndWaveData
+
+    DEY
+    JMP UpdateWaveDataPointersForCurrentEnemy
+
+No2ndWaveData   
+    LDA hasReachedThirdWaveAttackShips,X
+    BEQ No3rdWaveData
+
+    LDA #$00
+    STA hasReachedThirdWaveAttackShips,X
+
+    ; Byte 27: The 3rd stage of wave data for this enemy.
+    LDY #27
+    LDA (currentShipWaveDataLoPtr),Y
+    BEQ No3rdWaveData
+
+    DEY
+    JMP UpdateWaveDataPointersForCurrentEnemy
+
+No3rdWaveData   
+    LDA joystickInput
+    AND #$10
+    BNE No4thWaveData
+
+    ; Fire is pressed.
+    ; Byte 33: Check if we should load fourth wave stage data for this enemy.
+    LDY #33
+    LDA (currentShipWaveDataLoPtr),Y
+    BEQ No4thWaveData
+    DEY
+    JMP UpdateWaveDataPointersForCurrentEnemy
+    ; Returns
+\end{lstlisting}

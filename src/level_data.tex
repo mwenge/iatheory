@@ -1477,8 +1477,10 @@ The level data accomodates up to four incarnations in total for an enemy wave.
         \toprule
         Byte    & Value                     & Description                                                        \\
         \midrule
- Byte 30 & defaultExplosion          & Lo Ptr for data to switch to after colliding with gilby.                \\
- Byte 31 & defaultExplosion          & Hi Ptr for data to switch to after colliding with gilby.                \\
+ Byte 24-25 & nullPtr                   & Pointer for second wave of attack ships.                            \\
+ Byte 26-27 & nullPtr                   & Pointer for third wave of attack ships.                             \\
+ Byte 30-31 & defaultExplosion          & Pointer for  wave to switch to after colliding with gilby.          \\
+ Byte 32-33 & \$00                       & Pointer for fourth wave of attack ships.                            \\
         \bottomrule
       \end{tabular}
     \end{adjustbox}

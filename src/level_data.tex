@@ -1525,19 +1525,7 @@ No3rdWaveData
 In the table on the following page we can see the relatively spare use made of this functionality. Most of the
 planets only use one of the waves in 6 or 7 levels. What's notable is that that only one level makes use of \textbf{both}
 Bytes 24-25 and Bytes 26-27 together: Level 12 on the Om Planet. This is also the only level that attempts to make
-use of Bytes 32-23. But there appears to be a flaw here: the pointer is to \icode{\$1488}, a position in memory
-that does not contain any level data! What sits there instead? The high-byte data for the title music:
-
-\begin{lstlisting}
-  ;      C   C#  D   D#  E   F   F#  G   G#  A   A#  B
-titleMusicHiBytes   
-	.BYTE $08,$08,$09,$09,$0A,$0B,$0B,$0C,$0D,$0E,$0E,$0F  ; 4
-	.BYTE $10,$11,$12,$13,$15,$16,$17,$19,$1A,$1C,$1D,$1F  ; 5
-	.BYTE $21,$23,$25,$27,$2A,$2C,$2F,$32,$35,$38,$3B,$3F  ; 6
-	.BYTE $43,$47,$4B,$4F,$54,$59,$5E,$64,$6A,$70,$77,$7E  ; 7
-	.BYTE $86,$8E,$96,$9F,$A8,$B3,$BD,$C8,$D4,$E1,$EE,$FD  ; 8
-
-\end{lstlisting}
+use of Bytes 32-23. 
 
 \begin{figure}[H]
   {
@@ -1592,7 +1580,7 @@ titleMusicHiBytes
        \textbf{3} & nullPtr           & planet5Level3Data  & nullPtr       \\
        \textbf{8} & nullPtr           & planet5Level8Data  & nullPtr       \\
       \textbf{10} & defaultExplosion  & nullPtr            & nullPtr       \\
-      \textbf{12} & planet1Level5Data & planet5Level12Data & \icode{\$1488}       \\
+      \textbf{12} & planet1Level5Data & planet5Level12Data & planet5Level12Data2ndStage       \\
       \textbf{17} & nullPtr           & planet5Level17Data & nullPtr       \\
       \textbf{20} & copticExplosion   & nullPtr            & nullPtr       \\
 \addlinespace

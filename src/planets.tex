@@ -172,9 +172,20 @@ unit giving us four units on each row. Maybe it's intuitively obvious that \icod
 means 'blank' or 'background' but I've pointed that out to you now just in case.
 
 \lstset{style=6502Style}
-\CopyPartialFile{../iridisalpha/src/graphics/planet_textures.asm}{tmp.asm}{644}{654}%
-\lstinputlisting[caption=Character \icode{\$40} representing the sea as it is defined in the source code. A full eight bytes are required
-to define each character\, so not cheap.,basicstyle=\tiny]{tmp.asm}
+\begin{lstlisting}[caption=Character \icode{\$40} representing the sea as it is defined in the source code. A full eight bytes are required
+to define each character\, so not cheap.,basicstyle=\tiny]
+planet1Charset
+        .BYTE $00,$00,$20,$02,$8A,$AA,$AA,$AA   ;.BYTE $00,$00,$20,$02,$8A,$AA,$AA,$AA
+                                                ; CHARACTER $40
+                                                ; 00000000           
+                                                ; 00000000           
+                                                ; 00100000     *     
+                                                ; 00000010         * 
+                                                ; 10001010   *   * * 
+                                                ; 10101010   * * * * 
+                                                ; 10101010   * * * * 
+                                                ; 10101010   * * * * 
+\end{lstlisting}
 
 Is that all there is to it? No. Before we look at how me might color things other than blue, let's look at how we color them
 with the big blue brush we have so far. The first thing we do is clear down the entire surface of the planet:
@@ -202,8 +213,18 @@ ClearPlanetLoPtrs
         BNE ClearPlanetHiPtrs
 \end{lstlisting}
 
-\CopyPartialFile{../iridisalpha/src/graphics/planet_textures.asm}{tmp.asm}{965}{974}%
-\lstinputlisting[caption=The empty character bit map (all zeroes) used to overwrite the surface before populating it.,basicstyle=\tiny]{tmp.asm}
+\begin{lstlisting}[caption=The empty character bit map (all zeroes) used to overwrite the surface before populating it.,basicstyle=\tiny]
+        .BYTE $00,$00,$00,$00,$00,$00,$00,$00   ;.BYTE $00,$00,$00,$00,$00,$00,$00,$00
+                                                ; CHARACTER $60
+                                                ; 00000000           
+                                                ; 00000000           
+                                                ; 00000000           
+                                                ; 00000000           
+                                                ; 00000000           
+                                                ; 00000000           
+                                                ; 00000000           
+                                                ; 00000000           
+\end{lstlisting}
 
 With the planet surface cleared out (overwritten with all \icode{\$60}s) we can now.. overwrite it all again with sequences of
 \icode{\$40,\$42}. No, that's not right. We're only overwriting the bottom layer - the surface layer - this time. This is the
@@ -304,8 +325,11 @@ programming: it mutates itself.
 When called for the first time it loads a value from the address at \icode{randomPlanetData} to the accumulator. On first
 run \icode{randomPlanetData} points to the address \icode{\$9ABB} which contains the value \icode{\$42}:
 
-\CopyPartialFile{../iridisalpha/src/graphics/planet_surface.asm}{tmp.asm}{619}{621}%
-\lstinputlisting[caption=Not Quite Random Bytes]{tmp.asm}
+\begin{lstlisting}[caption=Not Quite Random Bytes]
+randomPlanetData
+        .BYTE $42,$E4,$3F,$94,$4E,$29,$B0,$59
+        .BYTE $2C,$FE,$7F,$B2,$40,$9B,$63,$2B
+\end{lstlisting}
 
 Before returning this value as its result it alters itself by changing
 \icode{randomPlanetData} to reference \icode{\$9ABC} (\icode{INC
@@ -387,11 +411,10 @@ and proper means giving the shore of the land its own look and feel. This we hav
 
 Now we can put the rest of the land down:
 
-\lstinputlisting[caption=Write pairs of \icode{\$41,\$43} for the main land mass.]{tmp.asm}
 \begin{lstlisting}[caption=Write pairs of \icode{\$41,\$43} for the main land mass.]
-        ; Draw the land from the randomly chosen position for up to
-        ; 150 bytes, depending on the randomly chosen length of the land
-        ; chosen above and storedin planetSurfaceDataPtrLo.
+; Draw the land from the randomly chosen position for up to
+; 150 bytes, depending on the randomly chosen length of the land
+; chosen above and storedin planetSurfaceDataPtrLo.
 DrawLandMassLoop   
         INC charSetDataPtrHi
         BNE b7420

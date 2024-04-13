@@ -1,9 +1,13 @@
 \chapter{Making Planets for Nigel} 
 \label{sec:planets}
 
-\begin{q}{Jeff Minter's Development Diary in Zzap Magazine\cite{devdiary}}
-17 February 1986 
-
+\begin{definition}[Jeffrey Says]
+\setlength{\intextsep}{0pt}%
+\setlength{\columnsep}{3pt}%
+\begin{wrapfigure}{l}{0.12\textwidth}
+\includegraphics[width=\linewidth]{src/callout/ia.jpg} 
+\end{wrapfigure}
+\small
 Redid the graphics completely, came up with some really
 nice looking metallic planet structures that I'll probably stick with. Started
 to write the \icode{GenPlan} routine that'll generate random planets at will. Good to
@@ -15,7 +19,7 @@ do one with grass and sea a bit like 'Sheep in Space', cos I did like that one.
 It'll be nice to have completely different planet surfaces in top and bottom of
 the screen. The neat thing is that all the surfaces have the same basic
 structures, all I do is fit different graphics around each one. 
-\end{q}
+\end{definition}
 
 Making planets is easy. 
 
@@ -307,8 +311,17 @@ Picking a random number between 128 and 256 is slightly convoluted in assembly:
         STA charSetDataPtrHi
 \end{lstlisting}
 
-\begin{q}
-\textbf{A Neat Little Trick}
+\begin{definition}[A Neat Little Trick]
+\setlength{\intextsep}{0pt}%
+\setlength{\columnsep}{3pt}%
+\begin{wrapfigure}{l}{0.12\textwidth}
+\includegraphics[width=\linewidth]{src/callout/ia.jpg} 
+\end{wrapfigure}
+\small
+
+This little snippet's job is to return a quasi-random byte for use in the planet generation
+routines. To achieve this, it does something quite fiendish that is more or less unhead of in modern
+programming: it mutates itself.
 
 \begin{lstlisting}[caption=Neat.]
 PutProceduralByteInAccumulatorRegister
@@ -317,10 +330,6 @@ randomIntToIncrement   =*+$01
         INC randomIntToIncrement
         RTS
 \end{lstlisting}
-
-This little snippet's job is to return a quasi-random byte for use in the planet generation
-routines. To achieve this, it does something quite fiendish that is more or less unhead of in modern
-programming: it mutates itself.
 
 When called for the first time it loads a value from the address at \icode{randomPlanetData} to the accumulator. On first
 run \icode{randomPlanetData} points to the address \icode{\$9ABB} which contains the value \icode{\$42}:
@@ -343,7 +352,7 @@ Every time the routine is called it increments the reference again so that the n
   lies in the bytes beyond \icode{9ABB}. The results it returns are never truly random, but random enough
   to permit the procedural generation of planets that they're used for.
 
-\end{q}
+\end{definition}
 
 With a random start position selected, a similar convolution is performed to choose the length of the land mass:
 

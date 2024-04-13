@@ -3,9 +3,13 @@
 
 \lstset{style=6502Style}
 
-\begin{q}{Jeff Minter's Development Diary in Zzap Magazine\cite{devdiary}}
-ACONT 
-
+\begin{definition}[Jeffrey Says]
+\setlength{\intextsep}{0pt}%
+\setlength{\columnsep}{3pt}%
+\begin{wrapfigure}{l}{0.12\textwidth}
+\includegraphics[width=\linewidth]{src/callout/ia.jpg} 
+\end{wrapfigure}
+\small
 This is the bit that I knew would take me ages to write and get glitch
 free, and the bit that is absolutely necessary to the functioning of the game.
 The module ACONT is essentially an interpreter for my own 'wave language',
@@ -16,8 +20,7 @@ to have twenty levels associated with it. It's impractical to write separate
 bits of code for each wave; even with 64K you can run outta memory pretty fast
 that way, and it's not really necessary coz a lot of stuff would be duplicated.
 Hence ACONT.
-
-\end{q}
+\end{definition}
 
 The bits and bytes that define the behaviour and appearance of
 wave after wave of Iridis Alpha's enemy formations - twenty across each of the
@@ -171,7 +174,13 @@ GetWaveDataForNewShip
 \end{lstlisting}
 
 \section{Bytes 1-4: Sprite Animation}
-\begin{q}{Jeff Minter's Development Diary in Zzap Magazine\cite{planner}}
+\begin{definition}[Jeffrey Says]
+\setlength{\intextsep}{0pt}%
+\setlength{\columnsep}{3pt}%
+\begin{wrapfigure}{l}{0.12\textwidth}
+\includegraphics[width=\linewidth]{src/callout/ia.jpg} 
+\end{wrapfigure}
+\small
 You pass the interpreter data, that describes exactly stuff like: what each
 alien looks like, how many frames of animation it uses, speed of that
 animation, colour, velocities in X— and Y— directions, accelerations in X and
@@ -183,7 +192,7 @@ frequently, and what types; how many points you get if you shoot it, and how
 much damage it does if it hits you; and a whole bunch more stuff like that. As
 you can imagine it was a fairly heavy routine to write and get debugged, but
 that's done now; took me about three weeks in all I'd say.
-\end{q}
+\end{definition}
 
 \begin{figure}[H]
   {

@@ -27,31 +27,97 @@ handling each is identical and was only very lightly modified for the final game
 \hspace{0.5cm}
 \begin{minipage}[b]{0.45\linewidth}
 \centering
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{5055}{5106}%
-\lstinputlisting[caption=... and Iridis Alpha,basicstyle=\tiny]{tmp.asm}
+\begin{lstlisting}[basicstyle=\tiny,caption=... and Iridis Alpha.]
+;--------------------------------------------------
+; AnimateGilbiesForNewBonus
+;--------------------------------------------------
+AnimateGilbiesForNewBonus
+        LDY #$00
+        LDA #$F0
+        STA $D012    ;Raster Position
+        DEC counterBetweeXPosUpdates
+        BNE MaybeUpdateYPos
+
+        LDA initialCounterBetweenXPosUpdates
+        STA counterBetweeXPosUpdates
+
+        LDA incrementForXPos
+        CLC
+        ADC indexForXPosInSpritePositionArray
+        STA indexForXPosInSpritePositionArray
+
+MaybeUpdateYPos   
+        DEC counterBetweenYPosUpdates
+        BNE MaybeResetOsc3WorkingValue
+
+        LDA initialCounterBetweenYPosUpdates
+        STA counterBetweenYPosUpdates
+
+        LDA indexForYPosInSpritePositionArray
+        CLC
+        ADC incrementForYPos
+        STA indexForYPosInSpritePositionArray
+
+MaybeResetOsc3WorkingValue   
+        DEC oscillator3WorkingValue
+        BNE MaybeResetOsc4WorkingValue
+
+        LDA oscillator3Value
+        STA oscillator3WorkingValue
+        INC indexForXPosOffetsetInSpritePositionArray
+
+MaybeResetOsc4WorkingValue   
+        DEC oscillator4WorkingValue
+        BNE InitializeSpriteAnimation
+
+        LDA oscillator4Value
+        STA oscillator4WorkingValue
+        INC inxedForYPosOffsetInSpritePositionArray
+
+InitializeSpriteAnimation   
+        LDA indexForXPosInSpritePositionArray
+        PHA
+        LDA indexForYPosInSpritePositionArray
+        PHA
+        LDA indexForXPosOffetsetInSpritePositionArray
+        PHA
+        LDA inxedForYPosOffsetInSpritePositionArray
+        PHA
+\end{lstlisting}
 \end{minipage}
-
-
-\begin{tcolorbox}[%
-  breakable,
-  parbox = false,
-  frame hidden,
-  sharp corners,
-  after skip=10pt,
-  overlay broken = {
-    \draw[]
-      (frame.north west) rectangle (frame.south east);},
-]{}
-\subsubsection{A Testing Hack}
-
+\clearpage
+\begin{definition}[A Testing Hack]
+\setlength{\intextsep}{0pt}%
+\setlength{\columnsep}{3pt}%
+\small
+\begin{lstlisting}[basicstyle=\tiny]
 In the CheckKeyboardInGame Routine, we find the following:
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{7909}{7920}%
-\lstinputlisting[basicstyle=\tiny]{tmp.asm}
+        ; We can award ourselves a bonus bounty by
+        ; pressing Y at any time, as long as '1C' is the
+        ; first character in the hiscore table. Not sure
+        ; what this hack is for, testing?
+CheckYPressed   
+        CMP #KEY_Y ; Y Pressed
+        BNE ReturnFromKeyboardCheck
+        LDA canAwardBonus
+        CMP #$1C
+        BNE ReturnFromKeyboardCheck
+        INC bonusAwarded
+        RTS
+\end{lstlisting}
 
 In the above the `canAwardBonus` byte is the first letter in the name of the player with the top score in the Hi-Score table. By default this is 'YAK':
-\CopyPartialFile{../iridisalpha/src/iridisalpha.asm}{tmp.asm}{8713}{8716}%
-\lstinputlisting[basicstyle=\tiny]{tmp.asm}
 
+\begin{lstlisting}[basicstyle=\tiny]
+;-------------------------------------------------------
+; The high score table.
+;-------------------------------------------------------
+hiScoreTablePtr           .TEXT "0068000"
+canAwardBonus             .TEXT "YAK "
+                          .FILL 10, $00
+                          .TEXT  "0065535RATT"
+                          .FILL 10, $00
+\end{lstlisting}
 But if we change 'Y' to \icode{\$1C} like so, we can activate the hack:
 
 \begin{lstlisting}[basicstyle=\tiny]
@@ -66,8 +132,7 @@ Note that \icode{\$1C} is charset code for a bull's head symbol in Iridis Alpha,
 
 
 I'm guessing this was used for testing the animation routine and left in as an Easter egg.
-
-\end{tcolorbox}%
+\end{definition}
 
 To start getting a handle on how the oscillation animation works, lets plot the first 24 animations that the Torus
 demo uses when left to its own devices. We get a variety of different trajectories, some relatively simple, some
@@ -147,12 +212,6 @@ the screen.
 \end{figure}
 \clearpage
 
-To get beyond simple ellipsoids we need to do more than pick a different value in the array for our x and y offsets.
-Here we experiment with something a little more involved. We update the x and y positions at different intervals
-and when skipping ahead in \icode{spritePositionArray} for a new value for x and y we use a pre-selected, random
-number of bytes to skip past.
-
-\clearpage
 \begin{figure}[p]
     \centering
     \foreach \l in {0, ..., 17}
@@ -165,6 +224,11 @@ number of bytes to skip past.
 \end{figure}
 \clearpage
 
+To get beyond simple ellipsoids we need to do more than pick a different value in the array for our x and y offsets.
+Here we experiment with something a little more involved. We update the x and y positions at different intervals
+and when skipping ahead in \icode{spritePositionArray} for a new value for x and y we use a pre-selected, random
+number of bytes to skip past.
+
 This is starting to look more like the actual results we observed and it is where the 4 values selectable by the player using keys z, x, c, and v in the Torus demo come in. In addition
 to controlling the music generation procedure, as we've already seen, they also determine the way the values in
 \icode{spritePositionArray} are selected for position the sprite in each new frame. This is based on letting them
@@ -176,7 +240,7 @@ ahead in \icode{spritePositionArray} when selecting a new value from it for the 
   {
     \setlength{\tabcolsep}{3.0pt}
     \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
-    \begin{adjustbox}{width=14cm,center}
+    \begin{adjustbox}{width=12cm,center}
 
       \begin{tabular}{rllllllll}
         \toprule

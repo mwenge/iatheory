@@ -448,18 +448,13 @@ MaybePlayVoice3
         STA voice3IndexToMusicNoteArray
 \end{lstlisting}
 
-\begin{tcolorbox}[%
-  breakable,
-  parbox = false,
-  frame hidden,
-  sharp corners,
-  after skip=10pt,
-  overlay broken = {
-    \draw[]
-      (frame.north west) rectangle (frame.south east);},
-]{}
-\subsubsection{Extracting the Title Music}
-
+\begin{definition}[Extracting the Title Music]
+\setlength{\intextsep}{0pt}%
+\setlength{\columnsep}{3pt}%
+\begin{wrapfigure}{l}{0.12\textwidth}
+\includegraphics[width=\linewidth]{src/callout/ia.jpg} 
+\end{wrapfigure}
+\small
 Since each tune is dynamically generated there's nowhere for us to pull them from. We could record
 the tunes as audio files and maybe extract something useful that way. A feature of Vice, the C64
 emulator, allows us to do something much simpler. We can log every note that's played to a 
@@ -508,7 +503,7 @@ matter to transform this into ABC format, a music notation frequently used for t
 We can then use the tool `abcm2ps` to transform this into an SVG image file giving the music in
 standard Western notation.
 
-\end{tcolorbox}%
+\end{definition}
 
 \subsection{Phrasing}
 Now that we've identified the underlying 4-bar structure of the arrangement. We can take a closer look at the 

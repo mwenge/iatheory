@@ -6,14 +6,14 @@
       \includegraphics[width=10cm]{src/dna/dnascreenshot.png}%
 \caption{DNA: A pause mode within a pause mode.}
 \end{figure}
-\begin{lstlisting}[caption=Defining the text for the DNA screen]
-titleTextLine1   .TEXT "    % % %  DNA  % % %   "
-titleTextLine2   .TEXT " CONCEIVED AND EXECUTED B"
-titleTextLine3   .TEXT "Y            Y A K       "
-titleTextLine4   .TEXT " SPACE: CANCEL SCREEN TEX"
-titleTextLine5   .TEXT "TF5 AND F7 CHANGE COLOURS"
-titleTextLine6   .TEXT " LISTEN TO TALKING HEADS."
-titleTextLine7   .TEXT ".BE NICE TO HAIRY ANIMALS "
+\begin{lstlisting}[caption=Defining the text for the DNA screen\index{screen},escapechar=\%]
+titleTextLine1%\index{titleTextLine1}%   .TEXT "    % % %  DNA  % % %   "
+titleTextLine2%\index{titleTextLine2}%   .TEXT " CONCEIVED%\index{CONCEIVED}% AND EXECUTED%\index{EXECUTED}% B"
+titleTextLine3%\index{titleTextLine3}%   .TEXT "Y            Y A K       "
+titleTextLine4%\index{titleTextLine4}%   .TEXT " SPACE: CANCEL SCREEN TEX"
+titleTextLine5%\index{titleTextLine5}%   .TEXT "TF5 AND F7 CHANGE COLOURS"
+titleTextLine6%\index{titleTextLine6}%   .TEXT " LISTEN TO TALKING%\index{TALKING}% HEADS."
+titleTextLine7%\index{titleTextLine7}%   .TEXT ".BE NICE TO HAIRY ANIMALS%\index{ANIMALS}% "
 \end{lstlisting}
 
 \begin{figure}[H]
@@ -27,7 +27,7 @@ titleTextLine7   .TEXT ".BE NICE TO HAIRY ANIMALS "
     {
       \includegraphics[width=4cm]{dna/dna\l.png}%
     }%
-\caption{The first screen paint in DNA. There are 24 raster interrupts allowing us to paint a long chain of sprites.}
+\caption{The first screen\index{screen} paint in DNA. There are 24 raster interrupts allowing us to paint a long chain of sprites\index{sprites}.}
 \end{figure}
 \clearpage
 
@@ -40,70 +40,70 @@ Minter first shared it as a tiny 11K demo in a UK Compunet forum in the summer o
 1986. It followed shortly after 'Torus', an oscillator-based demo, shared at the same time and which we
 cover elsewhere : both are sprite-based
 light synthesisers where, like Psychedelia and Colorspace, the player gets to experiment with different
-configurations that control the behaviour of a frantic assembly of brightly colored, pulsating sprites.
+configurations that control the behaviour of a frantic assembly of brightly colored, pulsating sprites\index{sprites}.
 
 DNA has an unapologetically daft premise: two chains of flashing eyeballs cascade down the
-screen in an unsettling, blinking helix configuration. Your object as player is to twiddle the available
+screen\index{screen} in an unsettling, blinking helix configuration. Your object as player is to twiddle the available
 knobs to see if you can get them to do anything interesting while listening to your favorite music.
 
-For its time DNA's most noteworthy feature was the number of sprites being written to the screen. There are
-48 eyeballs displayed at any one time, in addition to a pair of parallax starfields drifting past in the
-background. As you may have gathered by now, the C64 can only support 8 sprites in total so this would
+For its time DNA's most noteworthy feature was the number of sprites\index{sprites} being written to the screen\index{screen}. There are
+48 eyeballs displayed at any one time, in addition to a pair of parallax\index{parallax} starfields drifting past in the
+background\index{background}. As you may have gathered by now, the C64 can only support 8 sprites\index{sprites} in total so this would
 have seemed like wizardry to the uninitiated. If you're not dipping into this chapter at random, but have
 read any of the previous chapters in this book you may already be able to guess the secret to this 
 unsettling feat: raster interrupts.
 
-As elsewhere in Iridis Alpha the trick to filling the screen with sprites is to write a tight piece of code
-that can run periodically during a single paint of the screen, adding a layer of sprites to each horizontal
-section. We tell the C64 where we want the raster to interrupt its progress and call our code. This code
-will then paint as many sprites as possible on the horizontal layer. DNA takes the approach of painting a
+As elsewhere in Iridis Alpha the trick to filling the screen\index{screen} with sprites\index{sprites} is to write a tight piece of code
+that can run periodically during a single paint of the screen\index{screen}, adding a layer of sprites\index{sprites} to each horizontal
+section. We tell the C64 where we want the raster to interrupt\index{interrupt} its progress and call our code. This code
+will then paint as many sprites\index{sprites} as possible on the horizontal layer. DNA takes the approach of painting a
 pair of eyeballs at 8 pixel vertical intervals, so each horizontal layer is 8 pixels tall. 
-These intervals are defined in \icode{dnaSpritesYPositionsArray}:
+These intervals are defined in \icode{dnaSpritesYPositionsArray\index{dnaSpritesYPositionsArray}}:
 
-\begin{lstlisting}
-dnaSpritesYPositionsArray       .BYTE $30,$38,$40,$48,$50,$58,$60,$68
+\begin{lstlisting}[escapechar=\%]
+dnaSpritesYPositionsArray%\index{dnaSpritesYPositionsArray}%       .BYTE $30,$38,$40,$48,$50,$58,$60,$68
                                 .BYTE $70,$78,$80,$88,$90,$98,$A0,$A8
                                 .BYTE $B0,$B8,$C0,$C8,$D0,$D8,$E0,$E8
-                                .BYTE END_SENTINEL
+                                .BYTE END_SENTINEL%\index{END\_SENTINEL}%
 \end{lstlisting}
 
-While the Y co-ordinates of the sprites are set in stone, their X co-ordinates must be calculated on the fly
+While the Y co-ordinates of the sprites\index{sprites} are set in stone, their X co-ordinates must be calculated on the fly
 and indeed the purpose of the twiddling knobs is to control the way these co-ordinates are generated. Initially
 the X positions are all set to 192 (\$C0):
 
-\begin{lstlisting}
-dnaSpritesXPositionsArray       .BYTE $C0,$C0,$C0,$C0,$C0,$C0,$C0,$C0
+\begin{lstlisting}[escapechar=\%]
+dnaSpritesXPositionsArray%\index{dnaSpritesXPositionsArray}%       .BYTE $C0,$C0,$C0,$C0,$C0,$C0,$C0,$C0
                                 .BYTE $C0,$C0,$C0,$C0,$C0,$C0,$C0,$C0
                                 .BYTE $C0,$C0,$C0,$C0,$C0,$C0,$C0,$C0
                                 .BYTE $00,$00,$00,$00,$00,$00,$00,$00
                                 .BYTE $00,$00,$00,$00,$00,$00,$00,$00
 \end{lstlisting}
 
-With every full paint of the screen calculates a new X co-ordinate and puts it at the head of the array. Depending
+With every full paint of the screen\index{screen} calculates a new X co-ordinate and puts it at the head of the array. Depending
 on the value given as the 'Speed' setting, it then shifts all the others in the array to the right by one position. 
 
-\begin{lstlisting}
-DNA_PropagatePreviousXPosToTheRight
+\begin{lstlisting}[escapechar=\%]
+DNA_PropagatePreviousXPosToTheRight%\index{DNA\_PropagatePreviousXPosToTheRight}%
         LDX #$27
-PropagateToRightLoop   
-        LDA dnaSpritesXPositionsArray - $01,X
-        STA dnaSpritesXPositionsArray,X
+PropagateToRightLoop%\index{PropagateToRightLoop}%   
+        LDA dnaSpritesXPositionsArray%\index{dnaSpritesXPositionsArray}% - $01,X
+        STA dnaSpritesXPositionsArray%\index{dnaSpritesXPositionsArray}%,X
         DEX
-        BNE PropagateToRightLoop
+        BNE PropagateToRightLoop%\index{PropagateToRightLoop}%
         RTS
 \end{lstlisting}
 
 This very quickly fills the array.  We can see this in operation from the below
 snippet in \icode{DNA\_MainAnimationRoutine}. In order to calculate the x position
 for the right hand chain, it shows the value in
-\icode{dnaCurrentPhase} being added to the value
+\icode{dnaCurrentPhase\index{dnaCurrentPhase}} being added to the value
 \icode{dnaCurrent\-SpritesPosArrayIndex} to pick out a value in
-\icode{dnaSpritesXPositionsArray} offset by the amount of the 'Phase' setting:
+\icode{dnaSpritesXPositionsArray\index{dnaSpritesXPositionsArray}} offset by the amount of the 'Phase' setting:
 
 \begin{minipage}[b]{0.75\linewidth}
 \centering
-\begin{lstlisting}[caption=\icode{dnaCurrentPhase} is set by the 'Q' key.]
-  LDX dnaCurrentSpritesPosArrayIndex
+\begin{lstlisting}[caption=\icode{dnaCurrentPhase\index{dnaCurrentPhase}} is set by the 'Q' key.,escapechar=\%]
+  LDX dnaCurrentSpritesPosArrayIndex%\index{dnaCurrentSpritesPosArrayIndex}%
   ..
   ; Add in the phase to our index to the X position
   ; of the sprite on the right hand chain. If the 
@@ -114,19 +114,19 @@ for the right hand chain, it shows the value in
   ; previous values of X Pos from the left hand chain.
   TXA
   ..
-  ADC dnaCurrentPhase
+  ADC dnaCurrentPhase%\index{dnaCurrentPhase}%
   CMP #$27
-  BMI UpdateXPosWithPhase
+  BMI UpdateXPosWithPhase%\index{UpdateXPosWithPhase}%
 
   ; Back out the addition if result greater than $27.
   SEC
   SBC #$27
-UpdateXPosWithPhase   
+UpdateXPosWithPhase%\index{UpdateXPosWithPhase}%   
   ; Finally, use the offset given by the update value 
   ; in 'A', load it to 'X' and use it pick the X 
-  ; position from dnaSpritesXPositionsArray.
+  ; position from dnaSpritesXPositionsArray%\index{dnaSpritesXPositionsArray}%.
   TAX
-  LDA dnaSpritesXPositionsArray,X
+  LDA dnaSpritesXPositionsArray%\index{dnaSpritesXPositionsArray}%,X
   STA $D004,Y  ;Sprite 2 X Pos
 \end{lstlisting}
 \end{minipage}
@@ -189,24 +189,24 @@ the right-hand chain lags 5 'eyeballs' behind the left chain in terms of the pos
       \bottomrule
       \end{tabular}
     \end{adjustbox}
-  }\caption{Examples of the x co-ordinates (highlighted) in \icode{dnaSpritesXPositionsArray} used by the left and right chain when 'phase' is set to 5.}
+  }\caption{Examples of the x co-ordinates (highlighted) in \icode{dnaSpritesXPositionsArray\index{dnaSpritesXPositionsArray}} used by the left and right chain when 'phase' is set to 5.}
   \end{figure}
 
 We said a new value for the top eye-ball in each chain is calculated every paint, but whether the existing
-values get propagated to the right in \icode{dnaSpritesXPositionsArray} depends on the 'Speed' setting:
+values get propagated to the right in \icode{dnaSpritesXPositionsArray\index{dnaSpritesXPositionsArray}} depends on the 'Speed' setting:
 
 \begin{minipage}[b]{0.75\linewidth}
 \centering
-\begin{lstlisting}[caption=\icode{dnaCurrentSpeed} is set by the 'A' and 'S' keys.]
-UpdateXPosArrays
-    DEC actualSpeed
-    BNE CalculateNewXPosForHead
+\begin{lstlisting}[caption=\icode{dnaCurrentSpeed\index{dnaCurrentSpeed}} is set by the 'A' and 'S' keys.,escapechar=\%]
+UpdateXPosArrays%\index{UpdateXPosArrays}%
+    DEC actualSpeed%\index{actualSpeed}%
+    BNE CalculateNewXPosForHead%\index{CalculateNewXPosForHead}%
 
     ; The speed setting determines how quickly
     ; the X pos values are propagated down the chains.
-    LDA dnaCurrentSpeed
-    STA actualSpeed
-    JSR DNA_PropagatePreviousXPosToTheRight
+    LDA dnaCurrentSpeed%\index{dnaCurrentSpeed}%
+    STA actualSpeed%\index{actualSpeed}%
+    JSR DNA_PropagatePreviousXPosToTheRight%\index{DNA\_PropagatePreviousXPosToTheRight}%
 \end{lstlisting}
 \end{minipage}
 \hspace{0.5cm}
@@ -217,15 +217,15 @@ UpdateXPosArrays
 \end{minipage}
 
 The 'Speed' setting is effectively a counter that is decremented at every paint, once it reaches zero it gets reset back to 
-its initial value (in this case '1') and the X Positions are all shifted to the right in \icode{dnaSpritesXPositionsArray}.
+its initial value (in this case '1') and the X Positions are all shifted to the right in \icode{dnaSpritesXPositionsArray\index{dnaSpritesXPositionsArray}}.
 
-How is the new value for the eyeball at the head of each chain calculated? We get that it's updated at every screen paint
+How is the new value for the eyeball at the head of each chain calculated? We get that it's updated at every screen\index{screen} paint
 but what determines it? The calculation is a two-phase process but both phases depend on the same array of values stored
-in \icode{newXPosOffsetsArray}. This is a rattle-bag of X positions describing a more or less continuous curve:
+in \icode{newXPosOffsetsArray\index{newXPosOffsetsArray}}. This is a rattle-bag of X positions describing a more or less continuous curve:
 
-\begin{lstlisting}[caption=Notice that the values start at \icode{\$40}\, rise gradually to \icode{\$80}\, back to \icode{\$00} and then
+\begin{lstlisting}[escapechar=\%,caption=Notice that the values start at \icode{\$40}\, rise gradually to \icode{\$80}\, back to \icode{\$00} and then
 back up to \icode{\$40} again.]
-newXPosOffsetsArray  .BYTE $40,$46,$4C,$53,$58,$5E,$63,$68
+newXPosOffsetsArray%\index{newXPosOffsetsArray}%  .BYTE $40,$46,$4C,$53,$58,$5E,$63,$68
                      .BYTE $6D,$71,$75,$78,$7B,$7D,$7E,$7F
                      .BYTE $80,$7F,$7E,$7D,$7B,$78,$75,$71
                      .BYTE $6D,$68,$63,$5E,$58,$52,$4C,$46
@@ -233,35 +233,35 @@ newXPosOffsetsArray  .BYTE $40,$46,$4C,$53,$58,$5E,$63,$68
                      .BYTE $12,$0E,$0A,$07,$04,$02,$01,$00
                      .BYTE $00,$00,$01,$02,$04,$07,$0A,$0E
                      .BYTE $12,$17,$1C,$21,$27,$2D,$33,$39
-                     .BYTE END_SENTINEL
+                     .BYTE END_SENTINEL%\index{END\_SENTINEL}%
 \end{lstlisting}
 
 The other factors in this calculation are the 'Frequency' selected for each chain, the left-hand chain (Wave 1) and the right-hand
-chain (Wave 2). The values that do the most work are \icode{xPosOffsetForWave1} and \icode{xPosOffsetForWave2}. 
+chain (Wave 2). The values that do the most work are \icode{xPosOffsetForWave1\index{xPosOffsetForWave1}} and \icode{xPosOffsetForWave2\index{xPosOffsetForWave2}}. 
 
 \begin{minipage}[b]{0.75\linewidth}
 \centering
-\begin{lstlisting}[caption=The value selected for 'Frequency' for Wave 1 and 2 translates to settings used in calculating the next X position for each chain.]
-DNA_UpdateSettingsBasedOnFrequency
-  LDA dnaWave1Frequency
+\begin{lstlisting}[caption=The value selected for 'Frequency' for Wave 1 and 2 translates to settings used in calculating the next X position for each chain.,escapechar=\%]
+DNA_UpdateSettingsBasedOnFrequency%\index{DNA\_UpdateSettingsBasedOnFrequency}%
+  LDA dnaWave1Frequency%\index{dnaWave1Frequency}%
   AND #$1F
   TAX
-  LDA timesToNextUpdateForFrequency,X
-  STA initialTimeToNextUpdateForWave1
-  STA timeToNextUpdateCounterForWave1
-  LDA xPosOffsetsForFrequency,X
-  STA xPosOffsetForWave1
+  LDA timesToNextUpdateForFrequency%\index{timesToNextUpdateForFrequency}%,X
+  STA initialTimeToNextUpdateForWave1%\index{initialTimeToNextUpdateForWave1}%
+  STA timeToNextUpdateCounterForWave1%\index{timeToNextUpdateCounterForWave1}%
+  LDA xPosOffsetsForFrequency%\index{xPosOffsetsForFrequency}%,X
+  STA xPosOffsetForWave1%\index{xPosOffsetForWave1}%
 
-  LDA dnaWave2Frequency
+  LDA dnaWave2Frequency%\index{dnaWave2Frequency}%
   AND #$1F
   TAX
-  LDA timesToNextUpdateForFrequency,X
-  STA initialTimeToNextUpdateForWave2
-  STA timeToNextUpdateCounterForWave2
-  LDA xPosOffsetsForFrequency,X
-  STA xPosOffsetForWave2
-  JMP DNA_UpdateDisplayedSettings
-  ; Returns
+  LDA timesToNextUpdateForFrequency%\index{timesToNextUpdateForFrequency}%,X
+  STA initialTimeToNextUpdateForWave2%\index{initialTimeToNextUpdateForWave2}%
+  STA timeToNextUpdateCounterForWave2%\index{timeToNextUpdateCounterForWave2}%
+  LDA xPosOffsetsForFrequency%\index{xPosOffsetsForFrequency}%,X
+  STA xPosOffsetForWave2%\index{xPosOffsetForWave2}%
+  JMP DNA_UpdateDisplayedSettings%\index{DNA\_UpdateDisplayedSettings}%
+  ; Returns%\index{Returns}%
 \end{lstlisting}
 \end{minipage}
 \hspace{0.5cm}
@@ -272,164 +272,164 @@ DNA_UpdateSettingsBasedOnFrequency
       \includegraphics[width=3cm]{dna/dnafreq2.png}%
       \vspace{1cm}
 \end{minipage}
-As we can see above these are populated from \icode{xPosOffsetsForFrequency} using the 'Frequency' as an index.
+As we can see above these are populated from \icode{xPosOffsetsForFrequency\index{xPosOffsetsForFrequency}} using the 'Frequency' as an index.
 
-\begin{lstlisting}
+\begin{lstlisting}[escapechar=\%]
   ..
-  LDA xPosOffsetsForFrequency,X
-  STA xPosOffsetForWave1
+  LDA xPosOffsetsForFrequency%\index{xPosOffsetsForFrequency}%,X
+  STA xPosOffsetForWave1%\index{xPosOffsetForWave1}%
 
   ..
-  LDA xPosOffsetsForFrequency,X
-  STA xPosOffsetForWave2
+  LDA xPosOffsetsForFrequency%\index{xPosOffsetsForFrequency}%,X
+  STA xPosOffsetForWave2%\index{xPosOffsetForWave2}%
 \end{lstlisting}
 
-In each case the value populated here is added to a value selected from \icode{newXPosOffsetsArray} to give the 
+In each case the value populated here is added to a value selected from \icode{newXPosOffsetsArray\index{newXPosOffsetsArray}} to give the 
 new X position for the eyeball at the head of the chain. Well, in a way that's only half true. Separate positions
 are indeed calculated for the left and right chain, but at the end of the day the position calculate for the right-hand
 chain (Wave 2) is purely notional. It's just used as an initial value that the value calculated for the left-hand chain
 is layered on to. This allows the two chains to 'interfere' with each other, as though the position of one affects the
 other - and reduces the chance of the two overlapping too much:
 
-\begin{lstlisting}[caption=From \icode{CalculateValueOfNewXPosForWave1}]
-UpdateHeadOfWave   
+\begin{lstlisting}[caption=From \icode{CalculateValueOfNewXPosForWave1},escapechar=\%]
+UpdateHeadOfWave%\index{UpdateHeadOfWave}%   
   ; Take the new X Pos value we calculated for Wave 2, add the position
   ; we calculated for Wave 1 and make that the new position for the lead
-  ; sprite at the head of dnaSpritesXPositionsArray.
-  LDA notionalNewXPosForWave2
+  ; sprite at the head of dnaSpritesXPositionsArray%\index{dnaSpritesXPositionsArray}%.
+  LDA notionalNewXPosForWave2%\index{notionalNewXPosForWave2}%
   CLC
-  ADC newXPosForWave1
-  STA dnaSpritesXPositionsArray
+  ADC newXPosForWave1%\index{newXPosForWave1}%
+  STA dnaSpritesXPositionsArray%\index{dnaSpritesXPositionsArray}%
 \end{lstlisting}
 
 When we compare the routines responsible for calculating the X Pos for Wave 2 and Wave 1 side by side on the next
 page we can see many similarities between the two. They are both maintaining and updating an index into 
-\icode{newXPosOffsetsArray} and using that to come up with a new X position. They both have to deal towards the end
-of the routine with the need to ensure the index does not exceed \icode{\$40} and subtract \icode{\$40} from it if
-it does. The output of \icode{CalculateValueOfNewXPosForWave2} is essentially the value stored in \icode{notionalNewXPosForWave2}
-and this is what is used as the input above, in conjunction with \icode{newXPosForWave1}, to come up with the final
+\icode{newXPosOffsetsArray\index{newXPosOffsetsArray}} and using that to come up with a new X position. They both have to deal towards the end
+of the routine\index{routine} with the need to ensure the index does not exceed \icode{\$40} and subtract \icode{\$40} from it if
+it does. The output of \icode{CalculateValueOfNewXPosForWave2} is essentially the value stored in \icode{notionalNewXPosForWave2\index{notionalNewXPosForWave2}}
+and this is what is used as the input above, in conjunction with \icode{newXPosForWave1\index{newXPosForWave1}}, to come up with the final
 value for the X position for Wave 1. It is this value that gets added to the head of the working array \icode{dnaXPosDataHeadArray}
 by \icode{DNA\_PropagatePreviousXPosToTheRight}.
 
 \begin{minipage}[b]{0.55\linewidth}
 \centering
-\begin{lstlisting}[basicstyle=\tiny, caption=Calculate a notional X Pos value for Wave 2. This routine is called by the one on the
-right\, its return value is \icode{notionalNewXPosForWave2}. ]
+\begin{lstlisting}[escapechar=\%,basicstyle=\tiny, caption=Calculate a notional X Pos value for Wave 2. This routine\index{routine} is called by the one on the
+right\, its return value is \icode{notionalNewXPosForWave2\index{notionalNewXPosForWave2}}. ]
 CalculateValueOfNewXPosForWave2
-  LDA dnaWave2Enabled
-  BNE NewXPosWhenWave2Enabled
+  LDA dnaWave2Enabled%\index{dnaWave2Enabled}%
+  BNE NewXPosWhenWave2Enabled%\index{NewXPosWhenWave2Enabled}%
 
   ; If wave 2 is not enabled set $40
   ; as the initial X Pos (it will be
   ; incremented later).
-  LDA #XPOS_OFFSETS_ARRAY_SIZE
-  STA notionalNewXPosForWave2
-ReturnFromNewXPos   
+  LDA #XPOS_OFFSETS_ARRAY_SIZE%\index{XPOS\_OFFSETS\_ARRAY\_SIZE}%
+  STA notionalNewXPosForWave2%\index{notionalNewXPosForWave2}%
+ReturnFromNewXPos%\index{ReturnFromNewXPos}%   
   RTS
 
-NewXPosWhenWave2Enabled   
-  DEC timeToNextUpdateCounterForWave2
-  BNE ReturnFromNewXPos
+NewXPosWhenWave2Enabled%\index{NewXPosWhenWave2Enabled}%   
+  DEC timeToNextUpdateCounterForWave2%\index{timeToNextUpdateCounterForWave2}%
+  BNE ReturnFromNewXPos%\index{ReturnFromNewXPos}%
 
-  LDA initialTimeToNextUpdateForWave2
-  STA timeToNextUpdateCounterForWave2
+  LDA initialTimeToNextUpdateForWave2%\index{initialTimeToNextUpdateForWave2}%
+  STA timeToNextUpdateCounterForWave2%\index{timeToNextUpdateCounterForWave2}%
 
   ; If right hand chain is enabled
-  ; get value from newXPosOffsetsArray,
+  ; get value from newXPosOffsetsArray%\index{newXPosOffsetsArray}%,
   ; which has $40 (64) potential values. 
   ; This logic uses 
-  ; indexToXPosDataArrayForWave2 
+  ; indexToXPosDataArrayForWave2%\index{indexToXPosDataArrayForWave2}% 
   ; to get a value from it, halves it
   ; with ROR, and adds $40.
-  LDX indexToXPosDataArrayForWave2
-  LDA newXPosOffsetsArray,X
+  LDX indexToXPosDataArrayForWave2%\index{indexToXPosDataArrayForWave2}%
+  LDA newXPosOffsetsArray%\index{newXPosOffsetsArray}%,X
   CLC
   ROR         ; Halve it.
   CLC
-  ADC #XPOS_OFFSETS_ARRAY_SIZE
-  STA notionalNewXPosForWave2
+  ADC #XPOS_OFFSETS_ARRAY_SIZE%\index{XPOS\_OFFSETS\_ARRAY\_SIZE}%
+  STA notionalNewXPosForWave2%\index{notionalNewXPosForWave2}%
 
-  ; Add xPosOffsetForWave2 to
-  ; indexToXPosDataArrayForWave2.
+  ; Add xPosOffsetForWave2%\index{xPosOffsetForWave2}% to
+  ; indexToXPosDataArrayForWave2%\index{indexToXPosDataArrayForWave2}%.
   ; Ensure it loops to start of array if
   ; greater than $40. 
   TXA
   CLC
-  ADC xPosOffsetForWave2
-  CMP #XPOS_OFFSETS_ARRAY_SIZE
-  BMI NoLoopingRequired
+  ADC xPosOffsetForWave2%\index{xPosOffsetForWave2}%
+  CMP #XPOS_OFFSETS_ARRAY_SIZE%\index{XPOS\_OFFSETS\_ARRAY\_SIZE}%
+  BMI NoLoopingRequired%\index{NoLoopingRequired}%
 
   SEC
-  SBC #XPOS_OFFSETS_ARRAY_SIZE
-NoLoopingRequired   
-  STA indexToXPosDataArrayForWave2
+  SBC #XPOS_OFFSETS_ARRAY_SIZE%\index{XPOS\_OFFSETS\_ARRAY\_SIZE}%
+NoLoopingRequired%\index{NoLoopingRequired}%   
+  STA indexToXPosDataArrayForWave2%\index{indexToXPosDataArrayForWave2}%
   RTS
 \end{lstlisting}
 \end{minipage}
 \hspace{0.5cm}
 \begin{minipage}[b]{0.55\linewidth}
 \centering
-  \begin{lstlisting}[basicstyle=\tiny, caption=Calculate the new X Pos value for the head sprites\, as well as propagate the
+  \begin{lstlisting}[escapechar=\%,basicstyle=\tiny, caption=Calculate the new X Pos value for the head sprites\index{sprites}\, as well as propagate the
   values in \icode{dnaXPosDataHeadArray} to the right when required.]
 CalculateValueOfNewXPosForWave1
-  DEC actualSpeed
-  BNE CalculateNewXPosForHead
+  DEC actualSpeed%\index{actualSpeed}%
+  BNE CalculateNewXPosForHead%\index{CalculateNewXPosForHead}%
 
   ; The speed setting determines how quickly 
   ; the X pos values are propagated down the chains.
-  LDA dnaCurrentSpeed
-  STA actualSpeed
-  JSR DNA_PropagatePreviousXPosToTheRight
-CalculateNewXPosForHead   
+  LDA dnaCurrentSpeed%\index{dnaCurrentSpeed}%
+  STA actualSpeed%\index{actualSpeed}%
+  JSR DNA_PropagatePreviousXPosToTheRight%\index{DNA\_PropagatePreviousXPosToTheRight}%
+CalculateNewXPosForHead%\index{CalculateNewXPosForHead}%   
   ; Get a new value for Wave 2.
   JSR CalculateValueOfNewXPosForWave2
-  DEC timeToNextUpdateCounterForWave1
-  BNE ReturnFromUpdatingHead
+  DEC timeToNextUpdateCounterForWave1%\index{timeToNextUpdateCounterForWave1}%
+  BNE ReturnFromUpdatingHead%\index{ReturnFromUpdatingHead}%
 
-  LDA initialTimeToNextUpdateForWave1
-  STA timeToNextUpdateCounterForWave1
+  LDA initialTimeToNextUpdateForWave1%\index{initialTimeToNextUpdateForWave1}%
+  STA timeToNextUpdateCounterForWave1%\index{timeToNextUpdateCounterForWave1}%
 
-  ; Get newXPosForWave1, this will be added to
-  ; notionalNewXPosForWave2. Both are sourced
-  ; from the same array newXPosOffsetsArray.
-  LDX indexToNextXPosForHead
-  LDA newXPosOffsetsArray,X
-  STA newXPosForWave1
+  ; Get newXPosForWave1%\index{newXPosForWave1}%, this will be added to
+  ; notionalNewXPosForWave2%\index{notionalNewXPosForWave2}%. Both are sourced
+  ; from the same array newXPosOffsetsArray%\index{newXPosOffsetsArray}%.
+  LDX indexToNextXPosForHead%\index{indexToNextXPosForHead}%
+  LDA newXPosOffsetsArray%\index{newXPosOffsetsArray}%,X
+  STA newXPosForWave1%\index{newXPosForWave1}%
 
-  LDY dnaWave2Enabled
-  BEQ UpdateHeadOfWave
+  LDY dnaWave2Enabled%\index{dnaWave2Enabled}%
+  BEQ UpdateHeadOfWave%\index{UpdateHeadOfWave}%
 
   ; Halve the offset we will use if
   ; the right hand chain is enabled.
   CLC
   ROR 
-  STA newXPosForWave1
-UpdateHeadOfWave   
+  STA newXPosForWave1%\index{newXPosForWave1}%
+UpdateHeadOfWave%\index{UpdateHeadOfWave}%   
   ; Take the new X Pos value we calculated for Wave 2,
   ; add the position we calculated for Wave 1 and 
   ; make that the new position for the lead
-  ; sprite at the head of dnaSpritesXPositionsArray.
-  LDA notionalNewXPosForWave2
+  ; sprite at the head of dnaSpritesXPositionsArray%\index{dnaSpritesXPositionsArray}%.
+  LDA notionalNewXPosForWave2%\index{notionalNewXPosForWave2}%
   CLC
-  ADC newXPosForWave1
-  STA dnaSpritesXPositionsArray
+  ADC newXPosForWave1%\index{newXPosForWave1}%
+  STA dnaSpritesXPositionsArray%\index{dnaSpritesXPositionsArray}%
 
-  ; Get value for indexToNextXPosForHead for the next
+  ; Get value for indexToNextXPosForHead%\index{indexToNextXPosForHead}% for the next
   ; time around. Ensure it loops to start of array if 
   ; greater than $40.
   TXA
   CLC
-  ADC xPosOffsetForWave1
+  ADC xPosOffsetForWave1%\index{xPosOffsetForWave1}%
   TAX
-  CPX #XPOS_OFFSETS_ARRAY_SIZE
-  BMI UpdateNextXPos
+  CPX #XPOS_OFFSETS_ARRAY_SIZE%\index{XPOS\_OFFSETS\_ARRAY\_SIZE}%
+  BMI UpdateNextXPos%\index{UpdateNextXPos}%
 
   SEC
-  SBC #XPOS_OFFSETS_ARRAY_SIZE
+  SBC #XPOS_OFFSETS_ARRAY_SIZE%\index{XPOS\_OFFSETS\_ARRAY\_SIZE}%
   TAX
-UpdateNextXPos   
-  STX indexToNextXPosForHead
-ReturnFromUpdatingHead   
+UpdateNextXPos%\index{UpdateNextXPos}%   
+  STX indexToNextXPosForHead%\index{indexToNextXPosForHead}%
+ReturnFromUpdatingHead%\index{ReturnFromUpdatingHead}%   
   RTS
 \end{lstlisting}
 \end{minipage}
@@ -478,5 +478,5 @@ ReturnFromUpdatingHead
         \bottomrule
       \end{tabular}
     \end{adjustbox}
-  }\caption{The eyeball sprites used by DNA.}
+  }\caption{The eyeball sprites\index{sprites} used by DNA.}
 \end{figure}

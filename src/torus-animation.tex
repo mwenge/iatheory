@@ -13,10 +13,10 @@
   \includegraphics[width=4cm]{torus/torus.png}%
   \end{subfigure}
   \end{adjustbox}
-}\caption[]{The Torus oscillator animation and Iridis' bonus animation.}
+}\caption[]{The Torus oscillator animation\index{animation} and Iridis' bonus animation\index{animation}.}
 \end{figure}
 
-The Torus demo is also the laboratory where the elegant animation used when awarding a bonus was developed. The code
+The Torus demo is also the laboratory where the elegant animation\index{animation} used when awarding a bonus was developed. The code
 handling each is identical and was only very lightly modified for the final game.
 
 \begin{minipage}[b]{0.45\linewidth}
@@ -27,61 +27,61 @@ handling each is identical and was only very lightly modified for the final game
 \hspace{0.5cm}
 \begin{minipage}[b]{0.45\linewidth}
 \centering
-\begin{lstlisting}[basicstyle=\tiny,caption=... and Iridis Alpha.]
+\begin{lstlisting}[basicstyle=\tiny,caption=... and Iridis Alpha.,escapechar=\%]
 ;--------------------------------------------------
-; AnimateGilbiesForNewBonus
+; AnimateGilbiesForNewBonus%\index{AnimateGilbiesForNewBonus}%
 ;--------------------------------------------------
-AnimateGilbiesForNewBonus
+AnimateGilbiesForNewBonus%\index{AnimateGilbiesForNewBonus}%
         LDY #$00
         LDA #$F0
         STA $D012    ;Raster Position
-        DEC counterBetweeXPosUpdates
-        BNE MaybeUpdateYPos
+        DEC counterBetweeXPosUpdates%\index{counterBetweeXPosUpdates}%
+        BNE MaybeUpdateYPos%\index{MaybeUpdateYPos}%
 
-        LDA initialCounterBetweenXPosUpdates
-        STA counterBetweeXPosUpdates
+        LDA initialCounterBetweenXPosUpdates%\index{initialCounterBetweenXPosUpdates}%
+        STA counterBetweeXPosUpdates%\index{counterBetweeXPosUpdates}%
 
-        LDA incrementForXPos
+        LDA incrementForXPos%\index{incrementForXPos}%
         CLC
-        ADC indexForXPosInSpritePositionArray
-        STA indexForXPosInSpritePositionArray
+        ADC indexForXPosInSpritePositionArray%\index{indexForXPosInSpritePositionArray}%
+        STA indexForXPosInSpritePositionArray%\index{indexForXPosInSpritePositionArray}%
 
-MaybeUpdateYPos   
-        DEC counterBetweenYPosUpdates
-        BNE MaybeResetOsc3WorkingValue
+MaybeUpdateYPos%\index{MaybeUpdateYPos}%   
+        DEC counterBetweenYPosUpdates%\index{counterBetweenYPosUpdates}%
+        BNE MaybeResetOsc3WorkingValue%\index{MaybeResetOsc3WorkingValue}%
 
-        LDA initialCounterBetweenYPosUpdates
-        STA counterBetweenYPosUpdates
+        LDA initialCounterBetweenYPosUpdates%\index{initialCounterBetweenYPosUpdates}%
+        STA counterBetweenYPosUpdates%\index{counterBetweenYPosUpdates}%
 
-        LDA indexForYPosInSpritePositionArray
+        LDA indexForYPosInSpritePositionArray%\index{indexForYPosInSpritePositionArray}%
         CLC
-        ADC incrementForYPos
-        STA indexForYPosInSpritePositionArray
+        ADC incrementForYPos%\index{incrementForYPos}%
+        STA indexForYPosInSpritePositionArray%\index{indexForYPosInSpritePositionArray}%
 
-MaybeResetOsc3WorkingValue   
-        DEC oscillator3WorkingValue
-        BNE MaybeResetOsc4WorkingValue
+MaybeResetOsc3WorkingValue%\index{MaybeResetOsc3WorkingValue}%   
+        DEC oscillator3WorkingValue%\index{oscillator3WorkingValue}%
+        BNE MaybeResetOsc4WorkingValue%\index{MaybeResetOsc4WorkingValue}%
 
-        LDA oscillator3Value
-        STA oscillator3WorkingValue
-        INC indexForXPosOffetsetInSpritePositionArray
+        LDA oscillator3Value%\index{oscillator3Value}%
+        STA oscillator3WorkingValue%\index{oscillator3WorkingValue}%
+        INC indexForXPosOffetsetInSpritePositionArray%\index{indexForXPosOffetsetInSpritePositionArray}%
 
-MaybeResetOsc4WorkingValue   
-        DEC oscillator4WorkingValue
-        BNE InitializeSpriteAnimation
+MaybeResetOsc4WorkingValue%\index{MaybeResetOsc4WorkingValue}%   
+        DEC oscillator4WorkingValue%\index{oscillator4WorkingValue}%
+        BNE InitializeSpriteAnimation%\index{InitializeSpriteAnimation}%
 
-        LDA oscillator4Value
-        STA oscillator4WorkingValue
-        INC inxedForYPosOffsetInSpritePositionArray
+        LDA oscillator4Value%\index{oscillator4Value}%
+        STA oscillator4WorkingValue%\index{oscillator4WorkingValue}%
+        INC inxedForYPosOffsetInSpritePositionArray%\index{inxedForYPosOffsetInSpritePositionArray}%
 
-InitializeSpriteAnimation   
-        LDA indexForXPosInSpritePositionArray
+InitializeSpriteAnimation%\index{InitializeSpriteAnimation}%   
+        LDA indexForXPosInSpritePositionArray%\index{indexForXPosInSpritePositionArray}%
         PHA
-        LDA indexForYPosInSpritePositionArray
+        LDA indexForYPosInSpritePositionArray%\index{indexForYPosInSpritePositionArray}%
         PHA
-        LDA indexForXPosOffetsetInSpritePositionArray
+        LDA indexForXPosOffetsetInSpritePositionArray%\index{indexForXPosOffetsetInSpritePositionArray}%
         PHA
-        LDA inxedForYPosOffsetInSpritePositionArray
+        LDA inxedForYPosOffsetInSpritePositionArray%\index{inxedForYPosOffsetInSpritePositionArray}%
         PHA
 \end{lstlisting}
 \end{minipage}
@@ -90,51 +90,51 @@ InitializeSpriteAnimation
 \setlength{\intextsep}{0pt}%
 \setlength{\columnsep}{3pt}%
 \small
-\begin{lstlisting}[basicstyle=\tiny]
-In the CheckKeyboardInGame Routine, we find the following:
+\begin{lstlisting}[basicstyle=\tiny,escapechar=\%]
+In the CheckKeyboardInGame%\index{CheckKeyboardInGame}% Routine, we find the following:
         ; We can award ourselves a bonus bounty by
         ; pressing Y at any time, as long as '1C' is the
-        ; first character in the hiscore table. Not sure
+        ; first character%\index{character}% in the hiscore table. Not sure
         ; what this hack is for, testing?
-CheckYPressed   
+CheckYPressed%\index{CheckYPressed}%   
         CMP #KEY_Y ; Y Pressed
-        BNE ReturnFromKeyboardCheck
-        LDA canAwardBonus
+        BNE ReturnFromKeyboardCheck%\index{ReturnFromKeyboardCheck}%
+        LDA canAwardBonus%\index{canAwardBonus}%
         CMP #$1C
-        BNE ReturnFromKeyboardCheck
-        INC bonusAwarded
+        BNE ReturnFromKeyboardCheck%\index{ReturnFromKeyboardCheck}%
+        INC bonusAwarded%\index{bonusAwarded}%
         RTS
 \end{lstlisting}
 
-In the above the `canAwardBonus` byte is the first letter in the name of the player with the top score in the Hi-Score table. By default this is 'YAK':
+In the above the `canAwardBonus\index{canAwardBonus}` byte is the first letter in the name of the player with the top score in the Hi-Score table. By default this is 'YAK':
 
-\begin{lstlisting}[basicstyle=\tiny]
+\begin{lstlisting}[basicstyle=\tiny,escapechar=\%]
 ;-------------------------------------------------------
 ; The high score table.
 ;-------------------------------------------------------
-hiScoreTablePtr           .TEXT "0068000"
-canAwardBonus             .TEXT "YAK "
+hiScoreTablePtr%\index{hiScoreTablePtr}%           .TEXT "0068000"
+canAwardBonus%\index{canAwardBonus}%             .TEXT "YAK "
                           .FILL 10, $00
                           .TEXT  "0065535RATT"
                           .FILL 10, $00
 \end{lstlisting}
 But if we change 'Y' to \icode{\$1C} like so, we can activate the hack:
 
-\begin{lstlisting}[basicstyle=\tiny]
-hiScoreTablePtr           .TEXT "0068000"
-canAwardBonus             .TEXT $1C,"AK "
+\begin{lstlisting}[basicstyle=\tiny,escapechar=\%]
+hiScoreTablePtr%\index{hiScoreTablePtr}%           .TEXT "0068000"
+canAwardBonus%\index{canAwardBonus}%             .TEXT $1C,"AK "
 \end{lstlisting}
 
-Note that \icode{\$1C} is charset code for a bull's head symbol in Iridis Alpha, so it is also possible to enter this as the initial of a high scorer name if we get a score that puts us to the top of the table:
+Note that \icode{\$1C} is charset\index{charset} code for a bull's head symbol in Iridis Alpha, so it is also possible to enter this as the initial of a high scorer name if we get a score that puts us to the top of the table:
 
 \CopyPartialFile{../iridisalpha/src/graphics/charset.asm}{tmp.asm}{287}{296}%
 \lstinputlisting[basicstyle=\tiny]{tmp.asm}
 
 
-I'm guessing this was used for testing the animation routine and left in as an Easter egg.
+I'm guessing this was used for testing the animation\index{animation} routine\index{routine} and left in as an Easter egg.
 \end{definition}
 
-To start getting a handle on how the oscillation animation works, lets plot the first 24 animations that the Torus
+To start getting a handle on how the oscillation animation\index{animation} works, lets plot the first 24 animations that the Torus
 demo uses when left to its own devices. We get a variety of different trajectories, some relatively simple, some
 quite convoluted.
 
@@ -169,17 +169,17 @@ quite convoluted.
 \end{figure}
 \clearpage
 
-When we look into the code we find this petting zoo of animations is principally driven by a simple sequence
+When we look into the code we find this petting zoo of animations is principally driven by a simple sequence\index{sequence}
 of bytes stored in \icode{spritePositionArray}.
 
 \CopyPartialFile{../iridisalpha/demos/torus/src/torus.asm}{tmp.asm}{243}{251}%
 \lstinputlisting[basicstyle=\tiny]{tmp.asm}
 
-We can get a sense of how this rising and falling sequence of values can be used to plot a course across the screen
+We can get a sense of how this rising and falling sequence\index{sequence} of values can be used to plot a course across the screen\index{screen}
 if we treat each as an x and y value on a graph of cartesian co-ordinates. In the twenty four instances below we
 start by treating the value as providing both the x and y position. In each subsequent one we skip an increasing
-number of positions ahead in the sequence to get the y value, producing a variety of elliptical orbits around
-the screen. 
+number of positions ahead in the sequence\index{sequence} to get the y value, producing a variety of elliptical orbits around
+the screen\index{screen}. 
 
 \clearpage
 \begin{figure}[p]
@@ -232,7 +232,7 @@ number of bytes to skip past.
 This is starting to look more like the actual results we observed and it is where the 4 values selectable by the player using keys z, x, c, and v in the Torus demo come in. In addition
 to controlling the music generation procedure, as we've already seen, they also determine the way the values in
 \icode{spritePositionArray} are selected for position the sprite in each new frame. This is based on letting them
-determine the frequency with which the position of the x and y values of each sprite is changed and how far to skip
+determine the frequency\index{frequency} with which the position of the x and y values of each sprite is changed and how far to skip
 ahead in \icode{spritePositionArray} when selecting a new value from it for the x and y position.
 
 
@@ -293,21 +293,21 @@ to the next Y position.\\
 \end{figure}
 
 In \icode{RunMainInterruptHandler}) we can see how each of these values
-set by the player is used to maintain an accounting of the different sprite positions for each of the 8 sprites:
+set by the player is used to maintain an accounting of the different sprite positions for each of the 8 sprites\index{sprites}:
 
 \CopyPartialFile{../iridisalpha/demos/torus/src/torus.asm}{tmp.asm}{361}{403}%
 \lstinputlisting[basicstyle=\tiny]{tmp.asm}
 
-Before animating each of the 8 sprites we use the values set by the player to prepare the variables
+Before animating each of the 8 sprites\index{sprites} we use the values set by the player to prepare the variables
 that will be applied to positioning each sprite. For example the value selected with the Z key has been
-used to set \icode{initialCounterBetweenXPosUpdates} and \icode{incrementForXPos}. In the first lines above
-in \icode{UpdateXPos} we use them to set up \icode{indexForXPosInSpritePositionArray}. THis is then used
-in \icode{SpriteAnimationLoop} to selec the X position of the current sprite:
+used to set \icode{initialCounterBetweenXPosUpdates\index{initialCounterBetweenXPosUpdates}} and \icode{incrementForXPos\index{incrementForXPos}}. In the first lines above
+in \icode{UpdateXPos} we use them to set up \icode{indexForXPosInSpritePositionArray\index{indexForXPosInSpritePositionArray}}. THis is then used
+in \icode{SpriteAnimationLoop\index{SpriteAnimationLoop}} to selec the X position of the current sprite:
 
 
 \CopyPartialFile{../iridisalpha/demos/torus/src/torus.asm}{tmp.asm}{419}{424}%
 \lstinputlisting[basicstyle=\tiny]{tmp.asm}
 
 You can follow the same lineage between the setting of each value in our table above with the rest of the
-\icode{SpriteAnimationLoop} routine.
+\icode{SpriteAnimationLoop\index{SpriteAnimationLoop}} routine\index{routine}.
 

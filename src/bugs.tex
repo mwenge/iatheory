@@ -53,13 +53,13 @@ section of game data on the tape.
   }\caption{Chunk \icode{BF00} is missing its last byte.}
 \end{figure}
 
-\begin{lstlisting}[caption=The data segment as it should be\, with \icode{\$A2} at \icode{\$BFFF}]
+\begin{lstlisting}[caption=The data segment as it should be\, with \icode{\$A2} at \icode{\$BFFF},escapechar=\%]
 $BFFF	A2 07       LDX #$07
 $C001	A9 08       LDA #$08
 $C003	8D F8 BF    STA $BFF8
 \end{lstlisting}
 
-\begin{lstlisting}[caption=The corrupt byte\, with \icode{\$00} at \icode{\$BFFF}]
+\begin{lstlisting}[caption=The corrupt byte\, with \icode{\$00} at \icode{\$BFFF},escapechar=\%]
 $BFFF 00          BRK
 $C000 07 A9       SLO $A9
 $C002 08          PHP
@@ -68,7 +68,7 @@ $C003	8D F8 BF	  STA $BFF8
 
 \section{Reappearing Enemies}
 
-When you start a new game, enemies from the previous game show up in the first
+When you start a new game, enemies\index{enemies} from the previous game show up in the first
 wave. For most people starting out, this will take the form of a few residual
 'licker ships' zapping them just as they're getting started.
 
@@ -79,15 +79,15 @@ flushed out by being killed and replaced with the level's proper enemy data.
 This isn't a problem for the first game after Iridis Alpha is loaded because
 the first level's data is hardcoded in there.
 
-The fix is simple enough, we initialize the active wave data stored in `activeShipsWaveDataLoPtrArray` and `activeShipsWaveDataHiPtrArray`
+The fix is simple enough, we initialize the active wave data stored in `activeShipsWaveDataLoPtrArray\index{activeShipsWaveDataLoPtrArray}` and `activeShipsWaveDataHiPtrArray\index{activeShipsWaveDataHiPtrArray}`
 with the first level's data whenever we start a new game. 
 
-\begin{lstlisting}[caption=Fixing the reappearing enemy bug]
+\begin{lstlisting}[caption=Fixing the reappearing enemy bug,escapechar=\%]
   LDA #$0F 
   STA $D418    ;Select Filter Mode and Volume 
-  JSR ClearPlanetTextureCharsets 
+  JSR ClearPlanetTextureCharsets%\index{ClearPlanetTextureCharsets}% 
   JSR InitializeActiveShipArray ; Added to fix the bug.
-  JMP PrepareToLaunchIridisAlpha 
+  JMP PrepareToLaunchIridisAlpha%\index{PrepareToLaunchIridisAlpha}% 
 
 ;------------------------------------------------------------------ 
 ; InitializeActiveShipArray 
@@ -95,10 +95,10 @@ with the first level's data whenever we start a new game.
 InitializeActiveShipArray 
   LDX #$00 
 InitializeActiveShipLoop 
-  LDA <planet1Level1Data 
-  STA activeShipsWaveDataLoPtrArray,X 
-  LDA >planet1Level1Data 
-  STA activeShipsWaveDataHiPtrArray,X 
+  LDA <planet1Level1Data%\index{planet1Level1Data}% 
+  STA activeShipsWaveDataLoPtrArray%\index{activeShipsWaveDataLoPtrArray}%,X 
+  LDA >planet1Level1Data%\index{planet1Level1Data}% 
+  STA activeShipsWaveDataHiPtrArray%\index{activeShipsWaveDataHiPtrArray}%,X 
   INX 
   CPX #$10 
   BNE InitializeActiveShipLoop 
@@ -107,32 +107,32 @@ InitializeActiveShipLoop
 
 \section{A Sort of Cheat}
 
-After a minute or two in the title screen, the game enters 'Attract Mode' and
+After a minute or two in the title screen\index{screen}, the game enters 'Attract Mode' and
 plays a random level on autopilot for a few seconds. If you press F1 during
 this play you enter the 'Made in France' pause-mode mini game. If you press F1
 again you can now start playing the level 'Attract Mode' selected at random.
 
-This is because the `CheckKeyboardInGame` routine doesn't try to prevent you
+This is because the `CheckKeyboardInGame\index{CheckKeyboardInGame}` routine\index{routine} doesn't try to prevent you
 from entering 'Pause Mode' while Attract Mode is running:
 
-\begin{lstlisting}[caption=Fixing the reappearing enemy bug]
-CheckKeyboardInGame
-        LDA lastKeyPressed
+\begin{lstlisting}[caption=Fixing the reappearing enemy bug,escapechar=\%]
+CheckKeyboardInGame%\index{CheckKeyboardInGame}%
+        LDA lastKeyPressed%\index{lastKeyPressed}%
         CMP #$40 ; $40 means no key was pressed
-        BNE KeyWasPressed
+        BNE KeyWasPressed%\index{KeyWasPressed}%
         LDA #$00
-        STA f1WasPressed
-ReturnEarlyFromKeyboardCheck   
+        STA f1WasPressed%\index{f1WasPressed}%
+ReturnEarlyFromKeyboardCheck%\index{ReturnEarlyFromKeyboardCheck}%   
         RTS
 
-KeyWasPressed   
-        LDY f1WasPressed
-        BNE ReturnEarlyFromKeyboardCheck
-        LDY attractModeCountdown
+KeyWasPressed%\index{KeyWasPressed}%   
+        LDY f1WasPressed%\index{f1WasPressed}%
+        BNE ReturnEarlyFromKeyboardCheck%\index{ReturnEarlyFromKeyboardCheck}%
+        LDY attractModeCountdown%\index{attractModeCountdown}%
         BEQ b787C
         ; If a key is pressed during attract mode, accelerate the
-        ; countdown so that it exits it nearly immediately.
+        ; countdown%\index{countdown}% so that it exits it nearly immediately.
         LDY #$02
-        STY attractModeCountdown
+        STY attractModeCountdown%\index{attractModeCountdown}%
 \end{lstlisting}
 

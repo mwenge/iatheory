@@ -10,7 +10,7 @@ Jeff distributed these on Compunet in the summer of 1986.
 It turns out he was inspired by an article in 'Byte' magazine from June 1986 that
 described how to make 'Fractal Music'. This article outline a version of the
 algorithm that Jeff ultimately adopted. The 'self-similarity' we encountered
-in the way the Iridis Alpha theme tunes are constructed, a four-note structure
+in the way the Iridis Alpha theme tunes are constructed, a four-note structure\index{structure}
 repeated across different time intervals on each of the three voices, finds its
 roots in this article.
 
@@ -38,17 +38,17 @@ algorithm that is nearly fully formed. However, the music it produces is quite
 different. In fact, it is nearer to a tool for listening to and selecting music than
 anything else.
 
-The four seed values in \icode{titleMusicNoteArray} that are used to seed all subequently
+The four seed values in \icode{titleMusicNoteArray\index{titleMusicNoteArray}} that are used to seed all subequently
 generated tunes (\icode{00 07 0C 07} in Iridis Alpha) can be selected and changed by the
 user. They're called 'Oscillators' and each can be any value between 0 and 16, i.e. any of
 \icode{0 1 2 3 4 5 6 7 8 9 A B C D E F}.
 
 
 \lstset{style=6502Style}
-\lstinputlisting[caption=The music routine in Torus:Taurus side-by-side with Iridis Alpha.,basicstyle=\tiny]{torus/sidebyside.asm}
+\lstinputlisting[caption=The music routine\index{routine} in Torus:Taurus side-by-side with Iridis Alpha.,basicstyle=\tiny]{torus/sidebyside.asm}
 
-When it runs the demo cycles through procedural configurations of \icode{titleMusicNoteArray} of 64 notes each.
-In other words, exactly the kind of fractal structure we observed in Iridis Alpha proper. The examples below
+When it runs the demo cycles through procedural\index{procedural} configurations of \icode{titleMusicNoteArray\index{titleMusicNoteArray}} of 64 notes each.
+In other words, exactly the kind of fractal structure\index{structure} we observed in Iridis Alpha proper. The examples below
 give a flavour of the music it generats:
 
 \begin{figure}[H]
@@ -93,7 +93,7 @@ Not all of the tunes are 64-note based. It does generate some that are truncated
 \end{figure}
 
 \lstset{style=6502Style}
-\lstinputlisting[caption=The music routine in Taurus:Torus II side-by-side with Iridis Alpha.,basicstyle=\tiny]{torus/sidebyside2.asm}
+\lstinputlisting[caption=The music routine\index{routine} in Taurus:Torus II side-by-side with Iridis Alpha.,basicstyle=\tiny]{torus/sidebyside2.asm}
 
 
 \begin{figure}[H]

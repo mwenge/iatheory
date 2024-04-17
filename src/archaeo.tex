@@ -101,7 +101,7 @@ the 'Sync Train' in blue, and the Data Header fields from the grey cell onwards.
 TAP Format Header Description & \icode{43 36 34 2D 54 41 50 45 2D 52 41 57}  & 'C64-TAPE-RAW' in ASCII\\
 Version & \icode{00} & Version Number 0\\
 Reserved & \icode{00 00 00} & Used by format versions > 0\\
-File Size & \icode{5A 0A 08} & \$080A05, in decimal: 526,853 bytes long.\\
+File Size & \icode{5A 0A 08} & \$080A05, in decimal\index{decimal}: 526,853 bytes long.\\
         \midrule
 Start of Data & \makecell{
 \icode{00 00 5D 32 2F 30 2F 2F 30 30 31 30 31  } \\
@@ -156,7 +156,7 @@ duration sound:
 Remarkably the first 27,000 or so pulses on the Iridis Alpha tape are nothing but short sounds (values between \icode{\$2F} and
 \icode{\$31}) so cannot be interpreted as anything. It's not until the 27,157th byte in the tape that we start to encounter real data:
 
-\begin{lstlisting}[caption=Data finally gets started at \icode{56 41} in the first line above.,basicstyle=\tiny]
+\begin{lstlisting}[caption=Data finally gets started at \icode{56 41} in the first line above.,basicstyle=\tiny,escapechar=\%]
 00006a10: 3031 3031 3156 4144 3130 4231 4243 3130  01011VAD10B1BC10
 00006a20: 4231 4131 4244 312f 4057 4032 4231 4231  B1A1BD1/@W@2B1B1
 00006a30: 4244 312f 4231 4231 4243 3142 3055 4144  BD1/B1B1BC1B0UAD
@@ -169,11 +169,11 @@ Remarkably the first 27,000 or so pulses on the Iridis Alpha tape are nothing bu
 \end{lstlisting}
 
 The first meaningful twenty bytes therefore are:
-\begin{lstlisting}
+\begin{lstlisting}[escapechar=\%]
 56 41 44 31 30 42 31 42 43 31 30 42 31 41 31 42 44 31 2F 40
 \end{lstlisting}
 
-You get a sense of how wasteful, or ahem redundant, this encoding scheme is when you learn that these twenty pulses are
+You get a sense of how wasteful, or ahem redundant, this encoding\index{encoding} scheme is when you learn that these twenty pulses are
 required to give us a single byte. The table below shows how we interpret them to construct a series of 1s and 0s.
 
 \begin{figure}[H]
@@ -207,7 +207,7 @@ if there are an odd number of 1s and \icode{\$01} if there are an even number of
 \end{figure}
 
 We can visualize the twenty bytes as a square sound wave. When reading the tape the C64 would interpret these sound pulses as long, short,
-or medium to construct a meaning for the entire sequence.
+or medium to construct a meaning for the entire sequence\index{sequence}.
 
 \begin{figure}[H]
 {
@@ -259,7 +259,7 @@ We have our first byte! It's \icode{89}!
 
 \section{After Our First Real Byte}
 With this precious commodity in hand we now continue reading off bytes in the same manner from the tape. Eventually we encounter
-a signal that tells us we've reached the end of the data block, a 'Long-Short' sequence. When this happens we find we've
+a signal that tells us we've reached the end of the data block, a 'Long-Short' sequence\index{sequence}. When this happens we find we've
 read 202 bytes in total:
 
 \begin{figure}[H]
@@ -469,7 +469,7 @@ that it generally works is simply due to a lack of conservatism paying off in pr
 totally bereft of precautions. There is a slightly elaborate dance it goes through to gain some assurance that the tape
 medium is going to yield a reliable string of bytes.
 
-The first thing it does is look for a sentinel value of \icode{\$63}. 
+The first thing it does is look for a sentinel\index{sentinel} value of \icode{\$63}. 
 
 \begin{figure}[H]
 {
@@ -501,8 +501,8 @@ The first thing it does is look for a sentinel value of \icode{\$63}.
 natural way of representing bits on paper\, so we don't need to reverse the bits to 'make sense' of them.}.
 	\end{figure}
 
-There is an inordinately long string of these, followed by an ascending sequence of byte values from \icode{\$63} to \icode{\$FF}.
-This sequence has the catchy name of a 'Sync Train':
+There is an inordinately long string of these, followed by an ascending sequence\index{sequence} of byte values from \icode{\$63} to \icode{\$FF}.
+This sequence\index{sequence} has the catchy name of a 'Sync Train':
 
 \lstdefinestyle{megasave}{
   emptylines=1,
@@ -594,11 +594,11 @@ Load Address & \icode{00 08} & Address to load to: \icode{\$0800} \\
         \midrule
 End Address & \icode{FF BF} & End Address to load to: \icode{\$BFFF} \\
         \midrule
-Execution Address & \icode{00 00} & Filename: "IRIDIS"  \\
+Execution\index{Execution} Address & \icode{00 00} & Filename: "IRIDIS"  \\
         \midrule
 Next Action Indicator & \icode{01} & Resume loading data when done or execute the loaded data.\\
         \midrule
-Execution Type & \icode{02} & How to execute the code.\\
+Execution\index{Execution} Type & \icode{02} & How to execute the code.\\
         \midrule
         \addlinespace
         \bottomrule
@@ -687,11 +687,11 @@ Load Address & \icode{00 E0} & Address to load to: \icode{\$E000} \\
         \midrule
 End Address & \icode{00 F8} & End Address to load to: \icode{\$F800} \\
         \midrule
-Execution Address & \icode{10 08} & Address to start execution at: \icode{\$0810}. \\
+Execution\index{Execution} Address & \icode{10 08} & Address to start execution at: \icode{\$0810}. \\
         \midrule
 Next Action Indicator & \icode{00} & 00 means start executing code, don't read any more data.\\
         \midrule
-Execution Type & \icode{02} & How to execute the code: 01 means used the address given in 'Execution Address'.\\
+Execution\index{Execution} Type & \icode{02} & How to execute the code: 01 means used the address given in 'Execution\index{Execution} Address'.\\
         \midrule
         \addlinespace
         \bottomrule
@@ -705,36 +705,36 @@ Execution Type & \icode{02} & How to execute the code: 01 means used the address
 So according to the header data, the loader should stop reading data now and start executing what has already
 been loaded, and it should start doing this at address \icode{\$0810}.
 
-\begin{lstlisting}[caption=The first piece of code that is executed in Iridis Alpha.]
+\begin{lstlisting}[caption=The first piece of code that is executed in Iridis Alpha.,escapechar=\%]
 *=$0810
 StartExecution
         SEI
-        ; Tell the C64 to execute the code at MainControlLoop
-        ; the next time an interrupt happens.
-        LDA #>MainControlLoop
+        ; Tell the C64 to execute the code at MainControlLoop%\index{MainControlLoop}%
+        ; the next time an interrupt%\index{interrupt}% happens.
+        LDA #>MainControlLoop%\index{MainControlLoop}%
         STA $0319    ;NMI
-        LDA #<MainControlLoop
+        LDA #<MainControlLoop%\index{MainControlLoop}%
         STA $0318    ;NMI
 
         ; Turn off the tape deck.
         LDA #$10
-        STA $DD04    ;CIA2: Timer A: Low-Byte
+        STA $DD04    ;CIA2: Timer A: Low-Byte%\index{Low-Byte}%
         LDA #$00
-        STA $DD05    ;CIA2: Timer A: High-Byte
+        STA $DD05    ;CIA2: Timer A: High-Byte%\index{High-Byte}%
         LDA #$7F
-        STA $DD0D    ;CIA2: CIA Interrupt Control Register
+        STA $DD0D    ;CIA2: CIA Interrupt%\index{Interrupt}% Control Register%\index{Register}%
         LDA #$81
-        STA $DD0D    ;CIA2: CIA Interrupt Control Register
+        STA $DD0D    ;CIA2: CIA Interrupt%\index{Interrupt}% Control Register%\index{Register}%
         LDA #$19
-        STA $DD0E    ;CIA2: CIA Control Register A
+        STA $DD0E    ;CIA2: CIA Control Register%\index{Register}% A
         CLI
 LoopUntilExexcutes
         JMP LoopUntilExexcutes
 \end{lstlisting}
 
-This routine does two things: it turns off the tape deck and tells the C64 to execute the code at a different
-location (\icode{MainControlLoop}) the next time it wakes up and wonders what to do. This will be in a few
-microseconds time. When it starts executing \icode{MainControlLoop}, Iridis Alpha will get underway.
+This routine\index{routine} does two things: it turns off the tape deck and tells the C64 to execute the code at a different
+location (\icode{MainControlLoop\index{MainControlLoop}}) the next time it wakes up and wonders what to do. This will be in a few
+microseconds time. When it starts executing \icode{MainControlLoop\index{MainControlLoop}}, Iridis Alpha will get underway.
 
  
 \begin{figure}[H]

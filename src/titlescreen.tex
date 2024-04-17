@@ -2,86 +2,86 @@
 \label{sec:first16}
 \lstset{style=6502Style}
 
-The race is now on to get the title sequence up on the screen. After a little more setup in \icode{MainControlLoop}
-we call a routine to set up the main title screen:
+The race is now on to get the title sequence\index{sequence} up on the screen\index{screen}. After a little more setup in \icode{MainControlLoop\index{MainControlLoop}}
+we call a routine\index{routine} to set up the main title screen\index{screen}:
 
-\begin{lstlisting}[caption=In \icode{MainControlLoop}]
-        ; Display the title screen. We'll stay in here until the
+\begin{lstlisting}[caption=In \icode{MainControlLoop\index{MainControlLoop}},escapechar=\%]
+        ; Display the title screen%\index{screen}%. We'll stay in here until the
         ; player presses fire or we time out and go into attract mode.
-        JSR EnterMainTitleScreen
+        JSR EnterMainTitleScreen%\index{EnterMainTitleScreen}%
 \end{lstlisting}
 
-This brings us to a routine called \icode{InitializeSpritesAndInterruptsForTitleScreen} in
+This brings us to a routine\index{routine} called \icode{InitializeSpritesAndInterruptsForTitleScreen\index{InitializeSpritesAndInterruptsForTitleScreen}} in
 which we do some vital setup for the next 16 milliseconds and how we go about getting everything
-on the screen that we need to:
+on the screen\index{screen} that we need to:
 
 
-\begin{lstlisting}[caption=In \icode{InitializeSpritesAndInterruptsForTitleScreen}]
-        ; Set up the our interrupt handler for the title
-        ; screen. This will do all the animation and title
+\begin{lstlisting}[caption=In \icode{InitializeSpritesAndInterruptsForTitleScreen\index{InitializeSpritesAndInterruptsForTitleScreen}},escapechar=\%]
+        ; Set up the our interrupt%\index{interrupt}% handler for the title
+        ; screen%\index{screen}%. This will do all the animation%\index{animation}% and title
         ; music work.
-        LDA #<TitleScreenInterruptHandler
+        LDA #<TitleScreenInterruptHandler%\index{TitleScreenInterruptHandler}%
         STA $0314    ;IRQ
-        LDA #>TitleScreenInterruptHandler
+        LDA #>TitleScreenInterruptHandler%\index{TitleScreenInterruptHandler}%
         STA $0315    ;IRQ
 
-        ; Acknowledge the interrupt, so the CPU knows that
+        ; Acknowledge the interrupt%\index{interrupt}%, so the CPU knows that
         ; we have handled it.
         LDA #$01
-        STA $D019    ;VIC Interrupt Request Register (IRR)
-        STA $D01A    ;VIC Interrupt Mask Register (IMR)
+        STA $D019    ;VIC Interrupt%\index{Interrupt}% Request Register%\index{Register}% (IRR)
+        STA $D01A    ;VIC Interrupt%\index{Interrupt}% Mask Register%\index{Register}% (IMR)
 
-        ; Set up the raster interrupt to happen when the
+        ; Set up the raster interrupt%\index{interrupt}% to happen when the
         ; raster reaches the position we specify in D012.
-        LDA $D011    ;VIC Control Register 1
+        LDA $D011    ;VIC Control Register%\index{Register}% 1
         AND #$7F
-        STA $D011    ;VIC Control Register 1
+        STA $D011    ;VIC Control Register%\index{Register}% 1
 
-        ; Set the position for triggering our interrupt.
+        ; Set the position for triggering our interrupt%\index{interrupt}%.
         LDA #$10
         STA $D012    ;Raster Position
 \end{lstlisting}
 
-You'll notice we've changed our interrupt handler again, this time to a routine called
-\icode{TitleScreenInterruptHandler}. What we also do is make this interrupt something
-called a 'Raster Interrupt'. A 'raster' can be thought of as a beam of light that scans
-across the screen from top to bottom and left to right painting each pixel on the screen
-one at a time. It travels so quickly down and across the screen painting pixels that it
-can do so up to 60 times a second. As it makes this journey our 'Raster Interrupt' gives
-us the opportunity to tell it to stop once it reaches a certain position on the screen
+You'll notice we've changed our interrupt\index{interrupt} handler again, this time to a routine\index{routine} called
+\icode{TitleScreenInterruptHandler\index{TitleScreenInterruptHandler}}. What we also do is make this interrupt\index{interrupt} something
+called a 'Raster Interrupt\index{Interrupt}'. A 'raster' can be thought of as a beam of light that scans
+across the screen\index{screen} from top to bottom and left to right painting each pixel on the screen\index{screen}
+one at a time. It travels so quickly down and across the screen\index{screen} painting pixels that it
+can do so up to 60 times a second. As it makes this journey our 'Raster Interrupt\index{Interrupt}' gives
+us the opportunity to tell it to stop once it reaches a certain position on the screen\index{screen}
 and allow us to run some code before it resumes again. We can do this as many times as
-we want along the journey, but each time we interrupt it we have to be quick. If our code
-takes too long the display will flicker and the content of the screen become inconsistent.
+we want along the journey, but each time we interrupt\index{interrupt} it we have to be quick. If our code
+takes too long the display will flicker and the content of the screen\index{screen} become inconsistent.
 
-In this routine we set our first interrupt to line 16 (\icode{\$10} on the screen:
+In this routine\index{routine} we set our first interrupt\index{interrupt} to line 16 (\icode{\$10} on the screen\index{screen}:
 
-\begin{lstlisting}[caption=In \icode{InitializeSpritesAndInterruptsForTitleScreen}]
-        ; Set the position for triggering our interrupt.
+\begin{lstlisting}[caption=In \icode{InitializeSpritesAndInterruptsForTitleScreen\index{InitializeSpritesAndInterruptsForTitleScreen}},escapechar=\%]
+        ; Set the position for triggering our interrupt%\index{interrupt}%.
         LDA #$10
         STA $D012    ;Raster Position
 \end{lstlisting}
 
 This facility is the key that will allow us to do all sorts of magic in the 16 milliseconds
-it takes to traverse the screen. Every time we get the opportunity to run some code thanks
-to this interrupt we'll change the location of the screen it should stop at the next time
+it takes to traverse the screen\index{screen}. Every time we get the opportunity to run some code thanks
+to this interrupt\index{interrupt} we'll change the location of the screen\index{screen} it should stop at the next time
 so that we get to stop dozens of times in each single 16 millisecond traversal.
 
 Before we look at how we fit it all in, let's first appreciate just how much we plan to
-do each time the screen is painted.
+do each time the screen\index{screen} is painted\index{painted}.
 
-\section{Sprites}
-The C64 makes 8 sprites available to us. A sprite is a special purpose graphical object that
+\section{Sprites\index{Sprites}}
+The C64 makes 8 sprites\index{sprites} available to us. A sprite is a special purpose graphical object that
 can be up to 24 pixels wide by 20 pixels high. We can place them wherever we want on the
-screen. They are the core of graphics programming and Iridis Alpha has dozens of them. But
-if the C64 only has 8 sprites, are we limited to displaying just 8 sprites at once on the
-screen? The simple answer is that thanks to Raster Interrupts we are not: when we run
-some code after receiving an interrupt we can place new sprites wherever we like in any
+screen\index{screen}. They are the core of graphics\index{graphics} programming and Iridis Alpha has dozens of them. But
+if the C64 only has 8 sprites\index{sprites}, are we limited to displaying just 8 sprites\index{sprites} at once on the
+screen\index{screen}? The simple answer is that thanks to Raster Interrupts we are not: when we run
+some code after receiving an interrupt\index{interrupt} we can place new sprites\index{sprites} wherever we like in any
 position that the raster hasn't reached yet. This means our only effective limitation is
-the number of sprites we can place on a single line, which is eight. 
+the number of sprites\index{sprites} we can place on a single line, which is eight. 
 
-If you look carefully at the title screen of Iridis Alpha you'll notice that it is actually
-split in two. The top half has the title in large letters and the bottom half has a rainbow
-of jumping gilbies. Each half uses seven sprites to display these assets.
+If you look carefully at the title screen\index{screen} of Iridis Alpha you'll notice that it is actually
+split in two. The top half has the title in large letters and the bottom half has a rainbow\index{rainbow}
+of jumping\index{jumping} gilbies\index{gilbies}. Each half uses seven sprites\index{sprites} to display these assets.
 
 
 \begin{figure}[H]
@@ -210,12 +210,12 @@ of jumping gilbies. Each half uses seven sprites to display these assets.
         \bottomrule
       \end{tabular}
     \end{adjustbox}
-  }\caption{The sprites used by the top half of the screen and the bottom half of the screen.}
+  }\caption{The sprites\index{sprites} used by the top half of the screen\index{screen} and the bottom half of the screen\index{screen}.}
 \end{figure}
 
-The eighth sprite (Sprite 7) is used on both halves of the screen to display the starfield. This
-sprite pushes right up against the line limitation. It's painted at intervals throughout the screen
-but we're careful to avoid it ever being painted twice on the same line. We'll see how this is
+The eighth sprite (Sprite 7) is used on both halves of the screen\index{screen} to display the starfield\index{starfield}. This
+sprite pushes right up against the line limitation. It's painted\index{painted} at intervals throughout the screen\index{screen}
+but we're careful to avoid it ever being painted\index{painted} twice on the same line. We'll see how this is
 achieved very soon.
 
 
@@ -231,36 +231,36 @@ achieved very soon.
 		\input{sprites/STARFIELD_SPRITE}
 	\end{subfigure}
     \end{adjustbox}
-  }\caption{The sprite used for painting the starfield. Only a part of the sprite is ever painted!}
+  }\caption{The sprite used for painting the starfield\index{starfield}. Only a part of the sprite is ever painted\index{painted}!}
 \end{figure}
 
 \section{Waiting for the Beam}
-With our 'Raster Interrupt' handler set up as \icode{TitleScreenInterruptHandler} we're ready to 
-react when the raster reaches line 16 on the screen. Since the screen is made up of 512 lines in
+With our 'Raster Interrupt\index{Interrupt}' handler set up as \icode{TitleScreenInterruptHandler\index{TitleScreenInterruptHandler}} we're ready to 
+react when the raster reaches line 16 on the screen\index{screen}. Since the screen\index{screen} is made up of 512 lines in
 total this will be along soon.
 
 Before it comes in we just have time to prepare the relatively light amount of text we want displayed
-on the screen in memory. We only need to do this once. Throughout the code we refer to this
+on the screen\index{screen} in memory. We only need to do this once. Throughout the code we refer to this
 area we write to as \icode{SCREEN\_RAM}. It's an address range between \icode{\$0400} and \icode{\$07E8} This is a very
-simple bitmap representation of the entire screen that is 40 characters wide and 25 characters wide,
+simple bitmap representation of the entire screen\index{screen} that is 40 characters wide and 25 characters wide,
 giving a total of 1000 bytes (\$3E8 bytes in hex). If we wanted to think of it as pixels it is 320 pixels wide (40 * 8)
 and 200 pixels high (25 * 8). The important thing to remember about this \icode{SCREEN\_RAM} is that it is solely
-for storing what we call character data. You can think of character data as 'text'. This text gets painted
-first and then sprites get painted on top of it.
+for storing what we call character\index{character} data. You can think of character\index{character} data as 'text'. This text gets painted\index{painted}
+first and then sprites\index{sprites} get painted\index{painted} on top of it.
 
-In \icode{EnterTitleScreenLoop} we call two routines that will prepare the character data for the raster to paint. 
+In \icode{EnterTitleScreenLoop\index{EnterTitleScreenLoop}} we call two routines that will prepare the character\index{character} data for the raster to paint. 
 
-The first, \icode{DrawStripesBehindTitle} writes the rainbow stripes to five lines in the top half of the screen. 
-The second, \icode{DrawTitleScreenText} writes some text to the bottom half of the screen. Before we look at these
+The first, \icode{DrawStripesBehindTitle\index{DrawStripesBehindTitle}} writes the rainbow\index{rainbow} stripes to five lines in the top half of the screen\index{screen}. 
+The second, \icode{DrawTitleScreenText\index{DrawTitleScreenText}} writes some text to the bottom half of the screen\index{screen}. Before we look at these
 in detail we need to understand how this thing \icode{SCREEN\_RAM} works and how we store characters for display in it.
 
-Our starting point for displaying text on screen is to define what our characters look like. We define the appearance
-of a character using 8 bytes. This is what the definition of the stripe character looks like: 
+Our starting point for displaying text on screen\index{screen} is to define what our characters look like. We define the appearance
+of a character\index{character} using 8 bytes. This is what the definition of the stripe character\index{character} looks like: 
 
-\begin{lstlisting}[caption= The 'stripe' character.,basicstyle=\tiny]
-characterSetData
+\begin{lstlisting}[caption= The 'stripe' character\index{character}.,basicstyle=\tiny,escapechar=\%]
+characterSetData%\index{characterSetData}%
         .BYTE $FF,$00,$FF,$00,$00,$FF,$00,$FF   ;.BYTE $FF,$00,$FF,$00,$00,$FF,$00,$FF
-                                                ; CHARACTER $00
+                                                ; CHARACTER%\index{CHARACTER}% $00
                                                 ; 11111111   ********
                                                 ; 00000000           
                                                 ; 11111111   ********
@@ -272,105 +272,105 @@ characterSetData
 \end{lstlisting}
 
 As you can see each byte translates to a row of 0s and 1s. Each 1 defines a dot and each 0 a blank space. We end up
-with a character that is 8 pixels wide and 8 pixels high:
+with a character\index{character} that is 8 pixels wide and 8 pixels high:
 
 \input{titlescreen/tilesheets/charset_tilesheet_$0_bits}
 
-We create this definition for every character we want to display and store it at the address starting at \icode{\$2000}
+We create this definition for every character\index{character} we want to display and store it at the address starting at \icode{\$2000}
 in RAM. The order in which we store them determines the reference we use for them later. So for example the stripe
-character is referred to as \icode{\$00}, the 'A' character we've defined as \icode{\$01} and so on:
+character\index{character} is referred to as \icode{\$00}, the 'A' character\index{character} we've defined as \icode{\$01} and so on:
 
 \subfile{titlescreen/charset_tilesheet}
 
-With our character set defined we can now write some text to the screen ram. Note that when we write it \icode{SCREEN\_RAM}
-we're not yet writing it to the actual screen. This is just a place in memory that the raster (our beam of light)
-will refer to later when it is actually writing dots to the screen. If we write a stripe character to a particulas position
-in this \icode{SCREEN\_RAM} memory it will know to write it the corresponding position on the screen.
+With our character\index{character} set defined we can now write some text to the screen\index{screen} ram. Note that when we write it \icode{SCREEN\_RAM}
+we're not yet writing it to the actual screen\index{screen}. This is just a place in memory that the raster (our beam of light)
+will refer to later when it is actually writing dots to the screen\index{screen}. If we write a stripe character\index{character} to a particulas position
+in this \icode{SCREEN\_RAM} memory it will know to write it the corresponding position on the screen\index{screen}.
 
 \subsection{Drawing the Stripes}
 So let's write some stripes to RAM!
 
-\begin{lstlisting}[caption=The 'stripe' character.]
-DrawStripesBehindTitle
+\begin{lstlisting}[caption=The 'stripe' character\index{character}.,escapechar=\%]
+DrawStripesBehindTitle%\index{DrawStripesBehindTitle}%
         LDX #$28
         LDA #$00
-        STA shouldUpdateTitleScreenColors
-DrawStripesLoop   
+        STA shouldUpdateTitleScreenColors%\index{shouldUpdateTitleScreenColors}%
+DrawStripesLoop%\index{DrawStripesLoop}%   
         LDA #RED
-        STA COLOR_RAM + LINE2_COL39,X
+        STA COLOR_RAM%\index{COLOR\_RAM}% + LINE2_COL39%\index{LINE2\_COL39}%,X
         LDA #ORANGE
-        STA COLOR_RAM + LINE3_COL39,X
+        STA COLOR_RAM%\index{COLOR\_RAM}% + LINE3_COL39%\index{LINE3\_COL39}%,X
         LDA #YELLOW
-        STA COLOR_RAM + LINE4_COL39,X
+        STA COLOR_RAM%\index{COLOR\_RAM}% + LINE4_COL39%\index{LINE4\_COL39}%,X
         LDA #GREEN
-        STA COLOR_RAM + LINE5_COL39,X
+        STA COLOR_RAM%\index{COLOR\_RAM}% + LINE5_COL39%\index{LINE5\_COL39}%,X
         LDA #LTBLUE
-        STA COLOR_RAM + LINE6_COL39,X
+        STA COLOR_RAM%\index{COLOR\_RAM}% + LINE6_COL39%\index{LINE6\_COL39}%,X
         LDA #PURPLE
-        STA COLOR_RAM + LINE7_COL39,X
+        STA COLOR_RAM%\index{COLOR\_RAM}% + LINE7_COL39%\index{LINE7\_COL39}%,X
         LDA #BLUE
-        STA COLOR_RAM + LINE8_COL39,X
-        LDA #$00 ; Stripe character
-        STA SCREEN_RAM + LINE2_COL39,X
-        STA SCREEN_RAM + LINE3_COL39,X
-        STA SCREEN_RAM + LINE4_COL39,X
-        STA SCREEN_RAM + LINE5_COL39,X
-        STA SCREEN_RAM + LINE6_COL39,X
-        STA SCREEN_RAM + LINE7_COL39,X
-        STA SCREEN_RAM + LINE8_COL39,X
+        STA COLOR_RAM%\index{COLOR\_RAM}% + LINE8_COL39%\index{LINE8\_COL39}%,X
+        LDA #$00 ; Stripe character%\index{character}%
+        STA SCREEN_RAM%\index{SCREEN\_RAM}% + LINE2_COL39%\index{LINE2\_COL39}%,X
+        STA SCREEN_RAM%\index{SCREEN\_RAM}% + LINE3_COL39%\index{LINE3\_COL39}%,X
+        STA SCREEN_RAM%\index{SCREEN\_RAM}% + LINE4_COL39%\index{LINE4\_COL39}%,X
+        STA SCREEN_RAM%\index{SCREEN\_RAM}% + LINE5_COL39%\index{LINE5\_COL39}%,X
+        STA SCREEN_RAM%\index{SCREEN\_RAM}% + LINE6_COL39%\index{LINE6\_COL39}%,X
+        STA SCREEN_RAM%\index{SCREEN\_RAM}% + LINE7_COL39%\index{LINE7\_COL39}%,X
+        STA SCREEN_RAM%\index{SCREEN\_RAM}% + LINE8_COL39%\index{LINE8\_COL39}%,X
         DEX
-        BNE DrawStripesLoop
+        BNE DrawStripesLoop%\index{DrawStripesLoop}%
 
 \end{lstlisting}
 
-As you can hopefully see, what we're dealing with here is a loop. We load \icode{X} with the value \icode{\$28} (40 in decimal)
-and perform everything inside \icode{DrawStripesLoop} until \icode{DEX} has reduced the value of \icode{X} to zero.
+As you can hopefully see, what we're dealing with here is a loop. We load \icode{X} with the value \icode{\$28} (40 in decimal\index{decimal})
+and perform everything inside \icode{DrawStripesLoop\index{DrawStripesLoop}} until \icode{DEX} has reduced the value of \icode{X} to zero.
 
-The magic number 40 gives us a clue that what we are doing in each loop is drawing a character in each column of the screen:
-remember that our screen is 40 columns wide and 25 rows high. The bit actually writing the stripe character to RAM is:
+The magic number 40 gives us a clue that what we are doing in each loop is drawing\index{drawing} a character\index{character} in each column of the screen\index{screen}:
+remember that our screen\index{screen} is 40 columns wide and 25 rows high. The bit actually writing the stripe character\index{character} to RAM is:
 
-\begin{lstlisting}[caption=In \icode{DrawStripesBehindTitle}]
-        LDA #$00 ; Stripe character
-        STA SCREEN_RAM + LINE2_COL39,X
-        STA SCREEN_RAM + LINE3_COL39,X
-        STA SCREEN_RAM + LINE4_COL39,X
-        STA SCREEN_RAM + LINE5_COL39,X
-        STA SCREEN_RAM + LINE6_COL39,X
-        STA SCREEN_RAM + LINE7_COL39,X
-        STA SCREEN_RAM + LINE8_COL39,X
+\begin{lstlisting}[caption=In \icode{DrawStripesBehindTitle\index{DrawStripesBehindTitle}},escapechar=\%]
+        LDA #$00 ; Stripe character%\index{character}%
+        STA SCREEN_RAM%\index{SCREEN\_RAM}% + LINE2_COL39%\index{LINE2\_COL39}%,X
+        STA SCREEN_RAM%\index{SCREEN\_RAM}% + LINE3_COL39%\index{LINE3\_COL39}%,X
+        STA SCREEN_RAM%\index{SCREEN\_RAM}% + LINE4_COL39%\index{LINE4\_COL39}%,X
+        STA SCREEN_RAM%\index{SCREEN\_RAM}% + LINE5_COL39%\index{LINE5\_COL39}%,X
+        STA SCREEN_RAM%\index{SCREEN\_RAM}% + LINE6_COL39%\index{LINE6\_COL39}%,X
+        STA SCREEN_RAM%\index{SCREEN\_RAM}% + LINE7_COL39%\index{LINE7\_COL39}%,X
+        STA SCREEN_RAM%\index{SCREEN\_RAM}% + LINE8_COL39%\index{LINE8\_COL39}%,X
 \end{lstlisting}
 
-For the current column, this writes the stripe character (reference by \icode{\$00} as we mentioned above) to each of lines
+For the current column, this writes the stripe character\index{character} (reference by \icode{\$00} as we mentioned above) to each of lines
 2 to 8. The use of the \icode{X} in the \icode{STA} statement is an offset. So where \icode{X} is 14, for example,
 it will write to the position referred to by \icode{SCREEN\_RAM + LINE2\_COL39} plus 14.
 
 \input{titlescreen/titlescreen_ram_stripes}
 
-The other thing we do in \icode{DrawStripesLoop} is set the colors of the stripes. This is achieved using a region of memory
+The other thing we do in \icode{DrawStripesLoop\index{DrawStripesLoop}} is set the colors of the stripes. This is achieved using a region of memory
 similar in concept to \icode{SCREEN\_RAM}, that we call \icode{COLOR\_RAM}. This lives at \icode{\$D800 - \$DBFE}. Another 
-region of 1000 bytes, each one controlling the color of the character placed at a position in the 40 * 25 character rectangle
-of our screen.
+region of 1000 bytes, each one controlling the color of the character\index{character} placed at a position in the 40 * 25 character\index{character} rectangle
+of our screen\index{screen}.
 
-\begin{lstlisting}[caption=In \icode{DrawStripesBehindTitle}]
+\begin{lstlisting}[caption=In \icode{DrawStripesBehindTitle\index{DrawStripesBehindTitle}},escapechar=\%]
         LDA #RED
-        STA COLOR_RAM + LINE2_COL39,X
+        STA COLOR_RAM%\index{COLOR\_RAM}% + LINE2_COL39%\index{LINE2\_COL39}%,X
         LDA #ORANGE
-        STA COLOR_RAM + LINE3_COL39,X
+        STA COLOR_RAM%\index{COLOR\_RAM}% + LINE3_COL39%\index{LINE3\_COL39}%,X
         LDA #YELLOW
-        STA COLOR_RAM + LINE4_COL39,X
+        STA COLOR_RAM%\index{COLOR\_RAM}% + LINE4_COL39%\index{LINE4\_COL39}%,X
         LDA #GREEN
-        STA COLOR_RAM + LINE5_COL39,X
+        STA COLOR_RAM%\index{COLOR\_RAM}% + LINE5_COL39%\index{LINE5\_COL39}%,X
         LDA #LTBLUE
-        STA COLOR_RAM + LINE6_COL39,X
+        STA COLOR_RAM%\index{COLOR\_RAM}% + LINE6_COL39%\index{LINE6\_COL39}%,X
         LDA #PURPLE
-        STA COLOR_RAM + LINE7_COL39,X
+        STA COLOR_RAM%\index{COLOR\_RAM}% + LINE7_COL39%\index{LINE7\_COL39}%,X
         LDA #BLUE
-        STA COLOR_RAM + LINE8_COL39,X
+        STA COLOR_RAM%\index{COLOR\_RAM}% + LINE8_COL39%\index{LINE8\_COL39}%,X
 \end{lstlisting}
 
 We've used a meaningful alias for each of the color values that we write, these are defined as:
 
-\begin{lstlisting}[caption=In \icode{DrawStripesBehindTitle}]
+\begin{lstlisting}[caption=In \icode{DrawStripesBehindTitle\index{DrawStripesBehindTitle}},escapechar=\%]
 RED          = $02
 PURPLE       = $04
 GREEN        = $05
@@ -381,187 +381,187 @@ BROWN        = $09
 LTBLUE       = $0E
 \end{lstlisting}
 
-So by writing a value to the corresponding place in \icode{COLOR\_RAM}, we're defining the color of the character
+So by writing a value to the corresponding place in \icode{COLOR\_RAM}, we're defining the color of the character\index{character}
 in that position.
 
 \input{titlescreen/titlescreen_color_ram_stripes}
 
 \subsection{Drawing the Text}
 
-Next up is to write out the title screen's text to \icode{SCREEN\_RAM}. This we do in \icode{DrawTitleScreenText}
-using a similar loop to \icode{DrawStripesBehindTitle}. 
+Next up is to write out the title screen\index{screen}'s text to \icode{SCREEN\_RAM}. This we do in \icode{DrawTitleScreenText\index{DrawTitleScreenText}}
+using a similar loop to \icode{DrawStripesBehindTitle\index{DrawStripesBehindTitle}}. 
 
-\begin{lstlisting}[caption=In \icode{DrawTitleScreenText}]
-DrawTitleTextLoop   
-        LDA titleScreenTextLine1 - $01,X
-        AND #ASCII_BITMASK
-        STA SCREEN_RAM + LINE11_COL39,X
-        LDA titleScreenTextLine2 - $01,X
-        AND #ASCII_BITMASK
-        STA SCREEN_RAM + LINE13_COL39,X
-        LDA titleScreenTextLine3 - $01,X
-        AND #ASCII_BITMASK
-        STA SCREEN_RAM + LINE15_COL39,X
-        LDA titleScreenTextLine4 - $01,X
-        AND #ASCII_BITMASK
-        STA SCREEN_RAM + LINE17_COL39,X
-        LDA titleScreenTextLine5 - $01,X
-        AND #ASCII_BITMASK
-        STA SCREEN_RAM + LINE19_COL39,X
+\begin{lstlisting}[caption=In \icode{DrawTitleScreenText\index{DrawTitleScreenText}},escapechar=\%]
+DrawTitleTextLoop%\index{DrawTitleTextLoop}%   
+        LDA titleScreenTextLine1%\index{titleScreenTextLine1}% - $01,X
+        AND #ASCII_BITMASK%\index{ASCII\_BITMASK}%
+        STA SCREEN_RAM%\index{SCREEN\_RAM}% + LINE11_COL39%\index{LINE11\_COL39}%,X
+        LDA titleScreenTextLine2%\index{titleScreenTextLine2}% - $01,X
+        AND #ASCII_BITMASK%\index{ASCII\_BITMASK}%
+        STA SCREEN_RAM%\index{SCREEN\_RAM}% + LINE13_COL39%\index{LINE13\_COL39}%,X
+        LDA titleScreenTextLine3%\index{titleScreenTextLine3}% - $01,X
+        AND #ASCII_BITMASK%\index{ASCII\_BITMASK}%
+        STA SCREEN_RAM%\index{SCREEN\_RAM}% + LINE15_COL39%\index{LINE15\_COL39}%,X
+        LDA titleScreenTextLine4%\index{titleScreenTextLine4}% - $01,X
+        AND #ASCII_BITMASK%\index{ASCII\_BITMASK}%
+        STA SCREEN_RAM%\index{SCREEN\_RAM}% + LINE17_COL39%\index{LINE17\_COL39}%,X
+        LDA titleScreenTextLine5%\index{titleScreenTextLine5}% - $01,X
+        AND #ASCII_BITMASK%\index{ASCII\_BITMASK}%
+        STA SCREEN_RAM%\index{SCREEN\_RAM}% + LINE19_COL39%\index{LINE19\_COL39}%,X
 
         LDA #GRAY2
-        STA COLOR_RAM + LINE11_COL39,X
-        STA COLOR_RAM + LINE13_COL39,X
-        STA COLOR_RAM + LINE15_COL39,X
-        STA COLOR_RAM + LINE17_COL39,X
-        STA COLOR_RAM + LINE19_COL39,X
+        STA COLOR_RAM%\index{COLOR\_RAM}% + LINE11_COL39%\index{LINE11\_COL39}%,X
+        STA COLOR_RAM%\index{COLOR\_RAM}% + LINE13_COL39%\index{LINE13\_COL39}%,X
+        STA COLOR_RAM%\index{COLOR\_RAM}% + LINE15_COL39%\index{LINE15\_COL39}%,X
+        STA COLOR_RAM%\index{COLOR\_RAM}% + LINE17_COL39%\index{LINE17\_COL39}%,X
+        STA COLOR_RAM%\index{COLOR\_RAM}% + LINE19_COL39%\index{LINE19\_COL39}%,X
         DEX
-        BNE DrawTitleTextLoop
+        BNE DrawTitleTextLoop%\index{DrawTitleTextLoop}%
 \end{lstlisting}
 
-In this case we're not writing a single character over and over, rather we're writing text we've defined elsewhere
+In this case we're not writing a single character\index{character} over and over, rather we're writing text we've defined elsewhere
 in variables \icode{titleScreenTextLine[1-5]}:
 
-\begin{lstlisting}[basicstyle=\tiny,caption=In \icode{DrawTitleScreenText}]
-titleScreenTextLine1               .TEXT "IRIDIS ALPHA.....  HARD AND FAST ZAPPING"
-titleScreenTextLine2               .TEXT "PRESS FIRE TO BEGIN PLAY.. ONCE STARTED,"
-titleScreenTextLine3               .TEXT "F1 FOR PAUSE MODE     Q TO QUIT THE GAME"
-titleScreenTextLine4               .TEXT "CREATED BY JEFF MINTER...SPACE EASY/HARD"
-titleScreenTextLine5               .TEXT "LAST GILBY HIT 0000000; MODE IS NOW EASY"
+\begin{lstlisting}[basicstyle=\tiny,caption=In \icode{DrawTitleScreenText\index{DrawTitleScreenText}},escapechar=\%]
+titleScreenTextLine1%\index{titleScreenTextLine1}%               .TEXT "IRIDIS ALPHA.....  HARD AND FAST ZAPPING%\index{ZAPPING}%"
+titleScreenTextLine2%\index{titleScreenTextLine2}%               .TEXT "PRESS FIRE TO BEGIN PLAY.. ONCE STARTED%\index{STARTED}%,"
+titleScreenTextLine3%\index{titleScreenTextLine3}%               .TEXT "F1 FOR PAUSE MODE     Q TO QUIT THE GAME"
+titleScreenTextLine4%\index{titleScreenTextLine4}%               .TEXT "CREATED BY JEFF MINTER...SPACE EASY/HARD"
+titleScreenTextLine5%\index{titleScreenTextLine5}%               .TEXT "LAST GILBY HIT 0000000; MODE IS NOW EASY"
 \end{lstlisting}
 
-In each iteration of the loop we write a character to all five columns, plucking it from the position in
+In each iteration of the loop we write a character\index{character} to all five columns, plucking it from the position in
 \icode{titleScreenTextLine[1-5]} given by \icode{X}. 
 
 \input{titlescreen/titlescreen_ram}
 
 While writing text for the column we also set the color for each of the text lines to grey:
 
-\begin{lstlisting}[caption=In \icode{DrawTitleScreenText}]
+\begin{lstlisting}[caption=In \icode{DrawTitleScreenText\index{DrawTitleScreenText}},escapechar=\%]
         LDA #GRAY2
-        STA COLOR_RAM + LINE11_COL39,X
-        STA COLOR_RAM + LINE13_COL39,X
-        STA COLOR_RAM + LINE15_COL39,X
-        STA COLOR_RAM + LINE17_COL39,X
-        STA COLOR_RAM + LINE19_COL39,X
+        STA COLOR_RAM%\index{COLOR\_RAM}% + LINE11_COL39%\index{LINE11\_COL39}%,X
+        STA COLOR_RAM%\index{COLOR\_RAM}% + LINE13_COL39%\index{LINE13\_COL39}%,X
+        STA COLOR_RAM%\index{COLOR\_RAM}% + LINE15_COL39%\index{LINE15\_COL39}%,X
+        STA COLOR_RAM%\index{COLOR\_RAM}% + LINE17_COL39%\index{LINE17\_COL39}%,X
+        STA COLOR_RAM%\index{COLOR\_RAM}% + LINE19_COL39%\index{LINE19\_COL39}%,X
 \end{lstlisting}
 
 Once it is done the \icode{COLOR\_RAM} has the appropriate lines set to grey:
 \input{titlescreen/titlescreen_color_ram}
 
 Now that we've looped through all 40 columns we have both \icode{SCREEN\_RAM} and \icode{COLOR\_RAM} fully
-prepared for painting by the raster. As we watch the screen getting painted in the next section we'll see
-the following picture we've prepared gradually appear - with the sprites painted on top of course. The
-magic of adding the sprites to this picture, and animating them while we're at it, is what we will
-unpick as follow the raster on its journey to the bottom of the screen in the next few milliseconds.
+prepared for painting by the raster. As we watch the screen\index{screen} getting painted\index{painted} in the next section we'll see
+the following picture we've prepared gradually appear - with the sprites\index{sprites} painted\index{painted} on top of course. The
+magic of adding the sprites\index{sprites} to this picture, and animating them while we're at it, is what we will
+unpick as follow the raster on its journey to the bottom of the screen\index{screen} in the next few milliseconds.
 
 \begin{figure}[H]
     \begin{adjustbox}{width=13cm,center}
     \includegraphics[width=13cm]{titlescreen/titlescreen_textonly_grid.png}%
     \end{adjustbox}
-  \caption{The screen as it would appear after \icode{DrawStripesBehindTitle} and \icode{DrawTitleScreenText} have run. The added
+  \caption{The screen\index{screen} as it would appear after \icode{DrawStripesBehindTitle\index{DrawStripesBehindTitle}} and \icode{DrawTitleScreenText\index{DrawTitleScreenText}} have run. The added
   grid helps compare with our previous figures for \icode{SCREEN\_RAM} and \icode{COLOR\_RAM}.}
 \end{figure}
 
 \section{Racing the Beam}
 Now we're ready to receive our ifirst beam. You may remember we set this to happen when the raster reached line 16:
 
-\begin{lstlisting}[caption=In \icode{InitializeSpritesAndInterruptsForTitleScreen}]
-        ; Set the position for triggering our interrupt.
+\begin{lstlisting}[caption=In \icode{InitializeSpritesAndInterruptsForTitleScreen\index{InitializeSpritesAndInterruptsForTitleScreen}},escapechar=\%]
+        ; Set the position for triggering our interrupt%\index{interrupt}%.
         LDA #$10
         STA $D012    ;Raster Position
 \end{lstlisting}
 
-And that the routine we'll run when that happens is \icode{TitleScreenInterruptHandler} (which itself will pass
-the work onto \icode{TitleScreenAnimation}:
+And that the routine\index{routine} we'll run when that happens is \icode{TitleScreenInterruptHandler\index{TitleScreenInterruptHandler}} (which itself will pass
+the work onto \icode{TitleScreenAnimation\index{TitleScreenAnimation}}:
 
-\begin{lstlisting}[caption=In \icode{InitializeSpritesAndInterruptsForTitleScreen}]
-        ; Set up the our interrupt handler for the title
-        ; screen. This will do all the animation and title
+\begin{lstlisting}[caption=In \icode{InitializeSpritesAndInterruptsForTitleScreen\index{InitializeSpritesAndInterruptsForTitleScreen}},escapechar=\%]
+        ; Set up the our interrupt%\index{interrupt}% handler for the title
+        ; screen%\index{screen}%. This will do all the animation%\index{animation}% and title
         ; music work.
-        LDA #<TitleScreenInterruptHandler
+        LDA #<TitleScreenInterruptHandler%\index{TitleScreenInterruptHandler}%
         STA $0314    ;IRQ
-        LDA #>TitleScreenInterruptHandler
+        LDA #>TitleScreenInterruptHandler%\index{TitleScreenInterruptHandler}%
         STA $0315    ;IRQ
 \end{lstlisting}
 
-The painting of sprites and playing of music as the screen gets painted is all handled by \icode{TitleScreenAnimation}.
-This routine works by calling one of three different sub-routines each time its called. It picks the one to run
-depending on some internal state it maintains, all with a view to ensuring that the sprites spelling out the game's
-title and the sprites depicting the animated gilbies are updated and in place before the raster reaches them.
+The painting of sprites\index{sprites} and playing of music as the screen\index{screen} gets painted\index{painted} is all handled by \icode{TitleScreenAnimation\index{TitleScreenAnimation}}.
+This routine\index{routine} works by calling one of three different sub-routines each time its called. It picks the one to run
+depending on some internal state it maintains, all with a view to ensuring that the sprites\index{sprites} spelling out the game's
+title and the sprites\index{sprites} depicting the animated gilbies\index{gilbies} are updated and in place before the raster reaches them.
 
-To ensure it gets called by the interrupt when its needed it will repeatedly update the line that the next interrupt
-should happen. We'll trace this as it actually happens, interrupt by interrupt, and sift through what the routine
-does at each step during the raster's first pass at painting the entire screen.
+To ensure it gets called by the interrupt\index{interrupt} when its needed it will repeatedly update the line that the next interrupt\index{interrupt}
+should happen. We'll trace this as it actually happens, interrupt\index{interrupt} by interrupt\index{interrupt}, and sift through what the routine\index{routine}
+does at each step during the raster's first pass at painting the entire screen\index{screen}.
 
-The first time the raster is called, this is what the screen looks like:
+The first time the raster is called, this is what the screen\index{screen} looks like:
 
 \begin{figure}[H]
     \centering
       \includegraphics[width=10cm]{titlescreen/title1.png}%
-\caption{The state of the screen the first time the raster interrupt is received at line 16.}
+\caption{The state of the screen\index{screen} the first time the raster interrupt\index{interrupt} is received at line 16.}
 \end{figure}
 
-Of course we never actually see the screen in this state because it only appears for a microsecond or two, much too
+Of course we never actually see the screen\index{screen} in this state because it only appears for a microsecond or two, much too
 fast for us to observe. But as you can see the painting has aleady started. Everything above line 16 indicated in 
-the figure has been painted black, as per our preparation of \icode{SCREEN\_RAM} a little earlier.
+the figure has been painted\index{painted} black, as per our preparation of \icode{SCREEN\_RAM} a little earlier.
 
-What our diagram above also tells us is that in this visit from the beam \icode{TitleScreenAnimation} chose to execute
-the sub-routine \icode{DoStarfieldAnimation} and that it took 127 CPU cycles to complete it. Since it takes the
+What our diagram above also tells us is that in this visit from the beam \icode{TitleScreenAnimation\index{TitleScreenAnimation}} chose to execute
+the sub-routine\index{routine} \icode{DoStarfieldAnimation\index{DoStarfieldAnimation}} and that it took 127 CPU cycles to complete it. Since it takes the
 raster 63 cycles to do an entire line this means that by the time we've finished this piece of work, the raster will have
-moved on to the next line - which is why the diagram shows 17 rather than 16. Every time we get an interrupt, the 
-raster doesn't wait for us. We have to work quickly, especially if we're preparing graphics on lines that its likely
+moved on to the next line - which is why the diagram shows 17 rather than 16. Every time we get an interrupt\index{interrupt}, the 
+raster doesn't wait for us. We have to work quickly, especially if we're preparing graphics\index{graphics} on lines that its likely
 to reach soon. This is why each of these subroutines does as little as it can get away with to get the job done.
 
-The three sub-routines the work at each raster interrupt can get divvied out to are \icode{UpdateJumping\-GilbyPositionsAndColors},
-\icode{DoStarfieldAnimation}, and a cluster of routines starting with \icode{UpdateTitleScreenSpriteColors}. The one
-that's called the most often is \icode{DoStarfieldAnimation} as it is responsible for sprinkling the screen with 
+The three sub-routines the work at each raster interrupt\index{interrupt} can get divvied out to are \icode{UpdateJumping\-GilbyPositionsAndColors},
+\icode{DoStarfieldAnimation\index{DoStarfieldAnimation}}, and a cluster of routines starting with \icode{UpdateTitleScreenSpriteColors\index{UpdateTitleScreenSpriteColors}}. The one
+that's called the most often is \icode{DoStarfieldAnimation\index{DoStarfieldAnimation}} as it is responsible for sprinkling the screen\index{screen} with 
 animated stars traversing it left to right.
 
-\begin{lstlisting}[caption=\icode{TitleScreenAnimation} responsible for choosing what to do at each interrupt. ]
+\begin{lstlisting}[caption=\icode{TitleScreenAnimation\index{TitleScreenAnimation}} responsible for choosing what to do at each interrupt\index{interrupt}. ,escapechar=\%]
 ;-------------------------------------------------------
-; TitleScreenAnimation
-; This handles all the activity in the title screen and is called
-; roughly 60 times a second by the Raster Interrupt.
+; TitleScreenAnimation%\index{TitleScreenAnimation}%
+; This handles all the activity in the title screen%\index{screen}% and is called
+; roughly 60 times a second by the Raster Interrupt%\index{Interrupt}%.
 ;-------------------------------------------------------
-TitleScreenAnimation
-        LDY titleScreenStarFieldAnimationCounter
+TitleScreenAnimation%\index{TitleScreenAnimation}%
+        LDY titleScreenStarFieldAnimationCounter%\index{titleScreenStarFieldAnimationCounter}%
         CPY #$0C
-        BNE MaybeDoStarFieldOrTitleText
+        BNE MaybeDoStarFieldOrTitleText%\index{MaybeDoStarFieldOrTitleText}%
 
-        JSR UpdateJumpingGilbyPositionsAndColors
+        JSR UpdateJumpingGilbyPositionsAndColors%\index{UpdateJumpingGilbyPositionsAndColors}%
         LDY #$10
-        STY titleScreenStarFieldAnimationCounter
+        STY titleScreenStarFieldAnimationCounter%\index{titleScreenStarFieldAnimationCounter}%
 
-MaybeDoStarFieldOrTitleText   
-        LDA titleScreenStarFieldYPosArray,Y
-        BNE DoStarfieldAnimation
+MaybeDoStarFieldOrTitleText%\index{MaybeDoStarFieldOrTitleText}%   
+        LDA titleScreenStarFieldYPosArray%\index{titleScreenStarFieldYPosArray}%,Y
+        BNE DoStarfieldAnimation%\index{DoStarfieldAnimation}%
 
-PaintTitleTextSprites
-        JSR TitleScreenMutateStarfieldAnimationData
+PaintTitleTextSprites%\index{PaintTitleTextSprites}%
+        JSR TitleScreenMutateStarfieldAnimationData%\index{TitleScreenMutateStarfieldAnimationData}%
 
         LDA #$00
-        STA titleScreenStarFieldAnimationCounter
+        STA titleScreenStarFieldAnimationCounter%\index{titleScreenStarFieldAnimationCounter}%
 
         LDA #$10
         STA $D012    ;Raster Position
 
-        ; Acknowledge the interrupt, so the CPU knows that
+        ; Acknowledge the interrupt%\index{interrupt}%, so the CPU knows that
         ; we have handled it.
         LDA #$01
-        STA $D019    ;VIC Interrupt Request Register (IRR)
-        STA $D01A    ;VIC Interrupt Mask Register (IMR)
+        STA $D019    ;VIC Interrupt%\index{Interrupt}% Request Register%\index{Register}% (IRR)
+        STA $D01A    ;VIC Interrupt%\index{Interrupt}% Mask Register%\index{Register}% (IMR)
 
-        JSR UpdateTitleTextSprites
-        JSR MaybeUpdateSpriteColors
-        JSR RecalculateJumpingGilbyPositions
-        JSR PlayTitleScreenMusic
-        JMP ReEnterInterrupt
-        ; We're done, returns from function.
+        JSR UpdateTitleTextSprites%\index{UpdateTitleTextSprites}%
+        JSR MaybeUpdateSpriteColors%\index{MaybeUpdateSpriteColors}%
+        JSR RecalculateJumpingGilbyPositions%\index{RecalculateJumpingGilbyPositions}%
+        JSR PlayTitleScreenMusic%\index{PlayTitleScreenMusic}%
+        JMP ReEnterInterrupt%\index{ReEnterInterrupt}%
+        ; We're done, returns from function%\index{function}%.
 \end{lstlisting}
 
-The internal accounting responsible for choosing the routine to run is tricky to decipher by just looking at the code. So
-instead let's follow what actually happens in practice. If we roll ahead to the next interrupt we can already see something
+The internal accounting responsible for choosing the routine\index{routine} to run is tricky to decipher by just looking at the code. So
+instead let's follow what actually happens in practice. If we roll ahead to the next interrupt\index{interrupt} we can already see something
 happening:
 
 \begin{figure}[H]
@@ -570,92 +570,92 @@ happening:
 \caption{The start of the stripes and a star.}
 \end{figure}
 
-If you look closely, you can see a yellow star painted over the first band of red stripes. This is our first sprite. You may
-be wondering: what about the title sprites? Shouldn't they be there by now? The answer is no: we will paint them when the
-raster reaches the end of the screen. When it goes to paint the screen a second time (the second 16 milliseconds) they
+If you look closely, you can see a yellow star painted\index{painted} over the first band of red stripes. This is our first sprite. You may
+be wondering: what about the title sprites\index{sprites}? Shouldn't they be there by now? The answer is no: we will paint them when the
+raster reaches the end of the screen\index{screen}. When it goes to paint the screen\index{screen} a second time (the second 16 milliseconds) they
 will be ready for painting. We'll see this in action a little later.
 
-So let's see what \icode{DoStarfieldAnimation} did to get this sprite ready for painting.
+So let's see what \icode{DoStarfieldAnimation\index{DoStarfieldAnimation}} did to get this sprite ready for painting.
 
-When \icode{TitleScreenAnimation} chose \icode{DoStarfieldAnimation} as the sub-routine to run it loaded in a value
-from \icode{titleScreenStarFieldYPosArray} to the \icode{A} register: 
+When \icode{TitleScreenAnimation\index{TitleScreenAnimation}} chose \icode{DoStarfieldAnimation\index{DoStarfieldAnimation}} as the sub-routine\index{routine} to run it loaded in a value
+from \icode{titleScreenStarFieldYPosArray\index{titleScreenStarFieldYPosArray}} to the \icode{A} register\index{register}: 
 
-\begin{lstlisting}
-MaybeDoStarFieldOrTitleText   
-        LDA titleScreenStarFieldYPosArray,Y
-        BNE DoStarfieldAnimation
+\begin{lstlisting}[escapechar=\%]
+MaybeDoStarFieldOrTitleText%\index{MaybeDoStarFieldOrTitleText}%   
+        LDA titleScreenStarFieldYPosArray%\index{titleScreenStarFieldYPosArray}%,Y
+        BNE DoStarfieldAnimation%\index{DoStarfieldAnimation}%
 \end{lstlisting}
 
 Since \icode{Y} is zero at this point this means it referenced the first value in the array, which is \icode{\$48}:
-\begin{lstlisting}[basicstyle=\tiny]
-titleScreenStarFieldYPosArray .BYTE $48,$4E,$54,$5A,$60,$66,$6C,$72
+\begin{lstlisting}[basicstyle=\tiny,escapechar=\%]
+titleScreenStarFieldYPosArray%\index{titleScreenStarFieldYPosArray}% .BYTE $48,$4E,$54,$5A,$60,$66,$6C,$72
                               .BYTE $78,$7E,$84,$8A,$90,$96,$9C,$A2
                               .BYTE $A8,$AE,$B4,$BA,$C0,$C6,$CC,$D2
                               .BYTE $D8,$DE,$E4,$EA,$F0,$F6
-titleScreenStarFieldXPosArray .BYTE $00,$3A,$1A,$C4,$1B,$94,$7B,$96
+titleScreenStarFieldXPosArray%\index{titleScreenStarFieldXPosArray}% .BYTE $00,$3A,$1A,$C4,$1B,$94,$7B,$96
                               .BYTE $5D,$4F,$B5,$18,$C7,$E1,$EB,$4A
                               .BYTE $8F,$DA,$83,$6A,$B0,$FC,$68,$04
                               .BYTE $10,$06,$A7,$B8,$19,$BB
 \end{lstlisting}
 
-So when \icode{DoStarfieldAnimation} is called the first thing it does is set the y position of the star to paint
-to \icode{\$48} (72 in decimal): 
+So when \icode{DoStarfieldAnimation\index{DoStarfieldAnimation}} is called the first thing it does is set the y position of the star to paint
+to \icode{\$48} (72 in decimal\index{decimal}): 
 
-\begin{lstlisting}[caption=The start of \icode{DoStarfieldAnimation} responsible for painting stars.]
-DoStarfieldAnimation   
-        ; A was loaded from titleScreenStarFieldYPosArray
+\begin{lstlisting}[caption=The start of \icode{DoStarfieldAnimation\index{DoStarfieldAnimation}} responsible for painting stars.,escapechar=\%]
+DoStarfieldAnimation%\index{DoStarfieldAnimation}%   
+        ; A was loaded from titleScreenStarFieldYPosArray%\index{titleScreenStarFieldYPosArray}%
         ; by the caller.
         STA $D00F    ;Sprite 7 Y Pos
 
         ; Set the X position of the star.
-        LDA titleScreenStarFieldXPosArray + $01,Y
+        LDA titleScreenStarFieldXPosArray%\index{titleScreenStarFieldXPosArray}% + $01,Y
         STA $D00E    ;Sprite 7 X Pos
 
 \end{lstlisting}
 
-You can also see it then sets the X position of the star using values plucked from \icode{titleScreenStarFieldXPosArray}.
+You can also see it then sets the X position of the star using values plucked from \icode{titleScreenStarFieldXPosArray\index{titleScreenStarFieldXPosArray}}.
 So we're leaning heavily on these two arrays to decide where to place stars. But so far, so simple. We've placed the star
-on the screen more or less and when the raster reaches line 72 it will paint it. There's an additional complication to 
+on the screen\index{screen} more or less and when the raster reaches line 72 it will paint it. There's an additional complication to 
 specifying the X coordinate of the star though and we can't really gloss over it here. We'll also encounter this
 wrinkle elsewhere too so it's worth pausing on for a moment.
 
-The next few lines of the routine do quite a bit of convoluted work to handle something called the \icode{spriteMSBXPosOffset} of the
+The next few lines of the routine\index{routine} do quite a bit of convoluted work to handle something called the \icode{spriteMSBXPosOffset\index{spriteMSBXPosOffset}} of the
 star. This is our complication. 
 
 \subsection{A Complication}
-\begin{lstlisting}[caption= MSBXPos.. some'it.]
+\begin{lstlisting}[caption= MSBXPos.. some'it.,escapechar=\%]
         ; Set the rest of the X position of the star
         ; if it's greater than 255.
-        LDA titleScreenStarfieldMSBXPosArray + $01,Y
+        LDA titleScreenStarfieldMSBXPosArray%\index{titleScreenStarfieldMSBXPosArray}% + $01,Y
         AND #$01
-        STA spriteMSBXPosOffset
+        STA spriteMSBXPosOffset%\index{spriteMSBXPosOffset}%
 
-        BEQ StarFieldSkipMSB
+        BEQ StarFieldSkipMSB%\index{StarFieldSkipMSB}%
 
         LDA #$80
-        STA spriteMSBXPosOffset
-StarFieldSkipMSB   
-        LDA $D010    ;Sprites 0-7 MSB of X coordinate
+        STA spriteMSBXPosOffset%\index{spriteMSBXPosOffset}%
+StarFieldSkipMSB%\index{StarFieldSkipMSB}%   
+        LDA $D010    ;Sprites%\index{Sprites}% 0-7 MSB of X coordinate
         AND #$7F
-        ORA spriteMSBXPosOffset
-        STA $D010    ;Sprites 0-7 MSB of X coordinate
+        ORA spriteMSBXPosOffset%\index{spriteMSBXPosOffset}%
+        STA $D010    ;Sprites%\index{Sprites}% 0-7 MSB of X coordinate
 
 \end{lstlisting}
 
-If you look at the diagram again you may recall we said the screen we're painting is 504 pixels wide. Fortunately the only 
+If you look at the diagram again you may recall we said the screen\index{screen} we're painting is 504 pixels wide. Fortunately the only 
 part we can paint is the section in the center that is 320 pixels wide and 200 pixels high. 
 
 \begin{figure}[H]
     \centering
       \includegraphics[width=10cm]{titlescreen/raster.png}%
-  \caption{The different parts of the screen, we can only paint the bit in the middle. (Source: dustlayer.com)}
+  \caption{The different parts of the screen\index{screen}, we can only paint the bit in the middle. (Source: dustlayer.com)}
 \end{figure}
 
 200 is a value that can be expressed with a single byte. However, 320 is not. A byte can only store a number up to 255
 so if we want to specify an X co-ordinate greater than 255 a single byte will not do. The way the C64 works around this
 is by making a single extra bit for our sprite's X co-ordinate available that brings the available values up from 256
-(0 - 255) to 512. Since there are 8 sprites in total we need 8 extra bits to cover this requirement for all of them.
-For this purpose we use a single byte at address \icode{\$D010} that contains the extra bit for all 8 sprites. We refer
+(0 - 255) to 512. Since there are 8 sprites\index{sprites} in total we need 8 extra bits to cover this requirement for all of them.
+For this purpose we use a single byte at address \icode{\$D010} that contains the extra bit for all 8 sprites\index{sprites}. We refer
 to this bit as the \icode{MSB} for the X co-ordinate because it is the 'Most Significant Bit', i.e. the left most bit,
 in the 9-bit number that we store the X co-ordinate in. That's to say our x co-ordinate is given by combining the value
 between 0 and 255 we store in our 8-bit byte for 'Sprite 7' in \icode{\$D00E} and the extra bit we store in \icode{\$D010}.
@@ -682,24 +682,24 @@ between 0 and 255 we store in our 8-bit byte for 'Sprite 7' in \icode{\$D00E} an
   }\caption*{The most significant bits in \icode{\$D010} for each sprite.}
 \end{figure}
 
-Since we are using 'Sprite 7' for painting the starfield the bit we are interested in is bit 7. The way
-we're going to manage this value for the starfield is by keeping array \icode{titleScreenStarfieldMSBXPosArray}
+Since we are using 'Sprite 7' for painting the starfield\index{starfield} the bit we are interested in is bit 7. The way
+we're going to manage this value for the starfield\index{starfield} is by keeping array \icode{titleScreenStarfieldMSBXPosArray\index{titleScreenStarfieldMSBXPosArray}}
 that indicates whether the x co-ordinate for the current index is greater than 255. If the value in there
 indicates that it is we'll set our bit in \icode{\$D010} to 1.
 
 So when
-we determine from looking in \icode{titleScreenStarfieldMSBXPosArray} that the x co-ordinate of the star is greater
+we determine from looking in \icode{titleScreenStarfieldMSBXPosArray\index{titleScreenStarfieldMSBXPosArray}} that the x co-ordinate of the star is greater
 than 256..
 
-\begin{lstlisting}[basicstyle=\tiny]
-        LDA titleScreenStarfieldMSBXPosArray + $01,Y
+\begin{lstlisting}[basicstyle=\tiny,escapechar=\%]
+        LDA titleScreenStarfieldMSBXPosArray%\index{titleScreenStarfieldMSBXPosArray}% + $01,Y
         AND #$01
-        STA spriteMSBXPosOffset
+        STA spriteMSBXPosOffset%\index{spriteMSBXPosOffset}%
 \end{lstlisting}
 
-.. we set \icode{spriteMSBXPosOffset} to indicate that that's the case. That's all this step, with the help
+.. we set \icode{spriteMSBXPosOffset\index{spriteMSBXPosOffset}} to indicate that that's the case. That's all this step, with the help
 of the \icode{AND \#\$01} statement is doing. If 'Bit 1' is
-set in the value we pluck from \icode{titleScreenStarfieldMSBXPosArray} it is just an indicator that the x co-ordinate
+set in the value we pluck from \icode{titleScreenStarfieldMSBXPosArray\index{titleScreenStarfieldMSBXPosArray}} it is just an indicator that the x co-ordinate
 for this star is greater than 256. So if we see a value of \icode{\$02} in there our operation \icode{AND \#\$01} will
 give us a zero result, meaning the intended value of the x co-ordinate is not greater than 256, othwerise it will give
 us a non-zero result indicating that it is:
@@ -725,26 +725,26 @@ us a non-zero result indicating that it is:
   }\caption*{AND'ing \$02 and \$01 gives \$00 (0). For \icode{AND} to give a 1 both bits must 1 or both must be 0.}
 \end{figure}
 
-This zero result allows \icode{BEQ StarFieldSkipMSB} to evaluate as \icode{True} so we skip ahead to \icode{StarFieldSkipMSB}
+This zero result allows \icode{BEQ StarFieldSkipMSB\index{StarFieldSkipMSB}} to evaluate as \icode{True} so we skip ahead to \icode{StarFieldSkipMSB\index{StarFieldSkipMSB}}
 to set \icode{\$D010}.
 It means for us that the value of the x co-ordinate is not going to be greater than 255. If this is not the case, we instead load a value of
-\icode{\$80} to \icode{spriteMSBXPosOffset} to overwrite the \icode{00} there. This will indicate that the value of the x co-ordinate
+\icode{\$80} to \icode{spriteMSBXPosOffset\index{spriteMSBXPosOffset}} to overwrite the \icode{00} there. This will indicate that the value of the x co-ordinate
 is greater than 255.
 
-\begin{lstlisting}[basicstyle=\tiny]
-        BEQ StarFieldSkipMSB
+\begin{lstlisting}[basicstyle=\tiny,escapechar=\%]
+        BEQ StarFieldSkipMSB%\index{StarFieldSkipMSB}%
 
         LDA #$80
-        STA spriteMSBXPosOffset
-StarFieldSkipMSB   
-        LDA $D010    ;Sprites 0-7 MSB of X coordinate
+        STA spriteMSBXPosOffset%\index{spriteMSBXPosOffset}%
+StarFieldSkipMSB%\index{StarFieldSkipMSB}%   
+        LDA $D010    ;Sprites%\index{Sprites}% 0-7 MSB of X coordinate
         AND #$7F
-        ORA spriteMSBXPosOffset
-        STA $D010    ;Sprites 0-7 MSB of X coordinate
+        ORA spriteMSBXPosOffset%\index{spriteMSBXPosOffset}%
+        STA $D010    ;Sprites%\index{Sprites}% 0-7 MSB of X coordinate
 \end{lstlisting}
 
-The remaining step above is to load the value we've arrived at in \icode{spriteMSBXPosOffset} to \icode{\$D010}. Since we
-want to do this without affecting any of the other bits in there that have been set for the other sprites we can't
+The remaining step above is to load the value we've arrived at in \icode{spriteMSBXPosOffset\index{spriteMSBXPosOffset}} to \icode{\$D010}. Since we
+want to do this without affecting any of the other bits in there that have been set for the other sprites\index{sprites} we can't
 just do a \icode{LDA/STA} as that will overwrite what's already there. The combination of the \icode{AND/OR} operations
 here accomplishes something quite nifty - it allows us to update just the bit (Bit 7) that interests us in \icode{\$D010}.
 
@@ -772,9 +772,9 @@ it is always set to zero:
   }\caption*{AND'ing \$F3 and \$00 gives \$73. It clears 'Bit 7' for us of whatever value was there originally.}
 \end{figure}
 
-Now when we perform an 'or' operation on the result with \icode{ORA spriteMSBXPosOffset} it will have the effect of just setting 'Bit 7'
-with the value we've stored in \icode{spriteMSBXPosOffset}. In this case it remains at zero because that's what we have in
-\icode{spriteMSBXPosOffset} but if we have \icode{\$80} in there it would set it to 1: 
+Now when we perform an 'or' operation on the result with \icode{ORA spriteMSBXPosOffset\index{spriteMSBXPosOffset}} it will have the effect of just setting 'Bit 7'
+with the value we've stored in \icode{spriteMSBXPosOffset\index{spriteMSBXPosOffset}}. In this case it remains at zero because that's what we have in
+\icode{spriteMSBXPosOffset\index{spriteMSBXPosOffset}} but if we have \icode{\$80} in there it would set it to 1: 
 
 \begin{figure}[H]
   {
@@ -799,36 +799,36 @@ with the value we've stored in \icode{spriteMSBXPosOffset}. In this case it rema
 
 \subsection{Back to the Beam}
 Now that we've fixed the star's co-ordinates there's just two main things left to do before we're done with
-handling this raster interrupt. One is to set the color of the star. We do this using a look-up array
+handling this raster interrupt\index{interrupt}. One is to set the color of the star. We do this using a look-up array
 where we get the color for the star per our current index and set it:
 
-\begin{lstlisting}
-        LDA titleScreenStarFieldColorsArrayLookUp,Y
+\begin{lstlisting}[escapechar=\%]
+        LDA titleScreenStarFieldColorsArrayLookUp%\index{titleScreenStarFieldColorsArrayLookUp}%,Y
         TAX
-        LDA titleScreenColorsArray - $01,X
+        LDA titleScreenColorsArray%\index{titleScreenColorsArray}% - $01,X
         STA $D02E    ;Sprite 7 Color
 \end{lstlisting}
 
-The second, and most important, is that we update the position on the screen that we want the next interrupt to
+The second, and most important, is that we update the position on the screen\index{screen} that we want the next interrupt\index{interrupt} to
 happen. Remember for this visit we were interrupted at line 17. We want to place stars on other lines so we keep
-a list of the lines we want to write stars on in \icode{titleScreenStarFieldYPosArray}, i.e. an array that
-stores the y co-ordinates of our stars. What we do is simply update the Raster Interrupt with the next position
+a list of the lines we want to write stars on in \icode{titleScreenStarFieldYPosArray\index{titleScreenStarFieldYPosArray}}, i.e. an array that
+stores the y co-ordinates of our stars. What we do is simply update the Raster Interrupt\index{Interrupt} with the next position
 from this array so that we get called when the raster reaches it:
 
-\begin{lstlisting}
-        ; Update the raster position for the next interrupt
+\begin{lstlisting}[escapechar=\%]
+        ; Update the raster position for the next interrupt%\index{interrupt}%
         ; to the current line - 1. This will allow us to 
         ; draw the sprite multiple times on different lines.
-        LDA titleScreenStarFieldYPosArray + $01,Y
+        LDA titleScreenStarFieldYPosArray%\index{titleScreenStarFieldYPosArray}% + $01,Y
         SEC
         SBC #$01
         STA $D012    ;Raster Position
 \end{lstlisting}
 
-In this instance we're setting the value to \icode{\$48} (72). So when the next interrupt happens it will reveal
+In this instance we're setting the value to \icode{\$48} (72). So when the next interrupt\index{interrupt} happens it will reveal
 the star we just prepared. THis is the one we took a peek at in Figure 1.10.
 
-The next ten interrupts will continue to revisit \icode{DoStarfieldAnimation}. Let's look at the screen
+The next ten interrupts will continue to revisit \icode{DoStarfieldAnimation\index{DoStarfieldAnimation}}. Let's look at the screen\index{screen}
 as it unfolds through each of these interrupts:
 
 \begin{figure}[H]
@@ -837,102 +837,102 @@ as it unfolds through each of these interrupts:
     {
       \includegraphics[width=4cm]{titlescreen/title\l.png}%
     }%
-\caption{The next ten interrupts paint the starfield on the screen until we reach the point at which we want to prepare
-  the gilby sprites.}
+\caption{The next ten interrupts paint the starfield\index{starfield} on the screen\index{screen} until we reach the point at which we want to prepare
+  the gilby sprites\index{sprites}.}
 \end{figure}
 
 \section{Enter The Gilbies}
 \begin{figure}[H]
     \centering
       \includegraphics[width=12cm]{titlescreen/title25.png}%
-\caption{The point we reach in the screen paint when we decide to prepare the gilby sprites.}
+\caption{The point we reach in the screen\index{screen} paint when we decide to prepare the gilby sprites\index{sprites}.}
 \end{figure}
 
-Finally we've reached a point in the screen where we're not just going to add another star to the background.
-We've been keeping a count of the number of interrupts we've handled in \icode{titleScreenStarFieldAnimationCounter}.
-When it reaches \icode{\$0C} (12) we've handled the raster interrupt twelve times and painted nothing but the
-text background we prepared earlier and the stars we've added along the way. Now's the time to do something else:
+Finally we've reached a point in the screen\index{screen} where we're not just going to add another star to the background\index{background}.
+We've been keeping a count of the number of interrupts we've handled in \icode{titleScreenStarFieldAnimationCounter\index{titleScreenStarFieldAnimationCounter}}.
+When it reaches \icode{\$0C} (12) we've handled the raster interrupt\index{interrupt} twelve times and painted\index{painted} nothing but the
+text background\index{background} we prepared earlier and the stars we've added along the way. Now's the time to do something else:
 
-\begin{lstlisting}
-TitleScreenAnimation
-        LDY titleScreenStarFieldAnimationCounter
+\begin{lstlisting}[escapechar=\%]
+TitleScreenAnimation%\index{TitleScreenAnimation}%
+        LDY titleScreenStarFieldAnimationCounter%\index{titleScreenStarFieldAnimationCounter}%
         CPY #$0C
-        BNE MaybeDoStarFieldOrTitleText
+        BNE MaybeDoStarFieldOrTitleText%\index{MaybeDoStarFieldOrTitleText}%
 
-        JSR UpdateJumpingGilbyPositionsAndColors
+        JSR UpdateJumpingGilbyPositionsAndColors%\index{UpdateJumpingGilbyPositionsAndColors}%
         LDY #$10
-        STY titleScreenStarFieldAnimationCounter
+        STY titleScreenStarFieldAnimationCounter%\index{titleScreenStarFieldAnimationCounter}%
 \end{lstlisting}
 
-The routine we call into here by the name of \icode{UpdateJumpingGilbyPositionsAndColors} will prepare the sequence
-of jumping rainbow gilbies somewhere in the lower half of the screen before our current raster line. That's why we
-call it at this point in the raster's journey - because the raster hasn't reached that position in the screen yet
-(but will reach it shortly) so now is our opportunity to position the gilbies where we want them. 
+The routine\index{routine} we call into here by the name of \icode{UpdateJumpingGilbyPositionsAndColors\index{UpdateJumpingGilbyPositionsAndColors}} will prepare the sequence\index{sequence}
+of jumping\index{jumping} rainbow\index{rainbow} gilbies\index{gilbies} somewhere in the lower half of the screen\index{screen} before our current raster line. That's why we
+call it at this point in the raster's journey - because the raster hasn't reached that position in the screen\index{screen} yet
+(but will reach it shortly) so now is our opportunity to position the gilbies\index{gilbies} where we want them. 
 
-Since this is an animation sequence we're managing the approach of \icode{UpdateJumping\-GilbyPositionsAndColors} is
-simply to update their position on the screen. Calculating this new position is something that happens a little later
-in the routine \icode{Recalculate\-JumpingGilbyPositions} when we are nearer the bottom of the screen. This means the
+Since this is an animation\index{animation} sequence\index{sequence} we're managing the approach of \icode{UpdateJumping\-GilbyPositionsAndColors} is
+simply to update their position on the screen\index{screen}. Calculating this new position is something that happens a little later
+in the routine\index{routine} \icode{Recalculate\-JumpingGilbyPositions} when we are nearer the bottom of the screen\index{screen}. This means the
 position values we're picking up here are the initial ones set in the game's code:
 
-\begin{lstlisting}
+\begin{lstlisting}[escapechar=\%]
 titleScreenGilbiesYPosArray       .BYTE $B2,$B6,$BB,$C1,$D0,$C8,$C1
-titleScreenGilbiesXPosArray       .BYTE $54,$58,$5C,$60,$64,$68,$6C
+titleScreenGilbiesXPosArray%\index{titleScreenGilbiesXPosArray}%       .BYTE $54,$58,$5C,$60,$64,$68,$6C
 \end{lstlisting}
 
 The next time around we will pick up the positions as re-calculated by \icode{Recalculate\-JumpingGilbyPositions}.
-So the positioning of the gilbies and the calculation of the updated positions happen separately. The reason
-for that approach is simple: there isn't enough time right now to do anything but simply update the positions the gilbies
+So the positioning of the gilbies\index{gilbies} and the calculation of the updated positions happen separately. The reason
+for that approach is simple: there isn't enough time right now to do anything but simply update the positions the gilbies\index{gilbies}
 are displayed at.
 Later on, when the raster has passed line 320 we will have a lot more time available to perform complex calculations
-because we don't need to worry about the raster painting anything on the screen for a while.
+because we don't need to worry about the raster painting anything on the screen\index{screen} for a while.
 
-Since there are 7 of them, setting the x and y co-ordinates of the seven gilby sprites is handled by a loop:
+Since there are 7 of them, setting the x and y co-ordinates of the seven gilby sprites\index{sprites} is handled by a loop:
 
-\begin{lstlisting}[caption= The loop in \icode{UpdateJumpingGilbyPositionsAndColors} updating the x and y position on screen and color of each of the gilby sprites.]
-        ; Loop through the gilby sprites in the title screen and
+\begin{lstlisting}[caption= The loop in \icode{UpdateJumpingGilbyPositionsAndColors\index{UpdateJumpingGilbyPositionsAndColors}} updating the x and y position on screen\index{screen} and color of each of the gilby sprites\index{sprites}.,escapechar=\%]
+        ; Loop through the gilby sprites%\index{sprites}% in the title screen%\index{screen}% and
         ; update their position and color
         LDX #$00
-UpdateJumpingGilbiesLoop   
+UpdateJumpingGilbiesLoop%\index{UpdateJumpingGilbiesLoop}%   
         TXA
         ASL
         TAY
-        LDA titleScreenGilbiesXPosArray,X
+        LDA titleScreenGilbiesXPosArray%\index{titleScreenGilbiesXPosArray}%,X
         ASL
         STA $D000,Y  ;Sprite 0 X Pos
-        BCC SkipGilbyMSBXPos
-        LDA $D010    ;Sprites 0-7 MSB of X coordinate
-        ORA titleScreenGilbiesMSBXPosArray,X
-        STA $D010    ;Sprites 0-7 MSB of X coordinate
-        JMP UpdateYPosJumpingGilbies
+        BCC SkipGilbyMSBXPos%\index{SkipGilbyMSBXPos}%
+        LDA $D010    ;Sprites%\index{Sprites}% 0-7 MSB of X coordinate
+        ORA titleScreenGilbiesMSBXPosArray%\index{titleScreenGilbiesMSBXPosArray}%,X
+        STA $D010    ;Sprites%\index{Sprites}% 0-7 MSB of X coordinate
+        JMP UpdateYPosJumpingGilbies%\index{UpdateYPosJumpingGilbies}%
 
-SkipGilbyMSBXPos   
-        LDA $D010    ;Sprites 0-7 MSB of X coordinate
-        AND titleScreenGilbiesMSBXPosOffset,X
-        STA $D010    ;Sprites 0-7 MSB of X coordinate
+SkipGilbyMSBXPos%\index{SkipGilbyMSBXPos}%   
+        LDA $D010    ;Sprites%\index{Sprites}% 0-7 MSB of X coordinate
+        AND titleScreenGilbiesMSBXPosOffset%\index{titleScreenGilbiesMSBXPosOffset}%,X
+        STA $D010    ;Sprites%\index{Sprites}% 0-7 MSB of X coordinate
 
-UpdateYPosJumpingGilbies
-        LDA titleScreenGilbiesYPosARray,X
+UpdateYPosJumpingGilbies%\index{UpdateYPosJumpingGilbies}%
+        LDA titleScreenGilbiesYPosARray%\index{titleScreenGilbiesYPosARray}%,X
         STA $D001,Y  ;Sprite 0 Y Pos
 
-        LDA currentTitleScreenGilbySpriteValue
-        STA Sprite0Ptr,X
+        LDA currentTitleScreenGilbySpriteValue%\index{currentTitleScreenGilbySpriteValue}%
+        STA Sprite0Ptr%\index{Sprite0Ptr}%,X
 
         ; Update Gilby color.
-        LDA titleScreenColorsArray,X
+        LDA titleScreenColorsArray%\index{titleScreenColorsArray}%,X
         STA $D027,X  ;Sprite 0 Color
 
         INX
         CPX #$07
-        BNE UpdateJumpingGilbiesLoop
+        BNE UpdateJumpingGilbiesLoop%\index{UpdateJumpingGilbiesLoop}%
         RTS
 \end{lstlisting}
 We can see in here the verbosity required to handle the most significant bit of the sprite's x co-ordinate. Just
-as with the starfield we need a separate array (\icode{titleScreen\-GilbiesMSBXPosArray} to handle this in addition
+as with the starfield\index{starfield} we need a separate array (\icode{titleScreen\-GilbiesMSBXPosArray} to handle this in addition
 to arrays to manage the basic x/y positions themselves.
 
-With the gilbies prepared we fall through and update the starfield again. Once that's done we're finished handling the
-current raster interrupt. This is followed by another dozen or so interrupts where we again just prepare stars for display
-and as the raster progress our gilbies are revealed.
+With the gilbies\index{gilbies} prepared we fall through and update the starfield\index{starfield} again. Once that's done we're finished handling the
+current raster interrupt\index{interrupt}. This is followed by another dozen or so interrupts where we again just prepare stars for display
+and as the raster progress our gilbies\index{gilbies} are revealed.
 
 \begin{figure}[H]
     \centering
@@ -942,56 +942,56 @@ and as the raster progress our gilbies are revealed.
       \includegraphics[width=4cm]{titlescreen/title\l.png}%
       \end{subfigure}
     }%
-\caption{Behold the gilbies.}
+\caption{Behold the gilbies\index{gilbies}.}
 \end{figure}
 
 \section{Title Text}
 \begin{figure}[H]
     \centering
       \includegraphics[width=12cm]{titlescreen/title57.png}%
-\caption{We've finally reached the bottom of the screen, with gilbies and stars painted, but still no title.}
+\caption{We've finally reached the bottom of the screen\index{screen}, with gilbies\index{gilbies} and stars painted\index{painted}, but still no title.}
 \end{figure}
 
-We've finally reached the bottom of the screen in our first raster paint, at least the bottom of the portion of the
-screen that we can paint. When the raster hits line 270 we're beyond the point that we can place anything on the screen and
+We've finally reached the bottom of the screen\index{screen} in our first raster paint, at least the bottom of the portion of the
+screen\index{screen} that we can paint. When the raster hits line 270 we're beyond the point that we can place anything on the screen\index{screen} and
 into the border area. This gives us time to do some more complicated and time consuming stuff.
 
 There's a relatively full agenda:
 
-\begin{lstlisting}
+\begin{lstlisting}[escapechar=\%]
         LDA #$10
         STA $D012    ;Raster Position
 
-        ; Acknowledge the interrupt, so the CPU knows that
+        ; Acknowledge the interrupt%\index{interrupt}%, so the CPU knows that
         ; we have handled it.
         LDA #$01
-        STA $D019    ;VIC Interrupt Request Register (IRR)
-        STA $D01A    ;VIC Interrupt Mask Register (IMR)
+        STA $D019    ;VIC Interrupt%\index{Interrupt}% Request Register%\index{Register}% (IRR)
+        STA $D01A    ;VIC Interrupt%\index{Interrupt}% Mask Register%\index{Register}% (IMR)
 
         ; All of this stuff can be done before the raster
-        ; reaches the top of the screen again.
-        JSR UpdateTitleTextSprites
-        JSR MaybeUpdateSpriteColors
-        JSR RecalculateJumpingGilbyPositions
-        JSR PlayTitleScreenMusic
-        JMP ReEnterInterrupt
+        ; reaches the top of the screen%\index{screen}% again.
+        JSR UpdateTitleTextSprites%\index{UpdateTitleTextSprites}%
+        JSR MaybeUpdateSpriteColors%\index{MaybeUpdateSpriteColors}%
+        JSR RecalculateJumpingGilbyPositions%\index{RecalculateJumpingGilbyPositions}%
+        JSR PlayTitleScreenMusic%\index{PlayTitleScreenMusic}%
+        JMP ReEnterInterrupt%\index{ReEnterInterrupt}%
 \end{lstlisting}
 
-First of all we set the raster interrupt to line 16 at the top of the screen again, then we acknowledge the interrupt. The
+First of all we set the raster interrupt\index{interrupt} to line 16 at the top of the screen\index{screen} again, then we acknowledge the interrupt\index{interrupt}. The
 raster will continue its journey but because we're going to do this while it works its way the next 42 lines at the bottom 
-of the screen we have more time than at any point previously to get things done.
+of the screen\index{screen} we have more time than at any point previously\index{previously} to get things done.
 
-Adding the title sprites is relatively light work. Just as with the gilbies we use a tight loop to paint each of them
-on the screen. THere's no animation to handle here.
+Adding the title sprites\index{sprites} is relatively light work. Just as with the gilbies\index{gilbies} we use a tight loop to paint each of them
+on the screen\index{screen}. THere's no animation\index{animation} to handle here.
 
-\begin{lstlisting}
-titleTextSpriteArray          .BYTE $20,BIG_I,BIG_R,BIG_I,BIG_D,BIG_I,BIG_S
+\begin{lstlisting}[escapechar=\%]
+titleTextSpriteArray%\index{titleTextSpriteArray}%          .BYTE $20,BIG_I,BIG_R,BIG_I,BIG_D,BIG_I,BIG_S
 ...
 
-PaintSpriteLettersLoop   
+PaintSpriteLettersLoop%\index{PaintSpriteLettersLoop}%   
         ; Assign the sprite.
-        LDA titleTextSpriteArray,X
-        STA Sprite0Ptr - $01,X
+        LDA titleTextSpriteArray%\index{titleTextSpriteArray}%,X
+        STA Sprite0Ptr%\index{Sprite0Ptr}% - $01,X
 
         ; Shift the value in X left 1 bit and assign to Y.
         ; So e.g. 6 becomes 12, 5 becomes 10, 4 becomes 8,
@@ -1003,27 +1003,27 @@ PaintSpriteLettersLoop
         TAY
 
         ; Update the X Position of the sprite
-        LDA titleTextXPosArray - $01,X
+        LDA titleTextXPosArray%\index{titleTextXPosArray}% - $01,X
         STA $D000 - $02,Y
 
-        LDA $D010    ;Sprites 0-7 MSB of X coordinate
-        ORA titleTextMSBXPosArray,X
-        STA $D010    ;Sprites 0-7 MSB of X coordinate
+        LDA $D010    ;Sprites%\index{Sprites}% 0-7 MSB of X coordinate
+        ORA titleTextMSBXPosArray%\index{titleTextMSBXPosArray}%,X
+        STA $D010    ;Sprites%\index{Sprites}% 0-7 MSB of X coordinate
 
         ; Update the Y position of the sprite
         LDA #$40
         STA $D000 - $01,Y
         DEX
-        BNE PaintSpriteLettersLoop
+        BNE PaintSpriteLettersLoop%\index{PaintSpriteLettersLoop}%
 
 \end{lstlisting}
 
-The other complex thing we do is calculate the next step in the jumping gilby animations. \icode{RecalculateJumpingGilbyPositions}
-updates the x and y positions of the gilby sprites in \icode{titleScreenGilbiesYPosArray} and \icode{titleScreenGilbiesXPosArray}.
+The other complex thing we do is calculate the next step in the jumping\index{jumping} gilby animations. \icode{RecalculateJumpingGilbyPositions\index{RecalculateJumpingGilbyPositions}}
+updates the x and y positions of the gilby sprites\index{sprites} in \icode{titleScreenGilbiesYPosArray} and \icode{titleScreenGilbiesXPosArray\index{titleScreenGilbiesXPosArray}}.
 
 Finally we play a single note from the title music, we cover this in detail in a later chapter.
 
-The raster continues on its journey and progresses through its second paint journey of the screen. The title sprites
+The raster continues on its journey and progresses through its second paint journey of the screen\index{screen}. The title sprites\index{sprites}
 are finally revealed.
 
 \begin{figure}[H]
@@ -1037,7 +1037,7 @@ are finally revealed.
 \caption{The title text is finally revealed}
 \end{figure}
 
-And with that the title sequence is finally up and running after 20 milliseconds or so.
+And with that the title sequence\index{sequence} is finally up and running after 20 milliseconds or so.
 
 \begin{figure}[H]
     \centering

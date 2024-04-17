@@ -4,7 +4,7 @@
 \begin{figure}[H]
     \centering
       \includegraphics[width=10cm]{src/mif/mif.png}%
-\caption{Splash screen for the version of 'Made in France' released on Compunet.}
+\caption{Splash screen\index{screen} for the version of 'Made in France' released on Compunet.}
 \end{figure}
 
 I must admit I don't find this pause-mode mini-game of much interest in its own right. I initially
@@ -54,7 +54,7 @@ complete the level before it elapses.
 	\end{subfigure}
   }
 \caption{ The controls seem unintuitive to a player using a C64 emulator. Why use 'M' and 'N' for placing paddles? The answer lies in the PET
-and C64 keyboard layouts: the 'm' and 'n' keys each bear the paddle glyphs.
+and C64 keyboard\index{keyboard} layouts: the 'm' and 'n' keys each bear the paddle glyphs.
 }
 \end{figure}
 
@@ -65,23 +65,23 @@ presses to enter into the DNA mini-game, see
 \hyperref[sec:dna]{\textcolor{blue}{A Pause Mode for Your Pause Mode}} or exit
 back to Iridis Alpha itself.
 
-\begin{lstlisting}
-MIF_RunUntilPlayerUnpauses   
-    JSR MIF_InitializeProgressBar
-    JSR MIF_DrawCountdownBarAndCredit
-    JSR MIF_UpdateProgressBar
-    JSR MIF_SetUpInterruptHandler
-MIF_MainLoop
-    LDA lastKeyPressed
+\begin{lstlisting}[escapechar=\%]
+MIF_RunUntilPlayerUnpauses%\index{MIF\_RunUntilPlayerUnpauses}%   
+    JSR MIF_InitializeProgressBar%\index{MIF\_InitializeProgressBar}%
+    JSR MIF_DrawCountdownBarAndCredit%\index{MIF\_DrawCountdownBarAndCredit}%
+    JSR MIF_UpdateProgressBar%\index{MIF\_UpdateProgressBar}%
+    JSR MIF_SetUpInterruptHandler%\index{MIF\_SetUpInterruptHandler}%
+MIF_MainLoop%\index{MIF\_MainLoop}%
+    LDA lastKeyPressed%\index{lastKeyPressed}%
     CMP #$40 ; 'No key pressed'
-    BNE MIF_MainLoop
+    BNE MIF_MainLoop%\index{MIF\_MainLoop}%
 
     LDA #$00
     STA $D015    ;Sprite display Enable
 
     ; Maybe Exit Back to Game
 MaybeExitBackToGame
-    LDA lastKeyPressed
+    LDA lastKeyPressed%\index{lastKeyPressed}%
     CMP #$04 ; F1
     BNE MaybeAsteriskPressed
     ;F1 was pressed, so exit MIF back to game.
@@ -92,30 +92,30 @@ MaybeAsteriskPressed
     BNE MaybeLaunchNewGame
 
     ; If '*' was pressed, launch DNA.
-MIF_DoubleCheckKeyPress
-    LDA lastKeyPressed
+MIF_DoubleCheckKeyPress%\index{MIF\_DoubleCheckKeyPress}%
+    LDA lastKeyPressed%\index{lastKeyPressed}%
     CMP #$40 ; 'No key pressed'
-    BNE MIF_DoubleCheckKeyPress
+    BNE MIF_DoubleCheckKeyPress%\index{MIF\_DoubleCheckKeyPress}%
 
     ; Launch DNA
     LDA #$01
-    STA mifDNAPauseModeActive
-    JSR EnterMainTitleScreen
+    STA mifDNAPauseModeActive%\index{mifDNAPauseModeActive}%
+    JSR EnterMainTitleScreen%\index{EnterMainTitleScreen}%
 
     ; Relaunch MIF when player exits DNA.
-    JMP LaunchMIF
+    JMP LaunchMIF%\index{LaunchMIF}%
 
 MaybeLaunchNewGame
-    LDA mifGameOver
+    LDA mifGameOver%\index{mifGameOver}%
     BEQ MaybeExitBackToGame
-    JMP LaunchMIF
+    JMP LaunchMIF%\index{LaunchMIF}%
 \end{lstlisting}
 
-The actual gameplay is handled from an interrupt once per frame.
+The actual gameplay is handled from an interrupt\index{interrupt} once per frame.
 
-\begin{lstlisting}
-MIF_InterruptHandler   
-    LDA $D019    ;VIC Interrupt Request Register (IRR)
+\begin{lstlisting}[escapechar=\%]
+MIF_InterruptHandler%\index{MIF\_InterruptHandler}%   
+    LDA $D019    ;VIC Interrupt%\index{Interrupt}% Request Register%\index{Register}% (IRR)
     AND #$01
     ; Limits the updates to once per frame.
     BNE PerformGamePlayUpdates
@@ -127,13 +127,13 @@ MIF_InterruptHandler
     RTI 
 
 PerformGamePlayUpdates
-    JSR UpdateSnakePositionAndCheckInput
-    JSR MIF_UpdateCountdownBar
-    JSR MIF_PlaySound
-    JSR MIF_UpdateTarget
+    JSR UpdateSnakePositionAndCheckInput%\index{UpdateSnakePositionAndCheckInput}%
+    JSR MIF_UpdateCountdownBar%\index{MIF\_UpdateCountdownBar}%
+    JSR MIF_PlaySound%\index{MIF\_PlaySound}%
+    JSR MIF_UpdateTarget%\index{MIF\_UpdateTarget}%
     LDA #$01
-    STA $D019    ;VIC Interrupt Request Register (IRR)
-    STA $D01A    ;VIC Interrupt Mask Register (IMR)
+    STA $D019    ;VIC Interrupt%\index{Interrupt}% Request Register%\index{Register}% (IRR)
+    STA $D01A    ;VIC Interrupt%\index{Interrupt}% Mask Register%\index{Register}% (IMR)
     LDA #$FE
     STA $D012    ;Raster Position
     JMP $EA31

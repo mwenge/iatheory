@@ -2,11 +2,11 @@
 \lstset{style=6502Style}
 
 We've reached the point where the game has started to execute. We just saw a snippet of code that turned off the
-tape recorder and prompted the C64 to run a routine a called \icode{MainControlLoop}. Though perhaps a little
+tape recorder and prompted the C64 to run a routine\index{routine} a called \icode{MainControlLoop\index{MainControlLoop}}. Though perhaps a little
 cryptic, and you shouldn't expect to understand it yet, this code is not exactly what the machine 'saw'. Instead it read and executed something far more puzzling looking:
 
 
-\begin{lstlisting}[caption=The first piece of machine code that is executed in Iridis Alpha.]
+\begin{lstlisting}[caption=The first piece of machine code that is executed in Iridis Alpha.,escapechar=\%]
 78A9 408D 1903 A900 8D18 03A9 108D
 04DD A900 8D05 DDA9 7F8D 0DDD A981
 8D0D DDA9 198D 0EDD 584C 3508 
@@ -78,12 +78,12 @@ machine code programming in general.
 \icode{LDA} loads the byte you give it into a small one-byte slot called the 'Accumulator' ('A' for short
 so \icode{LDA} is an abbreviation for 'Load to Accumulator'). Think of this slot
 as a pocket - somewhere for the CPU to store a value for use later on. The technical name for this kind of 
-slot/pocket is a 'register'. The 'Accumulator' is so-called because a lot of the operations performed on
+slot/pocket is a 'register\index{register}'. The 'Accumulator' is so-called because a lot of the operations performed on
 bytes stored in this particular pocket have very precise behaviour when addition operations are executed on
 it. But we never really have to worry about this too often and in the general case it is simply used, as
 here, as a place to put a value so we can do something else with it.
 
-\begin{lstlisting}[caption=Loading the byte \$40 to the \icode{Accumulator}.]
+\begin{lstlisting}[caption=Loading the byte \$40 to the \icode{Accumulator}.,escapechar=\%]
 LDA #$40
 \end{lstlisting}
 
@@ -99,14 +99,14 @@ When we look at the disassembly of the STA instructions we see something quite p
 
 \begin{minipage}[b]{0.45\linewidth}
 \centering
-\begin{lstlisting}
+\begin{lstlisting}[escapechar=\%]
 8D 19 03
 \end{lstlisting}
 \end{minipage}
 \hspace{0.5cm}
 \begin{minipage}[b]{0.45\linewidth}
 \centering
-\begin{lstlisting}
+\begin{lstlisting}[escapechar=\%]
 STA $0319
 \end{lstlisting}
 \end{minipage}
@@ -130,7 +130,7 @@ you have now.
 The next incremental step in understanding our disassembly is to apply some meaning to these two-byte values
 that we've decoded. As it happens, all the ones given in this piece of code represent addresses in the C64's
 memory of \icode{\$FFFF} bytes, or in the preferred parlance of we humans, 65,532 bytes. Each address here
-has a particular function so storing a value in it does something. Let's add the meanings, which are still
+has a particular function\index{function} so storing a value in it does something. Let's add the meanings, which are still
 a little cryptic, to our listing:
 
 \begin{minipage}[b]{0.20\linewidth}
@@ -143,23 +143,23 @@ a little cryptic, to our listing:
 \lstinputlisting[caption=Assembly Language with some comments]{disassembly/labelled-bytes-1.asm}
 \end{minipage}
 
-As you may remember we said in the previous chapter that this little routine is doing two things: the first
-is telling the C64 to jump to and execute the routine that starts the actual game the next time it 'wakes up'; the
+As you may remember we said in the previous chapter that this little routine\index{routine} is doing two things: the first
+is telling the C64 to jump to and execute the routine\index{routine} that starts the actual game the next time it 'wakes up'; the
 other thing it's doing is turning off the cassette tape reader so that no more data is read from the tape.
 
 The bit that's turning off the tape reader is this:
 
-\begin{lstlisting}
+\begin{lstlisting}[escapechar=\%]
 LDA #$10
-STA $DD04    ;CIA2: Timer A: Low-Byte
+STA $DD04    ;CIA2: Timer A: Low-Byte%\index{Low-Byte}%
 LDA #$00
-STA $DD05    ;CIA2: Timer A: High-Byte
+STA $DD05    ;CIA2: Timer A: High-Byte%\index{High-Byte}%
 LDA #$7F
-STA $DD0D    ;CIA2: CIA Interrupt Control Register
+STA $DD0D    ;CIA2: CIA Interrupt%\index{Interrupt}% Control Register%\index{Register}%
 LDA #$81
-STA $DD0D    ;CIA2: CIA Interrupt Control Register
+STA $DD0D    ;CIA2: CIA Interrupt%\index{Interrupt}% Control Register%\index{Register}%
 LDA #$19
-STA $DD0E    ;CIA2: CIA Control Register A
+STA $DD0E    ;CIA2: CIA Control Register%\index{Register}% A
 \end{lstlisting}
 
 We are better off treating this series of instructions as a magic formula. The operation of the tape reader
@@ -168,15 +168,15 @@ we have to write a variety of values to 5 of them to just stop reading from the 
 to the power of boring overhead - we'll never interact with the tape reader again so studying the entrails
 here is not going to benefit us in any way.
 
-The other thing this routine is doing - preparing the C64 to execute the game proper - is more compact and
+The other thing this routine\index{routine} is doing - preparing the C64 to execute the game proper - is more compact and
 introduces two concepts that are going to be important throughout our tour of the Iridis Alpha code so it
 is worth spending some time on them here to get them clear.
 
-\begin{lstlisting}[caption=Containing two important concepts.]
+\begin{lstlisting}[caption=Containing two important concepts.,escapechar=\%]
 LDA #$40
-STA $0319    ;Non-Maskable Interrupt
+STA $0319    ;Non-Maskable Interrupt%\index{Interrupt}%
 LDA #$00
-STA $0318    ;Non-Maskable Interrupt
+STA $0318    ;Non-Maskable Interrupt%\index{Interrupt}%
 \end{lstlisting}
 
 \subsection{Important Concept Number One: High Bytes and Low Bytes}
@@ -218,7 +218,7 @@ way of saying 'second. When taking about a values like \icode{\$4000} stored in 
 
 Writing values to a pair of adjacent addresses in memory like this so that they can
 be subsequently interpreted as yet another address to get something from or do something with is a very common
-pattern in programming 6502 CPUs such as the C64's and we will encounter it a *lot* in this book.
+pattern\index{pattern} in programming 6502 CPUs such as the C64's and we will encounter it a *lot* in this book.
 
 It's a strange sort of indirection when you first attempt to understand it. Instead of storing actual values
 at an address we're storing an address in the address. If you are familiar with other programming languages
@@ -228,56 +228,56 @@ you otherwise, but hopefully when we look at the use it is put to here you may b
 utility. Let's do that by looking at our second important concept.
 
 \subsection{Important Concept Number Two: Interrupts}
-\begin{lstlisting}[caption=It's an interrupt. And it's non-maskable.]
+\begin{lstlisting}[caption=It's an interrupt\index{interrupt}. And it's non-maskable.,escapechar=\%]
 LDA #$40
-STA $0319    ;Non-Maskable Interrupt
+STA $0319    ;Non-Maskable Interrupt%\index{Interrupt}%
 LDA #$00
-STA $0318    ;Non-Maskable Interrupt
+STA $0318    ;Non-Maskable Interrupt%\index{Interrupt}%
 \end{lstlisting}
 
-We previously waved away what's happening in this code by saying that the address \icode{\$4000} will be interpreted
+We previously\index{previously} waved away what's happening in this code by saying that the address \icode{\$4000} will be interpreted
 as an address to jump to and start executing the next time the 6502 CPU 'wakes up'. That's a lot of hand-waving.
 
-The technical term for this 'waking up' is an 'interrupt'. This waking up happens incredibly frequently, 60 times every second.
+The technical term for this 'waking up' is an 'interrupt\index{interrupt}'. This waking up happens incredibly frequently, 60 times every second.
 60 times a second the C64 will stop what it's doing and execute whatever is given as an address by the bytes at \icode{\$0318-\$0319}.
 
-The number 60 may ring a bell for you in this context. A common aspiration for graphics-based games, and minimum table stakes today,
+The number 60 may ring a bell for you in this context. A common aspiration for graphics\index{graphics}-based games, and minimum table stakes today,
 is that a game runs at 60 'frames per second'. In other words, that at least 60 times a second the display is updated and whatever
-is on the screen moves a little bit.
+is on the screen\index{screen} moves a little bit.
 
 While a C64 programmer would never achieve 60 frames per second in practice, 'interrupts' are the C64's mechanism for at least
 getting some of the way there. They allow the game developer to at least do something to the display many times per second.
 Whatever it is, it has to be something short and sweet and at the same time effective enough to actually progress the gameplay.
 This is why this concept is important to us: most of the important things that happen in Iridis Alpha will be effected during
-an interrupt. When we look at moving, shooting, and blowing things up, all of them are going to happen in routines that are called
+an interrupt\index{interrupt}. When we look at moving, shooting, and blowing things up, all of them are going to happen in routines that are called
 multiple times per second by the 6502 CPU executing the code that has been stored at the address \icode{\$0318-\$0319} at that
 point in time.
 
 And this is our first taste of the power of storing an address in an address. Depending on where we are in the game - be it the
-title screen, the main game, the bonus phase, or in a pause mode sub-game, the code that we want to run during these interrupts
+title screen\index{screen}, the main game, the bonus phase, or in a pause mode sub-game, the code that we want to run during these interrupts
 will be different.
 
 We can see this in action if we look at what happens when the code at \icode{\$4000} is executed. We've given this address \icode{\$4000}
-a 'label' name of \icode{MainControlLoop} in our disassembled code so \icode{MainControlLoop} always refers to whatever lives at
+a 'label' name of \icode{MainControlLoop\index{MainControlLoop}} in our disassembled code so \icode{MainControlLoop\index{MainControlLoop}} always refers to whatever lives at
 \icode{\$4000}. 
 
-\begin{lstlisting}[caption=The code at \icode{\$4000}. ]
-MainControlLoop
+\begin{lstlisting}[caption=The code at \icode{\$4000}. ,escapechar=\%]
+MainControlLoop%\index{MainControlLoop}%
         LDA #$00
         SEI
-p4003   LDA #<MainControlLoopInterruptHandler
+p4003   LDA #<MainControlLoopInterruptHandler%\index{MainControlLoopInterruptHandler}%
         STA $318    ;NMI
-        LDA #>MainControlLoopInterruptHandler
+        LDA #>MainControlLoopInterruptHandler%\index{MainControlLoopInterruptHandler}%
         STA $319    ;NMI
 \end{lstlisting}
 
-As you can see the first thing it does is change the address of the code that should be executed at every 'interrupt'. It's now an
-address referred to by the label \icode{MainControlLoop\-InterruptHandler}. This happens to be address \icode{\$6B3E} but the beauty
+As you can see the first thing it does is change the address of the code that should be executed at every 'interrupt\index{interrupt}'. It's now an
+address referred to by the label \icode{MainControlLoop\index{MainControlLoop}\-InterruptHandler}. This happens to be address \icode{\$6B3E} but the beauty
 of using labels in our code is that we no longer need to worry about the number of the addresses anymore. The label will do the job
-for us. It does mean we have to know what the syntax \icode{\#<MainControlLoopInterruptHandler} means though. What it means is:
-if \icode{MainControlLoopInterruptHandler} lives at \icode{\$6B3E} the \icode{\#<} decorators refer to the \icode{\$3E} part of the
+for us. It does mean we have to know what the syntax \icode{\#<MainControlLoopInterruptHandler\index{MainControlLoopInterruptHandler}} means though. What it means is:
+if \icode{MainControlLoopInterruptHandler\index{MainControlLoopInterruptHandler}} lives at \icode{\$6B3E} the \icode{\#<} decorators refer to the \icode{\$3E} part of the
 address, so we're actually saying \icode{LDA \#\$3E}, i.e. load the value \$3E into the 'Accumulator'. Similarly the syntax
-\icode{\#>MainControlLoopInterruptHandler} refers to the \icode{\$6B} part of the address.
+\icode{\#>MainControlLoopInterruptHandler\index{MainControlLoopInterruptHandler}} refers to the \icode{\$6B} part of the address.
 
 \begin{figure}[H]
   {
@@ -296,24 +296,24 @@ address, so we're actually saying \icode{LDA \#\$3E}, i.e. load the value \$3E i
 						  };
       \end{tikzpicture}
     \end{adjustbox}
-  }\caption{The values in \icode{\$0318} and \icode{\$0319} after we've updated them in \icode{MainControlLoop}.}
+  }\caption{The values in \icode{\$0318} and \icode{\$0319} after we've updated them in \icode{MainControlLoop\index{MainControlLoop}}.}
 \end{figure}
 
 We've almost squeezed as much as we can out of this short and boring snippet of code. There's just one last thing to point
-out that will be useful to us later. The last instruction in the routine:
+out that will be useful to us later. The last instruction in the routine\index{routine}:
 
-\begin{lstlisting}[caption=Jump.]
+\begin{lstlisting}[caption=Jump.,escapechar=\%]
 JMP $0835
 \end{lstlisting}
 
 This tells the CPU to jump to the address \$0835 and execute whatever is there. What is at \icode{\$0835}? This:
 
-\begin{lstlisting}[caption=Hello again.]
+\begin{lstlisting}[caption=Hello again.,escapechar=\%]
 JMP $0835
 \end{lstlisting}
 
-That's right - it's jumping back to itself and will execute in an infinite loop repeatedly executing the instruction
-over and over again. The reason it does this is because it won't be doing it very long. The interrupt will take over
+That's right - it's jumping\index{jumping} back to itself and will execute in an infinite loop repeatedly executing the instruction
+over and over again. The reason it does this is because it won't be doing it very long. The interrupt\index{interrupt} will take over
 and steal execution away so that the C64 can find better things to do that run in circles.
 
 Before we move on let's take one last look at our disassembly accomplishment.

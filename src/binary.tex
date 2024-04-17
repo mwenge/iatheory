@@ -24,7 +24,7 @@ you find yourself with a string of 1s and 0s that means something.
 The idea of on/off is so simple even a computer can understand it. If you feed
 it a signal all it has to do is determine whether it is one or the other and
 store the result. Then read the next signal. And before long the computer
-has a sequence of 1s and 0s it might be able to do something with.
+has a sequence\index{sequence} of 1s and 0s it might be able to do something with.
 
 So when you are programming a computer or in our case trying to understand
 how it was programmed to give us Iridis Alpha you have to be able to visualize
@@ -63,9 +63,9 @@ Using the magic number of 8 as the denominator for batches of bits enables
 this simple mental model.
 
 The first great thing about 8 is that it can be divided into two. That is,
-into two segments of 4 bits. The great thing about a sequence of four 1s
+into two segments of 4 bits. The great thing about a sequence\index{sequence} of four 1s
 and 0s is that it has 16 possible permutations. That's to say it can be
-ordered in sixteen unique ways. Yet another way, is to say that a sequence
+ordered in sixteen unique ways. Yet another way, is to say that a sequence\index{sequence}
 of 4 bits can store up to sixteen different values.
 
 \begin{figure}[H]
@@ -94,10 +94,10 @@ of 4 bits can store up to sixteen different values.
 \end{figure}
 
 You have to agree this is marvellous stuff. But what is so convenient
-about a number between 0 and 15? If you're using decimal notation it's
+about a number between 0 and 15? If you're using decimal\index{decimal} notation it's
 not convenient at all, in some cases you end up having to write two
 whole characters rather than one. We could avoid that if we invented
-a system that allowed a single character for each of the 16 values.
+a system that allowed a single character\index{character} for each of the 16 values.
 
 For example \icode{0-9} for 0-9, and \icode{A-F} for 10-15. Seems a bit
 clunky. But it works.
@@ -130,7 +130,7 @@ clunky. But it works.
 On the other hand, congratulations, we've just invented hexadecimal.
 
 The genius of this system is that it allows us to write every possible
-sequence of 8 bits with just two characters. 
+sequence\index{sequence} of 8 bits with just two characters. 
 
 \begin{figure}[H]
   {
@@ -160,9 +160,9 @@ But that is not its only benefit. When we look at any specific number
 using this notation we can almost immediately tell how the bits in it
 are set, without needing to memorize all 256 possible permutations.
 
-This is possible because we can start by looking at either character
-in the two-character notation and quickly divine the 1s and 0s that
-make it up. We can do this because each character represents a value
+This is possible because we can start by looking at either character\index{character}
+in the two-character\index{character} notation and quickly divine the 1s and 0s that
+make it up. We can do this because each character\index{character} represents a value
 between 0 and 15 that made is up of some combination of 8, 4, 2, and
 1 - each representing a bit from left to right.
 
@@ -241,7 +241,7 @@ hexadecimal notation for binary.
 
 Imagine we have a value from some random source stored in a byte. Imagine
 we happen to be in need of a random number, for example to select a random
-planet to use the next time we run attract mode in Iridis Alpha.
+planet\index{planet} to use the next time we run attract mode in Iridis Alpha.
 
 This random number we have stored in a byte sounds like it should be useful to us, but since its
 random it can be any value between 0 and 255 and since we only have four

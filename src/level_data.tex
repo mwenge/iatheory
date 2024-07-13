@@ -32,19 +32,16 @@ the sheer variety of adversaries the player faces.
   {
     \setlength{\tabcolsep}{3.0pt}
     \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
-	\centering
-	\begin{subfigure}{0.3\textwidth}
-    \includegraphics[width=3cm]{src/sprites/gallery/sprite_160.png}%
-	\centering
-	\end{subfigure}
-	\begin{subfigure}{0.3\textwidth}
-    \includegraphics[width=3cm]{src/sprites/gallery/sprite_161.png}%
-	\end{subfigure}
-	\centering
-	\begin{subfigure}{0.3\textwidth}
+	\begin{subfigure}{1\textwidth}
+  \hspace{0.2cm}
+    \includegraphics[width=3cm]{src/sprites/gallery/sprite_162.png}%
+  \hspace{1.3cm}
+    \includegraphics[width=3cm]{src/sprites/gallery/sprite_162.png}%
+  \hspace{1.4cm}
     \includegraphics[width=3cm]{src/sprites/gallery/sprite_162.png}%
 	\end{subfigure}
   }
+  \vspace{1.4cm}
 
   {
   \setlength{\tabcolsep}{3.0pt}
@@ -548,7 +545,7 @@ First we do an \icode{AND \#\$3F} with the value of \$85 in \icode{A}:
   {
     \setlength{\tabcolsep}{3.0pt}
     \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
-    \begin{adjustbox}{width=10cm,center}
+    \begin{adjustbox}{width=7cm,center}
 
       \begin{tabular}{rllllllll}
         \toprule
@@ -605,7 +602,7 @@ enemy mode for some levels where the ship will supplement any dead ships with al
 
 
 \section{Bytes 6-8: Alternate Enemy Waves}
-This happens in \icode{MaybeSwitchToAlternateEnemyPattern\index{MaybeSwitchToAlternateEnemyPattern}} in \icode{UpdateAttackShipDataForNewShip\index{UpdateAttackShipDataForNewShip}}. 
+This happens in \icode{MaybeSwitchToAlternateEnemyPattern\index{MaybeSwitchToAlternateEnemyPattern}} in \icode{UpdateAttackShipData\-ForNewShip\index{UpdateAttackShipDataForNewShip}}. 
 
 \begin{lstlisting}[caption=Byte 6 is used to periodically switch to an enemy mode defined by Bytes 7-8 ,escapechar=\%]
 MaybeSwitchToAlternateEnemyPattern%\index{MaybeSwitchToAlternateEnemyPattern}%   
@@ -1028,11 +1025,10 @@ AddPointsForHittingEnemy%\index{AddPointsForHittingEnemy}%
 
 \section{Bytes 9-11: A Clever Plan}
 \begin{figure}[H]
-
   {
     \setlength{\tabcolsep}{3.0pt}
     \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
-    \begin{adjustbox}{width=10cm}
+    \begin{adjustbox}{width=10cm, center}
 
       \begin{tabular}{lll}
         \toprule

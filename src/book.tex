@@ -255,7 +255,6 @@ pdfkeywords={C64, 6502, Llamasoft, Iridis Alpha, Jeff Minter}%
 \definecolor{mGray}{rgb}{0.5,0.5,0.5}
 \definecolor{keyword_color}{rgb}{0.00,0,1.0}
 
-
 \lstdefinestyle{6502Style}{
     backgroundcolor=\color{bg_color},   
     commentstyle=\color{mGreen},
@@ -274,6 +273,24 @@ pdfkeywords={C64, 6502, Llamasoft, Iridis Alpha, Jeff Minter}%
     morekeywords={call, ld, or, jr,ldr, str,ldir, EI, IM, .area}
 }
 
+\lstdefinestyle{mystyle}{
+  basicstyle=\ttfamily,
+  numberstyle=\tiny,
+  numbersep=5pt
+}
+\tcbuselibrary{listings,skins,breakable}
+\newtcblisting{mycode}{
+  arc=0mm,
+  top=0mm,
+  bottom=0mm,
+  left=3mm,
+  right=0mm,
+  width=\textwidth,
+  boxrule=1pt,
+  listing only,
+  listing options={style=6502Style},
+  breakable
+}
 
 \lstloadlanguages{[6502]Assembler}
 
@@ -497,29 +514,29 @@ boxsep=0pt,left=2pt,right=2pt,top=2pt,bottom=.5pt}
 \tableofcontents 
 
 \subfile{src/preface} %draft
-\subfile{src/binary} %draft
-\subfile{src/archaeo} %draft
-\subfile{src/disassembly} %draft
-\subfile{src/titlescreen}
-\subfile{src/planets} % draft
+%\subfile{src/binary} %draft
+%\subfile{src/archaeo} %draft
+%\subfile{src/disassembly} %draft
+%\subfile{src/titlescreen}
+%\subfile{src/planets} % draft
 \subfile{src/main_game} % draft
 \subfile{src/level_data} % draft
-\subfile{src/bonusphase} % draft
-\subfile{src/music} % draft
-\subfile{src/torus} % draft
-\subfile{src/mif}
-\subfile{src/dna} % wip
-\subfile{src/torus-animation} % draft
-\subfile{src/bugs} %draft
-\appendix
-\chapter*{Appendices}
-\subfile{src/dev_diary} % draft
-\subfile{src/sprite_appendix} % draft
-\subfile{src/level_data_appendix} %draft
-\subfile{src/planets_appendix} % draft
-\subfile{src/music_appendix} % draft
-\subfile{src/bonusphase_appendix} % draft
-\subfile{src/bumph} %draft
+%\subfile{src/bonusphase} % draft
+%\subfile{src/music} % draft
+%\subfile{src/torus} % draft
+%\subfile{src/mif}
+%\subfile{src/dna} % wip
+%\subfile{src/torus-animation} % draft
+%\subfile{src/bugs} %draft
+%\appendix
+%\chapter*{Appendices}
+%\subfile{src/dev_diary} % draft
+%\subfile{src/sprite_appendix} % draft
+%\subfile{src/level_data_appendix} %draft
+%\subfile{src/planets_appendix} % draft
+%\subfile{src/music_appendix} % draft
+%\subfile{src/bonusphase_appendix} % draft
+%\subfile{src/bumph} %draft
 
 % Obsolete
 %\subfile{src/level_data_appendix_detail} % draft obsolete?

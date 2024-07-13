@@ -3,7 +3,7 @@
 \lstset{style=6502Style}
 
 Iridis Alpha was distributed on cassette tape by the publisher Hewson Consultants. Normally used
-to play audio, cassette tapes were the cheap and ubiquitous medium du jour of the 1980s and a
+to play audio, cassette tapes were the cheap and ubiquitous medium \textit{du jour} of the 1980s and a
 natural choice for the nascent 8-bit game industry to disribute its wares.
 
 \begin{figure}[H]
@@ -21,25 +21,25 @@ language available to it: lots of sound waves of varying length.
 
 Without knowing how it's actually done, it's tempting to imagine a variety of possible schemes that
 might have been used. For example, one sound wave denoting a '0' and another one denoting a '1'.
-The actual method used isn't very far away from such a thing but there is plenty of intricacy
+The method that is actually used isn't very far away from such a thing but there is plenty of intricacy
 layered on top, particularly in a bid to spend as little time as possible loading data from the
 tape.
 
-In order to get something to work with our first step is to somehow convert the contents of the
-cassette tape into a binary file so that we can emulate the steps the C64's tape player performed
-to read the sounds from the tape and load them into memory as something that could be run as a
+In order to get something to work with, we must first somehow convert the contents of the
+cassette tape into a binary file and then emulate the steps the C64's tape player performed
+to read the sounds from the tape. Only then can we load them into memory as something that could be run as a
 computer program.
 
-The earliest and most durable attempt at standardizing this was from Per Hakan Sundell in 1997. He
-invented what is now known as the 'tap' format for representing the beeps and bloops encoded on the
+The earliest and most durable attempt at standardizing this procedure was from Per Hakan Sundell in 1997. He
+invented what is now known as the '\icode{tap}' format for representing the beeps and bloops encoded on the
 tape as a file of bits and bytes. The idea is that each byte in the file represents the length of
 a pulse. It is the length of these pulses that will ultimately tell us whether we should interpret
-a value of 1 or 0. When we get eights 1s and 0s we have a byte. We get enough bytes, we have a program
+a value of \icode{1} or \icode{0}. When we get eights \icode{1}s and \icode{0}s we have a byte. We get enough bytes, we have a program
 we can run!
 
 Someone, somewhere has kindly decoded the contents of the Iridis Alpha cassette tape distribution to
-a 'tap' file for us. So we have something to dig into. This is going to be a slightly bonkers journey
-into the bowels of decoding a 54kb game file from over 500kb of raw data. Every time you think you
+a \icode{tap} file for us. So we have something to dig into. This is going to be a slightly bonkers journey
+into the bowels of decoding a 54KB game file from over 500KB of raw data. Every time you think you
 are nearly done there will be yet another convolution to wrap your head around. But at the end of it
 we will finally have our binary game file and will be ready to figure out how to decipher it into something
 approximating the original assembly langage.
@@ -50,7 +50,7 @@ approximating the original assembly langage.
       \surface{archaeo/spool.png}
     \end{adjustbox}
   }\caption[]{Simple, right? Here each short-pulse sound is represented by a light grey pixel, each medium-duration pulse by a blue pixel,
-and each long pulse by a pink pixel. Roughly speaking, gray is a shorthand for 0 bits and dark pixels for 1 bits.}
+and each long pulse by a pink pixel. Roughly speaking, grey is a shorthand for 0 bits and dark pixels for 1 bits.}
 \end{figure}
 
 \section{The Madness Begins}
@@ -84,8 +84,7 @@ This is what the start of the our \icode{iridis-alpha.tap} file looks like:
 
       \end{tikzpicture}
     \end{adjustbox}
-  }\caption{The leading material read by the Megasave loader in the run up to retrieving game data. The Pilot Bytes are in red, 
-the 'Sync Train' in blue, and the Data Header fields from the grey cell onwards.}
+  }\caption{The first batch of data we read in from the tape. The 'Header Description' is in grey, the Version Number in pink, Reserved bytes in blue, and the File Size in red.}
 \end{figure}
 
 \begin{figure}[H]
@@ -100,7 +99,7 @@ the 'Sync Train' in blue, and the Data Header fields from the grey cell onwards.
         \midrule
 TAP Format Header Description & \icode{43 36 34 2D 54 41 50 45 2D 52 41 57}  & 'C64-TAPE-RAW' in ASCII\\
 Version & \icode{00} & Version Number 0\\
-Reserved & \icode{00 00 00} & Used by format versions > 0\\
+Reserved & \icode{00 00 00} & Used by format versions \> 0\\
 File Size & \icode{5A 0A 08} & \$080A05, in decimal\index{decimal}: 526,853 bytes long.\\
         \midrule
 Start of Data & \makecell{
@@ -448,12 +447,272 @@ from the tape. This type of program is called a 'loader', or perhaps in an effor
 
 The idea is that this little program will do a better job of reading data from the tape and more quickly than the C64 can manage
 by itself. There is a whole menagerie of these programs that proliferated in the 1980s with exotic names such as Jetload, Easytape,
-Audiogenic and so on. Luigi di Fraia maintains a utility called tapclean that does a great job of identifying and emulating
+Audiogenic and so on. Luigi di Fraia maintains a utility called \icode{tapclean} that does a great job of identifying and emulating
 these loaders and thanks to him we have a disassembled version of the loader we've just found on the Iridis Alpha tape. It has the
 quintessentially 1980s moniker 'MegaSave' and as you can see in the listing reproduced below is relatively compact.
 
-\lstinputlisting[basicstyle=\tiny,caption=The data we have just loaded\, translated back into assembly language. This is the MegaSave loader.]
-{src/archaeo/megasave/loader.asm}
+\begin{lstlisting}[caption=The data we have just loaded\, translated back into assembly language. This is the MegaSave loader.]
+; This disassembly has been adapted from
+; https://www.luigidifraia.com/doku/doku.php?id=commodore:tapes:loaders:mega-save
+;
+; From: Cauldron 
+; Note: Assemble with 64tass
+ 
+; **************
+; * CBM Header *
+; **************
+ 
+*=$033C
+
+; Cassette I/O Buffer - Header
+T033C
+  .byte $03,$A7,$02,$04,$03,$49,$52,$49,$44,$49,$53,$00,$00,$00,$00,$00
+T034C
+  .byte $00,$00,$00,$00,$00
+
+AlignAndSynchronizeLoop
+  
+  SEI           
+
+  LDA #$6E      ; Set the read bit timer/counter threshold to 0x0107
+  STA $DD06     
+
+  LDX #$01      
+
+; Byte-align with the incoming stream by shifting bits in until
+; the first pilot byte is read
+
+_align
+  JSR rd_bit    ; Read a bit
+
+  ROL $F7       ; Shift each of them into the byte receive register
+  LDA $F7       
+  CMP #$63      ; Until the first occurrence of 0x63 (pilot byte)
+  BNE _align    
+
+  LDY #$64      ; Pre-load the first expected sync byte in Y
+
+; Read the whole pilot sequence
+
+_pilot
+  JSR rd_byte   ; Keep reading bytes until the pilot train is over
+  CMP #$63      
+  BEQ _pilot    
+
+; Check that the sync sequence is as expected (Note: $F7 = byte read by
+; means of a call to rd_byte)
+
+_sync
+  CPY $F7       ; Is the currently expected sync byte following?
+  BNE _align    ; Start over if not
+
+  JSR rd_byte   ; Read byte
+
+  INY           ; Bump the expected sync byte value
+  BNE _sync     ; Read the whole sync sequence (0x64-0xff inclusive)
+
+  CMP #$00      ; In absence of issues A is set to 0x01 here
+  BEQ AlignAndSynchronizeLoop     
+
+; Read and store file header
+
+_header
+  JSR rd_byte   ; Read 10 header bytes
+  STA $002B,Y   ; Overwrite BASIC program pointers
+  STA $00F9,Y   ; Also store them in RAM where they will be changed
+  INY           
+  CPY #$0A      
+  BNE _header   
+
+  LDY #$00      
+  STY $90       ; Zero the status flags (not set by this code)
+  STY $02       ; Zero the checkbyte register
+
+; Read and store data from tape into RAM
+
+_data
+  JSR rd_byte   ; Read a byte
+  STA ($F9),Y   ; Store in RAM
+
+  EOR $02       ; Update the checkbyte value
+  STA $02       
+
+  INC $F9       ; Bump the destination pointer
+  BNE _check_complete       
+  INC $FA       
+
+_check_complete
+  
+  LDA $F9       ; And check if the file is complete
+  CMP $2D       ; by comparing the destination pointer
+  LDA $FA       ; to its one-past-end value
+  SBC $2E       
+  BCC _data     
+
+  JSR rd_byte   ; Read a byte
+
+  INY           
+  STY $C0       ; Control motor via software
+
+  CLI           
+
+  CLC           
+  ; Make sure the call to $FC93 does not restore the standard IRQ
+  LDA #$00      
+  STA $02A0     
+  ; Disable interrupts, un-blank the screen, and stop cassette motor
+  JSR $FC93     
+
+  JSR $E453     ; Copy BASIC vectors to RAM
+
+  LDA $F7       ; Compare saved and computed checkbytes
+  EOR $02       
+  ; And check that the status flags do not indicate an error
+  ORA $90       
+  BEQ *+5       
+
+  JMP $FCE2     ; Soft-reset if any of the above checks fails
+
+; Code execution after a file is completely loaded in
+
+  LDA $31       ; Check flag #1
+  BEQ *+5       ; If not set move on
+  JMP J02B9     ; Otherwise re-execute the loader
+
+  LDA $32       ; Check flag #2
+  BEQ *+5       ; If not set move on to issue a BASIC RUN command
+  JMP ($002F)   ; Otherwise execute routine pointed by the vector $2f/$30
+
+  JSR $A533     ; Relink lines of tokenized program text
+
+  LDX #$03      ; Set the number of characters in keyboard buffer to 3
+  STX $C6       
+
+  LDA T02F4-1,X ; And copy R, <shift> + U, <return> into the buffer
+  STA $0276,X   
+  DEX           
+  BNE *-7       
+
+  JMP J02E9     
+
+; --------------------------------
+; Read byte: read 8 bits from tape, grouping them MSbF
+; Returns: the read byte in A
+
+rd_byte
+  LDA #$07      ; Prepare for 8 bits
+  STA $F8       ; Using $f8 as a counter
+
+B03EB
+  JSR rd_bit    ; Read a bit
+  ; Shift each of them into the byte receive register, MSbF
+  ROL $F7       
+  INC $D020     
+  DEC $F8       ; And loop until 8 bits are received
+  BPL B03EB     
+  LDA $F7       ; Return read byte in A
+  RTS           
+
+.cerror * > $03FC, "The CBM Header code is too long to fit in the tape buffer!"
+
+; --------------------------------
+
+  .align $03FC, $00 ; Padding
+; ************
+; * CBM Data *
+; ************
+
+*=$02A7
+
+NMIH
+  LDA #$80      
+  ORA $91       
+  JMP $F6EF     
+
+J02AE
+  LDA #<NMIH    
+
+  SEI           
+
+  STA $0328     ; Disable <Run Stop> + <Restore>
+  LDA #>NMIH    
+  STA $0329     
+
+J02B9
+  CLI           
+
+  LDY #$00      
+  STY $C6       ; No char in keyboard buffer
+  STY $C0       ; Enable tape motor
+  STY $02       ; Zero the checkbyte register (also done later on)
+
+  LDA $D011     ; Blank the screen
+  AND #$EF      
+  STA $D011     
+
+  DEX           ; Wait a bit
+  BNE *-1       
+  DEY           
+  BNE *-4       
+
+  SEI           
+
+  JMP AlignAndSynchronizeLoop     ; Execute the main loader code
+
+; --------------------------------
+; Read bit: loops until a falling edge is received on the read line 
+;           and uses the read bit timer/counter to discriminate
+;            the current bit value
+;
+; Returns: the read bit in the Carry flag
+
+rd_bit
+  LDA $DC0D     ; Loop until a falling edge is detected
+  AND #$10      ; on the read line of the tape port
+  BEQ rd_bit       
+
+  LDA $DD0D     
+  STX $DD07     
+  LSR           
+  LSR           ; Move read bit into the Carry flag
+
+  LDA #$19      ; Restart the bit read threshold timer/counter
+  STA $DD0F     
+
+  RTS           
+
+; --------------------------------
+
+J02E9
+  ; Reset pointer to current text character to the beginning
+  ; of program text
+  JSR $A68E 
+
+  LDA #$00      
+  TAY           
+  STA ($7A),Y   
+
+  JMP $A474     ; Print READY
+
+; --------------------------------
+; Characters to be injected in the keyboard buffer, if required
+
+T02F4
+.byte $52,$D5,$0D ; R, <shift> + U, <return>
+
+.cerror * > $0300,
+  "The CBM Data code is too long to fit in front of the vector table!"
+
+; --------------------------------
+; Overwrite BASIC vectors in RAM
+
+.align $0300, $00 ; Padding
+
+T0300
+  .word $E38B ; Leave IERROR unchanged
+  ; Autostart the turbo loader, once loaded, by overwriting IMAIN
+  .word J02AE 
+\end{lstlisting}
 
 What does MegaSave do that makes it so much faster than the default C64 tape loader? The simple answer is that it cuts corners
 and strips away all of the cautious redundancy we observed when loading the loader itself. Instead of reading 20 bytes (or pulses)
@@ -617,7 +876,7 @@ reads in the next three chunks.
 
 \begin{figure}[H]
   {
-    \begin{adjustbox}{width=10cm,center}
+    \begin{adjustbox}{width=9cm,center}
       \surface{archaeo/tap-full.png}
     \end{adjustbox}
   }\caption[]{All the data that has been read from the tape. The four chunks of game data are in green\, the third is only a sliver. The
@@ -633,22 +892,22 @@ relative sizes of the red data (the MegaSave loader which is only actually 200 o
   }\caption[]{Our image of the spool from the start of this chapter but this time with each section colored in as described in the previous image.}
 \end{figure}
 
-When it has completed it has loaded the following to RAM:
+When it has completed it has loaded each of the four chunks to the following positions in RAM:
 
 \begin{figure}[H]
   {
     \setlength{\tabcolsep}{3.0pt}
     \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
-    \begin{adjustbox}{width=5cm,center}
+    \begin{adjustbox}{width=12cm,center}
 
       \begin{tabular}{rllllllll}
         \toprule
         Start Address & End Address & Note & \\
         \toprule
-\icode{0800} & \icode{BFFE}  & .\\
-\icode{BF00} & \icode{BFFF}  & .\\
-\icode{C000} & \icode{CFFE}  & .\\
-\icode{E000} & \icode{F7FF}  & .\\
+\icode{0800} & \icode{BFFE}  & The game starts at \icode{\$0800} in RAM.\\
+\icode{BF00} & \icode{BFFF}  & Note this will overwrite the last 255 bytes written above.\\
+        \icode{C000} & \icode{CFFE}  & Third chunk written right up to the start of System ROM at \icode{D000}.\\
+\icode{E000} & \icode{F7FF}  & The rest of our data written after System ROM.\\
         \addlinespace
         \bottomrule
       \end{tabular}
@@ -658,17 +917,21 @@ When it has completed it has loaded the following to RAM:
   }\caption{The four chunks of game data.}
 \end{figure}
 
+To give you an idea of where the different parts of the game end up in the computer's memory let's take a look at where
+everything goes using the chart below:
+
 \begin{figure}[H]
   {
     \begin{adjustbox}{width=14cm,center}
       \surface{archaeo/layout.png}
     \end{adjustbox}
-  }\caption[]{Where the different parts of the game end up in memory.}
+  }\caption[]{Where the different parts of the game end up in memory. Note the sections of 'System ROM' in black. The loader had
+  to avoid copying to these as they are where the C64's operating system lives.}
 \end{figure}
 
 \section{Putting an End to the Madness}
 
-With all the data read in you might wonder how the loader knows what to do next (i.e. to run the game) and how it
+With all the data read and loaded to the C64's RAM you might wonder how the loader knows what to do next (i.e. to run the game) and how it
 will know where to start running it from. The answer is given in the \icode{Header Data} for the final chunk of data:
 
 \begin{figure}[H]
@@ -703,7 +966,8 @@ Execution\index{Execution} Type & \icode{02} & How to execute the code: 01 means
 \end{figure}
 
 So according to the header data, the loader should stop reading data now and start executing what has already
-been loaded, and it should start doing this at address \icode{\$0810}.
+been loaded, and it should start doing this at address \icode{\$0810}. When we look at the code that has been
+loaded to address \icode{\$0810}, this is what we find:
 
 \begin{lstlisting}[caption=The first piece of code that is executed in Iridis Alpha.,escapechar=\%]
 *=$0810
@@ -733,9 +997,16 @@ LoopUntilExexcutes
 \end{lstlisting}
 
 This routine\index{routine} does two things: it turns off the tape deck and tells the C64 to execute the code at a different
-location (\icode{MainControlLoop\index{MainControlLoop}}) the next time it wakes up and wonders what to do. This will be in a few
-microseconds time. When it starts executing \icode{MainControlLoop\index{MainControlLoop}}, Iridis Alpha will get underway.
+location (\icode{MainControlLoop\index{MainControlLoop}}) the next time it wakes up and wonders what to do. Until then it 
+goes into a loop executing \icode{LoopUntilExexcutes} over and over again.
 
+The C64 isn't getting out of bed and pondering its future over coffee once a day like the rest of us. It wakes up hundreds of times every second
+wondering what it should do next, in a permanent state of fizzing attention. So in a few microseconds time it will inspect the address we stored
+at \icode{\$0318} above, immediately go there, and do whatever it is told. What it will be told is contained in \icode{MainControlLoop\index{MainControlLoop}}, 
+and with that Iridis Alpha will at last get underway.
+
+I've built you up nicely to expect that we will finally get down to business and see how pixels are thrown on the screen, haven't I? Please console yourself
+with the picture below before proceeding circumspectly to the next chapter.
  
 \begin{figure}[H]
   {

@@ -21,7 +21,11 @@ the screen\index{screen}. The neat thing is that all the surfaces have the same 
 structures\index{structures}, all I do is fit different graphics\index{graphics} around each one. 
 \end{definition}
 
-Making planets is easy. 
+When the player presses fire we will leave the title screen and enter the world of the game. Since the
+game insists on having a world, that means we are going to have to create one. With enemies, and a ship
+that we can move and fire bullets out of. We will also need planets. That sounds like a lot of work to be honest.
+
+Fortunately, making planets is easy. So we can start there. 
 
 When making a planet\index{planet}, ensure you perform each of the following
 simple steps in the order given below.
@@ -31,7 +35,7 @@ simple steps in the order given below.
     \begin{adjustbox}{width=10cm,center}
       \surface{planets/planet1Charset_Random_Step1.png}
     \end{adjustbox}
-  }\caption[]{Step One: Add the sea across the entire surface\index{surface} of the planet\index{planet}.}
+  }\caption[]{\textbf{Step One}: Add the sea across the entire surface\index{surface} of the planet\index{planet}.}
 \end{figure}
 
 \begin{figure}[H]
@@ -39,7 +43,7 @@ simple steps in the order given below.
     \begin{adjustbox}{width=10cm,center}
       \surface{planets/planet1Charset_Random_Step2.png}
     \end{adjustbox}
-  }\caption[]{Step Two: Insert a land mass at least 32 bytes and at most 128 bytes long.}
+  }\caption[]{\textbf{Step Two}: Insert a land mass at least 32 bytes and at most 128 bytes long.}
 \end{figure}
 
 \begin{figure}[H]
@@ -47,7 +51,7 @@ simple steps in the order given below.
     \begin{adjustbox}{width=10cm,center}
       \surface{planets/planet1Charset_Random_Step3.png}
     \end{adjustbox}
-  }\caption[]{Step Three: Add a random structure\index{structure} every 13 to 29 bytes.}
+  }\caption[]{\textbf{Step Three}: Add a random structure\index{structure} every 13 to 29 bytes.}
 \end{figure}
 
 \begin{figure}[H]
@@ -55,7 +59,7 @@ simple steps in the order given below.
     \begin{adjustbox}{width=10cm,center}
       \surface{planets/planet1Charset_Random_Step4.png}
     \end{adjustbox}
-  }\caption[]{Step Four: Add warp gates at the beginning and end of the planet\index{planet} surface\index{surface}.}
+  }\caption[]{\textbf{Step Four}: Add warp gates at the beginning and end of the planet\index{planet} surface\index{surface}.}
 \end{figure}
 
 Now you have not just a layout for one planet\index{planet}, but a layout for all five.
@@ -177,18 +181,16 @@ means 'blank' or 'background\index{background}' but I've pointed that out to you
 
 \lstset{style=6502Style}
 \begin{lstlisting}[escapechar=\%,caption=Character \icode{\$40} representing the sea as it is defined in the source code. A full eight bytes are required
-to define each character\index{character}\, so not cheap.,basicstyle=\tiny]
+to define each character\index{character}\, so not cheap.]
 planet1Charset%\index{planet1Charset}%
-        .BYTE $00,$00,$20,$02,$8A,$AA,$AA,$AA   ;.BYTE $00,$00,$20,$02,$8A,$AA,$AA,$AA
-                                                ; CHARACTER%\index{CHARACTER}% $40
-                                                ; 00000000           
-                                                ; 00000000           
-                                                ; 00100000     *     
-                                                ; 00000010         * 
-                                                ; 10001010   *   * * 
-                                                ; 10101010   * * * * 
-                                                ; 10101010   * * * * 
-                                                ; 10101010   * * * * 
+        .BYTE $00,       ; 00000000           
+        .BYTE $00,       ; 00000000           
+        .BYTE $20,       ; 00100000     *     
+        .BYTE $02,       ; 00000010         * 
+        .BYTE $8A,       ; 10001010   *   * * 
+        .BYTE $AA,       ; 10101010   * * * * 
+        .BYTE $AA,       ; 10101010   * * * * 
+        .BYTE $AA        ; 10101010   * * * * 
 \end{lstlisting}
 
 Is that all there is to it? No. Before we look at how me might color things other than blue, let's look at how we color them
@@ -217,17 +219,15 @@ ClearPlanetLoPtrs%\index{ClearPlanetLoPtrs}%
         BNE ClearPlanetHiPtrs%\index{ClearPlanetHiPtrs}%
 \end{lstlisting}
 
-\begin{lstlisting}[caption=The empty character\index{character} bit map (all zeroes) used to overwrite the surface\index{surface} before populating it.,basicstyle=\tiny,escapechar=\%]
-        .BYTE $00,$00,$00,$00,$00,$00,$00,$00   ;.BYTE $00,$00,$00,$00,$00,$00,$00,$00
-                                                ; CHARACTER%\index{CHARACTER}% $60
-                                                ; 00000000           
-                                                ; 00000000           
-                                                ; 00000000           
-                                                ; 00000000           
-                                                ; 00000000           
-                                                ; 00000000           
-                                                ; 00000000           
-                                                ; 00000000           
+\begin{lstlisting}[caption=The empty character\index{character} bit map (all zeroes) used to overwrite the surface\index{surface} before populating it.,escapechar=\%]
+        .BYTE $00,       ; 00000000           
+        .BYTE $00,       ; 00000000           
+        .BYTE $00,       ; 00000000           
+        .BYTE $00,       ; 00000000           
+        .BYTE $00,       ; 00000000           
+        .BYTE $00,       ; 00000000           
+        .BYTE $00,       ; 00000000           
+        .BYTE $00        ; 00000000           
 \end{lstlisting}
 
 With the planet\index{planet} surface\index{surface} cleared out (overwritten with all \icode{\$60}s) we can now.. overwrite it all again with sequences of
@@ -311,6 +311,22 @@ Picking a random number between 128 and 256 is slightly convoluted in assembly:
         STA charSetDataPtrHi%\index{charSetDataPtrHi}%
 \end{lstlisting}
 
+With a random start position selected, a similar convolution is performed to choose the length of the land mass:
+
+\begin{lstlisting}[caption=A convolution.,escapechar=\%]
+        ; Randomly generate the length of the land section, but
+        ; make it at least 32 bytes and not more than 150.
+        JSR PutProceduralByteInAccumulatorRegister%\index{PutProceduralByteInAccumulatorRegister}%
+        AND #$7F ; Random number between 0 and 128
+        CLC
+        ADC #$20 ; Add 32
+        STA planetSurfaceDataPtrLo%\index{planetSurfaceDataPtrLo}%
+
+\end{lstlisting}
+
+Since the random number we get can be anything between \icode{\$00 - \$FF} (i.e. 0 and 255) and we want a number
+that's between 0 and 128 we need to do a bitwise \icode{AND} to mask out Bit 7 which by itself is 128.
+\clearpage
 \begin{definition}[A Neat Little Trick]
 \setlength{\intextsep}{0pt}%
 \setlength{\columnsep}{3pt}%
@@ -339,7 +355,6 @@ randomPlanetData%\index{randomPlanetData}%
         .BYTE $42,$E4,$3F,$94,$4E,$29,$B0,$59
         .BYTE $2C,$FE,$7F,$B2,$40,$9B,$63,$2B
 \end{lstlisting}
-
 Before returning this value as its result it alters itself by changing
 \icode{randomPlanetData\index{randomPlanetData}} to reference \icode{\$9ABC} (\icode{INC
 randomIntToIncrement\index{randomIntToIncrement}}). In other words, it increments the pointer\index{pointer}. In the
@@ -349,27 +364,9 @@ adding a 1 to shift is reference beyond the byte holding \icode{LDA} to
 \icode{randomPlanetData\index{randomPlanetData}}.
 
 Every time the routine\index{routine} is called it increments the reference again so that the next time it will pick up whatever
-  lies in the bytes beyond \icode{9ABB}. The results it returns are never truly random, but random enough
-  to permit the procedural\index{procedural} generation of planets that they're used for.
-
+lies in the bytes beyond \icode{9ABB}. The results it returns are never truly random, but random enough
+to permit the procedural\index{procedural} generation of planets that they're used for.
 \end{definition}
-
-With a random start position selected, a similar convolution is performed to choose the length of the land mass:
-
-\begin{lstlisting}[caption=A convolution.,escapechar=\%]
-        ; Randomly generate the length of the land section, but
-        ; make it at least 32 bytes and not more than 150.
-        JSR PutProceduralByteInAccumulatorRegister%\index{PutProceduralByteInAccumulatorRegister}%
-        AND #$7F ; Random number between 0 and 128
-        CLC
-        ADC #$20 ; Add 32
-        STA planetSurfaceDataPtrLo%\index{planetSurfaceDataPtrLo}%
-
-\end{lstlisting}
-
-Since the random number we get can be anything between \icode{\$00 - \$FF} (i.e. 0 and 255) and we want a number
-that's between 0 and 128 we need to do a bitwise \icode{AND} to mask out Bit 7 which by itself is 128.
-
 \begin{figure}[H]
   {
     \setlength{\tabcolsep}{3.0pt}
@@ -455,7 +452,7 @@ And finally the right shore:
 
 
 \section{Step Three: Structures Structures Structures}
-The routines for adding structures\index{structures} to the planet\index{planet} are the opportunity to observe some assembly language cleverness.
+The routines for adding structures\index{structures} to the planet\index{planet} are an opportunity to observe some assembly language cleverness.
 For each structure\index{structure} we draw we have to decide two things: where to drop it on the surface\index{surface} and what type of structure\index{structure}
 to draw. Apart from the Warp Gates, there are four structure\index{structure} types available. 
 
@@ -503,7 +500,7 @@ to draw. Apart from the Warp Gates, there are four structure\index{structure} ty
 
 You may be getting the sense that there is a sort of economy at work here. The structures\index{structures} are effectively
 the same for each planet\index{planet}, but with the textures\index{textures} swapped out. Your intuition is correct, the structures\index{structures}
-are only defined once and the same definition does regardless of which planet\index{planet} we're painting:
+are only defined once and the same definition is used regardless of which planet\index{planet} we're painting:
 
 \begin{lstlisting}[caption=The definitions of three of the structures\index{structures} above\, each of which serves all five planets.,escapechar=\%]
 littleStructureData%\index{littleStructureData}%  .BYTE $45,$47,$FF
@@ -614,14 +611,16 @@ our structure\index{structure} we need to pick a type of structure\index{structu
 regrettably repetitive draw routines in a pair of arrays. 
 
 
-\begin{lstlisting}[escapechar=\%,caption=A 'jump table' containing the addresses to our draw routines. The address for \icode{DrawLittleStructure\index{DrawLittleStructure}[escapechar=\%]}[escapechar=\%] 
-happens to be \$7486\, so we store \$74 in the first byte of \icode{structureSubRoutineArrayHiPtr%\index{structureSubRoutineArrayHiPtr}%} and \$86 in the first
-byte of \icode{structureSubRoutineArrayLoPtr%\index{structureSubRoutineArrayLoPtr}%}.,basicstyle=\tiny]
+\begin{lstlisting}[escapechar=\%,caption=A 'jump table' containing the addresses to our draw routines. The address for \icode{DrawLittleStructure\index{DrawLittleStructure}}
+happens to be \$7486\, so we store \$74 in the first byte of \icode{structureSubRoutineArrayHiPtr\index{structureSubRoutineArrayHiPtr}} and \$86 in the first
+byte of \icode{structureSubRoutineArrayLoPtr\index{structureSubRoutineArrayLoPtr}}.]
 ;Jump table
-structureSubRoutineArrayHiPtr%\index{structureSubRoutineArrayHiPtr}%   .BYTE >DrawLittleStructure%\index{DrawLittleStructure}%,>DrawMediumStructure%\index{DrawMediumStructure}%
-                                .BYTE >DrawLargestStructure%\index{DrawLargestStructure}%,>DrawNextLargestStructure%\index{DrawNextLargestStructure}%
-structureSubRoutineArrayLoPtr%\index{structureSubRoutineArrayLoPtr}%   .BYTE <DrawLittleStructure%\index{DrawLittleStructure}%,<DrawMediumStructure%\index{DrawMediumStructure}%
-                                .BYTE <DrawLargestStructure%\index{DrawLargestStructure}%,<DrawNextLargestStructure%\index{DrawNextLargestStructure}%
+structureSubRoutineArrayHiPtr%\index{structureSubRoutineArrayHiPtr}% 
+ .BYTE >DrawLittleStructure%\index{DrawLittleStructure}%,>DrawMediumStructure%\index{DrawMediumStructure}%
+ .BYTE >DrawLargestStructure%\index{DrawLargestStructure}%,>DrawNextLargestStructure%\index{DrawNextLargestStructure}%
+structureSubRoutineArrayLoPtr%\index{structureSubRoutineArrayLoPtr}% 
+ .BYTE <DrawLittleStructure%\index{DrawLittleStructure}%,<DrawMediumStructure%\index{DrawMediumStructure}%
+ .BYTE <DrawLargestStructure%\index{DrawLargestStructure}%,<DrawNextLargestStructure%\index{DrawNextLargestStructure}%
 \end{lstlisting}
 
 With this in place our routine\index{routine} consists of getting a random number between 0 and 3, then using that as in index to pick
@@ -746,7 +745,7 @@ When the lower planet\index{planet} is inactive a surface\index{surface} with la
 any of the logic described above. Instead it is generated from some customized data in the routine\index{routine}
 \icode{DrawLowerPlanetWhileInactive\index{DrawLowerPlanetWhileInactive}}.
 
-\begin{lstlisting}[caption=Draw the inactive lower planet\index{planet}.,basicstyle=\tiny,escapechar=\%]
+\begin{lstlisting}[caption=Draw the inactive lower planet\index{planet}.,escapechar=\%]
 ;-----------------------------------------------------------
 ; DrawLowerPlanetWhileInactive%\index{DrawLowerPlanetWhileInactive}%
 ; Draws the lower planet%\index{planet}% for the early levels when it isn't
@@ -840,7 +839,14 @@ this entry sequence\index{sequence} long enough we'll have time to populate all 
 
 \begin{figure}[H]
     \centering
-    \foreach \l in {10, 32, ...,255}
+    \foreach \l in {10, 32, ...,125}
+    {
+      \includegraphics[width=4cm]{planets/entry_images/entry\l.png}%
+    }%
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \foreach \l in {125, 147, ...,255}
     {
       \includegraphics[width=4cm]{planets/entry_images/entry\l.png}%
     }%
@@ -854,7 +860,7 @@ level sequence\index{sequence} though nearly all of it except for this routine\i
 for most of the routines to do:
 
 \begin{lstlisting}[escapechar=\%,caption=\icode{PerformMainGameUpdate\index{PerformMainGameUpdate}}\, the spaghetti junction handling nearly everything
-during main gameplay. We'll see more of this code section later in the book\. During the entry level sequence\index{sequence}
+during main gameplay. We'll see more of this code section later in the book. During the entry level sequence\index{sequence}
 it is \icode{MaybeDrawLevelEntrySequence\index{MaybeDrawLevelEntrySequence}} and \icode{PlaySoundEffects\index{PlaySoundEffects}} that do most of the work.]
 ;-------------------------------------------------------
 ; PerformMainGameUpdate%\index{PerformMainGameUpdate}%
@@ -1132,7 +1138,7 @@ definition. Let's assume it's the one below.
     \end{adjustbox}
   }
 \end{figure}
-
+\vspace{-0.7cm}
 We load this into the accumulator (\icode{A}) so that we can get work on it. What we're going to
 do is shift each of the four bit pairs in turn into the rightmost\index{rightmost} position in the byte and use
 that value (between 0 and 3) as in index into a trio of helper arrays that give the 'mirrored'
@@ -1173,8 +1179,9 @@ InvertCharacter%\index{InvertCharacter}%
 
   }\caption*{AND'ing \$08 and \$03 gives \$00.}
 \end{figure}
+\vspace{-0.5cm}
 
-Since the result is zero, we will then store the value at index zero in \icode{bitfield1ForInvertingByte\index{bitfield1ForInvertingByte}}
+Since the result is zero, we will then store the value at index zero in \icode{bitfield1For\-InvertingByte\index{bitfield1ForInvertingByte}}
 as our result in \icode{invertedCharToDraw\index{invertedCharToDraw}}:
 
 \begin{lstlisting}[escapechar=\%]
@@ -1214,6 +1221,7 @@ Now we can move on to the second rightmost\index{rightmost} bitpair\index{bitpai
     \end{adjustbox}
   }
 \end{figure}
+\vspace{-0.7cm}
 
 We pushed our original value onto the stack using \icode{PHA}. First we retrieve it using \icode{PLA}
 and then shift it two bits to the right:
@@ -1252,6 +1260,7 @@ position:
     \end{adjustbox}
   }
 \end{figure}
+\vspace{-0.7cm}
 
 Now we can \icode{AND} this byte with \icode{\$03} again to ensure we only deal with the last two bits
 (remember that although all the other bits are zero in the example, they may not be in other cases).
@@ -1283,6 +1292,7 @@ Now we can \icode{AND} this byte with \icode{\$03} again to ensure we only deal 
 
   }\caption*{AND'ing \$02 and \$03 gives \$02.}
 \end{figure}
+\vspace{-0.5cm}
 
 This result of \icode{\$02} gives us an index into \icode{bitfield2ForInvertingByte\index{bitfield2ForInvertingByte}} which will
 give us the 'mirrored' bit pair:
@@ -1388,7 +1398,7 @@ to flip the character\index{character} set from left to righ and top to bottom:
   \input{planets/planet1Charset_\$40_bits_inv_2}
   \end{subfigure}
   \end{adjustbox}
-}\caption[]{}
+}\caption[]{Flipping the piece both up to down, and left to right.}
 \end{figure}
 
 The second half of \icode{InvertCharacter\index{InvertCharacter}} that does this looks like:
@@ -1417,9 +1427,9 @@ The second half of \icode{InvertCharacter\index{InvertCharacter}} that does this
       CLC
       ADC charSetDataPtrLo%\index{charSetDataPtrLo}%
 
-      ; By storing the updated position in the charset%\index{charset}% definition to 'X'
-      ; here, we're changing the offset used in lowerPlanetSurfaceCharset%\index{lowerPlanetSurfaceCharset}%
-      ; in InvertSurfaceDataForLowerPlanet%\index{InvertSurfaceDataForLowerPlanet}%.
+      ; By storing the updated position in the charset%\index{charset}% definition
+      ; to 'X' here, we're changing the offset used in 
+      ; lowerPlanetSurfaceCharset%\index{lowerPlanetSurfaceCharset}% in InvertSurfaceDataForLowerPlanet%\index{InvertSurfaceDataForLowerPlanet}%.
       TAX
 
       PLA
@@ -1439,9 +1449,8 @@ below):
   \input{planets/planet1Charset_\$40_bits_2}
   \end{subfigure}
   \end{adjustbox}
-}\caption[]{}
+}\caption[]{Byte 5 highlighted in red.}
 \end{figure}
-
 
 then we can use that as an index into \icode{positionInInvertedCharSet\index{positionInInvertedCharSet}}
 to retreve the corresponding position in the inverted\index{inverted} character\index{character} set definition. As we can
@@ -1464,7 +1473,7 @@ so an index value of zero will pick the first byte and of three, as in this case
   \input{planets/planet1Charset_\$40_bits_inv_2}
   \end{subfigure}
   \end{adjustbox}
-}\caption[]{}
+}\caption[]{Byte 5 when flipped.}
 \end{figure}
 
 So where do we get the position of the current byte in the uninverted character\index{character} set? This was
@@ -1514,7 +1523,7 @@ into \icode{positionInInvertedCharSet\index{positionInInvertedCharSet}}.
 With our new position for the byte in the character\index{character} set definition established we can store it to the
 \icode{X} register\index{register} and use that as the position in \icode{lowerPlanetSurfaceCharset\index{lowerPlanetSurfaceCharset}} where we will
 store the \icode{invertedCharToDraw\index{invertedCharToDraw}} we calculated earlier. We do this when we return from the
-\icode{InvertCharacter\index{InvertCharacter}} routine\index{routine} and are back in \icode{InvertSurfaceDataForLowerPlanet\index{InvertSurfaceDataForLowerPlanet}}:
+\icode{InvertCharacter\index{InvertCharacter}} routine\index{routine} and are back in \icode{InvertSurfaceDataFor\-LowerPlanet\index{InvertSurfaceDataForLowerPlanet}}:
 
 \begin{lstlisting}[escapechar=\%]
         JSR InvertCharacter%\index{InvertCharacter}%

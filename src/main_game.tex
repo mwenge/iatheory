@@ -2,11 +2,13 @@
 \label{sec:blast}
 \lstset{style=6502Style}
 
-Every game has a 'main loop'. A tight section of code which is executed multiple times
-per second and which controls nearly all aspect of the gameplay. In Iridis Alpha this
-boiler-room is \icode{PerformMainGameUpdate\index{PerformMainGameUpdate}}:
+Every game has a 'main loop', a tight section of code which is executed multiple times
+per second and which controls nearly all aspect of the gameplay. Iridis Alpha is a game
+and since we've just finished preparing the planets for our game it may be time to
+do some main looping so the player can do some playing. The 
+boiler-room in which the game runs is called \icode{PerformMainGameUpdate\index{PerformMainGameUpdate}}:
 
-\begin{lstlisting}[escapechar=\%,caption=\icode{PerformMainGameUpdate\index{PerformMainGameUpdate}}\, the spaghetti junction handling nearly everything
+\begin{lstlisting}[escapechar=\%,caption=\icode{PerformMainGameUpdate\index{PerformMainGameUpdate}}. This is the spaghetti junction handling nearly everything
 during main gameplay.]
 ;-------------------------------------------------------
 ; PerformMainGameUpdate%\index{PerformMainGameUpdate}%
@@ -45,7 +47,7 @@ PerformMainGameUpdate%\index{PerformMainGameUpdate}%
 
 Just like in the title sequence\index{sequence} this routine\index{routine} is called dozens of times as the 
 beam of light painting the screen\index{screen} travels from top to bottom up to 25 times per second.
-\icode{PerformMainGameUpdate\index{PerformMainGameUpdate}}, along with a routine\index{routine} called \icode{AnimateStarFieldAndScrollPlanets\index{AnimateStarFieldAndScrollPlanets}}
+\icode{PerformMainGameUpdate\index{PerformMainGameUpdate}}, along with a routine\index{routine} called \icode{AnimateStarFieldAndScroll\-Planets\index{AnimateStarFieldAndScrollPlanets}}
 whose purpose you can hopefully guess from its name, are the two gears that grind out the
 gameplay as long as the player is alive and blasting. 
 
@@ -66,9 +68,9 @@ while \icode{PerformMainGameUpdate\index{PerformMainGameUpdate}} is executed onc
 
 \begin{figure}[H]
     \centering
-    \foreach \l in {5368,...,5378}
+    \foreach \l in {5370,...,5378}
     {
-      \includegraphics[width=3cm]{main_game/main_loop/main\l.png}%
+      \includegraphics[width=4cm]{main_game/main_loop/main\l.png}%
     }%
 \caption{The rasterline positiion when \icode{AnimateStarFieldAndScrollPlanets\index{AnimateStarFieldAndScrollPlanets}} and \icode{PerformMainGameUpdate\index{PerformMainGameUpdate}} are called.}
 \end{figure}
@@ -102,93 +104,102 @@ position of the raster when the position of the enemy sprites\index{sprites} on 
 \caption{The rasterline position when the enemies\index{enemies} on the upper and lower planets are updated.}
 \end{figure}
 
+Notice how the upper planet's attack ships are drawn when the raster is near the top of the screen, while those for
+the lower planet are drawn when the raster reaches line 135, exactly half-way down the screen, just in time for them
+to be painted when the raster passes through the lower half of the screen.
+
 The routines for updating the sprites\index{sprites} on the upper and lower planets are identical. If we were writing
 this game in any other language than assembly we would just have one function\index{function} and pass the different
-arrays for each planet\index{planet} in as parameters. 
+arrays for each planet\index{planet} in as parameters.
 
-\begin{minipage}[b]{0.55\linewidth}
+\begin{minipage}[b]{0.50\linewidth}
 \centering
-\begin{lstlisting}[basicstyle=\tiny,escapechar=\%]
+\begin{lstlisting}[basicstyle=\tiny\ttfamily,escapechar=\%]
 DrawUpperPlanetAttackShips%\index{DrawUpperPlanetAttackShips}%
-        LDX #$0C
-        LDY #$06
+  LDX #$0C
+  LDY #$06
 UpperPlanetShipsLoop%\index{UpperPlanetShipsLoop}%   
-        LDA upperPlanetAttackShipsXPosArray%\index{upperPlanetAttackShipsXPosArray}%,Y
-        STA $D000,X  ;Sprite 0 X Pos
+  LDA upperPlanetAttackShipsXPosArray%\index{upperPlanetAttackShipsXPosArray}%,Y
+  STA $D000,X  ;Sprite 0 X Pos
 
-        LDA attackShipsXPosArray%\index{attackShipsXPosArray}% - $01,Y
-        AND $D010    ;Sprites%\index{Sprites}% 0-7 MSB of X coordinate
-        STA currentMSBXPosOffset%\index{currentMSBXPosOffset}%
+  LDA attackShipsXPosArray%\index{attackShipsXPosArray}% - $01,Y
+  AND $D010    ;Sprites%\index{Sprites}% 0-7 MSB of X coordinate
+  STA currentMSBXPosOffset%\index{currentMSBXPosOffset}%
 
-        LDA upperPlanetAttackShipsMSBXPosArray%\index{upperPlanetAttackShipsMSBXPosArray}%,Y
-        AND attackShipsMSBXPosOffsetArray%\index{attackShipsMSBXPosOffsetArray}%,Y
-        ORA currentMSBXPosOffset%\index{currentMSBXPosOffset}%
-        STA $D010    ;Sprites%\index{Sprites}% 0-7 MSB of X coordinate
+  LDA upperPlanetAttackShipsMSBXPosArray%\index{upperPlanetAttackShipsMSBXPosArray}%,Y
+  AND attackShipsMSBXPosOffsetArray%\index{attackShipsMSBXPosOffsetArray}%,Y
+  ORA currentMSBXPosOffset%\index{currentMSBXPosOffset}%
+  STA $D010    ;Sprites%\index{Sprites}% 0-7 MSB of X coordinate
 
-        ; The X-Pos of sprites%\index{sprites}% is fiddly. The MSB manages
-        ; which side of the 512 possible x positions they
-        ; are on.
-        LDA upperPlanetAttackShipsYPosArray%\index{upperPlanetAttackShipsYPosArray}%,Y
-        STA $D001,X  ;Sprite 0 Y Pos
-        STX tempVarStorage%\index{tempVarStorage}%
+  ; The X-Pos of sprites%\index{sprites}% is fiddly. The MSB manages
+  ; which side of the 512 possible x positions they
+  ; are on.
+  LDA upperPlanetAttackShipsYPosArray%\index{upperPlanetAttackShipsYPosArray}%,Y
+  STA $D001,X  ;Sprite 0 Y Pos
+  STX tempVarStorage%\index{tempVarStorage}%
 
-        LDX upperPlanetAttackShipsColorArray%\index{upperPlanetAttackShipsColorArray}%,Y
-        LDA colorsForAttackShips%\index{colorsForAttackShips}%,X
-        STA $D027,Y  ;Sprite 0 Color
+  LDX upperPlanetAttackShipsColorArray%\index{upperPlanetAttackShipsColorArray}%,Y
+  LDA colorsForAttackShips%\index{colorsForAttackShips}%,X
+  STA $D027,Y  ;Sprite 0 Color
 
-        LDA upperPlanetAttackShipsSpriteValueArray%\index{upperPlanetAttackShipsSpriteValueArray}%,Y
-        STA Sprite0Ptr%\index{Sprite0Ptr}%,Y
-        LDX tempVarStorage%\index{tempVarStorage}%
+  LDA upperPlanetAttackShipsSpriteValueArray%\index{upperPlanetAttackShipsSpriteValueArray}%,Y
+  STA Sprite0Ptr%\index{Sprite0Ptr}%,Y
+  LDX tempVarStorage%\index{tempVarStorage}%
 
-        DEX
-        DEX
-        DEY
-        BNE UpperPlanetShipsLoop%\index{UpperPlanetShipsLoop}%
-        RTS
+  DEX
+  DEX
+  DEY
+  BNE UpperPlanetShipsLoop%\index{UpperPlanetShipsLoop}%
+  RTS
 \end{lstlisting}
 \end{minipage}
 \hspace{0.5cm}
-\begin{minipage}[b]{0.55\linewidth}
+\begin{minipage}[b]{0.50\linewidth}
 \centering
-\begin{lstlisting}[basicstyle=\tiny,escapechar=\%]
+\begin{lstlisting}[basicstyle=\tiny\ttfamily,escapechar=\%]
 DrawLowerPlanetAttackShips%\index{DrawLowerPlanetAttackShips}%
-        LDX #$0C
-        LDY #$06
+  LDX #$0C
+  LDY #$06
 LowerPlanetShipsLoop%\index{LowerPlanetShipsLoop}%   
-        LDA lowerPlanetAttackShipsXPosArray%\index{lowerPlanetAttackShipsXPosArray}% + $01,Y
-        STA $D000,X  ;Sprite 0 X Pos
+  LDA lowerPlanetAttackShipsXPosArray%\index{lowerPlanetAttackShipsXPosArray}% + $01,Y
+  STA $D000,X  ;Sprite 0 X Pos
 
-        LDA attackShipsXPosArray%\index{attackShipsXPosArray}% - $01,Y
-        AND $D010    ;Sprites%\index{Sprites}% 0-7 MSB of X coordinate
-        STA currentMSBXPosOffset%\index{currentMSBXPosOffset}%
+  LDA attackShipsXPosArray%\index{attackShipsXPosArray}% - $01,Y
+  AND $D010    ;Sprites%\index{Sprites}% 0-7 MSB of X coordinate
+  STA currentMSBXPosOffset%\index{currentMSBXPosOffset}%
 
-        ; The X-Pos of sprites%\index{sprites}% is fiddly. The MSB manages
-        ; which side of the 512 possible x positions they
-        ; are on.
-        LDA lowerPlanetGilbyBulletMSBXPosValue%\index{lowerPlanetGilbyBulletMSBXPosValue}%,Y
-        AND attackShipsMSBXPosOffsetArray%\index{attackShipsMSBXPosOffsetArray}%,Y
-        ORA currentMSBXPosOffset%\index{currentMSBXPosOffset}%
-        STA $D010    ;Sprites%\index{Sprites}% 0-7 MSB of X coordinate
+  ; The X-Pos of sprites%\index{sprites}% is fiddly. The MSB manages
+  ; which side of the 512 possible x positions they
+  ; are on.
+  LDA lowerPlanetGilbyBulletMSBXPosValue%\index{lowerPlanetGilbyBulletMSBXPosValue}%,Y
+  AND attackShipsMSBXPosOffsetArray%\index{attackShipsMSBXPosOffsetArray}%,Y
+  ORA currentMSBXPosOffset%\index{currentMSBXPosOffset}%
+  STA $D010    ;Sprites%\index{Sprites}% 0-7 MSB of X coordinate
 
-        LDA lowerPlanetAttackShipsYPosArray%\index{lowerPlanetAttackShipsYPosArray}%,Y
-        STA $D001,X  ;Sprite 0 Y Pos
-        STX tempVarStorage%\index{tempVarStorage}%
+  LDA lowerPlanetAttackShipsYPosArray%\index{lowerPlanetAttackShipsYPosArray}%,Y
+  STA $D001,X  ;Sprite 0 Y Pos
+  STX tempVarStorage%\index{tempVarStorage}%
 
-        LDX lowerPlanetAttackShipsColorArray%\index{lowerPlanetAttackShipsColorArray}%,Y
-        LDA colorsForAttackShips%\index{colorsForAttackShips}%,X
-        STA $D027,Y  ;Sprite 0 Color
+  LDX lowerPlanetAttackShipsColorArray%\index{lowerPlanetAttackShipsColorArray}%,Y
+  LDA colorsForAttackShips%\index{colorsForAttackShips}%,X
+  STA $D027,Y  ;Sprite 0 Color
 
-        LDA lowerPlanetAttackShipsSpriteValueArray%\index{lowerPlanetAttackShipsSpriteValueArray}%,Y
-        STA Sprite0Ptr%\index{Sprite0Ptr}%,Y
-        LDX tempVarStorage%\index{tempVarStorage}%
+  LDA lowerPlanetAttackShipsSpriteValueArray%\index{lowerPlanetAttackShipsSpriteValueArray}%,Y
+  STA Sprite0Ptr%\index{Sprite0Ptr}%,Y
+  LDX tempVarStorage%\index{tempVarStorage}%
 
-        DEX
-        DEX
-        DEY
-        BNE LowerPlanetShipsLoop%\index{LowerPlanetShipsLoop}%
-        RTS
+  DEX
+  DEX
+  DEY
+  BNE LowerPlanetShipsLoop%\index{LowerPlanetShipsLoop}%
+  RTS
 \end{lstlisting}
 \end{minipage}
+
+But here, duplication is both convenient and sensible. Trying
+to abstract away the differences and use a single routine would make things unnecessarily complicated. After all, no
+on will ever read this code, right? Right?
+
 
 \section{Scrolling\index{Scrolling} the Planets}
 We want scrolling to be smooth and fast. Moving swiftly or slowly across the planet\index{planet} surface\index{surface}
@@ -500,7 +511,7 @@ We would get a value of \icode{\$03} for our number of characters to move by. TH
   {
     \setlength{\tabcolsep}{3.0pt}
     \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
-    \begin{adjustbox}{width=6cm,center}
+    \begin{adjustbox}{width=8cm,center}
 
       \begin{tabular}{rllllllll}
         \toprule
@@ -516,6 +527,7 @@ We would get a value of \icode{\$03} for our number of characters to move by. TH
     \end{adjustbox}
   }
 \end{figure}
+\vspace{-0.05cm}
 
 And then using \icode{ROR} to shift the bits to the right three times results in \icode{\$03}:
 
@@ -523,7 +535,7 @@ And then using \icode{ROR} to shift the bits to the right three times results in
   {
     \setlength{\tabcolsep}{3.0pt}
     \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
-    \begin{adjustbox}{width=6cm,center}
+    \begin{adjustbox}{width=8cm,center}
 
       \begin{tabular}{rllllllll}
         \toprule
@@ -538,6 +550,7 @@ And then using \icode{ROR} to shift the bits to the right three times results in
     \end{adjustbox}
   }\caption{\icode{ROR} performed three times shifts everything to the right by three bits.}
 \end{figure}
+\vspace{-0.05cm}
 
 But instead of this we're doing an exclusive-or with the value in \icode{planetScrollSpeed\index{planetScrollSpeed}} first:
 
@@ -573,19 +586,20 @@ moving to the right and the value reflects its relative velocity.
   {
     \setlength{\tabcolsep}{3.0pt}
     \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
-    \begin{adjustbox}{width=6cm,center}
+    \begin{adjustbox}{width=8cm,center}
 
-      \begin{tabular}{rllllllll}
+      \begin{tabular}{lcr}
         \toprule
-        When Moving Left &  & & & Stationary &  & & & When Moving Right    \\
+        When Moving Left & Stationary &  When Moving Right    \\
         \midrule
-        \$04 & 03 & 02 & 01 & 00 & FF & FE & FD & FC \\
+        \$04 \$03 \$02 \$01 & \$00 & \$FF \$FE \$FD \$FC \\
         \addlinespace
         \bottomrule
       \end{tabular}
     \end{adjustbox}
   }\caption{Value of \icode{currentGilbySpeed\index{currentGilbySpeed}} when moving left and right.}
 \end{figure}
+\vspace{-0.05cm}
 
 Sure enough, when we look at the calculation using for the character\index{character} scroll offset when moving left, it's what we
 originally envisaged:

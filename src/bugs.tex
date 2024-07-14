@@ -13,22 +13,14 @@
 We must apologise to some of the earliest purchasers of IA, as well... it
 seems that some data was corrupted during the production phase of the
 data duplication, and the first few hundred copies of the game used to bug
-out if you lost at the Bonus Phase All the buggy copies known of have
+out if you lost at the Bonus Phase. All the buggy copies known of have
 been replaced, and all current tapes are fine, but if you find you have a
 buggy version you should send it back to those awfully nice Hewsons
-people and they ll give you an unglitchified one,
+people and they ll give you an unglitchified one.
 \end{definition}
 
-What happened is that the master tape had dropped the very last byte in the second
+What happened is that the mastering process had dropped the very last byte in the second
 section of game data on the tape.
-
-\begin{figure}[H]
-  {
-    \begin{adjustbox}{width=10cm,center}
-      \surface{bugs/spool-sections-glitches.png}
-    \end{adjustbox}
-  }\caption[]{The problematic section of data highlighted in red.}
-\end{figure}
 
 \begin{figure}[H]
   {
@@ -52,6 +44,15 @@ section of game data on the tape.
 
   }\caption{Chunk \icode{BF00} is missing its last byte.}
 \end{figure}
+
+\begin{figure}[H]
+  {
+    \begin{adjustbox}{width=10cm,center}
+      \surface{bugs/spool-sections-glitches.png}
+    \end{adjustbox}
+  }\caption[]{The problematic section of data highlighted in red.}
+\end{figure}
+
 
 \begin{lstlisting}[caption=The data segment as it should be\, with \icode{\$A2} at \icode{\$BFFF},escapechar=\%]
 $BFFF	A2 07       LDX #$07

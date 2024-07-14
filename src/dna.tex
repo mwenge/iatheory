@@ -1,20 +1,17 @@
 \chapter{A Pause Mode for your Pause Mode} 
 \label{sec:dna}
 \lstset{style=6502Style}
+
+Any pause mode must surely be in need of a pause mode. Titled 'DNA' this little entertainment is
+a cousin of Minter's previous work on Psychedelia for the C64 and Colorspace for the Atari 800
+in 1984 and 1985. It isn't accessed directly from the game but instead is invoked by pressing the
+asterisk key while playing 'Made in France'.
+
 \begin{figure}[H]
     \centering
       \includegraphics[width=10cm]{src/dna/dnascreenshot.png}%
 \caption{DNA: A pause mode within a pause mode.}
 \end{figure}
-\begin{lstlisting}[caption=Defining the text for the DNA screen\index{screen},escapechar=\%]
-titleTextLine1%\index{titleTextLine1}%   .TEXT "    % % %  DNA  % % %   "
-titleTextLine2%\index{titleTextLine2}%   .TEXT " CONCEIVED%\index{CONCEIVED}% AND EXECUTED%\index{EXECUTED}% B"
-titleTextLine3%\index{titleTextLine3}%   .TEXT "Y            Y A K       "
-titleTextLine4%\index{titleTextLine4}%   .TEXT " SPACE: CANCEL SCREEN TEX"
-titleTextLine5%\index{titleTextLine5}%   .TEXT "TF5 AND F7 CHANGE COLOURS"
-titleTextLine6%\index{titleTextLine6}%   .TEXT " LISTEN TO TALKING%\index{TALKING}% HEADS."
-titleTextLine7%\index{titleTextLine7}%   .TEXT ".BE NICE TO HAIRY ANIMALS%\index{ANIMALS}% "
-\end{lstlisting}
 
 \begin{figure}[H]
 
@@ -31,10 +28,15 @@ titleTextLine7%\index{titleTextLine7}%   .TEXT ".BE NICE TO HAIRY ANIMALS%\index
 \end{figure}
 \clearpage
 
-Any pause mode must surely be in need of a pause mode. Titled 'DNA' this little entertainment is
-a cousin of Minter's previous work on Psychedelia for the C64 and Colorspace for the Atari 800
-in 1984 and 1985. It isn't accessed directly from the game but instead is invoked by pressing the
-asterisk key while playing 'Made in France'.
+\begin{lstlisting}[caption=Defining the text for the DNA screen\index{screen},escapechar=\%]
+titleTextLine1%\index{titleTextLine1}%   .TEXT "    % % %  DNA  % % %   "
+titleTextLine2%\index{titleTextLine2}%   .TEXT " CONCEIVED%\index{CONCEIVED}% AND EXECUTED%\index{EXECUTED}% B"
+titleTextLine3%\index{titleTextLine3}%   .TEXT "Y            Y A K       "
+titleTextLine4%\index{titleTextLine4}%   .TEXT " SPACE: CANCEL SCREEN TEX"
+titleTextLine5%\index{titleTextLine5}%   .TEXT "TF5 AND F7 CHANGE COLOURS"
+titleTextLine6%\index{titleTextLine6}%   .TEXT " LISTEN TO TALKING%\index{TALKING}% HEADS."
+titleTextLine7%\index{titleTextLine7}%   .TEXT ".BE NICE TO HAIRY ANIMALS%\index{ANIMALS}% "
+\end{lstlisting}
 
 Minter first shared it as a tiny 11K demo in a UK Compunet forum in the summer of 
 1986. It followed shortly after 'Torus', an oscillator-based demo, shared at the same time and which we
@@ -102,16 +104,14 @@ for the right hand chain, it shows the value in
 
 \begin{minipage}[b]{0.75\linewidth}
 \centering
-\begin{lstlisting}[caption=\icode{dnaCurrentPhase\index{dnaCurrentPhase}} is set by the 'Q' key.,escapechar=\%]
+\begin{lstlisting}[caption=\icode{dnaCurrentPhase\index{dnaCurrentPhase}} is
+set by the 'Q' key. ,basicstyle=\scriptsize\ttfamily,escapechar=\%]
   LDX dnaCurrentSpritesPosArrayIndex%\index{dnaCurrentSpritesPosArrayIndex}%
   ..
-  ; Add in the phase to our index to the X position
-  ; of the sprite on the right hand chain. If the 
-  ; result is greater than the number of values
-  ; in the array ($27) subtract it out again.
-  ; This means the 'Phase' setting  acts as an 
-  ; offset into the X Position array  picking up 
-  ; previous values of X Pos from the left hand chain.
+  ; Add in the phase to our index to the X position of the 
+  ; sprite on the right hand chain. If the result is greater
+  ; than the number of values in the array ($27) subtract it
+  ; out again.
   TXA
   ..
   ADC dnaCurrentPhase%\index{dnaCurrentPhase}%
@@ -134,8 +134,11 @@ UpdateXPosWithPhase%\index{UpdateXPosWithPhase}%
 \begin{minipage}[b]{0.25\linewidth}
 \centering
       \includegraphics[width=3cm]{dna/dnaphase.png}%
-      \vspace{5cm}
+      \vspace{2cm}
 \end{minipage}
+In essence, the 'Phase' setting  acts as an offset into the X
+Position array picking up previous values of X Pos from the left hand
+chain.
 
 In the table below we've selected a few frames from the first second or two showing how the array fills up and how values from
 the array are selected for the X position of the left and right chains. Notice how the 'Phase' setting of 5 effectively means
@@ -155,11 +158,11 @@ the right-hand chain lags 5 'eyeballs' behind the left chain in terms of the pos
     } &
     \makecell[l]{
       \lstinputlisting[linewidth=4.5cm,framexleftmargin=-0.1cm,framexrightmargin=-0.22cm,
-          basicstyle=\tiny,escapechar=!,backgroundcolor=\color{white},frame=single,framerule=0pt]{dna/initial/frame46.tex}
+          basicstyle=\tiny\ttfamily,escapechar=!,backgroundcolor=\color{white},frame=single,framerule=0pt]{dna/initial/frame46.tex}
     } &
     \makecell[l]{
       \lstinputlisting[linewidth=4.5cm,framexleftmargin=-0.1cm,framexrightmargin=-0.22cm,
-          basicstyle=\tiny,escapechar=!,backgroundcolor=\color{white},frame=single,framerule=0pt]{dna/initial/frame46r.tex}
+          basicstyle=\tiny\ttfamily,escapechar=!,backgroundcolor=\color{white},frame=single,framerule=0pt]{dna/initial/frame46r.tex}
     } \\
     \addlinespace
     \makecell[l]{
@@ -167,11 +170,11 @@ the right-hand chain lags 5 'eyeballs' behind the left chain in terms of the pos
     } &
     \makecell[l]{
       \lstinputlisting[linewidth=4.5cm,framexleftmargin=-0.1cm,framexrightmargin=-0.22cm,
-          basicstyle=\tiny,escapechar=!,backgroundcolor=\color{white},frame=single,framerule=0pt]{dna/initial/frame58.tex}
+          basicstyle=\tiny\ttfamily,escapechar=!,backgroundcolor=\color{white},frame=single,framerule=0pt]{dna/initial/frame58.tex}
     } &
     \makecell[l]{
       \lstinputlisting[linewidth=4.5cm,framexleftmargin=-0.1cm,framexrightmargin=-0.22cm,
-          basicstyle=\tiny,escapechar=!,backgroundcolor=\color{white},frame=single,framerule=0pt]{dna/initial/frame58r.tex}
+          basicstyle=\tiny\ttfamily,escapechar=!,backgroundcolor=\color{white},frame=single,framerule=0pt]{dna/initial/frame58r.tex}
     } \\
     \addlinespace
     \makecell[l]{
@@ -179,11 +182,11 @@ the right-hand chain lags 5 'eyeballs' behind the left chain in terms of the pos
     } &
     \makecell[l]{
       \lstinputlisting[linewidth=4.5cm,framexleftmargin=-0.1cm,framexrightmargin=-0.22cm,
-          basicstyle=\tiny,escapechar=!,backgroundcolor=\color{white},frame=single,framerule=0pt]{dna/initial/frame67.tex}
+          basicstyle=\tiny\ttfamily,escapechar=!,backgroundcolor=\color{white},frame=single,framerule=0pt]{dna/initial/frame67.tex}
     } &
     \makecell[l]{
       \lstinputlisting[linewidth=4.5cm,framexleftmargin=-0.1cm,framexrightmargin=-0.22cm,
-          basicstyle=\tiny,escapechar=!,backgroundcolor=\color{white},frame=single,framerule=0pt]{dna/initial/frame67r.tex}
+          basicstyle=\tiny\ttfamily,escapechar=!,backgroundcolor=\color{white},frame=single,framerule=0pt]{dna/initial/frame67r.tex}
     } \\
     \addlinespace
       \bottomrule
@@ -303,17 +306,11 @@ UpdateHeadOfWave%\index{UpdateHeadOfWave}%
 \end{lstlisting}
 
 When we compare the routines responsible for calculating the X Pos for Wave 2 and Wave 1 side by side on the next
-page we can see many similarities between the two. They are both maintaining and updating an index into 
-\icode{newXPosOffsetsArray\index{newXPosOffsetsArray}} and using that to come up with a new X position. They both have to deal towards the end
-of the routine\index{routine} with the need to ensure the index does not exceed \icode{\$40} and subtract \icode{\$40} from it if
-it does. The output of \icode{CalculateValueOfNewXPosForWave2} is essentially the value stored in \icode{notionalNewXPosForWave2\index{notionalNewXPosForWave2}}
-and this is what is used as the input above, in conjunction with \icode{newXPosForWave1\index{newXPosForWave1}}, to come up with the final
-value for the X position for Wave 1. It is this value that gets added to the head of the working array \icode{dnaXPosDataHeadArray}
-by \icode{DNA\_PropagatePreviousXPosToTheRight}.
+page we can see many similarities between the two.
 
-\begin{minipage}[b]{0.55\linewidth}
+\begin{minipage}[b]{0.50\linewidth}
 \centering
-\begin{lstlisting}[escapechar=\%,basicstyle=\tiny, caption=Calculate a notional X Pos value for Wave 2. This routine\index{routine} is called by the one on the
+\begin{lstlisting}[escapechar=\%,basicstyle=\tiny\ttfamily, caption=Calculate a notional X Pos value for Wave 2. This routine\index{routine} is called by the one on the
 right\, its return value is \icode{notionalNewXPosForWave2\index{notionalNewXPosForWave2}}. ]
 CalculateValueOfNewXPosForWave2
   LDA dnaWave2Enabled%\index{dnaWave2Enabled}%
@@ -367,9 +364,9 @@ NoLoopingRequired%\index{NoLoopingRequired}%
 \end{lstlisting}
 \end{minipage}
 \hspace{0.5cm}
-\begin{minipage}[b]{0.55\linewidth}
+\begin{minipage}[b]{0.50\linewidth}
 \centering
-  \begin{lstlisting}[escapechar=\%,basicstyle=\tiny, caption=Calculate the new X Pos value for the head sprites\index{sprites}\, as well as propagate the
+  \begin{lstlisting}[escapechar=\%,basicstyle=\tiny\ttfamily, caption=Calculate the new X Pos value for the head sprites\index{sprites}\, as well as propagate the
   values in \icode{dnaXPosDataHeadArray} to the right when required.]
 CalculateValueOfNewXPosForWave1
   DEC actualSpeed%\index{actualSpeed}%
@@ -434,6 +431,14 @@ ReturnFromUpdatingHead%\index{ReturnFromUpdatingHead}%
 \end{lstlisting}
 \end{minipage}
 
+
+They are both maintaining and updating an index into 
+\icode{newXPosOffsetsArray\index{newXPosOffsetsArray}} and using that to come up with a new X position. They both have to deal towards the end
+of the routine\index{routine} with the need to ensure the index does not exceed \icode{\$40} and subtract \icode{\$40} from it if
+it does. The output of \icode{CalculateValueOfNewXPosForWave2} is essentially the value stored in \icode{notionalNewXPosForWave2\index{notionalNewXPosForWave2}}
+and this is what is used as the input above, in conjunction with \icode{newXPosForWave1\index{newXPosForWave1}}, to come up with the final
+value for the X position for Wave 1. It is this value that gets added to the head of the working array \icode{dnaXPosDataHeadArray}
+by \icode{DNA\_PropagatePreviousXPosToTheRight}.
 
 
 

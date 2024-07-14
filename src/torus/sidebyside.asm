@@ -13,23 +13,26 @@ PlayTitleScreenMusic                                            PlayTitleScreenM
                                    
          DEC numberOfNotesToPlayInTune                                  DEC numberOfNotesToPlayInTune
          BNE MaybePlayVoice1                                            BNE MaybePlayVoice1
-                                                                                                 
+         
+         ; Select new notes every time we enter
+         ; the routine.                                                                                        
          JSR SelectNewNotesToPlay        
 
          ; Set up a new tune.                                           ; Set up a new tune.
          LDA #$C0                                                       LDA #$C0
          STA numberOfNotesToPlayInTune                                  STA numberOfNotesToPlayInTune
                                                                  
-                                                                        ; This is what will eventually time us out of
-                                                                        ; the title music and enter attract mode.
+                                                                        ; This is what will eventually time us out
+                                                                        ; of the music and enter attract mode.
                                                                         INC f7PressedOrTimedOutToAttractMode
            
          LDX notesPlayedSinceLastKeyChange                              LDX notesPlayedSinceLastKeyChange
          LDA titleMusicNoteArray,X                                      LDA titleMusicNoteArray,X
          STA offsetForNextVoice1Note                                    STA offsetForNextVoice1Note
                                                                  
-         ; We'll only select a new tune when we've reached the          ; We'll only select a new tune when we've reached
-         ; beginning of a new 16 bar structure.                         ; the beginning of a new 16 bar structure.
+                                                                        ; We'll only select a new tune when
+                                                                        ; we've reached the beginning of a
+                                                                        ; new 16 bar structure.            
          INX                                                            INX
          TXA                                                            TXA
          AND #$03                                                       AND #$03
@@ -70,8 +73,8 @@ PlayTitleScreenMusic                                            PlayTitleScreenM
          CLC                                                            CLC
          ADC offsetForNextVoice2Note                                    ADC offsetForNextVoice2Note
                                                                 
-         ; Use this new value to change the key of the next four        ; Use this new value to change the key of the next four
-         ; notes played by voice 3.                                     ; notes played by voice 3. 
+         ; Use this new value to change the key of                      ; Use this new value to change the key of   
+         ; the next four notes played by voice 3.                       ; the next four notes played by voice 3.                
          STA offsetForNextVoice3Note                                    STA offsetForNextVoice3Note
                                                                 
          TAY                                                            TAY
@@ -89,7 +92,8 @@ PlayTitleScreenMusic                                            PlayTitleScreenM
          STA voice3NoteDuration                                         STA voice3NoteDuration
                                                                 
          ; Play the note currently pointed to by                        ; Play the note currently pointed to by 
-         ; voice3IndexToMusicNoteArray in titleMusicNoteArray.          ; voice3IndexToMusicNoteArray in titleMusicNoteArray.
+         ; voice3IndexToMusicNoteArray in                               ; voice3IndexToMusicNoteArray in
+         ; titleMusicNoteArray.                                         ; titleMusicNoteArray.
          LDX voice3IndexToMusicNoteArray                                LDX voice3IndexToMusicNoteArray
          LDA titleMusicNoteArray,X                                      LDA titleMusicNoteArray,X
          CLC                                                            CLC
@@ -97,12 +101,12 @@ PlayTitleScreenMusic                                            PlayTitleScreenM
          TAY                                                            TAY
          JSR PlayVoice3                                                 JSR PlayNoteVoice3
                                                                                                                                
-        ; Move voice3IndexToMusicNoteArray to the next                 ; Move voice3IndexToMusicNoteArray to the next
-         ; position in titleMusicNoteArray.                            ; position in titleMusicNoteArray.
+         ; Move voice3IndexToMusicNoteArray to the                     ; Move voice3IndexToMusicNoteArray to the
+         ; next position in titleMusicNoteArray.                       ; next position in titleMusicNoteArray.
          INX                                                           INX
          TXA                                                           TXA
-         ; Since it's only 4 bytes long ensure we wrap                 ; Since it's only 4 bytes long ensure we wrap
-         ; back to 0 if it's greater than 3.                           ; back to 0 if it's greater than 3.
+         ; Since it's only 4 bytes long ensure we                      ; Since it's only 4 bytes long ensure we
+         ; wrap back to 0 if it's greater than 3.                      ; wrap back to 0 if it's greater than 3.
          AND #$03                                                      AND #$03
          STA voice3IndexToMusicNoteArray                               STA voice3IndexToMusicNoteArray
                                                                                      

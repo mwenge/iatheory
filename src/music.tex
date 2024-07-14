@@ -295,22 +295,26 @@ note table in the game. This pair of arrays are where the title music logic pluc
 dynamically selected one:
 
 
+\begin{lstlisting}[escapechar=\%]
+titleMusicHiBytes%\index{titleMusicHiBytes}%
+  ;      C   C#  D   D#  E   F   F#  G   G#  A   A#  B
+  .BYTE $08,$08,$09,$09,$0A,$0B,$0B,$0C,$0D,$0E,$0E,$0F  ; 4
+  .BYTE $10,$11,$12,$13,$15,$16,$17,$19,$1A,$1C,$1D,$1F  ; 5
+  .BYTE $21,$23,$25,$27,$2A,$2C,$2F,$32,$35,$38,$3B,$3F  ; 6
+  .BYTE $43,$47,$4B,$4F,$54,$59,$5E,$64,$6A,$70,$77,$7E  ; 7
+  .BYTE $86,$8E,$96,$9F,$A8,$B3,$BD,$C8,$D4,$E1,$EE,$FD  ; 8
+\end{lstlisting}
+\clearpage
 \begin{lstlisting}[escapechar=\%,caption=The lookup table for all of the notes used in the theme music. The two lowest available octaves\index{octaves} are not
 used by the game. To see this for yourself\, compare the first entry in \icode{titleMusicHiBytes\index{titleMusicHiBytes}}/\icode{titleMusicLowBytes\index{titleMusicLowBytes}} (\$08 and \$61\,
-giving \$0861) with the entry highlighted in red in the previous table.,basicstyle=\tiny]
-                    ;      C   C#  D   D#  E   F   F#  G   G#  A   A#  B
-titleMusicHiBytes%\index{titleMusicHiBytes}%   .BYTE $08,$08,$09,$09,$0A,$0B,$0B,$0C,$0D,$0E,$0E,$0F  ; 4
-                    .BYTE $10,$11,$12,$13,$15,$16,$17,$19,$1A,$1C,$1D,$1F  ; 5
-                    .BYTE $21,$23,$25,$27,$2A,$2C,$2F,$32,$35,$38,$3B,$3F  ; 6
-                    .BYTE $43,$47,$4B,$4F,$54,$59,$5E,$64,$6A,$70,$77,$7E  ; 7
-                    .BYTE $86,$8E,$96,$9F,$A8,$B3,$BD,$C8,$D4,$E1,$EE,$FD  ; 8
-
-                    ;      C   C#  D   D#  E   F   F#  G   G#  A   A#  B
-titleMusicLowBytes%\index{titleMusicLowBytes}%  .BYTE $61,$E1,$68,$F7,$8F,$30,$DA,$8F,$4E,$18,$EF,$D2  ; 4
-                    .BYTE $C3,$C3,$D1,$EF,$1F,$60,$B5,$1E,$9C,$31,$DF,$A5  ; 5
-                    .BYTE $87,$86,$A2,$DF,$3E,$C1,$6B,$3C,$39,$63,$BE,$4B  ; 6
-                    .BYTE $0F,$0C,$45,$BF,$7D,$83,$D6,$79,$73,$C7,$7C,$97  ; 7
-                    .BYTE $1E,$18,$8B,$7E,$FA,$06,$AC,$F3,$E6,$8F,$F8,$2E  ; 8
+giving \$0861) with the entry highlighted in red in the previous table.]
+titleMusicLowBytes%\index{titleMusicLowBytes}% 
+  ;      C   C#  D   D#  E   F   F#  G   G#  A   A#  B
+  .BYTE $61,$E1,$68,$F7,$8F,$30,$DA,$8F,$4E,$18,$EF,$D2  ; 4
+  .BYTE $C3,$C3,$D1,$EF,$1F,$60,$B5,$1E,$9C,$31,$DF,$A5  ; 5
+  .BYTE $87,$86,$A2,$DF,$3E,$C1,$6B,$3C,$39,$63,$BE,$4B  ; 6
+  .BYTE $0F,$0C,$45,$BF,$7D,$83,$D6,$79,$73,$C7,$7C,$97  ; 7
+  .BYTE $1E,$18,$8B,$7E,$FA,$06,$AC,$F3,$E6,$8F,$F8,$2E  ; 8
 \end{lstlisting}
 
 So now that we know where the notes are and how to make them go beep we just have to figure out the order that \icode{PlayTitleScreenMusic\index{PlayTitleScreenMusic}}
@@ -321,8 +325,8 @@ music in Western notation.
 
 \begin{figure}[H]
 {
-  \begin{adjustbox}{width=11cm,center}
-  \includegraphics[width=11cm]{music/title_no_1_page_1001.png}%
+  \begin{adjustbox}{width=13cm,center}
+  \includegraphics{music/title_no_1_page_1001.png}%
     \end{adjustbox}
 }\caption[]{The first title tune in Iridis Alpha.}
 \end{figure}
@@ -367,7 +371,7 @@ voices.
 
 Here it is deciding whether or not to play new note on Voice 1:
 
-\begin{lstlisting}[caption=\icode{MaybePlayVoice1\index{MaybePlayVoice1}}\, part of \icode{PlayTitleScreenMusic\index{PlayTitleScreenMusic}}.,basicstyle=\tiny,escapechar=\%]
+\begin{lstlisting}[caption=\icode{MaybePlayVoice1\index{MaybePlayVoice1}}\, part of \icode{PlayTitleScreenMusic\index{PlayTitleScreenMusic}}.,escapechar=\%]
 MaybePlayVoice1%\index{MaybePlayVoice1}%   
         DEC voice1NoteDuration%\index{voice1NoteDuration}%
         BNE MaybePlayVoice2%\index{MaybePlayVoice2}%
@@ -447,7 +451,7 @@ MaybePlayVoice3%\index{MaybePlayVoice3}%
         AND #$03
         STA voice3IndexToMusicNoteArray%\index{voice3IndexToMusicNoteArray}%
 \end{lstlisting}
-
+\clearpage
 \begin{definition}[Extracting the Title Music]
 \setlength{\intextsep}{0pt}%
 \setlength{\columnsep}{3pt}%
@@ -477,16 +481,16 @@ tr store D400 D415
 
 We end up with \icode{IridisAlphaTitleMusicAll.txt} full of lines like:
 
-\begin{lstlisting}[basicstyle=\tiny,escapechar=\%]
+\begin{lstlisting}[basicstyle=\footnotesize\ttfamily,escapechar=\%]
 TRACE: 1  C:$d400-$d415  (Trace store)
 #1 (Trace store d400)  279 052
-.C:1598  8D 00 D4    STA $D400      - A:61 X:00 Y:00 SP:e8 ..-..I..   96135469
+.C:1598  8D 00 D4    STA $D400 - A:61 X:00 Y:00 SP:e8 96135469
 #1 (Trace store d401)  279 060
-.C:159e  8D 01 D4    STA $D401      - A:08 X:00 Y:00 SP:e8 ..-..I..   96135477
+.C:159e  8D 01 D4    STA $D401 - A:08 X:00 Y:00 SP:e8 96135477
 #1 (Trace store d40b)  280 059
 \end{lstlisting}
 
-This examples gives us the value in \icode{A} written to each register\index{register} for Voice 1. For example, \icode{\$61}
+This snppiet gives us the value in \icode{A} written to each register\index{register} for Voice 1. For example, \icode{\$61}
 has been written to \icode{\$D400} and \icode{\$08} has been written to \icode{\$D401}.
 
 We can now write a short Python \href{https://github.com/mwenge/iatheory/tree/main/notebooks}{notebook} that
@@ -497,10 +501,16 @@ translates to 'C-3'.
 
 With the sequence\index{sequence} of notes in three arrays, each representing one of the 3 voices, it is a simple
 matter to transform this into ABC format, a music notation frequently used for traditional music.
+\end{definition}
+\clearpage
+\begin{definition}[Extracting the Title Music cont.]
+\setlength{\intextsep}{0pt}%
+\setlength{\columnsep}{3pt}%
+\small
 
-\lstinputlisting[caption=Title Tune No 1 in ABC format, basicstyle=\tiny]{music/title_no_1_page_1.abc}
+\lstinputlisting[caption=Title Tune No 1 in ABC format, basicstyle=\tiny\ttfamily]{music/title_no_1_page_1.abc}
 
-We can then use the tool `abcm2ps` to transform this into an SVG image file giving the music in
+  We can then use the tool \icode{abcm2ps} to transform this into an SVG image file giving the music in
 standard Western notation.
 
 \end{definition}
@@ -558,8 +568,8 @@ tonic formula, e.g. C3-G3-C4-G3.
 
   }\caption{The value in \icode{titleMusicNoteArray\index{titleMusicNoteArray}} is an index into \icode{titleMusicHiBytes\index{titleMusicHiBytes}/titleMusicLowBytes\index{titleMusicLowBytes}}.}
 \end{figure}
-
 Playing the 4 note phrase we've stored in this array is done here:
+\clearpage
 
 \begin{lstlisting}[escapechar=\%]
         ; Play the note currently pointed to by 
@@ -631,7 +641,7 @@ are played by Voice 3 in its first bar, Voice 2 in its first 4 bars, and Voice 1
 
 \begin{figure}[H]
 {
-  \begin{adjustbox}{width=11cm,center}
+  \begin{adjustbox}{width=13cm,center}
   \includegraphics[width=11cm]{music/16BarStructure_Tune14.png}%
     \end{adjustbox}
 }\caption[]{A full 16 bar passage showing the nested structure\index{structure} of Voices 1 and 2}

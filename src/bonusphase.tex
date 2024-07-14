@@ -1,9 +1,40 @@
 \chapter{Congoatulations Hotshot} 
 \label{sec:bonus}
-
 \lstset{style=6502Style}
 
-This decidedly ropey mini-game has a few interesting features.
+If you are a good boy, and transfer enough energy to the planets' cores, then you too can
+get to play Iridis Alpha's decidedly ropey mini-game. 
+
+\begin{lstlisting}[escapechar=\%, caption=\icode{bonusPhaseEarned} is set once \icode{currCoreEnergyLevel} reaches 14.]
+EnterBonusPhaseInterruptHandler%\index{EnterBonusPhaseInterruptHandler}%   
+UpdateCoreEnergyLevel
+        LDX currCoreEnergyLevel
+        ..
+UpdateCoreGraphic   
+        DEC SCREEN_RAM + LINE23_COL13,X
+        LDA SCREEN_RAM + LINE23_COL13,X
+        CMP #$7F
+        BNE ReturnFromCoreEnergyLevel
+        LDA #$80
+        STA SCREEN_RAM + LINE23_COL13,X
+        INX
+        ; Has currCoreEnergyLevel reached 14 yet?
+        CPX #14
+        ; If so, you get to play the bonus phase.
+        BEQ MaybeEarnedBonusPhase
+
+        ...
+MaybeEarnedBonusPhase   
+        LDA lowerPlanetActivated
+        BEQ EarnedBonusPhase
+        DEX
+        JMP FinalizeLevelAndReturn
+
+EarnedBonusPhase   
+        INC bonusPhaseEarned
+ReturnFromCoreEnergyLevel   
+        RTS
+\end{lstlisting}
 
 \section{Entry Sequence}
 \begin{figure}[H]
@@ -11,6 +42,16 @@ This decidedly ropey mini-game has a few interesting features.
       \includegraphics[width=10cm]{src/bonusphase/entry/bonus_entry_example.png}%
 \caption{The entry sequence\index{sequence}.}
 \end{figure}
+
+\begin{lstlisting}[escapechar=\%, caption=Good boys pass this test.]
+MaybeGoToBonusPhase
+        LDA bonusPhaseEarned
+        BEQ ResumeMainGameAgain
+        SEI
+        JSR StoreStatusBarDetail
+        JSR ClearScreen3
+        JSR DisplayEnterBonusRoundScreen
+\end{lstlisting}
 
 The entry sequence\index{sequence} is an animated cascade of colored bars that appears to roll
 down from the top of the screen\index{screen}. You might assume we achieve this effect by simply
@@ -302,7 +343,7 @@ of bytes. In all we define 32 rows of different types so when we come up
 with a map for the level we are simply referencing each of these rows by their
 index in the array. Here is the data structure\index{structure} defining each of the 32 rows:
 
-\begin{lstlisting}[basicstyle=\tiny,escapechar=\%]
+\begin{lstlisting}[basicstyle=\tiny\ttfamily,escapechar=\%]
 bonusPhaseMapRowDefinitions%\index{bonusPhaseMapRowDefinitions}%   
         .BYTE $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; 00
         .BYTE $0D,$0D,$0E,$0E,$0E,$0E,$0E,$00,$00,$0B,$0B,$00,$00,$0D,$0D,$0D,$0D,$0D,$0E,$0E 
@@ -341,7 +382,7 @@ bonusPhaseMapRowDefinitions%\index{bonusPhaseMapRowDefinitions}%
 
 The one at index \icode{\$15} (21 in decimal\index{decimal}) is this guy:
 
-\begin{lstlisting}[basicstyle=\tiny,escapechar=\%]
+\begin{lstlisting}[basicstyle=\tiny\ttfamily,escapechar=\%]
 bonusPhaseMapRowDefinitions%\index{bonusPhaseMapRowDefinitions}%   
         .BYTE $00,$10,$0B,$11,$00,$00,$10,$0B,$11,$00,$00,$10,$0B,$11,$00,$00,$10,$0B,$11,$00
 \end{lstlisting}
@@ -534,7 +575,7 @@ for when the player scrolls down. They're nearly identical.
 
 \begin{minipage}[b]{0.45\linewidth}
 \centering
-\begin{lstlisting}[basicstyle=\tiny,escapechar=\%]
+\begin{lstlisting}[basicstyle=\tiny\ttfamily,escapechar=\%]
 BonusPhaseFillTopLineAfterScrollUp%\index{BonusPhaseFillTopLineAfterScrollUp}%   
         LDX offsetForScrollUp%\index{offsetForScrollUp}%
         LDY bonusPhaseMapDefinition%\index{bonusPhaseMapDefinition}%,X
@@ -575,7 +616,7 @@ ReturnEarly%\index{ReturnEarly}%
 \hspace{0.5cm}
 \begin{minipage}[b]{0.45\linewidth}
 \centering
-\begin{lstlisting}[basicstyle=\tiny,escapechar=\%]
+\begin{lstlisting}[basicstyle=\tiny\ttfamily,escapechar=\%]
 BonusPhaseFillBottomLineAfterScrollDown%\index{BonusPhaseFillBottomLineAfterScrollDown}%   
         LDX offsetForScrollDown%\index{offsetForScrollDown}%
         LDY bonusPhaseMapDefinition%\index{bonusPhaseMapDefinition}%,X
@@ -670,7 +711,7 @@ bonusPhaseMapDefinition%\index{bonusPhaseMapDefinition}%
 
 The trick is that these segments aren't themselves
 generated procedurally\index{procedurally}, we defined them in advance.  We did this in \icode{bonusMapSegmentArray\index{bonusMapSegmentArray}}
-given below. We've highlighted the segments used in our map in red:
+given below.
 
 \begin{lstlisting}[escapechar=\%]
 bonusMapSegmentArray%\index{bonusMapSegmentArray}%
@@ -709,7 +750,7 @@ bonusMapSegmentArray%\index{bonusMapSegmentArray}%
 \end{lstlisting}
 
 By way of example this is what the last segment in the list above looks like when 
-rendered as a section of our map:
+rendered as a section of our map (remember to read from back to front):
 
 \begin{figure}[H]
   {
@@ -760,7 +801,13 @@ pseudo-random order and stacking them on top of one another!
 
 
 \section{Some Very Ugly Sprites\index{Sprites}}
-For some reason the gilby sprite in the bonus phase is made impossibly ugly.
+There is no escaping the obvious: the gilby sprite in the bonus phase is impossibly ugly. It's such a contrast with the
+elegance of the main game's gilby sprite that for me it spoils the effect of the mini-game completely.
+
+There is of course
+a simple technical reason why the gilby sprite design is completely unsuitable for the vertical orientation used in the
+bonus phase. Multi-coloured sprites cannot be defined in terms of single pixels - the building blocks are always two pixels
+wide so it is by definition not possible to create an object oriented on the Y axis that does not look unappealingly blocky.
 
 \begin{figure}[H]
   {
@@ -844,7 +891,8 @@ For some reason the gilby sprite in the bonus phase is made impossibly ugly.
 \end{figure}
 
 \section{IBalls}
-
+The main adversary in the bonus phase, these at least have the merit of being visually appealing. The blinking animation is
+particularly pleasing, if a little eerie!
 \begin{figure}[H]
   {
     \setlength{\tabcolsep}{1.0pt}

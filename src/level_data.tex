@@ -93,7 +93,7 @@ the sheer variety of adversaries the player faces.
 \section{Something Simple - Byte 0: The Enemy's Color}
 To get an understanding of how the level data is used we can start with the very first byte of the data
 used for the first wave in the very first level. This is the wave of flying saucers you will already be
-familiar with if you have played the game (:)):
+familiar with if you have played the game:
 \begin{figure}[H]
   {
     \setlength{\tabcolsep}{3.0pt}
@@ -122,8 +122,8 @@ that this is defined with a value of \icode{\$06}. This is how it looks in the c
 
 \begin{lstlisting}[escapechar=\%]
 planet1Level1Data%\index{planet1Level1Data}%
-    ; Byte 0 (Index $00): An index into colorsForAttackShips%\index{colorsForAttackShips}% that applies a
-    ; color value for the ship sprite.
+    ; Byte 0 (Index $00): An index into colorsForAttackShips%\index{colorsForAttackShips}% 
+    ; that applies a color value for the ship sprite.
     .BYTE $06
 \end{lstlisting}
 
@@ -139,9 +139,6 @@ In the routine\index{routine} that draws the attack wave we find the following c
 to the register\index{register} \icode{\$D027} that determines the color of the sprite:
 
 \begin{lstlisting}[escapechar=\%]
-;-------------------------------------------------------
-; DrawUpperPlanetAttackShips%\index{DrawUpperPlanetAttackShips}% Routine
-;-------------------------------------------------------
 DrawUpperPlanetAttackShips%\index{DrawUpperPlanetAttackShips}%
     LDX #$0C
     LDY #$06
@@ -208,7 +205,7 @@ that's done now; took me about three weeks in all I'd say.
 	\begin{subfigure}{0.3\textwidth}
 		\input{sprites/CUMMING_COCK3}
 	\end{subfigure}
-  }\caption[position=top]{Confirmation that the game developer was a young male. The sprites\index{sprites} used to animate attack wave 17 in the Mushroom Planet.}
+  }\caption[position=top]{Confirmation that the game developer was a young caucasian male. The sprites\index{sprites} used to animate attack wave 17 in the Mushroom Planet.}
 \end{figure}
 
 Looking again at the table in the previous page we can see the first 7 bytes are concerned with the appearance and basic behaviour of the
@@ -776,7 +773,7 @@ are treated as providing the address \icode{\$1370}. This is the location where 
 
 
 
-\begin{table}[H]
+\begin{figure}[H]
   {
     \setlength{\tabcolsep}{3.0pt}
     \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
@@ -803,7 +800,7 @@ are treated as providing the address \icode{\$1370}. This is the location where 
     \end{adjustbox}
 
   }\caption{Actual use of Bytes 6, 7, and 8. Note that the value in Byte 6 doesn't matter, as long as it's non-zero.}
-\end{table}
+\end{figure}
 
 
 \section{Bytes 22-23: The Bytes of Death}
@@ -834,11 +831,11 @@ until they lose a life. This behavious is defined by Bytes 22 and 23.
 \begin{lstlisting}[escapechar=\%]
 lickerShipWaveData%\index{lickerShipWaveData}% = $1118
   ..
-  ; Byte 22 (Index $16): Stickiness%\index{Stickiness}% factor, does the enemy stick to the player
-  ; sapping their energy%\index{energy}% if they're near them?
+  ; Byte 22 (Index $16): Stickiness%\index{Stickiness}% factor, does the enemy stick to
+  ; the player sapping their energy%\index{energy}% if they're near them?
   .BYTE $01
-  ; Byte 23 (Index $17): Does the enemy gravitate quickly toward the player when its
-  ; been shot? (Typical lickership%\index{lickership}% behaviour)
+  ; Byte 23 (Index $17): Does the enemy gravitate quickly toward the
+  ; player when its been shot? (Typical lickership%\index{lickership}% behaviour)
   .BYTE $01
   ..
 \end{lstlisting}
@@ -849,7 +846,8 @@ If we leave out the slightly complicated logic to figure out where the gilby is 
 
 \begin{lstlisting}[escapechar=\%]
 MaybeQuicklyGravitatesToGilby%\index{MaybeQuicklyGravitatesToGilby}%
-  ; Byte 23:  Does the enemy gravitate quickly towards the gilby when it is shot?
+  ; Byte 23:  Does the enemy gravitate quickly towards the gilby
+  ; when it is shot?
   LDY #$17
   LDA (currentShipWaveDataLoPtr%\index{currentShipWaveDataLoPtr}%),Y
   BEQ MaybeStickyAttackShipBehaviour%\index{MaybeStickyAttackShipBehaviour}%
@@ -947,7 +945,8 @@ IncreaseEnergyTop%\index{IncreaseEnergyTop}%
     LDA SCREEN_RAM%\index{SCREEN\_RAM}% + LINE22_COL3%\index{LINE22\_COL3}%,X
     CMP #$7F
     BNE b547B
-    ; Note the reference to the index $80 of the first tile in the set above.
+    ; Note the reference to the index $80 of the first tile
+    ; in the set above.
     LDA #$80 
     STA SCREEN_RAM%\index{SCREEN\_RAM}% + LINE22_COL3%\index{LINE22\_COL3}%,X
     INX
@@ -1063,11 +1062,13 @@ UpdateAttackShipDataForNewShip%\index{UpdateAttackShipDataForNewShip}%
   BEQ MaybeQuicklyGravitatesToGilby%\index{MaybeQuicklyGravitatesToGilby}%
 
 UnusedRoutine%\index{UnusedRoutine}%
-  ; As above, this section is never reached because Byte 10 is never set.
+  ; As above, this section is never reached because Byte 10
+  ; is never set.
   DEC someKindOfRateLimitingForAttackWaves%\index{someKindOfRateLimitingForAttackWaves}%,X
   BNE MaybeQuicklyGravitatesToGilby%\index{MaybeQuicklyGravitatesToGilby}%
 
-  ; Store Bytes 10 and 11 in newMovementLoPtr%\index{newMovementLoPtr}% and newMovementHiPtr%\index{newMovementHiPtr}% respectively.
+  ; Store Bytes 10 and 11 in newMovementLoPtr%\index{newMovementLoPtr}% and 
+  ; newMovementHiPtr%\index{newMovementHiPtr}% respectively.
   STA newMovementHiPtr%\index{newMovementHiPtr}%
   DEY
   ; Byte 9: Y is now $09.
@@ -1177,30 +1178,30 @@ This now pulls in Bytes 16 and 17 from the level data and uses them as the addre
 switch to:
 \begin{lstlisting}[escapechar=\%]
 SwitchToAlternatingWaveData%\index{SwitchToAlternatingWaveData}%   
-        LDY #16
+  LDY #16
 
 ;-------------------------------------------------------
 ; UpdateWaveDataPointersForCurrentEnemy%\index{UpdateWaveDataPointersForCurrentEnemy}%
 ;-------------------------------------------------------
 UpdateWaveDataPointersForCurrentEnemy%\index{UpdateWaveDataPointersForCurrentEnemy}%
-        ; Byte 16  Y has been set to 16 above, so we're pulling in the pointer%\index{pointer}%
-        ; to the second tranche of wave data for this level. 
-        ; Or Y has been set by the caller.
-        LDA (currentShipWaveDataLoPtr%\index{currentShipWaveDataLoPtr}%),Y
-        PHA
-        INY
-        ; Byte 17
-        LDA (currentShipWaveDataLoPtr%\index{currentShipWaveDataLoPtr}%),Y
+  ; Byte 16  Y has been set to 16 above, so we're pulling in the pointer%\index{pointer}%
+  ; to the second tranche of wave data for this level. 
+  ; Or Y has been set by the caller.
+  LDA (currentShipWaveDataLoPtr%\index{currentShipWaveDataLoPtr}%),Y
+  PHA
+  INY
+  ; Byte 17
+  LDA (currentShipWaveDataLoPtr%\index{currentShipWaveDataLoPtr}%),Y
 
-        ; If we have a nullPtr%\index{nullPtr}% then there's no wave data to get
-        ; so the enemy ship can be cleared out and we can return.
-        BEQ ClearDeadShipFromLevelData%\index{ClearDeadShipFromLevelData}%
+  ; If we have a nullPtr%\index{nullPtr}% then there's no wave data to get
+  ; so the enemy ship can be cleared out and we can return.
+  BEQ ClearDeadShipFromLevelData%\index{ClearDeadShipFromLevelData}%
 
-        STA activeShipsWaveDataHiPtrArray%\index{activeShipsWaveDataHiPtrArray}%,X
-        STA currentShipWaveDataHiPtr%\index{currentShipWaveDataHiPtr}%
-        PLA
-        STA currentShipWaveDataLoPtr%\index{currentShipWaveDataLoPtr}%
-        STA activeShipsWaveDataLoPtrArray%\index{activeShipsWaveDataLoPtrArray}%,X
+  STA activeShipsWaveDataHiPtrArray%\index{activeShipsWaveDataHiPtrArray}%,X
+  STA currentShipWaveDataHiPtr%\index{currentShipWaveDataHiPtr}%
+  PLA
+  STA currentShipWaveDataLoPtr%\index{currentShipWaveDataLoPtr}%
+  STA activeShipsWaveDataLoPtrArray%\index{activeShipsWaveDataLoPtrArray}%,X
 \end{lstlisting}
 
 In the case of Level 1 this second set of wave data is at \icode{planet1Level1Data2ndStage\index{planet1Level1Data2ndStage}}. This data is more
@@ -1276,7 +1277,7 @@ switching back and forth will continue for as long as the enemy does not collide
   {
     \setlength{\tabcolsep}{3.0pt}
     \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
-    \begin{adjustbox}{width=13cm}
+    \begin{adjustbox}{width=10cm,center}
 
       \begin{tabular}{lll}
         \toprule

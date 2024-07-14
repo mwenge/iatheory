@@ -3,39 +3,59 @@
 \lstset{style=6502Style}
 
 \section{The Byte that Broke}
-\begin{definition}[Jeffrey Says]
+The earliest editions of Iridis Alpha contained a crash bug that manifested itself
+during the bonus phase. One moment, the player was barrelling their ugly vertically-oriented
+gilby through the game's obstacle course; the next, the game came to an abrupt halt:
+
+\begin{figure}[H]
+    \centering
+    \frame{\includegraphics[width=5.5cm]{bugs/before.png}}%
+    \hspace{0.5cm}
+    \frame{\includegraphics[width=5.5cm]{bugs/after.png}}%
+\caption{You're minding your own business playing this horrible mini-game when it mercifully crashes.}
+\end{figure}
+
+Despite its incredibly rapid pace of development and release this fault was not due
+to some overlooked glitch in the code of the game.
+
+What happened is that the mastering process had dropped the very last byte in the second
+section of game data on the tape. You may recall there were four chunks of data encoded on
+the cassette edition of Iridis Alpha, each containing data to be stored at different points
+in the C64's memory space.
+
+\begin{definition}[Jeffrey Breaks the Bad News]
 \setlength{\intextsep}{0pt}%
 \setlength{\columnsep}{3pt}%
 \begin{wrapfigure}{l}{0.12\textwidth}
 \includegraphics[width=\linewidth]{src/callout/ia.jpg} 
 \end{wrapfigure}
 \small
-We must apologise to some of the earliest purchasers of IA, as well... it
+"We must apologise to some of the earliest purchasers of Iridis Alpha... it
 seems that some data was corrupted during the production phase of the
 data duplication, and the first few hundred copies of the game used to bug
 out if you lost at the Bonus Phase. All the buggy copies known of have
 been replaced, and all current tapes are fine, but if you find you have a
 buggy version you should send it back to those awfully nice Hewsons
-people and they ll give you an unglitchified one.
+people and they ll give you an unglitchified one."
 \end{definition}
 
-What happened is that the mastering process had dropped the very last byte in the second
-section of game data on the tape.
-
+The fault lay in a single byte. The very last byte in the second segment on the tape was missing
+completely. Instead on \icode{\$A2} value, there was nothing. With the result that the byte
+stored in the C64's memory at that position was uninitialized and remained \icode{\$00}:
 \begin{figure}[H]
   {
     \setlength{\tabcolsep}{3.0pt}
     \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
-    \begin{adjustbox}{width=5cm,center}
+    \begin{adjustbox}{width=10cm,center}
 
-      \begin{tabular}{rllllllll}
+      \begin{tabular}{lllllllll}
         \toprule
         Start Address & End Address & Note & \\
         \toprule
-\icode{0800} & \icode{BFFE}  & .\\
-\icode{BF00} & \icode{BFFF}  & .\\
-\icode{C000} & \icode{CFFE}  & .\\
-\icode{E000} & \icode{F7FF}  & .\\
+\icode{0800} & \icode{BFFE}  & This one was fine.\\
+        \icode{BF00} & \icode{BFFF}  & The last byte in this section (\icode{\$A2}) was missing.\\
+\icode{C000} & \icode{CFFE}  & This one was fine.\\
+\icode{E000} & \icode{F7FF}  & This one was fine.\\
         \addlinespace
         \bottomrule
       \end{tabular}
@@ -45,27 +65,38 @@ section of game data on the tape.
   }\caption{Chunk \icode{BF00} is missing its last byte.}
 \end{figure}
 
+If we look at the data as it should have been we can see the assembly language the machine code would
+have translated to. The \icode{\$A2} is an \icode{LDA} instruction that loads the value \icode{\$07} into
+the \icode{A} register:
+\begin{lstlisting}[caption=The data segment as it should be\, with \icode{\$A2} at \icode{\$BFFF},escapechar=\%]
+Address      Bytes       Assembler
+$BFFF	       A2 07       LDX #$07
+$C001	       A9 08       LDA #$08
+$C003	       8D F8 BF    STA $BFF8
+\end{lstlisting}
+
+However, because the value at \icode{\$BFFF} was \icode{\$00} instead of \icode{\$A2} we end up with this
+invalid sequence of instructions.
+\begin{lstlisting}[caption=The corrupt byte\, with \icode{\$00} at \icode{\$BFFF},escapechar=\%]
+Address      Bytes       Assembler
+$BFFF        00          BRK
+$C000        07 A9       SLO $A9
+$C002        08          PHP
+$C003	       8D F8 BF	   STA $BFF8
+\end{lstlisting}
+The first two are probably not fatal, however \icode{PHP} pushes a value onto the stack. Once the stack is invalid
+things are going to go south fast. It was probably this instruction, the last invalid one before the bytes started
+to make sense again, that sunk this faulty pressing of Iridis Alpha with all hands.
+
 \begin{figure}[H]
   {
-    \begin{adjustbox}{width=10cm,center}
+    \begin{adjustbox}{width=14cm,center}
       \surface{bugs/spool-sections-glitches.png}
     \end{adjustbox}
   }\caption[]{The problematic section of data highlighted in red.}
 \end{figure}
 
 
-\begin{lstlisting}[caption=The data segment as it should be\, with \icode{\$A2} at \icode{\$BFFF},escapechar=\%]
-$BFFF	A2 07       LDX #$07
-$C001	A9 08       LDA #$08
-$C003	8D F8 BF    STA $BFF8
-\end{lstlisting}
-
-\begin{lstlisting}[caption=The corrupt byte\, with \icode{\$00} at \icode{\$BFFF},escapechar=\%]
-$BFFF 00          BRK
-$C000 07 A9       SLO $A9
-$C002 08          PHP
-$C003	8D F8 BF	  STA $BFF8
-\end{lstlisting}
 
 \section{Reappearing Enemies}
 

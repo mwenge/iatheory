@@ -2,9 +2,12 @@
 \label{sec:disassembly}
 \lstset{style=6502Style}
 
-We've reached the point where the game has started to execute. We just saw a snippet of code that turned off the
-tape recorder and prompted the C64 to run a routine\index{routine} a called \icode{MainControlLoop\index{MainControlLoop}}. Though perhaps a little
-cryptic, and you shouldn't expect to understand it yet, this code is not exactly what the machine 'saw'. Instead it read and executed something far more puzzling looking:
+We've reached the point where the game has started to execute. We just saw a
+snippet of code that turned off the tape recorder and prompted the C64 to run a
+routine\index{routine} called \icode{MainControlLoop\index{MainControlLoop}}.
+Though perhaps a little cryptic, and you shouldn't expect to understand it yet,
+this code is not exactly what the machine 'saw'. Instead it read and executed
+something far more puzzling-looking:
 
 
 \begin{lstlisting}[caption=The first piece of machine code that is executed in Iridis Alpha.,escapechar=\%]
@@ -12,7 +15,7 @@ cryptic, and you shouldn't expect to understand it yet, this code is not exactly
 DDA9 7F8D 0DDD A981 8D0D DDA9 198D 0EDD 584C 3508 
 \end{lstlisting}
 
-That's right it executed a stream of bytes. A stream of bytes commonly referred to as 'machine code'. Each of these
+That's right it executed a stream of bytes. A stream of bytes commonly referred to as \textit{machine code}. Each of these
 bytes is meaningful to the C64 whether individually, or taken in pairs, or even in groups of three. It can comprehend them
 as instructions to carry out that will shuffle data around in its memory and ultimately result in a game that
 can be played.
@@ -20,10 +23,10 @@ can be played.
 Before we can dig into the internals of how Iridis Alpha works we have to convert all of the machine code we've
 loaded into memory in the previous chapter into something we have a chance of reading and understanding. This
 process is called disassembly and here we're going to explain how it is done and along the way gain a little
-basic understanding of the human-readable language, called 6502 Assembly Language, that we convert the machine
+basic understanding of the human-readable language, called '6502 Assembly Language', that we convert the machine
 code back into.
 
-The process is called disassembly simply because it is the exact reverse of the process that was originally followed
+The process is called \textit{disassembly} simply because it is the exact reverse of the process that was originally followed
 to generate the data on the tape from the assembly language written by Jeff Minter in the first place. Programs that
 do this are referred to as 'assemblers'. They assemble the instructions written by the programmer into machine code
 that the C64 can execute. As self-appointed disassemblers we are going to turn it back into assembly language.
@@ -124,8 +127,8 @@ the \icode{STA} instruction comes in. This stores the value in the 'Accumulator'
 in memory that you give to it. As we can see such addresses are not one byte long, but two bytes. Are they
 ever more than two bytes long? No, and for a very simple reason. The C64 can only understand addresses
 that are at most two bytes long and this is what ultimately limits it to 64KB of memory. The largest address it can understand
-is therefore \icode{\$FFFF} - the largest value that can be expressed by 2 bytes. Which translates to 65,536.
-65,536 bytes is 64KB of RAM. 
+is therefore \icode{\$FFFF} - the largest value that can be expressed by 2 bytes. Which translates to 65,535.
+Including zero, this allows us 65,536 bytes, which is 64KB of RAM. 
 
 When we look at the disassembly of the STA instructions we see something quite puzzling:
 
@@ -145,7 +148,7 @@ STA $0319
 
 Shouldn't we have expected \icode{8D 19 03} to translate to \icode{STA \$1903} rather than 
 \icode{STA \$0319}? Why are the numbers back to front like that? The reason is due to something
-you may have heard described with a word before that you've never fully understood and maybe never
+you may have heard described with a word that you've never fully understood and maybe never
 dared to question. The machine code
 stores the address \icode{0319} as \icode{1903} because the 6502 CPU in the C64 expects to read
 addresses with the second half of the number first. When we read numbers we expect it to start
@@ -250,7 +253,7 @@ way of saying `second'. When taking about a values like \icode{\$4000} stored in
 
 Writing values to a pair of adjacent addresses in memory like this so that they can
 be subsequently interpreted as yet another address to get something from or do something with is a very common
-pattern\index{pattern} in programming 6502 CPUs such as the C64's and we will encounter it a *lot* in this book.
+pattern\index{pattern} in programming 6502 CPUs such as the C64's and we will encounter it a \textit{lot} in this book.
 
 It's a strange sort of indirection when you first attempt to understand it. Instead of storing actual values
 at an address, we're storing an \textit{address} in the address. If you are familiar with other programming languages
@@ -308,7 +311,7 @@ address referred to by the label \icode{MainControlLoop\index{MainControlLoop}\-
 of using labels in our code is that we no longer need to worry about the number of the addresses anymore. The label will do the job
 for us. It does mean we have to know what the syntax \icode{\#<MainControlLoopInterruptHandler\index{MainControlLoopInterruptHandler}} means though. What it means is:
 if \icode{MainControlLoopInterruptHandler\index{MainControlLoopInterruptHandler}} lives at \icode{\$6B3E} the \icode{\#<} decorators refer to the \icode{\$3E} part of the
-address, so we're actually saying \icode{LDA \#\$3E}, i.e. load the value \$3E into the 'Accumulator'. Similarly the syntax
+address, so we're actually saying \icode{LDA \#\$3E}, i.e. load the value \icode{\$3E} into the 'Accumulator'. Similarly the syntax
 \icode{\#>MainControlLoopInterruptHandler\index{MainControlLoopInterruptHandler}} refers to the \icode{\$6B} part of the address.
 
 \begin{figure}[H]

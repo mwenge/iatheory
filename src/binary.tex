@@ -34,7 +34,7 @@ operating on them intensively. There has to be some benefit to splitting
 up the blob in some way that allows some order to be imposed. Some way
 of segmenting a string of 1s and 0s that is both useful to us as the
 programmers and an efficient way of directing the computer to make effective
-use of the amorphous blob fed into it.
+use of the amorphous binary goo fed into it.
 
 Trial and error has eventually arrived at an optimal arrangement, one which
 you have definitely heard of: this is the \icode{byte}. The idea of the byte
@@ -44,8 +44,8 @@ of bytes and we call each of the individual 1s and 0s \icode{bits}.
 
 Any scheme that reduces the number of items we have to deal with is a boon,
 but is there any rhyme or reason to choosing 8 as our magic number instead
-of say 7, or 12? Believe it or not, the number 8 was chosen almost solely
-after much experimentation with others because it proved the easiest and
+of say 7, or 12? Believe it or not, the number 8 was chosen 
+(after much experimentation with others) almost solely because it proved the easiest and
 most convenient for people to deal with when understanding how they would
 make computers work.
 
@@ -56,7 +56,7 @@ allows humans to compose larger values from smaller values is surprisingly
 important when it comes down to it. It is humans doing the important part
 of the computing: making the big decisions, figuring out where things go
 and how they should work. The computer is just a glorified bit shuffler
-for which everything is on or off and there is no bigger picture. Humans
+for which everything is on or off, it has no concept of a bigger picture. Humans
 need to be able to at least intuit some of this shuffling with a mental
 model of what happens when one set of ones and zeros is clashed with another.
 Using the magic number of 8 as the denominator for batches of bits enables
@@ -327,7 +327,7 @@ that we never had all possible numbers to choose from in the first place. Sure
 we could have chosen 7 or 9 or 13 but how practical would this really be when
 the actual value assigned to any individual bit is always going to be a power of
 2. Even if we could never precisely intuit the reasons as to why, a magic number
-that is also the power of 2, e.g. 8,4,16,64, is always going to make things easier
+that is also the power of 2, e.g. 8, 4, 16, 64... is always going to make things easier
 over the long haul even if we can't articulate them.
 
 So now some jargon we might have heard in the past is starting to make sense. The
@@ -336,9 +336,9 @@ currency is the 8-bit byte we've invented here. Everytime it performs an operati
 it does so using a single byte as its fundamental building block. This is true 
 whether we talking about the \icode{AND} operation or storing a value for use
 later on. When we give the C64 a value it's always a single byte. The subsequent
-ear of 16-bit computing (e.g. the Amiga) took this a step further by introducing
+era of 16-bit computing (e.g. the Amiga) took this a step further by introducing
 a two-byte block as its basic unit of currency. 32-bit and 64-bit computing are the
-lingua franc of modern processors - no matter how small the value we're using it
+\textit{lingua franca} of modern processors - no matter how small the value we're using it
 will be managed as 4-byte or 8-byte value respectively by 32-bit and 64-bit
 computer architectures.
 

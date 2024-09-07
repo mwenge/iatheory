@@ -20,7 +20,7 @@ chirruping. This is the tape attempting to convey to you its long stream of bina
 language available to it: lots of sound waves of varying length.
 
 Without knowing how it's actually done, it's tempting to imagine a variety of possible schemes that
-might have been used. For example, one sound wave denoting a '0' and another one denoting a '1'.
+might have been used to store data on a cassette. For example, one sound wave denoting a '0' and another one denoting a '1'.
 The method that is actually used isn't very far away from such a thing but there is plenty of intricacy
 layered on top, particularly in a bid to spend as little time as possible loading data from the
 tape.
@@ -34,7 +34,7 @@ The earliest and most durable attempt at standardizing this procedure was from P
 invented what is now known as the '\icode{tap}' format for representing the beeps and bloops encoded on the
 tape as a file of bits and bytes. The idea is that each byte in the file represents the length of
 a pulse. It is the length of these pulses that will ultimately tell us whether we should interpret
-a value of \icode{1} or \icode{0}. When we get eights \icode{1}s and \icode{0}s we have a byte. We get enough bytes, we have a program
+a value of \icode{1} or \icode{0}. When we get eight \icode{1}s and \icode{0}s we have a byte. We get enough bytes, we have a program
 we can run!
 
 Someone, somewhere has kindly decoded the contents of the Iridis Alpha cassette tape distribution to
@@ -42,7 +42,7 @@ a \icode{tap} file for us. So we have something to dig into. This is going to be
 into the bowels of decoding a 54KB game file from over 500KB of raw data. Every time you think you
 are nearly done there will be yet another convolution to wrap your head around. But at the end of it
 we will finally have our binary game file and will be ready to figure out how to decipher it into something
-approximating the original assembly langage.
+approximating the original assembly langage Iridis Alpha itself was written in.
 
 \begin{figure}[H]
   {
@@ -55,8 +55,9 @@ and each long pulse by a pink pixel. Roughly speaking, grey is a shorthand for 0
 
 \section{The Madness Begins}
 
-This is what the start of the our \icode{iridis-alpha.tap} file looks like:
-
+This is what the start of the our \icode{iridis-alpha.tap} file looks like. Note that this is the contents of the
+start of \icode{tap} file rather than the data on the tape itself. The data on the tape is represented by the white
+cells in our diagram:
 
 \begin{figure}[H]
   {
@@ -122,12 +123,11 @@ Bytes representing the invdividual \\ pulses/sounds on the tape.  \\
 After the header information described above, each byte in the \icode{tap} file
 represents the pulse length or duration of a single sound emitted by the tape.
 A pair of sounds taken together represent a single bit, i.e. a \icode{0} or a
-\icode{1}. A medium length sound followed by a short one represents a \icode{1},
-a short one followed by a medium one represents a \icode{0}.
+\icode{1}. A medium length sound followed by a short length represents a \icode{1},
+a short length followed by a medium length represents a \icode{0}.
 
 The following table shows us whether we should consider a byte on the tape to
-represent short, medium, or long
-duration sound:
+represent a short, medium, or long duration sound:
 
 \begin{figure}[H]
   {
@@ -148,14 +148,14 @@ duration sound:
 
     \end{adjustbox}
 
-  }\caption{Values for short, medium, and long pulses. For example, ny byte value on the \icode{tap} file between \icode{\$24} and
+  }\caption{Values for short, medium, and long pulses. For example, any byte value on the \icode{tap} file between \icode{\$24} and
 \icode{\$36} would be considered a 'Short' pulse.}
 \end{figure}
 
 Remarkably the first 27,000 or so pulses on the Iridis Alpha tape are nothing but short sounds (values between \icode{\$2F} and
 \icode{\$31}) so cannot be interpreted as anything. It's not until the 27,157th byte in the tape that we start to encounter real data:
 
-\begin{lstlisting}[caption=Data finally gets started at \icode{56 41} in the first line above.,basicstyle=\tiny,escapechar=\%]
+\begin{lstlisting}[caption=Data finally gets started at `\icode{56 41}' in the first line above.,basicstyle=\scriptsize\ttfamily,escapechar=\%]
 00006a10: 3031 3031 3156 4144 3130 4231 4243 3130  01011VAD10B1BC10
 00006a20: 4231 4131 4244 312f 4057 4032 4231 4231  B1A1BD1/@W@2B1B1
 00006a30: 4244 312f 4231 4231 4243 3142 3055 4144  BD1/B1B1BC1B0UAD
@@ -173,7 +173,7 @@ The first meaningful twenty bytes therefore are:
 \end{lstlisting}
 
 You get a sense of how wasteful, or ahem redundant, this encoding\index{encoding} scheme is when you learn that these twenty pulses are
-required to give us a single byte. The table below shows how we interpret them to construct a series of 1s and 0s.
+required to give us a single byte. The table below shows how we interpret them to construct a series of \icode{1}s and \icode{0}s.
 
 \begin{figure}[H]
   {
@@ -202,7 +202,7 @@ required to give us a single byte. The table below shows how we interpret them t
     \end{adjustbox}
 
   }\caption{Interpretation of the first 20 meaningful bytes\, creating a byte. The parity bit at the end is a \icode{\$00}
-if there are an odd number of 1s and \icode{\$01} if there are an even number of 1s. \icode{10010001} has an odd number of 1s. }
+if there are an odd number of \icode{1}s, and \icode{\$01} if there are an even number of \icode{1}s. \icode{10010001} has an odd number of \icode{1}s. }
 \end{figure}
 
 We can visualize the twenty bytes as a square sound wave. When reading the tape the C64 would interpret these sound pulses as long, short,
@@ -338,7 +338,7 @@ Machine Code & \makecell{
  what it does later.  \\
 } \\
         \midrule
-Checksum & \icode{E4} & How is this calculated? \\
+Checksum & \icode{E4} & I don't know how is this calculated!? \\
         \addlinespace
         \bottomrule
       \end{tabular}
@@ -382,7 +382,7 @@ When it arrives it looks like this:
 
       \end{tikzpicture}
     \end{adjustbox}
-  }\caption{The data we've read in so far. The unshaded section is machine code.}
+  }\caption{The second part of our program in machine code. The unshaded section is the machine code.}
 \end{figure}
 
 \begin{figure}[H]
@@ -407,7 +407,7 @@ Machine Code & \makecell{
 \icode{00 00 00 00 00 8B E3 AE 02 } \\
  } & This is the rest of  machine code of the program to execute.  \\
         \midrule
-Checksum & \icode{53} & How is this calculated? \\
+Checksum & \icode{53} & I stil don't know how is this calculated! \\
         \addlinespace
         \bottomrule
       \end{tabular}
@@ -879,7 +879,7 @@ reads in the next three chunks.
     \begin{adjustbox}{width=9cm,center}
       \surface{archaeo/tap-full.png}
     \end{adjustbox}
-  }\caption[]{All the data that has been read from the tape. The four chunks of game data are in green\, the third is only a sliver. The
+  }\caption[]{All the data that has been read from the tape. The four chunks of game data are in green\, the second is only a sliver. The
 relative sizes of the red data (the MegaSave loader which is only actually 200 or so bytes long) and the green data (representing over
 50,000 bytes of game data) illustrates how efficient the MegaSave loader's storage is by comparison with the default.}
 \end{figure}
@@ -997,7 +997,7 @@ LoopUntilExexcutes
 \end{lstlisting}
 
 This routine\index{routine} does two things: it turns off the tape deck and tells the C64 to execute the code at a different
-location (\icode{MainControlLoop\index{MainControlLoop}}) the next time it wakes up and wonders what to do. Until then it 
+location (\icode{MainControlLoop\index{MainControlLoop}}) the next time that it wakes up and wonders what to do. Until then it 
 goes into a loop executing \icode{LoopUntilExexcutes} over and over again.
 
 The C64 isn't getting out of bed and pondering its future over coffee once a day like the rest of us. It wakes up hundreds of times every second

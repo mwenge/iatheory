@@ -305,7 +305,7 @@ in this \icode{SCREEN\_RAM} memory it will know to write it the corresponding po
 \subsection{Drawing the Stripes}
 So let's write some stripes to RAM!
 
-\begin{lstlisting}[caption=The 'stripe' character\index{character}.,escapechar=\%]
+\begin{lstlisting}[caption=Drawing stripes using a loop!,escapechar=\%]
 DrawStripesBehindTitle%\index{DrawStripesBehindTitle}%
         LDX #$28
         LDA #$00
@@ -362,7 +362,7 @@ it will write to the position referred to by \icode{SCREEN\_RAM + LINE2\_COL39} 
 \input{titlescreen/titlescreen_ram_stripes}
 
 The other thing we do in \icode{DrawStripesLoop\index{DrawStripesLoop}} is set the colors of the stripes. This is achieved using a region of memory
-similar in concept to \icode{SCREEN\_RAM}, that we call \icode{COLOR\_RAM}. This lives at \icode{\$D800 - \$DBFE}. Another 
+similar in concept to \icode{SCREEN\_RAM}, that we call \icode{COLOR\_RAM}. This lives at \icode{\$D800 - \$DBFE} and is another 
 region of 1000 bytes, each one controlling the color of the character\index{character} placed at a position in the 40 * 25 character\index{character} rectangle
 of our screen\index{screen}.
 
@@ -519,7 +519,7 @@ The first time the raster is called, this is what the screen\index{screen} looks
 \end{figure}
 
 Of course we never actually see the screen\index{screen} in this state because it only appears for a microsecond or two, much too
-fast for us to observe. But as you can see the painting has aleady started. Everything above line 16 indicated in 
+fast for us to observe. But as you can see the painting has aleady started. Everything above line 17 indicated in 
 the figure has been painted\index{painted} black, as per our preparation of \icode{SCREEN\_RAM} a little earlier.
 
 What our diagram above also tells us is that in this visit from the beam \icode{TitleScreen\-Animation\index{TitleScreenAnimation}} chose to execute
@@ -529,10 +529,10 @@ moved on to the next line - which is why the diagram shows 17 rather than 16. Ev
 raster doesn't wait for us. We have to work quickly, especially if we're preparing graphics\index{graphics} on lines that it's likely
 to reach soon. This is why each of these subroutines does as little as it can get away with in order to get the job done.
 
-The three sub-routines the work at each raster interrupt\index{interrupt} can get divvied out to are \icode{UpdateJumping\-GilbyPositionsAndColors},
+There are three sub-routines the work at each raster interrupt\index{interrupt} can get divvied out to. These are \icode{UpdateJumping\-GilbyPositionsAndColors},
 \icode{DoStarfieldAnimation\index{DoStarfieldAnimation}}, and a cluster of routines starting with \icode{UpdateTitleScreenSpriteColors\index{UpdateTitleScreenSpriteColors}}. The one
 that's called the most often is \icode{DoStarfieldAnimation\index{DoStarfieldAnimation}} as it is responsible for sprinkling the screen\index{screen} with 
-animated stars traversing it left to right.
+animated stars traversing left to right.
 
 \begin{lstlisting}[caption=\icode{TitleScreenAnimation\index{TitleScreenAnimation}} responsible for choosing what to do at each interrupt\index{interrupt}. ,escapechar=\%]
 ;-------------------------------------------------------
@@ -614,7 +614,7 @@ titleScreenStarFieldXPosArray%\index{titleScreenStarFieldXPosArray}% .BYTE $00,$
                               .BYTE $10,$06,$A7,$B8,$19,$BB
 \end{lstlisting}
 
-So when \icode{DoStarfieldAnimation\index{DoStarfieldAnimation}} is called the first thing it does is set the y position of the star to paint
+So when \icode{DoStarfieldAnimation\index{DoStarfieldAnimation}} is called the first thing it does is set the y-position of the star to paint
 to \icode{\$48} (72 in decimal\index{decimal}): 
 
 \begin{lstlisting}[caption=The start of \icode{DoStarfieldAnimation\index{DoStarfieldAnimation}} responsible for painting stars.,escapechar=\%]
@@ -718,7 +718,7 @@ of the `\icode{AND \#\$01}' statement is doing. If `Bit 1' is
 set in the value we pluck from \icode{titleScreenStarfieldMSBXPosArray\index{titleScreenStarfieldMSBXPosArray}} it is just an indicator that the x co-ordinate
 for this star is greater than 256. So if we see a value of \icode{\$02} in there our operation `\icode{AND \#\$01}' will
 give us a zero result, meaning the intended value of the x co-ordinate is not greater than 256, othwerise it will give
-us a non-zero result indicating that it is:
+us a non-zero result indicating that it is set:
 
 \begin{figure}[H]
   {
@@ -999,7 +999,7 @@ Adding the title sprites\index{sprites} is relatively light work. Just as with t
 on the screen\index{screen}. There's no animation\index{animation} to handle here.
 
 \begin{lstlisting}[escapechar=\%]
-titleTextSpriteArray%\index{titleTextSpriteArray}%          .BYTE $20,BIG_I,BIG_R,BIG_I,BIG_D,BIG_I,BIG_S
+titleTextSpriteArray%\index{titleTextSpriteArray}% .BYTE $20,BIG_I,BIG_R,BIG_I,BIG_D,BIG_I,BIG_S
 ...
 
 PaintSpriteLettersLoop%\index{PaintSpriteLettersLoop}%   
@@ -1035,9 +1035,10 @@ PaintSpriteLettersLoop%\index{PaintSpriteLettersLoop}%
 The other complex thing we do is calculate the next step in the jumping\index{jumping} gilby animations. \icode{RecalculateJumpingGilbyPositions\index{RecalculateJumpingGilbyPositions}}
 updates the x and y positions of the gilby sprites\index{sprites} in \icode{titleScreenGilbiesYPosArray} and \icode{titleScreenGilbiesXPosArray\index{titleScreenGilbiesXPosArray}}.
 
-Finally we play a single note from the title music, we cover this in detail in a later chapter.
+Finally we play a single note from the title music (\icode{JSR PlayTitleScreenMusic}), we cover the music of Iridis Alpha
+in detail in a later chapter.
 
-The raster continues on its journey and progresses through its second paint journey of the screen\index{screen}. The title sprites\index{sprites}
+For now though the raster continues on its journey and progresses through its second paint journey of the screen\index{screen}. The title sprites\index{sprites}
 are finally revealed.
 
 \begin{figure}[H]

@@ -157,7 +157,7 @@ see how the bits are actually set below:
         \fill[\BACKGROUNDTWO] (6,0) rectangle ++ (1,1);
         \fill[\BACKGROUNDTWO] (7,0) rectangle ++ (1,1);
         \node[matrix of math nodes,anchor=south west,inner sep=0pt,
-              nodes={draw,minimum size=1cm,anchor=center},
+              nodes={draw,minimum size=1cm,font=\Huge,anchor=center},
               column sep=-\pgflinewidth,row sep=-\pgflinewidth]
               {0 & 0  & 0 & 0 & 0 & 0 & 0 & 0\\
                0 & 0  & 0 & 0 & 0 & 0 & 0 & 0\\
@@ -200,10 +200,10 @@ with the big blue brush we have so far. The first thing we do is clear down the 
 the value \$60\, which is an empty bitmap.]
         ; Clear down the planet%\index{planet}% surface%\index{surface}% data from $8000 to $8FFF.
         ; There are 4 layers:
-        ; Top Layer:    $8000 to $83FF - 256 bytes 
-        ; Second Layer: $8400 to $87FF - 256 bytes 
-        ; Third Layer:  $8800 to $8BFF - 256 bytes 
-        ; Bottom Layer: $8C00 to $8FFF - 256 bytes 
+        ; Top Layer:    $8000 to $83FF - 1024 bytes 
+        ; Second Layer: $8400 to $87FF - 1024 bytes 
+        ; Third Layer:  $8800 to $8BFF - 1024 bytes 
+        ; Bottom Layer: $8C00 to $8FFF - 1024 bytes 
         LDY #$00
 ClearPlanetHiPtrs%\index{ClearPlanetHiPtrs}%   
         ; $60 is an empty character%\index{character}% and gets written to the entire
@@ -400,16 +400,16 @@ and proper means giving the shore of the land its own look and feel. This we hav
   \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
     \begin{adjustbox}{width=15cm,center}
   \begin{subfigure}{0.3\textwidth}
-  \input{planets/tilesheets/planet1Charset_tilesheet_\$5C}
+  \input{planets/tilesheets/5C_large}
   \end{subfigure}
   \begin{subfigure}{0.3\textwidth}
-  \input{planets/tilesheets/planet1Charset_tilesheet_\$5E}
+  \input{planets/tilesheets/5E_large}
   \end{subfigure}
   \begin{subfigure}{0.3\textwidth}
-  \input{planets/tilesheets/planet1Charset_tilesheet_\$5D}
+  \input{planets/tilesheets/5D_large}
   \end{subfigure}
   \begin{subfigure}{0.3\textwidth}
-  \input{planets/tilesheets/planet1Charset_tilesheet_\$5F}
+  \input{planets/tilesheets/5F_large}
   \end{subfigure}
   \end{adjustbox}
 }\caption[]{Character tiles for the left shore (\$5C,\$5E) and the right shore (\$5D,\$5F).}
@@ -517,8 +517,8 @@ nextLargestStructure%\index{nextLargestStructure}% .BYTE $59,$5B,$FF
                      .BYTE $54,$56,$FE
 \end{lstlisting}
 
-The \$FF at the end of each line serves as a sentinel\index{sentinel} for the drawing\index{drawing} routine\index{routine} to know that the subsequent bytes
-are for the next layer 'up'. The \$FE is a terminator, indicating there is no more data for the structure\index{structure}.
+The \icode{\$FF} at the end of each line serves as a sentinel\index{sentinel} for the drawing\index{drawing} routine\index{routine} to know that the subsequent bytes
+are for the next layer 'up'. The \icode{\$FE} is a terminator, indicating there is no more data for the structure\index{structure}.
 
 Drawing a structure\index{structure} is relatively straightforward so we'll cover that briefly first. Drawing the littlest
 structure\index{structure} provides the most compact example of the technique:

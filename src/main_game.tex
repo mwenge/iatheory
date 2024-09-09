@@ -75,7 +75,7 @@ while \icode{PerformMainGameUpdate\index{PerformMainGameUpdate}} is executed onc
 \caption{The rasterline positiion when \icode{AnimateStarFieldAndScrollPlanets\index{AnimateStarFieldAndScrollPlanets}} and \icode{PerformMainGameUpdate\index{PerformMainGameUpdate}} are called.}
 \end{figure}
 
-If you look closely you'll notice that our so-called boiler-room routine\index{routine} is called last, when the
+If you look closely you'll notice that \icode{PerformMainGameUpdate\index{PerformMainGameUpdate}}, our so-called boiler-room routine\index{routine}, is called last, when the
 raster is nearing the end of the screen\index{screen}. This makes sense as it has the most to do and therefore
 we need to execute it at a point when most of the screen\index{screen} has been painted\index{painted} and what to paint on the
 rest of it has already been prepared. \icode{PerformMainGameUpdate\index{PerformMainGameUpdate}} primarily concerns itself with
@@ -375,10 +375,10 @@ the data we came up with for the ever-so-randomly-generated planet\index{planet}
 the value \$60\, which is an empty bitmap.]
         ; Clear down the planet%\index{planet}% surface%\index{surface}% data from $8000 to $8FFF.
         ; There are 4 layers:
-        ; Top Layer:    $8000 to $83FF - 256 bytes 
-        ; Second Layer: $8400 to $87FF - 256 bytes 
-        ; Third Layer:  $8800 to $8BFF - 256 bytes 
-        ; Bottom Layer: $8C00 to $8FFF - 256 bytes 
+        ; Top Layer:    $8000 to $83FF - 1024 bytes 
+        ; Second Layer: $8400 to $87FF - 1024 bytes 
+        ; Third Layer:  $8800 to $8BFF - 1024 bytes 
+        ; Bottom Layer: $8C00 to $8FFF - 1024 bytes 
         LDY #$00
 ClearPlanetHiPtrs%\index{ClearPlanetHiPtrs}%   
         ; $60 is an empty character%\index{character}% and gets written to the entire
@@ -394,7 +394,7 @@ ClearPlanetLoPtrs%\index{ClearPlanetLoPtrs}%
         BNE ClearPlanetHiPtrs%\index{ClearPlanetHiPtrs}%
 \end{lstlisting}
 
-As you can see in the code comment above the planet\index{planet} surface\index{surface} itself is 256 bytes long and we store 4 layers of 256
+As you can see in the code comment above the planet\index{planet} surface\index{surface} itself is 1024 bytes long and we store 4 layers of 1024
 bytes each. The bottom layer is the surface\index{surface}, the other three are used for filling in the structures\index{structures} that dot the
 planet\index{planet}'s surface\index{surface}.
 
@@ -423,8 +423,8 @@ DrawPlanetSurfaces%\index{DrawPlanetSurfaces}%
 
         ;Draw the upper and lower planets. The lower
         ; planet%\index{planet}% is a mirror image of the top.
-b71E6   LDX #$27
-b71E8   LDA (planetTextureTopLayerPtr%\index{planetTextureTopLayerPtr}%),Y
+        LDX #$27
+Loop    LDA (planetTextureTopLayerPtr%\index{planetTextureTopLayerPtr}%),Y
         STA SCREEN_RAM%\index{SCREEN\_RAM}% + LINE7_COL0%\index{LINE7\_COL0}%,Y
         ORA #$C0
         STA SCREEN_RAM%\index{SCREEN\_RAM}% + LINE15_COL0%\index{LINE15\_COL0}%,X
@@ -443,7 +443,7 @@ b71E8   LDA (planetTextureTopLayerPtr%\index{planetTextureTopLayerPtr}%),Y
         INY
         DEX
         CPY #$28
-        BNE b71E8
+        BNE Loop 
         RTS
 \end{lstlisting}
 
@@ -453,7 +453,7 @@ the illusion of movement\index{movement} across the surface\index{surface} of th
 
 This means that our job is a simple one: how many characters should we move along the planet\index{planet}?
 
-THis decision happens in the \icode{ScrollPlanets\index{ScrollPlanets}} routine\index{routine}, inside the \icode{PerformMainGameUpdate\index{PerformMainGameUpdate}} loop. As
+This decision happens in the \icode{ScrollPlanets\index{ScrollPlanets}} routine\index{routine}, inside the \icode{PerformMainGameUpdate\index{PerformMainGameUpdate}} loop. As
 we have seen earlier, this routine\index{routine} is called around the time the raster reaches just past the halfway point
 down the screen\index{screen}:
 
@@ -503,7 +503,7 @@ ScrollPlanetRight%\index{ScrollPlanetRight}%
         ROR
 \end{lstlisting}
 
-We would get a value of \icode{\$03} for our number of characters to move by. THis is because \icode{AND}'ing
+We would get a value of \icode{\$03} for our number of characters to move by. This is because \icode{AND}'ing
 \icode{\$1F} and \icode{\$F8} gives us \icode{\$18}:
 
 
@@ -577,8 +577,8 @@ SetUpGilbySprite%\index{SetUpGilbySprite}%
 \end{lstlisting}
 
 There's a trick at work here. The gilby can move left or right and \icode{currentGilbySpeed\index{currentGilbySpeed}} is being used to
-store both the speed *and* direction of the gilby. When the value is between \icode{00} and \icode{80} the gilby is moving
-to the left and the value reflects its relative velociy. When the value is between \icode{80} and \icode{FF} the gilby is
+store both the speed \textit{and} direction of the gilby. When the value is between \icode{00} and \icode{80} the gilby is moving
+to the left and the value reflects its relative velocity. When the value is between \icode{80} and \icode{FF} the gilby is
 moving to the right and the value reflects its relative velocity.
 
 
@@ -611,7 +611,7 @@ ScrollPlanetLeft%\index{ScrollPlanetLeft}%
         ADC currentGilbySpeed%\index{currentGilbySpeed}%
         STA planetScrollSpeed%\index{planetScrollSpeed}%
         ..
-b72CF   CLC
+        CLC
         ROR
         ROR
         ROR
@@ -743,7 +743,7 @@ hang in the sky at Y co-ordinate \icode{\$33}:
 \end{figure}
 
 Now that \icode{gilbyLandingJumpingAnimationYPosOffset\index{gilbyLandingJumpingAnimationYPosOffset}} is \icode{\$00} adding it to our current Y position will no longer have the 
-effect of cycling around and arriving a smaller value than the current Y position. Instead it will increment the Y position and move
+effect of cycling around and arriving at a smaller value than the current Y position. Instead it will increment the Y position and move
 the gilby down the screen\index{screen} again. Just as when we were moving upwards the resulting movement\index{movement} increases in degree as we get closer to the
 land, creating an acceleration effect due to gravity\index{gravity}. 
 
@@ -756,7 +756,7 @@ land, creating an acceleration effect due to gravity\index{gravity}.
 \caption{Each increment in the offset, performed every three movements, results in an acceleration effect.}
 \end{figure}
 
-With a simple, consistent addition operation each time it comes to position the gilby we've managed to achieve a jumping\index{jumping} and
+With a simple, consistent addition operation, each time it comes to position the gilby we've managed to achieve a jumping\index{jumping} and
 landing effect with a neat gravity\index{gravity} effect built in!
 
 \section{Sound Effects}
@@ -986,7 +986,7 @@ setVolToMax            .BYTE $00,PLAY_SOUND%\index{PLAY\_SOUND}%,$0F,VOLUME,$01
 
 We can get a picture of how each record affects the relevant registers in the SID interface by looking at the table below.
 This is full history of each record that's processed in the \icode{planetWarpSoundEffect\index{planetWarpSoundEffect}} data structure\index{structure} by \icode{PlaySoundEffects\index{PlaySoundEffects}}
-in temporal order. Notice the way the colume steadily decreases as we go through the \icode{PLAY\_LOOP} loop towards the end.
+in temporal order. Notice the way the volume steadily decreases as we go through the \icode{PLAY\_LOOP} loop towards the end.
 
 \begin{figure}[H]
 {

@@ -24,7 +24,7 @@ Hence ACONT.
 
 The bits and bytes that define the behaviour and appearance of
 wave after wave of Iridis Alpha's enemy formations - twenty across each of the
-five planets giving one hundred in all - takes up relatively little space given
+five planets giving one hundred in all - take up relatively little space given
 the sheer variety of adversaries the player faces.
 
 
@@ -216,7 +216,7 @@ start and end point of the sprite's animation\index{animation}.
 We can see this in action in \icode{AnimateAttackShipSprites\index{AnimateAttackShipSprites}}. When this routine\index{routine} runs Byte 3 has been loaded
 to \icode{upperPlanetAttackShipInitialFrameRate\index{upperPlanetAttackShipInitialFrameRate}} for the upper planet\index{planet} and \icode{lowerPlanetAttackShipInitialFrameRate\index{lowerPlanetAttackShipInitialFrameRate}}
 for the lower planet\index{planet}. This routine\index{routine} is cycling through the sprites\index{sprites} given by Byte 1 as the lower limit and Byte 2 as 
-the upper limit. This is what the animation\index{animation} consists of: an animation\index{animation} effect achieved by changing the sprite from
+the upper limit. This is what the animation\index{animation} consists of: changing the sprite from
 one to another to create a classic animation\index{animation} effect.
 
 \begin{lstlisting}[caption=Routine for Animating Enemy Sprites\index{Sprites}. ,escapechar=\%]
@@ -691,7 +691,7 @@ With our position data safely stashed away on the stack we now decide which plan
         BNE LowerPlanetAttackShipBehaviour%\index{LowerPlanetAttackShipBehaviour}%
 \end{lstlisting}
 
-If we're on the upper planet\index{planet} we use \icode{SetXToIndexOfShipThatNeedsReplacing\index{SetXToIndexOfShipThatNeedsReplacing}} look in the \icode{activeShipsWaveDataHiPtrArray\index{activeShipsWaveDataHiPtrArray}} for any ships that
+If we're on the upper planet\index{planet} we use \icode{SetXToIndexOfShipThatNeedsReplacing\index{SetXToIndexOfShipThatNeedsReplacing}} to look in the \icode{activeShipsWaveDataHiPtrArray\index{activeShipsWaveDataHiPtrArray}} for any ships that
 need replacing between positions \icode{\$02} and \icode{\$06}. If we don't find one, we return early:
 
 \begin{lstlisting}[escapechar=\%]

@@ -143,7 +143,7 @@ entryScreenRainbowColors%\index{entryScreenRainbowColors}%
       .BYTE GREEN,YELLOW,ORANGE,RED
 \end{lstlisting}
 
-.. referenced in \icode{UpdateEntryScreenRainbow\index{UpdateEntryScreenRainbow}}. After every full screen\index{screen} paint we update the an
+.. referenced in \icode{UpdateEntryScreenRainbow\index{UpdateEntryScreenRainbow}}. After every full screen\index{screen} paint we update the 
 array \icode{previousRoundRainbowColors\index{previousRoundRainbowColors}} to store the position of the previous bar that used it.
 This allows us to use \icode{previousRoundRainbowColors\index{previousRoundRainbowColors}} as a source for \icode{X} the next time
 we finish a screen\index{screen} and shift the colors along by one position:
@@ -168,7 +168,7 @@ slower.
 \caption{The beginning of the first bonus phase.}
 \end{figure}
 Every time the player enters the bonus phase we'll procedurally\index{procedurally} generate a 
-new map. The way we'll manage this is by treating the map a stack of 
+new map. The way we'll manage this is by treating the map as a stack of 
 256 rows and defining our map simply as an array of the rows that 
 make up the map.
 

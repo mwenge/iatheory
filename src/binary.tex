@@ -2,7 +2,7 @@
 \lstset{style=6502Style}
 
 Here we are, ground zero in every book about assembly programming. Where the reader
-finds themselves in an awkward sit-down discussion about the B word. It's a necessary evil
+finds themselves in an awkward sit-down discussion about the B word: Binary. It's a necessary evil
 of course. Nothing will ever make sense without a rudimentary but slowly developing
 grasp of what bytes are and why they keep being referred to in a confusing mixture
 of letters and numbers such as \icode{\$D012} and \icode{\$F4}.
@@ -163,7 +163,7 @@ are set, without needing to memorize all 256 possible permutations.
 This is possible because we can start by looking at either character\index{character}
 in the two-character\index{character} notation and quickly divine the 1s and 0s that
 make it up. We can do this because each character\index{character} represents a value
-between 0 and 15 that made is up of some combination of 8, 4, 2, and
+between 0 and 15 that is made is up of some combination of 8, 4, 2, and
 1 - each representing a bit from left to right.
 
 \begin{figure}[H]
@@ -332,9 +332,9 @@ over the long haul even if we can't articulate them.
 
 So now some jargon we might have heard in the past is starting to make sense. The
 Commodore 64 was an '8-bit computer'. What this means is that its basic unit of
-currency is the 8-bit byte we've invented here. Everytime it performs an operation
+currency is the 8-bit byte we've invented here. Every time it performs an operation
 it does so using a single byte as its fundamental building block. This is true 
-whether we talking about the \icode{AND} operation or storing a value for use
+whether we're talking about the \icode{AND} operation or storing a value for use
 later on. When we give the C64 a value it's always a single byte. The subsequent
 era of 16-bit computing (e.g. the Amiga) took this a step further by introducing
 a two-byte block as its basic unit of currency. 32-bit and 64-bit computing are the
@@ -382,10 +382,10 @@ This upper limit is what gives the Commodore 64 its name. It has 64 kilobytes of
 
       \begin{tabular}{ccccccccc}
         \toprule
-        Hex & Decimal & Meaning &  & Hex & Decimal & Meaning \\
+        Hex & Decimal & Meaning  \\
         \midrule
-        \icode{\$0400} & 1024 & 1 Kilobyte &  & \icode{\$0400} & 1024 & 1 Kilobyte & \\\\
-        \icode{\$FFFF} & 65,535 & 64 Kilobytes & &  \icode{\$0400} & 1024 & 1 Kilobyte & \\\\
+        \icode{\$0400} & 1024 & 1 Kilobyte  \\\\
+        \icode{\$FFFF} & 65,535 & 64 Kilobytes  \\\\
         \bottomrule
       \end{tabular}
     \end{adjustbox}

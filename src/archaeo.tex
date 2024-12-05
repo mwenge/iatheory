@@ -4,7 +4,7 @@
 
 Iridis Alpha was distributed on cassette tape by the publisher Hewson Consultants. Normally used
 to play audio, cassette tapes were the cheap and ubiquitous medium \textit{du jour} of the 1980s and a
-natural choice for the nascent 8-bit game industry to disribute its wares.
+natural choice for the nascent 8-bit game industry to distribute its wares.
 
 \begin{figure}[H]
   {
@@ -32,8 +32,8 @@ computer program.
 
 The earliest and most durable attempt at standardizing this procedure was from Per Hakan Sundell in 1997. He
 invented what is now known as the '\icode{tap}' format for representing the beeps and bloops encoded on the
-tape as a file of bits and bytes. The idea is that each byte in the file represents the length of
-a pulse. It is the length of these pulses that will ultimately tell us whether we should interpret
+tape as a file of bits and bytes. The idea is that each byte in the \icode{tap} file represents the length of
+a pulse encoded on the tape. It is the length of these pulses that will ultimately tell us whether we should interpret
 a value of \icode{1} or \icode{0}. When we get eight \icode{1}s and \icode{0}s we have a byte. We get enough bytes, we have a program
 we can run!
 
@@ -49,7 +49,7 @@ approximating the original assembly langage Iridis Alpha itself was written in.
     \begin{adjustbox}{width=10cm,center}
       \surface{archaeo/spool.png}
     \end{adjustbox}
-  }\caption[]{Simple, right? Here each short-pulse sound is represented by a light grey pixel, each medium-duration pulse by a blue pixel,
+  }\caption[]{Simple, right? In this visualisation of a fully wound cassette spool containing Iridis Alpha each short-pulse sound is represented by a light grey pixel, each medium-duration pulse by a blue pixel,
 and each long pulse by a pink pixel. Roughly speaking, grey is a shorthand for 0 bits and dark pixels for 1 bits.}
 \end{figure}
 
@@ -85,7 +85,7 @@ cells in our diagram:
 
       \end{tikzpicture}
     \end{adjustbox}
-  }\caption{The first batch of data we read in from the tape. The 'Header Description' is in grey, the Version Number in pink, Reserved bytes in blue, and the File Size in red.}
+  }\caption{The first batch of data we read in from the 'tap' file. The 'Header Description' is in grey, the Version Number in pink, Reserved bytes in blue, and the File Size in red.}
 \end{figure}
 
 \begin{figure}[H]
@@ -445,7 +445,7 @@ from the tape. This type of program is called a 'loader', or perhaps in an effor
   }\caption[]{MegaSave loader pictured.}
 \end{figure}
 
-The idea is that this little program will do a better job of reading data from the tape and more quickly than the C64 can manage
+The idea is that this little program will do a better job of reading data from the tape and do it more quickly than the C64 can manage
 by itself. There is a whole menagerie of these programs that proliferated in the 1980s with exotic names such as Jetload, Easytape,
 Audiogenic and so on. Luigi di Fraia maintains a utility called \icode{tapclean} that does a great job of identifying and emulating
 these loaders and thanks to him we have a disassembled version of the loader we've just found on the Iridis Alpha tape. It has the

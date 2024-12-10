@@ -59,13 +59,13 @@ on the screen\index{screen} that we need to:
 
 You'll notice we've changed yet another interrupt\index{interrupt} handler again, this time to a routine\index{routine} called
 \icode{TitleScreenInterruptHandler\index{TitleScreenInterruptHandler}}. The particular type of interrupt\index{interrupt} we're going
-to hand here is something
+to handle here is something
 called a 'Raster Interrupt\index{Interrupt}'. A 'raster' can be thought of as a beam of light that scans
 across the screen\index{screen} from top to bottom and left to right painting each pixel on the screen\index{screen}
 one at a time. It travels so quickly down and across the screen\index{screen} painting pixels that it
 can do so up to 60 times a second. As it makes this journey our 'Raster Interrupt\index{Interrupt}' gives
 us the opportunity to tell it to stop once it reaches a certain position on the screen\index{screen}
-and allow us to run some code before it resumes again. We can do this as many times as
+and allows us to run some code before it resumes again. We can do this as many times as
 we want along the journey, but each time we interrupt\index{interrupt} it we have to be quick. If our code
 takes too long the display will flicker and the content of the screen\index{screen} become inconsistent.
 
@@ -258,8 +258,8 @@ total this will be along soon.
 Before it comes in we just have time to prepare the relatively light amount of text we want displayed
 on the screen\index{screen} in memory. We only need to do this once. Throughout the code we refer to this
 area we write to as \icode{SCREEN\_RAM}. It's an address range between \icode{\$0400} and \icode{\$07E8} This is a very
-simple bitmap representation of the entire screen\index{screen} that is 40 characters wide and 25 characters wide,
-giving a total of 1000 bytes (\$3E8 bytes in hex). If we wanted to think of it as pixels it is 320 pixels wide (40 * 8)
+simple bitmap representation of the entire screen\index{screen} that is 40 characters wide and 25 characters high,
+giving a total of 1000 bytes (\icode{\$3E8} bytes in hex). If we wanted to think of it as pixels it is 320 pixels wide (40 * 8)
 and 200 pixels high (25 * 8). The important thing to remember about this \icode{SCREEN\_RAM} is that it is solely
 for storing what we call character\index{character} data. You can think of character\index{character} data as 'text'. This text gets painted\index{painted}
 first and then sprites\index{sprites} get painted\index{painted} on top of it.
@@ -297,7 +297,7 @@ character\index{character} is referred to as \icode{\$00}, the 'A' character\ind
 
 \subfile{titlescreen/charset_tilesheet}
 
-With our character\index{character} set defined we can now write some text to the screen\index{screen} ram. Note that when we write it \icode{SCREEN\_RAM}
+With our character\index{character} set defined we can now write some text to the screen\index{screen} ram. Note that when we write it to \icode{SCREEN\_RAM}
 we're not yet writing it to the actual screen\index{screen}. This is just a place in memory that the raster (our beam of light)
 will refer to later when it is actually writing dots to the screen\index{screen}. If we write a stripe character\index{character} to a particular position
 in this \icode{SCREEN\_RAM} memory it will know to write it the corresponding position on the screen\index{screen}.
@@ -355,7 +355,7 @@ remember that our screen\index{screen} is 40 columns wide and 25 rows high. The 
         STA SCREEN_RAM%\index{SCREEN\_RAM}% + LINE8_COL39%\index{LINE8\_COL39}%,X
 \end{lstlisting}
 
-For the current column, this writes the stripe character\index{character} (reference by \icode{\$00} as we mentioned above) to each of lines
+For the current column, this writes the stripe character\index{character} (referenced by \icode{\$00} as we mentioned above) to each of lines
 2 to 8. The use of the \icode{X} in the \icode{STA} statement is an offset. So where \icode{X} is 14, for example,
 it will write to the position referred to by \icode{SCREEN\_RAM + LINE2\_COL39} plus 14.
 
@@ -502,7 +502,7 @@ the work onto \icode{TitleScreenAnimation\index{TitleScreenAnimation}}):
 \end{lstlisting}
 
 The painting of sprites\index{sprites} and playing of music as the screen\index{screen} gets painted\index{painted} is all handled by \icode{TitleScreen\-Animation\index{TitleScreenAnimation}}.
-This routine\index{routine} works by calling one of three different sub-routines each time its called. It picks the one to run
+This routine\index{routine} works by calling one of three different sub-routines each time it's called. It picks the one to run
 depending on some internal state it maintains, all with a view to ensuring that the sprites\index{sprites} spelling out the game's
 title and the sprites\index{sprites} depicting the animated gilbies\index{gilbies} are updated and in place before the raster reaches them.
 

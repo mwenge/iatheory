@@ -391,8 +391,8 @@ to permit the procedural\index{procedural} generation of planets that they're us
 \end{figure}
 
 With the position and length selected we can start laying turf. We don't just plop down our basic land tiles. Posh
-and proper means giving the shore of the land its own look and feel. This we have in the characters \icode{\$5C} and
-\icode{\$5E} in our character\index{character} set: 
+and proper means giving the shore of the land its own look and feel. This we have in the characters \icode{\$5C,\$5E} and
+\icode{\$5D,\$5F} in our character\index{character} set: 
 
 \begin{figure}[H]
 {
@@ -956,7 +956,7 @@ DrawLevelEntrySequence%\index{DrawLevelEntrySequence}%
 \end{lstlisting}
 
 
-This all just copying and pasting so far. We're slowly populating the tiles for the current upper planet\index{planet} without doing
+This is all just copying and pasting so far. We're slowly populating the tiles for the current upper planet\index{planet} without doing
 anything computationally intensive. The very last statement is where start work on the lower planet\index{planet}, and that's where
 the sorcery starts. In \icode{InvertSurfaceDataForLowerPlanet\index{InvertSurfaceDataForLowerPlanet}} we repoint ourselves to the data for the lower planet\index{planet}
 and use a routine\index{routine} called \icode{InvertCharacter\index{InvertCharacter}} to the do the actual turning of the byte upside-down:

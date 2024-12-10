@@ -168,9 +168,9 @@ slower.
 \caption{The beginning of the first bonus phase.}
 \end{figure}
 Every time the player enters the bonus phase we'll procedurally\index{procedurally} generate a 
-new map. The way we'll manage this is by treating the map as a stack of 
-256 rows and defining our map simply as an array of the rows that 
-make up the map.
+new level for them to play. The way we'll manage this is by treating the level as a stack of 
+256 rows and defining it as an array of the rows that 
+make up a conplete map of the level.
 
   \begin{figure}[H]
       \centering
@@ -183,7 +183,7 @@ make up the map.
   \end{figure}
 
 This means that in order to generate a new map all we have to do is come
-up with an array of bytes where each byte defines a row in the map. By
+up with an array of bytes where each byte defines a row. By
 way of example, this is what the array that defines the map for the 
 first bonus phase round looks like:
 
@@ -665,7 +665,7 @@ ReturnEarly%\index{ReturnEarly}%
 
 The thing to note about this routine\index{routine} is that it only fills one actual line of characters
 at a time, whereas as the 'rows' we've defined are two lines deep. It decides which of the
-two lines its writing by using the \icode{scrollLineOffset\index{scrollLineOffset}} variable to determine which
+two lines it's writing by using the \icode{scrollLineOffset\index{scrollLineOffset}} variable to determine which
 one its writing.
 
 \subsection{Choosing a Map}

@@ -52,7 +52,7 @@ the sheer variety of adversaries the player faces.
 \toprule
  Byte    & Value                     & Description                                                        \\
 \midrule
- Byte 0     & \icode{\$06}                       & Index into array for sprite color                                   \\
+ Byte 0     & \icode{\$06}                       & Index into array for sprite colour                                   \\
  Byte 1-2   & FLYING\_SAUCER1            & First and last sprite value for the attack ship on the upper planet\index{planet} \\
  Byte 3     & \icode{\$03}                       & The animation\index{animation} frame rate for the attack ship.                       \\
  Byte 4-5   & FLYING\_SAUCER1            & First and last sprite value for the attack ship on the lower planet\index{planet} \\
@@ -115,15 +115,15 @@ familiar with if you have played the game:
 \end{figure}
 
 The main colour for this sprite is blue. This may not be obvious from looking at the sprites\index{sprites} themselves, but
-the way the sprite color schemes work is that you can select two colors that are available for all sprites\index{sprites} and
-one color that is unique to the sprite itself. In this case, the unique color selected for the flying saucers is
+the way the sprite colour schemes work is that you can select two colours that are available for all sprites\index{sprites} and
+one colour that is unique to the sprite itself. In this case, the unique colour selected for the flying saucers is
 determined by Byte 1 in the Level Data. You can see in the table in the page opposite
 that this is defined with a value of \icode{\$06}. This is how it looks in the code itself:
 
 \begin{lstlisting}[escapechar=\%]
 planet1Level1Data%\index{planet1Level1Data}%
     ; Byte 0 (Index $00): An index into colorsForAttackShips%\index{colorsForAttackShips}% 
-    ; that applies a color value for the ship sprite.
+    ; that applies a colour value for the ship sprite.
     .BYTE $06
 \end{lstlisting}
 
@@ -136,7 +136,7 @@ colorsForAttackShips%\index{colorsForAttackShips}%
 \end{lstlisting}
 
 In the routine\index{routine} that draws the attack wave we find the following code segment writing this value
-to the register\index{register} \icode{\$D027} that determines the color of the sprite:
+to the register\index{register} \icode{\$D027} that determines the colour of the sprite:
 
 \begin{lstlisting}[escapechar=\%]
 DrawUpperPlanetAttackShips%\index{DrawUpperPlanetAttackShips}%
@@ -646,7 +646,7 @@ What this routine\index{routine} is going to do is replace the first dead ship i
 and create a new enemy with the current ship's position with it.
 
 First, we store the current ship's position. The way to do this is get the index (\icode{Y}) for the current ship \icode{X} and store
-each of the X and Y Position information into the accumulator first \icode{A} and then push it onto the 'stack' (\icode{PHA} which means
+each of the X and Y Position information into the accumulator \icode{A} and then push it onto the 'stack' (\icode{PHA} which means
 'push \icode{A} onto the stack').
 
 \begin{lstlisting}[escapechar=\%]
@@ -826,7 +826,7 @@ are treated as providing the address \icode{\$1370}. This is the location where 
 
 An irritating early hurdle in Iridis Alpha's gameplay is the behaviour of the lickerships in the game's third level.
 When shot the enemies\index{enemies} turn into lickerships that seek out the player and then stick to them, sapping the player's energy\index{energy}
-until they lose a life. This behavious is defined by Bytes 22 and 23. 
+until they lose a life. This behaviour is defined by Bytes 22 and 23. 
 
 \begin{lstlisting}[escapechar=\%]
 lickerShipWaveData%\index{lickerShipWaveData}% = $1118
@@ -1127,7 +1127,7 @@ of the level data is given over to chaining level data in this way. Let's look a
 
 \section{Bytes 15-17: Sprite Switching}
 Byte 15 defines a value that is periodically decremented and when it reaches zero the level data pointed
-to by Bytes 16 and 17 is loaded. This is used in the very first level to switch the main sprite color
+to by Bytes 16 and 17 is loaded. This is used in the very first level to switch the main sprite colour
 of the flying UFOs. 
 
 \begin{figure}[H]
@@ -1150,7 +1150,7 @@ Byte 15 & \$40                       & Update rate for periodically switching to
   }\caption{\icode{planet1Level1Data\index{planet1Level1Data}}: Bytes 15 to 17 for Level 1 on the Sheep Planet.}
 \end{figure}
 
-The way it works is Byte 15 is loaded to the appropriate position in \icode{updateRateForAttackShips\index{updateRateForAttackShips}}:
+The way it works is Byte 15 is loaded to the appropriate position in \icode{updateRateForAttack\-Ships\index{updateRateForAttackShips}}:
 
 \begin{lstlisting}[escapechar=\%]
 GetWaveDataForNewShip%\index{GetWaveDataForNewShip}%
@@ -1218,7 +1218,7 @@ or less the same as \icode{planet1Level1Data\index{planet1Level1Data}} with the 
         \toprule
         Byte    & Value                     & Description                                                        \\
         \midrule
-  Byte 0  & \icode{\$11}                       & Index into array for sprite color                                  \\
+  Byte 0  & \icode{\$11}                       & Index into array for sprite colour                                  \\
  Byte 16 & planet1Level1Data\index{planet1Level1Data} & Lo Ptr to the wave data we switch to periodically.               \\
  Byte 17 & planet1Level1Data\index{planet1Level1Data} & Hi Ptr to the wave data we switch to periodically.               \\
         \bottomrule
@@ -1227,7 +1227,7 @@ or less the same as \icode{planet1Level1Data\index{planet1Level1Data}} with the 
   }\caption{\icode{planet1Level1Data\index{planet1Level1Data}}: Bytes 15 to 17 for Level 1 on the Sheep Planet.}
 \end{figure}
 
-The effect therefore is that the main sprite color changes (although the sprite stays the same) and when the 
+The effect therefore is that the main sprite colour changes (although the sprite stays the same) and when the 
 periodic decrementing of Byte 15 reaches zero again it will switch back to \icode{planet1Level1Data\index{planet1Level1Data}}. This 
 switching back and forth will continue for as long as the enemy does not collide with anything or is not hit.
 
@@ -1347,7 +1347,7 @@ been struck by a bullet.
 \toprule
  Byte    & Value                     & Description                                                        \\
 \midrule
- Byte 0  & \$05                       & Index into array for sprite color                                  \\
+ Byte 0  & \$05                       & Index into array for sprite colour                                  \\
  Byte 1  & FLYING\_DOT1               & Sprite value for the attack ship on the upper planet\index{planet}               \\
  Byte 28 & lickerShipWaveData\index{lickerShipWaveData}         & Lo Ptr for data to switch to when hit by bullet.                                    \\
  Byte 29 & lickerShipWaveData\index{lickerShipWaveData}         & Hi Ptr for data to switch to when hit by bullet.                                    \\
@@ -1474,12 +1474,11 @@ The level data accomodates up to four incarnations in total for an enemy wave.
         \midrule
  Byte 24-25 & nullPtr\index{nullPtr}                   & Pointer for second wave of attack ships.                            \\
  Byte 26-27 & nullPtr\index{nullPtr}                   & Pointer for third wave of attack ships.                             \\
- Byte 30-31 & defaultExplosion\index{defaultExplosion}          & Pointer for  wave to switch to after colliding\index{colliding} with gilby.          \\
- Byte 32-33 & \$00                       & Pointer for fourth wave of attack ships.                            \\
+ Byte 32-33 & nullPtr                       & Pointer for fourth wave of attack ships.                            \\
         \bottomrule
       \end{tabular}
     \end{adjustbox}
-  }\caption{\icode{planet1Level1Data\index{planet1Level1Data}}: Bytes 30 to 31 for Level 1 on the Sheep Planet.}
+  }\caption{Mostly unused: the contents of these bytes for most levels in the game.}
 \end{figure}
 
 \begin{lstlisting}[escapechar=\%]

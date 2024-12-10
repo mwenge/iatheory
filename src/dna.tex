@@ -40,7 +40,7 @@ titleTextLine7%\index{titleTextLine7}%   .TEXT ".BE NICE TO HAIRY ANIMALS%\index
 
 Minter first shared it as a tiny 11K demo in a UK Compunet forum in the summer of 
 1986. It followed shortly after 'Torus', an oscillator-based demo, shared at the same time and which we
-cover elsewhere : both are sprite-based
+covered earlier: both are sprite-based
 light synthesisers where, like Psychedelia and Colorspace, the player gets to experiment with different
 configurations that control the behaviour of a frantic assembly of brightly colored, pulsating sprites\index{sprites}.
 
@@ -81,7 +81,7 @@ dnaSpritesXPositionsArray%\index{dnaSpritesXPositionsArray}%       .BYTE $C0,$C0
                                 .BYTE $00,$00,$00,$00,$00,$00,$00,$00
 \end{lstlisting}
 
-With every full paint of the screen\index{screen} calculates a new X co-ordinate and puts it at the head of the array. Depending
+With every full paint of the screen\index{screen} DNA calculates a new X co-ordinate and puts it at the head of the array. Depending
 on the value given as the 'Speed' setting, it then shifts all the others in the array to the right by one position. 
 
 \begin{lstlisting}[escapechar=\%]
@@ -289,7 +289,7 @@ As we can see above these are populated from \icode{xPosOffsetsForFrequency\inde
 
 In each case the value populated here is added to a value selected from \icode{newXPosOffsetsArray\index{newXPosOffsetsArray}} to give the 
 new X position for the eyeball at the head of the chain. Well, in a way that's only half true. Separate positions
-are indeed calculated for the left and right chain, but at the end of the day the position calculate for the right-hand
+are indeed calculated for the left and right chain, but at the end of the day the position calculated for the right-hand
 chain (Wave 2) is purely notional. It's just used as an initial value that the value calculated for the left-hand chain
 is layered on to. This allows the two chains to 'interfere' with each other, as though the position of one affects the
 other - and reduces the chance of the two overlapping too much:

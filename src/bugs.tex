@@ -40,7 +40,7 @@ people and they ll give you an unglitchified one."
 \end{definition}
 
 The fault lay in a single byte. The very last byte in the second segment on the tape was missing
-completely. Instead on \icode{\$A2} value, there was nothing. With the result that the byte
+completely. Instead of an \icode{\$A2} value, there was nothing. As a result the byte
 stored in the C64's memory at that position was uninitialized and remained \icode{\$00}:
 \begin{figure}[H]
   {
@@ -108,8 +108,8 @@ This bug happens because the 'wave' data isn't cleared down when a new game
 starts. So whatever is in there from the previous game gets used until they're
 flushed out by being killed and replaced with the level's proper enemy data.
 
-This isn't a problem for the first game after Iridis Alpha is loaded because
-the first level's data is hardcoded in there.
+This isn't a problem when playing the game for the first time after Iridis Alpha is loaded from tape because
+the first level's data is hardcoded in there. It only becomes apparent when playing the game after your first and subsequent defeats. Since these will usually be at the hands of the infamous licker ships this bug can be particularly painful for the beginner.
 
 The fix is simple enough, we initialize the active wave data stored in `activeShipsWaveDataLoPtrArray\index{activeShipsWaveDataLoPtrArray}` and `activeShipsWaveDataHiPtrArray\index{activeShipsWaveDataHiPtrArray}`
 with the first level's data whenever we start a new game. 
@@ -142,12 +142,12 @@ InitializeActiveShipLoop
 After a minute or two in the title screen\index{screen}, the game enters 'Attract Mode' and
 plays a random level on autopilot for a few seconds. If you press F1 during
 this play you enter the 'Made in France' pause-mode mini game. If you press F1
-again you can now start playing the level 'Attract Mode' selected at random.
+again you can now start playing the level 'Attract Mode' had selected at random. This can be a handy way of exploring new planets and levels that your meager playing skills prevent you from reaching legitimately!
 
-This is because the `CheckKeyboardInGame\index{CheckKeyboardInGame}` routine\index{routine} doesn't try to prevent you
+This handy little cheat is possible because the `CheckKeyboardInGame\index{CheckKeyboardInGame}` routine\index{routine} doesn't try to prevent you
 from entering 'Pause Mode' while Attract Mode is running:
 
-\begin{lstlisting}[caption=Fixing the reappearing enemy bug,escapechar=\%]
+\begin{lstlisting}[caption=A trap door to new worlds in Attract Mode,escapechar=\%]
 CheckKeyboardInGame%\index{CheckKeyboardInGame}%
         LDA lastKeyPressed%\index{lastKeyPressed}%
         CMP #$40 ; $40 means no key was pressed

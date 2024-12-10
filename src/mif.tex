@@ -359,8 +359,8 @@ Notice that painting the eighth square is achieved by simply falling through to 
 whereas for each of the previous seven squares this subroutine is called and returned from.
 
 I also quite like the simple logic at the end of the routine to ensure we don't bother trying to paint characters that are
-not on the screen. As a whole, this routine this code leverages nicely the 'return early' pattern possible in assembly programming
-where we bail out early if a condition is not met and otherwise let the code proceed to execute to the end and do what needs
+not on the screen. As a whole, this routine leverages nicely the 'return early' pattern 
+where we bail out early if a condition is not met but otherwise let the code proceed to execute to the end and do what needs
 to be done \textit{only if it needs to be done}.
 
 \begin{figure}[H]

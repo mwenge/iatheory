@@ -172,6 +172,11 @@ new level for them to play. The way we'll manage this is by treating the level a
 256 rows and defining it as an array of the rows that 
 make up a conplete map of the level.
 
+This means that in order to generate a new map all we have to do is come
+up with an array of bytes where each byte defines a row. By
+way of example, this is what the array that defines the map for the 
+first bonus phase round looks like:
+
   \begin{figure}[H]
       \centering
       \foreach \l in {0,...,6}
@@ -181,11 +186,6 @@ make up a conplete map of the level.
       }%
   \caption{The first seven maps used by the bonus phase round.}
   \end{figure}
-
-This means that in order to generate a new map all we have to do is come
-up with an array of bytes where each byte defines a row. By
-way of example, this is what the array that defines the map for the 
-first bonus phase round looks like:
 
 
 \begin{lstlisting}[escapechar=\%]
@@ -268,6 +268,7 @@ initially followed by rows with some other features.
     \end{adjustbox}
   }\caption{Snapshot of the map created by the first line definition.}
 \end{figure}
+\vspace{-0.3cm}
 
 Further along in the definition we reach a segment where some new features
 are introduced.
@@ -296,14 +297,8 @@ map them to their corresponding images:
         \icode{\$16} & \makecell[l]{
           \includegraphics[width=10cm]{src/bonusphase/row_hex16.png}%
         } \\
-        \icode{\$16} & \makecell[l]{
-          \includegraphics[width=10cm]{src/bonusphase/row_hex16.png}%
-        } \\
         \icode{\$15} & \makecell[l]{
           \includegraphics[width=10cm]{src/bonusphase/row_hex15.png}%
-        } \\
-        \icode{\$11} & \makecell[l]{
-          \includegraphics[width=10cm]{src/bonusphase/row_hex11.png}%
         } \\
         \icode{\$11} & \makecell[l]{
           \includegraphics[width=10cm]{src/bonusphase/row_hex11.png}%
@@ -382,9 +377,8 @@ bonusPhaseMapRowDefinitions%\index{bonusPhaseMapRowDefinitions}%
 
 The one at index \icode{\$15} (21 in decimal\index{decimal}) is this guy:
 
-\begin{lstlisting}[basicstyle=\tiny\ttfamily,escapechar=\%]
-bonusPhaseMapRowDefinitions%\index{bonusPhaseMapRowDefinitions}%   
-        .BYTE $00,$10,$0B,$11,$00,$00,$10,$0B,$11,$00,$00,$10,$0B,$11,$00,$00,$10,$0B,$11,$00
+\begin{lstlisting}[basicstyle=\scriptsize\ttfamily,escapechar=\%]
+.BYTE $00,$10,$0B,$11,$00,$00,$10,$0B,$11,$00,$00,$10,$0B,$11,$00,$00,$10,$0B,$11,$00
 \end{lstlisting}
 
 Each byte in this definition represents a square cell of four bytes. So for example, \icode{\$00}
@@ -399,7 +393,9 @@ translates to:
 \end{figure}
 
 \captionsetup[subfigure]{font=large,labelfont=large,labelformat=empty}
+\vspace{-0.5cm}
 And the first five bytes (which are repeated four times to complete the full row) translate as follows:
+
 \begin{figure}[H]
   {
     \setlength{\tabcolsep}{3.0pt}
@@ -502,7 +498,7 @@ to turn them into our 4-byte cell:
   }\caption[]{Characters making up the four-byte cell referenced by \icode{\$00}.}
 \end{figure}
 
-What we have done is take the two values at index \icode{\$00} in \icode{cellFirstColumnArray\index{cellFirstColumnArray}}
+What we have done is take the two values at index \icode{\$00} in \icode{cellFirstColumn\-Array\index{cellFirstColumnArray}}
 and used each as the first column across two rows. Then we've taken the two values from
 \icode{cellSecondColumnArray\index{cellSecondColumnArray}} and used them as the second column across two rows. 
 
@@ -521,8 +517,8 @@ cellSecondColumnArray%\index{cellSecondColumnArray}%
         ...
 \end{lstlisting}
 
-The values at index \icode{\$10} in \icode{cellFirstColumnArray\index{cellFirstColumnArray}} are \icode{\$60,\$61} and
-in \icode{cellSecondColumnArray\index{cellSecondColumnArray}} are \icode{\$61,\$63}. Translated to row and column position
+The values at index \icode{\$10} in \icode{cellFirstColumn\-Array\index{cellFirstColumnArray}} are \icode{\$60,\$61} and
+in \icode{cellSecondColumn\-Array\index{cellSecondColumnArray}} are \icode{\$61,\$63}. Translated to row and column position
 this gives:
 
 \begin{figure}[H]                          

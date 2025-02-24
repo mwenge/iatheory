@@ -2,6 +2,13 @@
 \label{sec:archaeo}
 \lstset{style=6502Style}
 
+\lstdefinestyle{megasave}{
+  emptylines=1,
+  basicstyle=\small\ttfamily\color{black},
+  moredelim=**[is][\color{red}]{@}{@},
+  moredelim=**[is][\color{blue}]{~}{~},
+}
+
 Iridis Alpha was distributed on cassette tape by the publisher Hewson Consultants. Normally used
 to play audio, cassette tapes were the cheap and ubiquitous medium \textit{du jour} of the 1980s and a
 natural choice for the nascent 8-bit game industry to distribute its wares.
@@ -14,10 +21,20 @@ natural choice for the nascent 8-bit game industry to distribute its wares.
   }\caption[]{It should be simple getting bytes off this\, right?}
 \end{figure}
 
+You don't have to look at the picture of Iridis Alpha's cassette tape above to notice that it doesn't contain
+an awful lot of tape. This gives you an idea of how little data we are actually dealing with when it comes
+to the size of program that the C64 could cope with. The spool contains a 'mere' 54 kilobytes of target data. Even
+when encoded in the elaborate way we are about to describe this still does not result in a large physical
+medium. As you may alread appreciate, 54 kilobytes is a fraction of the average file size we are used to
+dealing with today, where even a single image on a web page will run to hundreds of kilobytes.
+
 Playing a cassette tape for a C64 game such as Iridis Alpha on a normal cassette tape player would
 be an ear-splitting mistake. Instead of music you would be subjected to a cacophony of mechanical
 chirruping. This is the tape attempting to convey to you its long stream of binary data in the only
-language available to it: lots of sound waves of varying length.
+language available to it: lots of sound waves of varying length. The Commodore 64 came equipped
+with a specially-adapted cassette player of its own to cope with this racket. This player could read the the sounds encoded
+on a cassette tape and transmit them as a serious of pulses into the C64's main CPU board, so that 
+they could be used for their intended purpose: interpretation as bytes of data. 
 
 Without knowing how it's actually done, it's tempting to imagine a variety of possible schemes that
 might have been used to store data on a cassette. For example, one sound wave denoting a '0' and another one denoting a '1'.
@@ -25,8 +42,8 @@ The method that is actually used isn't very far away from such a thing but there
 layered on top, particularly in a bid to spend as little time as possible loading data from the
 tape.
 
-In order to get something to work with, we must first somehow convert the contents of the
-cassette tape into a binary file and then emulate the steps the C64's tape player performed
+In order to get something to work with on our modern computers, we must first somehow convert the contents of the
+cassette tape into a binary file on our computer's hard disk and then emulate the steps the C64's tape player performed
 to read the sounds from the tape. Only then can we load them into memory as something that could be run as a
 computer program.
 
@@ -42,7 +59,7 @@ a \icode{tap} file for us. So we have something to dig into. This is going to be
 into the bowels of decoding a 54KB game file from over 500KB of raw data. Every time you think you
 are nearly done there will be yet another convolution to wrap your head around. But at the end of it
 we will finally have our binary game file and will be ready to figure out how to decipher it into something
-approximating the original assembly langage Iridis Alpha itself was written in.
+approximating the original 6502 assembly langage Jeff Minter used to write Iridis Alpha in 1986.
 
 \begin{figure}[H]
   {
@@ -55,9 +72,13 @@ and each long pulse by a pink pixel. Roughly speaking, grey is a shorthand for 0
 
 \section{The Madness Begins}
 
-This is what the start of the our \icode{iridis-alpha.tap} file looks like. Note that this is the contents of the
-start of \icode{tap} file rather than the data on the tape itself. The data on the tape is represented by the white
-cells in our diagram:
+In the table below we show what the start of the our \icode{iridis-alpha.tap} file looks like. Note that this table
+presents the the contents of the
+start the of \icode{tap} file rather than the data on the tape itself. The data on the tape is represented by the white
+cells in our diagram. The coloured cells are header information specific to the \icode{tap} file format and do not represent
+data on the tape. The purpose of this header info is make it obvious to anyone inspecting \icode{iridis-alpha.tap} that it
+it contains raw sound information captured from a cassette (\icode{C64-TAP-RAW}), as well as providing the version of the \icode{tap} specification
+used when creating the file and the total length of the data in the file:
 
 \begin{figure}[H]
   {
@@ -71,7 +92,7 @@ cells in our diagram:
         \fill[cyan] (13,6) rectangle ++ (3,1);
         \fill[lightred] (0,5) rectangle ++ (3,1);
         \node[matrix of math nodes,anchor=south west,inner sep=0pt,
-              nodes={draw,minimum size=1cm,anchor=center},
+              nodes={draw,minimum size=1cm,anchor=center,font=\huge},
               column sep=-\pgflinewidth,row sep=-\pgflinewidth,font=\ttfamily]
               {
 \icode{43} & \icode{36} & \icode{34} & \icode{2D} & \icode{54} & \icode{41} & \icode{50} & \icode{45} & \icode{2D} & \icode{52} & \icode{41} & \icode{57} & \icode{00} & \icode{00} & \icode{00} & \icode{00}  \\
@@ -153,7 +174,8 @@ represent a short, medium, or long duration sound:
 \end{figure}
 
 Remarkably the first 27,000 or so pulses on the Iridis Alpha tape are nothing but short sounds (values between \icode{\$2F} and
-\icode{\$31}) so cannot be interpreted as anything. It's not until the 27,157th byte in the tape that we start to encounter real data:
+\icode{\$31}) so cannot be interpreted as anything. These would have been ignored by the C64 when reading the tape and so
+can be ignored by us. It's not until the 27,157th byte in the tape that we start to encounter real data:
 
 \begin{lstlisting}[caption=Data finally gets started at `\icode{56 41}' in the first line above.,basicstyle=\scriptsize\ttfamily,escapechar=\%]
 00006a10: 3031 3031 3156 4144 3130 4231 4243 3130  01011VAD10B1BC10
@@ -179,7 +201,7 @@ required to give us a single byte. The table below shows how we interpret them t
   {
     \setlength{\tabcolsep}{3.0pt}
     \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
-    \begin{adjustbox}{width=9cm,center}
+    \begin{adjustbox}{width=13cm,center}
 
       \begin{tabular}{rllllllll}
         \toprule
@@ -212,7 +234,7 @@ or medium to construct a meaning for the entire sequence\index{sequence}.
 {
 	\begin{adjustbox}{width=14cm,center}
 	\begin{tikzpicture}
-	\begin{axis}[xmin=0,width=14cm,height=4cm,xmax=52,
+	\begin{axis}[xmin=0,width=14cm,height=4cm,xmax=53,
 		title=The First 'Real' Byte of Data on the Tape as a Square Sound Wave.,xlabel={Time$\rightarrow$},ylabel=Amplitude]
 			\addplot+[thick,const plot, no marks,black]
 			coordinates {(0,0) (1,1) (4,0) (5,1) (7,0) %long medium
@@ -236,11 +258,11 @@ or medium to construct a meaning for the entire sequence\index{sequence}.
 				(32,0) (33,1) (34,0) (35,1) (37,0) % short medium
 				(37,0) (38,1) (39,0) (40,1) (42,0) % short medium
 		};
-	\addplot+[thick,const plot, no marks,red]
+	\addplot+[thick,solid,const plot, no marks,red]
 		coordinates {
 			(42,0) (43,1) (45,0) (46,1) (47,0) % medium short
 		};
-	\addplot+[thick,const plot, no marks,black]
+	\addplot+[thick,solid,const plot, no marks,black]
 		coordinates {
 			(47,0) (48,1) (49,0) (50,1) (52,0) % short medium
 		};
@@ -250,11 +272,16 @@ or medium to construct a meaning for the entire sequence\index{sequence}.
 }\caption[]{Medium-Short pairs in red represent a '1' bit, Short-Medium pairs in blue represent a '0' bit. So this gives
 us '10010001'. The black wave form at the beginning is the 'Start of Byte' indicator\, and the one at the end is a parity bit.}
 \end{figure}
+
+Take your time to compare the wave diagram above with the table on the opposite page. We're representing the same
+data in two different ways here, with the wave pattern illustrating the sound form that the cassette reader would
+have received and translated into the zeros and ones that will make up our first byte.
+
 Once we've extracted our result of \icode{10010001} from these twenty bytes we now must reverse it. We must do this because
 the bits are encoded on the tape with the 'most significant bit' first and we are used to reading binary with the 'least significant bit
 first'. In hexadecimal the reversed bit-string of \icode{10001001} is \icode{\$89}.
 
-We have our first byte! It's \icode{89}! 
+We have our first byte! It's \icode{\$89}! 
 
 \section{After Our First Real Byte}
 With this precious commodity in hand we now continue reading off bytes in the same manner from the tape. Eventually we encounter
@@ -276,7 +303,7 @@ read 202 bytes in total:
         \fill[pink] (0,11) rectangle ++ (14,1);
         \fill[lightgray] (9,0) rectangle ++ (1,1);
         \node[matrix of math nodes,anchor=south west,inner sep=0pt,
-              nodes={draw,minimum size=1cm,anchor=center},
+              nodes={draw,minimum size=1cm,anchor=center,font=\huge},
               column sep=-\pgflinewidth,row sep=-\pgflinewidth,font=\ttfamily]
               {
 	\icode{89} & \icode{88} & \icode{87} & \icode{86} & \icode{85} & \icode{84} & \icode{83} & \icode{82} & \icode{81} & \icode{03} & \icode{A7} & \icode{02} & \icode{04} & \icode{03} & \icode{49} & \icode{52} \\
@@ -368,7 +395,7 @@ When it arrives it looks like this:
         \fill[lightred] (0,6) rectangle ++ (9,1);
         \fill[lightgray] (6,0) rectangle ++ (1,1);
         \node[matrix of math nodes,anchor=south west,inner sep=0pt,
-              nodes={draw,minimum size=1cm,anchor=center},
+              nodes={draw,minimum size=1cm,anchor=center,font=\huge},
               column sep=-\pgflinewidth,row sep=-\pgflinewidth,font=\ttfamily]
               {
 \icode{89} & \icode{88} & \icode{87} & \icode{86} & \icode{85} & \icode{84} & \icode{83} & \icode{82} & \icode{81} & \icode{A9} & \icode{80} & \icode{05} & \icode{91} & \icode{4C} & \icode{EF} & \icode{F6} \\
@@ -417,6 +444,10 @@ Checksum & \icode{53} & I stil don't know how is this calculated! \\
   }\caption{The meaning of the second batch of data we've read in.}
 \end{figure}
 
+Would you be surprised to learn that we have to read in this payload a second time from the tape before we're done?
+Let's just assume that you're not and let's move swiftly on to wondering what we're supposed to do with 100 or so
+bytes of data we've finally managed to read after listening to some 50,000 chirrups and clicks from cassette tape.
+
 \begin{figure}[H]
   {
     \begin{adjustbox}{width=10cm,center}
@@ -424,10 +455,6 @@ Checksum & \icode{53} & I stil don't know how is this calculated! \\
     \end{adjustbox}
   }\caption[]{The bytes we've read so far from the tape.}
 \end{figure}
-
-Would you be surprised to learn that we have to read in this payload a second time from the tape before we're done?
-Let's just assume that you're not and let's move swiftly on to wondering what we're supposed to do with 100 or so
-bytes of data we've finally managed to read after listening to some 50,000 chirrups and clicks from cassette tape.
 
 The answer is simple. We load the data we've received into RAM and execute it. We load the second chunk of data
 we received at address \icode{\$02A7} (this was given in the 'Load Address' field) and the first chunk of data we received directly after it.
@@ -449,9 +476,15 @@ The idea is that this little program will do a better job of reading data from t
 by itself. There is a whole menagerie of these programs that proliferated in the 1980s with exotic names such as Jetload, Easytape,
 Audiogenic and so on. Luigi di Fraia maintains a utility called \icode{tapclean} that does a great job of identifying and emulating
 these loaders and thanks to him we have a disassembled version of the loader we've just found on the Iridis Alpha tape. It has the
-quintessentially 1980s moniker 'MegaSave' and as you can see in the listing reproduced below is relatively compact.
+quintessentially 1980s moniker 'MegaSave' and as you can see in the listing reproduced on the next page it is relatively compact.
 
-\begin{lstlisting}[caption=The data we have just loaded\, translated back into assembly language. This is the MegaSave loader.]
+Now before you turn the page, bear in mind that you are not expected to read or understand this listing yet. I've reproduced
+it here so you can get a sense of what a small assembly program looks like. If you're going to read your first serious piece
+of assembly this is not where you should start. If anything else, the font is way too small! 
+
+\begin{minipage}[b]{0.50\linewidth}
+\centering
+\begin{lstlisting}[basicstyle=\tiny\ttfamily]
 ; This disassembly has been adapted from
 ; https://www.luigidifraia.com/doku/doku.php?id=commodore:tapes:loaders:mega-save
 ;
@@ -471,12 +504,10 @@ T034C
   .byte $00,$00,$00,$00,$00
 
 AlignAndSynchronizeLoop
-  
   SEI           
 
   LDA #$6E      ; Set the read bit timer/counter threshold to 0x0107
   STA $DD06     
-
   LDX #$01      
 
 ; Byte-align with the incoming stream by shifting bits in until
@@ -484,7 +515,6 @@ AlignAndSynchronizeLoop
 
 _align
   JSR rd_bit    ; Read a bit
-
   ROL $F7       ; Shift each of them into the byte receive register
   LDA $F7       
   CMP #$63      ; Until the first occurrence of 0x63 (pilot byte)
@@ -515,7 +545,6 @@ _sync
   BEQ AlignAndSynchronizeLoop     
 
 ; Read and store file header
-
 _header
   JSR rd_byte   ; Read 10 header bytes
   STA $002B,Y   ; Overwrite BASIC program pointers
@@ -527,6 +556,12 @@ _header
   LDY #$00      
   STY $90       ; Zero the status flags (not set by this code)
   STY $02       ; Zero the checkbyte register
+\end{lstlisting}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}[b]{0.50\linewidth}
+\centering
+\begin{lstlisting}[basicstyle=\tiny\ttfamily]
 
 ; Read and store data from tape into RAM
 
@@ -574,7 +609,6 @@ _check_complete
   JMP $FCE2     ; Soft-reset if any of the above checks fails
 
 ; Code execution after a file is completely loaded in
-
   LDA $31       ; Check flag #1
   BEQ *+5       ; If not set move on
   JMP J02B9     ; Otherwise re-execute the loader
@@ -605,6 +639,12 @@ rd_byte
 
 B03EB
   JSR rd_bit    ; Read a bit
+\end{lstlisting}
+\end{minipage}
+
+\begin{minipage}[b]{0.50\linewidth}
+\centering
+\begin{lstlisting}[basicstyle=\tiny\ttfamily]
   ; Shift each of them into the byte receive register, MSbF
   ROL $F7       
   INC $D020     
@@ -614,10 +654,8 @@ B03EB
   RTS           
 
 .cerror * > $03FC, "The CBM Header code is too long to fit in the tape buffer!"
+.align $03FC, $00 ; Padding
 
-; --------------------------------
-
-  .align $03FC, $00 ; Padding
 ; ************
 ; * CBM Data *
 ; ************
@@ -658,11 +696,17 @@ J02B9
   SEI           
 
   JMP AlignAndSynchronizeLoop     ; Execute the main loader code
+\end{lstlisting}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}[b]{0.50\linewidth}
+\centering
+\begin{lstlisting}[basicstyle=\tiny\ttfamily]
 
 ; --------------------------------
-; Read bit: loops until a falling edge is received on the read line 
-;           and uses the read bit timer/counter to discriminate
-;            the current bit value
+; Read bit: loops until a falling edge is received on
+; the read line and uses the read bit timer/counter
+; to discriminate the current bit value
 ;
 ; Returns: the read bit in the Carry flag
 
@@ -681,11 +725,9 @@ rd_bit
 
   RTS           
 
-; --------------------------------
-
 J02E9
-  ; Reset pointer to current text character to the beginning
-  ; of program text
+  ; Reset pointer to current text character to the
+  ; beginning of program text
   JSR $A68E 
 
   LDA #$00      
@@ -713,6 +755,7 @@ T0300
   ; Autostart the turbo loader, once loaded, by overwriting IMAIN
   .word J02AE 
 \end{lstlisting}
+\end{minipage}
 
 What does MegaSave do that makes it so much faster than the default C64 tape loader? The simple answer is that it cuts corners
 and strips away all of the cautious redundancy we observed when loading the loader itself. Instead of reading 20 bytes (or pulses)
@@ -761,31 +804,54 @@ natural way of representing bits on paper\, so we don't need to reverse the bits
 	\end{figure}
 
 There is an inordinately long string of these, followed by an ascending sequence\index{sequence} of byte values from \icode{\$63} to \icode{\$FF}.
-This sequence\index{sequence} has the catchy name of a 'Sync Train':
-
-\lstdefinestyle{megasave}{
-  emptylines=1,
-  basicstyle=\small\ttfamily\color{black},
-  moredelim=**[is][\color{red}]{@}{@},
-  moredelim=**[is][\color{blue}]{~}{~},
-}
-
+The long series of \icode{\$63}s are known as 'Pilot Bytes'. 
 \begin{figure}[H]
   {
     \setlength{\tabcolsep}{3.0pt}
     \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
     \begin{adjustbox}{width=10cm,center}
       \begin{tikzpicture}
-        \draw[step=1.0,gray,thin] (0,0) grid (17,19);
-        \fill[lightred] (0,19) rectangle ++ (17,1);
-        \fill[lightred] (0,18) rectangle ++ (17,1);
-        \fill[lightred] (0,17) rectangle ++ (17,1);
-        \fill[lightred] (0,16) rectangle ++ (17,1);
-        \fill[lightred] (0,15) rectangle ++ (17,1);
-        \fill[lightred] (0,14) rectangle ++ (17,1);
-        \fill[lightred] (0,13) rectangle ++ (17,1);
-        \fill[lightred] (0,12) rectangle ++ (17,1);
-        \fill[lightred] (0,11) rectangle ++ (17,1);
+        \draw[step=1.0,gray,thin] (0,0) grid (17,9);
+        \fill[lightred] (0,9) rectangle ++ (17,1);
+        \fill[lightred] (0,8) rectangle ++ (17,1);
+        \fill[lightred] (0,7) rectangle ++ (17,1);
+        \fill[lightred] (0,6) rectangle ++ (17,1);
+        \fill[lightred] (0,5) rectangle ++ (17,1);
+        \fill[lightred] (0,4) rectangle ++ (17,1);
+        \fill[lightred] (0,3) rectangle ++ (17,1);
+        \fill[lightred] (0,2) rectangle ++ (17,1);
+        \fill[lightred] (0,1) rectangle ++ (17,1);
+        \fill[lightred] (0,0) rectangle ++ (5,1);
+        \fill[lightblue] (5,0) rectangle ++ (12,1);
+        \node[matrix of math nodes,anchor=south west,inner sep=0pt,
+              nodes={draw,minimum size=1cm,anchor=center,font=\huge},
+              column sep=-\pgflinewidth,row sep=-\pgflinewidth,font=\ttfamily]
+              {
+\icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} \\
+\icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} \\
+\icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} \\
+\icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} \\
+\icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} \\
+\icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} \\
+\icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} \\
+\icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} \\
+\icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} \\
+\icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{64} & \icode{64} & \icode{65} & \icode{66} & \icode{67} & \icode{68} & \icode{69} & \icode{6A} & \icode{6B} & \icode{6C} & \icode{6D} & \icode{6E} \\
+						  };
+      \end{tikzpicture}
+    \end{adjustbox}
+  }\caption{The leading material read by the Megasave loader in the run up to retrieving game data. The Pilot Bytes are in red, 
+the beginning of the 'Sync Train' in blue.}
+\end{figure}
+
+Following the pilot bytes we get an ascending series from \icode{\$63} to \icode{\$FF}. This sequence\index{sequence} has the catchy name of a 'Sync Train'. Once the Sync Train has reached \icode{\$FF} the decoder knows that its time to start taking some of this data seriously: 
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{3.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=10cm,center}
+      \begin{tikzpicture}
+        \draw[step=1.0,gray,thin] (0,0) grid (17,10);
         \fill[lightred] (0,10) rectangle ++ (5,1);
         \fill[lightblue] (5,10) rectangle ++ (12,1);
         \fill[lightblue] (0,9) rectangle ++ (17,1);
@@ -804,18 +870,9 @@ This sequence\index{sequence} has the catchy name of a 'Sync Train':
         \fill[pink] (16,1) rectangle ++ (1,1);
         \fill[violet] (0,0) rectangle ++ (1,1);
         \node[matrix of math nodes,anchor=south west,inner sep=0pt,
-              nodes={draw,minimum size=1cm,anchor=center},
+              nodes={draw,minimum size=1cm,anchor=center,font=\huge},
               column sep=-\pgflinewidth,row sep=-\pgflinewidth,font=\ttfamily]
               {
-\icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} \\
-\icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} \\
-\icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} \\
-\icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} \\
-\icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} \\
-\icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} \\
-\icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} \\
-\icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} \\
-\icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} \\
 \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{63} & \icode{64} & \icode{64} & \icode{65} & \icode{66} & \icode{67} & \icode{68} & \icode{69} & \icode{6A} & \icode{6B} & \icode{6C} & \icode{6D} & \icode{6E} \\
 \icode{6F} & \icode{70} & \icode{71} & \icode{72} & \icode{73} & \icode{74} & \icode{75} & \icode{76} & \icode{77} & \icode{78} & \icode{79} & \icode{7A} & \icode{7B} & \icode{7C} & \icode{7D} & \icode{7E} & \icode{7F} \\
 \icode{80} & \icode{81} & \icode{82} & \icode{83} & \icode{84} & \icode{85} & \icode{86} & \icode{87} & \icode{88} & \icode{89} & \icode{8A} & \icode{8B} & \icode{8C} & \icode{8D} & \icode{8E} & \icode{8F} & \icode{90} \\
@@ -831,17 +888,17 @@ This sequence\index{sequence} has the catchy name of a 'Sync Train':
 
       \end{tikzpicture}
     \end{adjustbox}
-  }\caption{The leading material read by the Megasave loader in the run up to retrieving game data. The Pilot Bytes are in red, 
+  }\caption{The rest of the leading material read by the Megasave loader in the run up to retrieving game data. The last few Pilot Bytes are in red, 
 the 'Sync Train' in blue, and the Data Header fields from the grey cell onwards.}
 \end{figure}
-
+\vspace{-0.5cm}
 The bytes after the blue cells above are our first bit of raw meat in a while. Here's what they mean:
 
 \begin{figure}[H]
   {
     \setlength{\tabcolsep}{3.0pt}
     \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
-    \begin{adjustbox}{width=12cm,center}
+    \begin{adjustbox}{width=13cm,center}
 
       \begin{tabular}{rllllllll}
         \toprule
@@ -876,12 +933,13 @@ reads in the next three chunks.
 
 \begin{figure}[H]
   {
-    \begin{adjustbox}{width=9cm,center}
+    \begin{adjustbox}{width=15cm,center}
       \surface{archaeo/tap-full.png}
     \end{adjustbox}
-  }\caption[]{All the data that has been read from the tape. The four chunks of game data are in green\, the second is only a sliver. The
+  }\caption[]{All the data that has been read from the tape. The four chunks of game data are in green\, the second is only a sliver visible
+  below the label \icode{\$682F5}. The
 relative sizes of the red data (the MegaSave loader which is only actually 200 or so bytes long) and the green data (representing over
-50,000 bytes of game data) illustrates how efficient the MegaSave loader's storage is by comparison with the default.}
+50,000 bytes of game data) illustrate how efficient the MegaSave loader's storage is by comparison with the default.}
 \end{figure}
 
 \begin{figure}[H]
@@ -892,7 +950,7 @@ relative sizes of the red data (the MegaSave loader which is only actually 200 o
   }\caption[]{Our image of the spool from the start of this chapter but this time with each section colored in as described in the previous image.}
 \end{figure}
 
-When it has completed it has loaded each of the four chunks to the following positions in RAM:
+When it has finished it has loaded each of the four chunks to the following positions in RAM:
 
 \begin{figure}[H]
   {
@@ -938,7 +996,7 @@ will know where to start running it from. The answer is given in the \icode{Head
   {
     \setlength{\tabcolsep}{3.0pt}
     \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
-    \begin{adjustbox}{width=12cm,center}
+    \begin{adjustbox}{width=14cm,center}
 
       \begin{tabular}{rllllllll}
         \toprule

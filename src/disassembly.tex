@@ -5,7 +5,7 @@
 We've reached the point where the game has started to execute. We just saw a
 snippet of code that turned off the tape recorder and prompted the C64 to run a
 routine\index{routine} called \icode{MainControlLoop\index{MainControlLoop}}.
-Though perhaps a little cryptic, and you shouldn't expect to understand it yet,
+Though perhaps a little cryptic (and you shouldn't expect yourself to understand it yet),
 this code is not exactly what the machine 'saw'. Instead it read and executed
 something far more puzzling-looking:
 
@@ -15,21 +15,24 @@ something far more puzzling-looking:
 DDA9 7F8D 0DDD A981 8D0D DDA9 198D 0EDD 584C 3508 
 \end{lstlisting}
 
-That's right it executed a stream of bytes. A stream of bytes commonly referred to as \textit{machine code}. Each of these
-bytes is meaningful to the C64 whether individually, or taken in pairs, or even in groups of three. It can comprehend them
-as instructions to carry out that will shuffle data around in its memory and ultimately result in a game that
+That's right, it executed a stream of bytes. A stream of bytes commonly referred to as \textit{machine code}. Each of these
+bytes is meaningful to the C64, whether individually, taken in pairs, or even in groups of three. It can comprehend them
+as instructions to carry out which will shuffle data around in its memory and ultimately result in a game that
 can be played.
 
 Before we can dig into the internals of how Iridis Alpha works we have to convert all of the machine code we've
 loaded into memory in the previous chapter into something we have a chance of reading and understanding. This
-process is called disassembly and here we're going to explain how it is done and along the way gain a little
-basic understanding of the human-readable language, called '6502 Assembly Language', that we convert the machine
+process is called \textit{disassembly} and here we're going to explain how it is done, and along the way gain a little
+basic understanding of the human-readable language (called '6502 Assembly Language') that we convert the machine
 code back into.
 
-The process is called \textit{disassembly} simply because it is the exact reverse of the process that was originally followed
-to generate the data on the tape from the assembly language written by Jeff Minter in the first place. Programs that
-do this are referred to as 'assemblers'. They assemble the instructions written by the programmer into machine code
-that the C64 can execute. As self-appointed disassemblers we are going to turn it back into assembly language.
+The process is called \textit{disassembly} simply because it is the exact
+reverse of the process that was originally followed to generate the data on the
+tape in the first place. That is to say, the data on the tap was generated from the assembly language instructions written by
+Jeff Minter. Programs that do this conversion from assembly language to machine code are referred to as
+'assemblers'. They assemble the instructions written by the programmer into
+machine code that the C64 can execute. As self-appointed disassemblers we are
+going to turn this machine code back into assembly language.
 
 \begin{definition}[Jeffrey Says]
 \setlength{\intextsep}{0pt}%
@@ -45,13 +48,13 @@ Commodore disk drives."
 You've read that correctly: Iridis Alpha was not written
 on a C64 but its more powerful and expensive, and hence much less popular, successor
 the C128. 
-
+  \vspace{0.2cm}
 \begin{figure}[H]
   {
     \begin{adjustbox}{width=7cm,center}
       \frame{\surface{disassembly/jcl.png}}
     \end{adjustbox}
-  }\caption[]{The 1984 JCL Assember on the C128. You can imagine how user-friendly this thing must have been.}
+  }\caption*{The 1984 JCL Assember on the C128. You can imagine how user-friendly this thing must have been.}
 \end{figure}
 This wasn't so uncommon back in the day: computers like the C64 were not
 powerful enough for getting any actual work done (such as writing and assembling a game),
@@ -62,14 +65,14 @@ the C64, actual development could be done on any system the developer found tole
   me trusty [Atari] ST..."
 \end{definition}
 
-Along the way we will have to invent names for things that are meaningful to us: the names Jeff Minter gave to his
-functions, routines, and variables are long since lost to us. They were thrown away by the assembler as unnecessary
-for execution of the machine code. As we proceed, we will see why but it hopefully makes sense to say that the
-6502 CPU in the C64 doesn't care what things are called, it just cares where in the 65,632 bytes of its RAM things
+Along the way we will have to invent names for things that are meaningful to us. This is because the names Jeff Minter gave to his
+functions, routines, and variables are long since lost to computer science. They were thrown away by the assembler as unnecessary
+for execution of the machine code. As we proceed, we will see why, but it hopefully makes sense to say that the
+6502 CPU in the C64 doesn't care what things are called. It just cares where in the 65,536 bytes of its RAM things
 are located. That is to say it only cares about their 'address'.
 
-So let's start by stepping back for a second. Let's put the machine code and the snippet of code we disassembled it
-back into and see what we can learn:
+So let's start by stepping back for a second. Let's put the machine code, and the snippet of code we disassembled it
+back into, side by side and see what we can learn:
 
 \begin{minipage}[b]{0.45\linewidth}
 \centering
@@ -106,10 +109,10 @@ A9 & LDA & \\
   }\caption{Machine code bytes and their assembly language counterparts.}
 \end{figure}
 
-Let's quickly explain what two of these mean as they're extremely common and also fundamental to
-machine code programming in general.
+Let's quickly explain what two of these instructions mean as they're extremely common and also fundamental to
+assembly programming in general.
 
-\icode{LDA} loads the byte you give it into a small one-byte slot called the 'Accumulator' ('A' for short,
+The instruction \icode{LDA} loads the byte you give it into a small one-byte slot called the 'Accumulator' ('A' for short,
 so \icode{LDA} is an abbreviation for 'Load to Accumulator'). Think of this slot
 as a pocket - somewhere for the CPU to store a value for use later on. The technical name for this kind of 
 slot/pocket is a 'register\index{register}'. The 'Accumulator' is so-called because a lot of the operations performed on
@@ -122,15 +125,31 @@ here, as a place to put a value so we can do something else with it.
 LDA #$40
 \end{lstlisting}
 
-What we do with it for the most part in the code above is go on to store it somewhere else. This is where
+'What we do with it', for the most part in the code above, is go on to store it somewhere else. This is where
 the \icode{STA} instruction comes in. This stores the value in the 'Accumulator' pocket at the address
-in memory that you give to it. As we can see such addresses are not one byte long, but two bytes. Are they
+in memory that you give to it. 
+
+\begin{minipage}[b]{0.45\linewidth}
+\centering
+\begin{lstlisting}[escapechar=\%]
+8D 19 03
+\end{lstlisting}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}[b]{0.45\linewidth}
+\centering
+\begin{lstlisting}[escapechar=\%]
+STA $0319
+\end{lstlisting}
+\end{minipage}
+
+As we can see such addresses are not one byte long, but two bytes. Are they
 ever more than two bytes long? No, and for a very simple reason. The C64 can only understand addresses
 that are at most two bytes long and this is what ultimately limits it to 64KB of memory. The largest address it can understand
 is therefore \icode{\$FFFF} - the largest value that can be expressed by 2 bytes. Which translates to 65,535.
 Including zero, this allows us 65,536 bytes, which is 64KB of RAM. 
 
-When we look at the disassembly of the STA instructions we see something quite puzzling:
+When we look again at the disassembly of the STA instructions we see something quite puzzling:
 
 \begin{minipage}[b]{0.45\linewidth}
 \centering
@@ -165,7 +184,7 @@ you have now.
 The next incremental step in understanding our disassembly is to apply some meaning to these two-byte values
 that we've decoded. As it happens, all the ones given in this piece of code represent addresses in the C64's
 memory of \icode{\$FFFF} bytes, or in the preferred parlance of we humans, 65,536 bytes. Each address here
-has a particular function\index{function} so storing a value in it does something. Let's add the meanings, which are still
+has a particular function\index{function}, so storing a value in it does something. Let's add the meanings, which are still
 a little cryptic, to our listing:
 
 \begin{minipage}[b]{0.20\linewidth}
@@ -199,7 +218,7 @@ STA $DD0E    ;CIA2: CIA Control Register%\index{Register}% A
 
 We are better off treating this series of instructions as a magic formula. The operation of the tape reader
 is managed by the values stored in a series of bytes between \icode{\$DD04} and \icode{\$DD0F}. The fact that
-we have to write a variety of values to 5 of them to just stop reading from the tape is just a testament
+we have to write a variety of values to 5 of them to just stop reading from the tape is a testament
 to the power of boring overhead - we'll never interact with the tape reader again so studying the entrails
 here is not going to benefit us in any way.
 
@@ -307,9 +326,11 @@ p4003   LDA #<MainControlLoopInterruptHandler%\index{MainControlLoopInterruptHan
 \end{lstlisting}
 
 As you can see the first thing it does is change the address of the code that should be executed at every 'interrupt\index{interrupt}'. It's now an
-address referred to by the label \icode{MainControlLoop\index{MainControlLoop}\-InterruptHandler}. This happens to be address \icode{\$6B3E} but the beauty
+address referred to by the label \icode{MainControl\-Loop\-InterruptHandler}. This happens to be address \icode{\$6B3E} but the beauty
 of using labels in our code is that we no longer need to worry about the number of the addresses anymore. The label will do the job
-for us. It does mean we have to know what the syntax \icode{\#<MainControlLoopInterruptHandler\index{MainControlLoopInterruptHandler}} means though. What it means is:
+for us. It does mean we have to know what the syntax \icode{\#<MainControlLoopInterruptHandler\index{MainControlLoopInterruptHandler}} means though.
+
+What it means is:
 if \icode{MainControlLoopInterruptHandler\index{MainControlLoopInterruptHandler}} lives at \icode{\$6B3E} the \icode{\#<} decorators refer to the \icode{\$3E} part of the
 address, so we're actually saying \icode{LDA \#\$3E}, i.e. load the value \icode{\$3E} into the 'Accumulator'. Similarly the syntax
 \icode{\#>MainControlLoopInterruptHandler\index{MainControlLoopInterruptHandler}} refers to the \icode{\$6B} part of the address.
@@ -349,7 +370,7 @@ JMP $0835
 
 That's right - it's jumping\index{jumping} back to itself and will execute in an infinite loop repeatedly executing the instruction
 over and over again. The reason it does this is because it won't be doing it very long. The interrupt\index{interrupt} will take over
-and steal execution away so that the C64 can find better things to do that run in circles.
+and steal execution away to the new interrupt handler we just specified (\icode{MainControlLoopInterruptHandler} so that the C64 can find better things to do than run in circles.
 
 Before we move on let's take one last look at our disassembly accomplishment.
 

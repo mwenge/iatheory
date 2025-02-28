@@ -2,11 +2,14 @@
 \label{sec:first16}
 \lstset{style=6502Style}
 OK, where were we? At the end of \hyperref[sec:archaeo]{\textcolor{blue}{A Little Archaeology}}
-we were just about to get started and start the race to get something up on the screen.
+we were just about to get started and begin the race to get something up on the screen.
 We had set up an interrupt to make us jump to \icode{MainControlLoop} at address \icode{\$4000}.
 
-Our first act, which we covered briefly in the previous chapter, was to make sure that interrupt didn't
-have us jumping here again. So we overwrote the interrupt handler with a new address:
+Our first act in \icode{MainControlLoop} is to make sure that the next interrupt didn't
+have us jumping to the start of \icode{MainControlLoop} all over again. So we overwrite the interrupt handler with a new address,
+\icode{MainControlLoopInterruptHandler}. You will be reassured to learn that, having the changed the interrupt 
+handler three times in several milliseconds, we are ready to settle down and stick with \icode{MainControlLoop\-Interrupt\-Handler} as our
+interrupt handler of choice for the time being:
 
 \begin{lstlisting}[caption=The code at \icode{\$4000}. ,escapechar=\%]
 MainControlLoop%\index{MainControlLoop}%
@@ -26,11 +29,11 @@ Our next act is to call a routine\index{routine} to set up the main title screen
         JSR EnterMainTitleScreen%\index{EnterMainTitleScreen}%
 \end{lstlisting}
 
-This brings us to a routine\index{routine} called \icode{InitializeSpritesAndInterruptsForTitleScreen\index{InitializeSpritesAndInterruptsForTitleScreen}} in
-which we do some vital setup for the next 16 milliseconds and how we go about getting everything
-on the screen\index{screen} that we need to:
-\clearpage
-
+\icode{EnterMainTitleScreen} does a bit of shuffling of data before it brings
+us to a routine\index{routine} that does something important. This routine is called
+\icode{InitializeSpritesAndInterruptsForTitleScreen\index{InitializeSpritesAndInterruptsForTitleScreen}}
+and it does some vital setup for the next 16 milliseconds that determines how we go
+about getting everything on the screen\index{screen} that we need to get:
 \begin{lstlisting}[caption=In \icode{InitializeSpritesAndInterruptsForTitleScreen\index{InitializeSpritesAndInterruptsForTitleScreen}},escapechar=\%]
         ; Set up the our interrupt%\index{interrupt}% handler for the title
         ; screen%\index{screen}%. This will do all the animation%\index{animation}% and title
@@ -57,19 +60,23 @@ on the screen\index{screen} that we need to:
         STA $D012    ;Raster Position
 \end{lstlisting}
 
-You'll notice we've changed yet another interrupt\index{interrupt} handler again, this time to a routine\index{routine} called
-\icode{TitleScreenInterruptHandler\index{TitleScreenInterruptHandler}}. The particular type of interrupt\index{interrupt} we're going
-to handle here is something
+You'll notice we've changed yet another interrupt\index{interrupt} handler, this time to a routine\index{routine} called
+\icode{TitleScreenInterruptHandler\index{TitleScreenInterruptHandler}}. I didn't lie to you earlier though. This is not
+the same interrupt we settled on above. It is a new and important one that affects how get things on to the screen.
+The particular type of interrupt\index{interrupt} it is concerned with is something
 called a 'Raster Interrupt\index{Interrupt}'. A 'raster' can be thought of as a beam of light that scans
-across the screen\index{screen} from top to bottom and left to right painting each pixel on the screen\index{screen}
+across the screen\index{screen} from top to bottom and left to right, painting each pixel on the screen\index{screen}
 one at a time. It travels so quickly down and across the screen\index{screen} painting pixels that it
-can do so up to 60 times a second. As it makes this journey our 'Raster Interrupt\index{Interrupt}' gives
+can do so up to 60 times a second.
+
+As it makes this journey our 'Raster Interrupt\index{Interrupt}' gives
 us the opportunity to tell it to stop once it reaches a certain position on the screen\index{screen}
 and allows us to run some code before it resumes again. We can do this as many times as
 we want along the journey, but each time we interrupt\index{interrupt} it we have to be quick. If our code
 takes too long the display will flicker and the content of the screen\index{screen} become inconsistent.
 
-In this routine\index{routine} we set our first interrupt\index{interrupt} to line 16 (\icode{\$10}) on the screen\index{screen}:
+At the very end of the little listing above we set our first interrupt\index{interrupt} to line 16 (\icode{\$10}) on the screen\index{screen}:
+\clearpage
 
 \begin{lstlisting}[caption=In \icode{InitializeSpritesAndInterruptsForTitleScreen\index{InitializeSpritesAndInterruptsForTitleScreen}},escapechar=\%]
         ; Set the position for triggering our interrupt%\index{interrupt}%.
@@ -88,16 +95,46 @@ do each time the screen\index{screen} is painted\index{painted}.
 \section{Sprites\index{Sprites}}
 The C64 makes 8 sprites\index{sprites} available to us. A sprite is a special purpose graphical object that
 can be up to 24 pixels wide by 20 pixels high. We can place them wherever we want on the
-screen\index{screen}. They are the core of graphics\index{graphics} programming and Iridis Alpha has dozens of them. But
-if the C64 only has 8 sprites\index{sprites}, are we limited to displaying just 8 sprites\index{sprites} at once on the
-screen\index{screen}? The simple answer is that thanks to \textit{Raster Interrupts} we are not: when we run
-some code after receiving an interrupt\index{interrupt} we can place new sprites\index{sprites} wherever we like in any
-position that the raster hasn't reached yet. This means our only effective limitation is
-the number of sprites\index{sprites} we can place on a single line, which is eight. 
+screen\index{screen}. They are the core of graphics\index{graphics} programming and Iridis Alpha has dozens of them. 
 
-If you look carefully at the title screen\index{screen} of Iridis Alpha you'll notice that it is actually
-split in two. The top half has the title in large letters and the bottom half has a rainbow\index{rainbow}
-of jumping\index{jumping} gilbies\index{gilbies}. Each half uses seven sprites\index{sprites} to display these assets.
+\begin{figure}[H]
+  {
+    \setlength{\tabcolsep}{1.0pt}
+    \setlength\cmidrulewidth{\heavyrulewidth} % Make cmidrule = 
+    \begin{adjustbox}{width=4cm,center}
+	\begin{subfigure}{0.3\textwidth}
+    \def\MULTICOLORONE{red}
+    \def\MULTICOLORTWO{white}
+    \def\SPRITECOLOR{blue}
+		\input{sprites/GILBY_AIRBORNE_LEFT}
+	\end{subfigure}
+    \end{adjustbox}
+  }\caption{An example of a sprite in Iridis Alpha.}
+\end{figure}
+
+
+But if the C64 only has 8 sprites\index{sprites}, are we limited to displaying
+just 8 sprites\index{sprites} at once on the screen\index{screen}?
+
+The simple
+answer is that thanks to \textit{Raster Interrupts} we are not: when we run
+some code after receiving an interrupt\index{interrupt} we can place new
+sprites\index{sprites} wherever we like in any position that the raster hasn't
+reached yet. This means our only effective limitation is the number of
+sprites\index{sprites} we can place on a single line, which is eight.  If you look carefully at the title screen\index{screen} of Iridis Alpha you'll notice that it is actually
+split in two.
+
+\begin{figure}[H]
+  {
+    \begin{adjustbox}{width=10cm,center}
+      \frame{\surface{titlescreen/ia-title3.png}}
+    \end{adjustbox}
+  }
+\caption{The title screen with big letters up top and jumping gilbies down below.}
+\end{figure}
+
+The top half has the title in large letters and the bottom half has a rainbow\index{rainbow}
+of jumping\index{jumping} gilbies\index{gilbies}. Each half uses seven sprites\index{sprites} (numbered 0 to 6) to display these assets.
 
 
 \begin{figure}[H]
@@ -113,6 +150,22 @@ of jumping\index{jumping} gilbies\index{gilbies}. Each half uses seven sprites\i
 	\begin{subfigure}{0.3\textwidth}
     \def\MULTICOLORONE{gray}
     \def\MULTICOLORTWO{black}
+    \def\SPRITECOLOR{red}
+		\input{sprites/BIG_I}
+	\end{subfigure}
+} &
+\makecell[l]{
+	\begin{subfigure}{0.3\textwidth}
+    \def\MULTICOLORONE{gray}
+    \def\MULTICOLORTWO{black}
+    \def\SPRITECOLOR{orange}
+		\input{sprites/BIG_R}
+	\end{subfigure}
+} &
+\makecell[l]{
+	\begin{subfigure}{0.3\textwidth}
+    \def\MULTICOLORONE{gray}
+    \def\MULTICOLORTWO{black}
     \def\SPRITECOLOR{yellow}
 		\input{sprites/BIG_I}
 	\end{subfigure}
@@ -122,22 +175,6 @@ of jumping\index{jumping} gilbies\index{gilbies}. Each half uses seven sprites\i
     \def\MULTICOLORONE{gray}
     \def\MULTICOLORTWO{black}
     \def\SPRITECOLOR{green}
-		\input{sprites/BIG_R}
-	\end{subfigure}
-} &
-\makecell[l]{
-	\begin{subfigure}{0.3\textwidth}
-    \def\MULTICOLORONE{gray}
-    \def\MULTICOLORTWO{black}
-    \def\SPRITECOLOR{lightblue}
-		\input{sprites/BIG_I}
-	\end{subfigure}
-} &
-\makecell[l]{
-	\begin{subfigure}{0.3\textwidth}
-    \def\MULTICOLORONE{gray}
-    \def\MULTICOLORTWO{black}
-    \def\SPRITECOLOR{purple}
 		\input{sprites/BIG_D}
 	\end{subfigure}
 } &
@@ -145,7 +182,7 @@ of jumping\index{jumping} gilbies\index{gilbies}. Each half uses seven sprites\i
 	\begin{subfigure}{0.3\textwidth}
     \def\MULTICOLORONE{gray}
     \def\MULTICOLORTWO{black}
-    \def\SPRITECOLOR{blue}
+    \def\SPRITECOLOR{cyan}
 		\input{sprites/BIG_I}
 	\end{subfigure}
 } &
@@ -153,7 +190,7 @@ of jumping\index{jumping} gilbies\index{gilbies}. Each half uses seven sprites\i
 	\begin{subfigure}{0.3\textwidth}
     \def\MULTICOLORONE{gray}
     \def\MULTICOLORTWO{black}
-    \def\SPRITECOLOR{gray}
+    \def\SPRITECOLOR{pink}
 		\input{sprites/IG_S}
 	\end{subfigure}
 } &
@@ -171,15 +208,7 @@ of jumping\index{jumping} gilbies\index{gilbies}. Each half uses seven sprites\i
     \def\MULTICOLORONE{gray}
     \def\MULTICOLORTWO{white}
     \def\SPRITECOLOR{red}
-		\input{sprites/LAND_GILBY1}
-	\end{subfigure}
-} & 
-\makecell[l]{
-	\begin{subfigure}{0.3\textwidth}
-    \def\MULTICOLORONE{gray}
-    \def\MULTICOLORTWO{white}
-    \def\SPRITECOLOR{red}
-		\input{sprites/LAND_GILBY2}
+		\input{sprites/LAND_GILBY4}
 	\end{subfigure}
 } & 
 \makecell[l]{
@@ -187,7 +216,7 @@ of jumping\index{jumping} gilbies\index{gilbies}. Each half uses seven sprites\i
     \def\MULTICOLORONE{gray}
     \def\MULTICOLORTWO{white}
     \def\SPRITECOLOR{orange}
-		\input{sprites/LAND_GILBY3}
+		\input{sprites/LAND_GILBY4}
 	\end{subfigure}
 } & 
 \makecell[l]{
@@ -203,15 +232,23 @@ of jumping\index{jumping} gilbies\index{gilbies}. Each half uses seven sprites\i
     \def\MULTICOLORONE{gray}
     \def\MULTICOLORTWO{white}
     \def\SPRITECOLOR{green}
-		\input{sprites/LAND_GILBY5}
+		\input{sprites/LAND_GILBY4}
 	\end{subfigure}
 } & 
 \makecell[l]{
 	\begin{subfigure}{0.3\textwidth}
     \def\MULTICOLORONE{gray}
     \def\MULTICOLORTWO{white}
-    \def\SPRITECOLOR{lightblue}
-		\input{sprites/LAND_GILBY6}
+    \def\SPRITECOLOR{cyan}
+		\input{sprites/LAND_GILBY4}
+	\end{subfigure}
+} & 
+\makecell[l]{
+	\begin{subfigure}{0.3\textwidth}
+    \def\MULTICOLORONE{gray}
+    \def\MULTICOLORTWO{white}
+    \def\SPRITECOLOR{pink}
+		\input{sprites/LAND_GILBY4}
 	\end{subfigure}
 } & 
 \makecell[l]{
@@ -219,7 +256,7 @@ of jumping\index{jumping} gilbies\index{gilbies}. Each half uses seven sprites\i
     \def\MULTICOLORONE{gray}
     \def\MULTICOLORTWO{white}
     \def\SPRITECOLOR{purple}
-		\input{sprites/LAND_GILBY7}
+		\input{sprites/LAND_GILBY4}
 	\end{subfigure}
 } \\ 
         \addlinespace
@@ -255,7 +292,7 @@ With our 'Raster Interrupt\index{Interrupt}' handler set up as \icode{TitleScree
 react when the raster reaches line 16 on the screen\index{screen}. Since the screen\index{screen} is made up of 512 lines in
 total this will be along soon.
 
-Before it comes in we just have time to prepare the relatively light amount of text we want displayed
+Before it comes to getus we just have time to prepare the relatively light amount of text we want displayed
 on the screen\index{screen} in memory. We only need to do this once. Throughout the code we refer to this
 area we write to as \icode{SCREEN\_RAM}. It's an address range between \icode{\$0400} and \icode{\$07E8} This is a very
 simple bitmap representation of the entire screen\index{screen} that is 40 characters wide and 25 characters high,
@@ -292,22 +329,27 @@ with a character\index{character} that is 8 pixels wide and 8 pixels high:
 \input{titlescreen/tilesheets/charset_tilesheet_$0_bits}
 
 We create this definition for every character\index{character} we want to display and store it at the address starting at \icode{\$2000}
-in RAM. The order in which we store them determines the reference we use for them later. So for example the stripe
+in RAM, which we will give the label \icode{characterSetData}. The order in which we store them determines the reference we use for them later. So for example the stripe
 character\index{character} is referred to as \icode{\$00}, the 'A' character\index{character} we've defined as \icode{\$01} and so on:
 
 \subfile{titlescreen/charset_tilesheet}
 
-With our character\index{character} set defined we can now write some text to the screen\index{screen} ram. Note that when we write it to \icode{SCREEN\_RAM}
-we're not yet writing it to the actual screen\index{screen}. This is just a place in memory that the raster (our beam of light)
-will refer to later when it is actually writing dots to the screen\index{screen}. If we write a stripe character\index{character} to a particular position
-in this \icode{SCREEN\_RAM} memory it will know to write it the corresponding position on the screen\index{screen}.
+With our character\index{character} set defined in the \icode{characterSetData} at address \icode{\$2000} we can now write some text to
+the \icode{SCREEN\_RAM} at address \icode{\$0400}. For example, when we write a \icode{\$01} to a position in \icode{SCREEN\_RAM}
+it will write an 'A' from our character set to that position. Note that when we write a byte to \icode{SCREEN\_RAM}
+we're not yet writing it to the actual screen\index{screen}. This is just a
+place in memory that the raster (our beam of light) will refer to later when it
+is actually writing dots to the screen\index{screen}. So for example, when we write a stripe (\icode{\$00}) or 'A' (\icode{\$01})
+character index to a particular position in this \icode{SCREEN\_RAM}
+memory it will know to write it to the corresponding position on the
+screen\index{screen}. 
 
 \subsection{Drawing the Stripes}
-So let's write some stripes to RAM!
+So let's use our stripe character at position \icode{\$00} in our \icode{characterSetData} to  write some stripes to RAM!
 
 \begin{lstlisting}[caption=Drawing stripes using a loop!,escapechar=\%]
 DrawStripesBehindTitle%\index{DrawStripesBehindTitle}%
-        LDX #$28
+        LDX #40
         LDA #$00
         STA shouldUpdateTitleScreenColors%\index{shouldUpdateTitleScreenColors}%
 DrawStripesLoop%\index{DrawStripesLoop}%   
@@ -364,7 +406,12 @@ it will write to the position referred to by \icode{SCREEN\_RAM + LINE2\_COL39} 
 The other thing we do in \icode{DrawStripesLoop\index{DrawStripesLoop}} is set the colors of the stripes. This is achieved using a region of memory
 similar in concept to \icode{SCREEN\_RAM}, that we call \icode{COLOR\_RAM}. This lives at \icode{\$D800 - \$DBFE} and is another 
 region of 1000 bytes, each one controlling the color of the character\index{character} placed at a position in the 40 * 25 character\index{character} rectangle
-of our screen\index{screen}.
+of our screen\index{screen}. 
+
+The part that does this is given below. As you can see it is pretty much the same as the
+section that writes to \icode{SCREEN\_RAM}, but in this instance we load a different colour value to each row.
+
+As we cycle through the loop we add a different colour to each of the 40 columns all 7 rows:
 
 \begin{lstlisting}[caption=In \icode{DrawStripesBehindTitle\index{DrawStripesBehindTitle}},escapechar=\%]
         LDA #RED
@@ -386,6 +433,7 @@ of our screen\index{screen}.
 We've used a meaningful alias for each of the color values that we write, these are defined as:
 
 \begin{lstlisting}
+BLACK        = $01
 RED          = $02
 PURPLE       = $04
 GREEN        = $05
@@ -399,7 +447,21 @@ LTBLUE       = $0E
 So by writing a value to the corresponding place in \icode{COLOR\_RAM}, we're defining the color of the character\index{character}
 in that position.
 
+Notice that everywhere else in the the \icode{COLOR\_RAM} is set to \icode{\$01}. This is the value for \icode{BLACK}, reflecting the
+fact that our background is black by default.
+
 \input{titlescreen/titlescreen_color_ram_stripes}
+
+The end result when we combine both \icode{SCREEN\_RAM} and \icode{COLOR\_RAM} for the top half of the screen is below. You can
+see that the colours have been applied to the stripe characters along all seven rows, exactly as we specified in our 
+\icode{DrawStripesBehindTitle} loop.
+
+\begin{figure}[H]
+    \begin{adjustbox}{width=13cm,center}
+    \includegraphics[width=13cm]{titlescreen/titlescreen_colour_only_grid.png}%
+    \end{adjustbox}
+  \caption{The section of the screen with our stripes painted.}
+\end{figure}
 
 \subsection{Drawing the Text}
 
@@ -461,7 +523,7 @@ While writing text for the column we also set the color for each of the text lin
         STA COLOR_RAM%\index{COLOR\_RAM}% + LINE19_COL39%\index{LINE19\_COL39}%,X
 \end{lstlisting}
 
-Once it is done the \icode{COLOR\_RAM} has the appropriate lines set to grey, in addition to the coloured stripes
+Once it is done, the \icode{COLOR\_RAM} has the appropriate lines set to grey, in addition to the coloured stripes
 we added earlier:
 \input{titlescreen/titlescreen_color_ram}
 
@@ -484,12 +546,11 @@ Now we're ready to receive our first beam. You may remember we set this to happe
 
 \begin{lstlisting}[caption=In \icode{InitializeSpritesAndInterruptsForTitleScreen\index{InitializeSpritesAndInterruptsForTitleScreen}},escapechar=\%]
         ; Set the position for triggering our interrupt%\index{interrupt}%.
-        LDA #$10
+        LDA #16
         STA $D012    ;Raster Position
 \end{lstlisting}
 
-And that the routine\index{routine} we'll run when that happens is \icode{TitleScreenInterruptHandler\index{TitleScreenInterruptHandler}} (which itself will pass
-the work onto \icode{TitleScreenAnimation\index{TitleScreenAnimation}}):
+And that the routine\index{routine} we'll run when that happens is \icode{TitleScreenInterruptHandler\index{TitleScreenInterruptHandler}}:
 
 \begin{lstlisting}[caption=In \icode{InitializeSpritesAndInterruptsForTitleScreen\index{InitializeSpritesAndInterruptsForTitleScreen}},escapechar=\%]
         ; Set up the our interrupt%\index{interrupt}% handler for the title
@@ -501,10 +562,82 @@ the work onto \icode{TitleScreenAnimation\index{TitleScreenAnimation}}):
         STA $0315    ;IRQ
 \end{lstlisting}
 
-The painting of sprites\index{sprites} and playing of music as the screen\index{screen} gets painted\index{painted} is all handled by \icode{TitleScreen\-Animation\index{TitleScreenAnimation}}.
-This routine\index{routine} works by calling one of three different sub-routines each time it's called. It picks the one to run
+The painting of sprites\index{sprites} and playing of music as the
+screen\index{screen} gets painted\index{painted} is all handled by
+\icode{TitleScreen\-Animation\index{TitleScreenAnimation}} the one and only
+function this interrupt handler calls:
+\begin{lstlisting}
+TitleScreenInterruptHandler
+        LDA $D019    ; Get the VIC Interrupt Request Register (IRR)
+        AND #$01     ; Has it been set?
+        BNE TitleScreenAnimation ; If so, animate the screen.
+\end{lstlisting}
+\icode{TitleScreenAnimation} works by calling one of three different sub-routines. It picks the one to run
 depending on some internal state it maintains, all with a view to ensuring that the sprites\index{sprites} spelling out the game's
 title and the sprites\index{sprites} depicting the animated gilbies\index{gilbies} are updated and in place before the raster reaches them.
+
+\begin{lstlisting}[caption=\icode{TitleScreenAnimation\index{TitleScreenAnimation}} responsible for choosing what to do at each interrupt\index{interrupt}. ,escapechar=\%]
+;-------------------------------------------------------
+; TitleScreenAnimation%\index{TitleScreenAnimation}%
+; This handles all the activity in the title screen%\index{screen}% and is called
+; roughly 60 times a second by the Raster Interrupt%\index{Interrupt}%.
+;-------------------------------------------------------
+TitleScreenAnimation%\index{TitleScreenAnimation}%
+        ; Check our animation counter, if it's anything other
+        ; than 12 we skip to MaybeDoStarFieldOrTitleText. Note
+        ; that the counter is used as an index into 
+        ; our arrays of star positions.
+        LDY titleScreenStarFieldAnimationCounter%\index{titleScreenStarFieldAnimationCounter}%
+        CPY #12
+        BNE MaybeDoStarFieldOrTitleText%\index{MaybeDoStarFieldOrTitleText}%
+
+        ; When the counter is 12, we update the position
+        ; and color of the jumping gilbies.
+        JSR UpdateJumpingGilbyPositionsAndColors%\index{UpdateJumpingGilbyPositionsAndColors}%
+        ; And reset the counter to 16. 
+        LDY #16
+        STY titleScreenStarFieldAnimationCounter%\index{titleScreenStarFieldAnimationCounter}%
+
+MaybeDoStarFieldOrTitleText%\index{MaybeDoStarFieldOrTitleText}%   
+        ; If we have starfield to paint, do that and return.
+        ; DoStarfieldAnimation will update the raster
+        ; position for the next interrupt.
+        LDA titleScreenStarFieldYPosArray%\index{titleScreenStarFieldYPosArray}%,Y ; Use counter as an index.
+        BNE DoStarfieldAnimation%\index{DoStarfieldAnimation}%
+        ; DoStarfieldAnimation will return from the interrupt.
+
+        ; If we got a zero back from titleScreenStarFieldYPosArray
+        ; it means we have finished the starfield, so we can get
+        ; the title text sprites ready.
+PaintTitleTextSprites%\index{PaintTitleTextSprites}%
+        ; Update the X positions of all the stars so that they
+        ; move across the screen a bit the next time they're painted.
+        JSR TitleScreenMutateStarfieldAnimationData%\index{TitleScreenMutateStarfieldAnimationData}%
+
+        ; Reset the animation counter.
+        LDA #$00
+        STA titleScreenStarFieldAnimationCounter%\index{titleScreenStarFieldAnimationCounter}%
+
+        ; Reset the next raster interrupt position to 16,
+        ; the top of the screen.
+        LDA #16
+        STA $D012    ;Raster Position
+
+        ; Acknowledge the interrupt%\index{interrupt}%, so the CPU knows that
+        ; we have handled it.
+        LDA #$01
+        STA $D019    ;VIC Interrupt%\index{Interrupt}% Request Register%\index{Register}% (IRR)
+        STA $D01A    ;VIC Interrupt%\index{Interrupt}% Mask Register%\index{Register}% (IMR)
+
+        ; Update the title text, the sprite colors, the position 
+        ; of the gilbies, and play a little music.
+        JSR UpdateTitleTextSprites%\index{UpdateTitleTextSprites}%
+        JSR MaybeUpdateSpriteColors%\index{MaybeUpdateSpriteColors}%
+        JSR RecalculateJumpingGilbyPositions%\index{RecalculateJumpingGilbyPositions}%
+        JSR PlayTitleScreenMusic%\index{PlayTitleScreenMusic}%
+        JMP ReEnterInterrupt%\index{ReEnterInterrupt}%
+        ; We're done, returns from function%\index{function}%.
+\end{lstlisting}
 
 To ensure it gets called by the interrupt\index{interrupt} when its needed it will repeatedly update the line that the next interrupt\index{interrupt}
 should happen. We'll trace this as it actually happens, interrupt\index{interrupt} by interrupt\index{interrupt}, and sift through what the routine\index{routine}
@@ -534,47 +667,6 @@ There are three sub-routines the work at each raster interrupt\index{interrupt} 
 that's called the most often is \icode{DoStarfieldAnimation\index{DoStarfieldAnimation}} as it is responsible for sprinkling the screen\index{screen} with 
 animated stars traversing left to right.
 
-\begin{lstlisting}[caption=\icode{TitleScreenAnimation\index{TitleScreenAnimation}} responsible for choosing what to do at each interrupt\index{interrupt}. ,escapechar=\%]
-;-------------------------------------------------------
-; TitleScreenAnimation%\index{TitleScreenAnimation}%
-; This handles all the activity in the title screen%\index{screen}% and is called
-; roughly 60 times a second by the Raster Interrupt%\index{Interrupt}%.
-;-------------------------------------------------------
-TitleScreenAnimation%\index{TitleScreenAnimation}%
-        LDY titleScreenStarFieldAnimationCounter%\index{titleScreenStarFieldAnimationCounter}%
-        CPY #$0C
-        BNE MaybeDoStarFieldOrTitleText%\index{MaybeDoStarFieldOrTitleText}%
-
-        JSR UpdateJumpingGilbyPositionsAndColors%\index{UpdateJumpingGilbyPositionsAndColors}%
-        LDY #$10
-        STY titleScreenStarFieldAnimationCounter%\index{titleScreenStarFieldAnimationCounter}%
-
-MaybeDoStarFieldOrTitleText%\index{MaybeDoStarFieldOrTitleText}%   
-        LDA titleScreenStarFieldYPosArray%\index{titleScreenStarFieldYPosArray}%,Y
-        BNE DoStarfieldAnimation%\index{DoStarfieldAnimation}%
-
-PaintTitleTextSprites%\index{PaintTitleTextSprites}%
-        JSR TitleScreenMutateStarfieldAnimationData%\index{TitleScreenMutateStarfieldAnimationData}%
-
-        LDA #$00
-        STA titleScreenStarFieldAnimationCounter%\index{titleScreenStarFieldAnimationCounter}%
-
-        LDA #$10
-        STA $D012    ;Raster Position
-
-        ; Acknowledge the interrupt%\index{interrupt}%, so the CPU knows that
-        ; we have handled it.
-        LDA #$01
-        STA $D019    ;VIC Interrupt%\index{Interrupt}% Request Register%\index{Register}% (IRR)
-        STA $D01A    ;VIC Interrupt%\index{Interrupt}% Mask Register%\index{Register}% (IMR)
-
-        JSR UpdateTitleTextSprites%\index{UpdateTitleTextSprites}%
-        JSR MaybeUpdateSpriteColors%\index{MaybeUpdateSpriteColors}%
-        JSR RecalculateJumpingGilbyPositions%\index{RecalculateJumpingGilbyPositions}%
-        JSR PlayTitleScreenMusic%\index{PlayTitleScreenMusic}%
-        JMP ReEnterInterrupt%\index{ReEnterInterrupt}%
-        ; We're done, returns from function%\index{function}%.
-\end{lstlisting}
 
 The internal accounting responsible for choosing the routine\index{routine} to run is tricky to decipher by just looking at the code. So
 instead let's follow what actually happens in practice. If we roll ahead to the next interrupt\index{interrupt} we can already see something

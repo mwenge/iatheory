@@ -550,7 +550,28 @@ Now we're ready to receive our first beam. You may remember we set this to happe
         STA $D012    ;Raster Position
 \end{lstlisting}
 
-And that the routine\index{routine} we'll run when that happens is \icode{TitleScreenInterruptHandler\index{TitleScreenInterruptHandler}}:
+The job ahead of us is to paint an animated parallax starfield behind the title screen and sprinkle some jumping gilbies
+along the bottom. To do that we're going to need a data structure that tells us where to paint stuff. For that
+humble purpose we have \icode{titleScreenStarFieldYPosArray}:
+\begin{lstlisting}[escapechar=\%]
+titleScreenStarFieldYPosArray .BYTE  72, 78, 84, 90, 96,102,108,114
+                              .BYTE 120,126,132,138,144,150,156,162
+                              .BYTE 168,174,180,186,192,198,204,210
+                              .BYTE 216,222,228,234,240,246
+\end{lstlisting}
+
+This array tells us the lines that we should start a new starfield sprite on. With 30 entries,
+that's 30 stars on 30 different lines from line 72 on the screen to line 246. If we were to tell the C64 to call our
+\icode{TitleScreenInterruptHandler} every time it was about to paint one of
+those lines, we would have a way of drawing one of our starfield sprites on
+that line. That would also allow us to set the next entry in the list as our
+next raster position each time we'd finished the current one. We would do this in the same way
+that we originally set it to \icode{16} above. Working through the list in this way, one
+interrupt at a time, we could start a new star on all 30 lines in the array.
+
+When we look closely at the routine \icode{TitleScreenStars} we see that this is
+indeed how the animation is done. To make it our 'interrupt handler' we first set up
+\icode{TitleScreenInterruptHandler} as follows:
 
 \begin{lstlisting}[caption=In \icode{InitializeSpritesAndInterruptsForTitleScreen\index{InitializeSpritesAndInterruptsForTitleScreen}},escapechar=\%]
         ; Set up the our interrupt%\index{interrupt}% handler for the title
@@ -562,48 +583,47 @@ And that the routine\index{routine} we'll run when that happens is \icode{TitleS
         STA $0315    ;IRQ
 \end{lstlisting}
 
-The painting of sprites\index{sprites} and playing of music as the
-screen\index{screen} gets painted\index{painted} is all handled by
-\icode{TitleScreen\-Animation\index{TitleScreenAnimation}} the one and only
-function this interrupt handler calls:
+We then make \icode{TitleScreenInterruptHandler} call our \icode{TitleScreenStars} routine every time
+it is ready to handle an interrupt:
 \begin{lstlisting}
 TitleScreenInterruptHandler
-        LDA $D019    ; Get the VIC Interrupt Request Register (IRR)
-        AND #$01     ; Has it been set?
-        BNE TitleScreenAnimation ; If so, animate the screen.
+        LDA $D019                ; Has the previous interrupt been acknowledged yet?
+        AND #$01                 ; If it has.. 
+        BNE TitleScreenStars ; .. then we can handle this one.
 \end{lstlisting}
-\icode{TitleScreenAnimation} works by calling one of three different sub-routines. It picks the one to run
-depending on some internal state it maintains, all with a view to ensuring that the sprites\index{sprites} spelling out the game's
-title and the sprites\index{sprites} depicting the animated gilbies\index{gilbies} are updated and in place before the raster reaches them.
 
-\begin{lstlisting}[caption=\icode{TitleScreenAnimation\index{TitleScreenAnimation}} responsible for choosing what to do at each interrupt\index{interrupt}. ,escapechar=\%]
-;-------------------------------------------------------
-; TitleScreenAnimation%\index{TitleScreenAnimation}%
-; This handles all the activity in the title screen%\index{screen}% and is called
-; roughly 60 times a second by the Raster Interrupt%\index{Interrupt}%.
-;-------------------------------------------------------
-TitleScreenAnimation%\index{TitleScreenAnimation}%
-        ; Check our animation counter, if it's anything other
-        ; than 12 we skip to MaybeDoStarFieldOrTitleText. Note
-        ; that the counter is used as an index into 
-        ; our arrays of star positions.
-        LDY titleScreenStarFieldAnimationCounter%\index{titleScreenStarFieldAnimationCounter}%
-        CPY #12
-        BNE MaybeDoStarFieldOrTitleText%\index{MaybeDoStarFieldOrTitleText}%
+\icode{TitleScreenStars} works by calling one of three different
+sub-routines. It picks the one to run depending on which line the raster is on.
+With \icode{currentStarfieldLine} as in index into our \icode{titleScreenStarFieldYPosArray}
+it will draw a star on the line in cases where we don't overlap with the gilbies. This
+means avoiding the lines indexed by the 12th to 16th elements in the array, except when
+we want to draw the gilbies there with \icode{UpdateJumpingGilbyPositionsAndColors}. 
 
-        ; When the counter is 12, we update the position
-        ; and color of the jumping gilbies.
+\begin{lstlisting}[caption=\icode{TitleScreenStars\index{TitleScreenStars}} responsible for choosing what to do at each interrupt\index{interrupt}. ,escapechar=\%]
+TitleScreenStars%\index{TitleScreenStars}%
+        ; For the first 12 lines given by 
+        ; titleScreenStarFieldYPosArray just paint the
+        ; star on that line.
+        LDY currentStarfieldLine%\index{currentStarfieldLine}%
+        CPY #12                         ; Is it 12?
+        BNE MaybeDoStarFieldOrTitleText ; If not, skip.
+
+        ; When the index is 12, we update the position
+        ; and color of the jumping gilbies. This is because
+        ; the line positions given by elements 12 to 16 in
+        ; titleScreenStarFieldYPosArray overlap with them.
         JSR UpdateJumpingGilbyPositionsAndColors%\index{UpdateJumpingGilbyPositionsAndColors}%
-        ; And reset the counter to 16. 
-        LDY #16
-        STY titleScreenStarFieldAnimationCounter%\index{titleScreenStarFieldAnimationCounter}%
 
-MaybeDoStarFieldOrTitleText%\index{MaybeDoStarFieldOrTitleText}%   
-        ; If we have starfield to paint, do that and return.
+        ; Skip to index 16 for the rest of the stars.
+        LDY #16
+        STY currentStarfieldLine
+
+MaybeDoStarFieldOrTitleText
+        ; If we have a star on the line to paint, do that and return.
         ; DoStarfieldAnimation will update the raster
         ; position for the next interrupt.
-        LDA titleScreenStarFieldYPosArray%\index{titleScreenStarFieldYPosArray}%,Y ; Use counter as an index.
-        BNE DoStarfieldAnimation%\index{DoStarfieldAnimation}%
+        LDA titleScreenStarFieldYPosArray ; Use counter as an index.
+        BNE DoStarfieldAnimation
         ; DoStarfieldAnimation will return from the interrupt.
 
         ; If we got a zero back from titleScreenStarFieldYPosArray
@@ -614,9 +634,9 @@ PaintTitleTextSprites%\index{PaintTitleTextSprites}%
         ; move across the screen a bit the next time they're painted.
         JSR TitleScreenMutateStarfieldAnimationData%\index{TitleScreenMutateStarfieldAnimationData}%
 
-        ; Reset the animation counter.
+        ; Reset the line counter.
         LDA #$00
-        STA titleScreenStarFieldAnimationCounter%\index{titleScreenStarFieldAnimationCounter}%
+        STA currentStarfieldLine%\index{currentStarfieldLine}%
 
         ; Reset the next raster interrupt position to 16,
         ; the top of the screen.
@@ -639,8 +659,13 @@ PaintTitleTextSprites%\index{PaintTitleTextSprites}%
         ; We're done, returns from function%\index{function}%.
 \end{lstlisting}
 
-To ensure it gets called by the interrupt\index{interrupt} when its needed it will repeatedly update the line that the next interrupt\index{interrupt}
-should happen. We'll trace this as it actually happens, interrupt\index{interrupt} by interrupt\index{interrupt}, and sift through what the routine\index{routine}
+But whether we're painting a star or a gilby the important thing is, when we're
+done, to always update the raster interrupt position for the next line that
+will require an update. 
+
+We'll trace this as it actually happens, interrupt\index{interrupt} by
+interrupt\index{interrupt}, and sift through what the
+\icode{DoStarfieldAnimation} routine\index{routine}
 does at each step during the raster's first pass at painting the entire screen\index{screen}.
 
 The first time the raster is called, this is what the screen\index{screen} looks like:
@@ -655,7 +680,7 @@ Of course we never actually see the screen\index{screen} in this state because i
 fast for us to observe. But as you can see the painting has aleady started. Everything above line 17 indicated in 
 the figure has been painted\index{painted} black, as per our preparation of \icode{SCREEN\_RAM} a little earlier.
 
-What our diagram above also tells us is that in this visit from the beam \icode{TitleScreen\-Animation\index{TitleScreenAnimation}} chose to execute
+What our diagram above also tells us is that in this visit from the beam, \icode{TitleScreen\-Animation\index{TitleScreenStars}} chose to execute
 the sub-routine\index{routine} \icode{DoStarfieldAnimation\index{DoStarfieldAnimation}} and that it took 127 CPU cycles to complete it. Since it takes the
 raster 63 cycles to do an entire line this means that by the time we've finished this piece of work, the raster will have
 moved on to the next line - which is why the diagram shows 17 rather than 16. Every time we get an interrupt\index{interrupt}, the 
@@ -685,7 +710,7 @@ will be ready for painting. We'll see this in action a little later.
 
 So let's see what \icode{DoStarfieldAnimation\index{DoStarfieldAnimation}} did to get this sprite ready for painting.
 
-When \icode{TitleScreenAnimation\index{TitleScreenAnimation}} chose \icode{DoStarfieldAnimation\index{DoStarfieldAnimation}} as the sub-routine\index{routine} to run it loaded in a value
+When \icode{TitleScreenStars\index{TitleScreenStars}} chose \icode{DoStarfieldAnimation\index{DoStarfieldAnimation}} as the sub-routine\index{routine} to run it loaded in a value
 from \icode{titleScreenStarFieldYPosArray\index{titleScreenStarFieldYPosArray}} to the \icode{A} register\index{register}: 
 
 \begin{lstlisting}[escapechar=\%]
@@ -957,19 +982,19 @@ as it unfolds through each of these interrupts:
 \end{figure}
 
 Finally we've reached a point in the screen\index{screen} where we're not just going to add another star to the background\index{background}.
-We've been keeping a count of the number of interrupts we've handled in \icode{titleScreenStarFieldAnimationCounter\index{titleScreenStarFieldAnimationCounter}}.
+We've been keeping a count of the number of interrupts we've handled in \icode{currentStarfieldLine\index{currentStarfieldLine}}.
 When it reaches \icode{\$0C} (12) we've handled the raster interrupt\index{interrupt} twelve times and painted\index{painted} nothing but the
 text background\index{background} we prepared earlier and the stars we've added along the way. Now's the time to do something else:
 
 \begin{lstlisting}[escapechar=\%]
-TitleScreenAnimation%\index{TitleScreenAnimation}%
-        LDY titleScreenStarFieldAnimationCounter%\index{titleScreenStarFieldAnimationCounter}%
+TitleScreenStars%\index{TitleScreenStars}%
+        LDY currentStarfieldLine%\index{currentStarfieldLine}%
         CPY #$0C
         BNE MaybeDoStarFieldOrTitleText%\index{MaybeDoStarFieldOrTitleText}%
 
         JSR UpdateJumpingGilbyPositionsAndColors%\index{UpdateJumpingGilbyPositionsAndColors}%
         LDY #$10
-        STY titleScreenStarFieldAnimationCounter%\index{titleScreenStarFieldAnimationCounter}%
+        STY currentStarfieldLine%\index{currentStarfieldLine}%
 \end{lstlisting}
 
 The routine\index{routine} we call into here by the name of \icode{UpdateJumpingGilbyPositionsAndColors\index{UpdateJumpingGilbyPositionsAndColors}} will prepare the sequence\index{sequence}

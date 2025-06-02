@@ -268,9 +268,29 @@ func main() {
 		fmt.Println("%s %s", string(out), err)
   }
 
+
   // Rename
   var src = outputDirName + "/book.pdf"
   var dst =  outputDirName + "/" + currentDir() + "_" + getMode() + ".pdf"
 	os.Rename(src, dst)
 
+  // Trim the final PDF.
+  bin = "gs"
+  trim_args := []string{
+    "-sDEVICE=pdfwrite",
+    "-dCompatibilityLevel=1.4",
+    "-dPDFSETTINGS=/ebook",
+    "-dNOPAUSE",
+    "-dQUIET",
+    "-dBATCH",
+    "-sOutputFile=" + outputDirName + "/IridisAlphaTheory.pdf",
+    dst,
+  }
+  fmt.Println(bin, trim_args)
+
+  out, err = exec.Command(bin, trim_args...).CombinedOutput()
+
+  if err != nil {
+    fmt.Println("%s %s", string(out), err)
+  }
 }

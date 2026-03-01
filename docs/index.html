@@ -40,6 +40,36 @@ body {
   font-weight: 400;
   src: url(Novarese.ttf) format('truetype');
 }
+.masthead {
+  font-size: 50px !important;
+}
+.cover-image {
+  width: 35%;
+}
+.section {
+  font-family: Ricardo;
+  letter-spacing: -2px;
+  text-transform: uppercase;
+  font-weight: 900;
+  color: #000000;
+}
+@media (620px <= width <= 800px) {
+  .cover-image {
+    width: 50%;
+    padding-bottom: 20px;
+    margin-left: none;
+  }
+}
+@media (100px <= width <= 620px) {
+  .markdown-body h1 {
+    font-size: 9.8vw !important;
+  }
+  .cover-image {
+    width: 100%;
+    padding-bottom: 20px;
+    margin-left: none;
+  }
+}
     </style>
   </head>
   <body>
@@ -48,7 +78,7 @@ body {
 
       <p>
       <a href="https://github.com/mwenge/iatheory/raw/main/out/IridisAlphaTheory.pdf">
-        <img loading="lazy" style="float:right;" width="24%" src="images/cover_front.png"/>
+        <img class="cover-image" loading="lazy" style="float:right;" width="24%" src="images/cover_front.png"/>
       </a>
       <span style="letter-spacing:-1px;"><b>Iridis Alpha</b></span> 
       is a classic of the 8-bit home computer era. An innovative,
@@ -73,6 +103,7 @@ body {
       If you'd like to read a hard copy instead you can get the current version from <a href="https://www.amazon.de/dp/B0C1J2WRCM">Amazon at a very reasonable price.</a>
       </p>
       <p>The electronic edition is free, but if you like it you can <a href="https://www.paypal.com/paypalme/hoganrobert">gift what you want</a>.</p>
+      <br>
 
       <h2 style="font-family: 'Novarese'; font-variant: small-caps; font-weight: 900; color: #000000; letter-spacing: -1px;">A PEEK INSIDE</h2>
       <p>
